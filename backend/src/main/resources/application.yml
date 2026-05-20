@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Reparieren Statt Wegwerfen - Backoffice
+  threads:
+    virtual:
+      enabled: true

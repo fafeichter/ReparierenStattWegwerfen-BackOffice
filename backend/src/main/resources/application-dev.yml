@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/reparieren-statt-wegwefen?serverTimezone=Europe/Vienna
+    username: reparieren-statt-wegwerfen
+    password: reparieren-statt-wegwerfen
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000/realms/reparieren-statt-wegwerfen-backoffice
+logging:
+  level:
+    at.reparierenstattwegwerfen.backoffice: DEBUG

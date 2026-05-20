@@ -1,0 +1,15 @@
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    # Database connection settings must be provided via environment variables.
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # OAuth2 / OpenID Connect issuer URI must be provided via environment variables.
+          issuer-uri: ${JWT_ISSUER_URI}
