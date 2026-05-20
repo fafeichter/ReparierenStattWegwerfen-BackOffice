@@ -7,10 +7,10 @@ copy, modify, and merge the Software, subject to the following conditions:
 1. The above copyright notice and this permission notice shall be included in
    all copies or substantial portions of the Software.
 
-2. The Software may be used for NON-COMMERCIAL purposes only. Any commercial 
-   use, reproduction, distribution, or incorporation into commercial products, 
-   services, or business operations (including, but not limited to, use by 
-   for-profit companies, monetization, or use within a workplace environment) 
+2. The Software may be used for NON-COMMERCIAL purposes only. Any commercial
+   use, reproduction, distribution, or incorporation into commercial products,
+   services, or business operations (including, but not limited to, use by
+   for-profit companies, monetization, or use within a workplace environment)
    is strictly prohibited without prior written consent from the copyright holder.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
