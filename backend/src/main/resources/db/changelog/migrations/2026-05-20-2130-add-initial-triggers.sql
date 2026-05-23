@@ -1,0 +1,90 @@
+--liquibase formatted sql
+--changeset fabian:2026-05-20-2130-add-initial-triggers endDelimiter:$$
+-- --------------------------------------------------------
+
+CREATE TRIGGER tr_device_insert
+    AFTER INSERT
+    ON device
+    FOR EACH ROW
+BEGIN
+    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, apple_silicon_id,
+                              apple_silicon_unified_memory_id, model_storage_id, model_color_id, serial_number,
+                              device_status_id, seller_business_partner_id, buyer_business_partner_id, purchase_price,
+                              device_grade_id, reported_defect, diagnosed_defect, purchase_online_marketplace_id,
+                              selling_online_marketplace, selling_date, battery_maximum_capacity, battery_cycle_count,
+                              device_battery_status_id, selling_price, device_invoice_id, created_at, updated_at)
+    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.model_id, NEW.apple_silicon_id,
+            NEW.apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.serial_number,
+            NEW.device_status_id, NEW.seller_business_partner_id, NEW.buyer_business_partner_id, NEW.purchase_price,
+            NEW.device_grade_id, NEW.reported_defect, NEW.diagnosed_defect, NEW.purchase_online_marketplace_id,
+            NEW.selling_online_marketplace, NEW.selling_date, NEW.battery_maximum_capacity, NEW.battery_cycle_count,
+            NEW.device_battery_status_id, NEW.selling_price, NEW.device_invoice_id, NEW.created_at, NEW.updated_at);
+END $$
+
+CREATE TRIGGER tr_device_update
+    AFTER UPDATE
+    ON device
+    FOR EACH ROW
+BEGIN
+    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, apple_silicon_id,
+                              apple_silicon_unified_memory_id, model_storage_id, model_color_id, serial_number,
+                              device_status_id, seller_business_partner_id, buyer_business_partner_id, purchase_price,
+                              device_grade_id, reported_defect, diagnosed_defect, purchase_online_marketplace_id,
+                              selling_online_marketplace, selling_date, battery_maximum_capacity, battery_cycle_count,
+                              device_battery_status_id, selling_price, device_invoice_id, created_at, updated_at)
+    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.model_id, NEW.apple_silicon_id,
+            NEW.apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.serial_number,
+            NEW.device_status_id, NEW.seller_business_partner_id, NEW.buyer_business_partner_id, NEW.purchase_price,
+            NEW.device_grade_id, NEW.reported_defect, NEW.diagnosed_defect, NEW.purchase_online_marketplace_id,
+            NEW.selling_online_marketplace, NEW.selling_date, NEW.battery_maximum_capacity, NEW.battery_cycle_count,
+            NEW.device_battery_status_id, NEW.selling_price, NEW.device_invoice_id, NEW.created_at, NEW.updated_at);
+END $$
+
+CREATE TRIGGER tr_device_delete
+    AFTER DELETE
+    ON device
+    FOR EACH ROW
+BEGIN
+    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, apple_silicon_id,
+                              apple_silicon_unified_memory_id, model_storage_id, model_color_id, serial_number,
+                              device_status_id, seller_business_partner_id, buyer_business_partner_id, purchase_price,
+                              device_grade_id, reported_defect, diagnosed_defect, purchase_online_marketplace_id,
+                              selling_online_marketplace, selling_date, battery_maximum_capacity, battery_cycle_count,
+                              device_battery_status_id, selling_price, device_invoice_id, created_at, updated_at)
+    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.model_id, OLD.apple_silicon_id,
+            OLD.apple_silicon_unified_memory_id, OLD.model_storage_id, OLD.model_color_id, OLD.serial_number,
+            OLD.device_status_id, OLD.seller_business_partner_id, OLD.buyer_business_partner_id, OLD.purchase_price,
+            OLD.device_grade_id, OLD.reported_defect, OLD.diagnosed_defect, OLD.purchase_online_marketplace_id,
+            OLD.selling_online_marketplace, OLD.selling_date, OLD.battery_maximum_capacity, OLD.battery_cycle_count,
+            OLD.device_battery_status_id, OLD.selling_price, OLD.device_invoice_id, OLD.created_at, OLD.updated_at);
+END $$
+
+CREATE TRIGGER tr_device_note_insert
+    AFTER INSERT
+    ON device_note
+    FOR EACH ROW
+BEGIN
+    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, created_at,
+                                   updated_at)
+    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.created_at, NEW.updated_at);
+END $$
+
+CREATE TRIGGER tr_device_note_update
+    AFTER UPDATE
+    ON device_note
+    FOR EACH ROW
+BEGIN
+    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, created_at,
+                                   updated_at)
+    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.created_at, NEW.updated_at);
+END $$
+
+CREATE TRIGGER tr_device_note_delete
+    AFTER DELETE
+    ON device_note
+    FOR EACH ROW
+BEGIN
+    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, created_at,
+                                   updated_at)
+    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.device_note_id, OLD.text, OLD.created_at, OLD.updated_at);
+END $$

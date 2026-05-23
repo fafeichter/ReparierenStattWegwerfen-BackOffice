@@ -1,4 +1,7 @@
 spring:
+  docker:
+    compose:
+      lifecycle-management: start_only
   datasource:
     url: jdbc:mysql://localhost:3306/reparieren-statt-wegwefen?serverTimezone=Europe/Vienna
     username: reparieren-statt-wegwerfen

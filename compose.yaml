@@ -1,6 +1,7 @@
 services:
   mysql:
     image: mysql:${MYSQL_VERSION}
+    command: --log-bin-trust-function-creators=1 # required to enable the creation of triggers
     environment:
       TZ: ${TIMEZONE}
       LANG: C.UTF-8
@@ -9,7 +10,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - '3306'
+      - '3306:3306'
     volumes:
       - reparierenstattwegwerfen-backoffice-mysql-data:/var/lib/mysql/
       - ./keycloak-database.sql:/docker-entrypoint-initdb.d/001-keycloak-database.sql

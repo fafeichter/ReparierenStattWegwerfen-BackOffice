@@ -1,12 +1,14 @@
 spring:
   main:
     banner-mode: off
+  docker:
+    compose:
+      lifecycle-management: none
   datasource:
     # Database connection settings must be provided via environment variables.
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-
   security:
     oauth2:
       resourceserver:
