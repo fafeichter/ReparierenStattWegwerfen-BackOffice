@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal;
 
+import at.reparierenstattwegwerfen.backoffice.device.DeviceStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,8 +42,8 @@ public class Device {
     @Column(name = "serial_number")
     private String serialNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_status_id")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "device_status")
     private DeviceStatus status;
 
     @Column(name = "seller_business_partner_id")

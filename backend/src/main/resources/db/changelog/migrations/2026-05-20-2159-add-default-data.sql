@@ -70,10 +70,6 @@ VALUES (1, 'A', 'neuwertig'),
        (2, 'B', 'kleinere sichtbare Kratzer'),
        (3, 'C', 'sichtbare Kratzer, Dellen oder Kerben');
 
-INSERT INTO device_status_classification (device_status_classification_id, name)
-VALUES (1, 'common'),
-       (2, 'rare');
-
 INSERT INTO model_series (model_series_id, name)
 VALUES (1, 'MacBook Air'),
        (2, 'MacBook Pro'),
@@ -557,20 +553,6 @@ VALUES (1, 1, 1),
        (120, 51, 7),
        (121, 52, 8),
        (122, 53, 7);
-
-INSERT INTO device_status (device_status_id, name, sort_order, device_status_classification_id)
-VALUES (1, 'bestellt / gekauft', 0, 1),
-       (2, 'eingetroffen', 1, 1),
-       (3, 'in Reparatur', 2, 1),
-       (4, 'repariert', 3, 1),
-       (5, 'zum Verkauf angeboten', 4, 1),
-       (6, 'verkauft', 5, 1),
-       (7, 'zum Ausschlachten verfügbar', 6, 1),
-       (8, 'falscher Artikel eingetroffen', 7, 2),
-       (9, 'zurückgegeben', 8, 2),
-       (10, 'Verkäufer/in hat sich anders entschieden', 9, 2),
-       (11, 'nie bekommen - Geld nicht zurückbekommen', 10, 2),
-       (12, 'nie bekommen - Geld zurückbekommen', 11, 2);
 
 INSERT INTO model_silicon_available_storage (model_silicon_available_storage_id, model_available_apple_silicon_id,
                                              model_storage_id)
