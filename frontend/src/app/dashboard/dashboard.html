@@ -1,1 +1,96 @@
-<p>dashboard works!</p>
+<div class="main-container">
+  <header class="header">
+    <div class="branding">
+      <a routerLink="/" routerLinkActive="active">
+        <span class="title">Reparieren Statt Wegwerfen - Back Office</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button aria-label="open user profile" class="nav-text" clrDropdownTrigger>
+          Fabian
+          <cds-icon direction="down" shape="angle"></cds-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen="true" clrPosition="bottom-right">
+          <a clrDropdownItem href="#">Log out</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </header>
+  <div class="content-container">
+    <clr-vertical-nav [clrVerticalNavCollapsed]="false" [clrVerticalNavCollapsible]="true">
+      <a clrVerticalNavLink routerLink="./electric" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="home"></clr-icon>
+        Dashboard
+      </a>
+      <div class="nav-divider"></div>
+      <clr-vertical-nav-group [clrVerticalNavGroupExpanded]="true" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="computer"></clr-icon>
+        Devices
+        <clr-vertical-nav-group-children>
+          <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">Arriving</a>
+          <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">In progress</a>
+          <a clrVerticalNavLink routerLink="./normal/snorlax" routerLinkActive="active">Done</a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+      <div class="nav-divider"></div>
+      <a clrVerticalNavLink routerLink="./electric" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="user"></clr-icon>
+        Business Partners
+      </a>
+      <a clrVerticalNavLink routerLink="./models" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="pod"></clr-icon>
+        Models
+      </a>
+      <div class="nav-divider"></div>
+      <a clrVerticalNavLink routerLink="./models" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="analytics"></clr-icon>
+        Statistics
+      </a>
+    </clr-vertical-nav>
+    <div class="content-area">
+      <clr-breadcrumbs [items]="[{label: 'Dashboard', routerLink: '/home'}]"></clr-breadcrumbs>
+
+      <div class="clr-row">
+        <div class="clr-col-lg-12 clr-col-sm-12 clr-col-12">
+          <div class="card">
+            <div class="card-header">Unordered Lists</div>
+            <div class="card-block">
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat.
+            </div>
+            <div class="card-block">
+              <ul class="list">
+                <li>Ullamco Laboris</li>
+                <li>
+                  Nisi Ut Aliquip
+                  <ul class="list">
+                    <li>Exercitation</li>
+                    <li>Laboris</li>
+                    <li>Commodo</li>
+                  </ul>
+                </li>
+                <li>Consequat</li>
+                <li>Excepteur sint occaecat cupidatat non proident</li>
+                <li>Enim ad Minim</li>
+                <li>
+                  Occeaecat
+                  <ul class="list-unstyled">
+                    <li>Exercitation</li>
+                    <li>Laboris</li>
+                    <li>Commodo</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <a class="btn btn-primary">Action</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
