@@ -20,6 +20,7 @@ repositories {
 }
 
 extra["springAiVersion"] = "2.0.0-M6"
+extra["springModulithVersion"] = "2.0.6"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -29,6 +30,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
+    implementation("org.springframework.modulith:spring-modulith-starter-core")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
@@ -47,6 +49,7 @@ dependencies {
     testImplementation("org.springframework.ai:spring-ai-spring-boot-testcontainers")
     testImplementation("org.testcontainers:testcontainers-junit-jupiter")
     testImplementation("org.testcontainers:testcontainers-mysql")
+    testImplementation("org.springframework.modulith:spring-modulith-starter-test")
     testCompileOnly("org.projectlombok:lombok")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testAnnotationProcessor("org.projectlombok:lombok")
@@ -55,6 +58,7 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
+        mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
     }
 }
 

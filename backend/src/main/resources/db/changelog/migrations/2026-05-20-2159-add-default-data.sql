@@ -1,8 +1,9 @@
 --liquibase formatted sql
 --changeset fabian:2026-05-20-2159-add-default-data
 
-INSERT INTO apple_silicon (apple_silicon_id, name, name_short, number_efficiency_cores, number_performance_cores,
-                           number_super_cores)
+INSERT INTO model_apple_silicon (model_apple_silicon_id, name, name_short, number_efficiency_cores,
+                                 number_performance_cores,
+                                 number_super_cores)
 VALUES (1, 'A18 Pro mit 6‑Core CPU und 5-Core GPU', 'A18 Pro', 4, 2, 0),
        (2, 'M1 mit 8‑Core CPU und 7‑Core GPU', 'M1', 4, 4, 0),
        (3, 'M1 mit 8‑Core CPU und 8‑Core GPU', 'M1', 4, 4, 0),
@@ -41,7 +42,7 @@ VALUES (1, 'A18 Pro mit 6‑Core CPU und 5-Core GPU', 'A18 Pro', 4, 2, 0),
        (36, 'M5 Max mit 18‑Core CPU und 32‑Core GPU', 'M5 Max', 0, 12, 6),
        (37, 'M5 Max mit 18‑Core CPU und 40‑Core GPU', 'M5 Max', 0, 12, 6);
 
-INSERT INTO apple_silicon_unified_memory (apple_silicon_unified_memory_id, size, unit)
+INSERT INTO model_apple_silicon_unified_memory (model_apple_silicon_unified_memory_id, size, unit)
 VALUES (1, 8, 'GB'),
        (2, 12, 'GB'),
        (3, 16, 'GB'),
@@ -120,7 +121,7 @@ VALUES (1, 64, 'GB'),
        (7, 4, 'TB'),
        (8, 8, 'TB');
 
-INSERT INTO online_marketplace (online_marketplace_id, name, url)
+INSERT INTO device_online_marketplace (device_online_marketplace_id, name, url)
 VALUES (1, 'willhaben', 'https://www.willhaben.at/'),
        (2, 'Kleinanzeigen', 'https://kleinanzeigen.de/'),
        (3, 'eBay', 'https://www.ebay.at/');
@@ -192,7 +193,7 @@ VALUES (1, 'MacBook Air (M1, 2020)', 1, 'A2337', 'https://support.apple.com/de-a
        (53, 'iPad Pro 13" (M5, Wi-Fi + Cellular)', 4, 'A3361', 'https://support.apple.com/de-de/125407', 2025, 13,
         13.0);
 
-INSERT INTO model_available_apple_silicon (model_available_apple_silicon_id, model_id, apple_silicon_id)
+INSERT INTO model_available_apple_silicon (model_available_apple_silicon_id, model_id, model_apple_silicon_id)
 VALUES (1, 1, 2),
        (2, 1, 3),
        (3, 2, 3),
@@ -924,7 +925,8 @@ VALUES (1, 1, 3),
        (349, 94, 6);
 
 INSERT INTO model_silicon_available_unified_memory (model_silicon_available_unified_memory_id,
-                                                    model_available_apple_silicon_id, apple_silicon_unified_memory_id)
+                                                    model_available_apple_silicon_id,
+                                                    model_apple_silicon_unified_memory_id)
 VALUES (1, 1, 1),
        (2, 1, 3),
        (3, 2, 1),
@@ -1138,5 +1140,5 @@ VALUES (1, 1, 1),
        (211, 93, 2),
        (212, 94, 3);
 
-INSERT INTO invoice_number_counter (current_invoice_number)
+INSERT INTO invoice_number (current_invoice_number)
 VALUES (1);
