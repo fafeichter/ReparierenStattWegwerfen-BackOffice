@@ -29,7 +29,7 @@ The following domains have been identified:
 | **Model**            | `model`           | Manages the catalog of supported hardware definitions (specifically Apple Silicon M1 or newer devices) targeted for repair and refurbishment.                      |
 | **Business Partner** | `businesspartner` | Handles data of both suppliers (sellers) and clients (buyers).                                                                                                     |
 | **Device**           | `device`          | Tracks the entire lifecycle of a specific, physical asset—from initial acquisition through repair stages to a successful sale, or its disassembly for spare parts. |
-| **Invoice**          | `invoice`         | Aggregates data from the Model, Business Partner, and Device domains generate transactional billing documents.                                                     |
+| **Invoice**          | `invoice`         | Aggregates data from the Model, Business Partner, and Device domains to generate invoice documents.                                                                |
 
 ---
 

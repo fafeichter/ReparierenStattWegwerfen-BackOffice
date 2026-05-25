@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-20-2159-add-default-data
+--changeset fabian:MODEL-2026-05-20-2159-add-default-data context:model
 
 INSERT INTO model_apple_silicon (model_apple_silicon_id, name, name_short, number_efficiency_cores,
                                  number_performance_cores,
@@ -55,21 +55,6 @@ VALUES (1, 8, 'GB'),
        (10, 96, 'GB'),
        (11, 128, 'GB');
 
-INSERT INTO business_partner_address_country (business_partner_address_country_id, name, code)
-VALUES (1, 'Österreich', 'AT'),
-       (2, 'Deutschland', 'DE'),
-       (3, 'Moldau', 'MD');
-
-INSERT INTO device_battery_status (device_battery_status_id, name, sort_order)
-VALUES (1, 'nicht getauscht', 1),
-       (2, 'freiwillig getauscht', 2),
-       (3, 'getauscht wegen Defekt', 3);
-
-INSERT INTO device_grade (device_grade_id, name, description)
-VALUES (1, 'A', 'neuwertig'),
-       (2, 'B', 'kleinere sichtbare Kratzer'),
-       (3, 'C', 'sichtbare Kratzer, Dellen oder Kerben');
-
 INSERT INTO model_series (model_series_id, name)
 VALUES (1, 'MacBook Air'),
        (2, 'MacBook Pro'),
@@ -116,11 +101,6 @@ VALUES (1, 64, 'GB'),
        (6, 2, 'TB'),
        (7, 4, 'TB'),
        (8, 8, 'TB');
-
-INSERT INTO device_online_marketplace (device_online_marketplace_id, name, url)
-VALUES (1, 'willhaben', 'https://www.willhaben.at/'),
-       (2, 'Kleinanzeigen', 'https://kleinanzeigen.de/'),
-       (3, 'eBay', 'https://www.ebay.at/');
 
 INSERT INTO model (model_id, name, model_series_id, model_number, technical_specs_url, release_year, display_size,
                    display_size_exact)
@@ -1121,6 +1101,3 @@ VALUES (1, 1, 1),
        (210, 92, 3),
        (211, 93, 2),
        (212, 94, 3);
-
-INSERT INTO invoice_number (current_invoice_number)
-VALUES (1);
