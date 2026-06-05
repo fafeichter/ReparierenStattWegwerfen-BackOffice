@@ -1,0 +1,33 @@
+<header class="header">
+  <div class="branding">
+    <a routerLink="/" routerLinkActive="active">
+      <span class="title">Reparieren Statt Wegwerfen - Back Office</span>
+    </a>
+  </div>
+
+  <form class="search">
+    <label for="search_input">
+      <input id="search_input" placeholder="Search for keywords..." type="text"/>
+    </label>
+  </form>
+  <div class="header-actions">
+    <a aria-label="refresh" class="nav-link nav-icon">
+      <cds-icon shape="refresh"></cds-icon>
+    </a>
+    <a aria-label="notifications" class="nav-link nav-icon">
+      <cds-icon shape="bell"></cds-icon>
+    </a>
+    <clr-dropdown>
+      <button aria-label="open user profile" class="nav-text" clrDropdownTrigger>
+        <cds-icon shape="user" size="md"></cds-icon>
+        Fabian
+        <cds-icon direction="down" shape="angle"></cds-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a clrDropdownItem>Preferences</a>
+        <a (click)="logout()" clrDropdownItem>Log out</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+
+  </div>
+</header>

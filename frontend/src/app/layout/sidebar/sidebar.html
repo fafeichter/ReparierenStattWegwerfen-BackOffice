@@ -1,0 +1,35 @@
+<clr-vertical-nav [clrVerticalNavCollapsed]="false" [clrVerticalNavCollapsible]="true">
+  <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="home"></clr-icon>
+    Dashboard
+  </a>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group [clrVerticalNavGroupExpanded]="true" routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="computer"></clr-icon>
+    Devices
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">Ordered</a>
+      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">In progress</a>
+      <a clrVerticalNavLink routerLink="./normal/snorlax" routerLinkActive="active">Done</a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <div class="nav-divider"></div>
+  <a clrVerticalNavLink routerLink="./businesspartners" routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="user"></clr-icon>
+    Business Partners
+  </a>
+  <a clrVerticalNavLink routerLink="./models" routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="pod"></clr-icon>
+    Models
+  </a>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group [clrVerticalNavGroupExpanded]="true" routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="computer"></clr-icon>
+    Statistics
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">By month</a>
+      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">By quarter</a>
+      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">Total</a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+</clr-vertical-nav>

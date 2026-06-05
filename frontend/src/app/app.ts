@@ -1,11 +1,17 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {
+  ClrBreadcrumbsModule,
+  ClrDropdownModule,
+  ClrIconModule,
+  ClrVerticalNavModule,
+} from '@clr/angular';
+import { Layout } from './layout/layout';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ClrBreadcrumbsModule, ClrDropdownModule, ClrIconModule, ClrVerticalNavModule, Layout],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('reparierenstattwegwerfen-backoffice-frontend');
