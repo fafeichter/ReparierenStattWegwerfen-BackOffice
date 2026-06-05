@@ -1,4 +1,4 @@
-import {PassedInitialConfig} from 'angular-auth-oidc-client';
+import { PassedInitialConfig } from 'angular-auth-oidc-client';
 
 export const authConfig: PassedInitialConfig = {
   config: {
@@ -12,6 +12,6 @@ export const authConfig: PassedInitialConfig = {
     useRefreshToken: true,
     renewTimeBeforeTokenExpiresInSeconds: 30,
     autoUserInfo: true,
-    secureRoutes: ['http://localhost:8080/api/']
+    secureRoutes: ['http://localhost:8080/api/'],
   },
 };
