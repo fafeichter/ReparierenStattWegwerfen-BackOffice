@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   selector: 'app-devices',
   imports: [],
   templateUrl: './devices.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './devices.css',
 })
-export class Devices {}
+export class Devices {
+}

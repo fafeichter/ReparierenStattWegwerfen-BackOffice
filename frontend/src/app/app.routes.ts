@@ -1,17 +1,17 @@
-import { Routes } from '@angular/router';
-import { Dashboard } from './dashboard/dashboard';
-import { AutoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
-import { Models } from './models/models';
-import { Statistics } from './statistics/statistics';
-import { Devices } from './devices/devices';
-import { BusinessPartners } from './businesspartners/business-partners.component';
-import { ModelDetail } from './models/model-detail/model-detail';
+import {Routes} from '@angular/router';
+import {Dashboard} from './dashboard/dashboard';
+import {AutoLoginPartialRoutesGuard} from 'angular-auth-oidc-client';
+import {Models} from './models/models';
+import {Statistics} from './statistics/statistics';
+import {Devices} from './devices/devices';
+import {BusinessPartners} from './businesspartners/business-partners.component';
+import {ModelDetail} from './models/model-detail/model-detail';
 
 export const routes: Routes = [
   {
     path: '',
     canActivateChild: [AutoLoginPartialRoutesGuard],
-    data: { breadcrumb: 'Dashboard' },
+    data: {breadcrumb: 'Dashboard'},
     children: [
       {
         path: '',
@@ -41,7 +41,7 @@ export const routes: Routes = [
       },
       {
         path: 'models',
-        data: { breadcrumb: 'Models' },
+        data: {breadcrumb: 'Models'},
         children: [
           {
             path: '',
@@ -50,7 +50,7 @@ export const routes: Routes = [
           {
             path: ':id',
             component: ModelDetail,
-            data: { breadcrumb: 'Details' },
+            data: {breadcrumb: 'Details'},
           },
         ],
       },

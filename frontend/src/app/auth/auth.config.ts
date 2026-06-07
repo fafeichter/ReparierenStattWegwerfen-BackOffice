@@ -1,8 +1,9 @@
-import { PassedInitialConfig } from 'angular-auth-oidc-client';
+import {PassedInitialConfig} from 'angular-auth-oidc-client';
+import {environment} from '../../environments/environment';
 
 export const authConfig: PassedInitialConfig = {
   config: {
-    authority: 'http://localhost:9000/realms/reparieren-statt-wegwerfen-backoffice',
+    authority: environment.oidcIssuerUrl,
     redirectUrl: window.location.origin,
     postLogoutRedirectUri: window.location.origin,
     clientId: 'reparieren-statt-wegwerfen-backoffice-angular',
@@ -12,6 +13,6 @@ export const authConfig: PassedInitialConfig = {
     useRefreshToken: true,
     renewTimeBeforeTokenExpiresInSeconds: 30,
     autoUserInfo: true,
-    secureRoutes: ['http://localhost:8080/api/'],
+    secureRoutes: [environment.apiUrl],
   },
 };

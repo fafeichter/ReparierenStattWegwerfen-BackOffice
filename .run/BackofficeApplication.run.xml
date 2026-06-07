@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="BackofficeApplication" type="SpringBootApplicationConfigurationType"
-                   factoryName="Spring Boot" nameIsGenerated="true">
-        <option name="ACTIVE_PROFILES" value="dev"/>
-        <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources"/>
-        <module name="backoffice.main"/>
-        <option name="SPRING_BOOT_MAIN_CLASS" value="at.reparierenstattwegwerfen.backoffice.BackofficeApplication"/>
-        <method v="2">
-            <option name="Make" enabled="true"/>
-        </method>
-    </configuration>
+  <configuration default="false" name="BackofficeApplication" type="SpringBootApplicationConfigurationType"
+                 factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ACTIVE_PROFILES" value="dev"/>
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources"/>
+    <module name="Reparieren_Statt_Wegwerfen_-_Backoffice.backend.main"/>
+    <option name="SPRING_BOOT_MAIN_CLASS" value="at.reparierenstattwegwerfen.backoffice.BackofficeApplication"/>
+    <method v="2">
+      <option name="Make" enabled="true"/>
+    </method>
+  </configuration>
 </component>

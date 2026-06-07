@@ -1,6 +1,9 @@
-# ReparierenStattWegwerfen Back-Office
+[![Qodana](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml)
+[![Deployment](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/deploy.yml/badge.svg)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/deploy.yml)
 
-Back office app of my company ["Reparieren Statt Wegwerfen"](https://reparieren-statt-wegwerfen.at/).
+# Reparieren Statt Wegwerfen - Backoffice
+
+Backoffice app of my company ["Reparieren Statt Wegwerfen"](https://reparieren-statt-wegwerfen.at/).
 
 ---
 

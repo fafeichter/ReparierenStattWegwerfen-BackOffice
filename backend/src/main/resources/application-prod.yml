@@ -6,12 +6,12 @@ spring:
       lifecycle-management: none
   datasource:
     # Database connection settings must be provided via environment variables.
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ...
+    username: ...
+    password: ...
   security:
     oauth2:
       resourceserver:
         jwt:
           # OAuth2 / OpenID Connect issuer URI must be provided via environment variables.
-          issuer-uri: ${JWT_ISSUER_URI}
+          issuer-uri: ...

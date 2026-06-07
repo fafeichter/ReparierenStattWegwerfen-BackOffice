@@ -1,14 +1,9 @@
-import { Component } from '@angular/core';
-import {
-  ClrDropdownModule,
-  ClrIconModule,
-  ClrMainContainerModule,
-  ClrVerticalNavModule,
-} from '@clr/angular';
-import { RouterOutlet } from '@angular/router';
-import { Header } from './header/header';
-import { Sidebar } from './sidebar/sidebar';
-import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ClrDropdownModule, ClrIconModule, ClrMainContainerModule, ClrVerticalNavModule,} from '@clr/angular';
+import {RouterOutlet} from '@angular/router';
+import {Header} from './header/header';
+import {Sidebar} from './sidebar/sidebar';
+import {Breadcrumbs} from './breadcrumbs/breadcrumbs';
 
 @Component({
   selector: 'app-layout',
@@ -23,6 +18,8 @@ import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
     ClrMainContainerModule,
   ],
   templateUrl: './layout.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './layout.css',
 })
-export class Layout {}
+export class Layout {
+}

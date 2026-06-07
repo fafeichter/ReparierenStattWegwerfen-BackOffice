@@ -59,6 +59,6 @@ public enum DeviceStatus {
 
     public enum Classification {
         COMMON,
-        RARE;
+        RARE
     }
 }

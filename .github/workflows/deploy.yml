@@ -1,0 +1,100 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build application
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '25'
+          distribution: 'graalvm'
+          cache: 'gradle'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+      - uses: actions/upload-artifact@v7
+        with:
+          name: frontend-static-resources
+          path: frontend/dist/browser/
+          retention-days: 1
+
+  test:
+    name: Run tests
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '25'
+          distribution: 'graalvm'
+          cache: 'gradle'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Gradle Tests
+        run: ./gradlew test
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: ScalableCapital/action-surefire-report@v2
+        with:
+          report_paths: '**/build/test-results/**/TEST-*.xml'
+
+  artifact:
+    name: Create artifact
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          name: frontend-static-resources
+          path: frontend/dist/browser/
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '25'
+          distribution: 'graalvm'
+          cache: 'gradle'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Docker image
+        env:
+          SPRING_PROFILES_ACTIVE: prod,native
+        run: |
+          ./gradlew :backend:bootBuildImage \
+            -x test \
+            -PskipFrontendBuild=true
+
+      - name: Log in to private container registry
+        uses: azure/docker-login@v2
+        with:
+          login-server: registry.fabian-feichter.at
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Push Docker image
+        run: docker push registry.fabian-feichter.at/reparieren-statt-wegwerfen-backoffice:latest
+
+  deploy:
+    name: Deploy artifact
+    needs: [ artifact ]
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: Run deployment script on Droplet on DigitalOcean via SSH
+        uses: garygrossgarten/github-action-ssh@0.9.0
+        with:
+          command: sh /cloud/scripts/reparieren-statt-wegwerfen-backoffice-deploy.sh
+          host: fabian-feichter.at
+          username: root
+          privateKey: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY}}

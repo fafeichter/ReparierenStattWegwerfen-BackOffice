@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
     java
     id("org.springframework.boot") version "4.0.6"
@@ -6,21 +8,8 @@ plugins {
     id("org.graalvm.buildtools.native") version "0.11.5"
 }
 
-group = "at.reparierenstattwegwerfen"
-version = "0.0.1-SNAPSHOT"
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-extra["springAiVersion"] = "2.0.0-M6"
-extra["springModulithVersion"] = "2.0.6"
+val springAiVersion = "2.0.0-M8"
+val springModulithVersion = "2.0.6"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -57,8 +46,8 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
-        mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
+        mavenBom("org.springframework.ai:spring-ai-bom:$springAiVersion")
+        mavenBom("org.springframework.modulith:spring-modulith-bom:$springModulithVersion")
     }
 }
 
@@ -70,4 +59,40 @@ hibernate {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    reports {
+        junitXml.required = true;
+    }
+}
+
+// === AUTOMATED FRONTEND BUILD INTEGRATION ===
+val copyFrontendAssets = tasks.register<Copy>("copyFrontendAssets") {
+    description = "Copies production compiled frontend assets into the backend static resources"
+
+    // Explicit cross-module dependency: tells Gradle to build the frontend first
+    dependsOn(":frontend:npmBuild")
+
+    from(project(":frontend").projectDir.resolve("dist/browser"))
+    into(layout.buildDirectory.dir("resources/main/static"))
+}
+
+// Hooks the asset copy directly into Gradle's native compilation flow
+tasks.processResources {
+    dependsOn(copyFrontendAssets)
+}
+
+// === OCI CONTAINER BUILD (spring-boot-maven-plugin equivalent) ===
+tasks.named<BootBuildImage>("bootBuildImage") {
+    imageName = "registry.fabian-feichter.at/reparieren-statt-wegwerfen-backoffice"
+    buildpacks = listOf(
+        "urn:cnb:builder:paketo-buildpacks/java-native-image",
+        "paketobuildpacks/health-checker:latest"
+    )
+    environment.put(
+        "BP_NATIVE_IMAGE_BUILD_ARGUMENTS",
+        $$"""--initialize-at-run-time=sun.security.util.Password$ConsoleHolder"""
+    )
+    environment.put("BP_HEALTH_CHECKER_ENABLED", "true")
+    docker {
+        imagePlatform = "linux/amd64"
+    }
 }

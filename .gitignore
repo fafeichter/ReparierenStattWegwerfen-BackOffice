@@ -6,3 +6,13 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+
+### Gradle ###
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# System files
+.DS_Store
+Thumbs.db

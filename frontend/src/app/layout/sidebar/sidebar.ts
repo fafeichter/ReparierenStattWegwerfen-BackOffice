@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
-import { ClrIcon, ClrIconModule, ClrVerticalNavModule } from '@clr/angular';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ClrIcon, ClrIconModule, ClrVerticalNavModule} from '@clr/angular';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   imports: [ClrIcon, ClrIconModule, ClrVerticalNavModule, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sidebar.css',
 })
-export class Sidebar {}
+export class Sidebar {
+}

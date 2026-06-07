@@ -12,7 +12,7 @@ import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class RestSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
