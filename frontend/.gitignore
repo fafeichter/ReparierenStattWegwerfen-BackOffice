@@ -20,3 +20,4 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
+src/environments/build.info.production.ts

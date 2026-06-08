@@ -1,11 +1,12 @@
 import {Routes} from '@angular/router';
 import {Dashboard} from './dashboard/dashboard';
 import {AutoLoginPartialRoutesGuard} from 'angular-auth-oidc-client';
-import {Models} from './models/models';
-import {Statistics} from './statistics/statistics';
-import {Devices} from './devices/devices';
-import {BusinessPartners} from './businesspartners/business-partners.component';
-import {ModelDetail} from './models/model-detail/model-detail';
+import {Models} from './domain/model/models';
+import {BusinessPartners} from './domain/businesspartner/business-partners.component';
+import {ModelDetail} from './domain/model/model-detail/model-detail';
+import {Statistics} from './domain/statistics/statistics';
+import {Devices} from './domain/device/devices';
+import {TechnicalDetails} from './layout/technical-details/technical-details';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,13 @@ export const routes: Routes = [
         component: Statistics,
         data: {
           breadcrumb: 'Statistics',
+        },
+      },
+      {
+        path: 'technical-details',
+        component: TechnicalDetails,
+        data: {
+          breadcrumb: 'Technical details',
         },
       },
     ],
