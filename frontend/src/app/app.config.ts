@@ -12,6 +12,10 @@ import {
 } from 'angular-auth-oidc-client';
 import {provideHttpClient, withInterceptors, withXhr} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {Configuration as ModelConfig} from '@api/model';
+import {Configuration as BusinesspartnerConfig} from '@api/businesspartner';
+import {Configuration as DeviceConfig} from '@api/device';
+import {environment} from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +25,8 @@ export const appConfig: ApplicationConfig = {
     provideAuth(authConfig, withAppInitializerAuthCheck()),
     {provide: AbstractSecurityStorage, useClass: DefaultLocalStorageService},
     provideAnimations(),
+    {provide: ModelConfig, useValue: new ModelConfig({basePath: environment.backendUrl})},
+    {provide: BusinesspartnerConfig, useValue: new BusinesspartnerConfig({basePath: environment.backendUrl})},
+    {provide: DeviceConfig, useValue: new DeviceConfig({basePath: environment.backendUrl})},
   ],
 };

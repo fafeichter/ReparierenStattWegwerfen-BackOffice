@@ -27,7 +27,7 @@ public class DatabaseConfig {
     }
 
     @Bean
-    public BeanFactoryPostProcessor databaseDependencyPostProcessor() {
+    public static BeanFactoryPostProcessor databaseDependencyPostProcessor() {
         return beanFactory -> {
             // Force Liquibase and JPA to initialize only after the database is started
             Class<?>[] targetBeanTypes = {

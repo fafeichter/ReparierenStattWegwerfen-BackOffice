@@ -13,6 +13,6 @@ export const authConfig: PassedInitialConfig = {
     useRefreshToken: true,
     renewTimeBeforeTokenExpiresInSeconds: 30,
     autoUserInfo: true,
-    secureRoutes: [environment.apiUrl],
+    secureRoutes: [environment.backendUrl + '/api/'],
   },
 };

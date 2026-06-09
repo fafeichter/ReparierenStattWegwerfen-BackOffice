@@ -38,12 +38,6 @@ val npmBuild = tasks.register<NpmTask>("npmBuild") {
   description = "Builds the frontend production assets"
   args.set(listOf("run", "prod"))
   dependsOn(tasks.npmInstall)
-
-  onlyIf { !skipFrontendBuild }
-}
-
-// Conditional execution for npmInstall based on the property flag
-tasks.npmInstall {
   onlyIf { !skipFrontendBuild }
 }
 

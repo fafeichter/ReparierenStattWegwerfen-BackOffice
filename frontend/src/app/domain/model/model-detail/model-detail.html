@@ -1,57 +1,82 @@
-<div class="clr-row">
-  <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-    <div class="card">
-      <div class="card-header">
-        <a href="https://support.apple.com/de-at/111883" target="_blank">A2337</a>
-        - MacBook Air (M1, 2020)
-      </div>
-      <div class="card-block">
-        <div class="card-title">Colors</div>
-        <div class="card-text">
-          <ul class="list">
-            <li>Silber</li>
-            <li>Space Grau</li>
-          </ul>
+@if (model(); as m) {
+  <div class="clr-row">
+    <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+      <div class="card">
+        <div class="card-header">
+          {{ m.modelNumber}} |  {{ m.name }}
         </div>
-      </div>
-      <div class="card-block">
-        <div class="card-title">Chip</div>
-        <div class="card-text">
-          <ul class="list">
-            <li>M1 mit 8‑Core CPU und 7‑Core GPU</li>
-            <li>M1 mit 8‑Core CPU und 8‑Core GPU</li>
-          </ul>
+        <div class="card-block">
+          <div class="card-title">Technical Specs</div>
+          <div class="card-text">
+            <a [href]="m.technicalSpecsUrl" target="_blank">{{ m.technicalSpecsUrl }}</a>
+          </div>
         </div>
-      </div>
-      <div class="card-block">
-        <div class="card-title">Memory</div>
-        <div class="card-text">
-          <ul class="list">
-            <li>8 GB</li>
-            <li>16 GB</li>
-          </ul>
+        <div class="card-block">
+          <div class="card-title">Colors</div>
+          <div class="card-text">
+            <ul class="list">
+              @for (color of colors(); track color.id) {
+                <li>{{ color.name }}</li>
+              }
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="card-block">
-        <div class="card-title">Storage</div>
-        <div class="card-text">
-          <ul class="list">
-            <li>256 GB</li>
-            <li>512 GB</li>
-            <li>1 TB</li>
-            <li>2 TB</li>
-          </ul>
+        <div class="card-block">
+          <div class="card-title">Chip</div>
+          <div class="card-text">
+            @for (group of siliconGroups(); track group.shortName; let last = $last) {
+              <ul class="list">
+                @for (chip of group.chips; track chip.id) {
+                  <li>{{ chip.name }}</li>
+                }
+              </ul>
+              @if (!last) {
+                <div></div>
+              }
+            }
+          </div>
         </div>
-      </div>
-      <div class="card-block">
-        <div class="card-title">Features</div>
-        <div class="card-text">
-          <ul class="list">
-            <li>True Tone</li>
-            <li>Liquid Retina Display</li>
-          </ul>
+        <div class="card-block">
+          <div class="card-title">Memory</div>
+          <div class="card-text">
+            <ul class="list">
+              @for (mem of memoryOptions(); track mem.id) {
+                <li>
+                  {{ mem.label }}
+                  @if (!mem.onAllChips) {
+                    <span class="label label-light-blue">only on {{ mem.availableOn.join(', ') }}</span>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-title">Storage</div>
+          <div class="card-text">
+            <ul class="list">
+              @for (storage of storageOptions(); track storage.id) {
+                <li>
+                  {{ storage.label }}
+                  @if (!storage.onAllChips) {
+                    <span class="label label-light-blue">only on {{ storage.availableOn.join(', ') }}</span>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-title">Features</div>
+          <div class="card-text">
+            <ul class="list">
+              @for (feature of features(); track feature.id) {
+                <li>{{ feature.name }}</li>
+              }
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+}

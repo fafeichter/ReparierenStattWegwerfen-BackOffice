@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.model.internal;
+package at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,15 +9,15 @@ import lombok.Setter;
  * @author Fabian Feichter
  */
 @Entity
-@Table(name = "model_available_apple_silicon")
+@Table(name = "model_available_color")
 @Getter
 @Setter
 @NoArgsConstructor
-public class ModelAvailableAppleSilicon {
+public class ModelAvailableColor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_available_apple_silicon_id")
+    @Column(name = "model_available_color_id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,6 +25,6 @@ public class ModelAvailableAppleSilicon {
     private Model model;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_apple_silicon_id")
-    private ModelAppleSilicon modelAppleSilicon;
+    @JoinColumn(name = "model_color_id")
+    private ModelColor color;
 }

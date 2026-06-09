@@ -1,9 +1,10 @@
-package at.reparierenstattwegwerfen.backoffice.model.internal;
+package at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.util.unit.DataUnit;
 
 /**
  * @author Fabian Feichter
@@ -24,5 +25,6 @@ public class ModelAppleSiliconUnifiedMemory {
     private Short size;
 
     @Column(name = "unit")
-    private String unit;
+    @Convert(converter = DataUnitConverter.class)
+    private DataUnit unit;
 }

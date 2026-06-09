@@ -1,4 +1,6 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     java
@@ -6,6 +8,8 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     id("org.hibernate.orm") version "7.2.12.Final"
     id("org.graalvm.buildtools.native") version "0.11.5"
+    // Plugin to generate TypeScript code from OpenAPI JSON file
+    id("org.openapi.generator") version "7.17.0"
 }
 
 val springAiVersion = "2.0.0-M8"
@@ -20,6 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.modulith:spring-modulith-starter-core")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
@@ -65,12 +70,10 @@ tasks.withType<Test> {
 }
 
 // === AUTOMATED FRONTEND BUILD INTEGRATION ===
+// Since bootBuildImage builds from the bootJar output, it inherits the assets automatically
 val copyFrontendAssets = tasks.register<Copy>("copyFrontendAssets") {
     description = "Copies production compiled frontend assets into the backend static resources"
-
-    // Explicit cross-module dependency: tells Gradle to build the frontend first
-    dependsOn(":frontend:npmBuild")
-
+    
     from(project(":frontend").projectDir.resolve("dist/browser"))
     into(layout.buildDirectory.dir("resources/main/static"))
 }
@@ -95,4 +98,62 @@ tasks.named<BootBuildImage>("bootBuildImage") {
     docker {
         imagePlatform = "linux/amd64"
     }
+}
+
+val generateOpenApiSpecs = tasks.register<Test>("generateOpenApiSpecs") {
+    group = "openapi"
+    description = "Generates OpenAPI JSON definitions"
+
+    // Wire the custom Test task to the test source set
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
+
+    filter {
+        // leading wildcard so it matches regardless of package
+        includeTestsMatching("*OpenApiSpecsGenerator.generateOpenApiSpecs")
+    }
+
+    // The test produces files as a side effect; declare them so Gradle
+    // tracks the output and re-runs when they're missing
+    outputs.dir(layout.buildDirectory.dir("openapi"))
+
+    // The test produces files as a side effect; Gradle shout not track
+    // the output and re-generate the files every time
+    outputs.upToDateWhen { false }
+}
+
+// 2. Dynamic generation of TS clients
+val apiModules = listOf("model", "businesspartner", "device", "invoice")
+
+val apiClientsTasks = apiModules.map { module ->
+    val capitalizedModule = module.replaceFirstChar { it.uppercase() }
+
+    tasks.register<GenerateTask>("generate${capitalizedModule}ApiClients") {
+        group = "openapi"
+        description = "Generates the ${module} TypeScript clients."
+
+        generatorName = "typescript-angular"
+
+        // Point to the location where our test writes the file
+        inputSpec = "${layout.buildDirectory.get()}/openapi/${module}.json"
+        // Out of src/, into a sibling dir inside frontend so the TS
+        // toolchain can still resolve it via a path alias
+        outputDir = "${project.rootDir}/frontend/build/generated/openapi/api/${module}"
+
+        configOptions =
+            mapOf(
+                "supportsES6" to "true",
+                "providedInRoot" to "true",
+                "apiNameSuffix" to "${module.replaceFirstChar { it.uppercase() }}Service"
+            )
+
+        dependsOn(generateOpenApiSpecs)
+    }
+}
+
+tasks.register("generateApiClients") {
+    group = "openapi"
+    description = "Generates all TypeScript API clients."
+
+    dependsOn(apiClientsTasks)
 }

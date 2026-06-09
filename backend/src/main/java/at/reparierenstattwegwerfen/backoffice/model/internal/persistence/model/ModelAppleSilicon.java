@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.model.internal;
+package at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
 import jakarta.persistence.*;
@@ -27,12 +27,15 @@ public class ModelAppleSilicon implements NamedEntity {
     @Column(name = "name_short")
     private String nameShort;
 
-    @Column(name = "number_efficiency_cores")
-    private Integer numberEfficiencyCores;
+    @Column(name = "number_cpu_efficiency_cores")
+    private Integer numberCpuEfficiencyCores;
 
-    @Column(name = "number_performance_cores")
-    private Integer numberPerformanceCores;
+    @Column(name = "number_cpu_performance_cores")
+    private Integer numberCpuPerformanceCores;
 
-    @Column(name = "number_super_cores")
-    private Integer numberSuperCores;
+    @Column(name = "number_cpu_super_cores")
+    private Integer numberCpuSuperCores;
+
+    @Column(name = "number_gpu_cores")
+    private Integer numberGpuCores;
 }

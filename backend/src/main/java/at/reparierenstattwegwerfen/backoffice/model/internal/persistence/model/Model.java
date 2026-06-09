@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.model.internal;
+package at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
 import jakarta.persistence.*;
@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Fabian Feichter
@@ -44,4 +46,13 @@ public class Model implements NamedEntity {
 
     @Column(name = "display_size_exact")
     private BigDecimal displaySizeExact;
+
+    @OneToMany(mappedBy = "model")
+    private Set<ModelAvailableColor> availableColors = new HashSet<>();
+
+    @OneToMany(mappedBy = "model")
+    private Set<ModelAvailableFeature> availableFeatures = new HashSet<>();
+
+    @OneToMany(mappedBy = "model")
+    private Set<ModelAvailableAppleSilicon> availableAppleSilicons = new HashSet<>();
 }

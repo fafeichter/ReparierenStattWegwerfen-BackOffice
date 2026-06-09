@@ -49,7 +49,7 @@ export const routes: Routes = [
             component: Models,
           },
           {
-            path: ':id',
+            path: ':modelId',
             component: ModelDetail,
             data: {breadcrumb: 'Details'},
           },

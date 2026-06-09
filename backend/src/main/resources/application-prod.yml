@@ -15,3 +15,8 @@ spring:
         jwt:
           # OAuth2 / OpenID Connect issuer URI must be provided via environment variables.
           issuer-uri: ...
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

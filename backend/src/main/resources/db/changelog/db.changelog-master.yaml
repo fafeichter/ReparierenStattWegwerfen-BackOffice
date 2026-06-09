@@ -26,3 +26,6 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: migrations/invoice/INVOICE-2026-05-20-2159-add-default-data.sql
+  - include:
+      relativeToChangelogFile: true
+      file: migrations/model/2026-06-09.sql

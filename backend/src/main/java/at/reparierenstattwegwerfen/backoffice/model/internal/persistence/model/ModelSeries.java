@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.model.internal;
+package at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
 import jakarta.persistence.*;
@@ -10,15 +10,15 @@ import lombok.Setter;
  * @author Fabian Feichter
  */
 @Entity
-@Table(name = "model_color")
+@Table(name = "model_series")
 @Getter
 @Setter
 @NoArgsConstructor
-public class ModelColor implements NamedEntity {
+public class ModelSeries implements NamedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_color_id")
+    @Column(name = "model_series_id")
     private Integer id;
 
     @Column(name = "name")
