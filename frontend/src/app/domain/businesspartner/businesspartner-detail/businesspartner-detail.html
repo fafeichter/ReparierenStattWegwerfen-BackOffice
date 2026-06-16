@@ -1,0 +1,51 @@
+@if (businessPartner(); as businessPartner) {
+  <div class="clr-row">
+    <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+      <div class="card">
+        <div [class.scammer-header]="businessPartner.scammer" class="card-header">
+          {{ businessPartner.name }}
+          @if (businessPartner.scammer) {
+            <clr-label clrColor="danger" clrText="Scammer!" clrType="solid"></clr-label>
+          }
+        </div>
+        <div class="card-block">
+          <div class="card-title">Address</div>
+          <div class="card-text">
+            {{ businessPartner.address.street }} {{ businessPartner.address.houseNumber }}<br>
+            {{ businessPartner.address.zipCode }} {{ businessPartner.address.city }}<br>
+            {{ businessPartner.address.country }}
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-title">Contact</div>
+          <div class="card-text">
+            <ul class="list">
+              <li>E-Mail: {{ businessPartner.email | orElse }}</li>
+              <li>Telephone: {{ businessPartner.telephone | orElse }}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-title">Devices</div>
+          <div class="card-text">
+            <ul>
+              <li>
+                <a [routerLink]="['/devices', 1]">
+                  MacBook Pro 2021 M1 Pro
+                  <clr-label clrColor="info">Seller</clr-label>
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/devices', 2]">
+                  iPad Air 12,9 5. Generation M2
+                  <clr-label clrColor="success">Buyer</clr-label>
+                </a>
+              </li>
+            </ul>
+          </div>
+          todo ...
+        </div>
+      </div>
+    </div>
+  </div>
+}

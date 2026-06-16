@@ -7,6 +7,7 @@ import {ModelDetail} from './domain/model/model-detail/model-detail';
 import {Statistics} from './domain/statistics/statistics';
 import {Devices} from './domain/device/devices';
 import {TechnicalDetails} from './layout/technical-details/technical-details';
+import {BusinesspartnerDetail} from './domain/businesspartner/businesspartner-detail/businesspartner-detail';
 
 export const routes: Routes = [
   {
@@ -35,10 +36,20 @@ export const routes: Routes = [
       },
       {
         path: 'businesspartners',
-        component: BusinessPartners,
         data: {
           breadcrumb: 'Business Partners',
         },
+        children: [
+          {
+            path: '',
+            component: BusinessPartners,
+          },
+          {
+            path: ':businessPartnerId',
+            component: BusinesspartnerDetail,
+            data: {breadcrumb: 'Details'},
+          },
+        ],
       },
       {
         path: 'models',

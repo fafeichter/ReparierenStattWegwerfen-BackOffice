@@ -32,11 +32,9 @@ public class BusinessPartnerDetailDto {
     @Size(max = 256)
     String lastName;
 
-    @NotBlank
     @Size(max = 256)
     String telephone;
 
-    @NotBlank
     @Size(max = 256)
     String email;
 

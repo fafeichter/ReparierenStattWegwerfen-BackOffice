@@ -56,7 +56,7 @@ export class ModelDetail implements OnInit {
     this.buildAvailability(s => s.storageOptions));
 
   ngOnInit(): void {
-    const modelId = Number(this.route.snapshot.paramMap.get('modelId'));
+    const modelId = Number(this.route.snapshot.paramMap.get('businessPartnerId'));
     this.api.getModelDetails(modelId).subscribe(data => this.model.set(data));
   }
 
