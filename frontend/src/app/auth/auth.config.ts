@@ -7,7 +7,7 @@ export const authConfig: PassedInitialConfig = {
     redirectUrl: window.location.origin,
     postLogoutRedirectUri: window.location.origin,
     clientId: 'reparieren-statt-wegwerfen-backoffice-angular',
-    scope: 'openid profile email offline_access',
+    scope: 'openid profile email',
     responseType: 'code',
     silentRenew: true,
     useRefreshToken: true,
