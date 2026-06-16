@@ -1,4 +1,4 @@
-<clr-vertical-nav [clrVerticalNavCollapsed]="false" [clrVerticalNavCollapsible]="true">
+<clr-vertical-nav [clrVerticalNavCollapsed]="isMobile()" [clrVerticalNavCollapsible]="true">
   <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active">
     <clr-icon clrVerticalNavIcon shape="home"></clr-icon>
     Dashboard
