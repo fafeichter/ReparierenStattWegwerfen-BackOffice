@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:MODEL-2026-05-20-2115-add-initial-schema context:model
+--changeset fabian:2026-05-20 context:model
 
 CREATE TABLE model_apple_silicon
 (

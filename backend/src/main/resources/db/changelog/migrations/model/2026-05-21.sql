@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:MODEL-2026-05-20-2159-add-default-data context:model
+--changeset fabian:2026-05-21 context:model
 
 INSERT INTO model_apple_silicon (model_apple_silicon_id, name, name_short, number_efficiency_cores,
                                  number_performance_cores,

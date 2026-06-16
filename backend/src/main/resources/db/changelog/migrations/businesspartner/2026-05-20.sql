@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:BP-2026-05-20-2115-add-initial-schema context:businesspartner
+--changeset fabian:2026-05-20 context:businesspartner
 
 CREATE TABLE business_partner_address_country
 (

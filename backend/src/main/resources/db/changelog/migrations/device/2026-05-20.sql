@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-20-2115-add-initial-schema
+--changeset fabian:2026-05-20 context:device
 
 CREATE TABLE device_battery_status
 (

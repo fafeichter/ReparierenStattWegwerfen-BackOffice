@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:INVOICE-2026-05-20-2115-add-initial-schema context:invoice
+--changeset fabian:2026-05-20 context:invoice
 
 CREATE TABLE invoice
 (

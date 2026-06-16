@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:DEVICE-2026-05-20-2159-add-default-data context:device
+--changeset fabian:2026-05-22 context:device
 
 INSERT INTO device_battery_status (device_battery_status_id, name, sort_order)
 VALUES (1, 'nicht getauscht', 1),

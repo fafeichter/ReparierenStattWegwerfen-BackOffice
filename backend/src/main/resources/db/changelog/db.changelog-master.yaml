@@ -1,31 +1,31 @@
 databaseChangeLog:
   - include:
       relativeToChangelogFile: true
-      file: migrations/model/MODEL-2026-05-20-2115-add-initial-schema.sql
+      file: migrations/model/2026-05-20.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/businesspartner/BP-2026-05-20-2115-add-initial-schema.sql
+      file: migrations/businesspartner/2026-05-20.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/device/DEVICE-2026-05-20-2125-add-initial-schema.sql
+      file: migrations/device/2026-05-20.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/invoice/INVOICE-2026-05-20-2115-add-initial-schema.sql
+      file: migrations/invoice/2026-05-20.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/device/DEVICE-2026-05-20-2130-add-initial-triggers.sql
+      file: migrations/device/2026-05-21.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/model/MODEL-2026-05-20-2159-add-default-data.sql
+      file: migrations/model/2026-05-21.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/businesspartner/BP-2026-05-20-2159-add-default-data.sql
+      file: migrations/businesspartner/2026-05-21.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/device/DEVICE-2026-05-20-2159-add-default-data.sql
+      file: migrations/device/2026-05-22.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/invoice/INVOICE-2026-05-20-2159-add-default-data.sql
+      file: migrations/invoice/2026-05-21.sql
   - include:
       relativeToChangelogFile: true
       file: migrations/model/2026-06-09.sql
