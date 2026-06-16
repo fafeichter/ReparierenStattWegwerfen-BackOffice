@@ -28,21 +28,21 @@ public interface ModelRepository extends JpaRepository<Model, Integer> {
     List<Model> findAllIPads();
 
     @Query("""
-            SELECT DISTINCT m
-            FROM Model m
-            LEFT JOIN FETCH m.modelSeries
-            LEFT JOIN FETCH m.availableColors ac
-            LEFT JOIN FETCH ac.color
-            LEFT JOIN FETCH m.availableFeatures af
-            LEFT JOIN FETCH af.feature f
-            LEFT JOIN FETCH f.modelFeatureCategory
-            LEFT JOIN FETCH m.availableAppleSilicons aas
-            LEFT JOIN FETCH aas.modelAppleSilicon
-            LEFT JOIN FETCH aas.availableStorages st
-            LEFT JOIN FETCH st.storage
-            LEFT JOIN FETCH aas.availableUnifiedMemories um
-            LEFT JOIN FETCH um.unifiedMemory
-            WHERE m.id = :modelId
+            select distinct m
+            from Model m
+            left join fetch m.modelSeries
+            left join fetch m.availableColors ac
+            left join fetch ac.color
+            left join fetch m.availableFeatures af
+            left join fetch af.feature f
+            left join fetch f.modelFeatureCategory
+            left join fetch m.availableAppleSilicons aas
+            left join fetch aas.modelAppleSilicon
+            left join fetch aas.availableStorages st
+            left join fetch st.storage
+            left join fetch aas.availableUnifiedMemories um
+            left join fetch um.unifiedMemory
+            where m.id = :modelId
             """)
     Model getModelDetails(Integer modelId);
 }

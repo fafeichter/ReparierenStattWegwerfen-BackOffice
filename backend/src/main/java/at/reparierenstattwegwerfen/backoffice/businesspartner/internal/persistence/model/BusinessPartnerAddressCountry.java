@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.businesspartner.internal;
+package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.businesspartner.internal;
+package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -41,4 +41,8 @@ public class BusinessPartner {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_partner_address_id")
     private BusinessPartnerAddress address;
+
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 }
