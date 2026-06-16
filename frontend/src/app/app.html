@@ -1,1 +1,5 @@
-<app-layout></app-layout>
+@if (isAuthenticated()) {
+  <app-layout></app-layout>
+} @else {
+  Loading ...
+}
