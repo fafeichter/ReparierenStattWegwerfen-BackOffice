@@ -1,16 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {buildInfo} from "../../../environments/build.info";
-import {DatePipe} from '@angular/common';
+import {DatePipe, JsonPipe} from '@angular/common';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {OidcSecurityService} from 'angular-auth-oidc-client';
+import {map} from 'rxjs';
 
 @Component({
   selector: 'app-technical-details',
   imports: [
-    DatePipe
+    DatePipe,
+    JsonPipe
   ],
   templateUrl: './technical-details.html',
   styleUrl: './technical-details.css',
 })
 export class TechnicalDetails {
 
+  private readonly oidcSecurityService = inject(OidcSecurityService);
+
   buildInfo = buildInfo;
+
+  readonly userData = toSignal(
+    this.oidcSecurityService.userData$.pipe(map(({userData}) => userData))
+  );
 }
