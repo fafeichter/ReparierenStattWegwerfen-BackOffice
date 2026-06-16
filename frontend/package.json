@@ -20,8 +20,8 @@
     "@angular/forms": "^22.0.0",
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
-    "@clr/angular": "^18.0.0",
-    "@clr/ui": "^18.0.0",
+    "@clr/angular": "^18.2.0",
+    "@clr/ui": "^18.2.0",
     "angular-auth-oidc-client": "21.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
