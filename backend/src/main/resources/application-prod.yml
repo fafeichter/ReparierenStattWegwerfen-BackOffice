@@ -17,7 +17,7 @@ spring:
           issuer-uri: ...
   ai:
     openai:
-      # https://platform.openai.com/api-keys
+      # OpenAI API key must be provided via environment variables (https://platform.openai.com/api-keys)
       api-key: ...
 springdoc:
   api-docs:
