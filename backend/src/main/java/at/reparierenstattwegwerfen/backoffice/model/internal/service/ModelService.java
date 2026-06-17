@@ -9,6 +9,7 @@ import com.samskivert.mustache.Template;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@RegisterReflectionForBinding({PromptContext.class, LLMResponse.class})
 public class ModelService {
 
     private final ModelRepository modelRepository;
