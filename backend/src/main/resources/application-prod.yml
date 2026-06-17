@@ -15,6 +15,10 @@ spring:
         jwt:
           # OAuth2 / OpenID Connect issuer URI must be provided via environment variables.
           issuer-uri: ...
+  ai:
+    openai:
+      # https://platform.openai.com/api-keys
+      api-key: ...
 springdoc:
   api-docs:
     enabled: false

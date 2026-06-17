@@ -1,6 +1,5 @@
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     java
@@ -12,8 +11,8 @@ plugins {
     id("org.openapi.generator") version "7.17.0"
 }
 
-val springAiVersion = "2.0.0-M8"
-val springModulithVersion = "2.0.6"
+extra["springAiVersion"] = "2.0.0"
+extra["springModulithVersion"] = "2.1.0"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -25,6 +24,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.modulith:spring-modulith-starter-core")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
+    implementation("org.springframework.ai:spring-ai-starter-model-openai")
+    implementation("org.springframework.boot:spring-boot-starter-mustache")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
@@ -44,6 +45,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers-junit-jupiter")
     testImplementation("org.testcontainers:testcontainers-mysql")
     testImplementation("org.springframework.modulith:spring-modulith-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-mustache-test")
     testCompileOnly("org.projectlombok:lombok")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testAnnotationProcessor("org.projectlombok:lombok")
@@ -51,8 +53,8 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.ai:spring-ai-bom:$springAiVersion")
-        mavenBom("org.springframework.modulith:spring-modulith-bom:$springModulithVersion")
+        mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
+        mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
     }
 }
 

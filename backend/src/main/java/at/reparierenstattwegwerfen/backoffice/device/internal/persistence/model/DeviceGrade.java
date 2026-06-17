@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal;
+package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
 import jakarta.persistence.*;
@@ -10,20 +10,20 @@ import lombok.Setter;
  * @author Fabian Feichter
  */
 @Entity
-@Table(name = "device_online_marketplace")
+@Table(name = "device_grade")
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceOnlineMarketplace implements NamedEntity {
+public class DeviceGrade implements NamedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "device_online_marketplace_id")
+    @Column(name = "device_grade_id")
     private Integer id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "url")
-    private String url;
+    @Column(name = "description")
+    private String description;
 }

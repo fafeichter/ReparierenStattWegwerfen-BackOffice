@@ -1,0 +1,38 @@
+<button (click)="modalOpened.set(true)" class="btn btn-primary">
+  <clr-icon shape="plus"></clr-icon>
+  Add device
+</button>
+<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="xl">
+  <div class="modal-title">Add device</div>
+  <div class="modal-body">
+    <form (ngSubmit)="addDevice()" [formGroup]="form" clrForm>
+      <clr-input-container>
+        <label>
+          <span class="clr-required-mark">URL</span>
+        </label>
+        <input clrInput formControlName="url" size="999" type="url"/>
+        <clr-control-helper>From Kleinanzeigen, Willhaben etc.</clr-control-helper>
+        @if (form.get('url')?.hasError('required')) {
+          <clr-control-error>URL is required.</clr-control-error>
+        }
+        @if (form.get('url')?.hasError('pattern')) {
+          <clr-control-error> Please enter a valid URL.</clr-control-error>
+        }
+      </clr-input-container>
+    </form>
+
+    Found model(s):
+    {{ foundModels() }}
+
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalOpened.set(false)" class="btn btn-outline" type="button">Cancel
+    </button>
+    <button (click)="addDevice()" [disabled]="form.invalid" class="btn btn-primary" type="button">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+      }
+      {{ isSubmitting() ? 'Adding...' : 'Add' }}
+    </button>
+  </div>
+</clr-modal>

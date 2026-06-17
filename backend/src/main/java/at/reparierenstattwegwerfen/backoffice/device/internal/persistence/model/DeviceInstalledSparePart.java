@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal;
+package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

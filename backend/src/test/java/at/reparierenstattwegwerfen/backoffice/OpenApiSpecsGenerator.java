@@ -1,7 +1,9 @@
 package at.reparierenstattwegwerfen.backoffice;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.ai.model.openai.autoconfigure.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
@@ -24,9 +26,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-@Import({TestcontainersConfiguration.class, MockedOauth2ResourceServerConfig.class})
+@Import({
+        TestcontainersConfiguration.class,
+        MockedOauth2ResourceServerConfig.class,
+        MockedSpringAiTestConfig.class
+})
+@EnableAutoConfiguration(exclude = {
+        OpenAiModerationAutoConfiguration.class,
+        OpenAiImageAutoConfiguration.class,
+        OpenAiEmbeddingAutoConfiguration.class,
+        OpenAiChatAutoConfiguration.class,
+        OpenAiAudioTranscriptionAutoConfiguration.class,
+        OpenAiAudioSpeechAutoConfiguration.class
+})
 public class OpenApiSpecsGenerator {
-
     private static final List<String> IGNORE_MODULES = List.of(
             "application",
             "shared"

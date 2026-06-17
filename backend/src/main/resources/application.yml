@@ -1,6 +1,10 @@
 spring:
   application:
     name: Reparieren Statt Wegwerfen - Backoffice
+  ai:
+    openai:
+      chat:
+        model: gpt-5.4-mini
   threads:
     virtual:
       enabled: true

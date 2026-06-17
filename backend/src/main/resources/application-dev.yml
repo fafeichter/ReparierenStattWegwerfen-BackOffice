@@ -11,6 +11,10 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:9000/realms/reparieren-statt-wegwerfen-backoffice
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY_DEV} # See `secrets.env`
+
 logging:
   level:
     at.reparierenstattwegwerfen.backoffice: DEBUG

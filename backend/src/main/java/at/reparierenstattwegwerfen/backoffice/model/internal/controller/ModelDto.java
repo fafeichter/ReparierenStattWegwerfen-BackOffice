@@ -18,7 +18,6 @@ public class ModelDto {
 
     @EqualsAndHashCode.Include
     @NotNull
-
     Integer id;
 
     @NotBlank

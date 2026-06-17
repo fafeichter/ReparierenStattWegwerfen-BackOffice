@@ -2,11 +2,9 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.controller;
 
 import at.reparierenstattwegwerfen.backoffice.model.internal.service.ModelService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,5 +30,10 @@ public class ModelController {
     @GetMapping("/{modelId}")
     public ModelDetailDto getModelDetails(@PathVariable Integer modelId) {
         return modelService.getModelDetails(modelId);
+    }
+
+    @GetMapping("/search")
+    public List<String> getModelNumberFromAdUrl(@RequestParam("adUrl") String adUrl) throws IOException {
+        return modelService.getModelNumberFromAdUrl(adUrl);
     }
 }

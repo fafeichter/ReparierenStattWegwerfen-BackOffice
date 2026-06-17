@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal;
+package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.device.DeviceStatus;
 import jakarta.persistence.*;
