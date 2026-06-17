@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-21 context:businesspartner
+--changeset fabian:2026-05-21-data context:businesspartner
 
 INSERT INTO business_partner_address_country (business_partner_address_country_id, name, code)
 VALUES (1, 'Österreich', 'AT'),

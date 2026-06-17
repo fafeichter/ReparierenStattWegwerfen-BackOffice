@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-06-09 context:model
+--changeset fabian:2026-06-09-data-correction context:model
 
 alter table model_apple_silicon_unified_memory
     add constraint uq_model_apple_silicon_unified_memory

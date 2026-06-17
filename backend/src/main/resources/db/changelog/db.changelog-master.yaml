@@ -1,31 +1,31 @@
 databaseChangeLog:
   - include:
       relativeToChangelogFile: true
-      file: migrations/model/2026-05-20.sql
+      file: migrations/model/2026-05-20-schema.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/businesspartner/2026-05-20.sql
+      file: migrations/businesspartner/2026-05-20-schema.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/device/2026-05-20.sql
+      file: migrations/device/2026-05-20-schema.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/invoice/2026-05-20.sql
+      file: migrations/invoice/2026-05-20-schema.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/device/2026-05-21.sql
+      file: migrations/device/2026-05-21-triggers.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/model/2026-05-21.sql
+      file: migrations/model/2026-05-21-data.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/businesspartner/2026-05-21.sql
+      file: migrations/businesspartner/2026-05-21-data.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/device/2026-05-22.sql
+      file: migrations/device/2026-05-22-data.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/invoice/2026-05-21.sql
+      file: migrations/invoice/2026-05-21-data.sql
   - include:
       relativeToChangelogFile: true
-      file: migrations/model/2026-06-09.sql
+      file: migrations/model/2026-06-09-data-correction.sql

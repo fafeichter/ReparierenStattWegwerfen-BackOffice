@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-20 context:model
+--changeset fabian:2026-05-20-schema context:model
 
 CREATE TABLE model_apple_silicon
 (
@@ -72,7 +72,8 @@ CREATE TABLE model
     model_series_id     int           NOT NULL,
     model_number        varchar(5)    NOT NULL,
     technical_specs_url varchar(256)  NOT NULL,
-    release_year        smallint      NOT NULL,
+    release_year year          NOT NULL,
+    release_month       tinyint       NOT NULL,
     display_size        smallint      NOT NULL,
     display_size_exact  DECIMAL(4, 1) NOT NULL,
     created_at          timestamp     NOT NULL DEFAULT CURRENT_TIMESTAMP,
