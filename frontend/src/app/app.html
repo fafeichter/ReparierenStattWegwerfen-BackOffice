@@ -1,5 +1,9 @@
 @if (isAuthenticated()) {
   <app-layout></app-layout>
 } @else {
-  Loading ...
+  <div class="flex flex-col items-center justify-center min-h-screen w-full">
+    <clr-spinner [clrMedium]="true"></clr-spinner>
+    <br/>
+    Loading ...
+  </div>
 }
