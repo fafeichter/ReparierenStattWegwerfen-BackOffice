@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, computed, inject, OnInit, signal} from '@angular/core';
 import {ModelControllerService, ModelDetailDto, SiliconDto, SizeDto} from '@api/model';
 import {ActivatedRoute} from '@angular/router';
+import {ClrLabel} from '@clr/angular';
 
 interface SizeAvailability {
   id: number;
@@ -11,7 +12,9 @@ interface SizeAvailability {
 
 @Component({
   selector: 'app-model-detail',
-  imports: [],
+  imports: [
+    ClrLabel
+  ],
   templateUrl: './model-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './model-detail.css',

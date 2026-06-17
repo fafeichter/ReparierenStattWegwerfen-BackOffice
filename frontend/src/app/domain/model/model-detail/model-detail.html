@@ -3,7 +3,7 @@
     <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
       <div class="card">
         <div class="card-header">
-          {{ m.modelNumber}} |  {{ m.name }}
+          {{ m.modelNumber }} |  {{ m.name }}
         </div>
         <div class="card-block">
           <div class="card-title">Technical Specs</div>
@@ -44,7 +44,9 @@
                 <li>
                   {{ mem.label }}
                   @if (!mem.onAllChips) {
-                    <span class="label label-light-blue">only on {{ mem.availableOn.join(', ') }}</span>
+                    @for (availableOn of mem.availableOn; track availableOn) {
+                      <clr-label>{{ availableOn }}</clr-label>
+                    }
                   }
                 </li>
               }
@@ -59,7 +61,9 @@
                 <li>
                   {{ storage.label }}
                   @if (!storage.onAllChips) {
-                    <span class="label label-light-blue">only on {{ storage.availableOn.join(', ') }}</span>
+                    @for (availableOn of storage.availableOn; track availableOn) {
+                      <clr-label>{{ availableOn }}</clr-label>
+                    }
                   }
                 </li>
               }

@@ -22,18 +22,26 @@ public class ModelService {
     public List<ModelDto> getAllMacBooks() {
         return modelRepository.findAllMacbooks()
                 .stream()
-                .map(macbook -> {
-                    return new ModelDto(macbook.getId(), macbook.getName(), macbook.getModelNumber(), macbook.getReleaseYear());
-                })
+                .map(macbook -> ModelDto.builder()
+                        .id(macbook.getId())
+                        .name(macbook.getName())
+                        .modelNumber(macbook.getModelNumber())
+                        .releaseYear(macbook.getReleaseYear())
+                        .releaseMonth(macbook.getReleaseMonth())
+                        .build())
                 .toList();
     }
 
     public List<ModelDto> getAllIPads() {
         return modelRepository.findAllIPads()
                 .stream()
-                .map(ipad -> {
-                    return new ModelDto(ipad.getId(), ipad.getName(), ipad.getModelNumber(), ipad.getReleaseYear());
-                })
+                .map(macbook -> ModelDto.builder()
+                        .id(macbook.getId())
+                        .name(macbook.getName())
+                        .modelNumber(macbook.getModelNumber())
+                        .releaseYear(macbook.getReleaseYear())
+                        .releaseMonth(macbook.getReleaseMonth())
+                        .build())
                 .toList();
     }
 
@@ -82,6 +90,7 @@ public class ModelService {
                 .numberCpuEfficiencyCores(chip.getNumberCpuEfficiencyCores())
                 .numberCpuPerformanceCores(chip.getNumberCpuPerformanceCores())
                 .numberCpuSuperCores(chip.getNumberCpuSuperCores())
+                .numberGpuCores(chip.getNumberGpuCores())
                 .storageOptions(aas.getAvailableStorages().stream()
                         .map(s -> toSizeDto(s.getStorage().getId(),
                                 s.getStorage().getSize(), s.getStorage().getUnit()))

@@ -41,6 +41,9 @@ public class Model implements NamedEntity {
     @Column(name = "release_year")
     private Short releaseYear;
 
+    @Column(name = "release_month")
+    private Short releaseMonth;
+
     @Column(name = "display_size")
     private Short displaySize;
 
