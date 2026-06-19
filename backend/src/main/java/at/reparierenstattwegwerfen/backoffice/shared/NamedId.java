@@ -3,7 +3,7 @@ package at.reparierenstattwegwerfen.backoffice.shared;
 /**
  * @author Fabian Feichter
  */
-public interface NamedEntity {
+public interface NamedId {
     Integer getId();
 
     String getName();

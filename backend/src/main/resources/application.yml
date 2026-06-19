@@ -5,7 +5,7 @@ spring:
     openai:
       chat:
         model: gpt-5.4-mini
-        reasoning-effort: none
+        reasoning-effort: low
   threads:
     virtual:
       enabled: true

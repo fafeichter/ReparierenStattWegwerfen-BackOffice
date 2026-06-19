@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model;
 
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import org.springframework.util.unit.DataUnit;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ModelAppleSiliconUnifiedMemory {
+public class ModelAppleSiliconUnifiedMemory implements NamedId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +28,9 @@ public class ModelAppleSiliconUnifiedMemory {
     @Column(name = "unit")
     @Convert(converter = DataUnitConverter.class)
     private DataUnit unit;
+
+    @Override
+    public String getName() {
+        return size + " " + (unit == DataUnit.GIGABYTES ? "GB" : "TB");
+    }
 }

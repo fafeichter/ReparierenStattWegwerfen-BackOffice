@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
-import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceSparePart implements NamedEntity {
+public class DeviceSparePart implements NamedId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

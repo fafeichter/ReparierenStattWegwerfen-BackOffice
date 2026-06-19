@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model;
 
-import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BusinessPartnerAddressCountry implements NamedEntity {
+public class BusinessPartnerAddressCountry implements NamedId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

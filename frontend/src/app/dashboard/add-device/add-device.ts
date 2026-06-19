@@ -1,7 +1,8 @@
-import {Component, effect, inject, signal} from '@angular/core';
+import {Component, effect, ElementRef, inject, signal, ViewChild} from '@angular/core';
 import {ClrFormsModule, ClrIcon, ClrIconModule, ClrModalModule} from "@clr/angular";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ModelControllerService} from '@api/model';
+import {AiResponse, ModelControllerService} from '@api/model';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-add-device',
@@ -11,16 +12,19 @@ import {ModelControllerService} from '@api/model';
     ClrModalModule,
     ClrFormsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JsonPipe
   ],
   templateUrl: './add-device.html',
   styleUrl: './add-device.css',
 })
 export class AddDevice {
 
+  @ViewChild('input') urlInput!: ElementRef<HTMLInputElement>;
+
   modalOpened = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
-  foundModels = signal<string[]>([]);
+  found = signal<AiResponse | undefined>(undefined);
 
   form = new FormGroup({
     url: new FormControl('', [
@@ -36,12 +40,16 @@ export class AddDevice {
     effect(() => {
       if (this.modalOpened()) {
         this.resetFormState();
+
+        setTimeout(() => {
+          this.urlInput?.nativeElement.focus();
+        }, 1);
       }
     });
   }
 
   addDevice() {
-    this.foundModels.set([]);
+    this.found.set(undefined);
 
     // 1. If form is invalid, trigger Clarity's error UI by marking it touched
     if (this.form.invalid) {
@@ -54,7 +62,7 @@ export class AddDevice {
     const adUrl = this.form.controls.url.value ?? ''
 
     this.api.getModelNumberFromAdUrl(adUrl).subscribe(data => {
-      this.foundModels.set(data);
+      this.found.set(data);
       this.isSubmitting.set(false);
     });
   }

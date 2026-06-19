@@ -3,18 +3,24 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.service;
 import at.reparierenstattwegwerfen.backoffice.model.internal.controller.ModelDetailDto;
 import at.reparierenstattwegwerfen.backoffice.model.internal.controller.ModelDto;
 import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model.*;
-import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.repository.ModelRepository;
+import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.repository.*;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.converter.BeanOutputConverter;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 import org.springframework.util.unit.DataUnit;
+import org.springframework.web.client.RestClient;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -26,10 +32,16 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-@RegisterReflectionForBinding({PromptContext.class, LLMResponse.class})
+@RegisterReflectionForBinding({PromptContext.class, DeviceModelMatchResponse.class,
+        DeviceModelMatchResponse.AlternativeCandidate.class, DeviceModelMatchResponse.Confidence.class})
 public class ModelService {
 
     private final ModelRepository modelRepository;
+    private final ModelAppleSiliconRepository modelAppleSiliconRepository;
+    private final ModelColorRepository modelColorRepository;
+    private final ModelStorageRepository modelStorageRepository;
+    private final ModelAppleSiliconUnifiedMemoryRepository modelAppleSiliconUnifiedMemoryRepository;
+
     private final ChatClient.Builder aiClientBuilder;
 
     @Value("classpath:prompts/model/apple-model-extractor.mustache")
@@ -126,38 +138,77 @@ public class ModelService {
                 .build();
     }
 
-    public List<String> getModelNumberFromAdUrl(String adUrl) throws IOException {
+    @Transactional
+    public AiResponse getModelDetailsFromAd(String adUrl) throws IOException {
 
         // 3. Build the context and render the Mustache template
         PromptContext context = PromptContext.builder()
-                .adUrl(adUrl)
+                .adHtmlContent(HtmlMinifier.stripHtmlTrash(RestClient.create().get().uri(adUrl).retrieve().body(String.class)))
                 .build();
 
         String templateString = mustacheTemplateResource.getContentAsString(StandardCharsets.UTF_8);
         Template template = Mustache.compiler().compile(templateString);
         String formattedPrompt = template.execute(context);
 
-        // 4. Call Spring AI ChatClient with the rendered prompt
         ChatClient chatClient = aiClientBuilder.build();
 
-        // We use .entity(LLMResponse.class) so Spring AI automatically parses
-        // the strict raw JSON string back into your structured Lombok DTO.
+        BeanOutputConverter<DeviceModelMatchResponse> output = new BeanOutputConverter<>(DeviceModelMatchResponse.class);
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        LLMResponse airResponse = chatClient.prompt(formattedPrompt)
+
+        OpenAiChatOptions chatOptions = OpenAiChatOptions.builder()
+                .outputSchema(output.getJsonSchema())
+                .build();
+
+        Prompt prompt = new Prompt(formattedPrompt, chatOptions);
+
+        DeviceModelMatchResponse aiResponse = chatClient.prompt(prompt)
                 .call()
-                .entity(LLMResponse.class);
+                .entity(DeviceModelMatchResponse.class);
         stopWatch.stop();
 
         log.info(stopWatch.prettyPrint());
 
+        AiResponse processedResponse = null;
 
-        // 5. Extract the highest probability model number if available
-        if (airResponse != null && airResponse.getModelNumbers() != null && !airResponse.getModelNumbers().isEmpty()) {
-            return airResponse.getModelNumbers();
+        if (aiResponse != null) {
+            // 1. Resolve the main NamedId components from your repositories
+            NamedId model = modelRepository.findById(aiResponse.modelId()).orElse(null);
+            NamedId color = aiResponse.modelColorId().flatMap(modelColorRepository::findById).orElse(null);
+            NamedId storage = aiResponse.modelStorageId().flatMap(modelStorageRepository::findById).orElse(null);
+            NamedId memory = aiResponse.modelAppleSiliconUnifiedMemoryId().flatMap(modelAppleSiliconUnifiedMemoryRepository::findById).orElse(null);
+
+
+            // 2. Map the alternative candidates to the new record structure recursively
+            List<AiResponse.Alternative> mappedAlternatives = null;
+            if (aiResponse.alternativeCandidates() != null) {
+                mappedAlternatives = aiResponse.alternativeCandidates().stream()
+                        .map(alt -> new AiResponse.Alternative(
+                                NamedIdDto.from(modelRepository.findById(alt.modelId()).orElse(null)),
+                                NamedIdDto.from(alt.modelColorId().flatMap(modelColorRepository::findById).orElse(null)),
+                                NamedIdDto.from(alt.modelStorageId().flatMap(modelStorageRepository::findById).orElse(null)),
+                                NamedIdDto.from(alt.modelAppleSiliconUnifiedMemoryId().flatMap(modelAppleSiliconUnifiedMemoryRepository::findById).orElse(null))
+                        ))
+                        .toList();
+            }
+
+            // 3. Create the final top-level record
+            processedResponse = new AiResponse(
+                    NamedIdDto.from(model),
+                    NamedIdDto.from(color),
+                    NamedIdDto.from(storage),
+                    NamedIdDto.from(memory),
+                    aiResponse.batteryMaximumCapacity().orElse(null),
+                    aiResponse.batteryCycleCount().orElse(null),
+                    aiResponse.reportedDefect().orElse(null),
+                    aiResponse.serialNumber().orElse(null),
+                    mappedAlternatives,
+                    stopWatch.getTotalTimeSeconds(),
+                    aiResponse.confidence().name()
+            );
         }
 
-        return List.of();
+        return processedResponse;
     }
 }

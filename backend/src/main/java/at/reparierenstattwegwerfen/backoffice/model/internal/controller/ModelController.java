@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.controller;
 
+import at.reparierenstattwegwerfen.backoffice.model.internal.service.AiResponse;
 import at.reparierenstattwegwerfen.backoffice.model.internal.service.ModelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class ModelController {
     }
 
     @GetMapping("/search")
-    public List<String> getModelNumberFromAdUrl(@RequestParam("adUrl") String adUrl) throws IOException {
-        return modelService.getModelNumberFromAdUrl(adUrl);
+    public AiResponse getModelNumberFromAdUrl(@RequestParam("adUrl") String adUrl) throws IOException {
+        return modelService.getModelDetailsFromAd(adUrl);
     }
 }

@@ -10,7 +10,7 @@
         <label>
           <span class="clr-required-mark">URL</span>
         </label>
-        <input clrInput formControlName="url" size="999" type="url"/>
+          <input #input clrInput formControlName="url" size="999" type="url"/>
         <clr-control-helper>From Kleinanzeigen, Willhaben etc.</clr-control-helper>
         @if (form.get('url')?.hasError('required')) {
           <clr-control-error>URL is required.</clr-control-error>
@@ -22,7 +22,7 @@
     </form>
 
     Found model(s):
-    {{ foundModels() }}
+      <pre>{{ found() | json }}</pre>
 
   </div>
   <div class="modal-footer">

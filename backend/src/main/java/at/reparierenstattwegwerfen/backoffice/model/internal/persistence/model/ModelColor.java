@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model;
 
-import at.reparierenstattwegwerfen.backoffice.shared.NamedEntity;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ModelColor implements NamedEntity {
+public class ModelColor implements NamedId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
