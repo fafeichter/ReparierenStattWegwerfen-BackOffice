@@ -1,33 +1,34 @@
 package at.reparierenstattwegwerfen.backoffice.sale.internal.config;
 
-import at.reparierenstattwegwerfen.backoffice.BackofficeApplication;
-import org.springframework.aot.hint.RuntimeHints;
-import org.springframework.aot.hint.RuntimeHintsRegistrar;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.aot.BeanFactoryInitializationAotProcessor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.context.annotation.Profile;
 import org.springframework.modulith.core.ApplicationModule;
 import org.springframework.modulith.core.ApplicationModuleIdentifier;
-import org.springframework.modulith.core.ApplicationModules;
+import org.springframework.modulith.runtime.ApplicationModulesRuntime;
 
 /**
  * @author Fabian Feichter
  */
 @Configuration("saleAiPromptsConfig")
-@ImportRuntimeHints(AiPromptsConfig.MustacheHintsRegistrar.class)
+@RequiredArgsConstructor
 @Profile("prod")
 public class AiPromptsConfig {
 
-    public static class MustacheHintsRegistrar implements RuntimeHintsRegistrar {
+    private final ApplicationModulesRuntime runtime;
 
-        @Override
-        public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-            ApplicationModuleIdentifier applicationModuleIdentifier = ApplicationModules.of(BackofficeApplication.class)
+    @Bean("saleMustacheHintsProcessor")
+    public BeanFactoryInitializationAotProcessor mustacheHintsProcessor() {
+        return _ -> (generationContext, beanFactoryInitializationCode) -> {
+            ApplicationModuleIdentifier moduleIdentifier = runtime.get()
                     .getModuleForPackage(this.getClass().getPackageName())
                     .map(ApplicationModule::getIdentifier)
                     .orElseThrow();
 
-            hints.resources().registerPattern("prompts/" + applicationModuleIdentifier + "/*.mustache");
-        }
+            generationContext.getRuntimeHints().resources()
+                    .registerPattern("prompts/" + moduleIdentifier + "/*.mustache");
+        };
     }
 }

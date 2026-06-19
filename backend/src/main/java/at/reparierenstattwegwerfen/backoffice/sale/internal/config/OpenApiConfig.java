@@ -1,28 +1,24 @@
 package at.reparierenstattwegwerfen.backoffice.sale.internal.config;
 
-import at.reparierenstattwegwerfen.backoffice.BackofficeApplication;
+import com.tngtech.archunit.core.importer.ModuleImportPlugin;
 import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.modulith.core.ApplicationModule;
-import org.springframework.modulith.core.ApplicationModules;
 
 /**
  * @author Fabian Feichter
  */
 @Configuration("saleOpenApiConfig")
+@RegisterReflectionForBinding(ModuleImportPlugin.class)
 public class OpenApiConfig {
 
     @Bean
-    public GroupedOpenApi saleApi() {
-        ApplicationModule module = ApplicationModules.of(BackofficeApplication.class)
-                .getModuleForPackage(this.getClass().getPackageName())
-                .orElseThrow();
-
+    public GroupedOpenApi saleOpenApi() {
         return GroupedOpenApi
                 .builder()
-                .group(module.getIdentifier().toString())
-                .packagesToScan(module.getBasePackage().getPackageName().toString())
+                .group("sale")
+                .packagesToScan("at.reparierenstattwegwerfen.backoffice.sale")
                 .build();
     }
 }
