@@ -122,7 +122,7 @@ CREATE TABLE device_audit
     battery_cycle_count                   int                     DEFAULT NULL,
     device_battery_status_id              int                     DEFAULT NULL,
     selling_price                         DECIMAL(10, 2)          DEFAULT NULL,
-    invoice_id                            int                     DEFAULT NULL,
+    sale_id int DEFAULT NULL,
     created_at                            timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at                            timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (device_audit_id),

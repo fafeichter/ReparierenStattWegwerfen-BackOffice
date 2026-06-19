@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.invoice.internal.config;
+package at.reparierenstattwegwerfen.backoffice.sale.internal.config;
 
 import at.reparierenstattwegwerfen.backoffice.BackofficeApplication;
 import org.springdoc.core.models.GroupedOpenApi;
@@ -10,11 +10,11 @@ import org.springframework.modulith.core.ApplicationModules;
 /**
  * @author Fabian Feichter
  */
-@Configuration("invoiceOpenApiConfig")
+@Configuration("saleOpenApiConfig")
 public class OpenApiConfig {
 
     @Bean
-    public GroupedOpenApi invoiceApi() {
+    public GroupedOpenApi saleApi() {
         ApplicationModule module = ApplicationModules.of(BackofficeApplication.class)
                 .getModuleForPackage(this.getClass().getPackageName())
                 .orElseThrow();

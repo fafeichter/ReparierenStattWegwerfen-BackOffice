@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.invoice.internal.config;
+package at.reparierenstattwegwerfen.backoffice.sale.internal.config;
 
 import at.reparierenstattwegwerfen.backoffice.BackofficeApplication;
 import org.springframework.aot.hint.RuntimeHints;
@@ -13,7 +13,7 @@ import org.springframework.modulith.core.ApplicationModules;
 /**
  * @author Fabian Feichter
  */
-@Configuration("invoiceAiPromptsConfig")
+@Configuration("saleAiPromptsConfig")
 @ImportRuntimeHints(AiPromptsConfig.MustacheHintsRegistrar.class)
 @Profile("prod")
 public class AiPromptsConfig {

@@ -126,7 +126,7 @@ val generateOpenApiSpecs = tasks.register<Test>("generateOpenApiSpecs") {
 }
 
 // 2. Dynamic generation of TS clients
-val apiModules = listOf("model", "businesspartner", "device", "invoice")
+val apiModules = listOf("model", "businesspartner", "device", "sale")
 
 val apiClientsTasks = apiModules.map { module ->
     val capitalizedModule = module.replaceFirstChar { it.uppercase() }
