@@ -4,7 +4,7 @@ spring:
   ai:
     openai:
       chat:
-        model: gpt-5.4-mini
+        model: gpt-5.5
         reasoning-effort: low
   threads:
     virtual:
