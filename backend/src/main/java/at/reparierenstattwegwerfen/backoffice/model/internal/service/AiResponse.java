@@ -8,25 +8,24 @@ import java.util.List;
  */
 public record AiResponse(
 
-        NamedIdDto model,
-        NamedIdDto modelColor,
-        NamedIdDto modelStorage,
-        NamedIdDto modelAppleSiliconUnifiedMemory,
-        Integer batteryMaximumCapacity,
-        Integer batteryCycleCount,
-        String reportedDefect,
-        String serialNumber,
-        List<Alternative> alternativeCandidates,
-        Double time,
-        String confidence
+	NamedIdDto model,
+	NamedIdDto modelColor,
+	NamedIdDto modelStorage,
+	NamedIdDto modelAppleSiliconUnifiedMemory,
+	Integer batteryMaximumCapacity,
+	Integer batteryCycleCount,
+	String reportedDefect,
+	String serialNumber,
+	List<Alternative> alternativeCandidates,
+	Double time,
+	String confidence
 ) {
-    public record Alternative(
+	public record Alternative(
 
-            NamedIdDto model,
-            NamedIdDto modelColor,
-            NamedIdDto modelStorage,
-            NamedIdDto modelAppleSiliconUnifiedMemory
-    ) {
-    }
+		NamedIdDto model,
+		NamedIdDto modelColor,
+		NamedIdDto modelStorage,
+		NamedIdDto modelAppleSiliconUnifiedMemory
+	) {
+	}
 }
-

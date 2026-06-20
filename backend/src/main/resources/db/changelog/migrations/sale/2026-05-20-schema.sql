@@ -3,12 +3,12 @@
 
 CREATE TABLE sale_invoice
 (
-    sale_invoice_id int NOT NULL AUTO_INCREMENT,
-    number     int       NOT NULL,
-    device_id  int       NOT NULL,
-    date       date      NOT NULL,
-    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    sale_invoice_id int       NOT NULL AUTO_INCREMENT,
+    number          int       NOT NULL,
+    device_id       int       NOT NULL,
+    date            date      NOT NULL,
+    created_at      timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at      timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (sale_invoice_id),
     UNIQUE KEY uq_sale_number (number),
     KEY             idx_sale_device_id (device_id),
@@ -18,7 +18,7 @@ CREATE TABLE sale_invoice
 
 CREATE TABLE sale_invoice_number
 (
-    current_sale_number int NOT NULL DEFAULT '1',
-    created_at             timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at             timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    current_sale_number int       NOT NULL DEFAULT '1',
+    created_at          timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at          timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

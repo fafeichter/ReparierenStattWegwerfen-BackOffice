@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SaleInvoiceNumber {
 
-    @Id
-    @Column(name = "current_sale_number")
-    private Integer currentInvoiceNumber;
+	@Id
+	@Column(name = "current_sale_number")
+	private Integer currentInvoiceNumber;
 }

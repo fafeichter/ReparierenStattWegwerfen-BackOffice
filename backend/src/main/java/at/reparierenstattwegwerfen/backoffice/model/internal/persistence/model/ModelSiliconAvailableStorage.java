@@ -15,16 +15,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModelSiliconAvailableStorage {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_silicon_available_storage_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_silicon_available_storage_id")
+	private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_available_apple_silicon_id")
-    private ModelAvailableAppleSilicon availableAppleSilicon;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_available_apple_silicon_id")
+	private ModelAvailableAppleSilicon availableAppleSilicon;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_storage_id")
-    private ModelStorage storage;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_storage_id")
+	private ModelStorage storage;
 }

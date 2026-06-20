@@ -27,46 +27,46 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Import({
-        TestcontainersConfiguration.class,
-        MockedOauth2ResourceServerConfig.class,
-        MockedSpringAiTestConfig.class
+	TestcontainersConfiguration.class,
+	MockedOauth2ResourceServerConfig.class,
+	MockedSpringAiTestConfig.class
 })
 @EnableAutoConfiguration(exclude = {
-        OpenAiModerationAutoConfiguration.class,
-        OpenAiImageAutoConfiguration.class,
-        OpenAiEmbeddingAutoConfiguration.class,
-        OpenAiChatAutoConfiguration.class,
-        OpenAiAudioTranscriptionAutoConfiguration.class,
-        OpenAiAudioSpeechAutoConfiguration.class
+	OpenAiModerationAutoConfiguration.class,
+	OpenAiImageAutoConfiguration.class,
+	OpenAiEmbeddingAutoConfiguration.class,
+	OpenAiChatAutoConfiguration.class,
+	OpenAiAudioTranscriptionAutoConfiguration.class,
+	OpenAiAudioSpeechAutoConfiguration.class
 })
 public class OpenApiSpecsGenerator {
-    private static final List<String> IGNORE_MODULES = List.of(
-            "application",
-            "shared"
-    );
+	private static final List<String> IGNORE_MODULES = List.of(
+		"application",
+		"shared"
+	);
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    void generateOpenApiSpecs() throws Exception {
-        List<String> modules = ApplicationModules.of(BackofficeApplication.class)
-                .stream()
-                .map(ApplicationModule::getIdentifier)
-                .map(ApplicationModuleIdentifier::toString)
-                .filter(module -> !IGNORE_MODULES.contains(module))
-                .toList();
+	@Test
+	void generateOpenApiSpecs() throws Exception {
+		List<String> modules = ApplicationModules.of(BackofficeApplication.class)
+			.stream()
+			.map(ApplicationModule::getIdentifier)
+			.map(ApplicationModuleIdentifier::toString)
+			.filter(module -> !IGNORE_MODULES.contains(module))
+			.toList();
 
-        Path directory = Paths.get("build/openapi");
-        Files.createDirectories(directory);
+		Path directory = Paths.get("build/openapi");
+		Files.createDirectories(directory);
 
-        for (String module : modules) {
-            mockMvc.perform(get(DEFAULT_API_DOCS_URL + "/" + module))
-                    .andExpect(status().isOk())
-                    .andDo(result -> {
-                        Path openApiFile = directory.resolve(module + ".json");
-                        Files.write(openApiFile, result.getResponse().getContentAsByteArray());
-                    });
-        }
-    }
+		for (String module : modules) {
+			mockMvc.perform(get(DEFAULT_API_DOCS_URL + "/" + module))
+				.andExpect(status().isOk())
+				.andDo(result -> {
+					Path openApiFile = directory.resolve(module + ".json");
+					Files.write(openApiFile, result.getResponse().getContentAsByteArray());
+				});
+		}
+	}
 }

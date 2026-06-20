@@ -15,27 +15,27 @@ import lombok.Value;
 @EqualsAndHashCode
 public class BusinessPartnerAddressDto {
 
-    @EqualsAndHashCode.Include
-    @NotNull
-    Integer id;
+	@EqualsAndHashCode.Include
+	@NotNull
+	Integer id;
 
-    @NotBlank
-    @Size(max = 256)
-    String street;
+	@NotBlank
+	@Size(max = 256)
+	String street;
 
-    @NotBlank
-    @Size(max = 256)
-    String houseNumber;
+	@NotBlank
+	@Size(max = 256)
+	String houseNumber;
 
-    @NotBlank
-    @Size(max = 256)
-    String zipCode;
+	@NotBlank
+	@Size(max = 256)
+	String zipCode;
 
-    @NotBlank
-    @Size(max = 256)
-    String city;
+	@NotBlank
+	@Size(max = 256)
+	String city;
 
-    @NotBlank
-    @Size(max = 256)
-    String country;
+	@NotBlank
+	@Size(max = 256)
+	String country;
 }

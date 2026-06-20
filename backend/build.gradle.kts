@@ -76,7 +76,7 @@ tasks.withType<Test> {
 // Since bootBuildImage builds from the bootJar output, it inherits the assets automatically
 val copyFrontendAssets = tasks.register<Copy>("copyFrontendAssets") {
     description = "Copies production compiled frontend assets into the backend static resources"
-    
+
     from(project(":frontend").projectDir.resolve("dist/browser"))
     into(layout.buildDirectory.dir("resources/main/static"))
 }

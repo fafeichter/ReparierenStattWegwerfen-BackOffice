@@ -17,18 +17,18 @@ import org.springframework.modulith.runtime.ApplicationModulesRuntime;
 @Profile("prod")
 public class AiPromptsConfig {
 
-    private final ApplicationModulesRuntime runtime;
+	private final ApplicationModulesRuntime runtime;
 
-    @Bean("deviceMustacheHintsProcessor")
-    public BeanFactoryInitializationAotProcessor mustacheHintsProcessor() {
-        return _ -> (generationContext, beanFactoryInitializationCode) -> {
-            ApplicationModuleIdentifier moduleIdentifier = runtime.get()
-                    .getModuleForPackage(this.getClass().getPackageName())
-                    .map(ApplicationModule::getIdentifier)
-                    .orElseThrow();
+	@Bean("deviceMustacheHintsProcessor")
+	public BeanFactoryInitializationAotProcessor mustacheHintsProcessor() {
+		return _ -> (generationContext, beanFactoryInitializationCode) -> {
+			ApplicationModuleIdentifier moduleIdentifier = runtime.get()
+				.getModuleForPackage(this.getClass().getPackageName())
+				.map(ApplicationModule::getIdentifier)
+				.orElseThrow();
 
-            generationContext.getRuntimeHints().resources()
-                    .registerPattern("prompts/" + moduleIdentifier + "/*.mustache");
-        };
-    }
+			generationContext.getRuntimeHints().resources()
+				.registerPattern("prompts/" + moduleIdentifier + "/*.mustache");
+		};
+	}
 }

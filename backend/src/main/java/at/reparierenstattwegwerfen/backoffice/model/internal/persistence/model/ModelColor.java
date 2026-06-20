@@ -16,11 +16,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModelColor implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_color_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_color_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 }

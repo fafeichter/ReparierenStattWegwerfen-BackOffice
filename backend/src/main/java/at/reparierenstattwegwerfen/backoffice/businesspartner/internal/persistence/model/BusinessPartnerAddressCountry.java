@@ -16,14 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BusinessPartnerAddressCountry implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "business_partner_address_country_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "business_partner_address_country_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "code")
-    private String code;
+	@Column(name = "code")
+	private String code;
 }

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ModelAppleSiliconUnifiedMemoryRepository extends JpaRepository<ModelAppleSiliconUnifiedMemory,
-        Integer> {
+	Integer> {
 }

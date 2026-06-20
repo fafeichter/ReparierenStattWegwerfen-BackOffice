@@ -17,17 +17,17 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class SaleInvoice {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sale_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "sale_id")
+	private Integer id;
 
-    @Column(name = "number")
-    private Integer number;
+	@Column(name = "number")
+	private Integer number;
 
-    @Column(name = "device_id")
-    private Integer deviceId;
+	@Column(name = "device_id")
+	private Integer deviceId;
 
-    @Column(name = "date")
-    private LocalDate date;
+	@Column(name = "date")
+	private LocalDate date;
 }

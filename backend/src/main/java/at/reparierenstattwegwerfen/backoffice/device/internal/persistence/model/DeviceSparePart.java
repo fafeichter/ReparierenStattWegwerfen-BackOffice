@@ -18,14 +18,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class DeviceSparePart implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "device_spare_part_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "device_spare_part_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "price_netto")
-    private BigDecimal priceNetto;
+	@Column(name = "price_netto")
+	private BigDecimal priceNetto;
 }

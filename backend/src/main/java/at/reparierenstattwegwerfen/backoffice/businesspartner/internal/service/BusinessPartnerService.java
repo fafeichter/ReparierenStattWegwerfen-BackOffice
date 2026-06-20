@@ -18,45 +18,45 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BusinessPartnerService {
 
-    private final BusinessPartnerRepository businessPartnerRepository;
+	private final BusinessPartnerRepository businessPartnerRepository;
 
-    public List<BusinessPartnerDto> getAllBusinessPartners() {
-        return businessPartnerRepository.findAllBusinessPartners()
-                .stream()
-                .map(businessPartner -> BusinessPartnerDto.builder()
-                        .id(businessPartner.getId())
-                        .name(businessPartner.getName())
-                        .firstName(businessPartner.getFirstName())
-                        .lastName(businessPartner.getLastName())
-                        .scammer(businessPartner.getScammer())
-                        .address(toAddress(businessPartner.getAddress()))
-                        .build())
-                .toList();
-    }
+	public List<BusinessPartnerDto> getAllBusinessPartners() {
+		return businessPartnerRepository.findAllBusinessPartners()
+			.stream()
+			.map(businessPartner -> BusinessPartnerDto.builder()
+				.id(businessPartner.getId())
+				.name(businessPartner.getName())
+				.firstName(businessPartner.getFirstName())
+				.lastName(businessPartner.getLastName())
+				.scammer(businessPartner.getScammer())
+				.address(toAddress(businessPartner.getAddress()))
+				.build())
+			.toList();
+	}
 
-    public BusinessPartnerDetailDto getBusinessPartnerDetails(Integer businessPartnerId) {
-        BusinessPartner businessPartner = businessPartnerRepository.getBusinessPartnerDetails(businessPartnerId);
+	public BusinessPartnerDetailDto getBusinessPartnerDetails(Integer businessPartnerId) {
+		BusinessPartner businessPartner = businessPartnerRepository.getBusinessPartnerDetails(businessPartnerId);
 
-        return BusinessPartnerDetailDto.builder()
-                .id(businessPartner.getId())
-                .name(businessPartner.getName())
-                .firstName(businessPartner.getFirstName())
-                .lastName(businessPartner.getLastName())
-                .telephone(businessPartner.getTelephone())
-                .scammer(businessPartner.getScammer())
-                .address(toAddress(businessPartner.getAddress()))
-                .build();
-    }
+		return BusinessPartnerDetailDto.builder()
+			.id(businessPartner.getId())
+			.name(businessPartner.getName())
+			.firstName(businessPartner.getFirstName())
+			.lastName(businessPartner.getLastName())
+			.telephone(businessPartner.getTelephone())
+			.scammer(businessPartner.getScammer())
+			.address(toAddress(businessPartner.getAddress()))
+			.build();
+	}
 
-    private BusinessPartnerAddressDto toAddress(BusinessPartnerAddress address) {
-        return BusinessPartnerAddressDto
-                .builder()
-                .id(address.getId())
-                .street(address.getStreet())
-                .houseNumber(address.getHouseNumber())
-                .zipCode(address.getZipCode())
-                .city(address.getCity())
-                .country(address.getCountry().getName())
-                .build();
-    }
+	private BusinessPartnerAddressDto toAddress(BusinessPartnerAddress address) {
+		return BusinessPartnerAddressDto
+			.builder()
+			.id(address.getId())
+			.street(address.getStreet())
+			.houseNumber(address.getHouseNumber())
+			.zipCode(address.getZipCode())
+			.city(address.getCity())
+			.country(address.getCountry().getName())
+			.build();
+	}
 }

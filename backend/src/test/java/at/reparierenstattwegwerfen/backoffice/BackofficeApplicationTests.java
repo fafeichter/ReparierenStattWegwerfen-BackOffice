@@ -8,34 +8,34 @@ import org.springframework.context.annotation.Import;
 import org.springframework.modulith.core.ApplicationModules;
 
 @Import({
-        TestcontainersConfiguration.class,
-        MockedOauth2ResourceServerConfig.class,
-        MockedSpringAiTestConfig.class
+	TestcontainersConfiguration.class,
+	MockedOauth2ResourceServerConfig.class,
+	MockedSpringAiTestConfig.class
 })
 @SpringBootTest
 @EnableAutoConfiguration(exclude = {
-        OpenAiModerationAutoConfiguration.class,
-        OpenAiImageAutoConfiguration.class,
-        OpenAiEmbeddingAutoConfiguration.class,
-        OpenAiChatAutoConfiguration.class,
-        OpenAiAudioTranscriptionAutoConfiguration.class,
-        OpenAiAudioSpeechAutoConfiguration.class
+	OpenAiModerationAutoConfiguration.class,
+	OpenAiImageAutoConfiguration.class,
+	OpenAiEmbeddingAutoConfiguration.class,
+	OpenAiChatAutoConfiguration.class,
+	OpenAiAudioTranscriptionAutoConfiguration.class,
+	OpenAiAudioSpeechAutoConfiguration.class
 })
 class BackofficeApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
-    @Test
-    void createApplicationModuleModel() {
-        ApplicationModules modules = ApplicationModules.of(BackofficeApplication.class);
-        modules.forEach(System.out::println);
-    }
+	@Test
+	void createApplicationModuleModel() {
+		ApplicationModules modules = ApplicationModules.of(BackofficeApplication.class);
+		modules.forEach(System.out::println);
+	}
 
-    @Test
-    void verifiesModularStructure() {
-        ApplicationModules modules = ApplicationModules.of(BackofficeApplication.class);
-        modules.verify();
-    }
+	@Test
+	void verifiesModularStructure() {
+		ApplicationModules modules = ApplicationModules.of(BackofficeApplication.class);
+		modules.verify();
+	}
 }

@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="All in frontend" type="JavaScriptTestRunnerVitest">
-        <node-interpreter value="project"/>
-        <vitest-package value="$PROJECT_DIR$/frontend/node_modules/@angular/cli"/>
-        <working-dir value="$PROJECT_DIR$/frontend"/>
-        <vitest-options value="--run"/>
-        <envs/>
-        <scope-kind value="DIRECTORY"/>
-        <test-directory value="$PROJECT_DIR$/frontend/src"/>
-        <method v="2"/>
-    </configuration>
+  <configuration default="false" name="All in frontend" type="JavaScriptTestRunnerVitest">
+    <node-interpreter value="project"/>
+    <vitest-package value="$PROJECT_DIR$/frontend/node_modules/@angular/cli"/>
+    <working-dir value="$PROJECT_DIR$/frontend"/>
+    <vitest-options value="--run"/>
+    <envs/>
+    <scope-kind value="DIRECTORY"/>
+    <test-directory value="$PROJECT_DIR$/frontend/src"/>
+    <method v="2"/>
+  </configuration>
 </component>

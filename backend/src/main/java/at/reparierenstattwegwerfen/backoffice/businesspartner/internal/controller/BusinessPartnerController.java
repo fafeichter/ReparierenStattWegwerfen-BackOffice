@@ -17,15 +17,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BusinessPartnerController {
 
-    private final BusinessPartnerService businessPartnerService;
+	private final BusinessPartnerService businessPartnerService;
 
-    @GetMapping("/")
-    public List<BusinessPartnerDto> getAllBusinessPartners() {
-        return businessPartnerService.getAllBusinessPartners();
-    }
+	@GetMapping("/")
+	public List<BusinessPartnerDto> getAllBusinessPartners() {
+		return businessPartnerService.getAllBusinessPartners();
+	}
 
-    @GetMapping("/{businessPartnerId}")
-    public BusinessPartnerDetailDto getBusinessPartnerDetails(@PathVariable Integer businessPartnerId) {
-        return businessPartnerService.getBusinessPartnerDetails(businessPartnerId);
-    }
+	@GetMapping("/{businessPartnerId}")
+	public BusinessPartnerDetailDto getBusinessPartnerDetails(@PathVariable Integer businessPartnerId) {
+		return businessPartnerService.getBusinessPartnerDetails(businessPartnerId);
+	}
 }

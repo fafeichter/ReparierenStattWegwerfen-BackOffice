@@ -15,16 +15,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModelAvailableColor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_available_color_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_available_color_id")
+	private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_id")
-    private Model model;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_id")
+	private Model model;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_color_id")
-    private ModelColor color;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_color_id")
+	private ModelColor color;
 }

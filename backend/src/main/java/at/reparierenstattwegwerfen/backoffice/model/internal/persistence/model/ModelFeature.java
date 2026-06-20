@@ -16,15 +16,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModelFeature implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_feature_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_feature_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_feature_category_id")
-    private ModelFeatureCategory modelFeatureCategory;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_feature_category_id")
+	private ModelFeatureCategory modelFeatureCategory;
 }

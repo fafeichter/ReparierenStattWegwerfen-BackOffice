@@ -17,20 +17,20 @@ import org.springframework.util.unit.DataUnit;
 @NoArgsConstructor
 public class ModelAppleSiliconUnifiedMemory implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_apple_silicon_unified_memory_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_apple_silicon_unified_memory_id")
+	private Integer id;
 
-    @Column(name = "size")
-    private Short size;
+	@Column(name = "size")
+	private Short size;
 
-    @Column(name = "unit")
-    @Convert(converter = DataUnitConverter.class)
-    private DataUnit unit;
+	@Column(name = "unit")
+	@Convert(converter = DataUnitConverter.class)
+	private DataUnit unit;
 
-    @Override
-    public String getName() {
-        return size + " " + (unit == DataUnit.GIGABYTES ? "GB" : "TB");
-    }
+	@Override
+	public String getName() {
+		return size + " " + (unit == DataUnit.GIGABYTES ? "GB" : "TB");
+	}
 }

@@ -16,25 +16,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ModelController {
 
-    private final ModelService modelService;
+	private final ModelService modelService;
 
-    @GetMapping("/macbooks")
-    public List<ModelDto> getAllMacBooks() {
-        return modelService.getAllMacBooks();
-    }
+	@GetMapping("/macbooks")
+	public List<ModelDto> getAllMacBooks() {
+		return modelService.getAllMacBooks();
+	}
 
-    @GetMapping("/ipads")
-    public List<ModelDto> getAllIPads() {
-        return modelService.getAllIPads();
-    }
+	@GetMapping("/ipads")
+	public List<ModelDto> getAllIPads() {
+		return modelService.getAllIPads();
+	}
 
-    @GetMapping("/{modelId}")
-    public ModelDetailDto getModelDetails(@PathVariable Integer modelId) {
-        return modelService.getModelDetails(modelId);
-    }
+	@GetMapping("/{modelId}")
+	public ModelDetailDto getModelDetails(@PathVariable Integer modelId) {
+		return modelService.getModelDetails(modelId);
+	}
 
-    @GetMapping("/search")
-    public AiResponse getModelNumberFromAdUrl(@RequestParam("adUrl") String adUrl) throws IOException {
-        return modelService.getModelDetailsFromAd(adUrl);
-    }
+	@GetMapping("/search")
+	public AiResponse getModelNumberFromAdUrl(@RequestParam("adUrl") String adUrl) throws IOException {
+		return modelService.getModelDetailsFromAd(adUrl);
+	}
 }

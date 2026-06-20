@@ -16,14 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DeviceGrade implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "device_grade_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "device_grade_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "description")
-    private String description;
+	@Column(name = "description")
+	private String description;
 }

@@ -16,30 +16,30 @@ import java.util.stream.Stream;
 @Configuration
 public class DatabaseConfig {
 
-    private final static String VALIDATOR_BEAN_NAME = "databaseStartupValidator";
+	private final static String VALIDATOR_BEAN_NAME = "databaseStartupValidator";
 
-    @Bean(name = VALIDATOR_BEAN_NAME)
-    public DatabaseStartupValidator databaseStartupValidator(DataSource dataSource) {
-        DatabaseStartupValidator validator = new DatabaseStartupValidator();
-        validator.setDataSource(dataSource);
-        validator.setTimeout(Integer.MAX_VALUE);
-        return validator;
-    }
+	@Bean
+	public static BeanFactoryPostProcessor databaseDependencyPostProcessor() {
+		return beanFactory -> {
+			// Force Liquibase and JPA to initialize only after the database is started
+			Class<?>[] targetBeanTypes = {
+				EntityManagerFactory.class,
+				SpringLiquibase.class
+			};
 
-    @Bean
-    public static BeanFactoryPostProcessor databaseDependencyPostProcessor() {
-        return beanFactory -> {
-            // Force Liquibase and JPA to initialize only after the database is started
-            Class<?>[] targetBeanTypes = {
-                    EntityManagerFactory.class,
-                    SpringLiquibase.class
-            };
+			for (Class<?> type : targetBeanTypes) {
+				Stream.of(beanFactory.getBeanNamesForType(type))
+					.map(beanFactory::getBeanDefinition)
+					.forEach(beanDefinition -> beanDefinition.setDependsOn(VALIDATOR_BEAN_NAME));
+			}
+		};
+	}
 
-            for (Class<?> type : targetBeanTypes) {
-                Stream.of(beanFactory.getBeanNamesForType(type))
-                        .map(beanFactory::getBeanDefinition)
-                        .forEach(beanDefinition -> beanDefinition.setDependsOn(VALIDATOR_BEAN_NAME));
-            }
-        };
-    }
+	@Bean(name = VALIDATOR_BEAN_NAME)
+	public DatabaseStartupValidator databaseStartupValidator(DataSource dataSource) {
+		DatabaseStartupValidator validator = new DatabaseStartupValidator();
+		validator.setDataSource(dataSource);
+		validator.setTimeout(Integer.MAX_VALUE);
+		return validator;
+	}
 }

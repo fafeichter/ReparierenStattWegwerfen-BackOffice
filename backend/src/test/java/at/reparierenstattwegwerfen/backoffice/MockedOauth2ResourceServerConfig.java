@@ -19,17 +19,17 @@ import java.util.Base64;
 @TestConfiguration
 public class MockedOauth2ResourceServerConfig {
 
-    @Value("#{T(at.reparierenstattwegwerfen.backoffice.ResourceReader).readFileToString('classpath:jwt/public_key" +
-            ".txt')}")
-    private String publicKeyPEM;
+	@Value("#{T(at.reparierenstattwegwerfen.backoffice.ResourceReader).readFileToString('classpath:jwt/public_key" +
+		".txt')}")
+	private String publicKeyPEM;
 
-    @Bean
-    public JwtDecoder jwtDecoder() throws NoSuchAlgorithmException, InvalidKeySpecException {
-        byte[] encoded = Base64.getDecoder().decode(publicKeyPEM);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(encoded);
-        RSAPublicKey publicKey = (RSAPublicKey) keyFactory.generatePublic(keySpec);
+	@Bean
+	public JwtDecoder jwtDecoder() throws NoSuchAlgorithmException, InvalidKeySpecException {
+		byte[] encoded = Base64.getDecoder().decode(publicKeyPEM);
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		X509EncodedKeySpec keySpec = new X509EncodedKeySpec(encoded);
+		RSAPublicKey publicKey = (RSAPublicKey) keyFactory.generatePublic(keySpec);
 
-        return NimbusJwtDecoder.withPublicKey(publicKey).build();
-    }
+		return NimbusJwtDecoder.withPublicKey(publicKey).build();
+	}
 }

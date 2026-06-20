@@ -16,14 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DeviceBatteryStatus implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "device_battery_status_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "device_battery_status_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "sort_order")
-    private Integer sortOrder;
+	@Column(name = "sort_order")
+	private Integer sortOrder;
 }

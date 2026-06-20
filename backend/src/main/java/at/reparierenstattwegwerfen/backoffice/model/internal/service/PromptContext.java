@@ -9,5 +9,5 @@ import lombok.Data;
 @Data
 @Builder
 public class PromptContext {
-    private String adHtmlContent;
+	private String adHtmlContent;
 }

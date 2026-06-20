@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration("businessPartnerOpenApiConfig")
 public class OpenApiConfig {
 
-    @Bean
-    public GroupedOpenApi businessPartnerOpenApi() {
-        return GroupedOpenApi
-                .builder()
-                .group("businesspartner")
-                .packagesToScan("at.reparierenstattwegwerfen.backoffice.businesspartner")
-                .build();
-    }
+	@Bean
+	public GroupedOpenApi businessPartnerOpenApi() {
+		return GroupedOpenApi
+			.builder()
+			.group("businesspartner")
+			.packagesToScan("at.reparierenstattwegwerfen.backoffice.businesspartner")
+			.build();
+	}
 }

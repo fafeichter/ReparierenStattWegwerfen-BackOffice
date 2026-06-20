@@ -13,20 +13,20 @@ import java.util.List;
 @Repository
 public interface BusinessPartnerRepository extends JpaRepository<BusinessPartner, Integer> {
 
-    @Query("""
-            from BusinessPartner bp
-            left join fetch bp.address a
-            left join fetch a.country
-            order by bp.lastName asc, bp.firstName asc
-            """)
-    List<BusinessPartner> findAllBusinessPartners();
+	@Query("""
+		from BusinessPartner bp
+		left join fetch bp.address a
+		left join fetch a.country
+		order by bp.lastName asc, bp.firstName asc
+		""")
+	List<BusinessPartner> findAllBusinessPartners();
 
-    @Query("""
-            select distinct bp
-            from BusinessPartner bp
-            left join fetch bp.address a
-            left join fetch a.country
-            where bp.id = :businessPartnerId
-            """)
-    BusinessPartner getBusinessPartnerDetails(Integer businessPartnerId);
+	@Query("""
+		select distinct bp
+		from BusinessPartner bp
+		left join fetch bp.address a
+		left join fetch a.country
+		where bp.id = :businessPartnerId
+		""")
+	BusinessPartner getBusinessPartnerDetails(Integer businessPartnerId);
 }

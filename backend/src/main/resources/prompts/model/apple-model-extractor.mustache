@@ -3980,17 +3980,36 @@ HTML_CONTENT:
 </reference_data>
 
 <strict_instructions>
-    1. When analyzing the content, identify any sections labeled with headers such as "Das könnte dich auch interessieren", "Weitere Anzeigen für dich", "Mehr von diesem Anbieter", or similar variations. Upon encountering any of these markers, immediately stop analysis and ignore all subsequent content.
-    2. Scope Restriction: You are ONLY allowed to return a device `model_id` that corresponds to an explicit `id` attribute inside the <devices> tag. Never guess or output an ID that is absent.
-    3. Model Number Priority: If a valid Model Number (e.g., A2337) is explicitly found inside the HTML text, return exactly that matching device record.
-    4. Ambiguity & Inference: If multiple devices match due to broad details, analyze contextual hints in the HTML text (standard default configurations, release dates, popularity) and assign the primary `model_id` to the device with the highest probability.
-    5. Confidence Mapping:
-    - Set `confidence` to "HIGH" if the model number or an unmistakable layout unique to one device is matched.
-    - Set `confidence` to "MEDIUM" if the device class is clear but exact variants could slightly overlap.
-    - Set `confidence` to "LOW" if you are forced to pick based heavily on generalized guessing.
-    6. Alternative Candidates: If there are multiple overlapping candidate device matches, include them inside the `alternative_candidates` list ordered by descending plausibility. If the match is completely unambiguous, leave `alternative_candidates` as an empty array `[]`.
-    7. Active Extraction & Null Field Constraints: Actively seek technical configuration data from the raw HTML text (Color name, Storage size, Memory size, Chip/Silicon version) and match them to their respective IDs. You MUST set these JSON values to `null` ONLY if they are genuinely missing from the HTML or cannot be confidently mapped. Do not let ambiguity in one field block the extraction of another clearly stated field.
-    8. iPad Specific Rule: If the device is an iPad and there is no explicit text (while applying instruction 1.) indicating it has cellular capabilities (e.g., "LTE", "5G", "Cellular", SIM slot), map it to the version supporting the Wi-Fi feature (ID 8) rather than the Wi-Fi + Cellular version.
-    9. Dynamic Data Integrity: When extracting IDs for Silicon, Color, Storage, and Unified Memory, cross-check the allowed comma-separated values inside the matched `<device>` XML attributes (`silicon`, `colors`, `storage`, `memory`). If the extracted ID is present within that list, you MUST provide it. Never map an attribute ID that is not natively supported by the matched device row.
-    10. Speed Optimization: Stop processing and generate the JSON immediately once the primary device is identified. Do not run any conversational inner dialogue.
+    1. When analyzing the content, identify any sections labeled with headers such as "Das könnte dich auch
+    interessieren", "Weitere Anzeigen für dich", "Mehr von diesem Anbieter", or similar variations. Upon encountering
+    any of these markers, immediately stop analysis and ignore all subsequent content.
+    2. Scope Restriction: You are ONLY allowed to return a device `model_id` that corresponds to an explicit `id`
+    attribute inside the
+    <devices> tag. Never guess or output an ID that is absent.
+        3. Model Number Priority: If a valid Model Number (e.g., A2337) is explicitly found inside the HTML text, return
+        exactly that matching device record.
+        4. Ambiguity & Inference: If multiple devices match due to broad details, analyze contextual hints in the HTML
+        text (standard default configurations, release dates, popularity) and assign the primary `model_id` to the
+        device with the highest probability.
+        5. Confidence Mapping:
+        - Set `confidence` to "HIGH" if the model number or an unmistakable layout unique to one device is matched.
+        - Set `confidence` to "MEDIUM" if the device class is clear but exact variants could slightly overlap.
+        - Set `confidence` to "LOW" if you are forced to pick based heavily on generalized guessing.
+        6. Alternative Candidates: If there are multiple overlapping candidate device matches, include them inside the
+        `alternative_candidates` list ordered by descending plausibility. If the match is completely unambiguous, leave
+        `alternative_candidates` as an empty array `[]`.
+        7. Active Extraction & Null Field Constraints: Actively seek technical configuration data from the raw HTML text
+        (Color name, Storage size, Memory size, Chip/Silicon version) and match them to their respective IDs. You MUST
+        set these JSON values to `null` ONLY if they are genuinely missing from the HTML or cannot be confidently
+        mapped. Do not let ambiguity in one field block the extraction of another clearly stated field.
+        8. iPad Specific Rule: If the device is an iPad and there is no explicit text (while applying instruction 1.)
+        indicating it has cellular capabilities (e.g., "LTE", "5G", "Cellular", SIM slot), map it to the version
+        supporting the Wi-Fi feature (ID 8) rather than the Wi-Fi + Cellular version.
+        9. Dynamic Data Integrity: When extracting IDs for Silicon, Color, Storage, and Unified Memory, cross-check the
+        allowed comma-separated values inside the matched `
+        <device>` XML attributes (`silicon`, `colors`, `storage`, `memory`). If the extracted ID is present within that
+            list, you MUST provide it. Never map an attribute ID that is not natively supported by the matched device
+            row.
+            10. Speed Optimization: Stop processing and generate the JSON immediately once the primary device is
+            identified. Do not run any conversational inner dialogue.
 </strict_instructions>

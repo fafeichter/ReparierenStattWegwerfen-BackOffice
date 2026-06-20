@@ -16,10 +16,8 @@ import {map} from 'rxjs';
 })
 export class TechnicalDetails {
 
-  private readonly oidcSecurityService = inject(OidcSecurityService);
-
   buildInfo = buildInfo;
-
+  private readonly oidcSecurityService = inject(OidcSecurityService);
   readonly userData = toSignal(
     this.oidcSecurityService.userData$.pipe(map(({userData}) => userData))
   );

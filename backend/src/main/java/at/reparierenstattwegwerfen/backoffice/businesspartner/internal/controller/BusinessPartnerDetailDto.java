@@ -16,32 +16,32 @@ import lombok.Value;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class BusinessPartnerDetailDto {
 
-    @EqualsAndHashCode.Include
-    @NotNull
-    Integer id;
+	@EqualsAndHashCode.Include
+	@NotNull
+	Integer id;
 
-    @NotBlank
-    @Size(max = 256)
-    String name;
+	@NotBlank
+	@Size(max = 256)
+	String name;
 
-    @NotBlank
-    @Size(max = 256)
-    String firstName;
+	@NotBlank
+	@Size(max = 256)
+	String firstName;
 
-    @NotBlank
-    @Size(max = 256)
-    String lastName;
+	@NotBlank
+	@Size(max = 256)
+	String lastName;
 
-    @Size(max = 256)
-    String telephone;
+	@Size(max = 256)
+	String telephone;
 
-    @Size(max = 256)
-    String email;
+	@Size(max = 256)
+	String email;
 
-    @NotNull
-    Boolean scammer;
+	@NotNull
+	Boolean scammer;
 
-    @NotNull
-    @Valid
-    BusinessPartnerAddressDto address;
+	@NotNull
+	@Valid
+	BusinessPartnerAddressDto address;
 }

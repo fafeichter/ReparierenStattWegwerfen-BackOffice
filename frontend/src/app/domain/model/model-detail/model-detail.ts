@@ -21,21 +21,15 @@ interface SizeAvailability {
 })
 export class ModelDetail implements OnInit {
 
-  private api = inject(ModelControllerService);
-  private route = inject(ActivatedRoute);
-
   protected readonly model = signal<ModelDetailDto | undefined>(undefined);
-
   /** Colors sorted by name. */
   protected readonly colors = computed(() =>
     [...(this.model()?.colors ?? [])].sort((a, b) => a.name.localeCompare(b.name)));
-
   /** Silicons sorted ascending by total CPU cores, then GPU cores. */
   protected readonly silicons = computed(() =>
     [...(this.model()?.siliconOptions ?? [])].sort((a, b) =>
       this.cpuCores(a) - this.cpuCores(b)
       || (a.numberGpuCores ?? 0) - (b.numberGpuCores ?? 0)));
-
   /** Silicons grouped by short name; group order follows the sorted silicons. */
   protected readonly siliconGroups = computed(() => {
     const groups = new Map<string, SiliconDto[]>();
@@ -46,17 +40,16 @@ export class ModelDetail implements OnInit {
     }
     return [...groups.entries()].map(([shortName, chips]) => ({shortName, chips}));
   });
-
   /** Features sorted by category, then name. */
   protected readonly features = computed(() =>
     [...(this.model()?.features ?? [])].sort((a, b) =>
       a.category.localeCompare(b.category) || a.name.localeCompare(b.name)));
-
   protected readonly memoryOptions = computed(() =>
     this.buildAvailability(s => s.memoryOptions));
-
   protected readonly storageOptions = computed(() =>
     this.buildAvailability(s => s.storageOptions));
+  private api = inject(ModelControllerService);
+  private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const modelId = Number(this.route.snapshot.paramMap.get('modelId'));
@@ -124,12 +117,17 @@ export class ModelDetail implements OnInit {
   private toGb(s: SizeDto): number {
     const size = Number(s.size ?? 0);
     switch ((s.unit ?? '').trim().toUpperCase()) {
-      case 'TB': return size * 1024;
-      case 'MB': return size / 1024;
-      case 'KB': return size / (1024 * 1024);
-      case 'B':  return size / (1024 * 1024 * 1024);
+      case 'TB':
+        return size * 1024;
+      case 'MB':
+        return size / 1024;
+      case 'KB':
+        return size / (1024 * 1024);
+      case 'B':
+        return size / (1024 * 1024 * 1024);
       case 'GB':
-      default:   return size;
+      default:
+        return size;
     }
   }
 }

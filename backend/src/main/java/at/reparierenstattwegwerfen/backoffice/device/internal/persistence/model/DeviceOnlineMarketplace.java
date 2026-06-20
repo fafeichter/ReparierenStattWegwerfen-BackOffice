@@ -16,14 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DeviceOnlineMarketplace implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "device_online_marketplace_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "device_online_marketplace_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "url")
-    private String url;
+	@Column(name = "url")
+	private String url;
 }

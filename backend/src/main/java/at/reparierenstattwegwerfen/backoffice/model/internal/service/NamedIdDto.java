@@ -13,13 +13,13 @@ import lombok.Value;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class NamedIdDto {
 
-    Integer id;
-    String name;
+	Integer id;
+	String name;
 
-    public static NamedIdDto from(NamedId namedId) {
-        if (namedId == null) {
-            return null;
-        }
-        return new NamedIdDto(namedId.getId(), namedId.getName());
-    }
+	public static NamedIdDto from(NamedId namedId) {
+		if (namedId == null) {
+			return null;
+		}
+		return new NamedIdDto(namedId.getId(), namedId.getName());
+	}
 }

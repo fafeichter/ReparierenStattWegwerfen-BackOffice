@@ -20,42 +20,42 @@ import java.util.Set;
 @NoArgsConstructor
 public class Model implements NamedId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_id")
+	private Integer id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_series_id")
-    private ModelSeries modelSeries;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_series_id")
+	private ModelSeries modelSeries;
 
-    @Column(name = "model_number")
-    private String modelNumber;
+	@Column(name = "model_number")
+	private String modelNumber;
 
-    @Column(name = "technical_specs_url")
-    private String technicalSpecsUrl;
+	@Column(name = "technical_specs_url")
+	private String technicalSpecsUrl;
 
-    @Column(name = "release_year")
-    private Short releaseYear;
+	@Column(name = "release_year")
+	private Short releaseYear;
 
-    @Column(name = "release_month")
-    private Short releaseMonth;
+	@Column(name = "release_month")
+	private Short releaseMonth;
 
-    @Column(name = "display_size")
-    private Short displaySize;
+	@Column(name = "display_size")
+	private Short displaySize;
 
-    @Column(name = "display_size_exact")
-    private BigDecimal displaySizeExact;
+	@Column(name = "display_size_exact")
+	private BigDecimal displaySizeExact;
 
-    @OneToMany(mappedBy = "model")
-    private Set<ModelAvailableColor> availableColors = new HashSet<>();
+	@OneToMany(mappedBy = "model")
+	private Set<ModelAvailableColor> availableColors = new HashSet<>();
 
-    @OneToMany(mappedBy = "model")
-    private Set<ModelAvailableFeature> availableFeatures = new HashSet<>();
+	@OneToMany(mappedBy = "model")
+	private Set<ModelAvailableFeature> availableFeatures = new HashSet<>();
 
-    @OneToMany(mappedBy = "model")
-    private Set<ModelAvailableAppleSilicon> availableAppleSilicons = new HashSet<>();
+	@OneToMany(mappedBy = "model")
+	private Set<ModelAvailableAppleSilicon> availableAppleSilicons = new HashSet<>();
 }

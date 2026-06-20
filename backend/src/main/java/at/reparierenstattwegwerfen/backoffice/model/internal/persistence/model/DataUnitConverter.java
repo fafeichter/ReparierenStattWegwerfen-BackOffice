@@ -10,23 +10,23 @@ import org.springframework.util.unit.DataUnit;
 @Converter(autoApply = false)
 public class DataUnitConverter implements AttributeConverter<DataUnit, String> {
 
-    public static String toSuffix(DataUnit unit) {
-        return switch (unit) {
-            case BYTES -> "B";
-            case KILOBYTES -> "KB";
-            case MEGABYTES -> "MB";
-            case GIGABYTES -> "GB";
-            case TERABYTES -> "TB";
-        };
-    }
+	public static String toSuffix(DataUnit unit) {
+		return switch (unit) {
+			case BYTES -> "B";
+			case KILOBYTES -> "KB";
+			case MEGABYTES -> "MB";
+			case GIGABYTES -> "GB";
+			case TERABYTES -> "TB";
+		};
+	}
 
-    @Override
-    public String convertToDatabaseColumn(DataUnit unit) {
-        return unit == null ? null : toSuffix(unit);
-    }
+	@Override
+	public String convertToDatabaseColumn(DataUnit unit) {
+		return unit == null ? null : toSuffix(unit);
+	}
 
-    @Override
-    public DataUnit convertToEntityAttribute(String suffix) {
-        return suffix == null ? null : DataUnit.fromSuffix(suffix);
-    }
+	@Override
+	public DataUnit convertToEntityAttribute(String suffix) {
+		return suffix == null ? null : DataUnit.fromSuffix(suffix);
+	}
 }

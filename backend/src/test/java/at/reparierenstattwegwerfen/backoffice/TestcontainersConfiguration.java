@@ -9,10 +9,10 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 
-    @Bean
-    @ServiceConnection
-    MySQLContainer mysqlContainer() {
-        return new MySQLContainer(DockerImageName.parse("mysql:9.7")
-        ).withCommand("--log-bin-trust-function-creators=1");
-    }
+	@Bean
+	@ServiceConnection
+	MySQLContainer mysqlContainer() {
+		return new MySQLContainer(DockerImageName.parse("mysql:9.7")
+		).withCommand("--log-bin-trust-function-creators=1");
+	}
 }

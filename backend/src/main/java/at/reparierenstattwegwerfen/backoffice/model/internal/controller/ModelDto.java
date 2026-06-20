@@ -16,23 +16,23 @@ import lombok.Value;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ModelDto {
 
-    @EqualsAndHashCode.Include
-    @NotNull
-    Integer id;
+	@EqualsAndHashCode.Include
+	@NotNull
+	Integer id;
 
-    @NotBlank
-    @Size(max = 256)
-    String name;
+	@NotBlank
+	@Size(max = 256)
+	String name;
 
-    @NotBlank
-    @Size(max = 5)
-    String modelNumber;
+	@NotBlank
+	@Size(max = 5)
+	String modelNumber;
 
-    @NotNull
-    @Positive
-    Short releaseYear;
+	@NotNull
+	@Positive
+	Short releaseYear;
 
-    @NotNull
-    @Positive
-    Short releaseMonth;
+	@NotNull
+	@Positive
+	Short releaseMonth;
 }

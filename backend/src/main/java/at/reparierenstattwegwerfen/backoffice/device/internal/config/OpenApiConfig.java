@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Configuration;
 @RegisterReflectionForBinding(ModuleImportPlugin.class)
 public class OpenApiConfig {
 
-    @Bean
-    public GroupedOpenApi deviceOpenApi() {
-        return GroupedOpenApi
-                .builder()
-                .group("device")
-                .packagesToScan("at.reparierenstattwegwerfen.backoffice.device")
-                .build();
-    }
+	@Bean
+	public GroupedOpenApi deviceOpenApi() {
+		return GroupedOpenApi
+			.builder()
+			.group("device")
+			.packagesToScan("at.reparierenstattwegwerfen.backoffice.device")
+			.build();
+	}
 }

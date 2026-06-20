@@ -15,16 +15,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModelAvailableFeature {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_available_feature_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_available_feature_id")
+	private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_id")
-    private Model model;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_id")
+	private Model model;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_feature_id")
-    private ModelFeature feature;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_feature_id")
+	private ModelFeature feature;
 }

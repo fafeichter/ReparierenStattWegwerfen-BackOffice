@@ -15,34 +15,34 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BusinessPartner {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "business_partner_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "business_partner_id")
+	private Integer id;
 
-    @Column(name = "first_name")
-    private String firstName;
+	@Column(name = "first_name")
+	private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "last_name")
+	private String lastName;
 
-    @Column(name = "telephone")
-    private String telephone;
+	@Column(name = "telephone")
+	private String telephone;
 
-    @Column(name = "email")
-    private String email;
+	@Column(name = "email")
+	private String email;
 
-    @Column(name = "company_name")
-    private String companyName;
+	@Column(name = "company_name")
+	private String companyName;
 
-    @Column(name = "scammer")
-    private Boolean scammer;
+	@Column(name = "scammer")
+	private Boolean scammer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_partner_address_id")
-    private BusinessPartnerAddress address;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "business_partner_address_id")
+	private BusinessPartnerAddress address;
 
-    public String getName() {
-        return firstName + " " + lastName;
-    }
+	public String getName() {
+		return firstName + " " + lastName;
+	}
 }

@@ -15,11 +15,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModelFeatureCategory {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_feature_category_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_feature_category_id")
+	private Integer id;
 
-    @Column(name = "value")
-    private String value;
+	@Column(name = "value")
+	private String value;
 }

@@ -15,24 +15,24 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BusinessPartnerAddress {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "business_partner_address_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "business_partner_address_id")
+	private Integer id;
 
-    @Column(name = "street")
-    private String street;
+	@Column(name = "street")
+	private String street;
 
-    @Column(name = "house_number")
-    private String houseNumber;
+	@Column(name = "house_number")
+	private String houseNumber;
 
-    @Column(name = "zip_code")
-    private String zipCode;
+	@Column(name = "zip_code")
+	private String zipCode;
 
-    @Column(name = "city")
-    private String city;
+	@Column(name = "city")
+	private String city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_partner_address_country_id")
-    private BusinessPartnerAddressCountry country;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "business_partner_address_country_id")
+	private BusinessPartnerAddressCountry country;
 }

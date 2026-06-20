@@ -18,22 +18,22 @@ import java.util.Set;
 @NoArgsConstructor
 public class ModelAvailableAppleSilicon {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "model_available_apple_silicon_id")
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_available_apple_silicon_id")
+	private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_id")
-    private Model model;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_id")
+	private Model model;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "model_apple_silicon_id")
-    private ModelAppleSilicon modelAppleSilicon;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_apple_silicon_id")
+	private ModelAppleSilicon modelAppleSilicon;
 
-    @OneToMany(mappedBy = "availableAppleSilicon")
-    private Set<ModelSiliconAvailableStorage> availableStorages = new HashSet<>();
+	@OneToMany(mappedBy = "availableAppleSilicon")
+	private Set<ModelSiliconAvailableStorage> availableStorages = new HashSet<>();
 
-    @OneToMany(mappedBy = "availableAppleSilicon")
-    private Set<ModelSiliconAvailableUnifiedMemory> availableUnifiedMemories = new HashSet<>();
+	@OneToMany(mappedBy = "availableAppleSilicon")
+	private Set<ModelSiliconAvailableUnifiedMemory> availableUnifiedMemories = new HashSet<>();
 }

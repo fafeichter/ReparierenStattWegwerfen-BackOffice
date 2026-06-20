@@ -14,23 +14,23 @@ import org.springframework.web.cors.CorsUtils;
 @EnableWebSecurity
 public class RestSecurityConfig {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(CorsUtils::isPreFlightRequest)
-                        .permitAll()
-                        .requestMatchers("/api/**")
-                        .authenticated()
-                        .anyRequest()
-                        .permitAll()
-                )
-                .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .build();
-    }
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) {
+		return http
+			.csrf(AbstractHttpConfigurer::disable)
+			.cors(Customizer.withDefaults())
+			.authorizeHttpRequests(auth -> auth
+				.requestMatchers(CorsUtils::isPreFlightRequest)
+				.permitAll()
+				.requestMatchers("/api/**")
+				.authenticated()
+				.anyRequest()
+				.permitAll()
+			)
+			.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
+			.sessionManagement(session -> session
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			)
+			.build();
+	}
 }
