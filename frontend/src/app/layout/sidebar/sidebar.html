@@ -1,11 +1,11 @@
 <clr-vertical-nav [clrVerticalNavCollapsed]="isMobile()" [clrVerticalNavCollapsible]="true">
   <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active">
-    <clr-icon clrVerticalNavIcon shape="home"></clr-icon>
+    <cds-icon clrVerticalNavIcon shape="home"></cds-icon>
     Dashboard
   </a>
   <div class="nav-divider"></div>
   <clr-vertical-nav-group [clrVerticalNavGroupExpanded]="true" routerLinkActive="active">
-    <clr-icon clrVerticalNavIcon shape="computer"></clr-icon>
+    <cds-icon clrVerticalNavIcon shape="computer"></cds-icon>
     Devices
     <clr-vertical-nav-group-children>
       <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">Ordered</a>
@@ -15,16 +15,16 @@
   </clr-vertical-nav-group>
   <div class="nav-divider"></div>
   <a clrVerticalNavLink routerLink="./businesspartners" routerLinkActive="active">
-    <clr-icon clrVerticalNavIcon shape="user"></clr-icon>
+    <cds-icon clrVerticalNavIcon shape="user"></cds-icon>
     Business Partners
   </a>
   <a clrVerticalNavLink routerLink="./models" routerLinkActive="active">
-    <clr-icon clrVerticalNavIcon shape="pod"></clr-icon>
+    <cds-icon clrVerticalNavIcon shape="pod"></cds-icon>
     Models
   </a>
   <div class="nav-divider"></div>
   <clr-vertical-nav-group [clrVerticalNavGroupExpanded]="true" routerLinkActive="active">
-    <clr-icon clrVerticalNavIcon shape="computer"></clr-icon>
+    <cds-icon clrVerticalNavIcon shape="analytics"></cds-icon>
     Statistics
     <clr-vertical-nav-group-children>
       <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">By month</a>

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {ClrDropdownModule, ClrIconModule, ClrMainContainerModule, ClrVerticalNavModule,} from '@clr/angular';
+import {ClrDropdownModule, ClrMainContainerModule, ClrVerticalNavModule,} from '@clr/angular';
 import {RouterOutlet} from '@angular/router';
 import {Header} from './header/header';
 import {Sidebar} from './sidebar/sidebar';
@@ -9,7 +9,6 @@ import {Breadcrumbs} from './breadcrumbs/breadcrumbs';
   selector: 'app-layout',
   imports: [
     ClrDropdownModule,
-    ClrIconModule,
     ClrVerticalNavModule,
     RouterOutlet,
     Header,

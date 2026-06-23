@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, inject, ViewChild} from '@angular/core';
-import {ClrIcon, ClrIconModule, ClrVerticalNav, ClrVerticalNavModule} from '@clr/angular';
+import {ClrIcon, ClrVerticalNav, ClrVerticalNavModule} from '@clr/angular';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {toSignal} from '@angular/core/rxjs-interop';
@@ -7,7 +7,7 @@ import {map} from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [ClrIcon, ClrIconModule, ClrVerticalNavModule, RouterLink, RouterLinkActive],
+  imports: [ClrIcon, ClrVerticalNavModule, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sidebar.css',

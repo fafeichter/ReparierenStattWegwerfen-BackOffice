@@ -7,7 +7,6 @@ import {
   ClrButtonModule,
   ClrFormsModule,
   ClrIcon,
-  ClrIconModule,
   ClrModalModule,
   ClrSpinnerModule,
   ClrTooltipModule
@@ -21,7 +20,6 @@ import {OrElsePipe} from '../../pipes/or-else-pipe';
   selector: 'app-add-device',
   imports: [
     ClrIcon,
-    ClrIconModule,
     ClrModalModule,
     ClrFormsModule,
     FormsModule,
