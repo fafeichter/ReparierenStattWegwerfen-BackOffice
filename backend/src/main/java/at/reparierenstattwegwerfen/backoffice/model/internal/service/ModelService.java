@@ -44,7 +44,7 @@ public class ModelService {
 
 	private final ChatClient.Builder aiClientBuilder;
 
-	@Value("classpath:prompts/model/apple-model-extractor.mustache")
+	@Value("classpath:templates/model/apple-model-extractor.mustache")
 	private Resource mustacheTemplateResource;
 
 	public List<ModelDto> getAllMacBooks() {
