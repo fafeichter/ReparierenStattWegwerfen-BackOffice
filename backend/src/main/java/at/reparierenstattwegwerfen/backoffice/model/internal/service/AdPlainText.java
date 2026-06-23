@@ -1,11 +1,17 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.service;
 
+import lombok.Getter;
+
 import java.util.regex.Pattern;
 
 /**
+ * The ad page's raw HTML with all markup, scripts, and boilerplate stripped away,
+ * leaving just the plain text that's relevant to feed to the AI.
+ *
  * @author Fabian Feichter
  */
-public class HtmlMinifier {
+@Getter
+public class AdPlainText {
 
 	// Pre-compile patterns for performance
 	private static final Pattern CODE_BLOCKS = Pattern.compile("<(script|style|noscript|iframe|header|footer|nav|aside)[^>]*?>[\\s\\S]*?</\\1>", Pattern.CASE_INSENSITIVE);
@@ -13,7 +19,13 @@ public class HtmlMinifier {
 	private static final Pattern HTML_ENTITIES = Pattern.compile("&nbsp;|&amp;|&lt;|&gt;|&quot;|&#\\d+;");
 	private static final Pattern WHITESPACE = Pattern.compile("\\s+");
 
-	public static String stripHtmlTrash(String html) {
+	private final String text;
+
+	public AdPlainText(String html) {
+		this.text = stripHtmlTrash(html);
+	}
+
+	private static String stripHtmlTrash(String html) {
 		if (html == null || html.isBlank()) return "";
 
 		// 1. Nukes scripts, styles, headers, footers, and nav bars entirely (including content inside them)

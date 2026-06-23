@@ -8,6 +8,7 @@ import {Statistics} from './domain/statistics/statistics';
 import {Devices} from './domain/device/devices';
 import {TechnicalDetails} from './layout/technical-details/technical-details';
 import {BusinesspartnerDetail} from './domain/businesspartner/businesspartner-detail/businesspartner-detail';
+import {DeviceDetail} from './domain/device/device-detail/device-detail';
 
 export const routes: Routes = [
   {
@@ -29,10 +30,18 @@ export const routes: Routes = [
       },
       {
         path: 'devices',
-        component: Devices,
-        data: {
-          breadcrumb: 'Devices',
-        },
+        data: {breadcrumb: 'Devices'},
+        children: [
+          {
+            path: '',
+            component: Devices,
+          },
+          {
+            path: ':deviceId',
+            component: DeviceDetail,
+            data: {breadcrumb: 'Details'},
+          },
+        ],
       },
       {
         path: 'businesspartners',

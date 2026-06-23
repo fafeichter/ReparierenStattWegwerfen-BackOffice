@@ -53,7 +53,7 @@ public class Device {
 	private Integer buyerBusinessPartnerId;
 
 	@Column(name = "purchase_price")
-	private BigDecimal purchasePrice;
+	private Double purchasePrice;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "device_grade_id")
@@ -66,10 +66,6 @@ public class Device {
 	private String diagnosedDefect;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "purchase_device_online_marketplace_id")
-	private DeviceOnlineMarketplace purchaseDeviceOnlineMarketplace;
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "selling_device_online_marketplace_id")
 	private DeviceOnlineMarketplace sellingDeviceOnlineMarketplace;
 
@@ -77,7 +73,7 @@ public class Device {
 	private LocalDate sellingDate;
 
 	@Column(name = "battery_maximum_capacity")
-	private Byte batteryMaximumCapacity;
+	private Integer batteryMaximumCapacity;
 
 	@Column(name = "battery_cycle_count")
 	private Integer batteryCycleCount;

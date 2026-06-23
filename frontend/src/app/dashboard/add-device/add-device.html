@@ -2,37 +2,96 @@
   <clr-icon shape="plus"></clr-icon>
   Add device
 </button>
+
 <clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="xl">
   <div class="modal-title">Add device</div>
   <div class="modal-body">
     <form (ngSubmit)="addDevice()" [formGroup]="form" clrForm>
       <clr-input-container>
-        <label>
-          <span class="clr-required-mark">URL</span>
-        </label>
-        <input #input clrInput formControlName="url" size="999" type="url"/>
+        <label><span class="clr-required-mark">URL</span></label>
+        <input #input (click)="input.select()" (focusout)="selectUrlText()" clrInput formControlName="url" size="999"
+               type="url"/>
         <clr-control-helper>From Kleinanzeigen, Willhaben etc.</clr-control-helper>
-        @if (form.get('url')?.hasError('required')) {
+        @if (form.controls.url.hasError('required')) {
           <clr-control-error>URL is required.</clr-control-error>
         }
-        @if (form.get('url')?.hasError('pattern')) {
-          <clr-control-error> Please enter a valid URL.</clr-control-error>
+        @if (form.controls.url.hasError('pattern')) {
+          <clr-control-error>Please enter a valid URL.</clr-control-error>
+        }
+      </clr-input-container>
+
+      <clr-input-container>
+        <label><span class="clr-required-mark">Price</span></label>
+        <input clrInput formControlName="price" type="number"/>
+        <div clrInputPrefix>€</div>
+        @if (form.controls.price.hasError('required')) {
+          <clr-control-error>Price is required.</clr-control-error>
+        }
+        @if (form.controls.price.hasError('min')) {
+          <clr-control-error>Please enter a valid Price.</clr-control-error>
         }
       </clr-input-container>
     </form>
 
-    Found model(s):
-    <pre>{{ found() | json }}</pre>
+    @if (isLoadingModel()) {
+      <div class="spinner-container">
+        <clr-spinner [clrMedium]="true"></clr-spinner>
+        <span>Loading ...</span>
+      </div>
+    } @else {
+      <div class="mt-5 mb-1">Found model:</div>
 
-  </div>
-  <div class="modal-footer">
-    <button (click)="modalOpened.set(false)" class="btn btn-outline" type="button">Cancel
-    </button>
-    <button (click)="addDevice()" [disabled]="form.invalid" class="btn btn-primary" type="button">
-      @if (isSubmitting()) {
-        <span class="spinner spinner-inline"></span>
+      @if (found(); as mainFound) {
+        <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: mainFound }"></ng-container>
       }
-      {{ isSubmitting() ? 'Adding...' : 'Add' }}
-    </button>
+
+      @if (found()?.alternativeCandidates?.length) {
+        <div class="mt-5 mb-1">Alternatives:</div>
+        @for (alternative of found()?.alternativeCandidates; track alternative; let i = $index) {
+          <clr-radio-wrapper>
+            <input
+              (change)="selectedAlternative.set(i)"
+              [checked]="selectedAlternative() === i"
+              [id]="'option-' + i"
+              [value]="i"
+              clrRadio
+              name="options"
+              type="radio"/>
+            <label [for]="'option-' + i">Option {{ i + 1 }}</label>
+          </clr-radio-wrapper>
+          <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: alternative }"></ng-container>
+        }
+      }
+
+      @if (found()) {
+        <clr-tooltip>
+          <clr-icon clrTooltipTrigger shape="info-circle" size="24"></clr-icon>
+          <clr-tooltip-content [clrPosition]="'top-right'" [clrSize]="'lg'">
+            <pre>{{ found() | json }}</pre>
+          </clr-tooltip-content>
+        </clr-tooltip>
+      }
+    }
+
+    <div class="modal-footer">
+      <button (click)="modalOpened.set(false)" class="btn btn-outline" type="button">Cancel</button>
+      <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="button">
+        @if (isSubmitting()) {
+          <span class="spinner spinner-inline"></span>
+        }
+        {{ isSubmitting() ? 'Adding...' : 'Add' }}
+      </button>
+    </div>
   </div>
 </clr-modal>
+
+<ng-template #modelCard let-model>
+  <div [style.background-color]="getConfidenceColor(model.confidence)" class="found">
+    <strong>{{ model.model?.name }}</strong><br>
+    {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} | {{ model.modelStorage?.name | orElse }}<br>
+    Color: {{ model.modelColor?.name | orElse }}<br>
+    Battery: {{ model.batteryMaximumCapacity | orElse }} % ({{ model.batteryCycleCount | orElse }} cycles)<br>
+    <hr>
+    {{ model.reportedDefect }}
+  </div>
+</ng-template>

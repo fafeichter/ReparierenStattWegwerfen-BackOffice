@@ -17,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Accessors(fluent = true)
 @EqualsAndHashCode
-public class DeviceModelMatchResponse {
+public class ModelMatchResponse implements ModelMatchCandidate {
 
 	@JsonProperty(required = true, value = "model_id")
 	@JsonPropertyDescription("Identifier of the matched device model (primary key in the devices reference table).")
@@ -47,33 +47,35 @@ public class DeviceModelMatchResponse {
 	@JsonPropertyDescription("Total number of battery charge cycles completed.")
 	Optional<Integer> batteryCycleCount;
 
-	@JsonProperty(required = true, value = "reported_defect")
-	@JsonPropertyDescription("The defect the device has according to the seller. Must be always be in German.")
-	Optional<String> reportedDefect;
-
 	@JsonProperty(required = true, value = "serial_number")
 	@JsonPropertyDescription("The serial number of the device")
 	Optional<String> serialNumber;
 
-	@JsonProperty(required = true, value = "confidence")
-	@JsonPropertyDescription("Confidence level of the match.")
-	Confidence confidence;
+	@JsonProperty(required = true, value = "reported_defect")
+	@JsonPropertyDescription("The defect the device has according to the seller.")
+	Optional<String> reportedDefect;
+
+	@JsonProperty(required = true, value = "seller_first_name")
+	@JsonPropertyDescription("The first name of the seller - or if not provided - his username.")
+	Optional<String> sellerFirstName;
+
+	@JsonProperty(required = true, value = "seller_last_name")
+	@JsonPropertyDescription("The last name of the seller.")
+	Optional<String> sellerLastName;
 
 	@JsonProperty(required = true, value = "alternative_candidates")
 	@JsonPropertyDescription("Alternative candidate matches, ordered by descending plausibility. Empty if the match is unambiguous.")
 	List<AlternativeCandidate> alternativeCandidates;
 
-	public enum Confidence {
-		HIGH,
-		MEDIUM,
-		LOW
-	}
+	@JsonProperty(required = true, value = "confidence")
+	@JsonPropertyDescription("Confidence level of the match.")
+	Integer confidence;
 
 	@Value
 	@RequiredArgsConstructor
 	@Accessors(fluent = true)
 	@EqualsAndHashCode
-	public static class AlternativeCandidate {
+	public static class AlternativeCandidate implements ModelMatchCandidate {
 
 		@JsonProperty(required = true, value = "model_id")
 		@JsonPropertyDescription("Identifier of the candidate device model.")
@@ -94,5 +96,21 @@ public class DeviceModelMatchResponse {
 		@JsonProperty(required = true, value = "model_apple_silicon_unified_memory_id")
 		@JsonPropertyDescription("Identifier for the unified memory capacity.")
 		Optional<Integer> modelAppleSiliconUnifiedMemoryId;
+
+		@JsonProperty(required = true, value = "battery_maximum_capacity")
+		@JsonPropertyDescription("The maximum battery capacity percentage between 0 and 100 inclusive.")
+		Optional<Integer> batteryMaximumCapacity;
+
+		@JsonProperty(required = true, value = "battery_cycle_count")
+		@JsonPropertyDescription("Total number of battery charge cycles completed.")
+		Optional<Integer> batteryCycleCount;
+
+		@JsonProperty(required = true, value = "serial_number")
+		@JsonPropertyDescription("The serial number of the device")
+		Optional<String> serialNumber;
+
+		@JsonProperty(required = true, value = "confidence")
+		@JsonPropertyDescription("Confidence level of the match.")
+		Integer confidence;
 	}
 }

@@ -1,6 +1,5 @@
-package at.reparierenstattwegwerfen.backoffice.model.internal.service;
+package at.reparierenstattwegwerfen.backoffice.shared;
 
-import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Value;

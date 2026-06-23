@@ -1,0 +1,41 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.service;
+
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartner;
+import at.reparierenstattwegwerfen.backoffice.device.DeviceStatus;
+import at.reparierenstattwegwerfen.backoffice.device.internal.controller.CreateNewDevice;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
+import lombok.Locked;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Fabian Feichter
+ */
+@Service
+@RequiredArgsConstructor
+public class DeviceCreationService {
+
+	private final DeviceRepository deviceRepository;
+
+	@Transactional
+	public Integer createDevice(CreateNewDevice newDevice) {
+		Device device = new Device();
+
+		device.setStatus(DeviceStatus.ORDERED);
+
+		device.setModelId(newDevice.getModelId());
+		device.setModelColorId(newDevice.getModelColorId());
+		device.setModelStorageId(newDevice.getModelStorageId());
+		device.setModelAppleSiliconId(newDevice.getModelAppleSiliconId());
+		device.setModelAppleSiliconUnifiedMemoryId(newDevice.getModelAppleSiliconUnifiedMemoryId());
+		device.setBatteryMaximumCapacity(newDevice.getBatteryMaximumCapacity());
+		device.setBatteryCycleCount(newDevice.getBatteryCycleCount());
+		device.setSerialNumber(newDevice.getSerialNumber());
+		device.setPurchasePrice(newDevice.getPurchasePrice());
+		device.setReportedDefect(newDevice.getDefect());
+
+		return deviceRepository.save(device).getId();
+	}
+}
