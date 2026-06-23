@@ -1,11 +1,9 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartner;
 import at.reparierenstattwegwerfen.backoffice.device.DeviceStatus;
 import at.reparierenstattwegwerfen.backoffice.device.internal.controller.CreateNewDevice;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
-import lombok.Locked;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

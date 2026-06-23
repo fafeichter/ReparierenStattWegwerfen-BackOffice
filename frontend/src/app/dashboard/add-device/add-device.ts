@@ -90,9 +90,11 @@ export class AddDevice {
       modelAppleSiliconUnifiedMemoryId: candidate.modelAppleSiliconUnifiedMemory?.id,
       modelStorageId: candidate.modelStorage?.id,
       serialNumber: candidate.serialNumber,
-      defect: candidate.reportedDefect,
       batteryMaximumCapacity: candidate.batteryMaximumCapacity,
-      batteryCycleCount: candidate.batteryCycleCount
+      batteryCycleCount: candidate.batteryCycleCount,
+      defect: this.found()?.reportedDefect,
+      sellerFirstName: this.found()?.sellerFirstName,
+      sellerLastName: this.found()?.sellerLastName,
     };
 
     this.deviceApi.createNewDevice(newDevice).subscribe({
@@ -118,7 +120,7 @@ export class AddDevice {
 
   protected getConfidenceColor(confidence: number | undefined): string {
     if (!confidence) return 'Tomato';
-    if (confidence >= 8) return 'MediumSeaGreen';
+    if (confidence >= 8) return 'YellowGreen';
     if (confidence >= 5) return 'BlanchedAlmond';
     return 'Tomato';
   }

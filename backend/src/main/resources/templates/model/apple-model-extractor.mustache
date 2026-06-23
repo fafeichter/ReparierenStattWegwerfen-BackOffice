@@ -4018,9 +4018,14 @@
     indicating it has cellular capabilities (e.g., "LTE", "5G", "Cellular", SIM slot), map it to the version
     supporting the Wi-Fi feature (ID 8) rather than the Wi-Fi + Cellular version.
     9. Dynamic Data Integrity: When extracting IDs for Silicon, Color, Storage, and Unified Memory, cross-check the
-    allowed comma-separated values inside the matched `
-    <device>` XML attributes (`silicon`, `colors`, `storage`, `memory`). If the extracted ID is present within that
-    list, you MUST provide it. Never map an attribute ID that is not natively supported by the matched device row.
-    10. Speed Optimization: Stop processing and generate the JSON immediately once the primary device is identified.
+    allowed comma-separated values inside the matched `<device>` XML attributes (`silicon`, `colors`, `storage`,
+    `memory`). If the extracted ID is present within that list, you MUST provide it. Never map an attribute ID that
+    is not natively supported by the matched device row.
+    10. Seller Identity Extraction: Actively look for indications of the seller's identity within the advertisement
+    text, user profile snippets, or metadata headers inside the HTML. If a single name or username is found, map it
+    to `seller_first_name`. If a full name is clearly structured (e.g., "Privatanbieter: Max Mustermann"), parse them
+    out into `seller_first_name` and `seller_last_name` respectively. Set to `null` only if absolutely no identifier
+    for the user can be scraped from the text.
+    11. Speed Optimization: Stop processing and generate the JSON immediately once the primary device is identified.
     Do not run any conversational inner dialogue.
 </strict_instructions>

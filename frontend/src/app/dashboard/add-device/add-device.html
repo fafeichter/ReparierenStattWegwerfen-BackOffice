@@ -89,8 +89,11 @@
   <div [style.background-color]="getConfidenceColor(model.confidence)" class="found">
     <strong>{{ model.model?.name }}</strong><br>
     {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} | {{ model.modelStorage?.name | orElse }}<br>
+    {{ model.modelAppleSilicon?.name | orElse }}<br>
     Color: {{ model.modelColor?.name | orElse }}<br>
     Battery: {{ model.batteryMaximumCapacity | orElse }} % ({{ model.batteryCycleCount | orElse }} cycles)<br>
+    <hr>
+    {{ model.sellerFirstName | orElse }} {{ model.sellerLastName | orElse }}
     <hr>
     {{ model.reportedDefect }}
   </div>
