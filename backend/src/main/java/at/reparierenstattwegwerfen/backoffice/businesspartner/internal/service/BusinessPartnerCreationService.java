@@ -19,8 +19,8 @@ public class BusinessPartnerCreationService {
 	@Transactional
 	public Integer createBusinessPartnerPlaceholder(CreateBusinessPartnerPlaceholder businessPartnerPlaceholder) {
 		BusinessPartner businessPartner = new BusinessPartner();
-		businessPartner.setFirstName(businessPartnerPlaceholder.getLastName());
-		businessPartner.setLastName(businessPartnerPlaceholder.getFirstName());
+		businessPartner.setFirstName(businessPartnerPlaceholder.getFirstName());
+		businessPartner.setLastName(businessPartnerPlaceholder.getLastName());
 		businessPartner.setScammer(false);
 
 		return businessPartnerRepository.save(businessPartner).getId();
