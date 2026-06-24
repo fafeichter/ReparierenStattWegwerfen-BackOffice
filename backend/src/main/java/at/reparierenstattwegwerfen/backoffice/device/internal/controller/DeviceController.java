@@ -24,7 +24,7 @@ public class DeviceController {
 	}
 
 	@PostMapping("/")
-	public Integer createNewDevice(@Valid CreateNewDevice newDevice) {
+	public Integer createNewDevice(@Valid @RequestBody CreateNewDevice newDevice) {
 		return deviceCreationService.createDevice(newDevice);
 	}
 }
