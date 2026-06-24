@@ -14,9 +14,9 @@
         </a>
       </clr-dg-cell>
       <clr-dg-cell>
-        {{ businessPartner.address.street }} {{ businessPartner.address.houseNumber }}<br>
-        {{ businessPartner.address.zipCode }} {{ businessPartner.address.city }}<br>
-        {{ businessPartner.address.country }}
+        {{ businessPartner.address?.street  | orElse }} {{ businessPartner.address?.houseNumber  | orElse }}<br>
+        {{ businessPartner.address?.zipCode | orElse }} {{ businessPartner.address?.city | orElse }}<br>
+        {{ businessPartner.address?.country | orElse }}
       </clr-dg-cell>
     </clr-dg-row>
   }

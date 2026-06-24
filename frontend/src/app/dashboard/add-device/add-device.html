@@ -20,17 +20,16 @@
         }
       </clr-input-container>
 
-      <clr-input-container>
+      <clr-number-input-container>
         <label><span class="clr-required-mark">Price</span></label>
-        <input clrInput formControlName="price" type="number"/>
-        <div clrInputPrefix>€</div>
+        <input clrNumberInput formControlName="price" type="number" prefix="€"/>
         @if (form.controls.price.hasError('required')) {
           <clr-control-error>Price is required.</clr-control-error>
         }
         @if (form.controls.price.hasError('min')) {
           <clr-control-error>Please enter a valid Price.</clr-control-error>
         }
-      </clr-input-container>
+      </clr-number-input-container>
     </form>
 
     @if (isLoadingModel()) {

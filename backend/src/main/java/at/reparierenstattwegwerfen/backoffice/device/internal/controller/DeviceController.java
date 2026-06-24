@@ -23,7 +23,6 @@ public class DeviceController {
 		return deviceRepository.findById(deviceId).orElse(null);
 	}
 
-
 	@PostMapping("/")
 	public Integer createNewDevice(@Valid CreateNewDevice newDevice) {
 		return deviceCreationService.createDevice(newDevice);

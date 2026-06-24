@@ -28,7 +28,6 @@ public class BusinessPartnerDetailDto {
 	@Size(max = 256)
 	String firstName;
 
-	@NotBlank
 	@Size(max = 256)
 	String lastName;
 
@@ -41,7 +40,6 @@ public class BusinessPartnerDetailDto {
 	@NotNull
 	Boolean scammer;
 
-	@NotNull
 	@Valid
 	BusinessPartnerAddressDto address;
 }

@@ -33,6 +33,7 @@ public class DeviceCreationService {
 		device.setSerialNumber(newDevice.getSerialNumber());
 		device.setPurchasePrice(newDevice.getPurchasePrice());
 		device.setReportedDefect(newDevice.getDefect());
+		device.setSellerBusinessPartnerId(newDevice.getSellerBusinessPartnerId());
 
 		return deviceRepository.save(device).getId();
 	}

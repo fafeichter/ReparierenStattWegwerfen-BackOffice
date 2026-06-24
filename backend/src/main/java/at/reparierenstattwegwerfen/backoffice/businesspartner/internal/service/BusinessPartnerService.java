@@ -49,7 +49,7 @@ public class BusinessPartnerService {
 	}
 
 	private BusinessPartnerAddressDto toAddress(BusinessPartnerAddress address) {
-		return BusinessPartnerAddressDto
+		return address != null ? BusinessPartnerAddressDto
 			.builder()
 			.id(address.getId())
 			.street(address.getStreet())
@@ -57,6 +57,6 @@ public class BusinessPartnerService {
 			.zipCode(address.getZipCode())
 			.city(address.getCity())
 			.country(address.getCountry().getName())
-			.build();
+			.build() : null;
 	}
 }

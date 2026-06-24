@@ -11,9 +11,9 @@
         <div class="card-block">
           <div class="card-title">Address</div>
           <div class="card-text">
-            {{ businessPartner.address.street }} {{ businessPartner.address.houseNumber }}<br>
-            {{ businessPartner.address.zipCode }} {{ businessPartner.address.city }}<br>
-            {{ businessPartner.address.country }}
+            {{ businessPartner.address?.street | orElse }} {{ businessPartner.address?.houseNumber  | orElse }}<br>
+            {{ businessPartner.address?.zipCode  | orElse }} {{ businessPartner.address?.city  | orElse }}<br>
+            {{ businessPartner.address?.country  | orElse }}
           </div>
         </div>
         <div class="card-block">

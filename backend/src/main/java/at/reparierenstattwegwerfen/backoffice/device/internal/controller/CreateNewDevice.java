@@ -8,7 +8,6 @@ import lombok.Data;
  * @author Fabian Feichter
  */
 @Data
-@Builder
 public class CreateNewDevice {
 
 	@NotNull
@@ -26,6 +25,5 @@ public class CreateNewDevice {
 	private final Integer batteryMaximumCapacity;
 	private final Integer batteryCycleCount;
 
-	private final String sellerLastName;
-	private final String sellerFirstName;
+	private final Integer sellerBusinessPartnerId;
 }
