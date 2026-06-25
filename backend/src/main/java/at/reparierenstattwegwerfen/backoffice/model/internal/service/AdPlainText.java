@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class AdPlainText {
 
 	// Pre-compile patterns for performance
-	private static final Pattern CODE_BLOCKS = Pattern.compile("<(script|style|noscript|iframe|header|footer|nav|aside)[^>]*?>[\\s\\S]*?</\\1>", Pattern.CASE_INSENSITIVE);
+	private static final Pattern CODE_BLOCKS = Pattern.compile("<(script|style|noscript|meta|link|iframe|header|footer|nav|aside|img)[^>]*?>[\\s\\S]*?</\\1>", Pattern.CASE_INSENSITIVE);
 	private static final Pattern ALL_TAGS = Pattern.compile("<[^>]*>");
 	private static final Pattern HTML_ENTITIES = Pattern.compile("&nbsp;|&amp;|&lt;|&gt;|&quot;|&#\\d+;");
 	private static final Pattern WHITESPACE = Pattern.compile("\\s+");

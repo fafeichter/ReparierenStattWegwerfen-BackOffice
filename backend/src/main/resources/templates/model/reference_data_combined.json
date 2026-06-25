@@ -1,0 +1,3782 @@
+[
+  {
+    "id": 1,
+    "model": "A2337",
+    "name": "MacBook Air (M1, 2020)",
+    "release_date": "2020-11",
+    "screen_size_in": 13.3,
+    "silicon": [
+      {
+        "id": 2,
+        "name": "M1 mit 8‑Core CPU und 7‑Core GPU"
+      },
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 3,
+        "name": "Gold"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "model": "A2338",
+    "name": "MacBook Pro (13\", M1, 2020)",
+    "release_date": "2020-11",
+    "screen_size_in": 13.3,
+    "silicon": [
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 6,
+        "name": "Touch Bar"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "model": "A2338",
+    "name": "MacBook Pro (13\", M2, 2022)",
+    "release_date": "2022-06",
+    "screen_size_in": 13.3,
+    "silicon": [
+      {
+        "id": 11,
+        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 6,
+        "name": "Touch Bar"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "model": "A2681",
+    "name": "MacBook Air (M2, 2022)",
+    "release_date": "2022-07",
+    "screen_size_in": 13.6,
+    "silicon": [
+      {
+        "id": 9,
+        "name": "M2 mit 8‑Core CPU und 8‑Core GPU"
+      },
+      {
+        "id": 11,
+        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "model": "A2442",
+    "name": "MacBook Pro (14\", 2021)",
+    "release_date": "2021-10",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 4,
+        "name": "M1 Pro mit 8‑Core CPU und 14‑Core GPU"
+      },
+      {
+        "id": 5,
+        "name": "M1 Pro mit 10‑Core CPU und 14‑Core GPU"
+      },
+      {
+        "id": 6,
+        "name": "M1 Pro mit 10‑Core CPU und 16‑Core GPU"
+      },
+      {
+        "id": 7,
+        "name": "M1 Max mit 10‑Core CPU und 24‑Core GPU"
+      },
+      {
+        "id": 8,
+        "name": "M1 Max mit 10‑Core CPU und 32‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "model": "A2485",
+    "name": "MacBook Pro (16\", 2021)",
+    "release_date": "2021-10",
+    "screen_size_in": 16.2,
+    "silicon": [
+      {
+        "id": 6,
+        "name": "M1 Pro mit 10‑Core CPU und 16‑Core GPU"
+      },
+      {
+        "id": 7,
+        "name": "M1 Max mit 10‑Core CPU und 24‑Core GPU"
+      },
+      {
+        "id": 8,
+        "name": "M1 Max mit 10‑Core CPU und 32‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "model": "A2779",
+    "name": "MacBook Pro (14\", 2023)",
+    "release_date": "2023-01",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 12,
+        "name": "M2 Pro mit 10‑Core CPU und 16‑Core GPU"
+      },
+      {
+        "id": 13,
+        "name": "M2 Pro mit 12‑Core CPU und 19‑Core GPU"
+      },
+      {
+        "id": 14,
+        "name": "M2 Max mit 12‑Core CPU und 30‑Core GPU"
+      },
+      {
+        "id": 15,
+        "name": "M2 Max mit 12‑Core CPU und 38‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 10,
+        "size": "96GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "model": "A3113",
+    "name": "MacBook Air (13\", M3, 2024)",
+    "release_date": "2024-03",
+    "screen_size_in": 13.6,
+    "silicon": [
+      {
+        "id": 16,
+        "name": "M3 mit 8‑Core CPU und 8‑Core GPU"
+      },
+      {
+        "id": 17,
+        "name": "M3 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "model": "A2780",
+    "name": "MacBook Pro (16\", 2023)",
+    "release_date": "2023-01",
+    "screen_size_in": 16.2,
+    "silicon": [
+      {
+        "id": 13,
+        "name": "M2 Pro mit 12‑Core CPU und 19‑Core GPU"
+      },
+      {
+        "id": 14,
+        "name": "M2 Max mit 12‑Core CPU und 30‑Core GPU"
+      },
+      {
+        "id": 15,
+        "name": "M2 Max mit 12‑Core CPU und 38‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 10,
+        "size": "96GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "model": "A2491",
+    "name": "MacBook Air (15\", M2, 2023)",
+    "release_date": "2023-06",
+    "screen_size_in": 15.3,
+    "silicon": [
+      {
+        "id": 11,
+        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "model": "A3114",
+    "name": "MacBook Air (15\", M3, 2024)",
+    "release_date": "2024-03",
+    "screen_size_in": 15.3,
+    "silicon": [
+      {
+        "id": 17,
+        "name": "M3 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "model": "A3112",
+    "name": "MacBook Pro (14\", M4, 2024)",
+    "release_date": "2024-11",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 26,
+        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "model": "A3401",
+    "name": "MacBook Pro (14\", M4 Pro, 2024)",
+    "release_date": "2024-11",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 27,
+        "name": "M4 Pro mit 12‑Core CPU und 16‑Core GPU"
+      },
+      {
+        "id": 28,
+        "name": "M4 Pro mit 14‑Core CPU und 20‑Core GPU"
+      },
+      {
+        "id": 29,
+        "name": "M4 Max mit 14‑Core CPU und 32‑Core GPU"
+      },
+      {
+        "id": 30,
+        "name": "M4 Max mit 16‑Core CPU und 40‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 7,
+        "size": "36GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 11,
+        "size": "128GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "model": "A3185",
+    "name": "MacBook Pro (14\", M4 Max, 2024)",
+    "release_date": "2024-11",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 27,
+        "name": "M4 Pro mit 12‑Core CPU und 16‑Core GPU"
+      },
+      {
+        "id": 28,
+        "name": "M4 Pro mit 14‑Core CPU und 20‑Core GPU"
+      },
+      {
+        "id": 29,
+        "name": "M4 Max mit 14‑Core CPU und 32‑Core GPU"
+      },
+      {
+        "id": 30,
+        "name": "M4 Max mit 16‑Core CPU und 40‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 7,
+        "size": "36GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 11,
+        "size": "128GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "model": "A2918",
+    "name": "MacBook Pro (14\", M3, Nov. 2023)",
+    "release_date": "2023-11",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 17,
+        "name": "M3 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "model": "A2992",
+    "name": "MacBook Pro (14\", Nov. 2023)",
+    "release_date": "2023-11",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 19,
+        "name": "M3 Pro mit 11‑Core CPU und 14‑Core GPU"
+      },
+      {
+        "id": 20,
+        "name": "M3 Pro mit 12‑Core CPU und 18‑Core GPU"
+      },
+      {
+        "id": 21,
+        "name": "M3 Max mit 14‑Core CPU und 30‑Core GPU"
+      },
+      {
+        "id": 22,
+        "name": "M3 Max mit 16‑Core CPU und 40‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 4,
+        "size": "18GB"
+      },
+      {
+        "id": 7,
+        "size": "36GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 10,
+        "size": "96GB"
+      },
+      {
+        "id": 11,
+        "size": "128GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "model": "A3240",
+    "name": "MacBook Air (13\", M4, 2025)",
+    "release_date": "2025-03",
+    "screen_size_in": 13.6,
+    "silicon": [
+      {
+        "id": 25,
+        "name": "M4 mit 10‑Core CPU und 8‑Core GPU"
+      },
+      {
+        "id": 26,
+        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 7,
+        "name": "Himmelblau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "model": "A3241",
+    "name": "MacBook Air (15\", M4, 2025)",
+    "release_date": "2025-03",
+    "screen_size_in": 15.3,
+    "silicon": [
+      {
+        "id": 26,
+        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 7,
+        "name": "Himmelblau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "model": "A3449",
+    "name": "MacBook Air (13\", M5)",
+    "release_date": "2026-03",
+    "screen_size_in": 13.6,
+    "silicon": [
+      {
+        "id": 32,
+        "name": "M5 mit 10‑Core CPU und 8‑Core GPU"
+      },
+      {
+        "id": 33,
+        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 7,
+        "name": "Himmelblau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "model": "A3448",
+    "name": "MacBook Air (15\", M5)",
+    "release_date": "2026-03",
+    "screen_size_in": 15.3,
+    "silicon": [
+      {
+        "id": 33,
+        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 4,
+        "name": "Mitternacht"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 7,
+        "name": "Himmelblau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 5,
+        "name": "Liquid Retina Display"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "model": "A2991",
+    "name": "MacBook Pro (16\", Nov. 2023)",
+    "release_date": "2023-11",
+    "screen_size_in": 16.2,
+    "silicon": [
+      {
+        "id": 20,
+        "name": "M3 Pro mit 12‑Core CPU und 18‑Core GPU"
+      },
+      {
+        "id": 21,
+        "name": "M3 Max mit 14‑Core CPU und 30‑Core GPU"
+      },
+      {
+        "id": 22,
+        "name": "M3 Max mit 16‑Core CPU und 40‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 4,
+        "size": "18GB"
+      },
+      {
+        "id": 7,
+        "size": "36GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 10,
+        "size": "96GB"
+      },
+      {
+        "id": 11,
+        "size": "128GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "model": "A3186",
+    "name": "MacBook Pro (16\", 2024)",
+    "release_date": "2024-11",
+    "screen_size_in": 16.2,
+    "silicon": [
+      {
+        "id": 29,
+        "name": "M4 Max mit 14‑Core CPU und 32‑Core GPU"
+      },
+      {
+        "id": 30,
+        "name": "M4 Max mit 16‑Core CPU und 40‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 7,
+        "size": "36GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 11,
+        "size": "128GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "model": "A3403",
+    "name": "MacBook Pro (16\", 2024)",
+    "release_date": "2024-11",
+    "screen_size_in": 16.2,
+    "silicon": [
+      {
+        "id": 28,
+        "name": "M4 Pro mit 14‑Core CPU und 20‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "model": "A3427",
+    "name": "MacBook Pro (14\", M5 Max)",
+    "release_date": "2026-03",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 36,
+        "name": "M5 Max mit 18‑Core CPU und 32‑Core GPU"
+      },
+      {
+        "id": 37,
+        "name": "M5 Max mit 18‑Core CPU und 40‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 7,
+        "size": "36GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 11,
+        "size": "128GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "model": "A3426",
+    "name": "MacBook Pro (14\", M5 Pro)",
+    "release_date": "2026-03",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 34,
+        "name": "M5 Pro mit 15‑Core CPU und 16‑Core GPU"
+      },
+      {
+        "id": 35,
+        "name": "M5 Pro mit 18‑Core CPU und 20‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "model": "A3429",
+    "name": "MacBook Pro (16\", M5 Pro)",
+    "release_date": "2026-03",
+    "screen_size_in": 16.2,
+    "silicon": [
+      {
+        "id": 35,
+        "name": "M5 Pro mit 18‑Core CPU und 20‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "model": "A3428",
+    "name": "MacBook Pro (16\", M5 Max)",
+    "release_date": "2026-03",
+    "screen_size_in": 16.2,
+    "silicon": [
+      {
+        "id": 36,
+        "name": "M5 Max mit 18‑Core CPU und 32‑Core GPU"
+      },
+      {
+        "id": 37,
+        "name": "M5 Max mit 18‑Core CPU und 40‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      },
+      {
+        "id": 8,
+        "size": "8TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 7,
+        "size": "36GB"
+      },
+      {
+        "id": 8,
+        "size": "48GB"
+      },
+      {
+        "id": 9,
+        "size": "64GB"
+      },
+      {
+        "id": 11,
+        "size": "128GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "model": "A3434",
+    "name": "MacBook Pro (14\", M5)",
+    "release_date": "2025-10",
+    "screen_size_in": 14.2,
+    "silicon": [
+      {
+        "id": 33,
+        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      },
+      {
+        "id": 7,
+        "size": "4TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 3,
+        "size": "16GB"
+      },
+      {
+        "id": 5,
+        "size": "24GB"
+      },
+      {
+        "id": 6,
+        "size": "32GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 1,
+        "name": "True Tone"
+      },
+      {
+        "id": 2,
+        "name": "ProMotion bis 120 Hz"
+      },
+      {
+        "id": 3,
+        "name": "Schnelles Aufladen"
+      },
+      {
+        "id": 4,
+        "name": "Liquid Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "model": "A3404",
+    "name": "MacBook Neo",
+    "release_date": "2026-03",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 1,
+        "name": "A18 Pro mit 6‑Core CPU und 5‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 8,
+        "name": "Rosa"
+      },
+      {
+        "id": 9,
+        "name": "Zitrus"
+      },
+      {
+        "id": 10,
+        "name": "Indigo"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      }
+    ],
+    "features": []
+  },
+  {
+    "id": 30,
+    "model": "A2436",
+    "name": "iPad Pro (12,9\", 6. Generation)",
+    "release_date": "2022-10",
+    "screen_size_in": 12.9,
+    "silicon": [
+      {
+        "id": 11,
+        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "model": "A2437",
+    "name": "iPad Pro (12,9\", 6. Generation, Wi-Fi + Cellular)",
+    "release_date": "2022-10",
+    "screen_size_in": 12.9,
+    "silicon": [
+      {
+        "id": 11,
+        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "model": "A2378",
+    "name": "iPad Pro, 12,9\" (5. Generation)",
+    "release_date": "2021-05",
+    "screen_size_in": 12.9,
+    "silicon": [
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "model": "A2461",
+    "name": "iPad Pro, 12,9\" (5. Generation, Wi-Fi + Cellular)",
+    "release_date": "2021-05",
+    "screen_size_in": 12.9,
+    "silicon": [
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "model": "A2377",
+    "name": "iPad Pro, 11\" (3. Generation)",
+    "release_date": "2021-05",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "model": "A2459",
+    "name": "iPad Pro, 11\" (3. Generation, Wi-Fi + Cellular)",
+    "release_date": "2021-05",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "model": "A2435",
+    "name": "iPad Pro (11\", 4. Generation)",
+    "release_date": "2022-10",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 11,
+        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "model": "A2761",
+    "name": "iPad Pro (11\", 4. Generation, Wi-Fi + Cellular)",
+    "release_date": "2022-10",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 11,
+        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 2,
+        "name": "Space Grau"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "model": "A2588",
+    "name": "iPad Air (5. Generation)",
+    "release_date": "2022-03",
+    "screen_size_in": 10.9,
+    "silicon": [
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      },
+      {
+        "id": 13,
+        "name": "Rosé"
+      }
+    ],
+    "storage": [
+      {
+        "id": 1,
+        "size": "64GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "model": "A2902",
+    "name": "iPad Air 11\" (M2)",
+    "release_date": "2024-05",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 10,
+        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "model": "A2898",
+    "name": "iPad Air 13\" (M2)",
+    "release_date": "2024-05",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 10,
+        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "model": "A2836",
+    "name": "iPad Pro 11\" (M4)",
+    "release_date": "2024-05",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 24,
+        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 26,
+        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "model": "A2925",
+    "name": "iPad Pro 13\" (M4)",
+    "release_date": "2024-05",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 24,
+        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 26,
+        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "model": "A2589",
+    "name": "iPad Air (5. Generation, Wi-Fi + Cellular)",
+    "release_date": "2022-03",
+    "screen_size_in": 10.9,
+    "silicon": [
+      {
+        "id": 3,
+        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      },
+      {
+        "id": 13,
+        "name": "Rosé"
+      }
+    ],
+    "storage": [
+      {
+        "id": 1,
+        "size": "64GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "model": "A2837",
+    "name": "iPad Pro 11\" (M4, Wi-Fi + Cellular)",
+    "release_date": "2024-05",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 24,
+        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 26,
+        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "model": "A2926",
+    "name": "iPad Pro 13\" (M4, Wi-Fi + Cellular)",
+    "release_date": "2024-05",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 24,
+        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 26,
+        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "model": "A2903",
+    "name": "iPad Air 11\" (M2, Wi‑Fi + Cellular)",
+    "release_date": "2024-05",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 10,
+        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "model": "A2899",
+    "name": "iPad Air 13\" (M2, Wi‑Fi + Cellular)",
+    "release_date": "2024-05",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 10,
+        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 1,
+        "size": "8GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "model": "A3459",
+    "name": "iPad Air 11\" (M4)",
+    "release_date": "2026-03",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 23,
+        "name": "M4 mit 8‑Core CPU und 9‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 2,
+        "size": "12GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "model": "A3461",
+    "name": "iPad Air 13\" (M4)",
+    "release_date": "2026-03",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 23,
+        "name": "M4 mit 8‑Core CPU und 9‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 2,
+        "name": "Space Grau"
+      },
+      {
+        "id": 5,
+        "name": "Polarstern"
+      },
+      {
+        "id": 11,
+        "name": "Blau"
+      },
+      {
+        "id": 12,
+        "name": "Violett"
+      }
+    ],
+    "storage": [
+      {
+        "id": 2,
+        "size": "128GB"
+      },
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 2,
+        "size": "12GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "model": "A3357",
+    "name": "iPad Pro 11\" (M5)",
+    "release_date": "2025-10",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 31,
+        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 33,
+        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 2,
+        "size": "12GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "model": "A3358",
+    "name": "iPad Pro 11\" (M5, Wi-Fi + Cellular)",
+    "release_date": "2025-10",
+    "screen_size_in": 11.0,
+    "silicon": [
+      {
+        "id": 31,
+        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 33,
+        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 2,
+        "size": "12GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "model": "A3360",
+    "name": "iPad Pro 13\" (M5)",
+    "release_date": "2025-10",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 31,
+        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 33,
+        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 2,
+        "size": "12GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 8,
+        "name": "Wi‑Fi"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "model": "A3361",
+    "name": "iPad Pro 13\" (M5, Wi-Fi + Cellular)",
+    "release_date": "2025-10",
+    "screen_size_in": 13.0,
+    "silicon": [
+      {
+        "id": 31,
+        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
+      },
+      {
+        "id": 33,
+        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "name": "Silber"
+      },
+      {
+        "id": 6,
+        "name": "Space Schwarz"
+      }
+    ],
+    "storage": [
+      {
+        "id": 3,
+        "size": "256GB"
+      },
+      {
+        "id": 4,
+        "size": "512GB"
+      },
+      {
+        "id": 5,
+        "size": "1TB"
+      },
+      {
+        "id": 6,
+        "size": "2TB"
+      }
+    ],
+    "unified_memory": [
+      {
+        "id": 2,
+        "size": "12GB"
+      },
+      {
+        "id": 3,
+        "size": "16GB"
+      }
+    ],
+    "features": [
+      {
+        "id": 7,
+        "name": "Wi‑Fi + Cellular"
+      },
+      {
+        "id": 9,
+        "name": "Ultra Retina XDR Display"
+      }
+    ]
+  }
+]

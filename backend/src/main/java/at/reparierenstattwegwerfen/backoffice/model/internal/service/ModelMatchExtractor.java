@@ -4,14 +4,19 @@ import com.samskivert.mustache.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.content.Media;
 import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MimeTypeUtils;
 
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * Downloads an ad and asks the AI model to extract the device's specs and reported
@@ -29,31 +34,60 @@ public class ModelMatchExtractor {
 	@Value("classpath:templates/model/apple-model-extractor.mustache")
 	private Resource mustacheTemplateResource;
 
-	// Constructor injection...
+	@Value("classpath:templates/model/reference_data_macbook.json")
+	private Resource macbookReferenceData;
+
+	@Value("classpath:templates/model/reference_data_ipad.json")
+	private Resource ipadReferenceData;
+
+	@Value("classpath:templates/model/reference_data_combined.json")
+	private Resource combinedReferenceData;
 
 	public ModelMatchResponse extractModelDetails(String adUrl) {
 		// 1. Fetch and clean data
 		String adText = adDownloader.downloadAd(adUrl).getText();
 
-		// 2. Build prompt
+		// 2. Build instructions prompt
 		String formattedPrompt = compilePrompt(adText);
 
-		// 3. Call AI service
+		// 3. Determine the correct reference data resource
+		Resource referenceData = resolveReferenceResource(adUrl);
+
+		// 4. Create the message contents (Prompt text + File attachment)
+		UserMessage userMessage = UserMessage.builder()
+			.text(formattedPrompt)
+			.media(new Media(MimeTypeUtils.APPLICATION_JSON, referenceData))
+			.build();
+
+		// 5. Call AI service using the UserMessage
 		BeanOutputConverter<ModelMatchResponse> output = new BeanOutputConverter<>(ModelMatchResponse.class);
 		OpenAiChatOptions chatOptions = OpenAiChatOptions.builder()
 			.outputSchema(output.getJsonSchema())
 			.build();
 
 		return aiClientBuilder.build()
-			.prompt(new Prompt(formattedPrompt, chatOptions))
+			.prompt(new Prompt(userMessage, chatOptions))
 			.call()
 			.entity(ModelMatchResponse.class);
+	}
+
+	private Resource resolveReferenceResource(String adUrl) {
+		String urlLower = adUrl.toLowerCase();
+
+		if (urlLower.contains("macbook")) {
+			return macbookReferenceData;
+		} else if (urlLower.contains("ipad")) {
+			return ipadReferenceData;
+		}
+
+		// Fallback
+		return combinedReferenceData;
 	}
 
 	@SneakyThrows
 	private String compilePrompt(String content) {
 		PromptContext context = PromptContext.builder().adHtmlContent(content).build();
-		String templateString = mustacheTemplateResource.getContentAsString(StandardCharsets.UTF_8);
-		return Mustache.compiler().compile(templateString).execute(context);
+		InputStreamReader input = new InputStreamReader(mustacheTemplateResource.getInputStream(), StandardCharsets.UTF_8);
+		return Mustache.compiler().compile(input).execute(context);
 	}
 }

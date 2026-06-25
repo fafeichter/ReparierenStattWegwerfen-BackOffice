@@ -1,13 +1,13 @@
 spring:
   application:
     name: Reparieren Statt Wegwerfen - Backoffice
-  ai:
-    openai:
-      chat:
-        model: gpt-5.5-mini
-        reasoning-effort: low
   threads:
     virtual:
       enabled: true
+  ai:
+    openai:
+      chat:
+        model: gpt-5.4-mini
+
 springdoc:
   default-produces-media-type: application/json
