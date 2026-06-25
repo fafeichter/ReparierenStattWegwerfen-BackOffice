@@ -1,1490 +1,678 @@
-[
-  {
-    "id": 30,
-    "model": "A2436",
-    "name": "iPad Pro (12,9\", 6. Generation)",
-    "release_date": "2022-10",
-    "screen_size_in": 12.9,
-    "silicon": [
-      {
-        "id": 11,
-        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
+{
+  "silicon": {
+    "1": "A18 Pro mit 6‑Core CPU und 5‑Core GPU",
+    "2": "M1 mit 8‑Core CPU und 7‑Core GPU",
+    "3": "M1 mit 8‑Core CPU und 8‑Core GPU",
+    "4": "M1 Pro mit 8‑Core CPU und 14‑Core GPU",
+    "5": "M1 Pro mit 10‑Core CPU und 14‑Core GPU",
+    "6": "M1 Pro mit 10‑Core CPU und 16‑Core GPU",
+    "7": "M1 Max mit 10‑Core CPU und 24‑Core GPU",
+    "8": "M1 Max mit 10‑Core CPU und 32‑Core GPU",
+    "9": "M2 mit 8‑Core CPU und 8‑Core GPU",
+    "10": "M2 mit 8‑Core CPU und 9‑Core GPU",
+    "11": "M2 mit 8‑Core CPU und 10‑Core GPU",
+    "12": "M2 Pro mit 10‑Core CPU und 16‑Core GPU",
+    "13": "M2 Pro mit 12‑Core CPU und 19‑Core GPU",
+    "14": "M2 Max mit 12‑Core CPU und 30‑Core GPU",
+    "15": "M2 Max mit 12‑Core CPU und 38‑Core GPU",
+    "16": "M3 mit 8‑Core CPU und 8‑Core GPU",
+    "17": "M3 mit 8‑Core CPU und 10‑Core GPU",
+    "19": "M3 Pro mit 11‑Core CPU und 14‑Core GPU",
+    "20": "M3 Pro mit 12‑Core CPU und 18‑Core GPU",
+    "21": "M3 Max mit 14‑Core CPU und 30‑Core GPU",
+    "22": "M3 Max mit 16‑Core CPU und 40‑Core GPU",
+    "23": "M4 mit 8‑Core CPU und 9‑Core GPU",
+    "24": "M4 mit 9‑Core CPU und 10‑Core GPU",
+    "25": "M4 mit 10‑Core CPU und 8‑Core GPU",
+    "26": "M4 mit 10‑Core CPU und 10‑Core GPU",
+    "27": "M4 Pro mit 12‑Core CPU und 16‑Core GPU",
+    "28": "M4 Pro mit 14‑Core CPU und 20‑Core GPU",
+    "29": "M4 Max mit 14‑Core CPU und 32‑Core GPU",
+    "30": "M4 Max mit 16‑Core CPU und 40‑Core GPU",
+    "31": "M5 mit 9‑Core CPU und 10‑Core GPU",
+    "32": "M5 mit 10‑Core CPU und 8‑Core GPU",
+    "33": "M5 mit 10‑Core CPU und 10‑Core GPU",
+    "34": "M5 Pro mit 15‑Core CPU und 16‑Core GPU",
+    "35": "M5 Pro mit 18‑Core CPU und 20‑Core GPU",
+    "36": "M5 Max mit 18‑Core CPU und 32‑Core GPU",
+    "37": "M5 Max mit 18‑Core CPU und 40‑Core GPU"
   },
-  {
-    "id": 31,
-    "model": "A2437",
-    "name": "iPad Pro (12,9\", 6. Generation, Wi-Fi + Cellular)",
-    "release_date": "2022-10",
-    "screen_size_in": 12.9,
-    "silicon": [
-      {
-        "id": 11,
-        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      }
-    ]
+  "storage": {
+    "1": "64GB",
+    "2": "128GB",
+    "3": "256GB",
+    "4": "512GB",
+    "5": "1TB",
+    "6": "2TB",
+    "7": "4TB",
+    "8": "8TB"
   },
-  {
-    "id": 32,
-    "model": "A2378",
-    "name": "iPad Pro, 12,9\" (5. Generation)",
-    "release_date": "2021-05",
-    "screen_size_in": 12.9,
-    "silicon": [
-      {
-        "id": 3,
-        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
+  "memory": {
+    "1": "8GB",
+    "2": "12GB",
+    "3": "16GB",
+    "4": "18GB",
+    "5": "24GB",
+    "6": "32GB",
+    "7": "36GB",
+    "8": "48GB",
+    "9": "64GB",
+    "10": "96GB",
+    "11": "128GB"
   },
-  {
-    "id": 33,
-    "model": "A2461",
-    "name": "iPad Pro, 12,9\" (5. Generation, Wi-Fi + Cellular)",
-    "release_date": "2021-05",
-    "screen_size_in": 12.9,
-    "silicon": [
-      {
-        "id": 3,
-        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      }
-    ]
+  "colors": {
+    "1": "Silber",
+    "2": "Space Grau",
+    "3": "Gold",
+    "4": "Mitternacht",
+    "5": "Polarstern",
+    "6": "Space Schwarz",
+    "7": "Himmelblau",
+    "8": "Rosa",
+    "9": "Zitrus",
+    "10": "Indigo",
+    "11": "Blau",
+    "12": "Violett",
+    "13": "Rosé"
   },
-  {
-    "id": 34,
-    "model": "A2377",
-    "name": "iPad Pro, 11\" (3. Generation)",
-    "release_date": "2021-05",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 3,
-        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
-  },
-  {
-    "id": 35,
-    "model": "A2459",
-    "name": "iPad Pro, 11\" (3. Generation, Wi-Fi + Cellular)",
-    "release_date": "2021-05",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 3,
-        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      }
-    ]
-  },
-  {
-    "id": 36,
-    "model": "A2435",
-    "name": "iPad Pro (11\", 4. Generation)",
-    "release_date": "2022-10",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 11,
-        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
-  },
-  {
-    "id": 37,
-    "model": "A2761",
-    "name": "iPad Pro (11\", 4. Generation, Wi-Fi + Cellular)",
-    "release_date": "2022-10",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 11,
-        "name": "M2 mit 8‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 2,
-        "name": "Space Grau"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      }
-    ]
-  },
-  {
-    "id": 38,
-    "model": "A2588",
-    "name": "iPad Air (5. Generation)",
-    "release_date": "2022-03",
-    "screen_size_in": 10.9,
-    "silicon": [
-      {
-        "id": 3,
-        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      },
-      {
-        "id": 13,
-        "name": "Rosé"
-      }
-    ],
-    "storage": [
-      {
-        "id": 1,
-        "size": "64GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
-  },
-  {
-    "id": 39,
-    "model": "A2902",
-    "name": "iPad Air 11\" (M2)",
-    "release_date": "2024-05",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 10,
-        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
-  },
-  {
-    "id": 40,
-    "model": "A2898",
-    "name": "iPad Air 13\" (M2)",
-    "release_date": "2024-05",
-    "screen_size_in": 13.0,
-    "silicon": [
-      {
-        "id": 10,
-        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
-  },
-  {
-    "id": 41,
-    "model": "A2836",
-    "name": "iPad Pro 11\" (M4)",
-    "release_date": "2024-05",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 24,
-        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 26,
-        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  },
-  {
-    "id": 42,
-    "model": "A2925",
-    "name": "iPad Pro 13\" (M4)",
-    "release_date": "2024-05",
-    "screen_size_in": 13.0,
-    "silicon": [
-      {
-        "id": 24,
-        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 26,
-        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  },
-  {
-    "id": 43,
-    "model": "A2589",
-    "name": "iPad Air (5. Generation, Wi-Fi + Cellular)",
-    "release_date": "2022-03",
-    "screen_size_in": 10.9,
-    "silicon": [
-      {
-        "id": 3,
-        "name": "M1 mit 8‑Core CPU und 8‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      },
-      {
-        "id": 13,
-        "name": "Rosé"
-      }
-    ],
-    "storage": [
-      {
-        "id": 1,
-        "size": "64GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      }
-    ]
-  },
-  {
-    "id": 44,
-    "model": "A2837",
-    "name": "iPad Pro 11\" (M4, Wi-Fi + Cellular)",
-    "release_date": "2024-05",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 24,
-        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 26,
-        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  },
-  {
-    "id": 45,
-    "model": "A2926",
-    "name": "iPad Pro 13\" (M4, Wi-Fi + Cellular)",
-    "release_date": "2024-05",
-    "screen_size_in": 13.0,
-    "silicon": [
-      {
-        "id": 24,
-        "name": "M4 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 26,
-        "name": "M4 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  },
-  {
-    "id": 46,
-    "model": "A2903",
-    "name": "iPad Air 11\" (M2, Wi‑Fi + Cellular)",
-    "release_date": "2024-05",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 10,
-        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      }
-    ]
-  },
-  {
-    "id": 47,
-    "model": "A2899",
-    "name": "iPad Air 13\" (M2, Wi‑Fi + Cellular)",
-    "release_date": "2024-05",
-    "screen_size_in": 13.0,
-    "silicon": [
-      {
-        "id": 10,
-        "name": "M2 mit 8‑Core CPU und 9‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 1,
-        "size": "8GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      }
-    ]
-  },
-  {
-    "id": 48,
-    "model": "A3459",
-    "name": "iPad Air 11\" (M4)",
-    "release_date": "2026-03",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 23,
-        "name": "M4 mit 8‑Core CPU und 9‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 2,
-        "size": "12GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
-  },
-  {
-    "id": 49,
-    "model": "A3461",
-    "name": "iPad Air 13\" (M4)",
-    "release_date": "2026-03",
-    "screen_size_in": 13.0,
-    "silicon": [
-      {
-        "id": 23,
-        "name": "M4 mit 8‑Core CPU und 9‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 2,
-        "name": "Space Grau"
-      },
-      {
-        "id": 5,
-        "name": "Polarstern"
-      },
-      {
-        "id": 11,
-        "name": "Blau"
-      },
-      {
-        "id": 12,
-        "name": "Violett"
-      }
-    ],
-    "storage": [
-      {
-        "id": 2,
-        "size": "128GB"
-      },
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 2,
-        "size": "12GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      }
-    ]
-  },
-  {
-    "id": 50,
-    "model": "A3357",
-    "name": "iPad Pro 11\" (M5)",
-    "release_date": "2025-10",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 31,
-        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 33,
-        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 2,
-        "size": "12GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  },
-  {
-    "id": 51,
-    "model": "A3358",
-    "name": "iPad Pro 11\" (M5, Wi-Fi + Cellular)",
-    "release_date": "2025-10",
-    "screen_size_in": 11.0,
-    "silicon": [
-      {
-        "id": 31,
-        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 33,
-        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 2,
-        "size": "12GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  },
-  {
-    "id": 52,
-    "model": "A3360",
-    "name": "iPad Pro 13\" (M5)",
-    "release_date": "2025-10",
-    "screen_size_in": 13.0,
-    "silicon": [
-      {
-        "id": 31,
-        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 33,
-        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 2,
-        "size": "12GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 8,
-        "name": "Wi‑Fi"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  },
-  {
-    "id": 53,
-    "model": "A3361",
-    "name": "iPad Pro 13\" (M5, Wi-Fi + Cellular)",
-    "release_date": "2025-10",
-    "screen_size_in": 13.0,
-    "silicon": [
-      {
-        "id": 31,
-        "name": "M5 mit 9‑Core CPU und 10‑Core GPU"
-      },
-      {
-        "id": 33,
-        "name": "M5 mit 10‑Core CPU und 10‑Core GPU"
-      }
-    ],
-    "colors": [
-      {
-        "id": 1,
-        "name": "Silber"
-      },
-      {
-        "id": 6,
-        "name": "Space Schwarz"
-      }
-    ],
-    "storage": [
-      {
-        "id": 3,
-        "size": "256GB"
-      },
-      {
-        "id": 4,
-        "size": "512GB"
-      },
-      {
-        "id": 5,
-        "size": "1TB"
-      },
-      {
-        "id": 6,
-        "size": "2TB"
-      }
-    ],
-    "unified_memory": [
-      {
-        "id": 2,
-        "size": "12GB"
-      },
-      {
-        "id": 3,
-        "size": "16GB"
-      }
-    ],
-    "features": [
-      {
-        "id": 7,
-        "name": "Wi‑Fi + Cellular"
-      },
-      {
-        "id": 9,
-        "name": "Ultra Retina XDR Display"
-      }
-    ]
-  }
-]
+  "devices": [
+    {
+      "id": 30,
+      "model": "A2436",
+      "name": "iPad Pro (12,9\", 6. Generation)",
+      "release_date": "2022-10",
+      "screen_size_inch": 12.9,
+      "silicon": [
+        11
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 31,
+      "model": "A2437",
+      "name": "iPad Pro (12,9\", 6. Generation, Wi-Fi + Cellular)",
+      "release_date": "2022-10",
+      "screen_size_inch": 12.9,
+      "silicon": [
+        11
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 32,
+      "model": "A2378",
+      "name": "iPad Pro, 12,9\" (5. Generation)",
+      "release_date": "2021-05",
+      "screen_size_inch": 12.9,
+      "silicon": [
+        3
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 33,
+      "model": "A2461",
+      "name": "iPad Pro, 12,9\" (5. Generation, Wi-Fi + Cellular)",
+      "release_date": "2021-05",
+      "screen_size_inch": 12.9,
+      "silicon": [
+        3
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 34,
+      "model": "A2377",
+      "name": "iPad Pro, 11\" (3. Generation)",
+      "release_date": "2021-05",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        3
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 35,
+      "model": "A2459",
+      "name": "iPad Pro, 11\" (3. Generation, Wi-Fi + Cellular)",
+      "release_date": "2021-05",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        3
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 36,
+      "model": "A2435",
+      "name": "iPad Pro (11\", 4. Generation)",
+      "release_date": "2022-10",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        11
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 37,
+      "model": "A2761",
+      "name": "iPad Pro (11\", 4. Generation, Wi-Fi + Cellular)",
+      "release_date": "2022-10",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        11
+      ],
+      "colors": [
+        1,
+        2
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 38,
+      "model": "A2588",
+      "name": "iPad Air (5. Generation)",
+      "release_date": "2022-03",
+      "screen_size_inch": 10.9,
+      "silicon": [
+        3
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12,
+        13
+      ],
+      "storage": [
+        1,
+        3
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 39,
+      "model": "A2902",
+      "name": "iPad Air 11\" (M2)",
+      "release_date": "2024-05",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        10
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 40,
+      "model": "A2898",
+      "name": "iPad Air 13\" (M2)",
+      "release_date": "2024-05",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        10
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 41,
+      "model": "A2836",
+      "name": "iPad Pro 11\" (M4)",
+      "release_date": "2024-05",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        24,
+        26
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 42,
+      "model": "A2925",
+      "name": "iPad Pro 13\" (M4)",
+      "release_date": "2024-05",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        24,
+        26
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 43,
+      "model": "A2589",
+      "name": "iPad Air (5. Generation, Wi-Fi + Cellular)",
+      "release_date": "2022-03",
+      "screen_size_inch": 10.9,
+      "silicon": [
+        3
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12,
+        13
+      ],
+      "storage": [
+        1,
+        3
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 44,
+      "model": "A2837",
+      "name": "iPad Pro 11\" (M4, Wi-Fi + Cellular)",
+      "release_date": "2024-05",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        24,
+        26
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 45,
+      "model": "A2926",
+      "name": "iPad Pro 13\" (M4, Wi-Fi + Cellular)",
+      "release_date": "2024-05",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        24,
+        26
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 46,
+      "model": "A2903",
+      "name": "iPad Air 11\" (M2, Wi‑Fi + Cellular)",
+      "release_date": "2024-05",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        10
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 47,
+      "model": "A2899",
+      "name": "iPad Air 13\" (M2, Wi‑Fi + Cellular)",
+      "release_date": "2024-05",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        10
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 48,
+      "model": "A3459",
+      "name": "iPad Air 11\" (M4)",
+      "release_date": "2026-03",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        23
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        2
+      ]
+    },
+    {
+      "id": 49,
+      "model": "A3461",
+      "name": "iPad Air 13\" (M4)",
+      "release_date": "2026-03",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        23
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        2
+      ]
+    },
+    {
+      "id": 50,
+      "model": "A3357",
+      "name": "iPad Pro 11\" (M5)",
+      "release_date": "2025-10",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        31,
+        33
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 51,
+      "model": "A3358",
+      "name": "iPad Pro 11\" (M5, Wi-Fi + Cellular)",
+      "release_date": "2025-10",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        31,
+        33
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 52,
+      "model": "A3360",
+      "name": "iPad Pro 13\" (M5)",
+      "release_date": "2025-10",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        31,
+        33
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 53,
+      "model": "A3361",
+      "name": "iPad Pro 13\" (M5, Wi-Fi + Cellular)",
+      "release_date": "2025-10",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        31,
+        33
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "memory": [
+        2,
+        3
+      ]
+    }
+  ]
+}
