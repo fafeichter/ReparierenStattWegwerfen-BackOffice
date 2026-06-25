@@ -1,12 +1,14 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Device, DeviceControllerService} from '@api/device';
-import {JsonPipe} from '@angular/common';
+import {ClrDatagridModule, ClrIcon, ClrLabel} from '@clr/angular';
 
 @Component({
   selector: 'app-device-detail',
   imports: [
-    JsonPipe
+    ClrDatagridModule,
+    ClrLabel,
+    ClrIcon
   ],
   templateUrl: './device-detail.html',
   styleUrl: './device-detail.css',
