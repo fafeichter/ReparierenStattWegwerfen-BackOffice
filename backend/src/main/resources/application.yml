@@ -8,6 +8,7 @@ spring:
     openai:
       chat:
         model: gpt-5.4-mini
+        reasoning-effort: low
 
 springdoc:
   default-produces-media-type: application/json

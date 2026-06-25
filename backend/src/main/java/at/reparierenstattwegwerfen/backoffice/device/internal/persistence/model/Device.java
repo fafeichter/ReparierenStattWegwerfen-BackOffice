@@ -39,6 +39,9 @@ public class Device {
 	@Column(name = "model_color_id")
 	private Integer modelColorId;
 
+	@Column(name = "url")
+	private String url;
+
 	@Column(name = "serial_number")
 	private String serialNumber;
 

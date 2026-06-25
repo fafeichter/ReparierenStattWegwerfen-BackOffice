@@ -17,9 +17,6 @@ spring:
           issuer-uri: ...
   ai:
     openai:
-      chat:
-        model: gpt-5.5
-        reasoning-effort: medium
       # OpenAI API key must be provided via environment variables (https://platform.openai.com/api-keys)
       api-key: ...
 springdoc:

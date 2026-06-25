@@ -1,14 +1,20 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 
 /**
  * @author Fabian Feichter
  */
 @Data
 public class CreateNewDevice {
+
+	@NotEmpty
+	@URL
+	private final String url;
 
 	@NotNull
 	private final Integer modelId;

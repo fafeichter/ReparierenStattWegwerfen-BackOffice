@@ -97,6 +97,7 @@ export class AddDevice {
           modelAppleSiliconId: candidate.modelAppleSilicon?.id,
           modelAppleSiliconUnifiedMemoryId: candidate.modelAppleSiliconUnifiedMemory?.id,
           modelStorageId: candidate.modelStorage?.id,
+          url: this.form.controls.url.value,
           serialNumber: candidate.serialNumber,
           batteryMaximumCapacity: candidate.batteryMaximumCapacity,
           batteryCycleCount: candidate.batteryCycleCount,
