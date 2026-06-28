@@ -27,6 +27,9 @@ public class Device {
 	@Column(name = "model_id")
 	private Integer modelId;
 
+	@Column(name = "buying_date")
+	private LocalDate buyingDate;
+
 	@Column(name = "model_apple_silicon_id")
 	private Integer modelAppleSiliconId;
 

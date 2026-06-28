@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 /**
  * @author Fabian Feichter
  */
@@ -23,6 +25,7 @@ public class DeviceCreationService {
 	public Integer createDevice(CreateNewDevice newDevice) {
 		Device device = new Device();
 
+		device.setBuyingDate(LocalDate.now());
 		device.setUrl(newDevice.getUrl());
 		device.setStatus(DeviceStatus.ORDERED);
 

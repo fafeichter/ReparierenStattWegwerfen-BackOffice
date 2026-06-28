@@ -7,13 +7,13 @@ CREATE TRIGGER tr_device_insert
     ON device
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, model_apple_silicon_id,
+    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, buying_date, model_id, model_apple_silicon_id,
                               model_apple_silicon_unified_memory_id, model_storage_id, model_color_id, url,
                               serial_number, device_status, seller_business_partner_id, buyer_business_partner_id,
                               purchase_price, device_grade_id, reported_defect, diagnosed_defect,
                               selling_device_online_marketplace_id, selling_date, battery_maximum_capacity,
                               battery_cycle_count, device_battery_status_id, selling_price, created_at, updated_at)
-    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.model_id, NEW.model_apple_silicon_id,
+    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.buying_date, NEW.model_id, NEW.model_apple_silicon_id,
             NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
             NEW.serial_number, NEW.device_status, NEW.seller_business_partner_id, NEW.buyer_business_partner_id,
             NEW.purchase_price, NEW.device_grade_id, NEW.reported_defect, NEW.diagnosed_defect,
@@ -26,14 +26,14 @@ CREATE TRIGGER tr_device_update
     ON device
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, model_apple_silicon_id,
+    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, buying_date, model_id, model_apple_silicon_id,
                               model_apple_silicon_unified_memory_id, model_storage_id, model_color_id, url,
                               serial_number, device_status, seller_business_partner_id, buyer_business_partner_id,
                               purchase_price, device_grade_id, reported_defect, diagnosed_defect,
                               selling_device_online_marketplace_id, selling_date, battery_maximum_capacity,
                               battery_cycle_count, device_battery_status_id, selling_price, created_at,
                               updated_at)
-    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.model_id, NEW.model_apple_silicon_id,
+    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.buying_date, NEW.model_id, NEW.model_apple_silicon_id,
             NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
             NEW.serial_number, NEW.device_status, NEW.seller_business_partner_id, NEW.buyer_business_partner_id,
             NEW.purchase_price, NEW.device_grade_id, NEW.reported_defect, NEW.diagnosed_defect,
@@ -47,14 +47,14 @@ CREATE TRIGGER tr_device_delete
     ON device
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, model_apple_silicon_id,
+    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, buying_date, model_id, model_apple_silicon_id,
                               model_apple_silicon_unified_memory_id, model_storage_id, model_color_id, url,
                               serial_number, device_status, seller_business_partner_id, buyer_business_partner_id,
                               purchase_price, device_grade_id, reported_defect, diagnosed_defect,
                               selling_device_online_marketplace_id, selling_date, battery_maximum_capacity,
                               battery_cycle_count, device_battery_status_id, selling_price, created_at,
                               updated_at)
-    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.model_id, OLD.model_apple_silicon_id,
+    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.buying_date, OLD.model_id, OLD.model_apple_silicon_id,
             OLD.model_apple_silicon_unified_memory_id, OLD.model_storage_id, OLD.model_color_id, OLD.url,
             OLD.serial_number, OLD.device_status, OLD.seller_business_partner_id, OLD.buyer_business_partner_id,
             OLD.purchase_price, OLD.device_grade_id, OLD.reported_defect, OLD.diagnosed_defect,

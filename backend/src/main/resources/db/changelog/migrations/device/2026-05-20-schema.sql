@@ -47,6 +47,7 @@ CREATE TABLE device
 (
     device_id                             int            NOT NULL AUTO_INCREMENT,
     model_id                              int            NOT NULL,
+    buying_date                           date                    DEFAULT (CURRENT_DATE) NOT NULL,
     model_apple_silicon_id                int                     DEFAULT NULL,
     model_apple_silicon_unified_memory_id int                     DEFAULT NULL,
     model_storage_id                      int                     DEFAULT NULL,
@@ -100,6 +101,7 @@ CREATE TABLE device_audit
     audit_action                          enum('INSERT','UPDATE','DELETE') NOT NULL,
     audit_timestamp                       timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     device_id                             int            NOT NULL,
+    buying_date                           date                    DEFAULT (CURRENT_DATE) NOT NULL,
     model_id                              int            NOT NULL,
     model_apple_silicon_id                int                     DEFAULT NULL,
     model_apple_silicon_unified_memory_id int                     DEFAULT NULL,

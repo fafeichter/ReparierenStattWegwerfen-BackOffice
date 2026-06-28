@@ -32,7 +32,7 @@ public class AdPlainText {
 		String clean = CODE_BLOCKS.matcher(html).replaceAll(" ");
 
 		// 2. Strips all remaining HTML tags (leaving just the raw text)
-		//clean = ALL_TAGS.matcher(clean).replaceAll(" ");
+		clean = ALL_TAGS.matcher(clean).replaceAll(" ");
 
 		// 3. Quick cleanup for common HTML entities
 		clean = HTML_ENTITIES.matcher(clean).replaceAll(" ");
