@@ -22,7 +22,7 @@
 
       <clr-number-input-container>
         <label><span class="clr-required-mark">Price</span></label>
-        <input clrNumberInput formControlName="price" type="number" prefix="€"/>
+        <input clrNumberInput formControlName="price" prefix="€" type="number"/>
         @if (form.controls.price.hasError('required')) {
           <clr-control-error>Price is required.</clr-control-error>
         }
@@ -65,7 +65,8 @@
 
     <div class="modal-footer">
       <button (click)="modalOpened.set(false)" class="btn btn-outline" type="button">Cancel</button>
-      <button [disabled]="form.invalid || isSubmitting() || isLoadingModel()" (click)="addDevice()" class="btn btn-primary"
+      <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting() || isLoadingModel()"
+              class="btn btn-primary"
               type="submit">
         @if (isSubmitting()) {
           <span class="spinner spinner-inline"></span>
@@ -79,10 +80,15 @@
 <ng-template #modelCard let-model>
   <div [style.background-color]="getConfidenceColor(model.confidence)" class="found">
     <strong>{{ model.model?.name }}
-    {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} / {{ model.modelStorage?.name | orElse }}</strong><br>
+      {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} / {{ model.modelStorage?.name | orElse }}</strong>
+    <a class="ml-1" target="_blank" [routerLink]="['/models', model.model.id]">
+      <cds-icon role="img" shape="pop-out"></cds-icon>
+    </a>
+    <br>
     Chip: {{ model.modelAppleSilicon?.name | orElse }}<br>
     Color: {{ model.modelColor?.name | orElse }}<br>
     Battery: {{ model.batteryMaximumCapacity | orElse }} % ({{ model.batteryCycleCount | orElse }} cycles)<br>
+    Serial Number: {{ model.serialNumber | orElse }}
     <hr>
     Seller: {{ model.sellerFirstName | orElse }} {{ model.sellerLastName | orElse }}
     <hr>

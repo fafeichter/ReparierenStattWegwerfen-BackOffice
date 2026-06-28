@@ -1,6 +1,6 @@
 import {Component, effect, ElementRef, inject, signal, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {JsonPipe, NgTemplateOutlet} from '@angular/common';
 
 import {
@@ -30,7 +30,8 @@ import {BusinessPartnerCreationControllerService, CreateBusinessPartnerPlacehold
     OrElsePipe,
     ClrTooltipModule,
     NgTemplateOutlet,
-    ClrButtonModule
+    ClrButtonModule,
+    RouterLink
   ],
   templateUrl: './add-device.html',
   styleUrl: './add-device.css',
