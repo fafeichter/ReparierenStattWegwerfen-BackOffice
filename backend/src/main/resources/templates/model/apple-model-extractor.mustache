@@ -55,7 +55,9 @@
     same chip generation (M4 ≠ M5), same Pro/Max/Ultra tier, AND matching
     CPU-core and GPU-core numbers.
     For each of silicon_id / color_id / storage_id / memory_id:
-    - Special rule: If the device only has one possible silicon use that silicon.
+    - Special rule: If the model only has one possible silicon in the
+    `silicon[]` list in the reference data always use that silicon. Same
+    goes for memory.
     - If the normalized ad text matches an entry in that row's allowed
     list → use that entry's id.
     - If the ad gives a value but it does NOT appear in the row's allowed
@@ -109,6 +111,8 @@
     STEP 7 — Seller identity.
     Look in the ad body, profile snippet, or metadata for a name/username.
     "Privatanbieter: Max Mustermann" → first="Max", last="Mustermann".
-    A single name/handle → first_name only, last_name="N/A".
-    Nothing found → both "N/A".
+    A single name/handle → first_name only, last_name="N/A". Always capitalize
+    the first and last name. If either the first or last name cannot be determined,
+    set the missing field to "N/A". If no name or username is found, set both
+    first_name and last_name to "N/A".
 </procedure>

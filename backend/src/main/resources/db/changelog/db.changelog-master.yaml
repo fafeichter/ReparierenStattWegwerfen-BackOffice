@@ -29,3 +29,6 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: migrations/model/2026-06-09-data-correction.sql
+  - include:
+      relativeToChangelogFile: true
+      file: migrations/model/2026-06-28-add-missing-model.sql

@@ -56,25 +56,17 @@
               clrRadio
               name="options"
               type="radio"/>
-            <label [for]="'option-' + i">Option {{ i + 1 }}</label>
+            <label [for]="'option-' + i">Alternative {{ i + 1 }}</label>
           </clr-radio-wrapper>
           <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: alternative }"></ng-container>
         }
-      }
-
-      @if (found()) {
-        <clr-tooltip>
-          <cds-icon clrTooltipTrigger shape="info-circle" size="24"></cds-icon>
-          <clr-tooltip-content [clrPosition]="'top-right'" [clrSize]="'lg'">
-            <pre>{{ found() | json }}</pre>
-          </clr-tooltip-content>
-        </clr-tooltip>
       }
     }
 
     <div class="modal-footer">
       <button (click)="modalOpened.set(false)" class="btn btn-outline" type="button">Cancel</button>
-      <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="button">
+      <button [disabled]="form.invalid || isSubmitting() || isLoadingModel()" (click)="addDevice()" class="btn btn-primary"
+              type="submit">
         @if (isSubmitting()) {
           <span class="spinner spinner-inline"></span>
         }
@@ -86,14 +78,14 @@
 
 <ng-template #modelCard let-model>
   <div [style.background-color]="getConfidenceColor(model.confidence)" class="found">
-    <strong>{{ model.model?.name }}</strong><br>
-    {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} | {{ model.modelStorage?.name | orElse }}<br>
-    {{ model.modelAppleSilicon?.name | orElse }}<br>
+    <strong>{{ model.model?.name }}
+    {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} / {{ model.modelStorage?.name | orElse }}</strong><br>
+    Chip: {{ model.modelAppleSilicon?.name | orElse }}<br>
     Color: {{ model.modelColor?.name | orElse }}<br>
     Battery: {{ model.batteryMaximumCapacity | orElse }} % ({{ model.batteryCycleCount | orElse }} cycles)<br>
     <hr>
-    {{ model.sellerFirstName | orElse }} {{ model.sellerLastName | orElse }}
+    Seller: {{ model.sellerFirstName | orElse }} {{ model.sellerLastName | orElse }}
     <hr>
-    {{ model.reportedDefect }}
+    {{ model.reportedDefect | orElse }}
   </div>
 </ng-template>

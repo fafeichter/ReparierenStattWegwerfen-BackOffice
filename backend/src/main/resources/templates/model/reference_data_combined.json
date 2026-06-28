@@ -17,6 +17,7 @@
     "15": "M2 Max mit 12‑Core CPU und 38‑Core GPU",
     "16": "M3 mit 8‑Core CPU und 8‑Core GPU",
     "17": "M3 mit 8‑Core CPU und 10‑Core GPU",
+    "18": "M3 mit 8‑Core CPU und 9‑Core GPU",
     "19": "M3 Pro mit 11‑Core CPU und 14‑Core GPU",
     "20": "M3 Pro mit 12‑Core CPU und 18‑Core GPU",
     "21": "M3 Max mit 14‑Core CPU und 30‑Core GPU",
@@ -1460,6 +1461,156 @@
       "memory": [
         2,
         3
+      ]
+    },
+    {
+      "id": 54,
+      "model": "A3266",
+      "name": "iPad Air 11\" (M3)",
+      "release_date": "2025-03",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 55,
+      "model": "A3267",
+      "name": "iPad Air 11\" (M3, Wi‑Fi + Cellular)",
+      "release_date": "2025-03",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 56,
+      "model": "A3268",
+      "name": "iPad Air 13\" (M3)",
+      "release_date": "2025-03",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 57,
+      "model": "A3269",
+      "name": "iPad Air 13\" (M3, Wi‑Fi + Cellular)",
+      "release_date": "2025-03",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 58,
+      "model": "A3460",
+      "name": "iPad Air 11\" (M4, Wi‑Fi + Cellular)",
+      "release_date": "2026-03",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        23
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        2
+      ]
+    },
+    {
+      "id": 59,
+      "model": "A3462",
+      "name": "iPad Air 13\" (M4, Wi‑Fi + Cellular)",
+      "release_date": "2026-03",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        23
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        2
       ]
     }
   ]

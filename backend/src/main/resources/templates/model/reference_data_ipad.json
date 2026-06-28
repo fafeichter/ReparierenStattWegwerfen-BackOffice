@@ -1,41 +1,14 @@
 {
   "silicon": {
-    "1": "A18 Pro mit 6‑Core CPU und 5‑Core GPU",
-    "2": "M1 mit 8‑Core CPU und 7‑Core GPU",
     "3": "M1 mit 8‑Core CPU und 8‑Core GPU",
-    "4": "M1 Pro mit 8‑Core CPU und 14‑Core GPU",
-    "5": "M1 Pro mit 10‑Core CPU und 14‑Core GPU",
-    "6": "M1 Pro mit 10‑Core CPU und 16‑Core GPU",
-    "7": "M1 Max mit 10‑Core CPU und 24‑Core GPU",
-    "8": "M1 Max mit 10‑Core CPU und 32‑Core GPU",
-    "9": "M2 mit 8‑Core CPU und 8‑Core GPU",
     "10": "M2 mit 8‑Core CPU und 9‑Core GPU",
     "11": "M2 mit 8‑Core CPU und 10‑Core GPU",
-    "12": "M2 Pro mit 10‑Core CPU und 16‑Core GPU",
-    "13": "M2 Pro mit 12‑Core CPU und 19‑Core GPU",
-    "14": "M2 Max mit 12‑Core CPU und 30‑Core GPU",
-    "15": "M2 Max mit 12‑Core CPU und 38‑Core GPU",
-    "16": "M3 mit 8‑Core CPU und 8‑Core GPU",
-    "17": "M3 mit 8‑Core CPU und 10‑Core GPU",
-    "19": "M3 Pro mit 11‑Core CPU und 14‑Core GPU",
-    "20": "M3 Pro mit 12‑Core CPU und 18‑Core GPU",
-    "21": "M3 Max mit 14‑Core CPU und 30‑Core GPU",
-    "22": "M3 Max mit 16‑Core CPU und 40‑Core GPU",
+    "18": "M3 mit 8‑Core CPU und 9‑Core GPU",
     "23": "M4 mit 8‑Core CPU und 9‑Core GPU",
     "24": "M4 mit 9‑Core CPU und 10‑Core GPU",
-    "25": "M4 mit 10‑Core CPU und 8‑Core GPU",
     "26": "M4 mit 10‑Core CPU und 10‑Core GPU",
-    "27": "M4 Pro mit 12‑Core CPU und 16‑Core GPU",
-    "28": "M4 Pro mit 14‑Core CPU und 20‑Core GPU",
-    "29": "M4 Max mit 14‑Core CPU und 32‑Core GPU",
-    "30": "M4 Max mit 16‑Core CPU und 40‑Core GPU",
     "31": "M5 mit 9‑Core CPU und 10‑Core GPU",
-    "32": "M5 mit 10‑Core CPU und 8‑Core GPU",
-    "33": "M5 mit 10‑Core CPU und 10‑Core GPU",
-    "34": "M5 Pro mit 15‑Core CPU und 16‑Core GPU",
-    "35": "M5 Pro mit 18‑Core CPU und 20‑Core GPU",
-    "36": "M5 Max mit 18‑Core CPU und 32‑Core GPU",
-    "37": "M5 Max mit 18‑Core CPU und 40‑Core GPU"
+    "33": "M5 mit 10‑Core CPU und 10‑Core GPU"
   },
   "storage": {
     "1": "64GB",
@@ -43,34 +16,18 @@
     "3": "256GB",
     "4": "512GB",
     "5": "1TB",
-    "6": "2TB",
-    "7": "4TB",
-    "8": "8TB"
+    "6": "2TB"
   },
   "memory": {
     "1": "8GB",
     "2": "12GB",
-    "3": "16GB",
-    "4": "18GB",
-    "5": "24GB",
-    "6": "32GB",
-    "7": "36GB",
-    "8": "48GB",
-    "9": "64GB",
-    "10": "96GB",
-    "11": "128GB"
+    "3": "16GB"
   },
   "colors": {
     "1": "Silber",
     "2": "Space Grau",
-    "3": "Gold",
-    "4": "Mitternacht",
     "5": "Polarstern",
     "6": "Space Schwarz",
-    "7": "Himmelblau",
-    "8": "Rosa",
-    "9": "Zitrus",
-    "10": "Indigo",
     "11": "Blau",
     "12": "Violett",
     "13": "Rosé"
@@ -672,6 +629,156 @@
       "memory": [
         2,
         3
+      ]
+    },
+    {
+      "id": 54,
+      "model": "A3266",
+      "name": "iPad Air 11\" (M3)",
+      "release_date": "2025-03",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 55,
+      "model": "A3267",
+      "name": "iPad Air 11\" (M3, Wi‑Fi + Cellular)",
+      "release_date": "2025-03",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 56,
+      "model": "A3268",
+      "name": "iPad Air 13\" (M3)",
+      "release_date": "2025-03",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 57,
+      "model": "A3269",
+      "name": "iPad Air 13\" (M3, Wi‑Fi + Cellular)",
+      "release_date": "2025-03",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        18
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        1
+      ]
+    },
+    {
+      "id": 58,
+      "model": "A3460",
+      "name": "iPad Air 11\" (M4, Wi‑Fi + Cellular)",
+      "release_date": "2026-03",
+      "screen_size_inch": 11.0,
+      "silicon": [
+        23
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        2
+      ]
+    },
+    {
+      "id": 59,
+      "model": "A3462",
+      "name": "iPad Air 13\" (M4, Wi‑Fi + Cellular)",
+      "release_date": "2026-03",
+      "screen_size_inch": 13.0,
+      "silicon": [
+        23
+      ],
+      "colors": [
+        2,
+        5,
+        11,
+        12
+      ],
+      "storage": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "memory": [
+        2
       ]
     }
   ]

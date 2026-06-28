@@ -1,6 +1,5 @@
 {
   "silicon": {
-    "1": "A18 Pro mit 6‑Core CPU und 5‑Core GPU",
     "2": "M1 mit 8‑Core CPU und 7‑Core GPU",
     "3": "M1 mit 8‑Core CPU und 8‑Core GPU",
     "4": "M1 Pro mit 8‑Core CPU und 14‑Core GPU",
@@ -9,7 +8,6 @@
     "7": "M1 Max mit 10‑Core CPU und 24‑Core GPU",
     "8": "M1 Max mit 10‑Core CPU und 32‑Core GPU",
     "9": "M2 mit 8‑Core CPU und 8‑Core GPU",
-    "10": "M2 mit 8‑Core CPU und 9‑Core GPU",
     "11": "M2 mit 8‑Core CPU und 10‑Core GPU",
     "12": "M2 Pro mit 10‑Core CPU und 16‑Core GPU",
     "13": "M2 Pro mit 12‑Core CPU und 19‑Core GPU",
@@ -21,15 +19,12 @@
     "20": "M3 Pro mit 12‑Core CPU und 18‑Core GPU",
     "21": "M3 Max mit 14‑Core CPU und 30‑Core GPU",
     "22": "M3 Max mit 16‑Core CPU und 40‑Core GPU",
-    "23": "M4 mit 8‑Core CPU und 9‑Core GPU",
-    "24": "M4 mit 9‑Core CPU und 10‑Core GPU",
     "25": "M4 mit 10‑Core CPU und 8‑Core GPU",
     "26": "M4 mit 10‑Core CPU und 10‑Core GPU",
     "27": "M4 Pro mit 12‑Core CPU und 16‑Core GPU",
     "28": "M4 Pro mit 14‑Core CPU und 20‑Core GPU",
     "29": "M4 Max mit 14‑Core CPU und 32‑Core GPU",
     "30": "M4 Max mit 16‑Core CPU und 40‑Core GPU",
-    "31": "M5 mit 9‑Core CPU und 10‑Core GPU",
     "32": "M5 mit 10‑Core CPU und 8‑Core GPU",
     "33": "M5 mit 10‑Core CPU und 10‑Core GPU",
     "34": "M5 Pro mit 15‑Core CPU und 16‑Core GPU",
@@ -38,8 +33,6 @@
     "37": "M5 Max mit 18‑Core CPU und 40‑Core GPU"
   },
   "storage": {
-    "1": "64GB",
-    "2": "128GB",
     "3": "256GB",
     "4": "512GB",
     "5": "1TB",
@@ -49,7 +42,6 @@
   },
   "memory": {
     "1": "8GB",
-    "2": "12GB",
     "3": "16GB",
     "4": "18GB",
     "5": "24GB",
@@ -67,13 +59,7 @@
     "4": "Mitternacht",
     "5": "Polarstern",
     "6": "Space Schwarz",
-    "7": "Himmelblau",
-    "8": "Rosa",
-    "9": "Zitrus",
-    "10": "Indigo",
-    "11": "Blau",
-    "12": "Violett",
-    "13": "Rosé"
+    "7": "Himmelblau"
   },
   "devices": [
     {
@@ -840,28 +826,6 @@
         5,
         6
       ]
-    },
-    {
-      "id": 29,
-      "model": "A3404",
-      "name": "MacBook Neo",
-      "release_date": "2026-03",
-      "screen_size_inch": 13.0,
-      "silicon": [
-        1
-      ],
-      "colors": [
-        1,
-        8,
-        9,
-        10
-      ],
-      "storage": [
-        3,
-        4
-      ],
-      "memory": [
-        1
-      ]
     }
+  ]
 }
