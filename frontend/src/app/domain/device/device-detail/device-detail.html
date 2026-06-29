@@ -158,18 +158,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td class="left">Mit Tasche</td>
-              <td class="right">25.06.2026 11:09</td>
-            </tr>
-            <tr>
-              <td class="left">Nur Tastenkappen defekt, wenn man auf Nippel drückt, funktionieren sie.</td>
-              <td class="right">24.06.2026 09:11</td>
-            </tr>
-            <tr>
-              <td class="left">Interessant wie viel Gewinn möglich ist.</td>
-              <td class="right">21.06.2026 12:03</td>
-            </tr>
+              @for (note of deviceNotes(); track note.noteId) {
+                <tr>
+                  <td class="left">{{ note.text }}</td>
+                  <td class="right">{{ note.timestamp | date:'dd.MM.yyyy HH:mm:ss' }}</td>
+                </tr>
+              }
             </tbody>
           </table>
         </div>

@@ -4,6 +4,8 @@ import {
   DeviceBaseDetailsDto,
   DeviceBuyingDetailsDto,
   DeviceDetailsControllerService,
+  DeviceNoteDto,
+  DeviceNotesControllerService,
   DeviceSellingDetailsDto
 } from '@api/device';
 import {ClrDatagridModule, ClrIcon, ClrLabel} from '@clr/angular';
@@ -31,8 +33,10 @@ export class DeviceDetail implements OnInit {
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
   deviceBuying = signal<DeviceBuyingDetailsDto | undefined>(undefined);
   deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
+  deviceNotes = signal<DeviceNoteDto[]>([]);
   private route = inject(ActivatedRoute);
   private api = inject(DeviceDetailsControllerService);
+  private notesApi = inject(DeviceNotesControllerService);
 
   ngOnInit(): void {
     let deviceId = Number(this.route.snapshot.paramMap.get('deviceId'));
@@ -40,5 +44,6 @@ export class DeviceDetail implements OnInit {
     this.api.getDeviceBaseDetails(deviceId).subscribe(data => this.deviceBase.set(data));
     this.api.getDeviceBuyingDetails(deviceId).subscribe(data => this.deviceBuying.set(data));
     this.api.getDeviceSellingDetails(deviceId).subscribe(data => this.deviceSelling.set(data));
+    this.notesApi.getDeviceNotes(deviceId).subscribe(data => this.deviceNotes.set(data));
   }
 }

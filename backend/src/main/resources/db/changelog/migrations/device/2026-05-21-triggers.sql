@@ -68,9 +68,10 @@ CREATE TRIGGER tr_device_note_insert
     ON device_note
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, created_at,
-                                   updated_at)
-    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.created_at, NEW.updated_at);
+    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, timestamp,
+                                   created_at, updated_at)
+    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.timestamp, NEW.created_at,
+            NEW.updated_at);
 END $$
 
 CREATE TRIGGER tr_device_note_update
@@ -78,9 +79,10 @@ CREATE TRIGGER tr_device_note_update
     ON device_note
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, created_at,
-                                   updated_at)
-    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.created_at, NEW.updated_at);
+    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, timestamp,
+                                   created_at, updated_at)
+    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.timestamp, NEW.created_at,
+            NEW.updated_at);
 END $$
 
 CREATE TRIGGER tr_device_note_delete
@@ -88,7 +90,8 @@ CREATE TRIGGER tr_device_note_delete
     ON device_note
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, created_at,
-                                   updated_at)
-    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.device_note_id, OLD.text, OLD.created_at, OLD.updated_at);
+    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, timestamp,
+                                   created_at, updated_at)
+    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.device_note_id, OLD.text, OLD.timestamp, OLD.created_at, OLD
+        .updated_at);
 END $$

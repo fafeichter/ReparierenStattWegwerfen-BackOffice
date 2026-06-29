@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Fabian Feichter
  */
@@ -20,10 +22,12 @@ public class DeviceNote {
 	@Column(name = "device_note_id")
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "device_id")
-	private Device device;
+	@Column(name = "device_id")
+	private Integer deviceId;
 
 	@Column(name = "text")
 	private String text;
+
+	@Column(name = "timestamp")
+	private LocalDateTime timestamp;
 }
