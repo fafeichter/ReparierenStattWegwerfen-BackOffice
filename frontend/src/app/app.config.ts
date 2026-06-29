@@ -1,4 +1,4 @@
-import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';
+import {ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
@@ -17,6 +17,11 @@ import {Configuration as BusinesspartnerConfig} from '@api/businesspartner';
 import {Configuration as DeviceConfig} from '@api/device';
 import {environment} from '../environments/environment';
 
+import localeAt from '@angular/common/locales/de-AT';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localeAt);
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -28,5 +33,6 @@ export const appConfig: ApplicationConfig = {
     {provide: ModelConfig, useValue: new ModelConfig({basePath: environment.backendUrl})},
     {provide: BusinesspartnerConfig, useValue: new BusinesspartnerConfig({basePath: environment.backendUrl})},
     {provide: DeviceConfig, useValue: new DeviceConfig({basePath: environment.backendUrl})},
+    {provide: LOCALE_ID, useValue: 'de-AT'}
   ],
 };

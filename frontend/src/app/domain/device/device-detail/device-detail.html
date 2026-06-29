@@ -1,4 +1,4 @@
-<h3>#{{ deviceId() }} - {{ deviceBase()?.modelNumber}} | {{ deviceBase()?.model?.name }}</h3>
+<h3>#{{ deviceId() }} - {{ deviceBase()?.modelNumber }} | {{ deviceBase()?.model?.name }}</h3>
 
 <div class="mt-5">
   Status:
@@ -19,21 +19,25 @@
               <cds-icon role="img" shape="pop-out"></cds-icon>
             </a></li>
             <hr>
-            <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse}}</li>
-            <li>Memory: {{ deviceBase()?.unifiedMemory?.name | orElse}}</li>
-            <li>Storage: {{ deviceBase()?.storage?.name | orElse}}</li>
-            <li>Color: {{ deviceBase()?.color?.name | orElse}}</li>
+            <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse }}</li>
+            <li>Memory: {{ deviceBase()?.unifiedMemory?.name | orElse }}</li>
+            <li>Storage: {{ deviceBase()?.storage?.name | orElse }}</li>
+            <li>Color: {{ deviceBase()?.color?.name | orElse }}</li>
             <hr>
-            <li>Serial Number: {{ deviceBase()?.serialNumber | orElse}}</li>
-            <li>Battery: {{ deviceBase()?.batteryMaximumCapacity | orElse }} % / {{ deviceBase()?.batteryCycleCount |
-              orElse }}
-              cycles</li>
+            <li>Serial Number: {{ deviceBase()?.serialNumber | orElse }}</li>
+            <li>
+              Battery:
+              {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
+              /
+              {{ deviceBase()?.batteryCycleCount |orElse }}
+              cycles
+            </li>
             <li>Battery status:
               <clr-label>{{ deviceBase()?.batteryStatus?.name }}</clr-label>
             </li>
             <hr>
             <li>Grade:
-              <clr-label>{{ deviceBase()?.grade?.name | orElse}}</clr-label>
+              <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
             </li>
             <hr>
             <li>Charger included:
@@ -64,19 +68,21 @@
         <div class="card-title"></div>
         <div class="card-text">
           <ul class="list">
-            <li>URL: <a
-              href="https://www.kleinanzeigen.de/s-anzeige/macbook-pro-m4-10-cpu-10-gpu-14-2024-512gb-ssd-16gb-ram/3436450846-278-14042"
-              target="_blank">https://www.kleinanzeigen.de/s-anzeige/macbook-pro-m4-10-cpu-10-gpu-14-2024-512gb-ssd-16gb-ram/3436450846-278-14042
-              <cds-icon role="img" shape="pop-out"></cds-icon>
-            </a>
+            <li>URL:
+              <a [href]="deviceBuying()?.url" target="_blank">{{ deviceBuying()?.url }}
+                <cds-icon role="img" shape="pop-out"></cds-icon>
+              </a>
             </li>
             <li>
-              Price: 300,67€
+              Price: {{ deviceBuying()?.price | currency:'EUR':'symbol':'1.2-2' }}
             </li>
             <hr>
             <li>Seller:
-              <a href="#">Tobias Ecke</a></li>
-            <li>Date: 21.06.2026</li>
+              <a [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]">
+                {{ deviceBuying()?.seller?.name }}
+              </a>
+            </li>
+            <li>Date: {{ deviceBuying()?.date | date:'dd.MM.yyyy' }}</li>
             <hr>
             Invoice: <a href="#">Invoice_Tobias_Ecke.pdf</a>
           </ul>

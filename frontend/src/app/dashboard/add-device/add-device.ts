@@ -1,7 +1,7 @@
 import {Component, effect, ElementRef, inject, signal, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
-import {JsonPipe, NgTemplateOutlet} from '@angular/common';
+import {NgTemplateOutlet} from '@angular/common';
 
 import {
   ClrButtonModule,
@@ -25,7 +25,6 @@ import {BusinessPartnerCreationControllerService, CreateBusinessPartnerPlacehold
     ClrFormsModule,
     FormsModule,
     ReactiveFormsModule,
-    JsonPipe,
     ClrSpinnerModule,
     OrElsePipe,
     ClrTooltipModule,

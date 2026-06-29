@@ -1,6 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeviceDetailsController {
 
 	private final DeviceBaseDetailsService baseDetailsService;
+	private final DeviceBuyingDetailsService buyingDetailsService;
 
 	@GetMapping("/base")
 	public DeviceBaseDetailsDto getDeviceBaseDetails(@PathVariable Integer deviceId) {
 		return baseDetailsService.load(deviceId);
+	}
+
+	@GetMapping("/buying")
+	public DeviceBuyingDetailsDto getDeviceBuyingDetails(@PathVariable Integer deviceId) {
+		return buyingDetailsService.load(deviceId);
 	}
 }
