@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceNote;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceSparePart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,12 +11,12 @@ import java.util.List;
  * @author Fabian Feichter
  */
 @Repository
-public interface DeviceNoteRepository extends JpaRepository<DeviceNote, Integer> {
+public interface DeviceSparePartRepository extends JpaRepository<DeviceSparePart, Integer> {
 
 	@Query("""
-		SELECT n FROM DeviceNote n
+		SELECT n FROM DeviceSparePart n
 		WHERE n.deviceId = :deviceId
 		ORDER BY n.timestamp DESC
 		""")
-	List<DeviceNote> getNotesForDevice(Integer deviceId);
+	List<DeviceSparePart> getSparePartsForDevice(Integer deviceId);
 }

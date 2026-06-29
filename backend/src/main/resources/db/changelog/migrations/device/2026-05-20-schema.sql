@@ -22,16 +22,6 @@ CREATE TABLE device_grade
     PRIMARY KEY (device_grade_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE device_spare_part
-(
-    device_spare_part_id int            NOT NULL AUTO_INCREMENT,
-    name                 varchar(256)   NOT NULL,
-    price_netto          DECIMAL(10, 2) NOT NULL,
-    created_at           timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at           timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (device_spare_part_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE device_online_marketplace
 (
     device_online_marketplace_id int          NOT NULL AUTO_INCREMENT,
@@ -154,18 +144,19 @@ CREATE TABLE device_audit
     KEY                                   idx_audit_timestamp (device_audit_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE device_installed_spare_part
+CREATE TABLE device_spare_part
 (
-    device_installed_spare_part_id int       NOT NULL AUTO_INCREMENT,
-    device_id                      int       NOT NULL,
-    device_spare_part_id           int       NOT NULL,
-    created_at                     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at                     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (device_installed_spare_part_id),
-    KEY                            idx_disp_device_id (device_id),
-    KEY                            idx_disp_spare_part_id (device_spare_part_id),
-    CONSTRAINT fk_disp_device_id FOREIGN KEY (device_id) REFERENCES device (device_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_disp_spare_part_id FOREIGN KEY (device_spare_part_id) REFERENCES device_spare_part (device_spare_part_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    device_spare_part_id int            NOT NULL AUTO_INCREMENT,
+    device_id            int            NOT NULL,
+    name                 varchar(256)   NOT NULL,
+    price_netto          DECIMAL(10, 2) NOT NULL,
+    timestamp            timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at           timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at           timestamp      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY                  idx_device_spare_part_device_id (device_id),
+    KEY                  idx_device_spare_part_timestamp (timestamp),
+    CONSTRAINT fk_device_spare_part_device_id FOREIGN KEY (device_id) REFERENCES device (device_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    PRIMARY KEY (device_spare_part_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_note

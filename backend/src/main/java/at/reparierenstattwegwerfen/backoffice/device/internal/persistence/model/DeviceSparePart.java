@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * @author Fabian Feichter
@@ -23,9 +23,15 @@ public class DeviceSparePart implements NamedId {
 	@Column(name = "device_spare_part_id")
 	private Integer id;
 
+	@Column(name = "device_id")
+	private Integer deviceId;
+
 	@Column(name = "name")
 	private String name;
 
 	@Column(name = "price_netto")
-	private BigDecimal priceNetto;
+	private Double priceNetto;
+
+	@Column(name = "timestamp")
+	private LocalDateTime timestamp;
 }

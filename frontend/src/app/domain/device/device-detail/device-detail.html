@@ -96,30 +96,20 @@
         <div class="card-text">
           <ul class="list">
             <li>Original defect: Display bleibt schwarz</li>
-            <li>Diagnoes defect: Panel defekt
+            <li>Diagnosed defect: Panel defekt
             </li>
           </ul>
           <h5>Spare Parts</h5>
           <clr-datagrid>
             <clr-dg-column>Name</clr-dg-column>
-            <clr-dg-column>Price</clr-dg-column>
-            <clr-dg-row>
+            <clr-dg-column>Price (Netto)</clr-dg-column>
+            <clr-dg-row *clrDgItems="let sparePart of deviceSpareParts()">
               <clr-dg-cell>
-                Panel
+                {{ sparePart.name }}
               </clr-dg-cell>
-              <clr-dg-cell>
-                110,80€
-              </clr-dg-cell>
+              <clr-dg-cell>{{ sparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-cell>
             </clr-dg-row>
-            <clr-dg-row>
-              <clr-dg-cell>
-                Akku
-              </clr-dg-cell>
-              <clr-dg-cell>
-                30,40€
-              </clr-dg-cell>
-            </clr-dg-row>
-            <clr-dg-footer>Sum: 180,11€</clr-dg-footer>
+            <clr-dg-footer>Sum: {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-footer>
           </clr-datagrid>
         </div>
       </div>
