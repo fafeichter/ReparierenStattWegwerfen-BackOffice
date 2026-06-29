@@ -9,6 +9,7 @@ plugins {
     id("org.graalvm.buildtools.native") version "0.11.5"
     // Plugin to generate TypeScript code from OpenAPI JSON file
     id("org.openapi.generator") version "7.17.0"
+    id("io.github.redgreencoding.plantuml") version "0.3.0"
 }
 
 extra["springAiVersion"] = "2.0.0"
@@ -159,4 +160,63 @@ tasks.register("generateApiClients") {
     description = "Generates all TypeScript API clients."
 
     dependsOn(apiClientsTasks)
+}
+
+plantuml {
+    options {
+        // where should the .svg be generated to (defaults to build/plantuml)
+        outputDir = project.file("docs/images")
+
+        // output format (lowercase, defaults to svg)
+        format = "svg"
+    }
+
+    diagrams {
+        create("modules") {
+            // .puml sourcefile, this can be also omitted and defaults to _<name>.puml_.
+            sourceFile = project.file("${project.layout.buildDirectory.get()}/spring-modulith-docs/components.puml")
+        }
+    }
+}
+
+tasks.register("generate") {
+    group = "openapi"
+    description = "Generates all TypeScript API clients."
+
+    dependsOn(apiClientsTasks)
+}
+
+val generateSpringModulithPuml = tasks.register<Test>("generateSpringModulithPuml") {
+    group = "documentation"
+    description = "Runs only the Spring Modulith documentation tests to generate PUML files."
+
+    // Wire the custom Test task to the test source set
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
+
+    filter {
+        // leading wildcard so it matches regardless of package
+        includeTestsMatching("*DocumentationTests.writeDocumentationSnippets")
+    }
+
+    // The test produces files as a side effect; declare them so Gradle
+    // tracks the output and re-runs when they're missing
+    outputs.dir(layout.buildDirectory.dir("spring-modulith-docs"))
+
+    // The test produces files as a side effect; Gradle shout not track
+    // the output and re-generate the files every time
+    outputs.upToDateWhen { false }
+}
+
+// Make all PlantUML diagram generation tasks depend on your test task
+tasks.matching { it.name.startsWith("plantuml") }.configureEach {
+    // We use standard Task reference api to bypass type visibility issues
+    dependsOn(generateSpringModulithPuml)
+}
+
+tasks.register("generateModulithDoc") {
+    group = "documentation"
+    description = "Generates the module dependency SVG for the README"
+
+    dependsOn("plantumlModules")
 }
