@@ -37,7 +37,7 @@ public interface ModelRepository extends JpaRepository<Model, Integer> {
 	List<Model> findAllIPads();
 
 	@Query("""
-		select distinct m
+		select m
 		from Model m
 		left join fetch m.modelSeries
 		left join fetch m.availableColors ac
@@ -54,4 +54,11 @@ public interface ModelRepository extends JpaRepository<Model, Integer> {
 		where m.id = :modelId
 		""")
 	Model getModelDetails(Integer modelId);
+
+	@Query("""
+		select m
+		from Model m
+		where m.id = :modelId
+		""")
+	Model getModel(Integer modelId);
 }

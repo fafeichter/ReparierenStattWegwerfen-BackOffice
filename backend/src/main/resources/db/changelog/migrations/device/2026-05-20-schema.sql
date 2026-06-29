@@ -43,6 +43,31 @@ CREATE TABLE device_online_marketplace
     UNIQUE KEY uq_online_marketplace_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE device_status_classification
+(
+    device_status_classification_id int          NOT NULL AUTO_INCREMENT,
+    name                            varchar(256) NOT NULL,
+    created_at                      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (device_status_classification_id),
+    UNIQUE KEY uq_device_status_class_name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE device_status
+(
+    device_status_id                int          NOT NULL AUTO_INCREMENT,
+    name                            varchar(256) NOT NULL,
+    sort_order                      int          NOT NULL,
+    device_status_classification_id int          NOT NULL,
+    created_at                      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (device_status_id),
+    UNIQUE KEY uq_device_status_name (name),
+    UNIQUE KEY uq_device_status_sort (sort_order),
+    KEY                             idx_device_status_classification_id (device_status_classification_id),
+    CONSTRAINT fk_device_status_classification_id FOREIGN KEY (device_status_classification_id) REFERENCES device_status_classification (device_status_classification_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE device
 (
     device_id                             int            NOT NULL AUTO_INCREMENT,
@@ -54,9 +79,7 @@ CREATE TABLE device
     model_color_id                        int                     DEFAULT NULL,
     url                                   varchar(256)   NOT NULL,
     serial_number                         varchar(128)            DEFAULT NULL,
-    device_status                         enum('ORDERED','ARRIVED','IN_REPAIR','REPAIRED','LISTED_FOR_SALE','SOLD',
-        'AVAILABLE_FOR_PARTS','WRONG_ITEM_ARRIVED','RETURNED','SELLER_CHANGED_MIND','NEVER_RECEIVED_NOT_REFUNDED',
-        'NEVER_RECEIVED_REFUNDED') NOT NULL DEFAULT 'ORDERED',
+    device_status_id                      int            NOT NULL DEFAULT 1,
     seller_business_partner_id            int                     DEFAULT NULL,
     buyer_business_partner_id             int                     DEFAULT NULL,
     purchase_price                        DECIMAL(10, 2) NOT NULL,
@@ -76,7 +99,7 @@ CREATE TABLE device
     KEY                                   idx_device_apple_silicon_id (model_apple_silicon_id),
     KEY                                   idx_device_unified_memory_id (model_apple_silicon_unified_memory_id),
     KEY                                   idx_device_buyer_bp_id (buyer_business_partner_id),
-    KEY                                   idx_device_status (device_status),
+    KEY                                   idx_device_status_id (device_status_id),
     KEY                                   idx_device_model_color_id (model_color_id),
     KEY                                   idx_device_seller_bp_id (seller_business_partner_id),
     KEY                                   idx_device_grade_id (device_grade_id),
@@ -92,6 +115,7 @@ CREATE TABLE device
     CONSTRAINT fk_device_model_storage_id FOREIGN KEY (model_storage_id) REFERENCES model_storage (model_storage_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_seller_bp_id FOREIGN KEY (seller_business_partner_id) REFERENCES business_partner (business_partner_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_selling_om_id FOREIGN KEY (selling_device_online_marketplace_id) REFERENCES device_online_marketplace (device_online_marketplace_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT fk_device_status_id FOREIGN KEY (device_status_id) REFERENCES device_status (device_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_unified_memory_id FOREIGN KEY (model_apple_silicon_unified_memory_id) REFERENCES model_apple_silicon_unified_memory (model_apple_silicon_unified_memory_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -109,7 +133,7 @@ CREATE TABLE device_audit
     model_color_id                        int                     DEFAULT NULL,
     url                                   varchar(128)   NOT NULL,
     serial_number                         varchar(128)            DEFAULT NULL,
-    device_status                         enum('ORDERED','ARRIVED','IN_REPAIR','REPAIRED','LISTED_FOR_SALE','SOLD','AVAILABLE_FOR_PARTS','WRONG_ITEM_ARRIVED','RETURNED','SELLER_CHANGED_MIND','NEVER_RECEIVED_NOT_REFUNDED','NEVER_RECEIVED_REFUNDED') NOT NULL,
+    device_status_id                      int            NOT NULL DEFAULT 1,
     seller_business_partner_id            int                     DEFAULT NULL,
     buyer_business_partner_id             int                     DEFAULT NULL,
     purchase_price                        DECIMAL(10, 2) NOT NULL,

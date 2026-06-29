@@ -15,3 +15,21 @@ INSERT INTO device_online_marketplace (device_online_marketplace_id, name, url)
 VALUES (1, 'willhaben', 'https://www.willhaben.at/'),
        (2, 'Kleinanzeigen', 'https://kleinanzeigen.de/'),
        (3, 'eBay', 'https://www.ebay.at/');
+
+INSERT INTO device_status_classification (device_status_classification_id, name)
+VALUES (1, 'common'),
+       (2, 'rare');
+
+INSERT INTO device_status (device_status_id, name, sort_order, device_status_classification_id)
+VALUES (1, 'bestellt / gekauft', 0, 1),
+       (2, 'eingetroffen', 1, 1),
+       (3, 'in Reparatur', 2, 1),
+       (4, 'repariert', 3, 1),
+       (5, 'zum Verkauf angeboten', 4, 1),
+       (6, 'verkauft', 5, 1),
+       (7, 'zum Ausschlachten verfügbar', 6, 1),
+       (8, 'falscher Artikel eingetroffen', 7, 2),
+       (9, 'zurückgegeben', 8, 2),
+       (10, 'Verkäufer/in hat sich anders entschieden', 9, 2),
+       (11, 'nie bekommen - Geld nicht zurückbekommen', 10, 2),
+       (12, 'nie bekommen - Geld zurückbekommen', 11, 2);

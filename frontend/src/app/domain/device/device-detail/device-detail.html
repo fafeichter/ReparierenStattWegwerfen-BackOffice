@@ -1,8 +1,8 @@
-<h3>#{{ deviceId() }} - A2337 | MacBook Air (M1, 2020)</h3>
+<h3>#{{ deviceId() }} - {{ deviceBase()?.modelNumber}} | {{ deviceBase()?.model?.name }}</h3>
 
 <div class="mt-5">
   Status:
-  <clr-label>In Reparatur</clr-label>
+  <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
 </div>
 
 <div class="clr-row">
@@ -13,25 +13,27 @@
         <div class="card-title"></div>
         <div class="card-text">
           <ul class="list">
-            <li>Model: <a href="#">A2337</a></li>
-            <li>Technical Specs: <a href="https://support.apple.com/de-at/111883">
-              https://support.apple.com/de-at/111883
+            <li>Model: <a href="#">{{ deviceBase()?.modelNumber }}</a></li>
+            <li>Technical Specs: <a [href]=" deviceBase()?.technicalSpecsUrl">
+              {{ deviceBase()?.technicalSpecsUrl }}
               <cds-icon role="img" shape="pop-out"></cds-icon>
             </a></li>
             <hr>
-            <li>Chip: M2 mit 10-Core CPU und 18-Core GPU</li>
-            <li>Memory: 16 GB</li>
-            <li>Storage: 256 GB</li>
-            <li>Color: Space Gray</li>
+            <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse}}</li>
+            <li>Memory: {{ deviceBase()?.unifiedMemory?.name | orElse}}</li>
+            <li>Storage: {{ deviceBase()?.storage?.name | orElse}}</li>
+            <li>Color: {{ deviceBase()?.color?.name | orElse}}</li>
             <hr>
-            <li>Serial Number: FVFH408NQ05N</li>
-            <li>Battery: 99 % / 311 cycles</li>
+            <li>Serial Number: {{ deviceBase()?.serialNumber | orElse}}</li>
+            <li>Battery: {{ deviceBase()?.batteryMaximumCapacity | orElse }} % / {{ deviceBase()?.batteryCycleCount |
+              orElse }}
+              cycles</li>
             <li>Battery status:
-              <clr-label>Nicht getauscht</clr-label>
+              <clr-label>{{ deviceBase()?.batteryStatus?.name }}</clr-label>
             </li>
             <hr>
             <li>Grade:
-              <clr-label>GUT - schwach sichtbare Kratzer</clr-label>
+              <clr-label>{{ deviceBase()?.grade?.name | orElse}}</clr-label>
             </li>
             <hr>
             <li>Charger included:

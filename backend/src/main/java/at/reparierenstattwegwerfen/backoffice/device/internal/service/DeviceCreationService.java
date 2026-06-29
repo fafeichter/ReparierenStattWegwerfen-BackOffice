@@ -1,10 +1,10 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.device.DeviceStatus;
 import at.reparierenstattwegwerfen.backoffice.device.internal.controller.CreateNewDevice;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +20,7 @@ public class DeviceCreationService {
 
 	private final DeviceRepository deviceRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
+	private final DeviceStatusRepository deviceStatusRepository;
 
 	@Transactional
 	public Integer createDevice(CreateNewDevice newDevice) {
@@ -27,7 +28,7 @@ public class DeviceCreationService {
 
 		device.setBuyingDate(LocalDate.now());
 		device.setUrl(newDevice.getUrl());
-		device.setStatus(DeviceStatus.ORDERED);
+		device.setStatus(deviceStatusRepository.getReferenceById(1));
 
 		device.setModelId(newDevice.getModelId());
 		device.setModelColorId(newDevice.getModelColorId());

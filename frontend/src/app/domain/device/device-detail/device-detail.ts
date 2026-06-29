@@ -1,29 +1,31 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Device, DeviceControllerService} from '@api/device';
+import {DeviceBaseDetailsDto, DeviceDetailsControllerService} from '@api/device';
 import {ClrDatagridModule, ClrIcon, ClrLabel} from '@clr/angular';
+import {OrElsePipe} from '../../../pipes/or-else-pipe';
 
 @Component({
   selector: 'app-device-detail',
   imports: [
     ClrDatagridModule,
     ClrLabel,
-    ClrIcon
+    ClrIcon,
+    OrElsePipe
   ],
   templateUrl: './device-detail.html',
-  styleUrl: './device-detail.css',
+  standalone: true,
+  styleUrl: './device-detail.css'
 })
 export class DeviceDetail implements OnInit {
 
-  device = signal<Device | undefined>(undefined);
+  deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
   deviceId = signal<number | undefined>(undefined);
   private route = inject(ActivatedRoute);
-  private api = inject(DeviceControllerService);
+  private api = inject(DeviceDetailsControllerService);
 
   ngOnInit(): void {
     let deviceId = Number(this.route.snapshot.paramMap.get('deviceId'));
     this.deviceId.set(deviceId);
-    this.api.getDeviceDetails(deviceId).subscribe(data => this.device.set(data));
-
+    this.api.getDeviceBaseDetails(deviceId).subscribe(data => this.deviceBase.set(data));
   }
 }
