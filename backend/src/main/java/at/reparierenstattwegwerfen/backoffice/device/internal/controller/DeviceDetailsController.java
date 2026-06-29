@@ -16,6 +16,7 @@ public class DeviceDetailsController {
 
 	private final DeviceBaseDetailsService baseDetailsService;
 	private final DeviceBuyingDetailsService buyingDetailsService;
+	private final DeviceSellingDetailsService sellingDetailsService;
 
 	@GetMapping("/base")
 	public DeviceBaseDetailsDto getDeviceBaseDetails(@PathVariable Integer deviceId) {
@@ -25,5 +26,10 @@ public class DeviceDetailsController {
 	@GetMapping("/buying")
 	public DeviceBuyingDetailsDto getDeviceBuyingDetails(@PathVariable Integer deviceId) {
 		return buyingDetailsService.load(deviceId);
+	}
+
+	@GetMapping("/selling")
+	public DeviceSellingDetailsDto getDeviceSellingDetails(@PathVariable Integer deviceId) {
+		return sellingDetailsService.load(deviceId);
 	}
 }

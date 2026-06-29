@@ -1,0 +1,30 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
+
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBaseDetailsRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Fabian Feichter
+ */
+@Service
+@RequiredArgsConstructor
+public class DeviceSellingDetailsService {
+
+	private final DeviceBaseDetailsRepository deviceRepository;
+	private final BusinessPartnerDetailsService businessPartnerDetailsService;
+
+	@Transactional(readOnly = true)
+	public DeviceSellingDetailsDto load(Integer deviceId) {
+		Device device = deviceRepository.getByIdWithRelations(deviceId);
+
+		return DeviceSellingDetailsDto.builder()
+			.price(device.getSellingPrice())
+			.buyer(businessPartnerDetailsService.getBusinessPartner(device.getBuyerBusinessPartnerId()))
+			.date(device.getSellingDate())
+			.build();
+	}
+}

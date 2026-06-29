@@ -1,6 +1,11 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {DeviceBaseDetailsDto, DeviceBuyingDetailsDto, DeviceDetailsControllerService} from '@api/device';
+import {
+  DeviceBaseDetailsDto,
+  DeviceBuyingDetailsDto,
+  DeviceDetailsControllerService,
+  DeviceSellingDetailsDto
+} from '@api/device';
 import {ClrDatagridModule, ClrIcon, ClrLabel} from '@clr/angular';
 import {OrElsePipe} from '../../../pipes/or-else-pipe';
 import {CurrencyPipe, DatePipe} from '@angular/common';
@@ -22,9 +27,10 @@ import {CurrencyPipe, DatePipe} from '@angular/common';
 })
 export class DeviceDetail implements OnInit {
 
+  deviceId = signal<number | undefined>(undefined);
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
   deviceBuying = signal<DeviceBuyingDetailsDto | undefined>(undefined);
-  deviceId = signal<number | undefined>(undefined);
+  deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
   private route = inject(ActivatedRoute);
   private api = inject(DeviceDetailsControllerService);
 
@@ -33,5 +39,6 @@ export class DeviceDetail implements OnInit {
     this.deviceId.set(deviceId);
     this.api.getDeviceBaseDetails(deviceId).subscribe(data => this.deviceBase.set(data));
     this.api.getDeviceBuyingDetails(deviceId).subscribe(data => this.deviceBuying.set(data));
+    this.api.getDeviceSellingDetails(deviceId).subscribe(data => this.deviceSelling.set(data));
   }
 }

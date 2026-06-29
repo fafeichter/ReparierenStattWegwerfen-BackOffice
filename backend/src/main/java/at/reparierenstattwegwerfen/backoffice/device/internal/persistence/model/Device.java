@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -88,5 +87,5 @@ public class Device {
 	private DeviceBatteryStatus batteryStatus;
 
 	@Column(name = "selling_price")
-	private BigDecimal sellingPrice;
+	private Double sellingPrice;
 }
