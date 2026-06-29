@@ -1,20 +1,29 @@
-[![Qodana](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml)
-[![Deployment](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/deploy.yml/badge.svg)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/deploy.yml)
+[![Qodana](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml/badge.svg)](
+https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml)
+[![Deployment](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/deploy.yml/badge.svg)](
+https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/deploy.yml)
 
 # Reparieren Statt Wegwerfen - Backoffice
 
-Backoffice app of my company ["Reparieren Statt Wegwerfen"](https://reparieren-statt-wegwerfen.at/).
+This is the back-office application for my company,
+[Reparieren Statt Wegwerfen](https://reparieren-statt-wegwerfen.at/), used to manage and track
+my repair and refurbishment workflow.
+
+I decided to open-source this project to enforce better security practices, such as keeping
+secrets out of the repository.
 
 ---
 
 ## 🏗️ Architecture & Design
 
-The application is built adhering to modern architectural practices to ensure maintainability, scalability, and clean
-boundaries:
+The application is built adhering to modern architectural practices to ensure maintainability,
+scalability, and clean boundaries:
 
-- **Modular Monolith (Modulith):** Promotes a highly structured monolithic architecture with strictly enforced
-  package boundaries, combining the simplicity of a single deployment with the decoupled nature of microservices.
-- **Domain-Driven Design (DDD):** Core business logic is modeled after my real-world refurbishment and retail workflows.
+- **Modular Monolith (Modulith):** Promotes a highly structured monolithic architecture with
+  strictly enforced package boundaries, combining the simplicity of a single deployment with the
+  decoupled nature of microservices.
+- **Domain-Driven Design (DDD):** Core business logic is modeled after my real-world
+  refurbishment and repair workflows.
 
 The following domains have been identified:
 
@@ -40,5 +49,5 @@ The following domains have been identified:
 
 ## 📄 License
 
-This project is licensed under the terms of the open-source license included in the repository. See the `LICENSE` file
-for details.
+This project is licensed under the terms of the open-source license included in the repository.
+See the `LICENSE` file for details.
