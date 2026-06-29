@@ -13,7 +13,8 @@
         <div class="card-title"></div>
         <div class="card-text">
           <ul class="list">
-            <li>Model: <a href="#">{{ deviceBase()?.modelNumber }}</a></li>
+            <li>Model:
+              <a [routerLink]="['/models', deviceBase()?.model?.id]">{{ deviceBase()?.modelNumber }}</a></li>
             <li>Technical Specs: <a [href]=" deviceBase()?.technicalSpecsUrl">
               {{ deviceBase()?.technicalSpecsUrl }}
               <cds-icon role="img" shape="pop-out"></cds-icon>
