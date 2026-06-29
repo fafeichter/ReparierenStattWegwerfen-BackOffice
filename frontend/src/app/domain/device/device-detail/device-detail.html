@@ -95,9 +95,8 @@
         <div class="card-title"></div>
         <div class="card-text">
           <ul class="list">
-            <li>Original defect: Display bleibt schwarz</li>
-            <li>Diagnosed defect: Panel defekt
-            </li>
+            <li>Original defect: {{ deviceDefects()?.reportedDefect | orElse }}</li>
+            <li>Diagnosed defect: {{ deviceDefects()?.diagnosedDefect | orElse }}</li>
           </ul>
           <h5>Spare Parts</h5>
           <clr-datagrid>

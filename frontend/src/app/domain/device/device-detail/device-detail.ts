@@ -3,6 +3,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
   DeviceBaseDetailsDto,
   DeviceBuyingDetailsDto,
+  DeviceDefectsDetailsDto,
   DeviceDetailsControllerService,
   DeviceNoteDto,
   DeviceNotesControllerService,
@@ -37,6 +38,7 @@ export class DeviceDetail implements OnInit {
   deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
   deviceNotes = signal<DeviceNoteDto[]>([]);
   deviceSpareParts = signal<DeviceSparePartDto[]>([]);
+  deviceDefects = signal<DeviceDefectsDetailsDto | undefined>(undefined);
   totalSparePartsCost = computed(() => {
     return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
   });
@@ -55,5 +57,6 @@ export class DeviceDetail implements OnInit {
     this.notesApi.getDeviceNotes(deviceId).subscribe(data => this.deviceNotes.set(data));
     this.notesApi.getDeviceNotes(deviceId).subscribe(data => this.deviceNotes.set(data));
     this.sparePartsApi.getDeviceSpareParts(deviceId).subscribe(data => this.deviceSpareParts.set(data));
+    this.api.getDeviceDefectDetails(deviceId).subscribe(data => this.deviceDefects.set(data));
   }
 }
