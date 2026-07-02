@@ -122,7 +122,7 @@ val generateOpenApiSpecs = tasks.register<Test>("generateOpenApiSpecs") {
     // tracks the output and re-runs when they're missing
     outputs.dir(layout.buildDirectory.dir("openapi"))
 
-    // The test produces files as a side effect; Gradle shout not track
+    // The test produces files as a side effect; Gradle should not track
     // the output and re-generate the files every time
     outputs.upToDateWhen { false }
 }
@@ -166,7 +166,7 @@ tasks.register("generateApiClients") {
 plantuml {
     options {
         // where should the .svg be generated to (defaults to build/plantuml)
-        outputDir = project.file("docs/images")
+        outputDir = project.file("docs/spring-modulith/")
 
         // output format (lowercase, defaults to svg)
         format = "svg"
@@ -200,24 +200,15 @@ val generateSpringModulithPuml = tasks.register<Test>("generateSpringModulithPum
         includeTestsMatching("*DocumentationTests.writeDocumentationSnippets")
     }
 
-    // The test produces files as a side effect; declare them so Gradle
-    // tracks the output and re-runs when they're missing
-    outputs.dir(layout.buildDirectory.dir("spring-modulith-docs"))
-
-    // The test produces files as a side effect; Gradle shout not track
+    // The test produces files as a side effect; Gradle should not track
     // the output and re-generate the files every time
     outputs.upToDateWhen { false }
-}
-
-// Make all PlantUML diagram generation tasks depend on your test task
-tasks.matching { it.name.startsWith("plantuml") }.configureEach {
-    // We use standard Task reference api to bypass type visibility issues
-    dependsOn(generateSpringModulithPuml)
 }
 
 tasks.register("generateModulithDoc") {
     group = "documentation"
     description = "Generates the module dependency SVG for the README"
 
+    dependsOn(generateSpringModulithPuml)
     dependsOn("plantumlModules")
 }

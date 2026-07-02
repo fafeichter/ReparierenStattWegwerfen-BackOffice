@@ -19,30 +19,10 @@ jobs:
           distribution: 'graalvm'
           cache: 'gradle'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install Graphviz
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y graphviz
       - name: Build with Gradle
         run: |
           ./gradlew :backend:generateApiClients
-           ./gradlew :backend:generateModulithDoc
           ./gradlew build -x test
-      # Automatically commit and push the updated SVG if changes are detected
-      - name: Commit and push updated Modulith diagrams
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-
-          # Check if there are changes in the docs directory
-          if [ -n "$(git status --porcelain backend/docs/)" ]; then
-            echo "New documentation diagrams detected. Committing changes..."
-            git add backend/docs/
-            git commit -m "chore(docs): automatically update architecture diagrams [skip ci]"
-            git push
-          else
-            echo "No diagram changes detected."
-          fi
       - uses: actions/upload-artifact@v7
         with:
           name: frontend-static-resources

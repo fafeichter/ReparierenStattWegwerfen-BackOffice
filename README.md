@@ -41,7 +41,7 @@ The following domains have been identified:
 | **Device**           | `device`          | Tracks the entire lifecycle of a specific, physical asset—from initial acquisition through repair stages to a successful sale, or its disassembly for spare parts. |
 | **Sale**             | `sale`            | Aggregates data from the Model, Business Partner, and Device domains to generate invoices.                                                                         |
 
-![Application Modules](./backend/docs/images/modules.svg)
+![Application Modules](./backend/docs/spring-modulith/modules.svg)
 
 ---
 

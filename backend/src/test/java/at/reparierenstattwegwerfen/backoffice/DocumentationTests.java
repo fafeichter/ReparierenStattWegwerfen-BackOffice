@@ -13,9 +13,7 @@ public class DocumentationTests {
 
 	@Test
 	public void writeDocumentationSnippets() {
-
 		new Documenter(modules)
-			.writeModulesAsPlantUml()
-			.writeIndividualModulesAsPlantUml();
+			.writeModulesAsPlantUml();
 	}
 }
