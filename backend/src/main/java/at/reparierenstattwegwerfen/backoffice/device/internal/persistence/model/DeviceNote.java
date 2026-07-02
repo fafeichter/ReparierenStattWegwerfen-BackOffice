@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceNote {
+public class DeviceNote implements NamedId {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +31,8 @@ public class DeviceNote {
 
 	@Column(name = "timestamp")
 	private LocalDateTime timestamp;
+
+	public String getName() {
+		return text;
+	}
 }

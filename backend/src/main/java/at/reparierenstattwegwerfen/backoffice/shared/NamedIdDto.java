@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
+import java.io.Serializable;
+
 /**
  * @author Fabian Feichter
  */
 @Value
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class NamedIdDto {
+public class NamedIdDto implements Serializable {
 
 	Integer id;
 	String name;

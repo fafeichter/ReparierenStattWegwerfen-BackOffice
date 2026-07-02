@@ -12,14 +12,14 @@ import java.util.List;
  * @author Fabian Feichter
  */
 @RestController
-@RequestMapping("/api/devices/{deviceId}/spare-parts")
+@RequestMapping("/api/devices/{deviceId}/tags")
 @RequiredArgsConstructor
-public class DeviceSparePartsController {
+public class DeviceTagsController {
 
-	private final DeviceSparePartService deviceSparePartService;
+	private final DeviceTagsService deviceTagsService;
 
 	@GetMapping("/")
-	public List<DeviceSparePartDto> getDeviceSpareParts(@PathVariable Integer deviceId) {
-		return deviceSparePartService.load(deviceId);
+	public List<DeviceTagDto> getTagsForDevice(@PathVariable Integer deviceId) {
+		return deviceTagsService.getTagsForDevice(deviceId);
 	}
 }

@@ -52,12 +52,14 @@
       </div>
       <div class="card-block">
         Tags:
-        <clr-label [clrClickable]="true">Activation Lock
-          <cds-icon shape="close"></cds-icon>
-        </clr-label>
-        <clr-label [clrClickable]="true">Hot Deal
-          <cds-icon shape="close"></cds-icon>
-        </clr-label>
+        @for (tag of deviceTags(); track tag.id) {
+          <clr-label [clrClickable]="true">
+            {{ tag.name }}
+            <cds-icon shape="close"></cds-icon>
+          </clr-label>
+        } @empty {
+          -
+        }
       </div>
     </div>
     <div class="card">

@@ -1,39 +1,30 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
-import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 /**
  * @author Fabian Feichter
  */
 @Entity
-@Table(name = "device_activity")
+@Table(name = "device_tags")
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceActivity implements NamedId {
+public class DeviceTags {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "device_activity_id")
+	@Column(name = "device_tags_id")
 	private Integer id;
-
-	@Column(name = "name")
-	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "device_id")
 	private Device device;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "device_activity_type_id")
-	private DeviceActivityType activityType;
-
-	@Column(name = "date")
-	private LocalDateTime date;
+	@JoinColumn(name = "device_tag_id")
+	private DeviceTag deviceTag;
 }

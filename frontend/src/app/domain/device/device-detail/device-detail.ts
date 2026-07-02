@@ -11,7 +11,9 @@ import {
   DeviceNotesControllerService,
   DeviceSellingDetailsDto,
   DeviceSparePartDto,
-  DeviceSparePartsControllerService
+  DeviceSparePartsControllerService,
+  DeviceTagDto,
+  DeviceTagsControllerService
 } from '@api/device';
 import {ClrDatagridModule, ClrDatagridSortOrder, ClrIcon, ClrLabel} from '@clr/angular';
 import {OrElsePipe} from '../../../pipes/or-else-pipe';
@@ -36,6 +38,7 @@ export class DeviceDetail implements OnInit {
 
   deviceId = signal<number | undefined>(undefined);
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
+  deviceTags = signal<DeviceTagDto[]>([]);
   deviceBuying = signal<DeviceBuyingDetailsDto | undefined>(undefined);
   deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
   deviceNotes = signal<DeviceNoteDto[]>([]);
@@ -48,6 +51,7 @@ export class DeviceDetail implements OnInit {
 
   private route = inject(ActivatedRoute);
   private api = inject(DeviceDetailsControllerService);
+  private tagsApi = inject(DeviceTagsControllerService);
   private notesApi = inject(DeviceNotesControllerService);
   protected readonly ClrDatagridSortOrder = ClrDatagridSortOrder;
   private sparePartsApi = inject(DeviceSparePartsControllerService);
@@ -57,6 +61,7 @@ export class DeviceDetail implements OnInit {
     let deviceId = Number(this.route.snapshot.paramMap.get('deviceId'));
     this.deviceId.set(deviceId);
     this.api.getDeviceBaseDetails(deviceId).subscribe(data => this.deviceBase.set(data));
+    this.tagsApi.getTagsForDevice(deviceId).subscribe(data => this.deviceTags.set(data));
     this.api.getDeviceBuyingDetails(deviceId).subscribe(data => this.deviceBuying.set(data));
     this.api.getDeviceSellingDetails(deviceId).subscribe(data => this.deviceSelling.set(data));
     this.notesApi.getDeviceNotes(deviceId).subscribe(data => this.deviceNotes.set(data));

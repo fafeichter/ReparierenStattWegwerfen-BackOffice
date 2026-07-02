@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceActivityType {
+public class DeviceActivityType implements NamedId {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
