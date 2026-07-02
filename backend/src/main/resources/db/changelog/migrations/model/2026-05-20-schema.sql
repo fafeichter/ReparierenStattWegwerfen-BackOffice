@@ -3,14 +3,15 @@
 
 CREATE TABLE model_apple_silicon
 (
-    model_apple_silicon_id   int          NOT NULL AUTO_INCREMENT,
-    name                     varchar(256) NOT NULL,
-    name_short               varchar(64)  NOT NULL,
-    number_efficiency_cores  int          NOT NULL,
-    number_performance_cores int          NOT NULL,
-    number_super_cores       int          NOT NULL,
-    created_at               timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at               timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    model_apple_silicon_id       int          NOT NULL AUTO_INCREMENT,
+    name                         varchar(256) NOT NULL,
+    name_short                   varchar(64)  NOT NULL,
+    number_cpu_efficiency_cores  int          NOT NULL,
+    number_cpu_performance_cores int          NOT NULL,
+    number_cpu_super_cores       int          NOT NULL,
+    number_gpu_cores             int          NOT NULL,
+    created_at                   timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at                   timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (model_apple_silicon_id),
     UNIQUE KEY uq_apple_silicon_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -22,7 +23,8 @@ CREATE TABLE model_apple_silicon_unified_memory
     unit                                  char(2)   NOT NULL,
     created_at                            timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at                            timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (model_apple_silicon_unified_memory_id)
+    PRIMARY KEY (model_apple_silicon_unified_memory_id),
+    CONSTRAINT uq_model_apple_silicon_unified_memory UNIQUE (size, unit)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE model_color
