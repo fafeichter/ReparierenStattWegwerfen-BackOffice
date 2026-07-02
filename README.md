@@ -7,10 +7,17 @@ https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workfl
 
 This is the back-office application for my company,
 [Reparieren Statt Wegwerfen](https://reparieren-statt-wegwerfen.at/), used to manage and track
-my repair and refurbishment workflow.
+my repair and refurbishment workflow. It replaces my legacy Apple Numbers-based solution,
+which had reached the limits of its capabilities.
 
 I decided to open-source this project to enforce better security practices, such as keeping
 secrets out of the repository.
+
+---
+
+## Development Approach
+
+Since I need this fast, I follow this approach: _Make it exist first, make it better later._
 
 ---
 
