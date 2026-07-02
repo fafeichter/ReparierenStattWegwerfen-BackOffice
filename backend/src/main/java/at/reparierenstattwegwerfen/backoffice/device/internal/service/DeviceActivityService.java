@@ -7,6 +7,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.reposi
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import com.samskivert.mustache.Mustache;
 import lombok.RequiredArgsConstructor;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.Map;
  */
 @Service
 @RequiredArgsConstructor
+@RegisterReflectionForBinding(DeviceCreated.class)
 public class DeviceActivityService {
 
 	private final DeviceActivityRepository deviceActivityRepository;
