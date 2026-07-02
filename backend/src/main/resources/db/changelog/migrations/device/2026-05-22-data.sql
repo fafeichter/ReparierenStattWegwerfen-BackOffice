@@ -33,3 +33,13 @@ VALUES (1, 'bestellt / gekauft', 0, 1),
        (10, 'Verkäufer/in hat sich anders entschieden', 9, 2),
        (11, 'nie bekommen - Geld nicht zurückbekommen', 10, 2),
        (12, 'nie bekommen - Geld zurückbekommen', 11, 2);
+
+INSERT INTO device_tag (device_tag_id, name, sort_order)
+VALUES (1, 'Activation Lock', 1),
+       (2, 'Activation Lock entfernt', 2),
+       (3, 'Verkäufer könnte Scammer sein', 3),
+       (4, 'Staub unter Panel', 4),
+       (5, 'QWERTY Tastaturlayout', 5),
+       (6, 'Zu teuer eingekauft', 6),
+       (7, 'Retoure', 7),
+       (8, 'Verkauf mit Defekt', 8);

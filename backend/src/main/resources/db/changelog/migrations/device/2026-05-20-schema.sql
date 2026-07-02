@@ -188,3 +188,31 @@ CREATE TABLE device_note_audit
     KEY                  idx_dna_device_id (device_id),
     KEY                  idx_dna_audit_timestamp (device_note_audit_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE device_tag
+(
+    device_tag_id int          NOT NULL AUTO_INCREMENT,
+    name          varchar(256) NOT NULL,
+    sort_order    int          NOT NULL,
+    created_at    timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at    timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (device_tag_id),
+    UNIQUE KEY uq_device_tag_name (name),
+    UNIQUE KEY uq_device_tags_sort (sort_order)
+);
+
+CREATE TABLE device_tags
+(
+    device_tags_id int AUTO_INCREMENT,
+    device_id      int       NOT NULL,
+    device_tag_id  int       NOT NULL,
+    created_at     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (device_tags_id),
+    CONSTRAINT uq_device_tags_device_id_device_tag_id
+        UNIQUE (device_id, device_tag_id),
+    CONSTRAINT fk_device_tags_device_id
+        FOREIGN KEY (device_id) REFERENCES device (device_id),
+    CONSTRAINT fk_device_tags_device_tag_id
+        FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id)
+);
