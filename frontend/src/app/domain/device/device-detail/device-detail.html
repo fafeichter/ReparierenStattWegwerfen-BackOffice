@@ -1,10 +1,5 @@
 <h3>#{{ deviceId() }} - {{ deviceBase()?.modelNumber }} | {{ deviceBase()?.model?.name }}</h3>
 
-<div class="mt-5">
-  Status:
-  <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
-</div>
-
 <div class="clr-row">
   <div class="clr-col-lg-8 clr-col-md-8 clr-col-12">
     <div class="card">
@@ -23,6 +18,11 @@
           <li>Storage: {{ deviceBase()?.storage?.name | orElse }}</li>
           <li>Color: {{ deviceBase()?.color?.name | orElse }}</li>
           <hr>
+          <li>
+            Status:
+            <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
+          </li>
+          <hr>
           <li>Serial Number: {{ deviceBase()?.serialNumber | orElse }}</li>
           <li>
             Battery:
@@ -37,16 +37,6 @@
           <hr>
           <li>Grade:
             <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
-          </li>
-          <hr>
-          <li>Charger included:
-            <cds-icon role="img" shape="check"></cds-icon>
-          </li>
-          <li>Cable included:
-            <cds-icon role="img" shape="check"></cds-icon>
-          </li>
-          <li>OVP included:
-            <cds-icon role="img" shape="check"></cds-icon>
           </li>
         </ul>
       </div>
@@ -66,13 +56,14 @@
       <div class="card-header">Buying</div>
       <div class="card-block">
         <ul class="list">
+          <li>Date: {{ deviceBuying()?.date | date:'dd.MM.yyyy' }}</li>
+          <li>
+            Price: {{ deviceBuying()?.price | currency:'EUR':'symbol':'1.2-2' }}
+          </li>
           <li>URL:
             <a [href]="deviceBuying()?.url" target="_blank">{{ deviceBuying()?.url }}
               <cds-icon role="img" shape="pop-out"></cds-icon>
             </a>
-          </li>
-          <li>
-            Price: {{ deviceBuying()?.price | currency:'EUR':'symbol':'1.2-2' }}
           </li>
           <hr>
           <li>Seller:
@@ -80,7 +71,6 @@
               {{ deviceBuying()?.seller?.name }}
             </a>
           </li>
-          <li>Date: {{ deviceBuying()?.date | date:'dd.MM.yyyy' }}</li>
           <hr>
           Invoice: <a href="#">Invoice_Tobias_Ecke.pdf</a>
         </ul>
@@ -90,8 +80,14 @@
       <div class="card-header">Repair</div>
       <div class="card-block">
         <ul class="list">
-          <li>Original defect: {{ deviceDefects()?.reportedDefect | orElse }}</li>
-          <li>Diagnosed defect: {{ deviceDefects()?.diagnosedDefect | orElse }}</li>
+          <li>
+            <div class="underline">Original defect:</div>
+            {{ deviceDefects()?.reportedDefect | orElse }}
+          </li>
+          <li class="mt-5">
+            <div class="underline">Real defect:</div>
+            {{ deviceDefects()?.diagnosedDefect | orElse }}
+          </li>
         </ul>
         <h5>Spare Parts</h5>
         <clr-datagrid>
@@ -120,6 +116,16 @@
             </a>
           </li>
           <li>Date: {{ deviceSelling()?.date | date:'dd.MM.yyyy' | orElse }}</li>
+          <hr>
+          <li>Charger included:
+            <cds-icon role="img" shape="check"></cds-icon>
+          </li>
+          <li>Cable included:
+            <cds-icon role="img" shape="check"></cds-icon>
+          </li>
+          <li>OVP included:
+            <cds-icon role="img" shape="check"></cds-icon>
+          </li>
           <hr>
           Invoice: <a href="#">Invoice_Franz_Kornthaler.pdf</a>
         </ul>
