@@ -1,6 +1,8 @@
 import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
+  DeviceActivityControllerService,
+  DeviceActivityDto,
   DeviceBaseDetailsDto,
   DeviceBuyingDetailsDto,
   DeviceDefectsDetailsDto,
@@ -42,11 +44,14 @@ export class DeviceDetail implements OnInit {
   totalSparePartsCost = computed(() => {
     return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
   });
+  deviceActivities = signal<DeviceActivityDto[]>([]);
+
   private route = inject(ActivatedRoute);
   private api = inject(DeviceDetailsControllerService);
   private notesApi = inject(DeviceNotesControllerService);
   protected readonly ClrDatagridSortOrder = ClrDatagridSortOrder;
   private sparePartsApi = inject(DeviceSparePartsControllerService);
+  private activityApi = inject(DeviceActivityControllerService);
 
   ngOnInit(): void {
     let deviceId = Number(this.route.snapshot.paramMap.get('deviceId'));
@@ -58,5 +63,6 @@ export class DeviceDetail implements OnInit {
     this.notesApi.getDeviceNotes(deviceId).subscribe(data => this.deviceNotes.set(data));
     this.sparePartsApi.getDeviceSpareParts(deviceId).subscribe(data => this.deviceSpareParts.set(data));
     this.api.getDeviceDefectDetails(deviceId).subscribe(data => this.deviceDefects.set(data));
+    this.activityApi.getActivities(deviceId).subscribe(data => this.deviceActivities.set(data));
   }
 }

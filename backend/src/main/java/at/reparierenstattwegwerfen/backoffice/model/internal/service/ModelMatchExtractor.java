@@ -16,7 +16,6 @@ import org.springframework.util.MimeTypeUtils;
 
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 /**
  * Downloads an ad and asks the AI model to extract the device's specs and reported
@@ -30,6 +29,7 @@ public class ModelMatchExtractor {
 
 	private final ChatClient.Builder aiClientBuilder;
 	private final AdDownloader adDownloader;
+	private final Mustache.Compiler mustacheCompiler;
 
 	@Value("classpath:templates/model/apple-model-extractor.mustache")
 	private Resource mustacheTemplateResource;
@@ -88,6 +88,6 @@ public class ModelMatchExtractor {
 	private String compilePrompt(String content) {
 		PromptContext context = PromptContext.builder().adHtmlContent(content).build();
 		InputStreamReader input = new InputStreamReader(mustacheTemplateResource.getInputStream(), StandardCharsets.UTF_8);
-		return Mustache.compiler().compile(input).execute(context);
+		return mustacheCompiler.compile(input).execute(context);
 	}
 }

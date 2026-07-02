@@ -4,6 +4,10 @@ spring:
   threads:
     virtual:
       enabled: true
+  modulith:
+    events:
+      republish-outstanding-events-on-restart: true
+      completion-mode: archive
   ai:
     openai:
       chat:

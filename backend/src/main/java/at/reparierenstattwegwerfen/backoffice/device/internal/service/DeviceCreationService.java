@@ -6,6 +6,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.reposi
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class DeviceCreationService {
 	private final DeviceRepository deviceRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
+	private final ApplicationEventPublisher events;
 
 	@Transactional
 	public Integer createDevice(CreateNewDevice newDevice) {
@@ -51,6 +53,14 @@ public class DeviceCreationService {
 		device.setReportedDefect(newDevice.getDefect());
 		device.setSellerBusinessPartnerId(newDevice.getSellerBusinessPartnerId());
 
-		return deviceRepository.save(device).getId();
+		Integer newDeviceId = deviceRepository.save(device).getId();
+
+		DeviceCreated deviceCreatedEvent = DeviceCreated.builder()
+			.source(this)
+			.deviceId(newDeviceId)
+			.build();
+		events.publishEvent(deviceCreatedEvent);
+
+		return newDeviceId;
 	}
 }

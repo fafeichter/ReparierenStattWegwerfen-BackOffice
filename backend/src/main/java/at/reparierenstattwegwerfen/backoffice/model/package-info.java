@@ -1,7 +1,7 @@
 /**
  * @author Fabian Feichter
  */
-@ApplicationModule(displayName = "Model", allowedDependencies = {"shared"})
+@ApplicationModule(displayName = "Model")
 package at.reparierenstattwegwerfen.backoffice.model;
 
 import org.springframework.modulith.ApplicationModule;

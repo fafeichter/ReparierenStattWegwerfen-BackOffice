@@ -199,7 +199,7 @@ CREATE TABLE device_tag
     PRIMARY KEY (device_tag_id),
     UNIQUE KEY uq_device_tag_name (name),
     UNIQUE KEY uq_device_tags_sort (sort_order)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_tags
 (
@@ -215,7 +215,7 @@ CREATE TABLE device_tags
         FOREIGN KEY (device_id) REFERENCES device (device_id),
     CONSTRAINT fk_device_tags_device_tag_id
         FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_activity_type
 (
@@ -229,12 +229,13 @@ CREATE TABLE device_activity_type
         UNIQUE (name),
     CONSTRAINT uq_device_activity_type_name_description_template
         UNIQUE (name, description_template)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_activity
 (
     device_activity_id      int auto_increment,
     device_id               int       NOT NULL,
+    name varchar(256) NOT NULL,
     device_activity_type_id int       NOT NULL NULL,
     date                    datetime  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at              timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -244,4 +245,4 @@ CREATE TABLE device_activity
         FOREIGN KEY (device_id) REFERENCES device (device_id),
     CONSTRAINT fk_activity_device_activity_type_id
         FOREIGN KEY (device_id) REFERENCES device_activity_type (device_activity_type_id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

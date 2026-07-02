@@ -1,6 +1,9 @@
 databaseChangeLog:
   - include:
       relativeToChangelogFile: true
+      file: migrations/application/event_publication_registry.sql
+  - include:
+      relativeToChangelogFile: true
       file: migrations/model/2026-05-20-schema.sql
   - include:
       relativeToChangelogFile: true

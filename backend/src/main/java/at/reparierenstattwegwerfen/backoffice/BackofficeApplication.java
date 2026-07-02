@@ -1,9 +1,12 @@
 package at.reparierenstattwegwerfen.backoffice;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.modulith.Modulith;
 
-@SpringBootApplication
+@Modulith(
+	systemName = "Reparieren Statt Wegwerfen - Backoffice",
+	sharedModules = {"shared"}
+)
 public class BackofficeApplication {
 
 	public static void main(String[] args) {
