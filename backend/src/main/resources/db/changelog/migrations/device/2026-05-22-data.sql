@@ -43,3 +43,9 @@ VALUES (1, 'Activation Lock', 1),
        (6, 'Zu teuer eingekauft', 6),
        (7, 'Retoure', 7),
        (8, 'Verkauf mit Defekt', 8);
+
+INSERT INTO device_activity_type (device_activity_type_id, name, description_template)
+VALUES (1, 'Erstellt', 'Device #{{deviceId}} erstellt.'),
+       (2, 'Status geändert', 'Status geändert von \"{{oldStatus}}\" auf \"{{newStatus}}\".'),
+       (3, 'Rechnung generiert', '{{invoiceFileName}}'),
+       (4, 'Verkauft', null);
