@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-header">Notes</div>
+  <div class="card-block">
+    <button (click)="modalOpened.set(true)" class="btn btn-sm btn-icon" type="button">
+      <clr-icon shape="plus"></clr-icon>
+    </button>
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="left">Note</th>
+        <th class="right">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (note of deviceNotes(); track note.noteId) {
+          <tr>
+            <td class="left">{{ note.text }}</td>
+            <td class="right">{{ note.date | date:'dd.MM.yyyy HH:mm:ss' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="xl">
+  <div class="modal-title">Add note</div>
+  <div class="modal-body">
+    <form (ngSubmit)="addNote()" [formGroup]="form" clrForm>
+      <clr-textarea-container>
+        <label><span class="clr-required-mark">Text</span></label>
+        <textarea class="!w-full" clrTextarea formControlName="text" name="text" required rows="5"></textarea>
+        @if (form.controls.text.hasError('required')) {
+          <clr-control-error>Text is required.</clr-control-error>
+        }
+      </clr-textarea-container>
+    </form>
+
+    <div class="modal-footer mt-4">
+      <button (click)="modalOpened.set(false)" class="btn btn-outline" type="button">Cancel</button>
+      <button (click)="addNote()" [disabled]="form.invalid || isSubmitting()"
+              class="btn btn-primary"
+              type="submit">
+        @if (isSubmitting()) {
+          <span class="spinner spinner-inline"></span>
+        }
+        {{ isSubmitting() ? 'Adding...' : 'Add' }}
+      </button>
+    </div>
+  </div>
+</clr-modal>

@@ -29,8 +29,8 @@ public class DeviceNote implements NamedId {
 	@Column(name = "text")
 	private String text;
 
-	@Column(name = "timestamp")
-	private LocalDateTime timestamp;
+	@Column(name = "date")
+	private LocalDateTime date;
 
 	public String getName() {
 		return text;

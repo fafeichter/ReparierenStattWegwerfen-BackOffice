@@ -16,7 +16,7 @@ public interface DeviceNoteRepository extends JpaRepository<DeviceNote, Integer>
 	@Query("""
 		SELECT n FROM DeviceNote n
 		WHERE n.deviceId = :deviceId
-		ORDER BY n.timestamp DESC
+		ORDER BY n.date DESC
 		""")
 	List<DeviceNote> getNotesForDevice(Integer deviceId);
 }

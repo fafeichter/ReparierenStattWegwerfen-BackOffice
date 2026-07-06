@@ -1,10 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +18,10 @@ public class DeviceNotesController {
 	@GetMapping("/notes")
 	public List<DeviceNoteDto> getDeviceNotes(@PathVariable Integer deviceId) {
 		return deviceNoteService.load(deviceId);
+	}
+
+	@PostMapping("/notes")
+	public void addDeviceNote(@PathVariable Integer deviceId, @RequestBody String text) {
+		deviceNoteService.add(deviceId, text);
 	}
 }

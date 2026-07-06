@@ -131,27 +131,7 @@
         </ul>
       </div>
     </div>
-    <div class="card">
-      <div class="card-header">Notes</div>
-      <div class="card-block">
-        <table class="table">
-          <thead>
-          <tr>
-            <th class="left">Note</th>
-            <th class="right">Date</th>
-          </tr>
-          </thead>
-          <tbody>
-            @for (note of deviceNotes(); track note.noteId) {
-              <tr>
-                <td class="left">{{ note.text }}</td>
-                <td class="right">{{ note.timestamp | date:'dd.MM.yyyy HH:mm:ss' }}</td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <app-notes [deviceId]="deviceId()"></app-notes>
     <div class="card">
       <div class="card-header">Activity Log</div>
       <div class="card-block">

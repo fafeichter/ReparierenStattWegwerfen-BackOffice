@@ -20,5 +20,5 @@ public class DeviceNoteDto {
 	private final String text;
 
 	@NotNull
-	private final LocalDateTime timestamp;
+	private final LocalDateTime date;
 }
