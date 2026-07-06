@@ -38,11 +38,13 @@ INSERT INTO device_tag (device_tag_id, name, sort_order)
 VALUES (1, 'Activation Lock', 1),
        (2, 'Activation Lock entfernt', 2),
        (3, 'Verkäufer könnte Scammer sein', 3),
-       (4, 'Staub unter Panel', 4),
-       (5, 'QWERTY Tastaturlayout', 5),
-       (6, 'Zu teuer eingekauft', 6),
-       (7, 'Retoure', 7),
-       (8, 'Verkauf mit Defekt', 8);
+       (4, 'Scammer', 4),
+       (5, 'Hot-Deal', 5),
+       (6, 'Staub unter Panel', 6),
+       (7, 'QWERTY Tastaturlayout', 7),
+       (8, 'Zu teuer eingekauft', 8),
+       (9, 'Retoure', 9),
+       (10, 'Verkauf mit Defekt', 10);
 
 INSERT INTO device_activity_type (device_activity_type_id, name, description_template)
 VALUES (1, 'Erstellt', 'Device #{{deviceId}} erstellt.'),
