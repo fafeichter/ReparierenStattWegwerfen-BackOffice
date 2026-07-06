@@ -1,8 +1,9 @@
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   DeviceActivityControllerService,
   DeviceActivityDto,
+  DeviceBaseControllerService,
   DeviceBaseDetailsDto,
   DeviceBuyingDetailsDto,
   DeviceDefectsDetailsDto,
@@ -10,16 +11,12 @@ import {
   DeviceSellingDetailsDto,
   DeviceSparePartDto,
   DeviceSparePartsControllerService,
-  DeviceTagDto,
-  DeviceTagsControllerService,
 } from '@api/device';
 import {
   ClrCommonFormsModule,
   ClrDatagridModule,
-  ClrDatagridSortOrder,
   ClrIcon,
   ClrInputModule,
-  ClrLabel,
   ClrModalModule,
   ClrNumberInputModule,
   ClrRadioModule,
@@ -30,12 +27,12 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Notes } from './notes/notes';
+import { Base } from './base/base';
 
 @Component({
   selector: 'app-device-detail',
   imports: [
     ClrDatagridModule,
-    ClrLabel,
     ClrIcon,
     OrElsePipe,
     RouterLink,
@@ -51,6 +48,7 @@ import { Notes } from './notes/notes';
     ReactiveFormsModule,
     ClrTextareaModule,
     Notes,
+    Base,
   ],
   templateUrl: './device-detail.html',
   standalone: true,
@@ -61,7 +59,6 @@ export class DeviceDetail implements OnInit {
     transform: (value: string) => Number(value),
   });
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
-  deviceTags = signal<DeviceTagDto[]>([]);
   deviceBuying = signal<DeviceBuyingDetailsDto | undefined>(undefined);
   deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
   deviceSpareParts = signal<DeviceSparePartDto[]>([]);
@@ -71,17 +68,15 @@ export class DeviceDetail implements OnInit {
   });
   deviceActivities = signal<DeviceActivityDto[]>([]);
 
-  private route = inject(ActivatedRoute);
   private api = inject(DeviceDetailsControllerService);
-  private tagsApi = inject(DeviceTagsControllerService);
-
-  protected readonly ClrDatagridSortOrder = ClrDatagridSortOrder;
+  private baseApi = inject(DeviceBaseControllerService);
   private sparePartsApi = inject(DeviceSparePartsControllerService);
   private activityApi = inject(DeviceActivityControllerService);
 
   ngOnInit(): void {
-    this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
-    this.tagsApi.getTagsForDevice(this.deviceId()).subscribe((data) => this.deviceTags.set(data));
+    this.baseApi
+      .getDeviceBaseDetails(this.deviceId())
+      .subscribe((data) => this.deviceBase.set(data));
     this.api
       .getDeviceBuyingDetails(this.deviceId())
       .subscribe((data) => this.deviceBuying.set(data));
@@ -98,4 +93,11 @@ export class DeviceDetail implements OnInit {
       .getActivities(this.deviceId())
       .subscribe((data) => this.deviceActivities.set(data));
   }
+
+  reloadActivity() {
+    this.activityApi
+      .getActivities(this.deviceId())
+      .subscribe((data) => this.deviceActivities.set(data));
+  }
 }
+protected;

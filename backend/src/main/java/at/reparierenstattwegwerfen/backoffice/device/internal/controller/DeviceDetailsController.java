@@ -14,15 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class DeviceDetailsController {
 
-	private final DeviceBaseDetailsService baseDetailsService;
 	private final DeviceBuyingDetailsService buyingDetailsService;
 	private final DeviceSellingDetailsService sellingDetailsService;
 	private final DeviceDefectDetailsService defectDetailsService;
-
-	@GetMapping("/base")
-	public DeviceBaseDetailsDto getDeviceBaseDetails(@PathVariable Integer deviceId) {
-		return baseDetailsService.load(deviceId);
-	}
 
 	@GetMapping("/buying")
 	public DeviceBuyingDetailsDto getDeviceBuyingDetails(@PathVariable Integer deviceId) {

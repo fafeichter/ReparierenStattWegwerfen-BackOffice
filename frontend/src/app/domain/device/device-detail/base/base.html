@@ -1,0 +1,68 @@
+<div class="card">
+  <div class="card-header">Device</div>
+  <div class="card-block">
+    <ul class="list">
+      <li>Model:
+        <a [routerLink]="['/models', deviceBase()?.model?.id]">{{ deviceBase()?.modelNumber }}</a></li>
+      <li>Technical Specs: <a [href]=" deviceBase()?.technicalSpecsUrl">
+        {{ deviceBase()?.technicalSpecsUrl }}
+        <cds-icon role="img" shape="pop-out"></cds-icon>
+      </a></li>
+      <hr>
+      <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse }}</li>
+      <li>Memory: {{ deviceBase()?.unifiedMemory?.name | orElse }}</li>
+      <li>Storage: {{ deviceBase()?.storage?.name | orElse }}</li>
+      <li>Color: {{ deviceBase()?.color?.name | orElse }}</li>
+      <hr>
+      <li>
+        Status:
+        @if (!statusEditModeActive()) {
+          <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
+          <button (click)="activateStatusEditMode()"
+                  class="btn btn-link">
+            <cds-icon role="img" shape="edit"></cds-icon>
+          </button>
+        } @else {
+          <form (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm>
+            <select formControlName="newStatusId">
+              @for (deviceStatus of deviceStatus(); track deviceStatus.id) {
+                <option [value]="deviceStatus.id">{{ deviceStatus.name }}</option>
+              }
+            </select>
+            <button [disabled]="statusForm.invalid"
+                    class="btn btn-link" type="submit">
+              <cds-icon role="img" shape="check"></cds-icon>
+            </button>
+          </form>
+        }
+      </li>
+      <hr>
+      <li>Serial Number: {{ deviceBase()?.serialNumber | orElse }}</li>
+      <li>
+        Battery:
+        {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
+        /
+        {{ deviceBase()?.batteryCycleCount |orElse }}
+        cycles
+      </li>
+      <li>Battery status:
+        <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>
+      </li>
+      <hr>
+      <li>Grade:
+        <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
+      </li>
+    </ul>
+  </div>
+  <div class="card-block">
+    Tags:
+    @for (tag of deviceTags(); track tag.id) {
+      <clr-label [clrClickable]="true">
+        {{ tag.name }}
+        <cds-icon shape="close"></cds-icon>
+      </clr-label>
+    } @empty {
+      -
+    }
+  </div>
+</div>
