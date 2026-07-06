@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-statistics',
@@ -7,5 +7,4 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './statistics.css',
 })
-export class Statistics {
-}
+export class Statistics {}

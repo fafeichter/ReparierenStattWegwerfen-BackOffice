@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {ClarityModule, ClrVerticalNavModule} from '@clr/angular';
-import {AddDevice} from './add-device/add-device';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ClarityModule, ClrVerticalNavModule } from '@clr/angular';
+import { AddDevice } from './add-device/add-device';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,5 +10,4 @@ import {AddDevice} from './add-device/add-device';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
-}
+export class Dashboard {}

@@ -1,7 +1,13 @@
-import {Component, effect, ElementRef, inject, signal, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
-import {NgTemplateOutlet} from '@angular/common';
+import { Component, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { NgTemplateOutlet } from '@angular/common';
 
 import {
   ClrButtonModule,
@@ -9,13 +15,16 @@ import {
   ClrIcon,
   ClrModalModule,
   ClrSpinnerModule,
-  ClrTooltipModule
-} from "@clr/angular";
+  ClrTooltipModule,
+} from '@clr/angular';
 
-import {Alternative, ModelControllerService, ResolvedModelMatch} from '@api/model';
-import {CreateNewDevice, DeviceControllerService} from '@api/device';
-import {OrElsePipe} from '../../pipes/or-else-pipe';
-import {BusinessPartnerCreationControllerService, CreateBusinessPartnerPlaceholder} from '@api/businesspartner';
+import { Alternative, ModelControllerService, ResolvedModelMatch } from '@api/model';
+import { CreateNewDevice, DeviceControllerService } from '@api/device';
+import { OrElsePipe } from '../../pipes/or-else-pipe';
+import {
+  BusinessPartnerCreationControllerService,
+  CreateBusinessPartnerPlaceholder,
+} from '@api/businesspartner';
 
 @Component({
   selector: 'app-add-device',
@@ -30,7 +39,7 @@ import {BusinessPartnerCreationControllerService, CreateBusinessPartnerPlacehold
     ClrTooltipModule,
     NgTemplateOutlet,
     ClrButtonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './add-device.html',
   styleUrl: './add-device.css',
@@ -49,13 +58,12 @@ export class AddDevice {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/)
-      ]
+        Validators.pattern(
+          /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/,
+        ),
+      ],
     }),
-    price: new FormControl<number | null>(null, [
-      Validators.required,
-      Validators.min(0.01)
-    ]),
+    price: new FormControl<number | null>(null, [Validators.required, Validators.min(0.01)]),
   });
 
   private modelApi = inject(ModelControllerService);
@@ -87,9 +95,11 @@ export class AddDevice {
     const newBusinessPartner: CreateBusinessPartnerPlaceholder = {
       firstName: this.found()?.sellerFirstName || '',
       lastName: this.found()?.sellerLastName,
-    }
+    };
 
-    this.businessPartnerApi.createBusinessPartnerPlaceholder(newBusinessPartner).subscribe(data => {
+    this.businessPartnerApi
+      .createBusinessPartnerPlaceholder(newBusinessPartner)
+      .subscribe((data) => {
         const newDevice: CreateNewDevice = {
           modelId: candidate.model?.id || 0,
           purchasePrice: Number(this.form.controls.price.value),
@@ -103,16 +113,13 @@ export class AddDevice {
           batteryCycleCount: candidate.batteryCycleCount,
           defect: this.found()?.reportedDefect,
           sellerBusinessPartnerId: data,
-
         };
 
         this.deviceApi.createNewDevice(newDevice).subscribe({
           next: (deviceId) => this.router.navigate(['/devices', deviceId]),
-          error: () => this.isSubmitting.set(false)
+          error: () => this.isSubmitting.set(false),
         });
-
-    });
-
+      });
   }
 
   protected selectUrlText(): void {
@@ -125,7 +132,7 @@ export class AddDevice {
           this.found.set(data);
           this.isLoadingModel.set(false);
         },
-        error: () => this.isLoadingModel.set(false)
+        error: () => this.isLoadingModel.set(false),
       });
     }
   }

@@ -1,20 +1,20 @@
-import {Routes} from '@angular/router';
-import {Dashboard} from './dashboard/dashboard';
-import {AutoLoginPartialRoutesGuard} from 'angular-auth-oidc-client';
-import {Models} from './domain/model/models';
-import {BusinessPartners} from './domain/businesspartner/business-partners.component';
-import {ModelDetail} from './domain/model/model-detail/model-detail';
-import {Statistics} from './domain/statistics/statistics';
-import {Devices} from './domain/device/devices';
-import {TechnicalDetails} from './layout/technical-details/technical-details';
-import {BusinesspartnerDetail} from './domain/businesspartner/businesspartner-detail/businesspartner-detail';
-import {DeviceDetail} from './domain/device/device-detail/device-detail';
+import { Routes } from '@angular/router';
+import { Dashboard } from './dashboard/dashboard';
+import { AutoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
+import { Models } from './domain/model/models';
+import { BusinessPartners } from './domain/businesspartner/business-partners.component';
+import { ModelDetail } from './domain/model/model-detail/model-detail';
+import { Statistics } from './domain/statistics/statistics';
+import { Devices } from './domain/device/devices';
+import { TechnicalDetails } from './layout/technical-details/technical-details';
+import { BusinesspartnerDetail } from './domain/businesspartner/businesspartner-detail/businesspartner-detail';
+import { DeviceDetail } from './domain/device/device-detail/device-detail';
 
 export const routes: Routes = [
   {
     path: '',
     canActivateChild: [AutoLoginPartialRoutesGuard],
-    data: {breadcrumb: 'Dashboard'},
+    data: { breadcrumb: 'Dashboard' },
     children: [
       {
         path: '',
@@ -30,7 +30,7 @@ export const routes: Routes = [
       },
       {
         path: 'devices',
-        data: {breadcrumb: 'Devices'},
+        data: { breadcrumb: 'Devices' },
         children: [
           {
             path: '',
@@ -39,7 +39,7 @@ export const routes: Routes = [
           {
             path: ':deviceId',
             component: DeviceDetail,
-            data: {breadcrumb: 'Details'},
+            data: { breadcrumb: 'Details' },
           },
         ],
       },
@@ -56,13 +56,13 @@ export const routes: Routes = [
           {
             path: ':businessPartnerId',
             component: BusinesspartnerDetail,
-            data: {breadcrumb: 'Details'},
+            data: { breadcrumb: 'Details' },
           },
         ],
       },
       {
         path: 'models',
-        data: {breadcrumb: 'Models'},
+        data: { breadcrumb: 'Models' },
         children: [
           {
             path: '',
@@ -71,7 +71,7 @@ export const routes: Routes = [
           {
             path: ':modelId',
             component: ModelDetail,
-            data: {breadcrumb: 'Details'},
+            data: { breadcrumb: 'Details' },
           },
         ],
       },

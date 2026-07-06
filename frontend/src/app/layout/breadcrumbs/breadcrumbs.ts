@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {filter} from 'rxjs';
-import {BreadcrumbItem, ClrBreadcrumbsModule} from '@clr/angular';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { BreadcrumbItem, ClrBreadcrumbsModule } from '@clr/angular';
 
 @Component({
   selector: 'app-breadcrumbs',

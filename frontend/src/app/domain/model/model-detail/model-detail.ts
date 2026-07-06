@@ -1,35 +1,42 @@
-import {ChangeDetectionStrategy, Component, computed, inject, OnInit, signal} from '@angular/core';
-import {ModelControllerService, ModelDetailDto, SiliconDto, SizeDto} from '@api/model';
-import {ActivatedRoute} from '@angular/router';
-import {ClrLabel} from '@clr/angular';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { ModelControllerService, ModelDetailDto, SiliconDto, SizeDto } from '@api/model';
+import { ActivatedRoute } from '@angular/router';
+import { ClrLabel } from '@clr/angular';
 
 interface SizeAvailability {
   id: number;
   label: string;
-  availableOn: string[];  // collapsed to short names where possible
+  availableOn: string[]; // collapsed to short names where possible
   onAllChips: boolean;
 }
 
 @Component({
   selector: 'app-model-detail',
-  imports: [
-    ClrLabel
-  ],
+  imports: [ClrLabel],
   templateUrl: './model-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './model-detail.css',
 })
 export class ModelDetail implements OnInit {
-
   protected readonly model = signal<ModelDetailDto | undefined>(undefined);
   /** Colors sorted by name. */
   protected readonly colors = computed(() =>
-    [...(this.model()?.colors ?? [])].sort((a, b) => a.name.localeCompare(b.name)));
+    [...(this.model()?.colors ?? [])].sort((a, b) => a.name.localeCompare(b.name)),
+  );
   /** Silicons sorted ascending by total CPU cores, then GPU cores. */
   protected readonly silicons = computed(() =>
-    [...(this.model()?.siliconOptions ?? [])].sort((a, b) =>
-      this.cpuCores(a) - this.cpuCores(b)
-      || (a.numberGpuCores ?? 0) - (b.numberGpuCores ?? 0)));
+    [...(this.model()?.siliconOptions ?? [])].sort(
+      (a, b) =>
+        this.cpuCores(a) - this.cpuCores(b) || (a.numberGpuCores ?? 0) - (b.numberGpuCores ?? 0),
+    ),
+  );
   /** Silicons grouped by short name; group order follows the sorted silicons. */
   protected readonly siliconGroups = computed(() => {
     const groups = new Map<string, SiliconDto[]>();
@@ -38,22 +45,24 @@ export class ModelDetail implements OnInit {
       list.push(s);
       groups.set(s.nameShort, list);
     }
-    return [...groups.entries()].map(([shortName, chips]) => ({shortName, chips}));
+    return [...groups.entries()].map(([shortName, chips]) => ({ shortName, chips }));
   });
   /** Features sorted by category, then name. */
   protected readonly features = computed(() =>
-    [...(this.model()?.features ?? [])].sort((a, b) =>
-      a.category.localeCompare(b.category) || a.name.localeCompare(b.name)));
-  protected readonly memoryOptions = computed(() =>
-    this.buildAvailability(s => s.memoryOptions));
+    [...(this.model()?.features ?? [])].sort(
+      (a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name),
+    ),
+  );
+  protected readonly memoryOptions = computed(() => this.buildAvailability((s) => s.memoryOptions));
   protected readonly storageOptions = computed(() =>
-    this.buildAvailability(s => s.storageOptions));
+    this.buildAvailability((s) => s.storageOptions),
+  );
   private api = inject(ModelControllerService);
   private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const modelId = Number(this.route.snapshot.paramMap.get('modelId'));
-    this.api.getModelDetails(modelId).subscribe(data => this.model.set(data));
+    this.api.getModelDetails(modelId).subscribe((data) => this.model.set(data));
   }
 
   private buildAvailability(pick: (s: SiliconDto) => SizeDto[] | undefined): SizeAvailability[] {
@@ -65,7 +74,7 @@ export class ModelDetail implements OnInit {
       for (const size of pick(silicon) ?? []) {
         let entry = byId.get(size.id);
         if (!entry) {
-          entry = {size, siliconIds: new Set<number>()};
+          entry = { size, siliconIds: new Set<number>() };
           byId.set(size.id, entry);
         }
         entry.siliconIds.add(silicon.id);
@@ -74,7 +83,7 @@ export class ModelDetail implements OnInit {
 
     return [...byId.values()]
       .sort((a, b) => this.toGb(a.size) - this.toGb(b.size))
-      .map(e => ({
+      .map((e) => ({
         id: e.size.id,
         label: `${e.size.size} ${e.size.unit}`,
         onAllChips: e.siliconIds.size === totalChips,
@@ -93,14 +102,14 @@ export class ModelDetail implements OnInit {
 
     const tokens: string[] = [];
     for (const [shortName, group] of byShort) {
-      const available = group.filter(s => availableIds.has(s.id));
+      const available = group.filter((s) => availableIds.has(s.id));
       if (available.length === 0) {
         continue;
       }
       if (available.length === group.length) {
         tokens.push(shortName);
       } else {
-        tokens.push(...available.map(s => s.name));
+        tokens.push(...available.map((s) => s.name));
       }
     }
     return tokens;
@@ -108,9 +117,11 @@ export class ModelDetail implements OnInit {
 
   /** Total CPU cores: efficiency + performance + super. */
   private cpuCores(s: SiliconDto): number {
-    return (s.numberCpuEfficiencyCores ?? 0)
-      + (s.numberCpuPerformanceCores ?? 0)
-      + (s.numberCpuSuperCores ?? 0);
+    return (
+      (s.numberCpuEfficiencyCores ?? 0) +
+      (s.numberCpuPerformanceCores ?? 0) +
+      (s.numberCpuSuperCores ?? 0)
+    );
   }
 
   /** Normalizes a size to GB for sorting, regardless of unit casing/whitespace. */

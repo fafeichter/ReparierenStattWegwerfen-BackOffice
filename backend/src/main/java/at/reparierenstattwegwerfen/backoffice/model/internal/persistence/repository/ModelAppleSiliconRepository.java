@@ -17,5 +17,5 @@ public interface ModelAppleSiliconRepository extends JpaRepository<ModelAppleSil
 		from ModelAppleSilicon m
 		where m.id = :modelAppleSiliconId
 		""")
-    NamedId getAppleSilicon(Integer modelAppleSiliconId);
+	NamedId getAppleSilicon(Integer modelAppleSiliconId);
 }

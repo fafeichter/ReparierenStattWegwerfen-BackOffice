@@ -1,18 +1,20 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   ClrDatagridComparatorInterface,
   ClrDatagridModule,
   ClrDatagridSortOrder,
   ClrDatagridStringFilterInterface,
-  ClrTabsModule
+  ClrTabsModule,
 } from '@clr/angular';
-import {RouterLink} from '@angular/router';
-import {ModelControllerService, ModelDto} from '@api/model';
-import {DatePipe} from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { ModelControllerService, ModelDto } from '@api/model';
+import { DatePipe } from '@angular/common';
 
 class ReleaseDateComparator implements ClrDatagridComparatorInterface<ModelDto> {
   compare(a: ModelDto, b: ModelDto): number {
-    return +new Date(a.releaseYear, a.releaseMonth - 1) - +new Date(b.releaseYear, b.releaseMonth - 1);
+    return (
+      +new Date(a.releaseYear, a.releaseMonth - 1) - +new Date(b.releaseYear, b.releaseMonth - 1)
+    );
   }
 }
 
@@ -26,8 +28,11 @@ class ReleaseDateFilter implements ClrDatagridStringFilterInterface<ModelDto> {
   private datePipe = inject(DatePipe);
 
   accepts(item: ModelDto, search: string): boolean {
-    return (this.datePipe.transform(+new Date(item.releaseYear, item.releaseMonth - 1), 'MMM yyyy') || '')
-      .toLowerCase().includes(search.toLowerCase());
+    return (
+      this.datePipe.transform(+new Date(item.releaseYear, item.releaseMonth - 1), 'MMM yyyy') || ''
+    )
+      .toLowerCase()
+      .includes(search.toLowerCase());
   }
 }
 
@@ -39,7 +44,6 @@ class ReleaseDateFilter implements ClrDatagridStringFilterInterface<ModelDto> {
   styleUrl: './models.css',
 })
 export class Models implements OnInit {
-
   public releaseDateComparator = new ReleaseDateComparator();
   public nameFilter = new NameFilter();
   public releaseDateFilter = new ReleaseDateFilter();
@@ -71,10 +75,10 @@ export class Models implements OnInit {
     this._macbooksLoading.set(true);
 
     // Subscribe to the generated RxJS Observable
-    this.api.getAllMacBooks().subscribe(data => {
+    this.api.getAllMacBooks().subscribe((data) => {
       this._macbooks.set(data);
       this._macbooksLoading.set(false);
-    })
+    });
   }
 
   // 3. Method to trigger fetch
@@ -82,7 +86,7 @@ export class Models implements OnInit {
     this._ipadsLoading.set(true);
 
     // Subscribe to the generated RxJS Observable
-    this.api.getAllIPads().subscribe(data => {
+    this.api.getAllIPads().subscribe((data) => {
       this._ipads.set(data);
       this._ipadsLoading.set(false);
     });

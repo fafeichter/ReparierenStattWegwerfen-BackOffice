@@ -1,4 +1,4 @@
-import {OrElsePipe} from './or-else-pipe';
+import { OrElsePipe } from './or-else-pipe';
 
 describe('OrElsePipe', () => {
   it('create an instance', () => {

@@ -1,6 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.controller;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

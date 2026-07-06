@@ -18,5 +18,5 @@ public interface ModelAppleSiliconUnifiedMemoryRepository extends JpaRepository<
 		from ModelAppleSiliconUnifiedMemory m
 		where m.id = :modelUnifiedMemoryId
 		""")
-    NamedId getUnifiedMemory(Integer modelUnifiedMemoryId);
+	NamedId getUnifiedMemory(Integer modelUnifiedMemoryId);
 }

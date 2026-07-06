@@ -100,4 +100,3 @@ export class DeviceDetail implements OnInit {
       .subscribe((data) => this.deviceActivities.set(data));
   }
 }
-protected;

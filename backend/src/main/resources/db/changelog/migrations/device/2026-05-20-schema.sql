@@ -164,12 +164,12 @@ CREATE TABLE device_note
     device_note_id int       NOT NULL AUTO_INCREMENT,
     device_id      int       NOT NULL,
     text           text      NOT NULL,
-    date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date           timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (device_note_id),
     KEY            idx_device_note_device_id (device_id),
-    KEY  idx_device_note_date (date),
+    KEY            idx_device_note_date (date),
     CONSTRAINT fk_device_note_device_id FOREIGN KEY (device_id) REFERENCES device (device_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -181,7 +181,7 @@ CREATE TABLE device_note_audit
     device_note_id       int       NOT NULL,
     device_id            int       NOT NULL,
     text                 text      NOT NULL,
-    date timestamp NOT NULL,
+    date                 timestamp NOT NULL,
     created_at           timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at           timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (device_note_audit_id),

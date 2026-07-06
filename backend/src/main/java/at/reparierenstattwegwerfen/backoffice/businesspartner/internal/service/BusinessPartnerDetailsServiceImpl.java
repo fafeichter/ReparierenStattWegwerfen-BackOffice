@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class BusinessPartnerDetailsServiceImpl implements BusinessPartnerDetailsService {
 
 	private final BusinessPartnerRepository businessPartnerRepository;
+
 	@Override
 	public NamedIdDto getBusinessPartner(Integer businessPartnerId) {
 		return NamedIdDto.from(businessPartnerRepository.getBusinessPartner(businessPartnerId));

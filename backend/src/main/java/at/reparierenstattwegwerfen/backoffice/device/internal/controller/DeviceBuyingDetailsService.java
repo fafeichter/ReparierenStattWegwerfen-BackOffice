@@ -3,8 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBaseDetailsRepository;
-import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
-import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

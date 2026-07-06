@@ -7,10 +7,16 @@ import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
  */
 public interface DeviceInspection {
 	NamedIdDto getModel();
+
 	NamedIdDto getModelColor();
+
 	NamedIdDto getModelStorage();
+
 	NamedIdDto getModelAppleSiliconUnifiedMemory();
+
 	Integer getBatteryMaximumCapacity();
+
 	Integer getBatteryCycleCount();
+
 	String getSerialNumber();
 }

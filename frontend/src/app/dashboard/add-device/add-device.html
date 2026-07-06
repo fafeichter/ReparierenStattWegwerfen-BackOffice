@@ -81,7 +81,7 @@
   <div [style.background-color]="getConfidenceColor(model.confidence)" class="found">
     <strong>{{ model.model?.name }}
       {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} / {{ model.modelStorage?.name | orElse }}</strong>
-    <a class="ml-1" target="_blank" [routerLink]="['/models', model.model.id]">
+    <a [routerLink]="['/models', model.model.id]" class="ml-1" target="_blank">
       <cds-icon role="img" shape="pop-out"></cds-icon>
     </a>
     <br>

@@ -17,5 +17,5 @@ public interface ModelStorageRepository extends JpaRepository<ModelStorage, Inte
 		from ModelStorage m
 		where m.id = :modelStorageId
 		""")
-    NamedId getStorage(Integer modelStorageId);
+	NamedId getStorage(Integer modelStorageId);
 }

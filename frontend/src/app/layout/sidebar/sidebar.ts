@@ -1,9 +1,15 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, inject, ViewChild} from '@angular/core';
-import {ClrIcon, ClrVerticalNav, ClrVerticalNavModule} from '@clr/angular';
-import {RouterLink, RouterLinkActive} from '@angular/router';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {map} from 'rxjs';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  ViewChild,
+} from '@angular/core';
+import { ClrIcon, ClrVerticalNav, ClrVerticalNavModule } from '@clr/angular';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,16 +19,13 @@ import {map} from 'rxjs';
   styleUrl: './sidebar.css',
 })
 export class Sidebar implements AfterViewInit {
-
   @ViewChild(ClrVerticalNav) verticalNav!: ClrVerticalNav;
 
   private breakpointObserver = inject(BreakpointObserver);
 
   readonly isMobile = toSignal(
-    this.breakpointObserver
-      .observe([Breakpoints.Handset])
-      .pipe(map(result => result.matches)),
-    {initialValue: true}
+    this.breakpointObserver.observe([Breakpoints.Handset]).pipe(map((result) => result.matches)),
+    { initialValue: true },
   );
 
   ngAfterViewInit(): void {

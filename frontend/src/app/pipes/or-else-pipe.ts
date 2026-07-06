@@ -1,8 +1,8 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'orElse',
-  standalone: true
+  standalone: true,
 })
 export class OrElsePipe implements PipeTransform {
   transform(value: unknown, ...args: unknown[]): unknown {

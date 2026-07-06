@@ -1,11 +1,12 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.controller;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service.BusinessPartnerCreationService;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service.BusinessPartnerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Fabian Feichter

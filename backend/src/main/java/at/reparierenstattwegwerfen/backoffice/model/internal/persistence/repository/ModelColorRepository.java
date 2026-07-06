@@ -17,5 +17,5 @@ public interface ModelColorRepository extends JpaRepository<ModelColor, Integer>
 		from ModelColor m
 		where m.id = :modelColorId
 		""")
-    NamedId getColor(Integer modelColorId);
+	NamedId getColor(Integer modelColorId);
 }

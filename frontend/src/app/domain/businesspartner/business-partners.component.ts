@@ -1,24 +1,17 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
-import {BusinessPartnerControllerService, BusinessPartnerDto} from '@api/businesspartner';
-import {ClrDatagridModule, ClrLabel, ClrTabsModule} from '@clr/angular';
-import {RouterLink} from '@angular/router';
-import {OrElsePipe} from '../../pipes/or-else-pipe';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { BusinessPartnerControllerService, BusinessPartnerDto } from '@api/businesspartner';
+import { ClrDatagridModule, ClrLabel, ClrTabsModule } from '@clr/angular';
+import { RouterLink } from '@angular/router';
+import { OrElsePipe } from '../../pipes/or-else-pipe';
 
 @Component({
   selector: 'app-businesspartners',
-  imports: [
-    ClrDatagridModule,
-    ClrTabsModule,
-    RouterLink,
-    ClrLabel,
-    OrElsePipe
-  ],
+  imports: [ClrDatagridModule, ClrTabsModule, RouterLink, ClrLabel, OrElsePipe],
   templateUrl: './business-partners.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './business-partners.component.css',
 })
 export class BusinessPartners {
-
   private api = inject(BusinessPartnerControllerService);
 
   // 1. Private state signal
@@ -37,9 +30,9 @@ export class BusinessPartners {
     this._businessPartnersLoading.set(true);
 
     // Subscribe to the generated RxJS Observable
-    this.api.getAllBusinessPartners().subscribe(data => {
+    this.api.getAllBusinessPartners().subscribe((data) => {
       this._businessPartners.set(data);
       this._businessPartnersLoading.set(false);
-    })
+    });
   }
 }
