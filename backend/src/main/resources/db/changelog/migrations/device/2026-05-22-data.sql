@@ -52,5 +52,7 @@ VALUES (1, 'Erstellt', 'Device #{{deviceId}} erstellt.'),
        (3, 'Akku Status geändert', 'Akku Status automatisch auf \"{{newBatteryStatus}}\" gesetzt.'),
        (4, 'Akku Status geändert', 'Akku Status geändert von \"{{oldBatteryStatus}}\" auf \"{{newBatteryStatus}}\".'),
        (5, 'Äußerlichen Zustand geändert', 'Äußerlichen Zustand geändert von \"{{oldGrade}}\" auf \"{{newGrade}}\".'),
-       (6, 'Rechnung generiert', '{{invoiceFileName}}'),
-       (7, 'Verkauft', null);
+       (6, 'Tag hinzugefügt', 'Tag \"{{newTag}}\" hinzugefügt.'),
+       (7, 'Tag entfernt', 'Tag \"{{tag}}\" entfernt.'),
+       (8, 'Rechnung generiert', '{{invoiceFileName}}'),
+       (9, 'Verkauft', null);

@@ -2,6 +2,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBaseDetailsRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceTagRepository;
 import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class DeviceBaseDetailsService {
 
 	private final DeviceBaseDetailsRepository deviceRepository;
+	private final DeviceTagRepository deviceTagRepository;
+
 	private final ModelDetailsService modelDetailsService;
 
 	@Transactional(readOnly = true)
@@ -37,6 +40,7 @@ public class DeviceBaseDetailsService {
 			.batteryMaximumCapacity(device.getBatteryMaximumCapacity())
 			.batteryCycleCount(device.getBatteryCycleCount())
 			.batteryStatus(NamedIdDto.from(device.getBatteryStatus()))
+			.tags(deviceTagRepository.getTagsForDevice(deviceId).stream().map(tag -> NamedIdDto.from(tag)).toList())
 			.build();
 	}
 }

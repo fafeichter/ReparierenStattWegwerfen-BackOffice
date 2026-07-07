@@ -6,8 +6,6 @@ import {
   DeviceBatteryStatusControllerService,
   DeviceGradeControllerService,
   DeviceStatusControllerService,
-  DeviceTagDto,
-  DeviceTagsControllerService,
   NamedIdDto,
 } from '@api/device';
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
@@ -48,14 +46,16 @@ export class Base implements OnInit {
   statusChanged = output<void>();
   batteryStatusChanged = output<void>();
   gradeChanged = output<void>();
+  tagsChanged = output<void>();
 
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
-  deviceTags = signal<DeviceTagDto[]>([]);
 
   deviceStatus = signal<NamedIdDto[]>([]);
   deviceBatteryStatus = signal<NamedIdDto[]>([]);
   deviceGrades = signal<NamedIdDto[]>([]);
   statusEditModeActive = signal<boolean>(false);
+  tagEditModeActive = signal<boolean>(false);
+  deviceTags = signal<NamedIdDto[]>([]);
 
   serialNumberEditModeActive = signal<boolean>(false);
   batteryEditModeActive = signal<boolean>(false);
@@ -83,15 +83,17 @@ export class Base implements OnInit {
     newGradeId: new FormControl<number | null>(null, [Validators.required]),
   });
 
+  tagForm = new FormGroup({
+    newTagId: new FormControl<number | null>(null, [Validators.required]),
+  });
+
   private api = inject(DeviceBaseControllerService);
-  private tagsApi = inject(DeviceTagsControllerService);
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
   private gradeApi = inject(DeviceGradeControllerService);
 
   ngOnInit(): void {
     this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
-    this.tagsApi.getTagsForDevice(this.deviceId()).subscribe((data) => this.deviceTags.set(data));
   }
 
   activateStatusEditMode() {
@@ -227,5 +229,52 @@ export class Base implements OnInit {
           };
         });
       });
+  }
+
+  activateTagEditMode() {
+    this.tagEditModeActive.set(true);
+
+    this.api.getAvailableTags(this.deviceId()).subscribe((data) => {
+      this.deviceTags.set(data);
+    });
+  }
+
+  addTag() {
+    this.api.addTag(this.deviceId(), this.tagForm.controls.newTagId.value!).subscribe(() => {
+      this.tagEditModeActive.set(false);
+      this.tagsChanged.emit();
+
+      this.deviceBase.update((currentValue) => {
+        let addedTag: NamedIdDto = this.deviceTags().find((deviceTag) => {
+          return deviceTag.id == this.tagForm.controls.newTagId.value!;
+        })!;
+
+        this.deviceBase()?.tags!.push(addedTag);
+
+        return {
+          ...currentValue!,
+          tags: this.deviceBase()?.tags,
+        };
+      });
+    });
+  }
+
+  protected deleteTag(tagId: number) {
+    if (confirm('Do you really want to delete this tag?')) {
+      this.api.deleteTag(this.deviceId(), tagId).subscribe(() => {
+        this.tagsChanged.emit();
+
+        this.deviceBase.update((currentValue) => {
+          this.deviceBase()!.tags = this.deviceBase()!.tags!.filter(
+            (deviceTag) => deviceTag.id !== tagId,
+          );
+
+          return {
+            ...currentValue!,
+            tags: this.deviceBase()?.tags,
+          };
+        });
+      });
+    }
   }
 }

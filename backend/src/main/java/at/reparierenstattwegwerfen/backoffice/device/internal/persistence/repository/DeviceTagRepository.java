@@ -15,7 +15,7 @@ public interface DeviceTagRepository extends JpaRepository<DeviceTag, Integer> {
 
 	@Query("""
 		SELECT t FROM DeviceTag t
-		JOIN DeviceTags d ON t.id = d.device.id
+		JOIN DeviceTags d ON d.deviceTag.id = t.id
 		WHERE d.device.id = :deviceId
 		ORDER BY t.sortOrder
 		""")

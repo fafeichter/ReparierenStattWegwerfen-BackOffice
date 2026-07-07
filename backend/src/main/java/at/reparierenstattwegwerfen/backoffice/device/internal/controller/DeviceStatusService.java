@@ -1,14 +1,10 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceGradeRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.service.BatteryStatusAutomaticallySet;
-import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceBatteryStatusChanged;
-import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceGradeChanged;
-import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceStatusChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTag;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTags;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -28,6 +24,8 @@ public class DeviceStatusService {
 	private final DeviceStatusRepository deviceStatusRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final DeviceGradeRepository deviceGradeRepository;
+	private final DeviceTagRepository deviceTagRepository;
+	private final DeviceTagsRepository deviceTagsRepository;
 	private final ApplicationEventPublisher events;
 
 	public List<NamedIdDto> getAllStatus() {
@@ -93,5 +91,36 @@ public class DeviceStatusService {
 
 		deviceRepository.save(device);
 		events.publishEvent(deviceGradeChanged);
+	}
+
+	@Transactional
+	public void addTag(Integer deviceId, Integer newTagId) {
+		DeviceTags deviceTags = new DeviceTags();
+		deviceTags.setDevice(deviceRepository.getReferenceById(deviceId));
+		deviceTags.setDeviceTag(deviceTagRepository.getReferenceById(newTagId));
+		DeviceTagAdded deviceTagAdded = new DeviceTagAdded(this, deviceId, newTagId);
+
+		deviceTagsRepository.save(deviceTags);
+		events.publishEvent(deviceTagAdded);
+	}
+
+	@Transactional
+	public void deleteTag(Integer deviceId, Integer tagId) {
+		deviceTagsRepository.deleteByDeviceAndDeviceTag(deviceRepository.getReferenceById(deviceId), deviceTagRepository.getReferenceById(tagId));
+		DeviceTagRemoved deviceTagRemoved = new DeviceTagRemoved(this, deviceId, tagId);
+		events.publishEvent(deviceTagRemoved);
+	}
+
+	public List<NamedIdDto> getAvailableTags(Integer deviceId) {
+		List<DeviceTag> allTags = deviceTagRepository.findAll();
+		List<Integer> alreadyUsedTagIds = deviceTagRepository.getTagsForDevice(deviceId)
+			.stream()
+			.map(DeviceTag::getId)
+			.toList();
+
+		return allTags.stream()
+			.filter(tag -> !alreadyUsedTagIds.contains(tag.getId()))
+			.map(a -> NamedIdDto.from(a))
+			.toList();
 	}
 }

@@ -121,13 +121,28 @@
   </div>
   <div class="card-block">
     Tags:
-    @for (tag of deviceTags(); track tag.id) {
+    @for (tag of deviceBase()?.tags; track tag.id) {
       <clr-label [clrClickable]="true">
         {{ tag.name }}
-        <cds-icon shape="close"/>
+        <cds-icon (click)="deleteTag(tag.id)" shape="close"/>
       </clr-label>
     } @empty {
       -
+    }
+    <button (click)="activateTagEditMode()" class="btn btn-link">
+      <cds-icon role="img" shape="plus"/>
+    </button>
+    @if (tagEditModeActive()) {
+      <form (ngSubmit)="addTag()" [formGroup]="tagForm" clrForm>
+        <select formControlName="newTagId">
+          @for (deviceTag of deviceTags(); track deviceTag.id) {
+            <option [value]="deviceTag.id">{{ deviceTag.name }}</option>
+          }
+        </select>
+        <button [disabled]="tagForm.invalid" class="btn btn-link" type="submit">
+          <cds-icon role="img" shape="check"/>
+        </button>
+      </form>
     }
   </div>
 </div>

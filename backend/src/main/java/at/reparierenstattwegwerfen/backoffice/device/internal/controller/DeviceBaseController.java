@@ -1,8 +1,11 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
+import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Fabian Feichter
@@ -43,5 +46,20 @@ public class DeviceBaseController {
 	@PostMapping("/grade")
 	public void updateGrade(@PathVariable Integer deviceId, @RequestBody Integer newGradeId) {
 		deviceStatusService.updateGrade(deviceId, newGradeId);
+	}
+
+	@PostMapping("/available-tags")
+	public List<NamedIdDto> getAvailableTags(@PathVariable Integer deviceId) {
+		return deviceStatusService.getAvailableTags(deviceId);
+	}
+
+	@PostMapping("/tags")
+	public void addTag(@PathVariable Integer deviceId, @RequestBody Integer newTagId) {
+		deviceStatusService.addTag(deviceId, newTagId);
+	}
+
+	@DeleteMapping("/tags")
+	public void deleteTag(@PathVariable Integer deviceId, @RequestBody Integer tagId) {
+		deviceStatusService.deleteTag(deviceId, tagId);
 	}
 }

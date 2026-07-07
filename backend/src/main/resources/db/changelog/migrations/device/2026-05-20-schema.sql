@@ -15,8 +15,8 @@ CREATE TABLE device_battery_status
 CREATE TABLE device_grade
 (
     device_grade_id int          NOT NULL AUTO_INCREMENT,
-    name       varchar(256) NOT NULL,
-    sort_order int          NOT NULL,
+    name            varchar(256) NOT NULL,
+    sort_order      int          NOT NULL,
     created_at      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (device_grade_id),
