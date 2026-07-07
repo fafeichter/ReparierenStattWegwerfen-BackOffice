@@ -1,5 +1,5 @@
 <button (click)="modalOpened.set(true)" class="btn btn-primary">
-  <cds-icon shape="plus"></cds-icon>
+  <cds-icon shape="plus"/>
   Add device
 </button>
 
@@ -82,7 +82,7 @@
     <strong>{{ model.model?.name }}
       {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} / {{ model.modelStorage?.name | orElse }}</strong>
     <a [routerLink]="['/models', model.model.id]" class="ml-1" target="_blank">
-      <cds-icon role="img" shape="pop-out"></cds-icon>
+      <cds-icon role="img" shape="pop-out"/>
     </a>
     <br>
     Chip: {{ model.modelAppleSilicon?.name | orElse }}<br>

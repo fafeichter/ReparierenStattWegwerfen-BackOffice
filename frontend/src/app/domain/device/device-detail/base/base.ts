@@ -9,7 +9,7 @@ import {
 } from '@api/device';
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import { RouterLink } from '@angular/router';
-import { ClrCommonFormsModule, ClrIcon, ClrLabel } from '@clr/angular';
+import { ClrCommonFormsModule, ClrIcon, ClrInputModule, ClrLabel } from '@clr/angular';
 import {
   FormControl,
   FormGroup,
@@ -28,6 +28,7 @@ import {
     ClrCommonFormsModule,
     FormsModule,
     ReactiveFormsModule,
+    ClrInputModule,
   ],
   templateUrl: './base.html',
   styleUrl: './base.css',
@@ -38,11 +39,18 @@ export class Base implements OnInit {
 
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
   deviceTags = signal<DeviceTagDto[]>([]);
+
   deviceStatus = signal<NamedIdDto[]>([]);
   statusEditModeActive = signal<boolean>(false);
 
+  serialNumberEditModeActive = signal<boolean>(false);
+
   statusForm = new FormGroup({
     newStatusId: new FormControl<number | null>(null, [Validators.required]),
+  });
+
+  serialNumberForm = new FormGroup({
+    newSerialNumber: new FormControl<string | null>(null, []),
   });
 
   private api = inject(DeviceBaseControllerService);
@@ -54,7 +62,7 @@ export class Base implements OnInit {
     this.tagsApi.getTagsForDevice(this.deviceId()).subscribe((data) => this.deviceTags.set(data));
   }
 
-  protected activateStatusEditMode() {
+  activateStatusEditMode() {
     this.statusEditModeActive.set(true);
     this.statusApi.getAllStatus().subscribe((data) => {
       this.deviceStatus.set(data);
@@ -64,15 +72,45 @@ export class Base implements OnInit {
     });
   }
 
-  protected changeStatus() {
+  changeStatus() {
     this.api
       .updateStatus(this.deviceId(), this.statusForm.controls.newStatusId.value!)
       .subscribe(() => {
         this.statusEditModeActive.set(false);
         this.statusChanged.emit();
+        this.deviceBase.update((currentValue) => {
+          return {
+            ...currentValue!,
+            status: this.deviceStatus().find(
+              (device) => device.id === this.statusForm.controls.newStatusId.value!,
+            )!,
+          };
+        });
+
         this.api
           .getDeviceBaseDetails(this.deviceId())
           .subscribe((data) => this.deviceBase.set(data));
+      });
+  }
+
+  activateSerialNumberEditMode() {
+    this.serialNumberEditModeActive.set(true);
+    this.serialNumberForm.patchValue({
+      newSerialNumber: this.deviceBase()?.serialNumber,
+    });
+  }
+
+  changeSerialNumber() {
+    this.api
+      .updateSerialNumber(this.deviceId(), this.serialNumberForm.controls.newSerialNumber.value!)
+      .subscribe(() => {
+        this.serialNumberEditModeActive.set(false);
+        this.deviceBase.update((currentValue) => {
+          return {
+            ...currentValue!,
+            serialNumber: this.serialNumberForm.controls.newSerialNumber.value!,
+          };
+        });
       });
   }
 }

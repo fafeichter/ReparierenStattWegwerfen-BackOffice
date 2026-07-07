@@ -40,4 +40,12 @@ public class DeviceStatusService {
 		deviceRepository.save(device);
 		events.publishEvent(deviceStatusChanged);
 	}
+
+	@Transactional
+	public void updateSerialNumber(Integer deviceId, String newSerialNumber) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+		device.setSerialNumber(newSerialNumber);
+
+		deviceRepository.save(device);
+	}
 }

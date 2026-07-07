@@ -23,4 +23,9 @@ public class DeviceBaseController {
 	public void updateStatus(@PathVariable Integer deviceId, @RequestBody Integer newStatusId) {
 		deviceStatusService.updateStatusOfDevice(deviceId, newStatusId);
 	}
+
+	@PostMapping("/serial-number")
+	public void updateSerialNumber(@PathVariable Integer deviceId, @RequestBody(required = false) String newSerialNumber) {
+		deviceStatusService.updateSerialNumber(deviceId, newSerialNumber);
+	}
 }

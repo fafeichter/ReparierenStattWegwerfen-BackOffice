@@ -6,7 +6,7 @@
         <a [routerLink]="['/models', deviceBase()?.model?.id]">{{ deviceBase()?.modelNumber }}</a></li>
       <li>Technical Specs: <a [href]=" deviceBase()?.technicalSpecsUrl">
         {{ deviceBase()?.technicalSpecsUrl }}
-        <cds-icon role="img" shape="pop-out"></cds-icon>
+        <cds-icon role="img" shape="pop-out"/>
       </a></li>
       <hr>
       <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse }}</li>
@@ -18,9 +18,8 @@
         Status:
         @if (!statusEditModeActive()) {
           <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
-          <button (click)="activateStatusEditMode()"
-                  class="btn btn-link">
-            <cds-icon role="img" shape="edit"></cds-icon>
+          <button (click)="activateStatusEditMode()" class="btn btn-link">
+            <cds-icon role="img" shape="edit"/>
           </button>
         } @else {
           <form (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm>
@@ -29,15 +28,30 @@
                 <option [value]="deviceStatus.id">{{ deviceStatus.name }}</option>
               }
             </select>
-            <button [disabled]="statusForm.invalid"
-                    class="btn btn-link" type="submit">
-              <cds-icon role="img" shape="check"></cds-icon>
+            <button [disabled]="statusForm.invalid" class="btn btn-link" type="submit">
+              <cds-icon role="img" shape="check"/>
             </button>
           </form>
         }
       </li>
       <hr>
-      <li>Serial Number: {{ deviceBase()?.serialNumber | orElse }}</li>
+      <li>Serial Number:
+        @if (!serialNumberEditModeActive()) {
+          {{ deviceBase()?.serialNumber | orElse }}
+          <button (click)="activateSerialNumberEditMode()" class="btn btn-link">
+            <cds-icon role="img" shape="edit"/>
+          </button>
+        } @else {
+          <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm>
+            <clr-input-container>
+              <input autofocus clrInput formControlName="newSerialNumber" type="text">
+            </clr-input-container>
+            <button [disabled]="serialNumberForm.invalid" class="btn btn-link" type="submit">
+              <cds-icon role="img" shape="check"/>
+            </button>
+          </form>
+        }
+      </li>
       <li>
         Battery:
         {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
@@ -59,7 +73,7 @@
     @for (tag of deviceTags(); track tag.id) {
       <clr-label [clrClickable]="true">
         {{ tag.name }}
-        <cds-icon shape="close"></cds-icon>
+        <cds-icon shape="close"/>
       </clr-label>
     } @empty {
       -

@@ -12,16 +12,16 @@
   </form>
   <div class="header-actions">
     <a (click)="refreshPage()" aria-label="refresh" class="nav-link nav-icon cursor-pointer">
-      <cds-icon shape="refresh"></cds-icon>
+      <cds-icon shape="refresh"/>
     </a>
     <a aria-label="notifications" class="nav-link nav-icon">
-      <cds-icon shape="bell"></cds-icon>
+      <cds-icon shape="bell"/>
     </a>
     <clr-dropdown>
       <button aria-label="open user profile" class="nav-text" clrDropdownTrigger>
-        <cds-icon shape="user" size="md"></cds-icon>
+        <cds-icon shape="user" size="md"/>
         {{ firstName() }}
-        <cds-icon direction="down" shape="angle"></cds-icon>
+        <cds-icon direction="down" shape="angle"/>
       </button>
       <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
         <a clrDropdownItem routerLink="/technical-details">Technical details</a>
