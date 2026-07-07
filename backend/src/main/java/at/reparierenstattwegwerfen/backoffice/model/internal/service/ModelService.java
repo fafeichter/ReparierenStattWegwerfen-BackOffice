@@ -1,7 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.model.internal.controller.ModelDetailDto;
-import at.reparierenstattwegwerfen.backoffice.model.internal.controller.ModelDto;
 import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model.*;
 import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.repository.ModelRepository;
 import lombok.RequiredArgsConstructor;

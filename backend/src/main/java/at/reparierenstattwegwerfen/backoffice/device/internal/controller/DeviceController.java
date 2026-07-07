@@ -2,6 +2,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.CreateNewDeviceDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceCreationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class DeviceController {
 	}
 
 	@PostMapping("/")
-	public Integer createNewDevice(@Valid @RequestBody CreateNewDevice newDevice) {
+	public Integer createNewDevice(@Valid @RequestBody CreateNewDeviceDto newDevice) {
 		return deviceCreationService.createDevice(newDevice);
 	}
 }

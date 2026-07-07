@@ -19,7 +19,7 @@ import {
 } from '@clr/angular';
 
 import { Alternative, ModelControllerService, ResolvedModelMatch } from '@api/model';
-import { CreateNewDevice, DeviceControllerService } from '@api/device';
+import { CreateNewDeviceDto, DeviceControllerService } from '@api/device';
 import { OrElsePipe } from '../../pipes/or-else-pipe';
 import {
   BusinessPartnerCreationControllerService,
@@ -100,7 +100,7 @@ export class AddDevice {
     this.businessPartnerApi
       .createBusinessPartnerPlaceholder(newBusinessPartner)
       .subscribe((data) => {
-        const newDevice: CreateNewDevice = {
+        const newDevice: CreateNewDeviceDto = {
           modelId: candidate.model?.id || 0,
           purchasePrice: Number(this.form.controls.price.value),
           modelColorId: candidate.modelColor?.id,

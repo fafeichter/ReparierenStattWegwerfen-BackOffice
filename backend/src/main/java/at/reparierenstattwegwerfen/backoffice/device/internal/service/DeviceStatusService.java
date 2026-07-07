@@ -1,10 +1,9 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTag;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTags;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
-import at.reparierenstattwegwerfen.backoffice.device.internal.service.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -55,7 +54,7 @@ public class DeviceStatusService {
 	}
 
 	@Transactional
-	public void updateBattery(Integer deviceId, BatteryHealth newDeviceBaseBattery) {
+	public void updateBattery(Integer deviceId, BatteryHealthDto newDeviceBaseBattery) {
 		Device device = deviceRepository.getReferenceById(deviceId);
 		device.setBatteryMaximumCapacity(newDeviceBaseBattery.getMaximumCapacity());
 		device.setBatteryCycleCount(newDeviceBaseBattery.getCycleCount());

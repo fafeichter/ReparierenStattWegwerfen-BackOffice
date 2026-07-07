@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceNote;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceNoteRepository;

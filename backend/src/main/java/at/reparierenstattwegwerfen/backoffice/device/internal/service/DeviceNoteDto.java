@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

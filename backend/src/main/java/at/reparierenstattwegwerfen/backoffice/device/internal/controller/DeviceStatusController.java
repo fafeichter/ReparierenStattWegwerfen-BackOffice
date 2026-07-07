@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceStatusService;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

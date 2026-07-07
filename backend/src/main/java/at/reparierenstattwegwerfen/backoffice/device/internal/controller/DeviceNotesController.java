@@ -1,5 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceNoteDto;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceNoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

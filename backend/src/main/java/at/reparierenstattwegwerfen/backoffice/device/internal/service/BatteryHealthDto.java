@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,7 +9,7 @@ import lombok.Value;
  * @author Fabian Feichter
  */
 @Value
-public class BatteryHealth {
+public class BatteryHealthDto {
 
 	@Min(0)
 	@Max(100)
@@ -18,7 +18,7 @@ public class BatteryHealth {
 	@Positive
 	Integer cycleCount;
 
-	public BatteryHealth(Integer maximumCapacity, Integer cycleCount) {
+	public BatteryHealthDto(Integer maximumCapacity, Integer cycleCount) {
 		this.maximumCapacity = maximumCapacity;
 		this.cycleCount = cycleCount;
 	}

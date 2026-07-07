@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import {
-  BatteryHealth,
+  BatteryHealthDto,
   DeviceBaseControllerService,
   DeviceBaseDetailsDto,
   DeviceBatteryStatusControllerService,
@@ -157,7 +157,7 @@ export class Base implements OnInit {
   }
 
   changeBattery() {
-    const newBatteryHealth: BatteryHealth = {
+    const newBatteryHealth: BatteryHealthDto = {
       cycleCount: this.batteryForm.controls.newCycleCount.value!,
       maximumCapacity: this.batteryForm.controls.newMaximumCapacity.value!,
     };

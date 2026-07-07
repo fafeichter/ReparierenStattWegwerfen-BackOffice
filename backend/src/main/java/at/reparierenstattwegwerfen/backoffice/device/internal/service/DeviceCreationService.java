@@ -1,7 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.controller.BatteryHealth;
-import at.reparierenstattwegwerfen.backoffice.device.internal.controller.CreateNewDevice;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
@@ -26,7 +24,7 @@ public class DeviceCreationService {
 	private final ApplicationEventPublisher events;
 
 	@Transactional
-	public Integer createDevice(CreateNewDevice newDevice) {
+	public Integer createDevice(CreateNewDeviceDto newDevice) {
 		Device device = new Device();
 
 		device.setBuyingDate(LocalDate.now());
@@ -39,7 +37,7 @@ public class DeviceCreationService {
 		device.setModelAppleSiliconId(newDevice.getModelAppleSiliconId());
 		device.setModelAppleSiliconUnifiedMemoryId(newDevice.getModelAppleSiliconUnifiedMemoryId());
 
-		BatteryHealth batteryHealth = new BatteryHealth(
+		BatteryHealthDto batteryHealth = new BatteryHealthDto(
 			newDevice.getBatteryMaximumCapacity(),
 			newDevice.getBatteryCycleCount()
 		);

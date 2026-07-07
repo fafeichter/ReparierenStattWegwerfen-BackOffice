@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
@@ -12,20 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-public class DeviceBuyingDetailsService {
+public class DeviceSellingDetailsService {
 
 	private final DeviceBaseDetailsRepository deviceRepository;
 	private final BusinessPartnerDetailsService businessPartnerDetailsService;
 
 	@Transactional(readOnly = true)
-	public DeviceBuyingDetailsDto load(Integer deviceId) {
+	public DeviceSellingDetailsDto load(Integer deviceId) {
 		Device device = deviceRepository.getByIdWithRelations(deviceId);
 
-		return DeviceBuyingDetailsDto.builder()
-			.url(device.getUrl())
-			.price(device.getPurchasePrice())
-			.seller(businessPartnerDetailsService.getBusinessPartner(device.getSellerBusinessPartnerId()))
-			.date(device.getBuyingDate())
+		return DeviceSellingDetailsDto.builder()
+			.price(device.getSellingPrice())
+			.buyer(businessPartnerDetailsService.getBusinessPartner(device.getBuyerBusinessPartnerId()))
+			.date(device.getSellingDate())
 			.build();
 	}
 }

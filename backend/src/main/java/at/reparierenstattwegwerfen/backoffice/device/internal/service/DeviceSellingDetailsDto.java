@@ -1,10 +1,9 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.validator.constraints.URL;
 
 import java.time.LocalDate;
 
@@ -13,17 +12,13 @@ import java.time.LocalDate;
  */
 @Data
 @Builder
-public class DeviceBuyingDetailsDto {
-
-	@NotNull
-	@URL
-	private final String url;
+public class DeviceSellingDetailsDto {
 
 	@NotNull
 	private final Double price;
 
 	@NotNull
-	private final NamedIdDto seller;
+	private final NamedIdDto buyer;
 
 	@NotNull
 	private final LocalDate date;

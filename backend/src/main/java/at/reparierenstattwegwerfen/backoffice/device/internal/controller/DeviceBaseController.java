@@ -1,5 +1,9 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.BatteryHealthDto;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceBaseDetailsDto;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceBaseDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceStatusService;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +38,7 @@ public class DeviceBaseController {
 	}
 
 	@PostMapping("/battery")
-	public void updateBattery(@PathVariable Integer deviceId, @RequestBody @Valid BatteryHealth newDeviceBaseBattery) {
+	public void updateBattery(@PathVariable Integer deviceId, @RequestBody @Valid BatteryHealthDto newDeviceBaseBattery) {
 		deviceStatusService.updateBattery(deviceId, newDeviceBaseBattery);
 	}
 
