@@ -28,6 +28,7 @@ public class DeviceActivityService {
 	private final DeviceRepository deviceRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
+	private final DeviceGradeRepository deviceGradeRepository;
 	private final Mustache.Compiler mustacheCompiler;
 
 	@ApplicationModuleListener
@@ -90,6 +91,24 @@ public class DeviceActivityService {
 		Map<String, String> context = new HashMap<>() {{
 			put("oldBatteryStatus", event.getOldBatteryStatusId() != null ? deviceBatteryStatusRepository.getReferenceById(event.getOldBatteryStatusId()).getName() : "-");
 			put("newBatteryStatus", deviceBatteryStatusRepository.getReferenceById(event.getNewBatteryStatusId()).getName());
+		}};
+
+		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));
+		deviceActivity.setActivityType(activityType);
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@EventListener
+	public void on(DeviceGradeChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+
+		DeviceActivityType activityType = deviceActivityTypeRepository.getReferenceById(5);
+		String templateString = activityType.getDescriptionTemplate();
+		Map<String, String> context = new HashMap<>() {{
+			put("oldGrade", event.getOldGradeId() != null ? deviceGradeRepository.getReferenceById(event.getOldGradeId()).getName() : "-");
+			put("newGrade", deviceGradeRepository.getReferenceById(event.getNewGradeId()).getName());
 		}};
 
 		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));

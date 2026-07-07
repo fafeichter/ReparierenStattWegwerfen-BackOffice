@@ -4,6 +4,7 @@ import {
   DeviceBaseControllerService,
   DeviceBaseDetailsDto,
   DeviceBatteryStatusControllerService,
+  DeviceGradeControllerService,
   DeviceStatusControllerService,
   DeviceTagDto,
   DeviceTagsControllerService,
@@ -45,17 +46,21 @@ import {
 export class Base implements OnInit {
   deviceId = input.required<number>();
   statusChanged = output<void>();
+  batteryStatusChanged = output<void>();
+  gradeChanged = output<void>();
 
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
   deviceTags = signal<DeviceTagDto[]>([]);
 
   deviceStatus = signal<NamedIdDto[]>([]);
   deviceBatteryStatus = signal<NamedIdDto[]>([]);
+  deviceGrades = signal<NamedIdDto[]>([]);
   statusEditModeActive = signal<boolean>(false);
 
   serialNumberEditModeActive = signal<boolean>(false);
   batteryEditModeActive = signal<boolean>(false);
   batteryStatusEditModeActive = signal<boolean>(false);
+  gradeEditModeActive = signal<boolean>(false);
 
   statusForm = new FormGroup({
     newStatusId: new FormControl<number | null>(null, [Validators.required]),
@@ -74,10 +79,15 @@ export class Base implements OnInit {
     newBatteryStatusId: new FormControl<number | null>(null, [Validators.required]),
   });
 
+  gradeForm = new FormGroup({
+    newGradeId: new FormControl<number | null>(null, [Validators.required]),
+  });
+
   private api = inject(DeviceBaseControllerService);
   private tagsApi = inject(DeviceTagsControllerService);
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
+  private gradeApi = inject(DeviceGradeControllerService);
 
   ngOnInit(): void {
     this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
@@ -175,6 +185,8 @@ export class Base implements OnInit {
       )
       .subscribe(() => {
         this.batteryStatusEditModeActive.set(false);
+        this.batteryStatusChanged.emit();
+
         this.deviceBase.update((currentValue) => {
           return {
             ...currentValue!,
@@ -182,6 +194,35 @@ export class Base implements OnInit {
               return (
                 deviceBatteryStatus.id == this.batteryStatusForm.controls.newBatteryStatusId.value!
               );
+            })!,
+          };
+        });
+      });
+  }
+
+  activateGradeEditMode() {
+    this.gradeEditModeActive.set(true);
+
+    this.gradeApi.getAllGrades().subscribe((data) => {
+      this.deviceGrades.set(data);
+      this.gradeForm.patchValue({
+        newGradeId: this.deviceBase()?.grade?.id,
+      });
+    });
+  }
+
+  changeGrade() {
+    this.api
+      .updateGrade(this.deviceId(), this.gradeForm.controls.newGradeId.value!)
+      .subscribe(() => {
+        this.gradeEditModeActive.set(false);
+        this.gradeChanged.emit();
+
+        this.deviceBase.update((currentValue) => {
+          return {
+            ...currentValue!,
+            grade: this.deviceGrades().find((deviceGrade) => {
+              return deviceGrade.id == this.gradeForm.controls.newGradeId.value!;
             })!,
           };
         });

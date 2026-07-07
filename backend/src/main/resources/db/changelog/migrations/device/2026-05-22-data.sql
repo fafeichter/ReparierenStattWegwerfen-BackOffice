@@ -6,10 +6,10 @@ VALUES (1, 'nicht getauscht', 1),
        (2, 'freiwillig getauscht', 2),
        (3, 'getauscht wegen Defekt', 3);
 
-INSERT INTO device_grade (device_grade_id, name, description)
-VALUES (1, 'A', 'neuwertig'),
-       (2, 'B', 'kleinere sichtbare Kratzer'),
-       (3, 'C', 'sichtbare Kratzer, Dellen oder Kerben');
+INSERT INTO device_grade (device_grade_id, name, sort_order)
+VALUES (1, 'neuwertig', 1),
+       (2, 'nahezu neuwertig', 2),
+       (3, 'sichtbare Gebrauchsspuren', 3);
 
 INSERT INTO device_online_marketplace (device_online_marketplace_id, name, url)
 VALUES (1, 'willhaben', 'https://www.willhaben.at/'),
@@ -51,5 +51,6 @@ VALUES (1, 'Erstellt', 'Device #{{deviceId}} erstellt.'),
        (2, 'Status geändert', 'Status geändert von \"{{oldStatus}}\" auf \"{{newStatus}}\".'),
        (3, 'Akku Status geändert', 'Akku Status automatisch auf \"{{newBatteryStatus}}\" gesetzt.'),
        (4, 'Akku Status geändert', 'Akku Status geändert von \"{{oldBatteryStatus}}\" auf \"{{newBatteryStatus}}\".'),
-       (5, 'Rechnung generiert', '{{invoiceFileName}}'),
-       (6, 'Verkauft', null);
+       (5, 'Äußerlichen Zustand geändert', 'Äußerlichen Zustand geändert von \"{{oldGrade}}\" auf \"{{newGrade}}\".'),
+       (6, 'Rechnung generiert', '{{invoiceFileName}}'),
+       (7, 'Verkauft', null);

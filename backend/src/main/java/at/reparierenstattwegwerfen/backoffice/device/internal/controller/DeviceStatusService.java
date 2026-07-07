@@ -2,10 +2,12 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceGradeRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.BatteryStatusAutomaticallySet;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceBatteryStatusChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceGradeChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class DeviceStatusService {
 	private final DeviceRepository deviceRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
+	private final DeviceGradeRepository deviceGradeRepository;
 	private final ApplicationEventPublisher events;
 
 	public List<NamedIdDto> getAllStatus() {
@@ -79,5 +82,16 @@ public class DeviceStatusService {
 
 		deviceRepository.save(device);
 		events.publishEvent(batteryStatusChanged);
+	}
+
+	@Transactional
+	public void updateGrade(Integer deviceId, Integer newGradeId) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+		DeviceGradeChanged deviceGradeChanged = new DeviceGradeChanged(this, deviceId,
+			device.getGrade() != null ? device.getGrade().getId() : null, newGradeId);
+		device.setGrade(deviceGradeRepository.getReferenceById(newGradeId));
+
+		deviceRepository.save(device);
+		events.publishEvent(deviceGradeChanged);
 	}
 }

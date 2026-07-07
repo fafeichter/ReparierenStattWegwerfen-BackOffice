@@ -2,7 +2,8 @@
 
 <div class="clr-row">
   <div class="clr-col-lg-8 clr-col-md-8 clr-col-12">
-    <app-base (statusChanged)="reloadActivity()" [deviceId]="deviceId()"></app-base>
+    <app-base (batteryStatusChanged)="reloadActivity()" (gradeChanged)="reloadActivity()"
+              (statusChanged)="reloadActivity()" [deviceId]="deviceId()"></app-base>
     <div class="card">
       <div class="card-header">Buying</div>
       <div class="card-block">

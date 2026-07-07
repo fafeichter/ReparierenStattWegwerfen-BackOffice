@@ -39,4 +39,9 @@ public class DeviceBaseController {
 	public void updateBatteryStatus(@PathVariable Integer deviceId, @RequestBody Integer newBatteryStatusId) {
 		deviceStatusService.updateBatteryStatus(deviceId, newBatteryStatusId);
 	}
+
+	@PostMapping("/grade")
+	public void updateGrade(@PathVariable Integer deviceId, @RequestBody Integer newGradeId) {
+		deviceStatusService.updateGrade(deviceId, newGradeId);
+	}
 }

@@ -99,7 +99,23 @@
       </li>
       <hr>
       <li>Grade:
-        <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
+        @if (!gradeEditModeActive()) {
+          <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
+          <button (click)="activateGradeEditMode()" class="btn btn-link">
+            <cds-icon role="img" shape="edit"/>
+          </button>
+        } @else {
+          <form (ngSubmit)="changeGrade()" [formGroup]="gradeForm" clrForm>
+            <select formControlName="newGradeId">
+              @for (deviceGrade of deviceGrades(); track deviceGrade.id) {
+                <option [value]="deviceGrade.id">{{ deviceGrade.name }}</option>
+              }
+            </select>
+            <button [disabled]="gradeForm.invalid" class="btn btn-link" type="submit">
+              <cds-icon role="img" shape="check"/>
+            </button>
+          </form>
+        }
       </li>
     </ul>
   </div>

@@ -15,11 +15,12 @@ CREATE TABLE device_battery_status
 CREATE TABLE device_grade
 (
     device_grade_id int          NOT NULL AUTO_INCREMENT,
-    name            varchar(1)   NOT NULL,
-    description     varchar(256) NOT NULL,
+    name       varchar(256) NOT NULL,
+    sort_order int          NOT NULL,
     created_at      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (device_grade_id)
+    PRIMARY KEY (device_grade_id),
+    UNIQUE KEY uq_device_grade_sort (sort_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_online_marketplace
