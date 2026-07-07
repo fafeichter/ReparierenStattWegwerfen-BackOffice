@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.reposi
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.BatteryStatusAutomaticallySet;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceBatteryStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
@@ -67,5 +68,16 @@ public class DeviceStatusService {
 		}
 
 		deviceRepository.save(device);
+	}
+
+	@Transactional
+	public void updateBatteryStatus(Integer deviceId, Integer newBatteryStatusId) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+		DeviceBatteryStatusChanged batteryStatusChanged = new DeviceBatteryStatusChanged(this, deviceId,
+			device.getBatteryStatus() != null ? device.getBatteryStatus().getId() : null, newBatteryStatusId);
+		device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId));
+
+		deviceRepository.save(device);
+		events.publishEvent(batteryStatusChanged);
 	}
 }

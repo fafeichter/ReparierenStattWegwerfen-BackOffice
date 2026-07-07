@@ -3,6 +3,7 @@ import {
   BatteryHealth,
   DeviceBaseControllerService,
   DeviceBaseDetailsDto,
+  DeviceBatteryStatusControllerService,
   DeviceStatusControllerService,
   DeviceTagDto,
   DeviceTagsControllerService,
@@ -49,10 +50,12 @@ export class Base implements OnInit {
   deviceTags = signal<DeviceTagDto[]>([]);
 
   deviceStatus = signal<NamedIdDto[]>([]);
+  deviceBatteryStatus = signal<NamedIdDto[]>([]);
   statusEditModeActive = signal<boolean>(false);
 
   serialNumberEditModeActive = signal<boolean>(false);
   batteryEditModeActive = signal<boolean>(false);
+  batteryStatusEditModeActive = signal<boolean>(false);
 
   statusForm = new FormGroup({
     newStatusId: new FormControl<number | null>(null, [Validators.required]),
@@ -67,9 +70,14 @@ export class Base implements OnInit {
     newCycleCount: new FormControl<number | null>(null),
   });
 
+  batteryStatusForm = new FormGroup({
+    newBatteryStatusId: new FormControl<number | null>(null, [Validators.required]),
+  });
+
   private api = inject(DeviceBaseControllerService);
   private tagsApi = inject(DeviceTagsControllerService);
   private statusApi = inject(DeviceStatusControllerService);
+  private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
 
   ngOnInit(): void {
     this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
@@ -96,7 +104,7 @@ export class Base implements OnInit {
           return {
             ...currentValue!,
             status: this.deviceStatus().find(
-              (device) => device.id === this.statusForm.controls.newStatusId.value!,
+              (deviceStatus) => deviceStatus.id === this.statusForm.controls.newStatusId.value!,
             )!,
           };
         });
@@ -146,5 +154,37 @@ export class Base implements OnInit {
       this.batteryEditModeActive.set(false);
       this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
     });
+  }
+
+  activateBatteryStatusEditMode() {
+    this.batteryStatusEditModeActive.set(true);
+
+    this.batteryStatusApi.getAllBatteryStatus().subscribe((data) => {
+      this.deviceBatteryStatus.set(data);
+      this.batteryStatusForm.patchValue({
+        newBatteryStatusId: this.deviceBase()?.batteryStatus?.id,
+      });
+    });
+  }
+
+  changeBatteryStatus() {
+    this.api
+      .updateBatteryStatus(
+        this.deviceId(),
+        this.batteryStatusForm.controls.newBatteryStatusId.value!,
+      )
+      .subscribe(() => {
+        this.batteryStatusEditModeActive.set(false);
+        this.deviceBase.update((currentValue) => {
+          return {
+            ...currentValue!,
+            batteryStatus: this.deviceBatteryStatus().find((deviceBatteryStatus) => {
+              return (
+                deviceBatteryStatus.id == this.batteryStatusForm.controls.newBatteryStatusId.value!
+              );
+            })!,
+          };
+        });
+      });
   }
 }

@@ -79,7 +79,23 @@
         }
       </li>
       <li>Battery status:
-        <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>
+        @if (!batteryStatusEditModeActive()) {
+          <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>
+          <button (click)="activateBatteryStatusEditMode()" class="btn btn-link">
+            <cds-icon role="img" shape="edit"/>
+          </button>
+        } @else {
+          <form (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm" clrForm>
+            <select formControlName="newBatteryStatusId">
+              @for (deviceBatteryStatus of deviceBatteryStatus(); track deviceBatteryStatus.id) {
+                <option [value]="deviceBatteryStatus.id">{{ deviceBatteryStatus.name }}</option>
+              }
+            </select>
+            <button [disabled]="batteryStatusForm.invalid" class="btn btn-link" type="submit">
+              <cds-icon role="img" shape="check"/>
+            </button>
+          </form>
+        }
       </li>
       <hr>
       <li>Grade:

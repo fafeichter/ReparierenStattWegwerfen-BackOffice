@@ -226,8 +226,8 @@ CREATE TABLE device_activity_type
     created_at              timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at              timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (device_activity_type_id),
-    CONSTRAINT uq_device_activity_type_name
-        UNIQUE (name),
+    CONSTRAINT uq_device_activity_type_description_template
+        UNIQUE (description_template),
     CONSTRAINT uq_device_activity_type_name_description_template
         UNIQUE (name, description_template)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

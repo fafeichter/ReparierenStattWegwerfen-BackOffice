@@ -11,8 +11,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +32,7 @@ public class DeviceActivityService {
 
 	@ApplicationModuleListener
 	public void on(DeviceCreated event) {
-		DeviceActivity deviceActivity = new DeviceActivity();
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 
 		DeviceActivityType activityType = deviceActivityTypeRepository.getReferenceById(1);
@@ -43,16 +41,13 @@ public class DeviceActivityService {
 
 		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));
 		deviceActivity.setActivityType(activityType);
-		deviceActivity.setDate(Instant.ofEpochMilli(event.getTimestamp())
-			.atZone(ZoneId.systemDefault())
-			.toLocalDateTime());
 
 		deviceActivityRepository.save(deviceActivity);
 	}
 
 	@EventListener
 	public void on(DeviceStatusChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity();
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 
 		DeviceActivityType activityType = deviceActivityTypeRepository.getReferenceById(2);
@@ -64,16 +59,13 @@ public class DeviceActivityService {
 
 		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));
 		deviceActivity.setActivityType(activityType);
-		deviceActivity.setDate(Instant.ofEpochMilli(event.getTimestamp())
-			.atZone(ZoneId.systemDefault())
-			.toLocalDateTime());
 
 		deviceActivityRepository.save(deviceActivity);
 	}
 
 	@EventListener
 	public void on(BatteryStatusAutomaticallySet event) {
-		DeviceActivity deviceActivity = new DeviceActivity();
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 
 		DeviceActivityType activityType = deviceActivityTypeRepository.getReferenceById(3);
@@ -84,9 +76,24 @@ public class DeviceActivityService {
 
 		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));
 		deviceActivity.setActivityType(activityType);
-		deviceActivity.setDate(Instant.ofEpochMilli(event.getTimestamp())
-			.atZone(ZoneId.systemDefault())
-			.toLocalDateTime());
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@EventListener
+	public void on(DeviceBatteryStatusChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+
+		DeviceActivityType activityType = deviceActivityTypeRepository.getReferenceById(4);
+		String templateString = activityType.getDescriptionTemplate();
+		Map<String, String> context = new HashMap<>() {{
+			put("oldBatteryStatus", event.getOldBatteryStatusId() != null ? deviceBatteryStatusRepository.getReferenceById(event.getOldBatteryStatusId()).getName() : "-");
+			put("newBatteryStatus", deviceBatteryStatusRepository.getReferenceById(event.getNewBatteryStatusId()).getName());
+		}};
+
+		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));
+		deviceActivity.setActivityType(activityType);
 
 		deviceActivityRepository.save(deviceActivity);
 	}

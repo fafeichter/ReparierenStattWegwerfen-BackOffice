@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * @author Fabian Feichter
@@ -36,4 +38,11 @@ public class DeviceActivity implements NamedId {
 
 	@Column(name = "date")
 	private LocalDateTime date;
+	
+	public DeviceActivity(long date) {
+		this();
+		this.date = Instant.ofEpochMilli(date)
+			.atZone(ZoneId.systemDefault())
+			.toLocalDateTime();
+	}
 }

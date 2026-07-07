@@ -50,5 +50,6 @@ INSERT INTO device_activity_type (device_activity_type_id, name, description_tem
 VALUES (1, 'Erstellt', 'Device #{{deviceId}} erstellt.'),
        (2, 'Status geändert', 'Status geändert von \"{{oldStatus}}\" auf \"{{newStatus}}\".'),
        (3, 'Akku Status geändert', 'Akku Status automatisch auf \"{{newBatteryStatus}}\" gesetzt.'),
-       (4, 'Rechnung generiert', '{{invoiceFileName}}'),
-       (5, 'Verkauft', null);
+       (4, 'Akku Status geändert', 'Akku Status geändert von \"{{oldBatteryStatus}}\" auf \"{{newBatteryStatus}}\".'),
+       (5, 'Rechnung generiert', '{{invoiceFileName}}'),
+       (6, 'Verkauft', null);
