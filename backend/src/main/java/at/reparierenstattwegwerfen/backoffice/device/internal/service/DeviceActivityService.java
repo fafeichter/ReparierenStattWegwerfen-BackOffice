@@ -3,10 +3,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 import at.reparierenstattwegwerfen.backoffice.device.internal.controller.DeviceActivityDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceActivity;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceActivityType;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceActivityRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceActivityTypeRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
 import com.samskivert.mustache.Mustache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
@@ -32,6 +29,7 @@ public class DeviceActivityService {
 	private final DeviceActivityTypeRepository deviceActivityTypeRepository;
 	private final DeviceRepository deviceRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
+	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final Mustache.Compiler mustacheCompiler;
 
 	@ApplicationModuleListener
@@ -62,6 +60,26 @@ public class DeviceActivityService {
 		Map<String, String> context = new HashMap<>() {{
 			put("oldStatus", deviceStatusRepository.getReferenceById(event.getOldStatusId()).getName());
 			put("newStatus", deviceStatusRepository.getReferenceById(event.getNewStatusId()).getName());
+		}};
+
+		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));
+		deviceActivity.setActivityType(activityType);
+		deviceActivity.setDate(Instant.ofEpochMilli(event.getTimestamp())
+			.atZone(ZoneId.systemDefault())
+			.toLocalDateTime());
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@EventListener
+	public void on(BatteryStatusAutomaticallySet event) {
+		DeviceActivity deviceActivity = new DeviceActivity();
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+
+		DeviceActivityType activityType = deviceActivityTypeRepository.getReferenceById(3);
+		String templateString = activityType.getDescriptionTemplate();
+		Map<String, String> context = new HashMap<>() {{
+			put("newBatteryStatus", deviceBatteryStatusRepository.getReferenceById(event.getBatteryStatusId()).getName());
 		}};
 
 		deviceActivity.setName(mustacheCompiler.compile(templateString).execute(context));

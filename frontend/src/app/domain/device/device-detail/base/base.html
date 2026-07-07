@@ -54,10 +54,29 @@
       </li>
       <li>
         Battery:
-        {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
-        /
-        {{ deviceBase()?.batteryCycleCount |orElse }}
-        cycles
+        @if (!batteryEditModeActive()) {
+          {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
+            /
+          {{ deviceBase()?.batteryCycleCount |orElse }}
+          cycles
+          <button (click)="activateBatteryEditMode()" class="btn btn-link">
+            <cds-icon role="img" shape="edit"/>
+          </button>
+        } @else {
+          <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" clrForm>
+            <clr-input-container>
+              <input clrInput formControlName="newMaximumCapacity"/>
+              <div clrInputSuffix>%</div>
+            </clr-input-container>
+            <clr-input-container>
+              <input clrInput formControlName="newCycleCount"/>
+              <div clrInputSuffix>cycles</div>
+            </clr-input-container>
+            <button [disabled]="batteryForm.invalid" class="btn btn-link" type="submit">
+              <cds-icon role="img" shape="check"/>
+            </button>
+          </form>
+        }
       </li>
       <li>Battery status:
         <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>

@@ -1,8 +1,10 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.BatteryStatusAutomaticallySet;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class DeviceStatusService {
 
 	private final DeviceRepository deviceRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
+	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final ApplicationEventPublisher events;
 
 	public List<NamedIdDto> getAllStatus() {
@@ -45,6 +48,23 @@ public class DeviceStatusService {
 	public void updateSerialNumber(Integer deviceId, String newSerialNumber) {
 		Device device = deviceRepository.getReferenceById(deviceId);
 		device.setSerialNumber(newSerialNumber);
+
+		deviceRepository.save(device);
+	}
+
+	@Transactional
+	public void updateBattery(Integer deviceId, BatteryHealth newDeviceBaseBattery) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+		device.setBatteryMaximumCapacity(newDeviceBaseBattery.getMaximumCapacity());
+		device.setBatteryCycleCount(newDeviceBaseBattery.getCycleCount());
+
+		if (newDeviceBaseBattery.determineStatusId() != null && device.getBatteryStatus() == null) {
+			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newDeviceBaseBattery.determineStatusId()));
+
+			BatteryStatusAutomaticallySet batteryStatusEvent = new BatteryStatusAutomaticallySet(
+				this, deviceId, newDeviceBaseBattery.determineStatusId());
+			events.publishEvent(batteryStatusEvent);
+		}
 
 		deviceRepository.save(device);
 	}

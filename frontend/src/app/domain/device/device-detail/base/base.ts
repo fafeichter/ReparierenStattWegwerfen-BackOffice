@@ -1,5 +1,6 @@
 import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import {
+  BatteryHealth,
   DeviceBaseControllerService,
   DeviceBaseDetailsDto,
   DeviceStatusControllerService,
@@ -9,7 +10,13 @@ import {
 } from '@api/device';
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import { RouterLink } from '@angular/router';
-import { ClrCommonFormsModule, ClrIcon, ClrInputModule, ClrLabel } from '@clr/angular';
+import {
+  ClrCommonFormsModule,
+  ClrIcon,
+  ClrInputModule,
+  ClrLabel,
+  ClrNumberInputModule,
+} from '@clr/angular';
 import {
   FormControl,
   FormGroup,
@@ -29,6 +36,7 @@ import {
     FormsModule,
     ReactiveFormsModule,
     ClrInputModule,
+    ClrNumberInputModule,
   ],
   templateUrl: './base.html',
   styleUrl: './base.css',
@@ -44,13 +52,19 @@ export class Base implements OnInit {
   statusEditModeActive = signal<boolean>(false);
 
   serialNumberEditModeActive = signal<boolean>(false);
+  batteryEditModeActive = signal<boolean>(false);
 
   statusForm = new FormGroup({
     newStatusId: new FormControl<number | null>(null, [Validators.required]),
   });
 
   serialNumberForm = new FormGroup({
-    newSerialNumber: new FormControl<string | null>(null, []),
+    newSerialNumber: new FormControl<string | null>(null),
+  });
+
+  batteryForm = new FormGroup({
+    newMaximumCapacity: new FormControl<number | null>(null),
+    newCycleCount: new FormControl<number | null>(null),
   });
 
   private api = inject(DeviceBaseControllerService);
@@ -112,5 +126,25 @@ export class Base implements OnInit {
           };
         });
       });
+  }
+
+  activateBatteryEditMode() {
+    this.batteryEditModeActive.set(true);
+    this.batteryForm.patchValue({
+      newCycleCount: this.deviceBase()?.batteryCycleCount,
+      newMaximumCapacity: this.deviceBase()?.batteryMaximumCapacity,
+    });
+  }
+
+  changeBattery() {
+    const newBatteryHealth: BatteryHealth = {
+      cycleCount: this.batteryForm.controls.newCycleCount.value!,
+      maximumCapacity: this.batteryForm.controls.newMaximumCapacity.value!,
+    };
+
+    this.api.updateBattery(this.deviceId(), newBatteryHealth).subscribe(() => {
+      this.batteryEditModeActive.set(false);
+      this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
+    });
   }
 }

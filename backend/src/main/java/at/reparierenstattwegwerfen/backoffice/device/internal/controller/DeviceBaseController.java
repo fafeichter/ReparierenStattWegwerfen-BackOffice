@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,5 +28,10 @@ public class DeviceBaseController {
 	@PostMapping("/serial-number")
 	public void updateSerialNumber(@PathVariable Integer deviceId, @RequestBody(required = false) String newSerialNumber) {
 		deviceStatusService.updateSerialNumber(deviceId, newSerialNumber);
+	}
+
+	@PostMapping("/battery")
+	public void updateBattery(@PathVariable Integer deviceId, @RequestBody @Valid BatteryHealth newDeviceBaseBattery) {
+		deviceStatusService.updateBattery(deviceId, newDeviceBaseBattery);
 	}
 }

@@ -49,5 +49,6 @@ VALUES (1, 'Activation Lock', 1),
 INSERT INTO device_activity_type (device_activity_type_id, name, description_template)
 VALUES (1, 'Erstellt', 'Device #{{deviceId}} erstellt.'),
        (2, 'Status geändert', 'Status geändert von \"{{oldStatus}}\" auf \"{{newStatus}}\".'),
-       (3, 'Rechnung generiert', '{{invoiceFileName}}'),
-       (4, 'Verkauft', null);
+       (3, 'Akku Status geändert', 'Akku Status automatisch auf \"{{newBatteryStatus}}\" gesetzt.'),
+       (4, 'Rechnung generiert', '{{invoiceFileName}}'),
+       (5, 'Verkauft', null);
