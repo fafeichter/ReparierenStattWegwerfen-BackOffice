@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, effect, inject, input, OnInit, output, signal } from '@angular/core';
 import {
   BatteryHealthDto,
   DeviceBaseControllerService,
@@ -86,11 +86,31 @@ export class Base implements OnInit {
   tagForm = new FormGroup({
     newTagId: new FormControl<number | null>(null, [Validators.required]),
   });
+  private readonly editModes = [
+    this.statusEditModeActive,
+    this.tagEditModeActive,
+    this.serialNumberEditModeActive,
+    this.batteryEditModeActive,
+    this.batteryStatusEditModeActive,
+    this.gradeEditModeActive,
+  ];
 
   private api = inject(DeviceBaseControllerService);
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
   private gradeApi = inject(DeviceGradeControllerService);
+
+  constructor() {
+    this.editModes.forEach((active) => {
+      effect(() => {
+        if (active()) {
+          this.editModes
+            .filter((editMode) => editMode !== active)
+            .forEach((otherEditMode) => otherEditMode.set(false));
+        }
+      });
+    });
+  }
 
   ngOnInit(): void {
     this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));

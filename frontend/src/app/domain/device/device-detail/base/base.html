@@ -22,14 +22,14 @@
             <cds-icon role="img" shape="edit"/>
           </button>
         } @else {
-          <form (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm>
-            <select formControlName="newStatusId">
+          <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm>
+            <select (change)="statusFormRef.requestSubmit()" formControlName="newStatusId">
               @for (deviceStatus of deviceStatus(); track deviceStatus.id) {
                 <option [value]="deviceStatus.id">{{ deviceStatus.name }}</option>
               }
             </select>
-            <button [disabled]="statusForm.invalid" class="btn btn-link" type="submit">
-              <cds-icon role="img" shape="check"/>
+            <button (click)="statusEditModeActive.set(false)" class="btn btn-link" type="button">
+              <cds-icon role="img" shape="close"/>
             </button>
           </form>
         }
@@ -85,8 +85,8 @@
             <cds-icon role="img" shape="edit"/>
           </button>
         } @else {
-          <form (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm" clrForm>
-            <select formControlName="newBatteryStatusId">
+          <form #batteryStatusFormRef (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm" clrForm>
+            <select (change)="batteryStatusFormRef.requestSubmit()" formControlName="newBatteryStatusId">
               @for (deviceBatteryStatus of deviceBatteryStatus(); track deviceBatteryStatus.id) {
                 <option [value]="deviceBatteryStatus.id">{{ deviceBatteryStatus.name }}</option>
               }
@@ -105,8 +105,8 @@
             <cds-icon role="img" shape="edit"/>
           </button>
         } @else {
-          <form (ngSubmit)="changeGrade()" [formGroup]="gradeForm" clrForm>
-            <select formControlName="newGradeId">
+          <form #gradeFormRef (ngSubmit)="changeGrade()" [formGroup]="gradeForm" clrForm>
+            <select (change)="gradeFormRef.requestSubmit()" formControlName="newGradeId">
               @for (deviceGrade of deviceGrades(); track deviceGrade.id) {
                 <option [value]="deviceGrade.id">{{ deviceGrade.name }}</option>
               }
@@ -133,8 +133,8 @@
       <cds-icon role="img" shape="plus"/>
     </button>
     @if (tagEditModeActive()) {
-      <form (ngSubmit)="addTag()" [formGroup]="tagForm" clrForm>
-        <select formControlName="newTagId">
+      <form #tagFormRef (ngSubmit)="addTag()" [formGroup]="tagForm" clrForm>
+        <select (change)="tagFormRef.requestSubmit()" formControlName="newTagId">
           @for (deviceTag of deviceTags(); track deviceTag.id) {
             <option [value]="deviceTag.id">{{ deviceTag.name }}</option>
           }
