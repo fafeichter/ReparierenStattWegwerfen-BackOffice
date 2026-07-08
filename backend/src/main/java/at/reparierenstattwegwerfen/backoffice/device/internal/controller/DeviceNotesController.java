@@ -11,18 +11,18 @@ import java.util.List;
  * @author Fabian Feichter
  */
 @RestController
-@RequestMapping("/api/devices/{deviceId}")
+@RequestMapping("/api/devices/{deviceId}/notes")
 @RequiredArgsConstructor
 public class DeviceNotesController {
 
 	private final DeviceNoteService deviceNoteService;
 
-	@GetMapping("/notes")
+	@GetMapping("/")
 	public List<DeviceNoteDto> getDeviceNotes(@PathVariable Integer deviceId) {
 		return deviceNoteService.load(deviceId);
 	}
 
-	@PostMapping("/notes")
+	@PostMapping("/")
 	public void addDeviceNote(@PathVariable Integer deviceId, @RequestBody String text) {
 		deviceNoteService.add(deviceId, text);
 	}

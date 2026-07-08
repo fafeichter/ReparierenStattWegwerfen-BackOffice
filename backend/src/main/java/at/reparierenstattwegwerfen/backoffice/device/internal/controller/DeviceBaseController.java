@@ -38,7 +38,7 @@ public class DeviceBaseController {
 	}
 
 	@PostMapping("/battery")
-	public void updateBattery(@PathVariable Integer deviceId, @RequestBody @Valid BatteryHealthDto newDeviceBaseBattery) {
+	public void updateBattery(@PathVariable Integer deviceId, @Valid @RequestBody BatteryHealthDto newDeviceBaseBattery) {
 		deviceStatusService.updateBattery(deviceId, newDeviceBaseBattery);
 	}
 

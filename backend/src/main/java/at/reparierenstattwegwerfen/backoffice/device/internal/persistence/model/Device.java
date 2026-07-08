@@ -76,6 +76,15 @@ public class Device {
 	@Column(name = "selling_date")
 	private LocalDate sellingDate;
 
+	@Column(name = "selling_accessory_charger")
+	private Boolean sellingAccessoryCharger;
+
+	@Column(name = "selling_accessory_charging_cable")
+	private Boolean sellingAccessoryChargingCable;
+
+	@Column(name = "selling_accessory_original_packaging")
+	private Boolean sellingAccessoryOriginalPackaging;
+
 	@Column(name = "battery_maximum_capacity")
 	private Integer batteryMaximumCapacity;
 
