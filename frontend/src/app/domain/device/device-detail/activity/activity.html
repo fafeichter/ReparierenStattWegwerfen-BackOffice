@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header">Activity</div>
+  <div class="card-block">
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="left">Action</th>
+        <th class="left">Description</th>
+        <th class="right">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (activity of deviceActivities(); track activity.id) {
+          <tr>
+            <td class="left">{{ activity.name }}</td>
+            <td class="left">{{ activity.description }}</td>
+            <td class="right">{{ activity.date | date:'dd.MM.yyyy HH:mm:ss' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

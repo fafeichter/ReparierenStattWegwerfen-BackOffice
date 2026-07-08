@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">Buying</div>
+  <div class="card-block">
+    <ul class="list">
+      <li>Date: {{ deviceBuying()?.date | date:'dd.MM.yyyy' }}</li>
+      <li>
+        Price: {{ deviceBuying()?.price | currency:'EUR':'symbol':'1.2-2' }}
+      </li>
+      <li>URL:
+        <a [href]="deviceBuying()?.url" target="_blank">{{ deviceBuying()?.url }}
+          <cds-icon role="img" shape="pop-out"/>
+        </a>
+      </li>
+      <hr>
+      <li>Seller:
+        <a [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]">
+          {{ deviceBuying()?.seller?.name }}
+        </a>
+      </li>
+      <hr>
+      Invoice: <a href="#">Invoice_Tobias_Ecke.pdf</a>
+    </ul>
+  </div>
+</div>

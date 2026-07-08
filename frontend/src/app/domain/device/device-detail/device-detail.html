@@ -2,110 +2,13 @@
 
 <div class="clr-row">
   <div class="clr-col-lg-8 clr-col-md-8 clr-col-12">
-    <app-base (batteryStatusChanged)="reloadActivity()" (gradeChanged)="reloadActivity()"
-              (statusChanged)="reloadActivity()" (tagsChanged)="reloadActivity()" [deviceId]="deviceId()"></app-base>
-    <div class="card">
-      <div class="card-header">Buying</div>
-      <div class="card-block">
-        <ul class="list">
-          <li>Date: {{ deviceBuying()?.date | date:'dd.MM.yyyy' }}</li>
-          <li>
-            Price: {{ deviceBuying()?.price | currency:'EUR':'symbol':'1.2-2' }}
-          </li>
-          <li>URL:
-            <a [href]="deviceBuying()?.url" target="_blank">{{ deviceBuying()?.url }}
-              <cds-icon role="img" shape="pop-out"/>
-            </a>
-          </li>
-          <hr>
-          <li>Seller:
-            <a [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]">
-              {{ deviceBuying()?.seller?.name }}
-            </a>
-          </li>
-          <hr>
-          Invoice: <a href="#">Invoice_Tobias_Ecke.pdf</a>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">Repair</div>
-      <div class="card-block">
-        <ul class="list">
-          <li>
-            <div class="underline">Original defect:</div>
-            {{ deviceDefects()?.reportedDefect | orElse }}
-          </li>
-          <li class="mt-5">
-            <div class="underline">Real defect:</div>
-            {{ deviceDefects()?.diagnosedDefect | orElse }}
-          </li>
-        </ul>
-        <h5>Spare Parts</h5>
-        <clr-datagrid>
-          <clr-dg-column>Name</clr-dg-column>
-          <clr-dg-column>Price (Netto)</clr-dg-column>
-          <clr-dg-row *clrDgItems="let sparePart of deviceSpareParts()">
-            <clr-dg-cell>
-              {{ sparePart.name }}
-            </clr-dg-cell>
-            <clr-dg-cell>{{ sparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-cell>
-          </clr-dg-row>
-          <clr-dg-footer>Sum: {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-footer>
-        </clr-datagrid>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">Selling</div>
-      <div class="card-block">
-        <ul class="list">
-          <li>
-            Price:  {{ deviceSelling()?.price | currency:'EUR':'symbol':'1.2-2' | orElse }}
-          </li>
-          <li>Buyer:
-            <a [routerLink]="['/businesspartners', deviceSelling()?.buyer?.id]">
-              {{ deviceSelling()?.buyer?.name | orElse }}
-            </a>
-          </li>
-          <li>Date: {{ deviceSelling()?.date | date:'dd.MM.yyyy' | orElse }}</li>
-          <hr>
-          <li>Charger included:
-            <cds-icon role="img" shape="check"/>
-          </li>
-          <li>Cable included:
-            <cds-icon role="img" shape="check"/>
-          </li>
-          <li>OVP included:
-            <cds-icon role="img" shape="check"/>
-          </li>
-          <hr>
-          Invoice: <a href="#">Invoice_Franz_Kornthaler.pdf</a>
-        </ul>
-      </div>
-    </div>
+    <app-base (batteryStatusChanged)="activity.reloadActivity()" (gradeChanged)="activity.reloadActivity()"
+              (statusChanged)="activity.reloadActivity()" (tagsChanged)="activity.reloadActivity()"
+              [deviceId]="deviceId()"></app-base>
+    <app-buying [deviceId]="deviceId()"></app-buying>
+    <app-repair [deviceId]="deviceId()"></app-repair>
+    <app-selling [deviceId]="deviceId()"></app-selling>
     <app-notes [deviceId]="deviceId()"></app-notes>
-    <div class="card">
-      <div class="card-header">Activity Log</div>
-      <div class="card-block">
-        <table class="table">
-          <thead>
-          <tr>
-            <th class="left">Action</th>
-            <th class="left">Description</th>
-            <th class="right">Date</th>
-          </tr>
-          </thead>
-          <tbody>
-            @for (activity of deviceActivities(); track activity.id) {
-              <tr>
-                <td class="left">{{ activity.name }}</td>
-                <td class="left">{{ activity.description }}</td>
-                <td class="right">{{ activity.date | date:'dd.MM.yyyy HH:mm:ss' }}</td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <app-activity #activity [deviceId]="deviceId()"></app-activity>
   </div>
 </div>

@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-header">Repair</div>
+  <div class="card-block">
+    <ul class="list">
+      <li>
+        <div class="underline">Original defect:</div>
+        {{ deviceDefects()?.reportedDefect | orElse }}
+      </li>
+      <li class="mt-5">
+        <div class="underline">Real defect:</div>
+        {{ deviceDefects()?.diagnosedDefect | orElse }}
+      </li>
+    </ul>
+    <h5>Spare Parts</h5>
+    <clr-datagrid>
+      <clr-dg-column>Name</clr-dg-column>
+      <clr-dg-column>Price (Netto)</clr-dg-column>
+      <clr-dg-row *clrDgItems="let sparePart of deviceSpareParts()">
+        <clr-dg-cell>
+          {{ sparePart.name }}
+        </clr-dg-cell>
+        <clr-dg-cell>{{ sparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>Sum: {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>
