@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
 import { ClrCommonFormsModule, ClrIcon, ClrModalModule, ClrTextareaModule } from '@clr/angular';
 import { DatePipe } from '@angular/common';
 import {
@@ -34,6 +34,15 @@ export class Notes implements OnInit {
   });
   private notesApi = inject(DeviceNotesControllerService);
 
+  constructor() {
+    // Automatically reset the form whenever the modal opens
+    effect(() => {
+      if (this.modalOpened()) {
+        this.form.reset();
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => this.deviceNotes.set(data));
   }
@@ -43,10 +52,9 @@ export class Notes implements OnInit {
       .addDeviceNote(this.deviceId(), this.form.controls.text.value || '')
       .subscribe((data) => {
         this.modalOpened.set(false);
-        this.form.reset();
-        this.notesApi
-          .getDeviceNotes(this.deviceId())
-          .subscribe((data) => this.deviceNotes.set(data));
+        this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => {
+          this.deviceNotes.set(data);
+        });
       });
   }
 }

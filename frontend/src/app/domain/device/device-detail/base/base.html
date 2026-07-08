@@ -20,16 +20,21 @@
           <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
           <button (click)="activateStatusEditMode()" class="btn btn-link">
             <cds-icon role="img" shape="edit"/>
+            Edit
           </button>
         } @else {
           <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm>
             <select (change)="statusFormRef.requestSubmit()" formControlName="newStatusId">
-              @for (deviceStatus of deviceStatus(); track deviceStatus.id) {
+              @for (deviceStatus of deviceStatus(); track deviceStatus.id; let i = $index) {
+                @if (i == 6) {
+                  <hr>
+                }
                 <option [value]="deviceStatus.id">{{ deviceStatus.name }}</option>
               }
             </select>
             <button (click)="statusEditModeActive.set(false)" class="btn btn-link" type="button">
               <cds-icon role="img" shape="close"/>
+              Cancel
             </button>
           </form>
         }
@@ -40,14 +45,20 @@
           {{ deviceBase()?.serialNumber | orElse }}
           <button (click)="activateSerialNumberEditMode()" class="btn btn-link">
             <cds-icon role="img" shape="edit"/>
+            Edit
           </button>
         } @else {
           <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm>
             <clr-input-container>
               <input autofocus clrInput formControlName="newSerialNumber" type="text">
             </clr-input-container>
-            <button [disabled]="serialNumberForm.invalid" class="btn btn-link" type="submit">
+            <button (click)="serialNumberEditModeActive.set(false)" class="btn btn-link" type="button">
+              <cds-icon role="img" shape="close"/>
+              Cancel
+            </button>
+            <button [disabled]="serialNumberForm.invalid" class="btn btn-link ml-1!" type="submit">
               <cds-icon role="img" shape="check"/>
+              Save
             </button>
           </form>
         }
@@ -61,6 +72,7 @@
           cycles
           <button (click)="activateBatteryEditMode()" class="btn btn-link">
             <cds-icon role="img" shape="edit"/>
+            Edit
           </button>
         } @else {
           <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" clrForm>
@@ -72,8 +84,13 @@
               <input clrInput formControlName="newCycleCount"/>
               <div clrInputSuffix>cycles</div>
             </clr-input-container>
+            <button (click)="batteryEditModeActive.set(false)" class="btn btn-link" type="button">
+              <cds-icon role="img" shape="close"/>
+              Cancel
+            </button>
             <button [disabled]="batteryForm.invalid" class="btn btn-link" type="submit">
               <cds-icon role="img" shape="check"/>
+              Save
             </button>
           </form>
         }
@@ -83,16 +100,19 @@
           <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>
           <button (click)="activateBatteryStatusEditMode()" class="btn btn-link">
             <cds-icon role="img" shape="edit"/>
+            Edit
           </button>
         } @else {
           <form #batteryStatusFormRef (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm" clrForm>
             <select (change)="batteryStatusFormRef.requestSubmit()" formControlName="newBatteryStatusId">
+              <option disabled selected value="null">-- Choose --</option>
               @for (deviceBatteryStatus of deviceBatteryStatus(); track deviceBatteryStatus.id) {
                 <option [value]="deviceBatteryStatus.id">{{ deviceBatteryStatus.name }}</option>
               }
             </select>
-            <button [disabled]="batteryStatusForm.invalid" class="btn btn-link" type="submit">
-              <cds-icon role="img" shape="check"/>
+            <button (click)="batteryStatusEditModeActive.set(false)" class="btn btn-link" type="button">
+              <cds-icon role="img" shape="close"/>
+              Cancel
             </button>
           </form>
         }
@@ -103,16 +123,19 @@
           <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
           <button (click)="activateGradeEditMode()" class="btn btn-link">
             <cds-icon role="img" shape="edit"/>
+            Edit
           </button>
         } @else {
           <form #gradeFormRef (ngSubmit)="changeGrade()" [formGroup]="gradeForm" clrForm>
             <select (change)="gradeFormRef.requestSubmit()" formControlName="newGradeId">
+              <option disabled selected value="null">-- Choose --</option>
               @for (deviceGrade of deviceGrades(); track deviceGrade.id) {
                 <option [value]="deviceGrade.id">{{ deviceGrade.name }}</option>
               }
             </select>
-            <button [disabled]="gradeForm.invalid" class="btn btn-link" type="submit">
-              <cds-icon role="img" shape="check"/>
+            <button (click)="gradeEditModeActive.set(false)" class="btn btn-link" type="button">
+              <cds-icon role="img" shape="close"/>
+              Cancel
             </button>
           </form>
         }
@@ -122,7 +145,7 @@
   <div class="card-block">
     Tags:
     @for (tag of deviceBase()?.tags; track tag.id) {
-      <clr-label [clrClickable]="true">
+      <clr-label>
         {{ tag.name }}
         <cds-icon (click)="deleteTag(tag.id)" shape="close"/>
       </clr-label>
@@ -131,16 +154,19 @@
     }
     <button (click)="activateTagEditMode()" class="btn btn-link">
       <cds-icon role="img" shape="plus"/>
+      Add
     </button>
     @if (tagEditModeActive()) {
       <form #tagFormRef (ngSubmit)="addTag()" [formGroup]="tagForm" clrForm>
         <select (change)="tagFormRef.requestSubmit()" formControlName="newTagId">
+          <option disabled selected value="null">-- Choose --</option>
           @for (deviceTag of deviceTags(); track deviceTag.id) {
             <option [value]="deviceTag.id">{{ deviceTag.name }}</option>
           }
         </select>
-        <button [disabled]="tagForm.invalid" class="btn btn-link" type="submit">
-          <cds-icon role="img" shape="check"/>
+        <button (click)="tagEditModeActive.set(false)" class="btn btn-link" type="button">
+          <cds-icon role="img" shape="close"/>
+          Cancel
         </button>
       </form>
     }

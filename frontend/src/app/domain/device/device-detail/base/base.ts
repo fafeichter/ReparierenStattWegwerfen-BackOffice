@@ -71,8 +71,11 @@ export class Base implements OnInit {
   });
 
   batteryForm = new FormGroup({
-    newMaximumCapacity: new FormControl<number | null>(null),
-    newCycleCount: new FormControl<number | null>(null),
+    newMaximumCapacity: new FormControl<number | null>(null, [
+      Validators.min(0),
+      Validators.max(100),
+    ]),
+    newCycleCount: new FormControl<number | null>(null, [Validators.min(1)]),
   });
 
   batteryStatusForm = new FormGroup({
@@ -86,6 +89,7 @@ export class Base implements OnInit {
   tagForm = new FormGroup({
     newTagId: new FormControl<number | null>(null, [Validators.required]),
   });
+
   private readonly editModes = [
     this.statusEditModeActive,
     this.tagEditModeActive,
@@ -194,7 +198,7 @@ export class Base implements OnInit {
     this.batteryStatusApi.getAllBatteryStatus().subscribe((data) => {
       this.deviceBatteryStatus.set(data);
       this.batteryStatusForm.patchValue({
-        newBatteryStatusId: this.deviceBase()?.batteryStatus?.id,
+        newBatteryStatusId: this.deviceBase()?.batteryStatus?.id || null,
       });
     });
   }
@@ -228,7 +232,7 @@ export class Base implements OnInit {
     this.gradeApi.getAllGrades().subscribe((data) => {
       this.deviceGrades.set(data);
       this.gradeForm.patchValue({
-        newGradeId: this.deviceBase()?.grade?.id,
+        newGradeId: this.deviceBase()?.grade?.id || null,
       });
     });
   }
@@ -256,6 +260,10 @@ export class Base implements OnInit {
 
     this.api.getAvailableTags(this.deviceId()).subscribe((data) => {
       this.deviceTags.set(data);
+
+      this.tagForm.patchValue({
+        newTagId: null,
+      });
     });
   }
 

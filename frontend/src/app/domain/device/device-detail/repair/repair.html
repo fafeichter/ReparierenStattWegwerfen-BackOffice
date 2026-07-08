@@ -9,11 +9,12 @@
       <li class="mt-5">
         <div class="underline">Confirmed defect:</div>
         {{ deviceDefects()?.diagnosedDefect | orElse }}
+        <button (click)="modalOpened.set(true)" class="btn btn-link">
+          <cds-icon role="img" shape="edit"/>
+          Edit
+        </button>
       </li>
     </ul>
-    <button (click)="modalOpened.set(true)" class="btn btn-link">
-      <cds-icon role="img" shape="edit"/>
-    </button>
     <h5>Spare Parts</h5>
     <clr-datagrid>
       <clr-dg-column>Name</clr-dg-column>
