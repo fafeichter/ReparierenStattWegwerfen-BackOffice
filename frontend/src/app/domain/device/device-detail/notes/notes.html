@@ -29,7 +29,7 @@
     <form (ngSubmit)="addNote()" [formGroup]="form" clrForm>
       <clr-textarea-container>
         <label><span class="clr-required-mark">Text</span></label>
-        <textarea class="!w-full" clrTextarea formControlName="text" name="text" required rows="5"></textarea>
+        <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="5"></textarea>
         @if (form.controls.text.hasError('required')) {
           <clr-control-error>Text is required.</clr-control-error>
         }

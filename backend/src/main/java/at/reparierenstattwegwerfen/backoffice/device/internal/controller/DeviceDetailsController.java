@@ -28,9 +28,4 @@ public class DeviceDetailsController {
 	public DeviceSellingDetailsDto getDeviceSellingDetails(@PathVariable Integer deviceId) {
 		return sellingDetailsService.load(deviceId);
 	}
-
-	@GetMapping("/defects")
-	public DeviceDefectsDetailsDto getDeviceDefectDetails(@PathVariable Integer deviceId) {
-		return defectDetailsService.load(deviceId);
-	}
 }
