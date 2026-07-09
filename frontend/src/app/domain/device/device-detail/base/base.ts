@@ -7,6 +7,7 @@ import {
   DeviceGradeControllerService,
   DeviceStatusControllerService,
   NamedIdDto,
+  UpdateHardwareConfigDto,
 } from '@api/device';
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import { RouterLink } from '@angular/router';
@@ -16,6 +17,7 @@ import {
   ClrInputModule,
   ClrLabel,
   ClrNumberInputModule,
+  ClrSelectModule,
 } from '@clr/angular';
 import {
   FormControl,
@@ -24,6 +26,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import {
+  ModelAppleSiliconControllerService,
+  ModelColorControllerService,
+  ModelStorageControllerService,
+  ModelUnifiedMemoryControllerService,
+} from '@api/model';
 
 @Component({
   selector: 'app-base',
@@ -37,6 +45,7 @@ import {
     ReactiveFormsModule,
     ClrInputModule,
     ClrNumberInputModule,
+    ClrSelectModule,
   ],
   templateUrl: './base.html',
   styleUrl: './base.css',
@@ -50,6 +59,10 @@ export class Base implements OnInit {
 
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
 
+  modelAppleSilicons = signal<NamedIdDto[]>([]);
+  modelColors = signal<NamedIdDto[]>([]);
+  modelMemories = signal<NamedIdDto[]>([]);
+  modelStorages = signal<NamedIdDto[]>([]);
   deviceStatus = signal<NamedIdDto[]>([]);
   deviceBatteryStatus = signal<NamedIdDto[]>([]);
   deviceGrades = signal<NamedIdDto[]>([]);
@@ -61,6 +74,14 @@ export class Base implements OnInit {
   batteryEditModeActive = signal<boolean>(false);
   batteryStatusEditModeActive = signal<boolean>(false);
   gradeEditModeActive = signal<boolean>(false);
+  hardwareConfigEditModeActive = signal<boolean>(false);
+
+  hardwareConfigForm = new FormGroup({
+    newAppleSiliconId: new FormControl<number | null>(null),
+    newMemoryId: new FormControl<number | null>(null),
+    newStorageId: new FormControl<number | null>(null),
+    newColorId: new FormControl<number | null>(null),
+  });
 
   statusForm = new FormGroup({
     newStatusId: new FormControl<number | null>(null, [Validators.required]),
@@ -91,6 +112,7 @@ export class Base implements OnInit {
   });
 
   private readonly editModes = [
+    this.hardwareConfigEditModeActive,
     this.statusEditModeActive,
     this.tagEditModeActive,
     this.serialNumberEditModeActive,
@@ -103,6 +125,10 @@ export class Base implements OnInit {
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
   private gradeApi = inject(DeviceGradeControllerService);
+  private appleSiliconApi = inject(ModelAppleSiliconControllerService);
+  private colorApi = inject(ModelColorControllerService);
+  private memoryApi = inject(ModelUnifiedMemoryControllerService);
+  private storageApi = inject(ModelStorageControllerService);
 
   constructor() {
     this.editModes.forEach((active) => {
@@ -120,13 +146,96 @@ export class Base implements OnInit {
     this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
   }
 
+  activateHardwareConfigEditMode() {
+    this.hardwareConfigEditModeActive.set(true);
+    this.modelMemories.set(
+      [this.deviceBase()?.unifiedMemory].filter((memory): memory is NamedIdDto => !!memory),
+    );
+    this.modelStorages.set(
+      [this.deviceBase()?.storage].filter((storage): storage is NamedIdDto => !!storage),
+    );
+
+    this.hardwareConfigForm.patchValue({
+      newAppleSiliconId: this.deviceBase()!.appleSilicon?.id,
+      newMemoryId: this.deviceBase()!.unifiedMemory?.id,
+      newStorageId: this.deviceBase()!.storage?.id,
+      newColorId: this.deviceBase()!.color?.id,
+    });
+
+    this.appleSiliconApi
+      .getAllAppleSiliconsForModel(this.deviceBase()!.model.id)
+      .subscribe((data) => {
+        this.modelAppleSilicons.set(data);
+      });
+
+    if (this.deviceBase()!.appleSilicon) {
+      if (this.deviceBase()!.unifiedMemory) {
+        this.loadMemoryOptionsForAppleSilicon(this.deviceBase()!.appleSilicon?.id!);
+      }
+      if (this.deviceBase()!.storage) {
+        this.loadStorageOptions();
+      }
+    }
+
+    this.colorApi.getColorsForModel(this.deviceBase()!.model.id).subscribe((data) => {
+      this.modelColors.set(data);
+    });
+  }
+
+  loadMemoryOptions($event: Event) {
+    const selectedAppleSiliconId: number = Number(($event.target as HTMLSelectElement).value);
+    this.loadMemoryOptionsForAppleSilicon(selectedAppleSiliconId);
+  }
+
+  loadStorageOptions() {
+    const selectedAppleSiliconId: number =
+      this.hardwareConfigForm.controls.newAppleSiliconId.value!;
+
+    this.storageApi
+      .getStoragesForModelAndAppleSilicon(this.deviceId(), selectedAppleSiliconId)
+      .subscribe((data) => {
+        this.modelStorages.set(data);
+      });
+  }
+
+  changeHardwareConfig() {
+    const updateHardwareConfig: UpdateHardwareConfigDto = {
+      modelAppleSiliconId: this.hardwareConfigForm.controls.newAppleSiliconId.value!,
+      modelAppleSiliconUnifiedMemoryId: this.hardwareConfigForm.controls.newMemoryId.value!,
+      modelStorageId: this.hardwareConfigForm.controls.newStorageId.value!,
+      modelColorId: this.hardwareConfigForm.controls.newColorId.value!,
+    };
+    this.api.updateHardwareConfig(this.deviceId(), updateHardwareConfig).subscribe(() => {
+      this.hardwareConfigEditModeActive.set(false);
+
+      this.deviceBase.update((currentValue) => {
+        return {
+          ...currentValue!,
+          appleSilicon: this.modelAppleSilicons().find((appleSilicon) => {
+            return appleSilicon.id == updateHardwareConfig.modelAppleSiliconId;
+          })!,
+          unifiedMemory: this.modelMemories().find((memory) => {
+            return memory.id == updateHardwareConfig.modelAppleSiliconUnifiedMemoryId;
+          })!,
+          storage: this.modelStorages().find((storage) => {
+            return storage.id == updateHardwareConfig.modelStorageId;
+          })!,
+          color: this.modelColors().find((appleSilicon) => {
+            return appleSilicon.id == updateHardwareConfig.modelColorId;
+          })!,
+        };
+      });
+    });
+  }
+
   activateStatusEditMode() {
     this.statusEditModeActive.set(true);
+    this.statusForm.patchValue({
+      newStatusId: this.deviceBase()?.status.id,
+    });
+
     this.statusApi.getAllStatus().subscribe((data) => {
       this.deviceStatus.set(data);
-      this.statusForm.patchValue({
-        newStatusId: this.deviceBase()?.status.id,
-      });
     });
   }
 
@@ -194,12 +303,12 @@ export class Base implements OnInit {
 
   activateBatteryStatusEditMode() {
     this.batteryStatusEditModeActive.set(true);
+    this.batteryStatusForm.patchValue({
+      newBatteryStatusId: this.deviceBase()?.batteryStatus?.id || null,
+    });
 
     this.batteryStatusApi.getAllBatteryStatus().subscribe((data) => {
       this.deviceBatteryStatus.set(data);
-      this.batteryStatusForm.patchValue({
-        newBatteryStatusId: this.deviceBase()?.batteryStatus?.id || null,
-      });
     });
   }
 
@@ -228,12 +337,12 @@ export class Base implements OnInit {
 
   activateGradeEditMode() {
     this.gradeEditModeActive.set(true);
+    this.gradeForm.patchValue({
+      newGradeId: this.deviceBase()?.grade?.id || null,
+    });
 
     this.gradeApi.getAllGrades().subscribe((data) => {
       this.deviceGrades.set(data);
-      this.gradeForm.patchValue({
-        newGradeId: this.deviceBase()?.grade?.id || null,
-      });
     });
   }
 
@@ -257,13 +366,12 @@ export class Base implements OnInit {
 
   activateTagEditMode() {
     this.tagEditModeActive.set(true);
+    this.tagForm.patchValue({
+      newTagId: null,
+    });
 
     this.api.getAvailableTags(this.deviceId()).subscribe((data) => {
       this.deviceTags.set(data);
-
-      this.tagForm.patchValue({
-        newTagId: null,
-      });
     });
   }
 
@@ -287,8 +395,8 @@ export class Base implements OnInit {
     });
   }
 
-  protected deleteTag(tagId: number) {
-    if (confirm('Do you really want to delete this tag?')) {
+  deleteTag(tagId: number) {
+    if (confirm('Do you really want to remove this tag?')) {
       this.api.deleteTag(this.deviceId(), tagId).subscribe(() => {
         this.tagsChanged.emit();
 
@@ -304,5 +412,14 @@ export class Base implements OnInit {
         });
       });
     }
+  }
+
+  private loadMemoryOptionsForAppleSilicon(appleSiliconId: number) {
+    this.memoryApi
+      .getUnifiedMemoriesForModelAndAppleSilicon(this.deviceBase()!.model.id, appleSiliconId)
+      .subscribe((data) => {
+        this.modelMemories.set(data);
+        this.loadStorageOptions();
+      });
   }
 }

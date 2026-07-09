@@ -122,4 +122,16 @@ public class DeviceStatusService {
 			.map(a -> NamedIdDto.from(a))
 			.toList();
 	}
+
+	@Transactional
+	public void updateHardwareConfigOfDevice(Integer deviceId, UpdateHardwareConfigDto updateHardwareConfigDto) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+
+		device.setModelAppleSiliconId(updateHardwareConfigDto.getModelAppleSiliconId());
+		device.setModelAppleSiliconUnifiedMemoryId(updateHardwareConfigDto.getModelAppleSiliconUnifiedMemoryId());
+		device.setModelStorageId(updateHardwareConfigDto.getModelStorageId());
+		device.setModelColorId(updateHardwareConfigDto.getModelColorId());
+
+		deviceRepository.save(device);
+	}
 }

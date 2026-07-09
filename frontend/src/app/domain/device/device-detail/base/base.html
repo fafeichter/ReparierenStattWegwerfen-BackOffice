@@ -9,11 +9,60 @@
         <cds-icon role="img" shape="pop-out"/>
       </a></li>
       <hr>
-      <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse }}</li>
-      <li>Memory: {{ deviceBase()?.unifiedMemory?.name | orElse }}</li>
-      <li>Storage: {{ deviceBase()?.storage?.name | orElse }}</li>
-      <li>Color: {{ deviceBase()?.color?.name | orElse }}</li>
-      <hr>
+      @if (!hardwareConfigEditModeActive()) {
+        <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse }}</li>
+        <li>Memory: {{ deviceBase()?.unifiedMemory?.name | orElse }}</li>
+        <li>Storage: {{ deviceBase()?.storage?.name | orElse }}</li>
+        <li>Color: {{ deviceBase()?.color?.name | orElse }}</li>
+        <button (click)="activateHardwareConfigEditMode()" class="btn btn-link">
+          <cds-icon role="img" shape="edit"/>
+          Edit
+        </button>
+        <hr>
+      } @else {
+        <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" clrForm>
+          <clr-select-container>
+            <label>Chip</label>
+            <select (change)="loadMemoryOptions($event)" clrSelect formControlName="newAppleSiliconId">
+              @for (appleSilicon of modelAppleSilicons(); track appleSilicon.id) {
+                <option [value]="appleSilicon.id">{{ appleSilicon.name }}</option>
+              }
+            </select>
+          </clr-select-container>
+          <clr-select-container>
+            <label>Memory</label>
+            <select (change)="loadStorageOptions()" clrSelect formControlName="newMemoryId">
+              @for (memory of modelMemories(); track memory.id) {
+                <option [value]="memory.id">{{ memory.name }}</option>
+              }
+            </select>
+          </clr-select-container>
+          <clr-select-container>
+            <label>Storage</label>
+            <select clrSelect formControlName="newStorageId">
+              @for (storage of modelStorages(); track storage.id) {
+                <option [value]="storage.id">{{ storage.name }}</option>
+              }
+            </select>
+          </clr-select-container>
+          <clr-select-container>
+            <label>Color</label>
+            <select clrSelect formControlName="newColorId">
+              @for (color of modelColors(); track color.id) {
+                <option [value]="color.id">{{ color.name }}</option>
+              }
+            </select>
+          </clr-select-container>
+          <button (click)="hardwareConfigEditModeActive.set(false)" class="btn btn-link" type="button">
+            <cds-icon role="img" shape="close"/>
+            Cancel
+          </button>
+          <button [disabled]="hardwareConfigForm.invalid" class="btn btn-link ml-1!" type="submit">
+            <cds-icon role="img" shape="check"/>
+            Save
+          </button>
+        </form>
+      }
       <li>
         Status:
         @if (!statusEditModeActive()) {

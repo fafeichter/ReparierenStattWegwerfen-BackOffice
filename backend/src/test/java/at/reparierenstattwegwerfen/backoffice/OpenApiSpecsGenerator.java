@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 	OpenAiAudioSpeechAutoConfiguration.class
 })
 public class OpenApiSpecsGenerator {
-	private static final List<String> IGNORE_MODULES = List.of(
+	private static final List<String> MODULES_TO_IGNORE = List.of(
 		"application",
 		"shared"
 	);
@@ -54,7 +54,7 @@ public class OpenApiSpecsGenerator {
 			.stream()
 			.map(ApplicationModule::getIdentifier)
 			.map(ApplicationModuleIdentifier::toString)
-			.filter(module -> !IGNORE_MODULES.contains(module))
+			.filter(module -> !MODULES_TO_IGNORE.contains(module))
 			.toList();
 
 		Path directory = Paths.get("build/openapi");
