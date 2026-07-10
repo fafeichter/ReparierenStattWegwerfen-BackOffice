@@ -1,5 +1,11 @@
 import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
-import { ClrCheckboxModule, ClrCommonFormsModule, ClrIcon, ClrModalModule, ClrTextareaModule } from '@clr/angular';
+import {
+  ClrCheckboxModule,
+  ClrCommonFormsModule,
+  ClrIcon,
+  ClrModalModule,
+  ClrTextareaModule,
+} from '@clr/angular';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import {
@@ -7,7 +13,7 @@ import {
   DeviceSellingAccessoriesControllerService,
   DeviceSellingAccessoriesDto,
   DeviceSellingAccessoriesFormDto,
-  DeviceSellingDetailsDto
+  DeviceSellingDetailsDto,
 } from '@api/device';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';

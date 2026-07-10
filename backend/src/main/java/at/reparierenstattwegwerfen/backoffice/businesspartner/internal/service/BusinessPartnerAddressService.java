@@ -49,7 +49,6 @@ public class BusinessPartnerAddressService {
 		addressRepository.save(businessPartnerAddress);
 		businessPartner.setAddress(businessPartnerAddress);
 
-
 		businessPartnerRepository.save(businessPartner);
 	}
 }
