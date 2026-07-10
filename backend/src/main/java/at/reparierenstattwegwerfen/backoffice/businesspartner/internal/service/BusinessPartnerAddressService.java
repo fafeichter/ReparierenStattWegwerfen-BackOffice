@@ -33,7 +33,13 @@ public class BusinessPartnerAddressService {
 		businessPartner.setFirstName(address.firstName());
 		businessPartner.setLastName(address.lastName());
 
-		BusinessPartnerAddress businessPartnerAddress = new BusinessPartnerAddress();
+		BusinessPartnerAddress businessPartnerAddress = null;
+		if (businessPartner.getAddress() == null) {
+			businessPartnerAddress = new BusinessPartnerAddress();
+		} else {
+			businessPartnerAddress = addressRepository.getReferenceById(businessPartner.getAddress().getId());
+		}
+
 		businessPartnerAddress.setStreet(address.street());
 		businessPartnerAddress.setHouseNumber(address.houseNumber());
 		businessPartnerAddress.setCity(address.city());
@@ -42,6 +48,7 @@ public class BusinessPartnerAddressService {
 
 		addressRepository.save(businessPartnerAddress);
 		businessPartner.setAddress(businessPartnerAddress);
+
 
 		businessPartnerRepository.save(businessPartner);
 	}

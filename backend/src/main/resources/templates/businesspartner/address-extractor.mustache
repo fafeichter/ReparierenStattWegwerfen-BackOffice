@@ -47,4 +47,12 @@ exact visible spelling for street names.
     layout/syntax to deduce the country.
     - Rule C (Fallback): If absolutely no country code can be determined, or if the country field is entirely missing
     and ambiguous, you must default to "AT" (Austria).
+
+    STEP 4 — ZIP Code Cross-Verification and Correction.
+    Analyze the relationship between the extracted City and the Postal Code:
+    - Use the recognized City/Locality as an anchor. If the extracted postal code contains OCR errors, looks incomplete,
+    or is known to mismatch the city, use your internal knowledge base of that country's postal system to correct or
+    derive the accurate ZIP code for that specific city.
+    - Prioritize a logical City-to-ZIP match over a literal interpretation of a poorly printed or flawed ZIP code on the
+    label.
 </procedure>
