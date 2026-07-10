@@ -13,7 +13,7 @@ Use OCR text as a baseline, but visually verify every field against the image. I
 image takes absolute precedence.
 
 For handwritten or low-quality labels, correct obvious OCR errors by analyzing the visual shape of the text. Preserve
-exact visible spelling for street names.
+exact visible spelling for street names unless geographical validation proves it to be an OCR/spelling error.
 </input>
 
 <reference_data>
@@ -48,11 +48,15 @@ exact visible spelling for street names.
     - Rule C (Fallback): If absolutely no country code can be determined, or if the country field is entirely missing
     and ambiguous, you must default to "AT" (Austria).
 
-    STEP 4 — ZIP Code Cross-Verification and Correction.
-    Analyze the relationship between the extracted City and the Postal Code:
-    - Use the recognized City/Locality as an anchor. If the extracted postal code contains OCR errors, looks incomplete,
-    or is known to mismatch the city, use your internal knowledge base of that country's postal system to correct or
-    derive the accurate ZIP code for that specific city.
-    - Prioritize a logical City-to-ZIP match over a literal interpretation of a poorly printed or flawed ZIP code on the
-    label.
+    STEP 4 — Address Integrity & Cross-Verification.
+    Cross-reference all extracted components (Street, ZIP, City, Country) against real-world geographical data to
+    validate and correct errors:
+    - Bi-directional ZIP/City Check: If the City is clear but the ZIP is corrupted/missing, derive the ZIP from the
+    City. Conversely, if the ZIP is highly legible but the City is smudged or misspelled, derive or correct the City
+    name using the ZIP.
+    - Street Validation: Verify if the extracted street name actually exists within that verified ZIP code and City.
+    - Error Correction: If a street name contains minor typos, missing characters, or obvious OCR misreadings (e.g.,
+    "S1reet" instead of "Street"), correct it to match the valid, existing real-world street name for that locality. Do
+    not invent a new address; use the visual evidence on the label combined with real-world geography to reconstruct the
+    correct, valid address.
 </procedure>
