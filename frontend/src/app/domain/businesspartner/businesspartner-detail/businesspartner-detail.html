@@ -28,22 +28,35 @@
         <div class="card-block">
           <div class="card-title">Devices</div>
           <div class="card-text">
-            <ul>
-              <li>
-                <a [routerLink]="['/devices', 1]">
-                  MacBook Pro 2021 M1 Pro
-                  <clr-label clrColor="info">Seller</clr-label>
-                </a>
-              </li>
-              <li>
-                <a [routerLink]="['/devices', 2]">
-                  iPad Air 12,9 5. Generation M2
-                  <clr-label clrColor="success">Buyer</clr-label>
-                </a>
-              </li>
-            </ul>
+            <div>
+              <h5>Seller</h5>
+              <ul>
+                @for (businessPartnerDevice of businessPartnerDevices()?.soldDevices; track businessPartnerDevice.id) {
+                  <li>
+                    <a [routerLink]="['/devices', businessPartnerDevice.id]">
+                      {{ businessPartnerDevice.name }}
+                    </a>
+                  </li>
+                } @empty {
+                  -
+                }
+              </ul>
+            </div>
+            <div class="mt-2">
+              <h5>Buyer</h5>
+              <ul>
+                @for (businessPartnerDevice of businessPartnerDevices()?.boughtDevices; track businessPartnerDevice.id) {
+                  <li>
+                    <a [routerLink]="['/devices', businessPartnerDevice.id]">
+                      {{ businessPartnerDevice.name }}
+                    </a>
+                  </li>
+                } @empty {
+                  -
+                }
+              </ul>
+            </div>
           </div>
-          todo ...
         </div>
       </div>
     </div>

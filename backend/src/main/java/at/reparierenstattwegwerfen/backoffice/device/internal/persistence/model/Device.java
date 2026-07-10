@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Device {
+public class Device implements NamedId {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -97,4 +98,9 @@ public class Device {
 
 	@Column(name = "selling_price")
 	private Double sellingPrice;
+
+	@Override
+	public String getName() {
+		return "#" + getId();
+	}
 }
