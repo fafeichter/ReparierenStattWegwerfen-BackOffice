@@ -192,7 +192,7 @@ export class Base implements OnInit {
       this.hardwareConfigForm.controls.newAppleSiliconId.value!;
 
     this.storageApi
-      .getStoragesForModelAndAppleSilicon(this.deviceId(), selectedAppleSiliconId)
+      .getStoragesForModelAndAppleSilicon(this.deviceBase()!.model.id, selectedAppleSiliconId)
       .subscribe((data) => {
         this.modelStorages.set(data);
       });
