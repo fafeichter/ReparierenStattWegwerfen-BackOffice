@@ -1,0 +1,50 @@
+<task>
+    Extract the sender's address from a photo or OCR text snippet of a shipping label, and return it as a single JSON
+    object. Follow the &lt;procedure&gt; exactly — it is a fixed checklist, not optional.
+</task>
+
+<input>
+See the attached image of the shipping label.
+
+Read only the address fields. Ignore layout graphics, carrier logos, tracking numbers, and unrelated system
+timestamps unless they help identify location.
+
+Use OCR text as a baseline, but visually verify every field against the image. If OCR and image data conflict, the
+image takes absolute precedence.
+
+For handwritten or low-quality labels, correct obvious OCR errors by analyzing the visual shape of the text. Preserve
+exact visible spelling for street names.
+</input>
+
+<reference_data>
+    See attached CSV file containing the country codes. This dataset contains a comma-separated list of valid ISO
+    alpha-2 country codes (e.g., "AT", "DE", "FR").
+</reference_data>
+
+<procedure>
+    Work through these steps in order. Keep work internal; output only the final JSON.
+
+    STEP 1 — Address Segregation.
+    Locate all address blocks visible on the label. Note that shipping labels frequently contain two addresses: the
+    sender (origin) and the recipient (destination).
+    - CRITICAL RULE: Locate the recipient address for "Fabian Feichter". You must STRICTLY IGNORE this address block for
+    extraction.
+    - Isolate the OTHER address block on the label. This is your target sender address.
+
+    STEP 2 — Extract Raw Address Components.
+    Pull out, verbatim from the target sender address, the following information. Do not normalize or map yet:
+    - Sender name
+    - Street name and house/building number
+    - Postal code (ZIP code)
+    - City / Locality
+    - Country name (if explicitly stated)
+
+    STEP 3 — Normalize Country Code.
+    Determine the final `country_code` for the sender using these priority rules:
+    - Rule A: If the country name is explicitly stated, match it against the attached CSV file to find the correct
+    2-letter ISO code.
+    - Rule B: If the country name is absent or implicit, analyze the postal code format or the overall address
+    layout/syntax to deduce the country.
+    - Rule C (Fallback): If absolutely no country code can be determined, or if the country field is entirely missing
+    and ambiguous, you must default to "AT" (Austria).
+</procedure>

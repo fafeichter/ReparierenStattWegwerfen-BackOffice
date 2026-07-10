@@ -13,6 +13,10 @@ spring:
       chat:
         model: gpt-5.5
         reasoning-effort: medium
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
 
 springdoc:
   default-produces-media-type: application/json

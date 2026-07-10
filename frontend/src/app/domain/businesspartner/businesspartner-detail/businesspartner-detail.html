@@ -15,6 +15,16 @@
             {{ businessPartner.address?.zipCode  | orElse }} {{ businessPartner.address?.city  | orElse }}<br>
             {{ businessPartner.address?.country  | orElse }}
           </div>
+          <form #formRef (ngSubmit)="updateAddress()" [formGroup]="form" clrForm clrLayout="vertical">
+            <clr-file-input-container clrButtonLabel="Browse">
+              <label>Set address from image</label>
+              <input (change)="formRef.requestSubmit()" accept="image/*" capture="environment"
+                     clrFileInput formControlName="shippingLabelImage" multiple name="file"
+                     required type="file"/>
+              <clr-control-helper>Photo of shipping label</clr-control-helper>
+              <clr-control-error *clrIfError="'required'">Required</clr-control-error>
+            </clr-file-input-container>
+          </form>
         </div>
         <div class="card-block">
           <div class="card-title">Contact</div>

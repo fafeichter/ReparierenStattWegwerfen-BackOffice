@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartner;
-import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -36,5 +35,5 @@ public interface BusinessPartnerRepository extends JpaRepository<BusinessPartner
 		from BusinessPartner bp
 		where bp.id = :businessPartnerId
 		""")
-	NamedId getBusinessPartner(Integer businessPartnerId);
+	BusinessPartner getBusinessPartner(Integer businessPartnerId);
 }
