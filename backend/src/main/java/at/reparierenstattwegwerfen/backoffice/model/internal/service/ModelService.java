@@ -4,7 +4,6 @@ import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.model.*
 import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.repository.ModelRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Service;
 import org.springframework.util.unit.DataUnit;
 
@@ -16,11 +15,6 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-@RegisterReflectionForBinding({
-	PromptContext.class,
-	ModelMatchResponse.class,
-	ModelMatchResponse.AlternativeCandidate.class
-})
 public class ModelService {
 
 	private final ModelRepository modelRepository;

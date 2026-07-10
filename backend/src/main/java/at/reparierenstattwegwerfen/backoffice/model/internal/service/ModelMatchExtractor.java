@@ -9,6 +9,7 @@ import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.content.Media;
 import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,11 @@ import java.nio.charset.StandardCharsets;
  */
 @Component
 @RequiredArgsConstructor
+@RegisterReflectionForBinding({
+	PromptContext.class,
+	ModelMatchResponse.class,
+	ModelMatchResponse.AlternativeCandidate.class
+})
 public class ModelMatchExtractor {
 
 	private final ChatClient.Builder aiClientBuilder;
