@@ -19,10 +19,10 @@ BEGIN
             NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
             NEW.serial_number, NEW.device_status_id, NEW.seller_business_partner_id, NEW.buyer_business_partner_id,
             NEW.purchase_price, NEW.device_grade_id, NEW.reported_defect, NEW.diagnosed_defect,
-            NEW.selling_device_online_marketplace_id, NEW.selling_date, NEW.selling_accessory_charger,
-            NEW.selling_accessory_charging_cable, NEW.selling_accessory_original_packaging,
-            NEW.battery_maximum_capacity, NEW.battery_cycle_count, NEW.device_battery_status_id, NEW.selling_price,
-            NEW.created_at, NEW.updated_at);
+            NEW.selling_device_online_marketplace_id, NEW.selling_date, NEW.battery_maximum_capacity,
+            NEW.battery_cycle_count, NEW.device_battery_status_id, NEW.selling_price, NEW.selling_accessory_charger,
+            NEW.selling_accessory_charging_cable, NEW.selling_accessory_original_packaging, NEW.created_at,
+            NEW.updated_at);
 END $$
 
 CREATE TRIGGER tr_device_update

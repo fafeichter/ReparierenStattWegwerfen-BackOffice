@@ -27,6 +27,15 @@
           </form>
         </div>
         <div class="card-block">
+          <div class="card-title">Company</div>
+          <div class="card-text">
+            <ul class="list">
+              <li>Name: {{ businessPartner.companyName | orElse }}</li>
+              <li>UID: {{ businessPartner.companyUid | orElse }}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-block">
           <div class="card-title">Contact</div>
           <div class="card-text">
             <ul class="list">
