@@ -30,6 +30,8 @@ dependencies {
     implementation("org.springframework.ai:spring-ai-starter-model-openai")
     implementation("org.springframework.boot:spring-boot-starter-mustache")
     compileOnly("org.projectlombok:lombok")
+    compileOnly("org.hibernate.orm:hibernate-processor")
+    annotationProcessor("org.hibernate.orm:hibernate-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     runtimeOnly("com.mysql:mysql-connector-j")

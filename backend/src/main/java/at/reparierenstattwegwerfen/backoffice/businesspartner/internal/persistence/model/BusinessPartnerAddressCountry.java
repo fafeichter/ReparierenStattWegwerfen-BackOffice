@@ -26,4 +26,7 @@ public class BusinessPartnerAddressCountry implements NamedId {
 
 	@Column(name = "code")
 	private String code;
+
+	@Column(name = "sort_order")
+	private Integer sortOrder;
 }

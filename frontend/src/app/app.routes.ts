@@ -9,6 +9,7 @@ import { Devices } from './domain/device/devices';
 import { TechnicalDetails } from './layout/technical-details/technical-details';
 import { BusinesspartnerDetail } from './domain/businesspartner/businesspartner-detail/businesspartner-detail';
 import { DeviceDetail } from './domain/device/device-detail/device-detail';
+import { BusinesspartnerCreate } from './domain/businesspartner/businesspartner-create/businesspartner-create';
 
 export const routes: Routes = [
   {
@@ -52,6 +53,10 @@ export const routes: Routes = [
           {
             path: '',
             component: BusinessPartners,
+          },
+          {
+            path: 'create',
+            component: BusinesspartnerCreate,
           },
           {
             path: ':businessPartnerId',

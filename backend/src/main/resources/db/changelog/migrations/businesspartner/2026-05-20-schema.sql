@@ -6,9 +6,11 @@ CREATE TABLE business_partner_address_country
     business_partner_address_country_id int          NOT NULL AUTO_INCREMENT,
     name                                varchar(256) NOT NULL,
     code                                char(2)      NOT NULL COMMENT 'ISO-3166',
+    sort_order int NOT NULL,
     created_at                          timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at                          timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (business_partner_address_country_id)
+    PRIMARY KEY (business_partner_address_country_id),
+    UNIQUE KEY uq_business_partner_address_country_sort (sort_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE business_partner_address

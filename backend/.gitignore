@@ -1,4 +1,6 @@
 ### Gradle ###
-
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+# Ignore Hibernate generated sources
+/src/main/generated/

@@ -74,8 +74,8 @@
         } @else {
           <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm>
             <select (change)="statusFormRef.requestSubmit()" formControlName="newStatusId">
-              @for (deviceStatus of deviceStatus(); track deviceStatus.id; let i = $index) {
-                @if (i == 6) {
+              @for (deviceStatus of deviceStatus(); track deviceStatus.id) {
+                @if (deviceStatus.id === 7) {
                   <hr>
                 }
                 <option [value]="deviceStatus.id">{{ deviceStatus.name }}</option>
