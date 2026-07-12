@@ -36,6 +36,9 @@ public class BusinessPartner implements NamedId {
 	@Column(name = "company_name")
 	private String companyName;
 
+	@Column(name = "company_uid")
+	private String companyUid;
+
 	@Column(name = "scammer")
 	private Boolean scammer;
 

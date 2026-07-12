@@ -37,6 +37,12 @@ public class BusinessPartnerDetailDto {
 	@Size(max = 256)
 	String email;
 
+	@Size(max = 256)
+	String companyName;
+
+	@Size(max = 32)
+	String companyUid;
+
 	@NotNull
 	Boolean scammer;
 

@@ -34,6 +34,7 @@ CREATE TABLE business_partner
     telephone                   varchar(64)           DEFAULT NULL,
     email                       varchar(256)          DEFAULT NULL,
     company_name                varchar(256)          DEFAULT NULL,
+    company_uid varchar(32) DEFAULT NULL,
     scammer                     tinyint(1)   NOT NULL DEFAULT '0',
     business_partner_address_id int                   DEFAULT NULL,
     created_at                  timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,

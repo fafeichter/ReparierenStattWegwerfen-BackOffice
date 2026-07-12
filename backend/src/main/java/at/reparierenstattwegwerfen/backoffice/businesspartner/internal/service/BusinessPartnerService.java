@@ -43,6 +43,9 @@ public class BusinessPartnerService {
 			.firstName(businessPartner.getFirstName())
 			.lastName(businessPartner.getLastName())
 			.telephone(businessPartner.getTelephone())
+			.email(businessPartner.getEmail())
+			.companyName(businessPartner.getCompanyName())
+			.companyUid(businessPartner.getCompanyUid())
 			.scammer(businessPartner.getScammer())
 			.address(toAddress(businessPartner.getAddress()))
 			.build();
