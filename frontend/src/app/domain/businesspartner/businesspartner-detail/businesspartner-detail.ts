@@ -23,6 +23,8 @@ export class BusinesspartnerDetail {
   form = new FormGroup({
     shippingLabelImage: new FormControl<FileList | null>(null, [Validators.required]),
   });
+  addressEditModeActive = signal<boolean>(false);
+
   private api = inject(BusinessPartnerControllerService);
   private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
   private businessPartnerAdressExtractionApi = inject(
@@ -52,7 +54,6 @@ export class BusinesspartnerDetail {
           this.api
             .getBusinessPartnerDetails(this.businessPartnerId()!)
             .subscribe((data) => this.businessPartner.set(data));
-          this.form.reset();
         });
     }
   }
