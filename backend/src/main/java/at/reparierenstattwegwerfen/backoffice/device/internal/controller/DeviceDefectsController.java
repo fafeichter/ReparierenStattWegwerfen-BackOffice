@@ -26,4 +26,9 @@ public class DeviceDefectsController {
 	public void updateDefects(@PathVariable Integer deviceId, @Valid @RequestBody DeviceDefectsDto deviceDefectsDto) {
 		defectDetailsService.update(deviceId, deviceDefectsDto);
 	}
+
+	@PostMapping("/confirm-original")
+	public void confirmOriginalDefect(@PathVariable Integer deviceId) {
+		defectDetailsService.confirmOriginalDefect(deviceId);
+	}
 }

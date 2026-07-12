@@ -30,5 +30,13 @@ public class DeviceDefectDetailsService {
 		Device device = deviceRepository.getReferenceById(deviceId);
 		device.setReportedDefect(deviceDefectsDto.getReportedDefect());
 		device.setDiagnosedDefect(deviceDefectsDto.getDiagnosedDefect());
+		deviceRepository.save(device);
+	}
+
+	@Transactional
+	public void confirmOriginalDefect(Integer deviceId) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+		device.setDiagnosedDefect("WIE ANGEGEBEN");
+		deviceRepository.save(device);
 	}
 }

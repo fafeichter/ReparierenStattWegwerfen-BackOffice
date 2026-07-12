@@ -5,6 +5,13 @@
       <li>
         <div class="underline">Original defect:</div>
         {{ deviceDefects()?.reportedDefect | orElse }}
+        <br/>
+        @if (!deviceDefects()?.diagnosedDefect) {
+          <button (click)="confirmOriginalDefect()" class="btn btn-link">
+            <clr-icon shape="tasks"></clr-icon>
+            Confirm
+          </button>
+        }
       </li>
       <li class="mt-5">
         <div class="underline">Confirmed defect:</div>

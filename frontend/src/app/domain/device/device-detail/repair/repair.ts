@@ -73,14 +73,14 @@ export class Repair implements OnInit {
       .subscribe((data) => this.deviceSpareParts.set(data));
   }
 
-  protected updateDefects() {
+  updateDefects() {
     const defects: DeviceDefectsDto = {
       reportedDefect: this.defectsForm.controls.originalDefect.value!,
       diagnosedDefect: this.defectsForm.controls.confirmedDefect.value!,
     };
 
-    this.defectsApi.updateDefects(this.deviceId(), defects).subscribe((data) => {
-      this.deviceDefects.update((currentValue) => {
+    this.defectsApi.updateDefects(this.deviceId(), defects).subscribe(() => {
+      this.deviceDefects.update(() => {
         this.defectsForm.reset();
         this.isSubmitting.set(false);
         this.modalOpened.set(false);
@@ -88,6 +88,17 @@ export class Repair implements OnInit {
         return {
           reportedDefect: defects.reportedDefect,
           diagnosedDefect: defects.diagnosedDefect,
+        };
+      });
+    });
+  }
+
+  confirmOriginalDefect() {
+    this.defectsApi.confirmOriginalDefect(this.deviceId()).subscribe(() => {
+      this.deviceDefects.update((currentValue) => {
+        return {
+          ...currentValue!,
+          diagnosedDefect: 'WIE ANGEGEBEN',
         };
       });
     });
