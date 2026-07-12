@@ -1,12 +1,22 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { DeviceBuyingDetailsDto, DeviceDetailsControllerService } from '@api/device';
-import { ClrIcon } from '@clr/angular';
+import { ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from '@clr/angular';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-buying',
-  imports: [ClrIcon, CurrencyPipe, DatePipe, RouterLink],
+  imports: [
+    ClrIcon,
+    CurrencyPipe,
+    DatePipe,
+    RouterLink,
+    ClrCommonFormsModule,
+    ClrFileInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './buying.html',
   styleUrl: './buying.css',
 })

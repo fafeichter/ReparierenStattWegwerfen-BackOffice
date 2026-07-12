@@ -1,4 +1,9 @@
 @if (businessPartner(); as businessPartner) {
+  @if (deviceId()) {
+    <button (click)="cancelForm()" class="btn btn-link">
+      ← Back
+    </button>
+  }
   <div class="clr-row">
     <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
       <div class="card">
@@ -32,7 +37,7 @@
                 <clr-control-error *clrIfError="'required'">Required</clr-control-error>
               </clr-file-input-container>
             </form>
-            <button (click)="addressEditModeActive.set(false)" class="btn btn-link" type="button">
+            <button (click)="cancelForm()" class="btn btn-link" type="button">
               <cds-icon role="img" shape="close"/>
               Cancel
             </button>

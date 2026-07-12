@@ -16,6 +16,13 @@
         <a [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]">
           {{ deviceBuying()?.seller?.name }}
         </a>
+        <button
+          [queryParams]="{ 'edit-address': true, 'device-id':  deviceId()}"
+          [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]"
+          class="btn btn-link">
+          <cds-icon role="img" shape="pop-out"/>
+          Edit
+        </button>
       </li>
     </ul>
   </div>

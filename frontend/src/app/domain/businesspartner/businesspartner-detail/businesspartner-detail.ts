@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   BusinessPartnerAddressExtractionControllerService,
   BusinessPartnerControllerService,
@@ -23,14 +23,19 @@ export class BusinesspartnerDetail {
   form = new FormGroup({
     shippingLabelImage: new FormControl<FileList | null>(null, [Validators.required]),
   });
-  addressEditModeActive = signal<boolean>(false);
 
+  private route = inject(ActivatedRoute);
+  addressEditModeActive = signal<boolean>(
+    this.route.snapshot.queryParamMap.get('edit-address') === 'true',
+  );
+  private rawDeviceId = this.route.snapshot.queryParamMap.get('device-id');
+  deviceId = signal<number | undefined>(this.rawDeviceId ? Number(this.rawDeviceId) : undefined);
   private api = inject(BusinessPartnerControllerService);
   private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
   private businessPartnerAdressExtractionApi = inject(
     BusinessPartnerAddressExtractionControllerService,
   );
-  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.businessPartnerId.set(Number(this.route.snapshot.paramMap.get('businessPartnerId')));
@@ -55,6 +60,14 @@ export class BusinesspartnerDetail {
             .getBusinessPartnerDetails(this.businessPartnerId()!)
             .subscribe((data) => this.businessPartner.set(data));
         });
+    }
+  }
+
+  cancelForm() {
+    if (!this.deviceId()) {
+      this.addressEditModeActive.set(false);
+    } else {
+      this.router.navigate(['/devices', this.deviceId()]);
     }
   }
 }
