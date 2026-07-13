@@ -1,15 +1,17 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ClrInputModule, ClrSelectModule } from '@clr/angular';
+import { ClrButtonGroupModule, ClrInputModule, ClrSelectModule } from '@clr/angular';
 import {
   BusinessPartnerAddressCountryControllerService,
   BusinessPartnerAddressCountryDto,
+  BusinessPartnerCreationControllerService,
+  CreateBuyerBusinessPartnerForDeviceDto,
 } from '@api/businesspartner';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-businesspartner-create',
-  imports: [ClrInputModule, ReactiveFormsModule, ClrSelectModule],
+  imports: [ClrInputModule, ReactiveFormsModule, ClrSelectModule, ClrButtonGroupModule],
   templateUrl: './businesspartner-create.html',
   styleUrl: './businesspartner-create.css',
 })
@@ -29,6 +31,7 @@ export class BusinesspartnerCreate implements OnInit {
   private rawDeviceId = this.route.snapshot.queryParamMap.get('device-id');
   deviceId = signal<number | undefined>(this.rawDeviceId ? Number(this.rawDeviceId) : undefined);
   private businessPartnerAddressCountryApi = inject(BusinessPartnerAddressCountryControllerService);
+  private businessPartnerCreationApi = inject(BusinessPartnerCreationControllerService);
   private router = inject(Router);
 
   ngOnInit(): void {
@@ -38,7 +41,30 @@ export class BusinesspartnerCreate implements OnInit {
   }
 
   createBusinessPartner() {
-    // todo
+    this.isSubmitting.set(true);
+
+    const businessPartner: CreateBuyerBusinessPartnerForDeviceDto = {
+      firstName: this.businessPartnerForm.controls.firstName.value!,
+      lastName: this.businessPartnerForm.controls.firstName.value!,
+      deviceId: this.deviceId()!,
+      street: this.businessPartnerForm.controls.street.value!,
+      houseNumber: this.businessPartnerForm.controls.houseNumber.value!,
+      zipCode: this.businessPartnerForm.controls.zipCode.value!,
+      city: this.businessPartnerForm.controls.city.value!,
+      countryId: this.businessPartnerForm.controls.businessPartnerCountryId.value!,
+    };
+
+    this.businessPartnerCreationApi
+      .createBuyerBusinessPartnerForDevice(businessPartner)
+      .subscribe(() => {
+        this.isSubmitting.set(false);
+
+        if (!this.deviceId()) {
+          this.isSubmitting.set(false);
+        } else {
+          this.router.navigate(['/devices', this.deviceId()]);
+        }
+      });
   }
 
   cancelForm() {

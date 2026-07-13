@@ -18,8 +18,13 @@ public class BusinessPartnerCreationController {
 
 	private final BusinessPartnerCreationService businessPartnerCreationService;
 
-	@PostMapping("/")
+	@PostMapping("/placeholder")
 	public Integer createBusinessPartnerPlaceholder(@Valid @RequestBody CreateBusinessPartnerPlaceholder businessPartnerPlaceholder) {
 		return businessPartnerCreationService.createBusinessPartnerPlaceholder(businessPartnerPlaceholder);
+	}
+
+	@PostMapping("/for-device-buyer")
+	public void createBuyerBusinessPartnerForDevice(@Valid @RequestBody CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice) {
+		businessPartnerCreationService.createBuyerBusinessPartnerForDevice(buyerBusinessPartnerForDevice);
 	}
 }

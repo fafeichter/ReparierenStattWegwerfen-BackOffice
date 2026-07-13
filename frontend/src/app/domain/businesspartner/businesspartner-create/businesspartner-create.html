@@ -1,67 +1,92 @@
-<form (ngSubmit)="createBusinessPartner()" [formGroup]="businessPartnerForm" clrForm>
-  <clr-input-container>
-    <label><span class="clr-required-mark">First name</span></label>
-    <input clrInput formControlName="firstName" type="text"/>
-    @if (businessPartnerForm.controls.firstName.hasError('required')) {
-      <clr-control-error>First name is required.</clr-control-error>
-    }
-  </clr-input-container>
-  <clr-input-container>
-    <label><span class="clr-required-mark">Last name</span></label>
-    <input clrInput formControlName="lastName" type="text"/>
-    @if (businessPartnerForm.controls.lastName.hasError('required')) {
-      <clr-control-error>Last name is required.</clr-control-error>
-    }
-  </clr-input-container>
-  <hr>
-  <clr-input-container>
-    <label><span class="clr-required-mark">Street</span></label>
-    <input clrInput formControlName="street" type="text"/>
-    @if (businessPartnerForm.controls.street.hasError('required')) {
-      <clr-control-error>Street is required.</clr-control-error>
-    }
-  </clr-input-container>
-  <clr-input-container>
-    <label><span class="clr-required-mark">House number</span></label>
-    <input clrInput formControlName="houseNumber" type="text"/>
-    @if (businessPartnerForm.controls.houseNumber.hasError('required')) {
-      <clr-control-error>House number is required.</clr-control-error>
-    }
-  </clr-input-container>
-  <clr-input-container>
-    <label><span class="clr-required-mark">ZIP code</span></label>
-    <input clrInput formControlName="zipCode" type="text"/>
-    @if (businessPartnerForm.controls.zipCode.hasError('required')) {
-      <clr-control-error>ZIP code is required.</clr-control-error>
-    }
-  </clr-input-container>
-  <clr-input-container>
-    <label><span class="clr-required-mark">City</span></label>
-    <input clrInput formControlName="city" type="text"/>
-    @if (businessPartnerForm.controls.city.hasError('required')) {
-      <clr-control-error>City is required.</clr-control-error>
-    }
-  </clr-input-container>
-  <clr-select-container>
-    <label>Country</label>
-    <select clrSelect formControlName="businessPartnerCountryId">
-      <option disabled selected value="null">-- Choose --</option>
-      @for (country of businessPartnerAddressCountries(); track country.id) {
-        @if (country.id === 3) {
-          <hr>
+<form (ngSubmit)="createBusinessPartner()" [formGroup]="businessPartnerForm" class="clr-form-full-width" clrForm>
+  <div class="clr-row">
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label><span class="clr-required-mark">First name</span></label>
+        <input clrInput formControlName="firstName" type="text"/>
+        @if (businessPartnerForm.controls.firstName.hasError('required')) {
+          <clr-control-error>First name is required.</clr-control-error>
         }
-        <option [value]="country.id">{{ country.code }} - {{ country.name }}</option>
-      }
-    </select>
-  </clr-select-container>
-  <button (click)="cancelForm()" class="btn btn-link" type="button">
-    <cds-icon role="img" shape="close"/>
-    Cancel
-  </button>
-  <button [disabled]="businessPartnerForm.invalid || isSubmitting()" class="btn btn-primary" type="submit">
-    @if (isSubmitting()) {
-      <span class="spinner spinner-inline"></span>
-    }
-    {{ isSubmitting() ? 'Setting...' : 'Set' }}
-  </button>
+      </clr-input-container>
+    </div>
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label><span class="clr-required-mark">Last name</span></label>
+        <input clrInput formControlName="lastName" type="text"/>
+        @if (businessPartnerForm.controls.lastName.hasError('required')) {
+          <clr-control-error>Last name is required.</clr-control-error>
+        }
+      </clr-input-container>
+    </div>
+  </div>
+  <div class="clr-row">
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label><span class="clr-required-mark">Street</span></label>
+        <input clrInput formControlName="street" type="text"/>
+        @if (businessPartnerForm.controls.street.hasError('required')) {
+          <clr-control-error>Street is required.</clr-control-error>
+        }
+      </clr-input-container>
+    </div>
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label><span class="clr-required-mark">House number</span></label>
+        <input class="clr-col-4" clrInput formControlName="houseNumber" type="text"/>
+        @if (businessPartnerForm.controls.houseNumber.hasError('required')) {
+          <clr-control-error>House number is required.</clr-control-error>
+        }
+      </clr-input-container>
+    </div>
+  </div>
+  <div class="clr-row">
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label><span class="clr-required-mark">ZIP code</span></label>
+        <input class="clr-col-5" clrInput formControlName="zipCode" type="text"/>
+        @if (businessPartnerForm.controls.zipCode.hasError('required')) {
+          <clr-control-error>ZIP code is required.</clr-control-error>
+        }
+      </clr-input-container>
+    </div>
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label><span class="clr-required-mark">City</span></label>
+        <input clrInput formControlName="city" type="text"/>
+        @if (businessPartnerForm.controls.city.hasError('required')) {
+          <clr-control-error>City is required.</clr-control-error>
+        }
+      </clr-input-container>
+    </div>
+  </div>
+  <div class="clr-row">
+    <div class="clr-col-md-3">
+      <clr-select-container>
+        <label>Country</label>
+        <select class="clr-col-7" clrSelect formControlName="businessPartnerCountryId">
+          <option disabled selected value="null">-- Choose --</option>
+          @for (country of businessPartnerAddressCountries(); track country.id) {
+            @if (country.id === 3) {
+              <hr>
+            }
+            <option [value]="country.id">{{ country.code }} - {{ country.name }}</option>
+          }
+        </select>
+      </clr-select-container>
+    </div>
+  </div>
+  <div>
+    <clr-button-group class="btn-primary mt-6">
+      <clr-button (click)="cancelForm()" class="btn btn-link" type="button">
+        <cds-icon role="img" shape="close"/>
+        Cancel
+      </clr-button>
+      <clr-button [disabled]="businessPartnerForm.invalid || isSubmitting()" class="btn btn-primary" type="submit">
+        @if (isSubmitting()) {
+          <span class="spinner spinner-inline"></span>
+        }
+        {{ isSubmitting() ? 'Setting...' : 'Set' }}
+      </clr-button>
+    </clr-button-group>
+  </div>
 </form>

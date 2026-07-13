@@ -1,6 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.DeviceBuyingService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBaseDetailsRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-public class DeviceBuyingDetailsService {
+public class DeviceBuyingDetailsService implements DeviceBuyingService {
 
 	private final DeviceBaseDetailsRepository deviceRepository;
 	private final BusinessPartnerDetailsService businessPartnerDetailsService;
@@ -27,5 +28,13 @@ public class DeviceBuyingDetailsService {
 			.seller(businessPartnerDetailsService.getBusinessPartner(device.getSellerBusinessPartnerId()))
 			.date(device.getBuyingDate())
 			.build();
+	}
+
+	@Transactional
+	@Override
+	public void setBuyerAddressForDevice(Integer deviceId, Integer buyerBusinessPartnerId) {
+		Device device = deviceRepository.getByIdWithRelations(deviceId);
+		device.setBuyerBusinessPartnerId(buyerBusinessPartnerId);
+		deviceRepository.save(device);
 	}
 }
