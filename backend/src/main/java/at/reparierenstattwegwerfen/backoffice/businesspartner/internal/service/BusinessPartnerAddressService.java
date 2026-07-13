@@ -33,7 +33,7 @@ public class BusinessPartnerAddressService {
 		businessPartner.setFirstName(address.firstName());
 		businessPartner.setLastName(address.lastName());
 
-		BusinessPartnerAddress businessPartnerAddress = null;
+		BusinessPartnerAddress businessPartnerAddress;
 		if (businessPartner.getAddress() == null) {
 			businessPartnerAddress = new BusinessPartnerAddress();
 		} else {
