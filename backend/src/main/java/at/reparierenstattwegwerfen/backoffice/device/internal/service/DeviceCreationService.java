@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
+import at.reparierenstattwegwerfen.backoffice.device.DeviceBuyingService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
  */
 @Service
 @RequiredArgsConstructor
-public class DeviceCreationService {
+public class DeviceCreationService implements DeviceBuyingService {
 
 	private final DeviceRepository deviceRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
@@ -69,5 +70,13 @@ public class DeviceCreationService {
 		}
 
 		return newDeviceId;
+	}
+
+	@Transactional
+	@Override
+	public void setBuyerAddressForDevice(Integer deviceId, Integer buyerBusinessPartnerId) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+		device.setBuyerBusinessPartnerId(buyerBusinessPartnerId);
+		deviceRepository.save(device);
 	}
 }

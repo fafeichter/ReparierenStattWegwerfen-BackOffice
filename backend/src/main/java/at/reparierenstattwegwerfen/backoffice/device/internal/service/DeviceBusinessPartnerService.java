@@ -1,9 +1,14 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerDto;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +20,7 @@ import java.util.List;
 public class DeviceBusinessPartnerService {
 
 	private final DeviceRepository deviceRepository;
+	private final BusinessPartnerService businessPartnerService;
 
 	public DeviceBusinesspartnerDto getDevicesOfBusinessPartner(Integer businessPartnerId) {
 		List<NamedIdDto> soldDevices = deviceRepository.findBySellerBusinessPartnerId(businessPartnerId).stream()
@@ -28,5 +34,17 @@ public class DeviceBusinessPartnerService {
 			.soldDevices(soldDevices)
 			.boughtDevices(boughtDevices)
 			.build();
+	}
+
+	@Transactional
+	public void createBuyerBusinessPartnerForDevice(CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice) {
+		CreateBusinessPartnerDto createBusinessPartnerDto = new CreateBusinessPartnerDto();
+		BeanUtils.copyProperties(buyerBusinessPartnerForDevice, createBusinessPartnerDto);
+
+		Integer buyerBusinessPartnerId = businessPartnerService.createBusinessPartner(createBusinessPartnerDto);
+
+		Device device = deviceRepository.getReferenceById(buyerBusinessPartnerForDevice.getDeviceId());
+		device.setBuyerBusinessPartnerId(buyerBusinessPartnerId);
+		deviceRepository.save(device);
 	}
 }

@@ -4,10 +4,12 @@ import { ClrButtonGroupModule, ClrInputModule, ClrSelectModule } from '@clr/angu
 import {
   BusinessPartnerAddressCountryControllerService,
   BusinessPartnerAddressCountryDto,
-  BusinessPartnerCreationControllerService,
-  CreateBuyerBusinessPartnerForDeviceDto,
 } from '@api/businesspartner';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  CreateBuyerBusinessPartnerForDeviceDto,
+  DeviceBusinessPartnerControllerService,
+} from '@api/device';
 
 @Component({
   selector: 'app-businesspartner-create',
@@ -31,7 +33,7 @@ export class BusinesspartnerCreate implements OnInit {
   private rawDeviceId = this.route.snapshot.queryParamMap.get('device-id');
   deviceId = signal<number | undefined>(this.rawDeviceId ? Number(this.rawDeviceId) : undefined);
   private businessPartnerAddressCountryApi = inject(BusinessPartnerAddressCountryControllerService);
-  private businessPartnerCreationApi = inject(BusinessPartnerCreationControllerService);
+  private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
   private router = inject(Router);
 
   ngOnInit(): void {
@@ -54,7 +56,7 @@ export class BusinesspartnerCreate implements OnInit {
       countryId: this.businessPartnerForm.controls.businessPartnerCountryId.value!,
     };
 
-    this.businessPartnerCreationApi
+    this.deviceBusinessPartnerApi
       .createBuyerBusinessPartnerForDevice(businessPartner)
       .subscribe(() => {
         this.isSubmitting.set(false);

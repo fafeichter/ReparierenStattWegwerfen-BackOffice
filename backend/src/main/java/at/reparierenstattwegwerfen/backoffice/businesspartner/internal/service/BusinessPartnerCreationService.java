@@ -1,14 +1,13 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service;
 
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerDto;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.controller.CreateBusinessPartnerPlaceholder;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.controller.CreateBuyerBusinessPartnerForDeviceDto;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartner;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartnerAddress;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerAddressCountryRepository;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerAddressRepository;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerRepository;
-import at.reparierenstattwegwerfen.backoffice.device.DeviceBuyingService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-public class BusinessPartnerCreationService {
+public class BusinessPartnerCreationService implements BusinessPartnerService {
 
 	private final BusinessPartnerRepository businessPartnerRepository;
 	private final BusinessPartnerAddressRepository businessPartnerAddressRepository;
 	private final BusinessPartnerAddressCountryRepository businessPartnerAddressCountryRepository;
-	private final DeviceBuyingService deviceBuyingService;
 
 	@Transactional
 	public Integer createBusinessPartnerPlaceholder(CreateBusinessPartnerPlaceholder businessPartnerPlaceholder) {
@@ -35,24 +33,22 @@ public class BusinessPartnerCreationService {
 	}
 
 	@Transactional
-	public void createBuyerBusinessPartnerForDevice(@Valid CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice) {
+	public Integer createBusinessPartner(CreateBusinessPartnerDto businessPartnerDto) {
 		BusinessPartner businessPartner = new BusinessPartner();
-		businessPartner.setFirstName(buyerBusinessPartnerForDevice.getFirstName());
-		businessPartner.setLastName(buyerBusinessPartnerForDevice.getLastName());
+		businessPartner.setFirstName(businessPartnerDto.getFirstName());
+		businessPartner.setLastName(businessPartnerDto.getLastName());
 
 		BusinessPartnerAddress businessPartnerAddress = new BusinessPartnerAddress();
-		businessPartnerAddress.setStreet(buyerBusinessPartnerForDevice.getStreet());
-		businessPartnerAddress.setHouseNumber(buyerBusinessPartnerForDevice.getHouseNumber());
-		businessPartnerAddress.setZipCode(buyerBusinessPartnerForDevice.getZipCode());
-		businessPartnerAddress.setCity(buyerBusinessPartnerForDevice.getCity());
-		businessPartnerAddress.setStreet(buyerBusinessPartnerForDevice.getStreet());
-		businessPartnerAddress.setCountry(businessPartnerAddressCountryRepository.getReferenceById(buyerBusinessPartnerForDevice.getCountryId()));
+		businessPartnerAddress.setStreet(businessPartnerDto.getStreet());
+		businessPartnerAddress.setHouseNumber(businessPartnerDto.getHouseNumber());
+		businessPartnerAddress.setZipCode(businessPartnerDto.getZipCode());
+		businessPartnerAddress.setCity(businessPartnerDto.getCity());
+		businessPartnerAddress.setStreet(businessPartnerDto.getStreet());
+		businessPartnerAddress.setCountry(businessPartnerAddressCountryRepository.getReferenceById(businessPartnerDto.getCountryId()));
 
 		BusinessPartnerAddress address = businessPartnerAddressRepository.save(businessPartnerAddress);
 		businessPartner.setAddress(address);
 
-		BusinessPartner savedBusinessPartner = businessPartnerRepository.save(businessPartner);
-
-		deviceBuyingService.setBuyerAddressForDevice(buyerBusinessPartnerForDevice.getDeviceId(), savedBusinessPartner.getId());
+		return businessPartnerRepository.save(businessPartner).getId();
 	}
 }
