@@ -11,7 +11,7 @@ jobs:
     name: Build application
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
@@ -37,7 +37,7 @@ jobs:
       checks: write
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
@@ -58,7 +58,7 @@ jobs:
     needs: [ test ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/download-artifact@v8
         with:
           name: frontend-static-resources

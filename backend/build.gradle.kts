@@ -3,10 +3,10 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     java
-    id("org.springframework.boot") version "4.0.6"
+    id("org.springframework.boot") version "4.1.0"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.hibernate.orm") version "7.2.12.Final"
-    id("org.graalvm.buildtools.native") version "0.11.5"
+    id("org.hibernate.orm") version "7.4.4.Final"
+    id("org.graalvm.buildtools.native") version "1.1.3"
     // Plugin to generate TypeScript code from OpenAPI JSON file
     id("org.openapi.generator") version "7.17.0"
     id("io.github.redgreencoding.plantuml") version "0.3.0"
