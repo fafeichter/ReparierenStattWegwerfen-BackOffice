@@ -29,7 +29,7 @@ VALUES (1, 'bestellt / gekauft', 0, 1),
        (6, 'verkauft', 5, 1),
        (7, 'zum Ausschlachten verfügbar', 6, 1),
        (8, 'falscher Artikel eingetroffen', 7, 2),
-       (9, 'zurückgegeben', 8, 2),
+       (9, 'zurückgeschickt', 8, 2),
        (10, 'Verkäufer/in hat sich anders entschieden', 9, 2),
        (11, 'nie bekommen - Geld nicht zurückbekommen', 10, 2),
        (12, 'nie bekommen - Geld zurückbekommen', 11, 2);
