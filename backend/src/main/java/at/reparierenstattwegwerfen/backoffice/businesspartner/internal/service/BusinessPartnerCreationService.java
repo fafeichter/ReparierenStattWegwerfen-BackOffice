@@ -2,7 +2,7 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerDto;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.controller.CreateBusinessPartnerPlaceholder;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerPlaceholderDto;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartner;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartnerAddress;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerAddressCountryRepository;
@@ -24,7 +24,8 @@ public class BusinessPartnerCreationService implements BusinessPartnerService {
 	private final BusinessPartnerAddressCountryRepository businessPartnerAddressCountryRepository;
 
 	@Transactional
-	public Integer createBusinessPartnerPlaceholder(CreateBusinessPartnerPlaceholder businessPartnerPlaceholder) {
+	@Override
+	public Integer createBusinessPartnerPlaceholder(CreateBusinessPartnerPlaceholderDto businessPartnerPlaceholder) {
 		BusinessPartner businessPartner = new BusinessPartner();
 		businessPartner.setFirstName(businessPartnerPlaceholder.getFirstName());
 		businessPartner.setLastName(businessPartnerPlaceholder.getLastName());
@@ -33,6 +34,7 @@ public class BusinessPartnerCreationService implements BusinessPartnerService {
 	}
 
 	@Transactional
+	@Override
 	public Integer createBusinessPartner(CreateBusinessPartnerDto businessPartnerDto) {
 		BusinessPartner businessPartner = new BusinessPartner();
 		businessPartner.setFirstName(businessPartnerDto.getFirstName());

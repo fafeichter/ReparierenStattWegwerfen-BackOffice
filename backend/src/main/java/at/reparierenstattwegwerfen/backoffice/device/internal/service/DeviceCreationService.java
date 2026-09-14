@@ -1,5 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerPlaceholderDto;
 import at.reparierenstattwegwerfen.backoffice.device.DeviceBuyingService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
@@ -22,6 +24,7 @@ public class DeviceCreationService implements DeviceBuyingService {
 	private final DeviceRepository deviceRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
+	private final BusinessPartnerService businessPartnerService;
 	private final ApplicationEventPublisher events;
 
 	@Transactional
@@ -53,7 +56,14 @@ public class DeviceCreationService implements DeviceBuyingService {
 		device.setSerialNumber(newDevice.getSerialNumber());
 		device.setPurchasePrice(newDevice.getPurchasePrice());
 		device.setReportedDefect(newDevice.getDefect());
-		device.setSellerBusinessPartnerId(newDevice.getSellerBusinessPartnerId());
+
+		CreateBusinessPartnerPlaceholderDto businessPartnerPlaceholder = new CreateBusinessPartnerPlaceholderDto(
+			newDevice.getBusinessPartnerPlaceholder().getFirstName(),
+			newDevice.getBusinessPartnerPlaceholder().getLastName()
+
+		);
+		Integer sellerBusinessPartnerId = businessPartnerService.createBusinessPartnerPlaceholder(businessPartnerPlaceholder);
+		device.setSellerBusinessPartnerId(sellerBusinessPartnerId);
 
 		Integer newDeviceId = deviceRepository.save(device).getId();
 

@@ -1,7 +1,9 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
@@ -10,6 +12,10 @@ import org.hibernate.validator.constraints.URL;
  */
 @Data
 public class CreateNewDeviceDto {
+
+	@NotNull
+	@Valid
+	private final CreateNewDeviceDto.BusinessPartnerPlaceholderDto businessPartnerPlaceholder;
 
 	@NotEmpty
 	@URL
@@ -30,5 +36,14 @@ public class CreateNewDeviceDto {
 	private final Integer batteryMaximumCapacity;
 	private final Integer batteryCycleCount;
 
-	private final Integer sellerBusinessPartnerId;
+	@Data
+	static class BusinessPartnerPlaceholderDto {
+
+		@NotEmpty
+		@Size(max = 256)
+		private final String firstName;
+
+		@Size(max = 256)
+		private final String lastName;
+	}
 }

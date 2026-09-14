@@ -19,12 +19,12 @@ import {
 } from '@clr/angular';
 
 import { Alternative, ModelControllerService, ResolvedModelMatch } from '@api/model';
-import { CreateNewDeviceDto, DeviceControllerService } from '@api/device';
-import { OrElsePipe } from '../../pipes/or-else-pipe';
 import {
-  BusinessPartnerCreationControllerService,
-  CreateBusinessPartnerPlaceholder,
-} from '@api/businesspartner';
+  BusinessPartnerPlaceholderDto,
+  CreateNewDeviceDto,
+  DeviceControllerService,
+} from '@api/device';
+import { OrElsePipe } from '../../pipes/or-else-pipe';
 
 @Component({
   selector: 'app-add-device',
@@ -68,7 +68,6 @@ export class AddDevice {
 
   private modelApi = inject(ModelControllerService);
   private deviceApi = inject(DeviceControllerService);
-  private businessPartnerApi = inject(BusinessPartnerCreationControllerService);
   private router = inject(Router);
 
   constructor() {
@@ -92,34 +91,30 @@ export class AddDevice {
 
     this.isSubmitting.set(true);
 
-    const newBusinessPartner: CreateBusinessPartnerPlaceholder = {
+    const businessPartnerPlaceholder: BusinessPartnerPlaceholderDto = {
       firstName: this.found()?.sellerFirstName || '',
       lastName: this.found()?.sellerLastName,
     };
 
-    this.businessPartnerApi
-      .createBusinessPartnerPlaceholder(newBusinessPartner)
-      .subscribe((data) => {
-        const newDevice: CreateNewDeviceDto = {
-          modelId: candidate.model?.id || 0,
-          purchasePrice: Number(this.form.controls.price.value),
-          modelColorId: candidate.modelColor?.id,
-          modelAppleSiliconId: candidate.modelAppleSilicon?.id,
-          modelAppleSiliconUnifiedMemoryId: candidate.modelAppleSiliconUnifiedMemory?.id,
-          modelStorageId: candidate.modelStorage?.id,
-          url: this.form.controls.url.value,
-          serialNumber: candidate.serialNumber,
-          batteryMaximumCapacity: candidate.batteryMaximumCapacity,
-          batteryCycleCount: candidate.batteryCycleCount,
-          defect: this.found()?.reportedDefect,
-          sellerBusinessPartnerId: data,
-        };
+    const newDevice: CreateNewDeviceDto = {
+      businessPartnerPlaceholder: businessPartnerPlaceholder,
+      modelId: candidate.model?.id || 0,
+      purchasePrice: Number(this.form.controls.price.value),
+      modelColorId: candidate.modelColor?.id,
+      modelAppleSiliconId: candidate.modelAppleSilicon?.id,
+      modelAppleSiliconUnifiedMemoryId: candidate.modelAppleSiliconUnifiedMemory?.id,
+      modelStorageId: candidate.modelStorage?.id,
+      url: this.form.controls.url.value,
+      serialNumber: candidate.serialNumber,
+      batteryMaximumCapacity: candidate.batteryMaximumCapacity,
+      batteryCycleCount: candidate.batteryCycleCount,
+      defect: this.found()?.reportedDefect,
+    };
 
-        this.deviceApi.createNewDevice(newDevice).subscribe({
-          next: (deviceId) => this.router.navigate(['/devices', deviceId]),
-          error: () => this.isSubmitting.set(false),
-        });
-      });
+    this.deviceApi.createNewDevice(newDevice).subscribe({
+      next: (deviceId) => this.router.navigate(['/devices', deviceId]),
+      error: () => this.isSubmitting.set(false),
+    });
   }
 
   protected selectUrlText(): void {

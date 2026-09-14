@@ -6,4 +6,6 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner;
 public interface BusinessPartnerService {
 
 	Integer createBusinessPartner(CreateBusinessPartnerDto businessPartnerDto);
+
+	Integer createBusinessPartnerPlaceholder(CreateBusinessPartnerPlaceholderDto businessPartnerPlaceholder);
 }
