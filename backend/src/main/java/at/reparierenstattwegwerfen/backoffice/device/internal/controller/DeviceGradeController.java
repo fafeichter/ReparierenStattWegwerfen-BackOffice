@@ -1,7 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceGradeDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceGradeService;
-import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class DeviceGradeController {
 	private final DeviceGradeService deviceGradeService;
 
 	@GetMapping("/")
-	public List<NamedIdDto> getAllGrades() {
+	public List<DeviceGradeDto> getAllGrades() {
 		return deviceGradeService.getAllStatus();
 	}
 }

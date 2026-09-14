@@ -6,10 +6,13 @@ VALUES (1, 'nicht getauscht', 1),
        (2, 'freiwillig getauscht', 2),
        (3, 'getauscht wegen Defekt', 3);
 
-INSERT INTO device_grade (device_grade_id, name, sort_order)
-VALUES (1, 'neuwertig', 1),
-       (2, 'nahezu neuwertig', 2),
-       (3, 'sichtbare Gebrauchsspuren', 3);
+INSERT INTO device_grade (device_grade_id, name, description, description_long, sort_order)
+VALUES (1, 'Grade A', 'Wie neu', 'Makelloser Zustand ohne Gebrauchsspuren', 1),
+       (2, 'Grade B', 'Minimale, kaum sichtbare Gebrauchsspuren',
+        'Sehr guter Zustand mit minimalen, kaum sichtbaren Gebrauchsspuren', 2),
+       (3, 'Grade C', 'Mehrere leichte Kratzer und/oder normale Abnutzungen',
+        'Guter Zustand mit mehreren leichten Kratzern oder normalen Abnutzungen', 3),
+       (4, 'Grade D', 'Tiefere Kratzer oder Kerben', 'Deutliche Gebrauchsspuren wie tiefere Kratzer oder Kerben', 4);
 
 INSERT INTO device_online_marketplace (device_online_marketplace_id, name, url)
 VALUES (1, 'willhaben', 'https://www.willhaben.at/'),

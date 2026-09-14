@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceGradeRepository;
-import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +15,14 @@ public class DeviceGradeService {
 
 	private final DeviceGradeRepository deviceGradeRepository;
 
-	public List<NamedIdDto> getAllStatus() {
+	public List<DeviceGradeDto> getAllStatus() {
 		return deviceGradeRepository.getAllStatus()
 			.stream()
-			.map(deviceStatus -> NamedIdDto.from(deviceStatus))
+			.map(deviceStatus -> DeviceGradeDto.builder()
+				.id(deviceStatus.getId())
+				.name(deviceStatus.getName())
+				.description(deviceStatus.getDescription())
+				.build())
 			.toList();
 	}
 }

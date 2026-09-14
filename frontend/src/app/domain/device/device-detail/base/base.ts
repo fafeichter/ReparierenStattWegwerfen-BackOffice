@@ -5,6 +5,7 @@ import {
   DeviceBaseDetailsDto,
   DeviceBatteryStatusControllerService,
   DeviceGradeControllerService,
+  DeviceGradeDto,
   DeviceStatusControllerService,
   NamedIdDto,
   UpdateHardwareConfigDto,
@@ -65,7 +66,7 @@ export class Base implements OnInit {
   modelStorages = signal<NamedIdDto[]>([]);
   deviceStatus = signal<NamedIdDto[]>([]);
   deviceBatteryStatus = signal<NamedIdDto[]>([]);
-  deviceGrades = signal<NamedIdDto[]>([]);
+  deviceGrades = signal<DeviceGradeDto[]>([]);
   statusEditModeActive = signal<boolean>(false);
   tagEditModeActive = signal<boolean>(false);
   deviceTags = signal<NamedIdDto[]>([]);

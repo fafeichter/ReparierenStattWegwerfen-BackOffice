@@ -179,7 +179,7 @@
             <select (change)="gradeFormRef.requestSubmit()" formControlName="newGradeId">
               <option disabled selected value="null">-- Choose --</option>
               @for (deviceGrade of deviceGrades(); track deviceGrade.id) {
-                <option [value]="deviceGrade.id">{{ deviceGrade.name }}</option>
+                <option [value]="deviceGrade.id">{{ deviceGrade.name }} - {{ deviceGrade.description }}</option>
               }
             </select>
             <button (click)="gradeEditModeActive.set(false)" class="btn btn-link" type="button">
