@@ -6,7 +6,7 @@ import {
   ClrDatagridStringFilterInterface,
   ClrTabsModule,
 } from '@clr/angular';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ModelControllerService, ModelDto } from '@api/model';
 import { DatePipe } from '@angular/common';
 
@@ -36,6 +36,11 @@ class ReleaseDateFilter implements ClrDatagridStringFilterInterface<ModelDto> {
   }
 }
 
+export enum ModelTab {
+  MacBook = 'macbook',
+  IPad = 'ipad',
+}
+
 @Component({
   selector: 'app-models',
   imports: [ClrDatagridModule, RouterLink, ClrTabsModule, DatePipe],
@@ -44,12 +49,15 @@ class ReleaseDateFilter implements ClrDatagridStringFilterInterface<ModelDto> {
   styleUrl: './models.css',
 })
 export class Models implements OnInit {
+  activeTab: ModelTab = ModelTab.MacBook;
   public releaseDateComparator = new ReleaseDateComparator();
   public nameFilter = new NameFilter();
   public releaseDateFilter = new ReleaseDateFilter();
+  protected readonly ModelTab = ModelTab;
   protected readonly ClrDatagridSortOrder = ClrDatagridSortOrder;
-
   private api = inject(ModelControllerService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   // 1. Private state signal
   private _macbooks = signal<ModelDto[]>([]);
@@ -57,7 +65,6 @@ export class Models implements OnInit {
   readonly macbooks = this._macbooks.asReadonly();
   private _macbooksLoading = signal<boolean>(false);
   readonly macbooksLoading = this._macbooksLoading.asReadonly();
-
   // 1. Private state signal
   private _ipads = signal<ModelDto[]>([]);
   // 2. Public read-only signals
@@ -68,6 +75,11 @@ export class Models implements OnInit {
   ngOnInit(): void {
     this.loadAllMacBooks();
     this.loadAllIPads();
+
+    this.route.queryParams.subscribe((params) => {
+      const type = params['type']?.toLowerCase();
+      this.activeTab = type === ModelTab.IPad ? ModelTab.IPad : ModelTab.MacBook;
+    });
   }
 
   // 3. Method to trigger fetch
@@ -94,5 +106,13 @@ export class Models implements OnInit {
 
   createDate(year: number, monthIndex: number): Date {
     return new Date(year, monthIndex);
+  }
+
+  selectTab(tab: ModelTab): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { type: tab },
+      queryParamsHandling: 'merge',
+    });
   }
 }

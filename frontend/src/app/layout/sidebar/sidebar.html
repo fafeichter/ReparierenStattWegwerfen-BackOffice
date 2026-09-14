@@ -18,7 +18,7 @@
     <cds-icon clrVerticalNavIcon shape="user"/>
     Business Partners
   </a>
-  <a clrVerticalNavLink routerLink="./models" routerLinkActive="active">
+  <a [queryParams]="{ type: 'macbook' }" clrVerticalNavLink routerLink="./models" routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="pod"/>
     Models
   </a>

@@ -1,7 +1,7 @@
 <clr-tabs>
   <clr-tab>
-    <button clrTabLink>MacBook</button>
-    <clr-tab-content *clrIfActive>
+    <button (click)="selectTab(ModelTab.MacBook)" clrTabLink>MacBook</button>
+    <clr-tab-content *clrIfActive="activeTab === ModelTab.MacBook">
       <clr-datagrid [clrDgLoading]="macbooksLoading()">
         <clr-dg-column>Model Code</clr-dg-column>
         <clr-dg-column>Name
@@ -29,8 +29,8 @@
   </clr-tab>
 
   <clr-tab>
-    <button clrTabLink>iPad</button>
-    <clr-tab-content *clrIfActive>
+    <button (click)="selectTab(ModelTab.IPad)" clrTabLink>iPad</button>
+    <clr-tab-content *clrIfActive="activeTab === ModelTab.IPad">
       <clr-datagrid [clrDgLoading]="ipadsLoading()">
         <clr-dg-column>Model Code</clr-dg-column>
         <clr-dg-column>Name
