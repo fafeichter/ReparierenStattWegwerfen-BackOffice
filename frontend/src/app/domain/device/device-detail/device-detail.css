@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.clr-vertical-nav {
+  position: sticky;
+  top: 0;
+  margin-top: var(--clr-base-vertical-offset-2xl);
+  margin-right: var(--clr-base-vertical-offset-2xl);
+  scroll-target-group: auto;
+}
+
+a.nav-link:target-current {
+  color: var(--clr-vertical-nav-item-active-color);
+  background-color: var(--clr-vertical-nav-selected-bg-color);
+}
+
+a.nav-link:target-current::before {
+  border-color: var(--cds-alias-object-interaction-background-highlight);
+}

@@ -1,14 +1,24 @@
 <h3>#{{ deviceId() }} - {{ deviceBase()?.modelNumber }} | {{ deviceBase()?.model?.name }}</h3>
 
-<div class="clr-row">
-  <div class="clr-col-lg-8 clr-col-md-8 clr-col-12">
-    <app-base (batteryStatusChanged)="activity.reloadActivity()" (gradeChanged)="activity.reloadActivity()"
-              (statusChanged)="activity.reloadActivity()" (tagsChanged)="activity.reloadActivity()"
-              [deviceId]="deviceId()"></app-base>
-    <app-buying [deviceId]="deviceId()"></app-buying>
-    <app-repair [deviceId]="deviceId()"></app-repair>
-    <app-selling [deviceId]="deviceId()"></app-selling>
-    <app-notes [deviceId]="deviceId()"></app-notes>
-    <app-activity #activity [deviceId]="deviceId()"></app-activity>
+<div class="container">
+  <clr-vertical-nav>
+    @for (item of navItems; track item.id) {
+      <a (click)="scrollToSection(item.id)" [fragment]="item.id" [routerLink]="[]"
+         clrVerticalNavLink>
+        {{ item.label }}
+      </a>
+    }
+  </clr-vertical-nav>
+  <div class="clr-row">
+    <div class="clr-col-lg-8 clr-col-md-8 clr-col-12">
+      <app-base (batteryStatusChanged)="activity.reloadActivity()" (gradeChanged)="activity.reloadActivity()"
+                (statusChanged)="activity.reloadActivity()" (tagsChanged)="activity.reloadActivity()"
+                [deviceId]="deviceId()"></app-base>
+      <app-buying [deviceId]="deviceId()"></app-buying>
+      <app-repair [deviceId]="deviceId()"></app-repair>
+      <app-selling [deviceId]="deviceId()"></app-selling>
+      <app-notes [deviceId]="deviceId()"></app-notes>
+      <app-activity #activity [deviceId]="deviceId()"></app-activity>
+    </div>
   </div>
 </div>
