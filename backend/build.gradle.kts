@@ -3,17 +3,17 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     java
-    id("org.springframework.boot") version "4.1.0"
+    id("org.springframework.boot") version "4.1.1"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.hibernate.orm") version "7.4.4.Final"
-    id("org.graalvm.buildtools.native") version "1.1.3"
+    id("org.hibernate.orm") version "7.4.8.Final"
+    id("org.graalvm.buildtools.native") version "1.1.12"
     // Plugin to generate TypeScript code from OpenAPI JSON file
-    id("org.openapi.generator") version "7.17.0"
+    id("org.openapi.generator") version "7.25.0"
     id("io.github.redgreencoding.plantuml") version "0.3.0"
 }
 
-extra["springAiVersion"] = "2.0.0"
-extra["springModulithVersion"] = "2.1.0"
+extra["springAiVersion"] = "2.0.1"
+extra["springModulithVersion"] = "2.1.1"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -142,17 +142,16 @@ val apiClientsTasks = apiModules.map { module ->
         generatorName = "typescript-angular"
 
         // Point to the location where our test writes the file
-        inputSpec = "${layout.buildDirectory.get()}/openapi/${module}.json"
+        inputSpec.set("${layout.buildDirectory.get()}/openapi/${module}.json")
         // Out of src/, into a sibling dir inside frontend so the TS
         // toolchain can still resolve it via a path alias
-        outputDir = "${project.rootDir}/frontend/build/generated/openapi/api/${module}"
+        outputDir.set("${project.rootDir}/frontend/build/generated/openapi/api/${module}")
 
-        configOptions =
-            mapOf(
-                "supportsES6" to "true",
-                "providedInRoot" to "true",
-                "apiNameSuffix" to "${module.replaceFirstChar { it.uppercase() }}Service"
-            )
+        configOptions = mapOf(
+            "supportsES6" to "true",
+            "providedInRoot" to "true",
+            "apiNameSuffix" to "${capitalizedModule}Service"
+        )
 
         dependsOn(generateOpenApiSpecs)
     }
