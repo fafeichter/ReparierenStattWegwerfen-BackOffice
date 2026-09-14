@@ -1,14 +1,21 @@
 .container {
   display: flex;
-  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .clr-vertical-nav {
   position: sticky;
-  top: 0;
+  height: min-content;
   margin-top: var(--clr-base-vertical-offset-2xl);
   margin-right: var(--clr-base-vertical-offset-2xl);
   scroll-target-group: auto;
+
+  @media (min-width: 768px) {
+    top: 0;
+  }
 }
 
 a.nav-link:target-current {
