@@ -113,7 +113,7 @@ VALUES (1, 'MacBook Air (M1, 2020)', 1, 'A2337', 'https://support.apple.com/de-a
        (7, 'MacBook Pro (14", 2023)', 2, 'A2779', 'https://support.apple.com/de-de/111340', 2023, 14, 14.2, 1),
        (8, 'MacBook Air (13", M3, 2024)', 1, 'A3113', 'https://support.apple.com/de-at/118551', 2024, 13, 13.6, 3),
        (9, 'MacBook Pro (16", 2023)', 2, 'A2780', 'https://support.apple.com/de-at/111838', 2023, 16, 16.2, 1),
-       (10, 'MacBook Air (15", M2, 2023)', 1, 'A2491', 'https://support.apple.com/de-at/111346', 2023, 15, 15.3, 6),
+       (10, 'MacBook Air (15", M2, 2023)', 1, 'A2941', 'https://support.apple.com/de-at/111346', 2023, 15, 15.3, 6),
        (11, 'MacBook Air (15", M3, 2024)', 1, 'A3114', 'https://support.apple.com/de-at/118552', 2024, 15, 15.3, 3),
        (12, 'MacBook Pro (14", M4, 2024)', 2, 'A3112', 'https://support.apple.com/de-at/121552', 2024, 14, 14.2, 11),
        (13, 'MacBook Pro (14", M4 Pro, 2024)', 2, 'A3401', 'https://support.apple.com/de-at/121553', 2024, 14, 14.2,
