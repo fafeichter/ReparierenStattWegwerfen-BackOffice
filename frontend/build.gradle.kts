@@ -8,8 +8,8 @@ plugins {
 val skipFrontendBuild = project.findProperty("skipFrontendBuild")?.toString()?.toBoolean() ?: false
 
 node {
-    version.set("26.5.0")
-    npmVersion.set("11.17.0")
+    version.set("26.8.2")
+    npmVersion.set("11.19.1")
     download.set(true)
     nodeProjectDir.set(projectDir)
 }
