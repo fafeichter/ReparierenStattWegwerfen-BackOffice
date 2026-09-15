@@ -1,14 +1,14 @@
 <clr-tabs>
   <clr-tab>
     <button (click)="selectTab(ModelTab.MacBook)" clrTabLink>MacBook</button>
-    <clr-tab-content *clrIfActive="activeTab === ModelTab.MacBook">
+    <clr-tab-content *clrIfActive="activeTab() === ModelTab.MacBook">
       <app-macbook-list></app-macbook-list>
     </clr-tab-content>
   </clr-tab>
 
   <clr-tab>
     <button (click)="selectTab(ModelTab.IPad)" clrTabLink>iPad</button>
-    <clr-tab-content *clrIfActive="activeTab === ModelTab.IPad">
+    <clr-tab-content *clrIfActive="activeTab() === ModelTab.IPad">
       <app-ipad-list></app-ipad-list>
     </clr-tab-content>
   </clr-tab>

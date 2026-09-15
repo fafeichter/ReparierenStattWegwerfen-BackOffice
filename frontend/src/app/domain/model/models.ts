@@ -1,8 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ClrTabsModule } from '@clr/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MacbookList } from './macbook-list/macbook-list';
 import { IpadList } from './ipad-list/ipad-list';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 export enum ModelTab {
   MacBook = 'macbook',
@@ -15,19 +17,15 @@ export enum ModelTab {
   templateUrl: './models.html',
   styleUrl: './models.css',
 })
-export class Models implements OnInit {
-  activeTab: ModelTab = ModelTab.MacBook;
+export class Models {
   protected readonly ModelTab = ModelTab;
 
   private route = inject(ActivatedRoute);
+  activeTab = toSignal(
+    this.route.queryParams.pipe(map((params) => params['type']?.toLowerCase())),
+    { initialValue: ModelTab.MacBook },
+  );
   private router = inject(Router);
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      const type = params['type']?.toLowerCase();
-      this.activeTab = type === ModelTab.IPad ? ModelTab.IPad : ModelTab.MacBook;
-    });
-  }
 
   selectTab(tab: ModelTab): void {
     this.router.navigate([], {

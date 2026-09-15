@@ -1,5 +1,5 @@
 <clr-vertical-nav [clrVerticalNavCollapsed]="isMobile()" [clrVerticalNavCollapsible]="true">
-  <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active">
+  <a [routerLink]="['/dashboard']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="home"/>
     Dashboard
   </a>
@@ -8,17 +8,17 @@
     <cds-icon clrVerticalNavIcon shape="computer"/>
     Devices
     <clr-vertical-nav-group-children>
-      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">Ordered</a>
-      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">In progress</a>
-      <a clrVerticalNavLink routerLink="./normal/snorlax" routerLinkActive="active">Done</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Ordered</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">In progress</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Done</a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <div class="nav-divider"></div>
-  <a clrVerticalNavLink routerLink="./businesspartners" routerLinkActive="active">
+  <a [routerLink]="['/businesspartners']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="user"/>
     Business Partners
   </a>
-  <a [queryParams]="{ type: 'macbook' }" clrVerticalNavLink routerLink="./models" routerLinkActive="active">
+  <a [queryParams]="{ type: 'macbook' }" [routerLink]="['/models']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="pod"/>
     Models
   </a>
@@ -27,9 +27,9 @@
     <cds-icon clrVerticalNavIcon shape="analytics"/>
     Statistics
     <clr-vertical-nav-group-children>
-      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">By month</a>
-      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">By quarter</a>
-      <a clrVerticalNavLink routerLink="./normal/pidgey" routerLinkActive="active">Total</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">By month</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">By quarter</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Total</a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
 </clr-vertical-nav>
