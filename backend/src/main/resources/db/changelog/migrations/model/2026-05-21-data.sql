@@ -146,7 +146,7 @@ VALUES (1, 'MacBook Air (M1, 2020)', 1, 'A2337', 'https://support.apple.com/de-a
        (34, 'iPad Pro, 11" (3. Generation)', 4, 'A2377', 'https://support.apple.com/de-de/111897', 2021, 11, 11.0, 5),
        (35, 'iPad Pro, 11" (3. Generation, Wi-Fi + Cellular)', 4, 'A2459', 'https://support.apple.com/de-de/111897',
         2021, 11, 11.0, 5),
-       (36, 'iPad Pro (11", 4. Generation)', 4, 'A2435', 'https://support.apple.com/de-de/111842', 2022, 11, 11.0, 10),
+       (36, 'iPad Pro (11", 4. Generation)', 4, 'A2759', 'https://support.apple.com/de-de/111842', 2022, 11, 11.0, 10),
        (37, 'iPad Pro (11", 4. Generation, Wi-Fi + Cellular)', 4, 'A2761', 'https://support.apple.com/de-de/111842',
         2022, 11, 11.0, 10),
        (38, 'iPad Air (5. Generation)', 5, 'A2588', 'https://support.apple.com/de-de/111887', 2022, 11, 10.9, 3),
