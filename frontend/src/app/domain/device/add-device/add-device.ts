@@ -108,7 +108,7 @@ export class AddDevice {
     };
 
     const [day, month, year] = this.form.controls.buyingDate.value!.split('.');
-    const buyingDateIso = `${year}-${month}-${day}`;
+    const buyingDateIso = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
     const newDevice: CreateNewDeviceDto = {
       businessPartnerPlaceholder: businessPartnerPlaceholder,
