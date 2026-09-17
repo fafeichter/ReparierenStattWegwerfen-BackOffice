@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { BusinessPartnerControllerService, BusinessPartnerDto } from '@api/businesspartner';
 import { ClrDatagridModule, ClrLabel, ClrTabsModule } from '@clr/angular';
 import { RouterLink } from '@angular/router';
-import { OrElsePipe } from '../../pipes/or-else-pipe';
+import { OrElsePipe } from '../../../pipes/or-else-pipe';
 
 @Component({
   selector: 'app-businesspartners',

@@ -3,9 +3,9 @@ import { RouterLink } from '@angular/router';
 import { ClrDatagridModule, ClrDatagridSortOrder } from '@clr/angular';
 import { ModelControllerService, ModelDto } from '@api/model';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ReleaseDateComparator } from '../ReleaseDateComparator';
-import { NameFilter } from '../NameFilter';
-import { ReleaseDateFilter } from '../ReleaseDateFilter';
+import { ReleaseDateComparator } from '../models-list/ReleaseDateComparator';
+import { NameFilter } from '../models-list/NameFilter';
+import { ReleaseDateFilter } from '../models-list/ReleaseDateFilter';
 
 @Component({
   imports: [ClrDatagridModule, RouterLink, DatePipe],

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule, ClrVerticalNavModule } from '@clr/angular';
-import { AddDevice } from './add-device/add-device';
+import { AddDevice } from '../domain/device/add-device/add-device';
 
 @Component({
   selector: 'app-dashboard',

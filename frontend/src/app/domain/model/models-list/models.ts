@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { ClrTabsModule } from '@clr/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MacbookList } from './macbook-list/macbook-list';
-import { IpadList } from './ipad-list/ipad-list';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { MacbookList } from '../macbook-list/macbook-list';
+import { IpadList } from '../ipad-list/ipad-list';
 
 export enum ModelTab {
   MacBook = 'macbook',

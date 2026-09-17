@@ -24,7 +24,7 @@ import {
   CreateNewDeviceDto,
   DeviceControllerService,
 } from '@api/device';
-import { OrElsePipe } from '../../pipes/or-else-pipe';
+import { OrElsePipe } from '../../../pipes/or-else-pipe';
 
 @Component({
   selector: 'app-add-device',
