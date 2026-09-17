@@ -6,6 +6,11 @@
   }
 }
 
+/* Force the clr-row flex child to grow and take 100% remaining width */
+.container > .clr-row {
+  flex: 1 1;
+}
+
 .clr-vertical-nav {
   position: sticky;
   height: min-content;
