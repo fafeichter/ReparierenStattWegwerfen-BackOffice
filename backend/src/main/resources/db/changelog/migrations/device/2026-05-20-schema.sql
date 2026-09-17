@@ -66,7 +66,7 @@ CREATE TABLE device_status
 
 CREATE TABLE device
 (
-    device_id                             int            NOT NULL AUTO_INCREMENT,
+    device_id                            int          NOT NULL,
     model_id                              int            NOT NULL,
     buying_date                           date                    DEFAULT (CURRENT_DATE) NOT NULL,
     model_apple_silicon_id                int                     DEFAULT NULL,

@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class Device implements NamedId {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@DeviceMaxPlusOneId
 	@Column(name = "device_id")
 	private Integer id;
 
