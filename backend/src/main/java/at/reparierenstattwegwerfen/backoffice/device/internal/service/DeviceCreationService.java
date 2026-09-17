@@ -7,8 +7,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
+import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +28,7 @@ public class DeviceCreationService implements DeviceBuyingService {
 	private final ApplicationEventPublisher events;
 
 	@Transactional
-	public Integer createDevice(CreateNewDeviceDto newDevice) {
+	public Integer createDevice(CreateNewDeviceDto newDevice, UserDetails actor) {
 		Device device = new Device();
 
 		device.setBuyingDate(newDevice.getBuyingDate());
@@ -47,7 +49,8 @@ public class DeviceCreationService implements DeviceBuyingService {
 		device.setBatteryMaximumCapacity(batteryHealth.getMaximumCapacity());
 		device.setBatteryCycleCount(batteryHealth.getCycleCount());
 
-		if (batteryHealth.determineStatusId() != null) {
+		boolean batteryStatusCanAutomaticallyBeSet = batteryHealth.determineStatusId() != null;
+		if (batteryStatusCanAutomaticallyBeSet) {
 			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(batteryHealth.determineStatusId()));
 		}
 
@@ -67,13 +70,14 @@ public class DeviceCreationService implements DeviceBuyingService {
 
 		DeviceCreated deviceCreatedEvent = DeviceCreated.builder()
 			.source(this)
+			.actor(actor)
 			.deviceId(newDeviceId)
 			.build();
 		events.publishEvent(deviceCreatedEvent);
 
-		if (batteryHealth.determineStatusId() != null) {
-			BatteryStatusAutomaticallySet batteryStatusEvent = new BatteryStatusAutomaticallySet(
-				this, newDeviceId, batteryHealth.determineStatusId());
+		if (batteryStatusCanAutomaticallyBeSet) {
+			DeviceBatteryStatusChanged batteryStatusEvent = new DeviceBatteryStatusChanged(
+				this, SystemUser.get(), newDeviceId, batteryHealth.determineStatusId());
 			events.publishEvent(batteryStatusEvent);
 		}
 

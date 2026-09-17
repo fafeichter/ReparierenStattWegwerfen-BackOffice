@@ -234,14 +234,11 @@ CREATE TABLE device_activity_type
 (
     device_activity_type_id int auto_increment,
     name                    varchar(256) NOT NULL,
-    description_template    varchar(256),
     created_at              timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at              timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (device_activity_type_id),
-    CONSTRAINT uq_device_activity_type_description_template
-        UNIQUE (description_template),
-    CONSTRAINT uq_device_activity_type_name_description_template
-        UNIQUE (name, description_template)
+    CONSTRAINT uq_device_activity_type_name
+        UNIQUE (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_activity
@@ -249,6 +246,7 @@ CREATE TABLE device_activity
     device_activity_id      int auto_increment,
     device_id               int          NOT NULL,
     name                    varchar(256) NOT NULL,
+    actor varchar(256) NOT NULL,
     device_activity_type_id int          NOT NULL NULL,
     date                    datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at              timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,

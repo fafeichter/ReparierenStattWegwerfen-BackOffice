@@ -23,7 +23,4 @@ public class DeviceActivityType implements NamedId {
 
 	@Column(name = "name")
 	private String name;
-
-	@Column(name = "description_template")
-	private String descriptionTemplate;
 }

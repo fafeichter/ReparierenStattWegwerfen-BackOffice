@@ -2,23 +2,19 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.context.ApplicationEvent;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceBatteryStatusChanged extends ApplicationEvent {
+public class DeviceBatteryStatusChanged extends DeviceActivityEvent {
 
-	final Integer deviceId;
-	final Integer oldBatteryStatusId;
 	final Integer newBatteryStatusId;
 
 	@Builder
-	public DeviceBatteryStatusChanged(Object source, Integer deviceId, Integer oldBatteryStatusId, Integer newBatteryStatusId) {
-		super(source);
-		this.deviceId = deviceId;
-		this.oldBatteryStatusId = oldBatteryStatusId;
+	public DeviceBatteryStatusChanged(Object source, UserDetails actor, Integer deviceId, Integer newBatteryStatusId) {
+		super(source, deviceId, actor);
 		this.newBatteryStatusId = newBatteryStatusId;
 	}
 }

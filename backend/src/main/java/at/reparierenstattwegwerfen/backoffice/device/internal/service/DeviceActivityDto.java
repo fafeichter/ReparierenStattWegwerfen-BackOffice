@@ -15,11 +15,17 @@ import java.time.LocalDateTime;
 public class DeviceActivityDto {
 
 	@NotEmpty
-	private final String name;
-	private final String description;
+	private final String action;
+
+	@NotEmpty
+	private final String value;
+
+	@NotEmpty
+	private final String actor;
+
 	@NotNull
 	private Integer id;
+
 	@NotNull
 	private LocalDateTime date;
-
 }

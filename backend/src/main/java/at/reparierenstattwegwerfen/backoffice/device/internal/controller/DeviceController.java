@@ -6,6 +6,8 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.service.CreateNewD
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceCreationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -25,7 +27,8 @@ public class DeviceController {
 	}
 
 	@PostMapping("/")
-	public Integer createNewDevice(@Valid @RequestBody CreateNewDeviceDto newDevice) {
-		return deviceCreationService.createDevice(newDevice);
+	public Integer createNewDevice(@Valid @RequestBody CreateNewDeviceDto newDevice,
+								   @AuthenticationPrincipal UserDetails currentUser) {
+		return deviceCreationService.createDevice(newDevice, currentUser);
 	}
 }

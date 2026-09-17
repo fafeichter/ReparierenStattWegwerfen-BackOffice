@@ -1,20 +1,21 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import lombok.Getter;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceTagRemoved extends DeviceActivityEvent {
+abstract class DeviceActivityEvent extends ApplicationEvent {
 
+	final UserDetails actor;
 	final Integer deviceId;
-	final Integer tagId;
 
-	public DeviceTagRemoved(Object source, UserDetails actor, Integer deviceId, Integer tagId) {
-		super(source, deviceId, actor);
+	public DeviceActivityEvent(Object source, Integer deviceId, UserDetails actor) {
+		super(source);
+		this.actor = actor;
 		this.deviceId = deviceId;
-		this.tagId = tagId;
 	}
 }

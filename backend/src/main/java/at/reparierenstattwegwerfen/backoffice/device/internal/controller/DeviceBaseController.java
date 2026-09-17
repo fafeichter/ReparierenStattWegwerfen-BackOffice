@@ -4,6 +4,8 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.service.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,33 +27,39 @@ public class DeviceBaseController {
 	}
 
 	@PostMapping("/hardware-config")
-	public void updateHardwareConfig(@PathVariable Integer deviceId, @Valid @RequestBody UpdateHardwareConfigDto updateHardwareConfigDto) {
+	public void updateHardwareConfig(@PathVariable Integer deviceId,
+									 @Valid @RequestBody UpdateHardwareConfigDto updateHardwareConfigDto) {
 		deviceStatusService.updateHardwareConfigOfDevice(deviceId, updateHardwareConfigDto);
 	}
 
 	@PostMapping("/status")
-	public void updateStatus(@PathVariable Integer deviceId, @RequestBody Integer newStatusId) {
-		deviceStatusService.updateStatusOfDevice(deviceId, newStatusId);
+	public void updateStatus(@PathVariable Integer deviceId, @RequestBody Integer newStatusId,
+							 @AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.updateStatusOfDevice(deviceId, newStatusId, currentUser);
 	}
 
 	@PostMapping("/serial-number")
-	public void updateSerialNumber(@PathVariable Integer deviceId, @RequestBody(required = false) String newSerialNumber) {
-		deviceStatusService.updateSerialNumber(deviceId, newSerialNumber);
+	public void updateSerialNumber(@PathVariable Integer deviceId, @RequestBody(required = false) String newSerialNumber,
+								   @AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.updateSerialNumber(deviceId, newSerialNumber, currentUser);
 	}
 
 	@PostMapping("/battery")
-	public void updateBattery(@PathVariable Integer deviceId, @Valid @RequestBody BatteryHealthDto newDeviceBaseBattery) {
-		deviceStatusService.updateBattery(deviceId, newDeviceBaseBattery);
+	public void updateBattery(@PathVariable Integer deviceId, @Valid @RequestBody BatteryHealthDto newDeviceBaseBattery,
+							  @AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.updateBattery(deviceId, newDeviceBaseBattery, currentUser);
 	}
 
 	@PostMapping("/battery-status")
-	public void updateBatteryStatus(@PathVariable Integer deviceId, @RequestBody Integer newBatteryStatusId) {
-		deviceStatusService.updateBatteryStatus(deviceId, newBatteryStatusId);
+	public void updateBatteryStatus(@PathVariable Integer deviceId, @RequestBody Integer newBatteryStatusId,
+									@AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.updateBatteryStatus(deviceId, newBatteryStatusId, currentUser);
 	}
 
 	@PostMapping("/grade")
-	public void updateGrade(@PathVariable Integer deviceId, @RequestBody Integer newGradeId) {
-		deviceStatusService.updateGrade(deviceId, newGradeId);
+	public void updateGrade(@PathVariable Integer deviceId, @RequestBody Integer newGradeId,
+							@AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.updateGrade(deviceId, newGradeId, currentUser);
 	}
 
 	@PostMapping("/available-tags")
@@ -60,12 +68,14 @@ public class DeviceBaseController {
 	}
 
 	@PostMapping("/tags")
-	public void addTag(@PathVariable Integer deviceId, @RequestBody Integer newTagId) {
-		deviceStatusService.addTag(deviceId, newTagId);
+	public void addTag(@PathVariable Integer deviceId, @RequestBody Integer newTagId,
+					   @AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.addTag(deviceId, newTagId, currentUser);
 	}
 
 	@DeleteMapping("/tags")
-	public void deleteTag(@PathVariable Integer deviceId, @RequestBody Integer tagId) {
-		deviceStatusService.deleteTag(deviceId, tagId);
+	public void deleteTag(@PathVariable Integer deviceId, @RequestBody Integer tagId,
+						  @AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.deleteTag(deviceId, tagId, currentUser);
 	}
 }

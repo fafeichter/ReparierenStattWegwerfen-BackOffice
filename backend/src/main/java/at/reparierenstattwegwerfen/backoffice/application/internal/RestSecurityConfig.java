@@ -27,7 +27,9 @@ public class RestSecurityConfig {
 				.anyRequest()
 				.permitAll()
 			)
-			.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
+			.oauth2ResourceServer(oauth2 -> oauth2
+				.jwt(jwt -> jwt.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter()))
+			)
 			.sessionManagement(session -> session
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			)

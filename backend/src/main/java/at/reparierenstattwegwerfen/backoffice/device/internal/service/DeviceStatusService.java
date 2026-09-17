@@ -5,8 +5,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTags;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
+import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,10 +37,10 @@ public class DeviceStatusService {
 	}
 
 	@Transactional
-	public void updateStatusOfDevice(Integer deviceId, Integer newStatusId) {
+	public void updateStatusOfDevice(Integer deviceId, Integer newStatusId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
 		DeviceStatusChanged deviceStatusChanged = new DeviceStatusChanged(
-			this, device.getId(), device.getStatus().getId(), newStatusId);
+			this, actor, device.getId(), newStatusId);
 		device.setStatus(deviceStatusRepository.getReferenceById(newStatusId));
 
 		deviceRepository.save(device);
@@ -46,7 +48,7 @@ public class DeviceStatusService {
 	}
 
 	@Transactional
-	public void updateSerialNumber(Integer deviceId, String newSerialNumber) {
+	public void updateSerialNumber(Integer deviceId, String newSerialNumber, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
 		device.setSerialNumber(newSerialNumber);
 
@@ -54,7 +56,7 @@ public class DeviceStatusService {
 	}
 
 	@Transactional
-	public void updateBattery(Integer deviceId, BatteryHealthDto newDeviceBaseBattery) {
+	public void updateBattery(Integer deviceId, BatteryHealthDto newDeviceBaseBattery, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
 		device.setBatteryMaximumCapacity(newDeviceBaseBattery.getMaximumCapacity());
 		device.setBatteryCycleCount(newDeviceBaseBattery.getCycleCount());
@@ -62,8 +64,8 @@ public class DeviceStatusService {
 		if (newDeviceBaseBattery.determineStatusId() != null && device.getBatteryStatus() == null) {
 			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newDeviceBaseBattery.determineStatusId()));
 
-			BatteryStatusAutomaticallySet batteryStatusEvent = new BatteryStatusAutomaticallySet(
-				this, deviceId, newDeviceBaseBattery.determineStatusId());
+			DeviceBatteryStatusChanged batteryStatusEvent = new DeviceBatteryStatusChanged(
+				this, SystemUser.get(), deviceId, newDeviceBaseBattery.determineStatusId());
 			events.publishEvent(batteryStatusEvent);
 		}
 
@@ -71,10 +73,9 @@ public class DeviceStatusService {
 	}
 
 	@Transactional
-	public void updateBatteryStatus(Integer deviceId, Integer newBatteryStatusId) {
+	public void updateBatteryStatus(Integer deviceId, Integer newBatteryStatusId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		DeviceBatteryStatusChanged batteryStatusChanged = new DeviceBatteryStatusChanged(this, deviceId,
-			device.getBatteryStatus() != null ? device.getBatteryStatus().getId() : null, newBatteryStatusId);
+		DeviceBatteryStatusChanged batteryStatusChanged = new DeviceBatteryStatusChanged(this, actor, deviceId, newBatteryStatusId);
 		device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId));
 
 		deviceRepository.save(device);
@@ -82,10 +83,9 @@ public class DeviceStatusService {
 	}
 
 	@Transactional
-	public void updateGrade(Integer deviceId, Integer newGradeId) {
+	public void updateGrade(Integer deviceId, Integer newGradeId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		DeviceGradeChanged deviceGradeChanged = new DeviceGradeChanged(this, deviceId,
-			device.getGrade() != null ? device.getGrade().getId() : null, newGradeId);
+		DeviceGradeChanged deviceGradeChanged = new DeviceGradeChanged(this, actor, deviceId, newGradeId);
 		device.setGrade(deviceGradeRepository.getReferenceById(newGradeId));
 
 		deviceRepository.save(device);
@@ -93,20 +93,20 @@ public class DeviceStatusService {
 	}
 
 	@Transactional
-	public void addTag(Integer deviceId, Integer newTagId) {
+	public void addTag(Integer deviceId, Integer newTagId, UserDetails actor) {
 		DeviceTags deviceTags = new DeviceTags();
 		deviceTags.setDevice(deviceRepository.getReferenceById(deviceId));
 		deviceTags.setDeviceTag(deviceTagRepository.getReferenceById(newTagId));
-		DeviceTagAdded deviceTagAdded = new DeviceTagAdded(this, deviceId, newTagId);
+		DeviceTagAdded deviceTagAdded = new DeviceTagAdded(this, actor, deviceId, newTagId);
 
 		deviceTagsRepository.save(deviceTags);
 		events.publishEvent(deviceTagAdded);
 	}
 
 	@Transactional
-	public void deleteTag(Integer deviceId, Integer tagId) {
+	public void deleteTag(Integer deviceId, Integer tagId, UserDetails actor) {
 		deviceTagsRepository.deleteByDeviceAndDeviceTag(deviceRepository.getReferenceById(deviceId), deviceTagRepository.getReferenceById(tagId));
-		DeviceTagRemoved deviceTagRemoved = new DeviceTagRemoved(this, deviceId, tagId);
+		DeviceTagRemoved deviceTagRemoved = new DeviceTagRemoved(this, actor, deviceId, tagId);
 		events.publishEvent(deviceTagRemoved);
 	}
 

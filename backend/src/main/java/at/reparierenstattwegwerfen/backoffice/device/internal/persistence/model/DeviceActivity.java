@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -28,6 +29,9 @@ public class DeviceActivity implements NamedId {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "actor")
+	private String actor;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "device_id")
 	private Device device;
@@ -39,10 +43,10 @@ public class DeviceActivity implements NamedId {
 	@Column(name = "date")
 	private LocalDateTime date;
 
-	public DeviceActivity(long date) {
-		this();
+	public DeviceActivity(long date, UserDetails actor) {
 		this.date = Instant.ofEpochMilli(date)
 			.atZone(ZoneId.systemDefault())
 			.toLocalDateTime();
+		this.actor = actor.getUsername();
 	}
 }

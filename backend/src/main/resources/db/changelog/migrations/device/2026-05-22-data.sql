@@ -45,13 +45,10 @@ VALUES (1, 'Activation Lock', 1),
        (5, 'Retoure', 5),
        (6, 'Gewährleistungs-Fall', 6);
 
-INSERT INTO device_activity_type (device_activity_type_id, name, description_template)
-VALUES (1, 'Erstellt', 'Device #{{deviceId}} erstellt.'),
-       (2, 'Status geändert', 'Status geändert von \"{{oldStatus}}\" auf \"{{newStatus}}\".'),
-       (3, 'Akku Status geändert', 'Akku Status automatisch auf \"{{newBatteryStatus}}\" gesetzt.'),
-       (4, 'Akku Status geändert', 'Akku Status geändert von \"{{oldBatteryStatus}}\" auf \"{{newBatteryStatus}}\".'),
-       (5, 'Äußerlichen Zustand geändert', 'Äußerlichen Zustand geändert von \"{{oldGrade}}\" auf \"{{newGrade}}\".'),
-       (6, 'Tag hinzugefügt', 'Tag \"{{newTag}}\" hinzugefügt.'),
-       (7, 'Tag entfernt', 'Tag \"{{tag}}\" entfernt.'),
-       (8, 'Rechnung generiert', '{{invoiceFileName}}'),
-       (9, 'Verkauft', null);
+INSERT INTO device_activity_type (device_activity_type_id, name)
+VALUES (1, 'Erstellt'),
+       (2, 'Status geändert'),
+       (3, 'Akku Status geändert'),
+       (4, 'Äußerlichen Zustand geändert'),
+       (5, 'Tag hinzugefügt'),
+       (6, 'Tag entfernt');

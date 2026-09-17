@@ -74,7 +74,7 @@
       </clr-checkbox-container>
     </form>
     <div class="modal-footer mt-4">
-        <button (click)="modalOpened.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+      <button (click)="modalOpened.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
       <button (click)="updateAccessories()" [disabled]="accessoriesForm.invalid || isSubmitting()"
               class="btn btn-primary"
               type="submit">
