@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 
 import {
   ClrButtonModule,
@@ -40,6 +40,7 @@ import { OrElsePipe } from '../../pipes/or-else-pipe';
     NgTemplateOutlet,
     ClrButtonModule,
     RouterLink,
+    DatePipe,
   ],
   templateUrl: './add-device.html',
   styleUrl: './add-device.css',
@@ -53,6 +54,8 @@ export class AddDevice {
   found = signal<ResolvedModelMatch | undefined>(undefined);
   selectedAlternative = signal<number>(-1);
 
+  now = new Date();
+
   form = new FormGroup({
     url: new FormControl('', {
       nonNullable: true,
@@ -64,6 +67,14 @@ export class AddDevice {
       ],
     }),
     price: new FormControl<number | null>(null, [Validators.required, Validators.min(0.01)]),
+    buyingDate: new FormControl<string | null>(null, [
+      Validators.required,
+      (control) => {
+        if (!control.value) return null;
+        const [day, month, year] = control.value.split('.').map(Number);
+        return new Date(year, month - 1, day) <= new Date() ? null : { futureDate: true };
+      },
+    ]),
   });
 
   private modelApi = inject(ModelControllerService);
@@ -96,9 +107,13 @@ export class AddDevice {
       lastName: this.found()?.sellerLastName,
     };
 
+    const [day, month, year] = this.form.controls.buyingDate.value!.split('.');
+    const buyingDateIso = `${year}-${month}-${day}`;
+
     const newDevice: CreateNewDeviceDto = {
       businessPartnerPlaceholder: businessPartnerPlaceholder,
-      modelId: candidate.model?.id || 0,
+      buyingDate: buyingDateIso,
+      modelId: candidate.model!.id,
       purchasePrice: Number(this.form.controls.price.value),
       modelColorId: candidate.modelColor?.id,
       modelAppleSiliconId: candidate.modelAppleSilicon?.id,
@@ -108,7 +123,7 @@ export class AddDevice {
       serialNumber: candidate.serialNumber,
       batteryMaximumCapacity: candidate.batteryMaximumCapacity,
       batteryCycleCount: candidate.batteryCycleCount,
-      defect: this.found()?.reportedDefect,
+      defect: this.found()!.reportedDefect!,
     };
 
     this.deviceApi.createNewDevice(newDevice).subscribe({
@@ -151,6 +166,7 @@ export class AddDevice {
 
   private resetFormState(): void {
     this.form.reset();
+    this.form.controls.buyingDate.setValue(new Date().toLocaleDateString('de-AT'));
     this.found.set(undefined);
     this.selectedAlternative.set(-1);
     this.isSubmitting.set(false);

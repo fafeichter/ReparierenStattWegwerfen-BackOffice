@@ -1,11 +1,11 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
+
+import java.time.LocalDate;
 
 /**
  * @author Fabian Feichter
@@ -30,8 +30,13 @@ public class CreateNewDeviceDto {
 	private final String serialNumber;
 
 	@NotNull
+	@Positive
 	private final Double purchasePrice;
 
+	@PastOrPresent
+	private final LocalDate buyingDate;
+
+	@NotEmpty
 	private final String defect;
 	private final Integer batteryMaximumCapacity;
 	private final Integer batteryCycleCount;

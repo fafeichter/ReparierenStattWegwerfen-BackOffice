@@ -12,8 +12,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-
 /**
  * @author Fabian Feichter
  */
@@ -31,7 +29,7 @@ public class DeviceCreationService implements DeviceBuyingService {
 	public Integer createDevice(CreateNewDeviceDto newDevice) {
 		Device device = new Device();
 
-		device.setBuyingDate(LocalDate.now());
+		device.setBuyingDate(newDevice.getBuyingDate());
 		device.setUrl(newDevice.getUrl());
 		device.setStatus(deviceStatusRepository.getReferenceById(1));
 

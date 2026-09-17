@@ -30,6 +30,18 @@
           <clr-control-error>Please enter a valid Price.</clr-control-error>
         }
       </clr-number-input-container>
+
+      <clr-date-container>
+        <label><span class="clr-required-mark">Buying date</span></label>
+        <input [max]="(now | date:'yyyy-MM-dd')!" autocomplete="off" clrDate formControlName="buyingDate"
+               type="date"/>
+        @if (this.form.controls.buyingDate.hasError('required')) {
+          <clr-control-error>Buying date is required.</clr-control-error>
+        }
+        @if (this.form.controls.buyingDate.hasError('futureDate')) {
+          <clr-control-error>Date must be in past or present</clr-control-error>
+        }
+      </clr-date-container>
     </form>
 
     @if (isLoadingModel()) {
