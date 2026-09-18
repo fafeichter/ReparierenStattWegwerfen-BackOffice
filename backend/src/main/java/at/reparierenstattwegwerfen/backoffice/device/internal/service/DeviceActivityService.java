@@ -4,7 +4,6 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.context.event.EventListener;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,7 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
+	@ApplicationModuleListener
 	public void on(DeviceStatusChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceStatusRepository.getReferenceById(event.getNewStatusId()).getName());
@@ -46,7 +45,7 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
+	@ApplicationModuleListener
 	public void on(DeviceBatteryStatusChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceBatteryStatusRepository.getReferenceById(event.getNewBatteryStatusId()).getName());
@@ -56,7 +55,7 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
+	@ApplicationModuleListener
 	public void on(DeviceGradeChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceGradeRepository.getReferenceById(event.getNewGradeId()).getName());
@@ -66,7 +65,7 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
+	@ApplicationModuleListener
 	public void on(DeviceTagAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getNewTagId()).getName());
@@ -76,7 +75,7 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
+	@ApplicationModuleListener
 	public void on(DeviceTagRemoved event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getTagId()).getName());

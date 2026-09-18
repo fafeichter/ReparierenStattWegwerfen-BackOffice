@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
 import {
   BatteryHealthDto,
   DeviceBaseControllerService,
@@ -55,10 +55,6 @@ import {
 })
 export class Base implements OnInit {
   deviceId = input.required<number>();
-  statusChanged = output<void>();
-  batteryStatusChanged = output<void>();
-  gradeChanged = output<void>();
-  tagsChanged = output<void>();
 
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
 
@@ -247,7 +243,6 @@ export class Base implements OnInit {
       .updateStatus(this.deviceId(), this.statusForm.controls.newStatusId.value!)
       .subscribe(() => {
         this.statusEditModeActive.set(false);
-        this.statusChanged.emit();
         this.deviceBase.update((currentValue) => {
           return {
             ...currentValue!,
@@ -323,7 +318,6 @@ export class Base implements OnInit {
       )
       .subscribe(() => {
         this.batteryStatusEditModeActive.set(false);
-        this.batteryStatusChanged.emit();
 
         this.deviceBase.update((currentValue) => {
           return {
@@ -354,7 +348,6 @@ export class Base implements OnInit {
       .updateGrade(this.deviceId(), this.gradeForm.controls.newGradeId.value!)
       .subscribe(() => {
         this.gradeEditModeActive.set(false);
-        this.gradeChanged.emit();
 
         this.deviceBase.update((currentValue) => {
           return {
@@ -381,7 +374,6 @@ export class Base implements OnInit {
   addTag() {
     this.api.addTag(this.deviceId(), this.tagForm.controls.newTagId.value!).subscribe(() => {
       this.tagEditModeActive.set(false);
-      this.tagsChanged.emit();
 
       this.deviceBase.update((currentValue) => {
         let addedTag: NamedIdDto = this.deviceTags().find((deviceTag) => {
@@ -401,8 +393,6 @@ export class Base implements OnInit {
   deleteTag(tagId: number) {
     if (confirm('Do you really want to remove this tag?')) {
       this.api.deleteTag(this.deviceId(), tagId).subscribe(() => {
-        this.tagsChanged.emit();
-
         this.deviceBase.update((currentValue) => {
           this.deviceBase()!.tags = this.deviceBase()!.tags!.filter(
             (deviceTag) => deviceTag.id !== tagId,

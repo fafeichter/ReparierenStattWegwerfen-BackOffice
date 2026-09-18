@@ -1,6 +1,8 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DeviceActivityControllerService, DeviceActivityDto } from '@api/device';
+import { interval, startWith, switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-activity',
@@ -15,15 +17,15 @@ export class Activity implements OnInit {
 
   private activityApi = inject(DeviceActivityControllerService);
 
-  ngOnInit(): void {
-    this.activityApi
-      .getActivities(this.deviceId())
-      .subscribe((data) => this.deviceActivities.set(data));
-  }
+  private destroyRef = inject(DestroyRef);
 
-  reloadActivity() {
-    this.activityApi
-      .getActivities(this.deviceId())
+  ngOnInit(): void {
+    interval(5000)
+      .pipe(
+        startWith(0),
+        switchMap(() => this.activityApi.getActivities(this.deviceId())),
+        takeUntilDestroyed(this.destroyRef),
+      )
       .subscribe((data) => this.deviceActivities.set(data));
   }
 }
