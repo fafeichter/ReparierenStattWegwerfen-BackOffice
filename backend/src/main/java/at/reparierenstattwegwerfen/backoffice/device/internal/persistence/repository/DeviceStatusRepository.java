@@ -15,7 +15,8 @@ public interface DeviceStatusRepository extends JpaRepository<DeviceStatus, Inte
 
 	@Query("""
 		SELECT n FROM DeviceStatus n
+		WHERE n.deviceStatusClassification.id IN (1, 2)
 		ORDER BY n.sortOrder ASC
 		""")
-	List<DeviceStatus> getAllStatus();
+	List<DeviceStatus> getAllNonSystemStatus();
 }

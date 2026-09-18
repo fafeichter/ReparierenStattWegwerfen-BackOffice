@@ -13,6 +13,7 @@ import {
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import { RouterLink } from '@angular/router';
 import {
+  ClrAlertModule,
   ClrCommonFormsModule,
   ClrIcon,
   ClrInputModule,
@@ -47,6 +48,7 @@ import {
     ClrInputModule,
     ClrNumberInputModule,
     ClrSelectModule,
+    ClrAlertModule,
   ],
   templateUrl: './base.html',
   styleUrl: './base.css',

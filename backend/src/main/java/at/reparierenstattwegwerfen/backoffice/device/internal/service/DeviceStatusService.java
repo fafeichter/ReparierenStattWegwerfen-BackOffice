@@ -8,10 +8,12 @@ import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -29,8 +31,8 @@ public class DeviceStatusService {
 	private final DeviceTagsRepository deviceTagsRepository;
 	private final ApplicationEventPublisher events;
 
-	public List<NamedIdDto> getAllStatus() {
-		return deviceStatusRepository.getAllStatus()
+	public List<NamedIdDto> getAllNonSystemStatus() {
+		return deviceStatusRepository.getAllNonSystemStatus()
 			.stream()
 			.map(deviceStatus -> NamedIdDto.from(deviceStatus))
 			.toList();
@@ -45,6 +47,15 @@ public class DeviceStatusService {
 
 		deviceRepository.save(device);
 		events.publishEvent(deviceStatusChanged);
+	}
+
+	@ApplicationModuleListener
+	public void on(DeviceStatusChanged event) {
+		Device device = deviceRepository.getReferenceById(event.getDeviceId());
+		if (event.getNewStatusId() == 6) {
+			device.setSellingDate(LocalDate.now());
+			deviceRepository.save(device);
+		}
 	}
 
 	@Transactional

@@ -1,3 +1,11 @@
+@if (deviceBase()?.status?.id === 8) {
+  <clr-alert [clrAlertClosable]="false" [clrAlertType]="'warning'">
+    <clr-alert-item>
+      <span class="alert-text">Device is archived. Do not modify!</span>
+    </clr-alert-item>
+  </clr-alert>
+}
+
 <div class="card" id="device">
   <div class="card-header">Device</div>
   <div class="card-block">

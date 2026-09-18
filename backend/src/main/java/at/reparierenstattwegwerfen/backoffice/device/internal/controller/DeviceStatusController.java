@@ -20,7 +20,7 @@ public class DeviceStatusController {
 	private final DeviceStatusService deviceStatusService;
 
 	@GetMapping("/")
-	public List<NamedIdDto> getAllStatus() {
-		return deviceStatusService.getAllStatus();
+	public List<NamedIdDto> getAllNonSystemStatus() {
+		return deviceStatusService.getAllNonSystemStatus();
 	}
 }
