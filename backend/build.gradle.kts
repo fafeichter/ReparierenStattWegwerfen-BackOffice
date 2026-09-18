@@ -65,14 +65,13 @@ dependencyManagement {
 
 hibernate {
     enhancement {
-        enableAssociationManagement = true
     }
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
     reports {
-        junitXml.required = true;
+        junitXml.required = true
     }
 }
 
