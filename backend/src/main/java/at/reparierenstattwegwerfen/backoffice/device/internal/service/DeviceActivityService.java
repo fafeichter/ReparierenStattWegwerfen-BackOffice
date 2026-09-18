@@ -51,7 +51,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceBatteryStatusRepository.getReferenceById(event.getNewBatteryStatusId()).getName());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(4));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(3));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -61,7 +61,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceGradeRepository.getReferenceById(event.getNewGradeId()).getName());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(5));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(4));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -71,7 +71,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getNewTagId()).getName());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(6));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(5));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -81,7 +81,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getTagId()).getName());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(7));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(6));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
