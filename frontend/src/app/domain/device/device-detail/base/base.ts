@@ -233,7 +233,7 @@ export class Base implements OnInit {
       newStatusId: this.deviceBase()?.status.id,
     });
 
-    this.statusApi.getAllStatus().subscribe((data) => {
+    this.statusApi.getAllNonSystemStatus().subscribe((data) => {
       this.deviceStatus.set(data);
     });
   }
