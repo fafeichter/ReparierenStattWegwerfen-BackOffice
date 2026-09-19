@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.service;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service.event;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceBatteryStatusChanged extends DeviceActivityEvent {
+public class DeviceBatteryStatusChanged extends AbstractDeviceActivityEvent {
 
 	final Integer newBatteryStatusId;
 

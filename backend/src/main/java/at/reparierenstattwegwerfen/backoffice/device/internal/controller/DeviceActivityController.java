@@ -22,6 +22,6 @@ public class DeviceActivityController {
 
 	@GetMapping("/")
 	public List<DeviceActivityDto> getActivities(@PathVariable Integer deviceId) {
-		return deviceActivityService.getForDevice(deviceId);
+		return deviceActivityService.getActivitiesForDevice(deviceId);
 	}
 }

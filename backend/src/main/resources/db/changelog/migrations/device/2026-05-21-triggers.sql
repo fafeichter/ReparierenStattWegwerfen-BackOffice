@@ -15,7 +15,7 @@ BEGIN
                               battery_cycle_count, device_battery_status_id, selling_price, selling_accessory_charger,
                               selling_accessory_charging_cable, selling_accessory_original_packaging, created_at,
                               updated_at)
-    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.buying_date, NEW.model_id, NEW.model_apple_silicon_id,
+    VALUES ('INSERT', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.buying_date, NEW.model_id, NEW.model_apple_silicon_id,
             NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
             NEW.serial_number, NEW.device_status_id, NEW.seller_business_partner_id, NEW.buyer_business_partner_id,
             NEW.purchase_price, NEW.device_grade_id, NEW.reported_defect, NEW.diagnosed_defect,
@@ -38,7 +38,7 @@ BEGIN
                               selling_accessory_charging_cable, selling_accessory_original_packaging,
                               battery_maximum_capacity, battery_cycle_count, device_battery_status_id, selling_price,
                               created_at, updated_at)
-    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.buying_date, NEW.model_id, NEW.model_apple_silicon_id,
+    VALUES ('UPDATE', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.buying_date, NEW.model_id, NEW.model_apple_silicon_id,
             NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
             NEW.serial_number, NEW.device_status_id, NEW.seller_business_partner_id, NEW.buyer_business_partner_id,
             NEW.purchase_price, NEW.device_grade_id, NEW.reported_defect, NEW.diagnosed_defect,
@@ -61,7 +61,7 @@ BEGIN
                               selling_accessory_charging_cable, selling_accessory_original_packaging,
                               battery_maximum_capacity, battery_cycle_count, device_battery_status_id, selling_price,
                               created_at, updated_at)
-    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.buying_date, OLD.model_id, OLD.model_apple_silicon_id,
+    VALUES ('DELETE', CURRENT_TIMESTAMP(6), OLD.device_id, OLD.buying_date, OLD.model_id, OLD.model_apple_silicon_id,
             OLD.model_apple_silicon_unified_memory_id, OLD.model_storage_id, OLD.model_color_id, OLD.url,
             OLD.serial_number, OLD.device_status_id, OLD.seller_business_partner_id, OLD.buyer_business_partner_id,
             OLD.purchase_price, OLD.device_grade_id, OLD.reported_defect, OLD.diagnosed_defect,
@@ -79,7 +79,7 @@ CREATE TRIGGER tr_device_note_insert
 BEGIN
     INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, date,
                                    created_at, updated_at)
-    VALUES ('INSERT', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.date, NEW.created_at,
+    VALUES ('INSERT', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.device_note_id, NEW.text, NEW.date, NEW.created_at,
             NEW.updated_at);
 END $$
 
@@ -90,7 +90,7 @@ CREATE TRIGGER tr_device_note_update
 BEGIN
     INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, date, created_at,
                                    updated_at)
-    VALUES ('UPDATE', CURRENT_TIMESTAMP, NEW.device_id, NEW.device_note_id, NEW.text, NEW.date, NEW.created_at,
+    VALUES ('UPDATE', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.device_note_id, NEW.text, NEW.date, NEW.created_at,
             NEW.updated_at);
 END $$
 
@@ -101,6 +101,6 @@ CREATE TRIGGER tr_device_note_delete
 BEGIN
     INSERT INTO device_note_audit (audit_action, audit_timestamp, device_id, device_note_id, text, date, created_at,
                                    updated_at)
-    VALUES ('DELETE', CURRENT_TIMESTAMP, OLD.device_id, OLD.device_note_id, OLD.text, OLD.date, OLD.created_at, OLD
+    VALUES ('DELETE', CURRENT_TIMESTAMP(6), OLD.device_id, OLD.device_note_id, OLD.text, OLD.date, OLD.created_at, OLD
         .updated_at);
 END $$

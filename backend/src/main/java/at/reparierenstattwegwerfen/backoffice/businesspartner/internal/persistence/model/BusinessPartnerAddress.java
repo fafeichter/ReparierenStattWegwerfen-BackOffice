@@ -35,4 +35,28 @@ public class BusinessPartnerAddress {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "business_partner_address_country_id")
 	private BusinessPartnerAddressCountry country;
+
+	@Override
+	public String toString() {
+		String streetVal = getValueOrDefault(street);
+		String houseNumberVal = getValueOrDefault(houseNumber);
+		String zipCodeVal = getValueOrDefault(zipCode);
+		String cityVal = getValueOrDefault(city);
+
+		String countryVal = "-";
+		if (country != null) {
+			countryVal = getValueOrDefault(country.getName());
+		}
+
+		return String.format(
+			"%s %s%n%s %s%n%s",
+			streetVal, houseNumberVal,
+			zipCodeVal, cityVal,
+			countryVal
+		);
+	}
+
+	private String getValueOrDefault(String value) {
+		return (value != null && !value.isBlank()) ? value.trim() : "-";
+	}
 }

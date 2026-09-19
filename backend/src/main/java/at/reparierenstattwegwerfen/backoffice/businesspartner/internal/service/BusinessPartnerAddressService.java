@@ -6,7 +6,10 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persisten
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerAddressCountryRepository;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerAddressRepository;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerRepository;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service.event.BusinessPartnerAddressChanged;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,9 +25,10 @@ public class BusinessPartnerAddressService {
 	private final BusinessPartnerAddressRepository addressRepository;
 	private final BusinessPartnerAddressCountryRepository countryRepository;
 	private final BusinessPartnerAddressExtractor addressExtractor;
+	private final ApplicationEventPublisher events;
 
 	@Transactional
-	public void extractAddressFromImage(Integer businessPartnerId, MultipartFile shippingLabelImage) {
+	public void extractAddressFromImage(Integer businessPartnerId, MultipartFile shippingLabelImage, UserDetails actor) {
 		BusinessPartnerAddressExtractResponse address = addressExtractor.extractAddress(shippingLabelImage.getResource());
 
 		BusinessPartner businessPartner = businessPartnerRepository.getReferenceById(businessPartnerId);
@@ -46,9 +50,17 @@ public class BusinessPartnerAddressService {
 		businessPartnerAddress.setZipCode(address.zipCode());
 		businessPartnerAddress.setCountry(country);
 
-		addressRepository.save(businessPartnerAddress);
+		Integer businessPartnerAddressId = addressRepository.save(businessPartnerAddress).getId();
 		businessPartner.setAddress(businessPartnerAddress);
 
 		businessPartnerRepository.save(businessPartner);
+
+		BusinessPartnerAddressChanged businessPartnerAddressChangedEvent = BusinessPartnerAddressChanged.builder()
+			.source(this)
+			.actor(actor)
+			.businessPartnerId(businessPartnerId)
+			.businessPartnerAddressId(businessPartnerAddressId)
+			.build();
+		events.publishEvent(businessPartnerAddressChangedEvent);
 	}
 }

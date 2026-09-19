@@ -2,10 +2,12 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceActivity;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.modulith.events.ApplicationModuleListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,7 +27,8 @@ public class DeviceActivityService {
 	private final DeviceGradeRepository deviceGradeRepository;
 	private final DeviceTagRepository deviceTagRepository;
 
-	@ApplicationModuleListener
+	@EventListener
+	@Transactional
 	public void on(DeviceCreated event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName("#" + event.getDeviceId());
@@ -35,7 +38,8 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@ApplicationModuleListener
+	@EventListener
+	@Transactional
 	public void on(DeviceStatusChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceStatusRepository.getReferenceById(event.getNewStatusId()).getName());
@@ -45,7 +49,8 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@ApplicationModuleListener
+	@EventListener
+	@Transactional
 	public void on(DeviceBatteryStatusChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceBatteryStatusRepository.getReferenceById(event.getNewBatteryStatusId()).getName());
@@ -55,7 +60,8 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@ApplicationModuleListener
+	@EventListener
+	@Transactional
 	public void on(DeviceGradeChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceGradeRepository.getReferenceById(event.getNewGradeId()).getName());
@@ -65,7 +71,8 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@ApplicationModuleListener
+	@EventListener
+	@Transactional
 	public void on(DeviceTagAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getNewTagId()).getName());
@@ -75,17 +82,18 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@ApplicationModuleListener
+	@EventListener
+	@Transactional
 	public void on(DeviceTagRemoved event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
-		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getTagId()).getName());
+		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getOldTagId()).getName());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(6));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	public List<DeviceActivityDto> getForDevice(Integer deviceId) {
+	public List<DeviceActivityDto> getActivitiesForDevice(Integer deviceId) {
 		return deviceActivityRepository.getByIdWithRelations(deviceId).stream().map(activity ->
 				DeviceActivityDto.builder()
 					.id(activity.getId())

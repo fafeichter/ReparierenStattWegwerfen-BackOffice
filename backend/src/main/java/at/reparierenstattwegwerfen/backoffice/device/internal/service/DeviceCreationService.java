@@ -1,12 +1,15 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerSetAsSeller;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerPlaceholderDto;
 import at.reparierenstattwegwerfen.backoffice.device.DeviceBuyingService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceBatteryStatusChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceCreated;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -63,7 +66,8 @@ public class DeviceCreationService implements DeviceBuyingService {
 			newDevice.getBusinessPartnerPlaceholder().getLastName()
 
 		);
-		Integer sellerBusinessPartnerId = businessPartnerService.createBusinessPartnerPlaceholder(businessPartnerPlaceholder);
+		Integer sellerBusinessPartnerId = businessPartnerService.createBusinessPartnerPlaceholder(
+			businessPartnerPlaceholder, actor);
 		device.setSellerBusinessPartnerId(sellerBusinessPartnerId);
 
 		Integer newDeviceId = deviceRepository.save(device).getId();
@@ -73,12 +77,23 @@ public class DeviceCreationService implements DeviceBuyingService {
 			.actor(actor)
 			.deviceId(newDeviceId)
 			.build();
+		BusinessPartnerSetAsSeller businessPartnerSetAsSellerEvent = BusinessPartnerSetAsSeller.builder()
+			.source(this)
+			.actor(actor)
+			.businessPartnerId(sellerBusinessPartnerId)
+			.deviceId(newDeviceId)
+			.build();
+
 		events.publishEvent(deviceCreatedEvent);
+		events.publishEvent(businessPartnerSetAsSellerEvent);
 
 		if (batteryStatusCanAutomaticallyBeSet) {
-			DeviceBatteryStatusChanged batteryStatusEvent = new DeviceBatteryStatusChanged(
-				this, SystemUser.get(), newDeviceId, batteryHealth.determineStatusId());
-			events.publishEvent(batteryStatusEvent);
+			DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()
+				.source(this).actor(SystemUser.get())
+				.deviceId(newDeviceId)
+				.newBatteryStatusId(batteryHealth.determineStatusId())
+				.build();
+			events.publishEvent(deviceBatteryStatusChangedEvent);
 		}
 
 		return newDeviceId;

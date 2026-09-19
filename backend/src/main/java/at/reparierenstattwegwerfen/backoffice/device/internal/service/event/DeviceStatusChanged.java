@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.service;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service.event;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceStatusChanged extends DeviceActivityEvent {
+public class DeviceStatusChanged extends AbstractDeviceActivityEvent {
 
 	final Integer newStatusId;
 

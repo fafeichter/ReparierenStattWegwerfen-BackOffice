@@ -1,100 +1,22 @@
-@if (businessPartner(); as businessPartner) {
-  @if (deviceId()) {
-    <button (click)="cancelForm()" class="btn btn-link">
-      ← Back
-    </button>
-  }
+@if (deviceId()) {
+  <button (click)="goBack()" class="btn btn-link">
+    ← Back
+  </button>
+}
+<div class="container">
+  <clr-vertical-nav>
+    @for (item of navItems; track item.id) {
+      <a (click)="scrollToSection(item.id)" [fragment]="item.id" [routerLink]="[]"
+         clrVerticalNavLink>
+        {{ item.label }}
+      </a>
+    }
+  </clr-vertical-nav>
   <div class="clr-row">
-    <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-      <div class="card">
-        <div [class.scammer-header]="businessPartner.scammer" class="card-header">
-          {{ businessPartner.name }}
-          @if (businessPartner.scammer) {
-            <clr-label clrColor="danger" clrText="Scammer!" clrType="solid"></clr-label>
-          }
-        </div>
-        <div class="card-block">
-          <div class="card-title">Address</div>
-          <div class="card-text">
-            {{ businessPartner.address?.street | orElse }} {{ businessPartner.address?.houseNumber  | orElse }}<br>
-            {{ businessPartner.address?.zipCode  | orElse }} {{ businessPartner.address?.city  | orElse }}<br>
-            {{ businessPartner.address?.country  | orElse }}
-          </div>
-
-          @if (!addressEditModeActive()) {
-            <button (click)="addressEditModeActive.set(true)" class="btn btn-link">
-              <cds-icon role="img" shape="edit"/>
-              Edit
-            </button>
-          } @else {
-            <form #formRef (ngSubmit)="updateAddress()" [formGroup]="form" clrForm clrLayout="vertical">
-              <clr-file-input-container clrButtonLabel="Browse">
-                <label>Set address from image</label>
-                <input (change)="formRef.requestSubmit()" accept="image/*" capture="environment"
-                       clrFileInput formControlName="shippingLabelImage" multiple name="file"
-                       required type="file"/>
-                <clr-control-helper>Photo of shipping label</clr-control-helper>
-                <clr-control-error *clrIfError="'required'">Required</clr-control-error>
-              </clr-file-input-container>
-            </form>
-            <button (click)="cancelForm()" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
-              Cancel
-            </button>
-          }
-        </div>
-        <div class="card-block">
-          <div class="card-title">Company</div>
-          <div class="card-text">
-            <ul class="list">
-              <li>Name: {{ businessPartner.companyName | orElse }}</li>
-              <li>UID: {{ businessPartner.companyUid | orElse }}</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-block">
-          <div class="card-title">Contact</div>
-          <div class="card-text">
-            <ul class="list">
-              <li>E-Mail: {{ businessPartner.email | orElse }}</li>
-              <li>Telephone: {{ businessPartner.telephone | orElse }}</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-block">
-          <div class="card-title">Devices</div>
-          <div class="card-text">
-            <div>
-              <h5>Seller</h5>
-              <ul>
-                @for (businessPartnerDevice of businessPartnerDevices()?.soldDevices; track businessPartnerDevice.id) {
-                  <li>
-                    <a [routerLink]="['/devices', businessPartnerDevice.id]">
-                      {{ businessPartnerDevice.name }}
-                    </a>
-                  </li>
-                } @empty {
-                  -
-                }
-              </ul>
-            </div>
-            <div class="mt-2">
-              <h5>Buyer</h5>
-              <ul>
-                @for (businessPartnerDevice of businessPartnerDevices()?.boughtDevices; track businessPartnerDevice.id) {
-                  <li>
-                    <a [routerLink]="['/devices', businessPartnerDevice.id]">
-                      {{ businessPartnerDevice.name }}
-                    </a>
-                  </li>
-                } @empty {
-                  -
-                }
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="clr-col-lg-8 clr-col-md-8 clr-col-10">
+      <app-contact [businessPartnerId]="businessPartnerId()"></app-contact>
+      <app-devices [businessPartnerId]="businessPartnerId()"></app-devices>
+      <app-activity [businessPartnerId]="businessPartnerId()"></app-activity>
     </div>
   </div>
-}
+</div>

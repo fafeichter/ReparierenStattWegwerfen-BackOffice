@@ -4,11 +4,12 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTag;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTags;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.modulith.events.ApplicationModuleListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,15 +42,21 @@ public class DeviceStatusService {
 	@Transactional
 	public void updateStatusOfDevice(Integer deviceId, Integer newStatusId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		DeviceStatusChanged deviceStatusChanged = new DeviceStatusChanged(
-			this, actor, device.getId(), newStatusId);
-		device.setStatus(deviceStatusRepository.getReferenceById(newStatusId));
 
+		device.setStatus(deviceStatusRepository.getReferenceById(newStatusId));
 		deviceRepository.save(device);
-		events.publishEvent(deviceStatusChanged);
+
+		DeviceStatusChanged deviceStatusChangedEvent = DeviceStatusChanged.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.newStatusId(newStatusId)
+			.build();
+		events.publishEvent(deviceStatusChangedEvent);
 	}
 
-	@ApplicationModuleListener
+	@EventListener
+	@Transactional
 	public void on(DeviceStatusChanged event) {
 		Device device = deviceRepository.getReferenceById(event.getDeviceId());
 		if (event.getNewStatusId() == 6) {
@@ -75,9 +82,12 @@ public class DeviceStatusService {
 		if (newDeviceBaseBattery.determineStatusId() != null && device.getBatteryStatus() == null) {
 			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newDeviceBaseBattery.determineStatusId()));
 
-			DeviceBatteryStatusChanged batteryStatusEvent = new DeviceBatteryStatusChanged(
-				this, SystemUser.get(), deviceId, newDeviceBaseBattery.determineStatusId());
-			events.publishEvent(batteryStatusEvent);
+			DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()
+				.source(this).actor(SystemUser.get())
+				.deviceId(deviceId)
+				.newBatteryStatusId(newDeviceBaseBattery.determineStatusId())
+				.build();
+			events.publishEvent(deviceBatteryStatusChangedEvent);
 		}
 
 		deviceRepository.save(device);
@@ -86,21 +96,30 @@ public class DeviceStatusService {
 	@Transactional
 	public void updateBatteryStatus(Integer deviceId, Integer newBatteryStatusId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		DeviceBatteryStatusChanged batteryStatusChanged = new DeviceBatteryStatusChanged(this, actor, deviceId, newBatteryStatusId);
 		device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId));
-
 		deviceRepository.save(device);
-		events.publishEvent(batteryStatusChanged);
+
+		DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()
+			.source(this).actor(actor)
+			.deviceId(deviceId)
+			.newBatteryStatusId(newBatteryStatusId)
+			.build();
+		events.publishEvent(deviceBatteryStatusChangedEvent);
 	}
 
 	@Transactional
 	public void updateGrade(Integer deviceId, Integer newGradeId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		DeviceGradeChanged deviceGradeChanged = new DeviceGradeChanged(this, actor, deviceId, newGradeId);
 		device.setGrade(deviceGradeRepository.getReferenceById(newGradeId));
-
 		deviceRepository.save(device);
-		events.publishEvent(deviceGradeChanged);
+
+		DeviceGradeChanged deviceGradeChangedEvent = DeviceGradeChanged.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.newGradeId(newGradeId)
+			.build();
+		events.publishEvent(deviceGradeChangedEvent);
 	}
 
 	@Transactional
@@ -108,17 +127,29 @@ public class DeviceStatusService {
 		DeviceTags deviceTags = new DeviceTags();
 		deviceTags.setDevice(deviceRepository.getReferenceById(deviceId));
 		deviceTags.setDeviceTag(deviceTagRepository.getReferenceById(newTagId));
-		DeviceTagAdded deviceTagAdded = new DeviceTagAdded(this, actor, deviceId, newTagId);
-
 		deviceTagsRepository.save(deviceTags);
-		events.publishEvent(deviceTagAdded);
+
+		DeviceTagAdded deviceTagAddedEvent = DeviceTagAdded.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.newTagId(newTagId)
+			.build();
+		events.publishEvent(deviceTagAddedEvent);
 	}
 
 	@Transactional
-	public void deleteTag(Integer deviceId, Integer tagId, UserDetails actor) {
-		deviceTagsRepository.deleteByDeviceAndDeviceTag(deviceRepository.getReferenceById(deviceId), deviceTagRepository.getReferenceById(tagId));
-		DeviceTagRemoved deviceTagRemoved = new DeviceTagRemoved(this, actor, deviceId, tagId);
-		events.publishEvent(deviceTagRemoved);
+	public void deleteTag(Integer deviceId, Integer oldTagId, UserDetails actor) {
+		deviceTagsRepository.deleteByDeviceAndDeviceTag(deviceRepository.getReferenceById(deviceId),
+			deviceTagRepository.getReferenceById(oldTagId));
+
+		DeviceTagRemoved deviceTagRemovedEvent = DeviceTagRemoved.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.oldTagId(oldTagId)
+			.build();
+		events.publishEvent(deviceTagRemovedEvent);
 	}
 
 	public List<NamedIdDto> getAvailableTags(Integer deviceId) {

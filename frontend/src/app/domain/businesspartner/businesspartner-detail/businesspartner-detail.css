@@ -1,3 +1,37 @@
 .scammer-header {
   background-color: var(--cds-global-color-red-50);
 }
+
+.container {
+  display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+/* Force the clr-row flex child to grow and take 100% remaining width */
+.container > .clr-row {
+  flex: 1 1;
+}
+
+.clr-vertical-nav {
+  position: sticky;
+  height: min-content;
+  margin-top: var(--clr-base-vertical-offset-2xl);
+  margin-right: var(--clr-base-vertical-offset-2xl);
+  scroll-target-group: auto;
+
+  @media (min-width: 768px) {
+    top: 0;
+  }
+}
+
+a.nav-link:target-current {
+  color: var(--clr-vertical-nav-item-active-color);
+  background-color: var(--clr-vertical-nav-selected-bg-color);
+}
+
+a.nav-link:target-current::before {
+  border-color: var(--cds-alias-object-interaction-background-highlight);
+}

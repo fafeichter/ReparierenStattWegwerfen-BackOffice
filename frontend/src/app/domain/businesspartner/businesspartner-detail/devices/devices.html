@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">Devices</div>
+  <div class="card-block">
+    <div class="card-text">
+      <div>
+        <h5>Seller</h5>
+        <ul>
+          @for (businessPartnerDevice of businessPartnerDevices()?.soldDevices; track businessPartnerDevice.id) {
+            <li>
+              <a [routerLink]="['/devices', businessPartnerDevice.id]">
+                {{ businessPartnerDevice.name }}
+              </a>
+            </li>
+          } @empty {
+            -
+          }
+        </ul>
+      </div>
+      <div class="mt-2">
+        <h5>Buyer</h5>
+        <ul>
+          @for (businessPartnerDevice of businessPartnerDevices()?.boughtDevices; track businessPartnerDevice.id) {
+            <li>
+              <a [routerLink]="['/devices', businessPartnerDevice.id]">
+                {{ businessPartnerDevice.name }}
+              </a>
+            </li>
+          } @empty {
+            -
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

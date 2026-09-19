@@ -1,6 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -29,9 +30,13 @@ public class DeviceArchivalService {
 
 			UserDetails systemUser = SystemUser.get();
 			devicesToArchive.forEach(deviceId -> {
-				DeviceStatusChanged deviceStatusChanged = new DeviceStatusChanged(
-					this, systemUser, deviceId, 8);
-				events.publishEvent(deviceStatusChanged);
+				DeviceStatusChanged deviceStatusChangedEvent = DeviceStatusChanged.builder()
+					.source(this)
+					.actor(systemUser)
+					.deviceId(deviceId)
+					.newStatusId(8)
+					.build();
+				events.publishEvent(deviceStatusChangedEvent);
 			});
 		}
 	}

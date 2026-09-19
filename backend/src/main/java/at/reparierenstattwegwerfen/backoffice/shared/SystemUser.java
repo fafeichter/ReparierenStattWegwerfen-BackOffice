@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class SystemUser {
 
-	private static final UserDetails SYSTEM_USER = new User("SYSTEM", "N/A",
+	private static final UserDetails SYSTEM_USER = new User("system", null,
 		AuthorityUtils.createAuthorityList("ROLE_SYSTEM"));
 
 	private SystemUser() {

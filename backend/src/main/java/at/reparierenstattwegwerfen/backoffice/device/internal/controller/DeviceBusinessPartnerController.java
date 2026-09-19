@@ -5,6 +5,8 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceBusi
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceBusinesspartnerDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,7 +25,9 @@ public class DeviceBusinessPartnerController {
 	}
 
 	@PostMapping("/buyer")
-	public void createBuyerBusinessPartnerForDevice(@Valid @RequestBody CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice) {
-		businessPartnerService.createBuyerBusinessPartnerForDevice(buyerBusinessPartnerForDevice);
+	public void createBuyerBusinessPartnerForDevice(
+		@Valid @RequestBody CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice,
+		@AuthenticationPrincipal UserDetails currentUser) {
+		businessPartnerService.createBuyerBusinessPartnerForDevice(buyerBusinessPartnerForDevice, currentUser);
 	}
 }

@@ -15,8 +15,6 @@ import org.springframework.util.MimeType;
 import org.springframework.util.MimeTypeUtils;
 
 /**
- * Downloads an ad and asks the AI model to extract the device's specs and reported
- * condition from its text content.
  *
  * @author Fabian Feichter
  */
