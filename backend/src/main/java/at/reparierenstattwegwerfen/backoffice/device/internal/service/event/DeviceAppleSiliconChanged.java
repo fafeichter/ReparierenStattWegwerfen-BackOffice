@@ -9,10 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceCreated extends AbstractDeviceActivityEvent {
+public class DeviceAppleSiliconChanged extends AbstractDeviceActivityEvent {
+
+	final Integer modelAppleSiliconId;
 
 	@Builder
-	public DeviceCreated(Object source, UserDetails actor, Integer deviceId) {
+	public DeviceAppleSiliconChanged(Object source, UserDetails actor, Integer deviceId, Integer modelAppleSiliconId) {
 		super(source, deviceId, actor);
+		this.modelAppleSiliconId = modelAppleSiliconId;
 	}
 }

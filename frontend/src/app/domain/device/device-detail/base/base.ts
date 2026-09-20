@@ -390,9 +390,9 @@ export class Base implements OnInit {
     });
   }
 
-  deleteTag(tagId: number) {
+  removeTag(tagId: number) {
     if (confirm('Do you really want to remove this tag?')) {
-      this.api.deleteTag(this.deviceId(), tagId).subscribe(() => {
+      this.api.removeTag(this.deviceId(), tagId).subscribe(() => {
         this.deviceBase.update((currentValue) => {
           this.deviceBase()!.tags = this.deviceBase()!.tags!.filter(
             (deviceTag) => deviceTag.id !== tagId,

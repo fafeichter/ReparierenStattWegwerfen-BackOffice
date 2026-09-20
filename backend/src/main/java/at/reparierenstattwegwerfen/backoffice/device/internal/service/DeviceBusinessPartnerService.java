@@ -1,8 +1,8 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerDto;
+import at.reparierenstattwegwerfen.backoffice.device.DeviceBusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
@@ -53,10 +53,10 @@ public class DeviceBusinessPartnerService {
 		device.setBuyerBusinessPartnerId(buyerBusinessPartnerId);
 		deviceRepository.save(device);
 
-		BusinessPartnerSetAsBuyer businessPartnerSetAsBuyerEvent = BusinessPartnerSetAsBuyer.builder()
+		DeviceBusinessPartnerSetAsBuyer businessPartnerSetAsBuyerEvent = DeviceBusinessPartnerSetAsBuyer.builder()
 			.source(this)
 			.actor(actor)
-			.businessPartnerId(buyerBusinessPartnerId)
+			.buyerBusinessPartnerId(buyerBusinessPartnerId)
 			.deviceId(deviceId)
 			.build();
 		events.publishEvent(businessPartnerSetAsBuyerEvent);

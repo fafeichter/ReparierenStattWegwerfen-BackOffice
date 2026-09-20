@@ -9,10 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceCreated extends AbstractDeviceActivityEvent {
+public class DeviceReportedDefectChanged extends AbstractDeviceActivityEvent {
+
+	final String reportedDefect;
 
 	@Builder
-	public DeviceCreated(Object source, UserDetails actor, Integer deviceId) {
+	public DeviceReportedDefectChanged(Object source, UserDetails actor, Integer deviceId, String reportedDefect) {
 		super(source, deviceId, actor);
+		this.reportedDefect = reportedDefect;
 	}
 }

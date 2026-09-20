@@ -9,10 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceCreated extends AbstractDeviceActivityEvent {
+public class DeviceColorChanged extends AbstractDeviceActivityEvent {
+
+	final Integer modelColorId;
 
 	@Builder
-	public DeviceCreated(Object source, UserDetails actor, Integer deviceId) {
+	public DeviceColorChanged(Object source, UserDetails actor, Integer deviceId, Integer modelColorId) {
 		super(source, deviceId, actor);
+		this.modelColorId = modelColorId;
 	}
 }

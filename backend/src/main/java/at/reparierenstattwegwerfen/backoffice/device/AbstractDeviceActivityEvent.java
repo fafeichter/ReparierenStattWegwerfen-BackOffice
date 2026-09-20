@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.service.event;
+package at.reparierenstattwegwerfen.backoffice.device;
 
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-abstract class AbstractDeviceActivityEvent extends ApplicationEvent {
+public abstract class AbstractDeviceActivityEvent extends ApplicationEvent {
 
 	final UserDetails actor;
 	final Integer deviceId;

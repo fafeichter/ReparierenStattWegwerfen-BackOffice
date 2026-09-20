@@ -5,14 +5,19 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+
 /**
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceCreated extends AbstractDeviceActivityEvent {
+public class DeviceSellingDateChanged extends AbstractDeviceActivityEvent {
+
+	final LocalDate sellingDate;
 
 	@Builder
-	public DeviceCreated(Object source, UserDetails actor, Integer deviceId) {
+	public DeviceSellingDateChanged(Object source, UserDetails actor, Integer deviceId, LocalDate sellingDate) {
 		super(source, deviceId, actor);
+		this.sellingDate = sellingDate;
 	}
 }

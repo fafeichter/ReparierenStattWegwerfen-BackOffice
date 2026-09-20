@@ -28,8 +28,9 @@ public class DeviceBaseController {
 
 	@PostMapping("/hardware-config")
 	public void updateHardwareConfig(@PathVariable Integer deviceId,
-									 @Valid @RequestBody UpdateHardwareConfigDto updateHardwareConfigDto) {
-		deviceStatusService.updateHardwareConfigOfDevice(deviceId, updateHardwareConfigDto);
+									 @Valid @RequestBody UpdateHardwareConfigDto updateHardwareConfigDto,
+									 @AuthenticationPrincipal UserDetails currentUser) {
+		deviceStatusService.updateHardwareConfigOfDevice(deviceId, updateHardwareConfigDto, currentUser);
 	}
 
 	@PostMapping("/status")
@@ -74,8 +75,8 @@ public class DeviceBaseController {
 	}
 
 	@DeleteMapping("/tags")
-	public void deleteTag(@PathVariable Integer deviceId, @RequestBody Integer tagId,
+	public void removeTag(@PathVariable Integer deviceId, @RequestBody Integer tagId,
 						  @AuthenticationPrincipal UserDetails currentUser) {
-		deviceStatusService.deleteTag(deviceId, tagId, currentUser);
+		deviceStatusService.removeTag(deviceId, tagId, currentUser);
 	}
 }

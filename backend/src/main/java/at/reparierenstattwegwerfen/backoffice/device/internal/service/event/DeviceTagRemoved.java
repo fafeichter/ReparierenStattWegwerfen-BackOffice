@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service.event;
 
+import at.reparierenstattwegwerfen.backoffice.device.AbstractDeviceActivityEvent;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,11 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceTagRemoved extends AbstractDeviceActivityEvent {
 
-	final Integer oldTagId;
+	final Integer oldDeviceTagId;
 
 	@Builder
-	public DeviceTagRemoved(Object source, UserDetails actor, Integer deviceId, Integer oldTagId) {
+	public DeviceTagRemoved(Object source, UserDetails actor, Integer deviceId, Integer oldDeviceTagId) {
 		super(source, deviceId, actor);
-		this.oldTagId = oldTagId;
+		this.oldDeviceTagId = oldDeviceTagId;
 	}
 }

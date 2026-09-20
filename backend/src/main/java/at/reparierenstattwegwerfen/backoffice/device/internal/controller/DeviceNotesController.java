@@ -3,6 +3,8 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.controller;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceNoteDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceNoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,8 @@ public class DeviceNotesController {
 	}
 
 	@PostMapping("/")
-	public void addDeviceNote(@PathVariable Integer deviceId, @RequestBody String text) {
-		deviceNoteService.add(deviceId, text);
+	public void addDeviceNote(@PathVariable Integer deviceId, @RequestBody String text,
+							  @AuthenticationPrincipal UserDetails currentUser) {
+		deviceNoteService.add(deviceId, text, currentUser);
 	}
 }

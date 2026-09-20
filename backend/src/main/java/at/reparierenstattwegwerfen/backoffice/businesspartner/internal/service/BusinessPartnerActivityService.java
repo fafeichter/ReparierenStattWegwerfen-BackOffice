@@ -1,7 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerSetAsBuyer;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerSetAsSeller;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.controller.BusinessPartnerActivityDto;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartnerActivity;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartnerAddress;
@@ -11,11 +9,13 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persisten
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerRepository;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service.event.BusinessPartnerAddressChanged;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service.event.BusinessPartnerCreated;
+import at.reparierenstattwegwerfen.backoffice.device.DeviceBusinessPartnerSetAsBuyer;
+import at.reparierenstattwegwerfen.backoffice.device.DeviceBusinessPartnerSetAsSeller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.List;
 
@@ -32,8 +32,7 @@ public class BusinessPartnerActivityService {
 	private final BusinessPartnerAddressRepository businessPartnerAddressRepository;
 	private final BusinessPartnerRepository businessPartnerRepository;
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(BusinessPartnerCreated event) {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getTimestamp(), event.getActor());
 		businessPartnerActivity.setName("#" + event.getBusinessPartnerId());
@@ -43,8 +42,7 @@ public class BusinessPartnerActivityService {
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(BusinessPartnerAddressChanged event) {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getTimestamp(), event.getActor());
 		BusinessPartnerAddress address = businessPartnerAddressRepository.getReferenceById(event.getBusinessPartnerAddressId());
@@ -55,23 +53,21 @@ public class BusinessPartnerActivityService {
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}
 
-	@EventListener
-	@Transactional
-	public void on(BusinessPartnerSetAsSeller event) {
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBusinessPartnerSetAsSeller event) {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getTimestamp(), event.getActor());
 		businessPartnerActivity.setName("#" + event.getDeviceId());
-		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getReferenceById(event.getBusinessPartnerId()));
+		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getReferenceById(event.getSellerBusinessPartnerId()));
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getReferenceById(3));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}
 
-	@EventListener
-	@Transactional
-	public void on(BusinessPartnerSetAsBuyer event) {
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBusinessPartnerSetAsBuyer event) {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getTimestamp(), event.getActor());
 		businessPartnerActivity.setName("#" + event.getDeviceId());
-		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getReferenceById(event.getBusinessPartnerId()));
+		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getReferenceById(event.getBuyerBusinessPartnerId()));
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getReferenceById(4));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);

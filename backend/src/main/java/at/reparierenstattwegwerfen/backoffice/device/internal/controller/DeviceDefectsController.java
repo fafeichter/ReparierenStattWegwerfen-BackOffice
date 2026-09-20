@@ -5,6 +5,8 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceDefe
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.DeviceDefectsDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,8 +25,9 @@ public class DeviceDefectsController {
 	}
 
 	@PostMapping("/")
-	public void updateDefects(@PathVariable Integer deviceId, @Valid @RequestBody DeviceDefectsDto deviceDefectsDto) {
-		defectDetailsService.update(deviceId, deviceDefectsDto);
+	public void updateDefects(@PathVariable Integer deviceId, @Valid @RequestBody DeviceDefectsDto deviceDefectsDto,
+							  @AuthenticationPrincipal UserDetails currentUser) {
+		defectDetailsService.update(deviceId, deviceDefectsDto, currentUser);
 	}
 
 	@PostMapping("/confirm-original")

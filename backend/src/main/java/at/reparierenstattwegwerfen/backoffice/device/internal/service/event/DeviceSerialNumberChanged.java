@@ -9,10 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceCreated extends AbstractDeviceActivityEvent {
+public class DeviceSerialNumberChanged extends AbstractDeviceActivityEvent {
+
+	final String serialNumber;
 
 	@Builder
-	public DeviceCreated(Object source, UserDetails actor, Integer deviceId) {
+	public DeviceSerialNumberChanged(Object source, UserDetails actor, Integer deviceId, String serialNumber) {
 		super(source, deviceId, actor);
+		this.serialNumber = serialNumber;
 	}
 }

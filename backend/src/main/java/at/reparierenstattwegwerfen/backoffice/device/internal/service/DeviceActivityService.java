@@ -5,9 +5,9 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.reposi
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.List;
 
@@ -27,8 +27,7 @@ public class DeviceActivityService {
 	private final DeviceGradeRepository deviceGradeRepository;
 	private final DeviceTagRepository deviceTagRepository;
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceCreated event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName("#" + event.getDeviceId());
@@ -38,8 +37,7 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceStatusChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
 		deviceActivity.setName(deviceStatusRepository.getReferenceById(event.getNewStatusId()).getName());
@@ -49,44 +47,55 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceBatteryStatusChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
-		deviceActivity.setName(deviceBatteryStatusRepository.getReferenceById(event.getNewBatteryStatusId()).getName());
+		Integer newBatteryStatusId = event.getNewBatteryStatusId();
+		String activityValue;
+		if (newBatteryStatusId != null) {
+			activityValue = deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId).getName();
+		} else {
+			activityValue = "-";
+		}
+		deviceActivity.setName(activityValue);
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(3));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceGradeChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
-		deviceActivity.setName(deviceGradeRepository.getReferenceById(event.getNewGradeId()).getName());
+
+		Integer newGradeId = event.getNewGradeId();
+		String activityValue;
+		if (newGradeId != null) {
+			activityValue = deviceGradeRepository.getReferenceById(newGradeId).getName();
+		} else {
+			activityValue = "-";
+		}
+		deviceActivity.setName(activityValue);
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(4));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceTagAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
-		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getNewTagId()).getName());
+		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getNewDeviceTagId()).getName());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(5));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceTagRemoved event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
-		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getOldTagId()).getName());
+		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getOldDeviceTagId()).getName());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(6));
 

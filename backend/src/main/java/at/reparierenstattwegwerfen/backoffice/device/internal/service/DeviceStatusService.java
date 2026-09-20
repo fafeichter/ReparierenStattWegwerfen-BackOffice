@@ -1,21 +1,24 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTag;
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTags;
+import at.reparierenstattwegwerfen.backoffice.device.AbstractDeviceActivityEvent;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.*;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -35,7 +38,7 @@ public class DeviceStatusService {
 	public List<NamedIdDto> getAllNonSystemStatus() {
 		return deviceStatusRepository.getAllNonSystemStatus()
 			.stream()
-			.map(deviceStatus -> NamedIdDto.from(deviceStatus))
+			.map(NamedIdDto::from)
 			.toList();
 	}
 
@@ -43,111 +46,170 @@ public class DeviceStatusService {
 	public void updateStatusOfDevice(Integer deviceId, Integer newStatusId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
 
-		device.setStatus(deviceStatusRepository.getReferenceById(newStatusId));
-		deviceRepository.save(device);
+		if (!newStatusId.equals(device.getStatus().getId())) {
+			device.setStatus(deviceStatusRepository.getReferenceById(newStatusId));
+			deviceRepository.save(device);
 
-		DeviceStatusChanged deviceStatusChangedEvent = DeviceStatusChanged.builder()
-			.source(this)
-			.actor(actor)
-			.deviceId(deviceId)
-			.newStatusId(newStatusId)
-			.build();
-		events.publishEvent(deviceStatusChangedEvent);
+			DeviceStatusChanged deviceStatusChangedEvent = DeviceStatusChanged.builder()
+				.source(this)
+				.actor(actor)
+				.deviceId(deviceId)
+				.newStatusId(newStatusId)
+				.build();
+			events.publishEvent(deviceStatusChangedEvent);
+		}
 	}
 
-	@EventListener
-	@Transactional
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceStatusChanged event) {
 		Device device = deviceRepository.getReferenceById(event.getDeviceId());
-		if (event.getNewStatusId() == 6) {
-			device.setSellingDate(LocalDate.now());
+
+		Integer newStatusId = event.getNewStatusId();
+		if (!Objects.equals(newStatusId, device.getStatus().getId()) && newStatusId == 6) {
+			LocalDate sellingDate = LocalDate.now();
+			device.setSellingDate(sellingDate);
 			deviceRepository.save(device);
+
+			DeviceSellingDateChanged sellingDateChangedEvent = DeviceSellingDateChanged.builder()
+				.source(this)
+				.actor(SystemUser.get())
+				.deviceId(event.getDeviceId())
+				.sellingDate(sellingDate)
+				.build();
+			events.publishEvent(sellingDateChangedEvent);
 		}
 	}
 
 	@Transactional
 	public void updateSerialNumber(Integer deviceId, String newSerialNumber, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		device.setSerialNumber(newSerialNumber);
 
-		deviceRepository.save(device);
+		if (!Objects.equals(newSerialNumber, device.getSerialNumber())) {
+			device.setSerialNumber(newSerialNumber);
+			deviceRepository.save(device);
+
+			DeviceSerialNumberChanged serialNumberChangedEvent = DeviceSerialNumberChanged.builder()
+				.source(this)
+				.actor(actor)
+				.deviceId(deviceId)
+				.serialNumber(newSerialNumber)
+				.build();
+			events.publishEvent(serialNumberChangedEvent);
+		}
 	}
 
 	@Transactional
 	public void updateBattery(Integer deviceId, BatteryHealthDto newDeviceBaseBattery, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		device.setBatteryMaximumCapacity(newDeviceBaseBattery.getMaximumCapacity());
-		device.setBatteryCycleCount(newDeviceBaseBattery.getCycleCount());
 
-		if (newDeviceBaseBattery.determineStatusId() != null && device.getBatteryStatus() == null) {
-			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newDeviceBaseBattery.determineStatusId()));
+		if (!Objects.equals(newDeviceBaseBattery.getCycleCount(), device.getBatteryCycleCount()) ||
+			!Objects.equals(newDeviceBaseBattery.getMaximumCapacity(), device.getBatteryMaximumCapacity())) {
 
-			DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()
-				.source(this).actor(SystemUser.get())
+			device.setBatteryMaximumCapacity(newDeviceBaseBattery.getMaximumCapacity());
+			device.setBatteryCycleCount(newDeviceBaseBattery.getCycleCount());
+
+			boolean batteryStatusAutomaticallySetOrUpdated =
+				(newDeviceBaseBattery.determineStatusId() != null && device.getBatteryStatus() == null) ||
+					(newDeviceBaseBattery.determineStatusId() == null && device.getBatteryStatus() != null) ||
+					(!Objects.equals(newDeviceBaseBattery.determineStatusId(), device.getBatteryStatus().getId()));
+
+			if (batteryStatusAutomaticallySetOrUpdated) {
+				device.setBatteryStatus(newDeviceBaseBattery.determineStatusId() != null ?
+					deviceBatteryStatusRepository.getReferenceById(newDeviceBaseBattery.determineStatusId()) : null);
+			}
+
+			deviceRepository.save(device);
+
+			DeviceBatteryHealthChanged batteryHealthChangedEvent = DeviceBatteryHealthChanged.builder()
+				.source(this)
+				.actor(actor)
 				.deviceId(deviceId)
-				.newBatteryStatusId(newDeviceBaseBattery.determineStatusId())
+				.maximumCapacity(newDeviceBaseBattery.getMaximumCapacity())
+				.cycleCount(newDeviceBaseBattery.getCycleCount())
 				.build();
-			events.publishEvent(deviceBatteryStatusChangedEvent);
-		}
+			events.publishEvent(batteryHealthChangedEvent);
 
-		deviceRepository.save(device);
+			if (batteryStatusAutomaticallySetOrUpdated) {
+				DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()
+					.source(this)
+					.actor(SystemUser.get())
+					.deviceId(deviceId)
+					.newBatteryStatusId(newDeviceBaseBattery.determineStatusId())
+					.build();
+				events.publishEvent(deviceBatteryStatusChangedEvent);
+			}
+		}
 	}
 
 	@Transactional
 	public void updateBatteryStatus(Integer deviceId, Integer newBatteryStatusId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId));
-		deviceRepository.save(device);
 
-		DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()
-			.source(this).actor(actor)
-			.deviceId(deviceId)
-			.newBatteryStatusId(newBatteryStatusId)
-			.build();
-		events.publishEvent(deviceBatteryStatusChangedEvent);
+		Integer currentBatteryStatusId = Optional.ofNullable(device.getBatteryStatus())
+			.map(DeviceBatteryStatus::getId)
+			.orElse(null);
+
+		if (!Objects.equals(currentBatteryStatusId, newBatteryStatusId)) {
+			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId));
+			deviceRepository.save(device);
+
+			DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()
+				.source(this).actor(actor)
+				.deviceId(deviceId)
+				.newBatteryStatusId(newBatteryStatusId)
+				.build();
+			events.publishEvent(deviceBatteryStatusChangedEvent);
+		}
 	}
 
 	@Transactional
 	public void updateGrade(Integer deviceId, Integer newGradeId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		device.setGrade(deviceGradeRepository.getReferenceById(newGradeId));
-		deviceRepository.save(device);
 
-		DeviceGradeChanged deviceGradeChangedEvent = DeviceGradeChanged.builder()
-			.source(this)
-			.actor(actor)
-			.deviceId(deviceId)
-			.newGradeId(newGradeId)
-			.build();
-		events.publishEvent(deviceGradeChangedEvent);
+		Integer currentGradeId = Optional.ofNullable(device.getGrade())
+			.map(DeviceGrade::getId)
+			.orElse(null);
+
+		if (!Objects.equals(currentGradeId, newGradeId)) {
+			device.setGrade(deviceGradeRepository.getReferenceById(newGradeId));
+			deviceRepository.save(device);
+
+			DeviceGradeChanged deviceGradeChangedEvent = DeviceGradeChanged.builder()
+				.source(this)
+				.actor(actor)
+				.deviceId(deviceId)
+				.newGradeId(newGradeId)
+				.build();
+			events.publishEvent(deviceGradeChangedEvent);
+		}
 	}
 
 	@Transactional
-	public void addTag(Integer deviceId, Integer newTagId, UserDetails actor) {
+	public void addTag(Integer deviceId, Integer newDeviceTagId, UserDetails actor) {
 		DeviceTags deviceTags = new DeviceTags();
 		deviceTags.setDevice(deviceRepository.getReferenceById(deviceId));
-		deviceTags.setDeviceTag(deviceTagRepository.getReferenceById(newTagId));
+		deviceTags.setDeviceTag(deviceTagRepository.getReferenceById(newDeviceTagId));
 		deviceTagsRepository.save(deviceTags);
 
 		DeviceTagAdded deviceTagAddedEvent = DeviceTagAdded.builder()
 			.source(this)
 			.actor(actor)
 			.deviceId(deviceId)
-			.newTagId(newTagId)
+			.newDeviceTagId(newDeviceTagId)
 			.build();
 		events.publishEvent(deviceTagAddedEvent);
 	}
 
 	@Transactional
-	public void deleteTag(Integer deviceId, Integer oldTagId, UserDetails actor) {
+	public void removeTag(Integer deviceId, Integer oldDeviceTagId, UserDetails actor) {
 		deviceTagsRepository.deleteByDeviceAndDeviceTag(deviceRepository.getReferenceById(deviceId),
-			deviceTagRepository.getReferenceById(oldTagId));
+			deviceTagRepository.getReferenceById(oldDeviceTagId));
 
 		DeviceTagRemoved deviceTagRemovedEvent = DeviceTagRemoved.builder()
 			.source(this)
 			.actor(actor)
 			.deviceId(deviceId)
-			.oldTagId(oldTagId)
+			.oldDeviceTagId(oldDeviceTagId)
 			.build();
 		events.publishEvent(deviceTagRemovedEvent);
 	}
@@ -161,19 +223,84 @@ public class DeviceStatusService {
 
 		return allTags.stream()
 			.filter(tag -> !alreadyUsedTagIds.contains(tag.getId()))
-			.map(a -> NamedIdDto.from(a))
+			.map(NamedIdDto::from)
 			.toList();
 	}
 
 	@Transactional
-	public void updateHardwareConfigOfDevice(Integer deviceId, UpdateHardwareConfigDto updateHardwareConfigDto) {
+	public void updateHardwareConfigOfDevice(Integer deviceId, UpdateHardwareConfigDto updateHardwareConfigDto, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
 
-		device.setModelAppleSiliconId(updateHardwareConfigDto.getModelAppleSiliconId());
-		device.setModelAppleSiliconUnifiedMemoryId(updateHardwareConfigDto.getModelAppleSiliconUnifiedMemoryId());
-		device.setModelStorageId(updateHardwareConfigDto.getModelStorageId());
-		device.setModelColorId(updateHardwareConfigDto.getModelColorId());
+		Integer newModelAppleSiliconId = updateHardwareConfigDto.getModelAppleSiliconId();
+		boolean updateModelAppleSilicon = !Objects.equals(newModelAppleSiliconId, device.getModelAppleSiliconId());
+		if (updateModelAppleSilicon) {
+			device.setModelAppleSiliconId(newModelAppleSiliconId);
+		}
 
-		deviceRepository.save(device);
+		Integer newModelAppleSiliconUnifiedMemoryId = updateHardwareConfigDto.getModelAppleSiliconUnifiedMemoryId();
+		boolean updateModelAppleSiliconUnifiedMemory =
+			!Objects.equals(newModelAppleSiliconUnifiedMemoryId, device.getModelAppleSiliconUnifiedMemoryId());
+		if (updateModelAppleSiliconUnifiedMemory) {
+			device.setModelAppleSiliconUnifiedMemoryId(newModelAppleSiliconUnifiedMemoryId);
+		}
+
+		Integer newModelStorageId = updateHardwareConfigDto.getModelStorageId();
+		boolean updateModelStorage = !Objects.equals(newModelStorageId, device.getModelStorageId());
+		if (updateModelStorage) {
+			device.setModelStorageId(newModelStorageId);
+		}
+
+		Integer newModelColorId = updateHardwareConfigDto.getModelColorId();
+		boolean updateModelColor = !Objects.equals(newModelColorId, device.getModelColorId());
+		if (updateModelColor) {
+			device.setModelColorId(newModelColorId);
+		}
+
+		if (updateModelAppleSilicon || updateModelAppleSiliconUnifiedMemory || updateModelStorage || updateModelColor) {
+			deviceRepository.save(device);
+
+			List<AbstractDeviceActivityEvent> deviceEvents = new ArrayList<>();
+			if (updateModelAppleSilicon) {
+				DeviceAppleSiliconChanged appleSiliconChanged = DeviceAppleSiliconChanged.builder()
+					.source(this)
+					.actor(actor)
+					.deviceId(deviceId)
+					.modelAppleSiliconId(newModelAppleSiliconId)
+					.build();
+				deviceEvents.add(appleSiliconChanged);
+			}
+
+			if (updateModelAppleSiliconUnifiedMemory) {
+				DeviceUnifiedMemoryChanged unifiedMemoryChangedEvent = DeviceUnifiedMemoryChanged.builder()
+					.source(this)
+					.actor(actor)
+					.deviceId(deviceId)
+					.modelUnifiedMemoryId(newModelAppleSiliconUnifiedMemoryId)
+					.build();
+				deviceEvents.add(unifiedMemoryChangedEvent);
+			}
+
+			if (updateModelStorage) {
+				DeviceStorageChanged storageChangedEvent = DeviceStorageChanged.builder()
+					.source(this)
+					.actor(actor)
+					.deviceId(deviceId)
+					.modelStorageId(newModelStorageId)
+					.build();
+				deviceEvents.add(storageChangedEvent);
+			}
+
+			if (updateModelColor) {
+				DeviceColorChanged deviceColorChangedEvent = DeviceColorChanged.builder()
+					.source(this)
+					.actor(actor)
+					.deviceId(deviceId)
+					.modelColorId(newModelStorageId)
+					.build();
+				deviceEvents.add(deviceColorChangedEvent);
+			}
+
+			deviceEvents.forEach(events::publishEvent);
+		}
 	}
 }

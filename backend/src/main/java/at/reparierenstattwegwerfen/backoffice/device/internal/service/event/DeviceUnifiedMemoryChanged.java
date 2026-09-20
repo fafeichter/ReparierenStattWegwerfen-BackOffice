@@ -9,10 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Fabian Feichter
  */
 @Getter
-public class DeviceCreated extends AbstractDeviceActivityEvent {
+public class DeviceUnifiedMemoryChanged extends AbstractDeviceActivityEvent {
+
+	final Integer modelUnifiedMemoryId;
 
 	@Builder
-	public DeviceCreated(Object source, UserDetails actor, Integer deviceId) {
+	public DeviceUnifiedMemoryChanged(Object source, UserDetails actor, Integer deviceId, Integer modelUnifiedMemoryId) {
 		super(source, deviceId, actor);
+		this.modelUnifiedMemoryId = modelUnifiedMemoryId;
 	}
 }

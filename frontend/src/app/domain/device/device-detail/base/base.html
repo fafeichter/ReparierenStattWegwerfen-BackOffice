@@ -204,7 +204,7 @@
     @for (tag of deviceBase()?.tags; track tag.id) {
       <clr-label>
         {{ tag.name }}
-        <cds-icon (click)="deleteTag(tag.id)" shape="close"/>
+        <cds-icon (click)="removeTag(tag.id)" shape="close"/>
       </clr-label>
     } @empty {
       -
