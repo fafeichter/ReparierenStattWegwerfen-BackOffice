@@ -1,6 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.device.AbstractDeviceActivityEvent;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.*;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;

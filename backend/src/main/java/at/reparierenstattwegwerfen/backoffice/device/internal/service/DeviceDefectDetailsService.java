@@ -1,9 +1,9 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.device.AbstractDeviceActivityEvent;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBaseDetailsRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.AbstractDeviceActivityEvent;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceDiagnosedDefectChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceReportedDefectChanged;
 import lombok.RequiredArgsConstructor;

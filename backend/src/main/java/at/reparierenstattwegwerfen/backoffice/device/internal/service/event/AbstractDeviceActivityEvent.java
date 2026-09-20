@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device;
+package at.reparierenstattwegwerfen.backoffice.device.internal.service.event;
 
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;

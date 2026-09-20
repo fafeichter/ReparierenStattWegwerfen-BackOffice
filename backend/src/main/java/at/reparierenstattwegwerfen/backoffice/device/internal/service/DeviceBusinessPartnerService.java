@@ -2,9 +2,9 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerDto;
-import at.reparierenstattwegwerfen.backoffice.device.DeviceBusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;

@@ -42,7 +42,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OpenApiSpecsGenerator {
 	private static final List<String> MODULES_TO_IGNORE = List.of(
 		"application",
-		"shared"
+		"shared",
+		"event"
 	);
 
 	@Autowired

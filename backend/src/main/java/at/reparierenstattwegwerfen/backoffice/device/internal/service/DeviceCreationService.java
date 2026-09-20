@@ -2,16 +2,16 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerPlaceholderDto;
-import at.reparierenstattwegwerfen.backoffice.device.AbstractDeviceActivityEvent;
-import at.reparierenstattwegwerfen.backoffice.device.DeviceBusinessPartnerSetAsSeller;
 import at.reparierenstattwegwerfen.backoffice.device.DeviceBuyingService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -37,6 +37,7 @@ public class DeviceCreationService implements DeviceBuyingService {
 	public Integer createDevice(CreateNewDeviceDto newDevice, UserDetails actor) {
 		Device device = new Device();
 		List<AbstractDeviceActivityEvent> deviceEvents = new ArrayList<>();
+		List<ApplicationEvent> businessPartnerEvents = new ArrayList<>();
 		UserDetails system = SystemUser.get();
 
 		device.setBuyingDate(newDevice.getBuyingDate());
@@ -195,9 +196,10 @@ public class DeviceCreationService implements DeviceBuyingService {
 			.sellerBusinessPartnerId(sellerBusinessPartnerId)
 			.deviceId(newDeviceId)
 			.build();
-		deviceEvents.add(businessPartnerSetAsSellerEvent);
+		businessPartnerEvents.add(businessPartnerSetAsSellerEvent);
 
 		deviceEvents.forEach(events::publishEvent);
+		businessPartnerEvents.forEach(events::publishEvent);
 
 		return newDeviceId;
 	}

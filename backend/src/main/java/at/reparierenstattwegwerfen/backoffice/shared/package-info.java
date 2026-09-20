@@ -1,7 +1,7 @@
 /**
  * @author Fabian Feichter
  */
-@ApplicationModule
+@ApplicationModule(displayName = "Shared", allowedDependencies = {})
 package at.reparierenstattwegwerfen.backoffice.shared;
 
 import org.springframework.modulith.ApplicationModule;

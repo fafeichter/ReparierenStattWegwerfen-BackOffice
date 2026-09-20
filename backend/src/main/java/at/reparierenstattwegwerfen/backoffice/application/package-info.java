@@ -1,7 +1,7 @@
 /**
  * @author Fabian Feichter
  */
-@ApplicationModule
+@ApplicationModule(displayName = "Appliacation", allowedDependencies = {})
 package at.reparierenstattwegwerfen.backoffice.application;
 
 import org.springframework.modulith.ApplicationModule;
