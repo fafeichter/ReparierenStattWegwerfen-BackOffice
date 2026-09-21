@@ -207,9 +207,9 @@ export class Base implements OnInit {
     this.api.updateHardwareConfig(this.deviceId(), updateHardwareConfig).subscribe(() => {
       this.hardwareConfigEditModeActive.set(false);
 
-      this.deviceBase.update((currentValue) => {
+      this.deviceBase.update((deviceBase) => {
         return {
-          ...currentValue!,
+          ...deviceBase!,
           appleSilicon: this.modelAppleSilicons().find((appleSilicon) => {
             return appleSilicon.id == updateHardwareConfig.modelAppleSiliconId;
           })!,
@@ -243,9 +243,9 @@ export class Base implements OnInit {
       .updateStatus(this.deviceId(), this.statusForm.controls.newStatusId.value!)
       .subscribe(() => {
         this.statusEditModeActive.set(false);
-        this.deviceBase.update((currentValue) => {
+        this.deviceBase.update((deviceBase) => {
           return {
-            ...currentValue!,
+            ...deviceBase!,
             status: this.deviceStatus().find(
               (deviceStatus) => deviceStatus.id === this.statusForm.controls.newStatusId.value!,
             )!,
@@ -270,9 +270,9 @@ export class Base implements OnInit {
       .updateSerialNumber(this.deviceId(), this.serialNumberForm.controls.newSerialNumber.value!)
       .subscribe(() => {
         this.serialNumberEditModeActive.set(false);
-        this.deviceBase.update((currentValue) => {
+        this.deviceBase.update((deviceBase) => {
           return {
-            ...currentValue!,
+            ...deviceBase!,
             serialNumber: this.serialNumberForm.controls.newSerialNumber.value!,
           };
         });
@@ -319,9 +319,9 @@ export class Base implements OnInit {
       .subscribe(() => {
         this.batteryStatusEditModeActive.set(false);
 
-        this.deviceBase.update((currentValue) => {
+        this.deviceBase.update((deviceBase) => {
           return {
-            ...currentValue!,
+            ...deviceBase!,
             batteryStatus: this.deviceBatteryStatus().find((deviceBatteryStatus) => {
               return (
                 deviceBatteryStatus.id == this.batteryStatusForm.controls.newBatteryStatusId.value!
@@ -349,9 +349,9 @@ export class Base implements OnInit {
       .subscribe(() => {
         this.gradeEditModeActive.set(false);
 
-        this.deviceBase.update((currentValue) => {
+        this.deviceBase.update((deviceBase) => {
           return {
-            ...currentValue!,
+            ...deviceBase!,
             grade: this.deviceGrades().find((deviceGrade) => {
               return deviceGrade.id == this.gradeForm.controls.newGradeId.value!;
             })!,
@@ -375,7 +375,7 @@ export class Base implements OnInit {
     this.api.addTag(this.deviceId(), this.tagForm.controls.newTagId.value!).subscribe(() => {
       this.tagEditModeActive.set(false);
 
-      this.deviceBase.update((currentValue) => {
+      this.deviceBase.update((deviceBase) => {
         let addedTag: NamedIdDto = this.deviceTags().find((deviceTag) => {
           return deviceTag.id == this.tagForm.controls.newTagId.value!;
         })!;
@@ -383,7 +383,7 @@ export class Base implements OnInit {
         this.deviceBase()?.tags!.push(addedTag);
 
         return {
-          ...currentValue!,
+          ...deviceBase!,
           tags: this.deviceBase()?.tags,
         };
       });
@@ -393,13 +393,13 @@ export class Base implements OnInit {
   removeTag(tagId: number) {
     if (confirm('Do you really want to remove this tag?')) {
       this.api.removeTag(this.deviceId(), tagId).subscribe(() => {
-        this.deviceBase.update((currentValue) => {
+        this.deviceBase.update((deviceBase) => {
           this.deviceBase()!.tags = this.deviceBase()!.tags!.filter(
             (deviceTag) => deviceTag.id !== tagId,
           );
 
           return {
-            ...currentValue!,
+            ...deviceBase!,
             tags: this.deviceBase()?.tags,
           };
         });

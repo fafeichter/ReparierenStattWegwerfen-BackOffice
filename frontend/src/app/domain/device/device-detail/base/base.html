@@ -12,7 +12,7 @@
     <ul class="list">
       <li>Model:
         <a [routerLink]="['/models', deviceBase()?.model?.id]">{{ deviceBase()?.modelNumber }}</a></li>
-      <li>Technical Specs: <a [href]=" deviceBase()?.technicalSpecsUrl">
+      <li>Technical Specs: <a [href]=" deviceBase()?.technicalSpecsUrl" target="_blank">
         {{ deviceBase()?.technicalSpecsUrl }}
         <cds-icon role="img" shape="pop-out"/>
       </a></li>

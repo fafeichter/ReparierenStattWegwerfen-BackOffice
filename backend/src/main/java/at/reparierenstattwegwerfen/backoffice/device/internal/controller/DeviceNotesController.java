@@ -29,4 +29,11 @@ public class DeviceNotesController {
 							  @AuthenticationPrincipal UserDetails currentUser) {
 		deviceNoteService.add(deviceId, text, currentUser);
 	}
+
+	@DeleteMapping("/{deviceNoteId}")
+	public void deleteDeviceNote(@PathVariable Integer deviceId,
+								 @PathVariable Integer deviceNoteId,
+								 @AuthenticationPrincipal UserDetails currentUser) {
+		deviceNoteService.delete(deviceId, deviceNoteId, currentUser);
+	}
 }

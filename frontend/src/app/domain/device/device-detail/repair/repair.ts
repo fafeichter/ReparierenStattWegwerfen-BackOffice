@@ -95,9 +95,9 @@ export class Repair implements OnInit {
 
   confirmOriginalDefect() {
     this.defectsApi.confirmOriginalDefect(this.deviceId()).subscribe(() => {
-      this.deviceDefects.update((currentValue) => {
+      this.deviceDefects.update((deviceDefects) => {
         return {
-          ...currentValue!,
+          ...deviceDefects!,
           diagnosedDefect: 'WIE ANGEGEBEN',
         };
       });

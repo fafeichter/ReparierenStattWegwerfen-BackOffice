@@ -85,7 +85,7 @@ export class Selling implements OnInit {
     this.accessoriesApi
       .updateSellingAccessories(this.deviceId(), deviceAccessories)
       .subscribe((data) => {
-        this.deviceAccessories.update((currentValue) => {
+        this.deviceAccessories.update(() => {
           this.accessoriesForm.reset();
           this.isSubmitting.set(false);
           this.modalOpened.set(false);

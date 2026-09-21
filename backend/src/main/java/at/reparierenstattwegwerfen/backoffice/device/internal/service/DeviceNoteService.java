@@ -3,6 +3,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceNote;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceNoteRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceNoteAdded;
+import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceNoteDeleted;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,7 +48,19 @@ public class DeviceNoteService {
 			.deviceId(deviceId)
 			.newNoteId(newNoteId)
 			.build();
-
 		events.publishEvent(noteAddedEvent);
+	}
+
+	@Transactional
+	public void delete(Integer deviceId, Integer oldDeviceNoteId, UserDetails actor) {
+		deviceNoteRepository.deleteById(deviceId);
+
+		DeviceNoteDeleted noteDeletedEvent = DeviceNoteDeleted.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.oldNoteId(oldDeviceNoteId)
+			.build();
+		events.publishEvent(noteDeletedEvent);
 	}
 }

@@ -47,14 +47,24 @@ export class Notes implements OnInit {
     this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => this.deviceNotes.set(data));
   }
 
-  protected addNote() {
+  addNote() {
     this.notesApi
       .addDeviceNote(this.deviceId(), this.form.controls.text.value || '')
-      .subscribe((data) => {
+      .subscribe(() => {
         this.modalOpened.set(false);
         this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => {
           this.deviceNotes.set(data);
         });
       });
+  }
+
+  deleteNote(oldDeviceNoteId: number) {
+    if (confirm('Do you really want to remove this note?')) {
+      this.notesApi.deleteDeviceNote(this.deviceId(), oldDeviceNoteId).subscribe(() => {
+        this.deviceNotes.update((deviceNotes) => {
+          return deviceNotes.filter((note) => note.noteId !== oldDeviceNoteId);
+        });
+      });
+    }
   }
 }

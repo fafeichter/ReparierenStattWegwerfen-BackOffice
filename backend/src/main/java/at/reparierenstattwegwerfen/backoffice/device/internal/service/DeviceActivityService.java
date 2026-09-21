@@ -207,6 +207,16 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceNoteDeleted event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		deviceActivity.setName(deviceNoteRepository.getReferenceById(event.getOldNoteId()).getName());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(17));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
 	public List<DeviceActivityDto> getActivitiesForDevice(Integer deviceId) {
 		return deviceActivityRepository.getByIdWithRelations(deviceId).stream().map(activity ->
 				DeviceActivityDto.builder()
