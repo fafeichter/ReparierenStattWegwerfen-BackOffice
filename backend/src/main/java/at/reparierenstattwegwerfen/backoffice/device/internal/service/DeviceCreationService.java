@@ -8,7 +8,6 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.reposi
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
-import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEvent;

@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 /**
  * @author Fabian Feichter
@@ -43,10 +41,8 @@ public class DeviceActivity implements NamedId {
 	@Column(name = "date")
 	private LocalDateTime date;
 
-	public DeviceActivity(long date, UserDetails actor) {
-		this.date = Instant.ofEpochMilli(date)
-			.atZone(ZoneId.systemDefault())
-			.toLocalDateTime();
+	public DeviceActivity(LocalDateTime date, UserDetails actor) {
+		this.date = date;
 		this.actor = actor.getUsername();
 	}
 }
