@@ -1,8 +1,12 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.*;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceBatteryStatus;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceGrade;
+import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceTags;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
+import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +37,7 @@ public class DeviceStatusService {
 	private final DeviceTagRepository deviceTagRepository;
 	private final DeviceTagsRepository deviceTagsRepository;
 	private final ApplicationEventPublisher events;
+	private final ModelDetailsService modelDetailsService;
 
 	public List<NamedIdDto> getAllNonSystemStatus() {
 		return deviceStatusRepository.getAllNonSystemStatus()
@@ -213,15 +218,12 @@ public class DeviceStatusService {
 		events.publishEvent(deviceTagRemovedEvent);
 	}
 
-	public List<NamedIdDto> getAvailableTags(Integer deviceId) {
-		List<DeviceTag> allTags = deviceTagRepository.findAll();
-		List<Integer> alreadyUsedTagIds = deviceTagRepository.getTagsForDevice(deviceId)
-			.stream()
-			.map(DeviceTag::getId)
-			.toList();
+	public List<NamedIdDto> getAvailableTagsForDevice(Integer deviceId) {
+		Integer deviceModelId = deviceRepository.getReferenceById(deviceId).getModelId();
+		Integer deviceModelSeriesId = modelDetailsService.getModelSeries(deviceModelId).getId();
 
-		return allTags.stream()
-			.filter(tag -> !alreadyUsedTagIds.contains(tag.getId()))
+		return deviceTagRepository.getAvailableTagsForDevice(deviceId, deviceModelSeriesId)
+			.stream()
 			.map(NamedIdDto::from)
 			.toList();
 	}

@@ -20,4 +20,6 @@ public interface ModelDetailsService {
 	String getTechnicalSpecsUrl(Integer modelId);
 
 	String getModelNumber(Integer modelId);
+
+	NamedIdDto getModelSeries(Integer modelId);
 }

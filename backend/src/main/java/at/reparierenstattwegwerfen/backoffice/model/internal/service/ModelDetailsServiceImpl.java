@@ -54,4 +54,9 @@ public class ModelDetailsServiceImpl implements ModelDetailsService {
 	public String getModelNumber(Integer modelId) {
 		return modelRepository.getModel(modelId).getModelNumber();
 	}
+
+	@Override
+	public NamedIdDto getModelSeries(Integer modelId) {
+		return NamedIdDto.from(modelRepository.getModel(modelId).getModelSeries());
+	}
 }

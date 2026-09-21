@@ -65,7 +65,7 @@ public class DeviceBaseController {
 
 	@PostMapping("/available-tags")
 	public List<NamedIdDto> getAvailableTags(@PathVariable Integer deviceId) {
-		return deviceStatusService.getAvailableTags(deviceId);
+		return deviceStatusService.getAvailableTagsForDevice(deviceId);
 	}
 
 	@PostMapping("/tags")

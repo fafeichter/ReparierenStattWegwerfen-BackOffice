@@ -214,6 +214,19 @@ CREATE TABLE device_tag
     UNIQUE KEY uq_device_tags_sort (sort_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE device_tag_available_model_series
+(
+    device_tag_available_model_series_id int          NOT NULL AUTO_INCREMENT,
+    device_tag_id                        int          NOT NULL,
+    model_series_id                      int          NOT NULL,
+    created_at                           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (device_tag_available_model_series_id),
+    UNIQUE KEY uq_device_tag_model_series (device_tag_id, model_series_id),
+    FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id) ON DELETE CASCADE,
+    FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE device_tags
 (
     device_tags_id int AUTO_INCREMENT,
