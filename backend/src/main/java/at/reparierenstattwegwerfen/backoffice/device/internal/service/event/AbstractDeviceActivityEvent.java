@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.service.event;
 
-import at.reparierenstattwegwerfen.backoffice.shared.PreciseTimestampedApplicationEvent;
+import at.reparierenstattwegwerfen.backoffice.event.PreciseTimestampedApplicationEvent;
 import lombok.Getter;
 import org.springframework.security.core.userdetails.UserDetails;
 

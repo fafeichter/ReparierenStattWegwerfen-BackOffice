@@ -9,8 +9,8 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persisten
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerRepository;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service.event.BusinessPartnerAddressChanged;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service.event.BusinessPartnerCreated;
-import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceBusinessPartnerSetAsBuyer;
-import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.DeviceBusinessPartnerSetAsSeller;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Service;
