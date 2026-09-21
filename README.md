@@ -54,6 +54,16 @@ The following domains have been identified:
 
 ---
 
+## 👨‍💻️ Development Setup
+
+Executing `generateDoc` to render the project's module diagrams requires Graphviz. You can install the dependency via Homebrew:
+
+```bash
+brew install graphviz
+```
+
+---
+
 ## 📄 License
 
 This project is licensed under the terms of the open-source license included in the repository.
