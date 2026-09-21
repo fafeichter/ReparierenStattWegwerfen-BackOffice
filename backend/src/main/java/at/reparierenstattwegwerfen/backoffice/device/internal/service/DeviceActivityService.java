@@ -3,6 +3,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.DeviceActivity;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.*;
 import at.reparierenstattwegwerfen.backoffice.device.internal.service.event.*;
+import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.List;
+
+import static java.time.format.DateTimeFormatter.ofPattern;
 
 /**
  * @author Fabian Feichter
@@ -26,6 +29,8 @@ public class DeviceActivityService {
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final DeviceGradeRepository deviceGradeRepository;
 	private final DeviceTagRepository deviceTagRepository;
+	private final DeviceNoteRepository deviceNoteRepository;
+	private final ModelDetailsService modelDetailsService;
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceCreated event) {
@@ -101,6 +106,107 @@ public class DeviceActivityService {
 
 		deviceActivityRepository.save(deviceActivity);
 	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceAppleSiliconChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(modelDetailsService.getAppleSilicon(event.getModelAppleSiliconId()).getName());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(7));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceUnifiedMemoryChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(modelDetailsService.getUnifiedMemory(event.getModelUnifiedMemoryId()).getName());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(8));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceStorageChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(modelDetailsService.getStorage(event.getModelStorageId()).getName());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(9));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceColorChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(modelDetailsService.getColor(event.getModelColorId()).getName());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(10));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceSerialNumberChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(event.getSerialNumber());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(11));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceReportedDefectChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(event.getReportedDefect());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(12));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceDiagnosedDefectChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(event.getDiagnosedDefect());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(13));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBuyingDateChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(event.getBuyingDate().format(ofPattern("dd.MM.yyyy")));
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(14));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceSellingDateChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(event.getSellingDate().format(ofPattern("dd.MM.yyyy")));
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(15));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceNoteAdded event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getTimestamp(), event.getActor());
+		deviceActivity.setName(deviceNoteRepository.getReferenceById(event.getNewNoteId()).getName());
+		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(16));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
 
 	public List<DeviceActivityDto> getActivitiesForDevice(Integer deviceId) {
 		return deviceActivityRepository.getByIdWithRelations(deviceId).stream().map(activity ->

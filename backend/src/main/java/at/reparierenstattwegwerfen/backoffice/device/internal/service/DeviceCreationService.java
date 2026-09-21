@@ -99,7 +99,7 @@ public class DeviceCreationService implements DeviceBuyingService {
 
 		);
 		Integer sellerBusinessPartnerId = businessPartnerService.createBusinessPartnerPlaceholder(
-			businessPartnerPlaceholder, actor);
+			businessPartnerPlaceholder, system);
 		device.setSellerBusinessPartnerId(sellerBusinessPartnerId);
 
 		Integer newDeviceId = deviceRepository.save(device).getId();
@@ -110,6 +110,14 @@ public class DeviceCreationService implements DeviceBuyingService {
 			.deviceId(newDeviceId)
 			.build();
 		deviceEvents.add(deviceCreatedEvent);
+
+		DeviceBuyingDateChanged deviceBuyingDateChangedEvent = DeviceBuyingDateChanged.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(newDeviceId)
+			.buyingDate(newDevice.getBuyingDate())
+			.build();
+		deviceEvents.add(deviceBuyingDateChangedEvent);
 
 		if (setAppleSilicon) {
 			DeviceAppleSiliconChanged appleSiliconChanged = DeviceAppleSiliconChanged.builder()

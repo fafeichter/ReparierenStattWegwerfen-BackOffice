@@ -294,7 +294,7 @@ public class DeviceStatusService {
 					.source(this)
 					.actor(actor)
 					.deviceId(deviceId)
-					.modelColorId(newModelStorageId)
+					.modelColorId(newModelColorId)
 					.build();
 				deviceEvents.add(deviceColorChangedEvent);
 			}

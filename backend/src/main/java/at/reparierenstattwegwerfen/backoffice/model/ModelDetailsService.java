@@ -7,17 +7,17 @@ import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
  */
 public interface ModelDetailsService {
 
-	NamedIdDto getModel(Integer deviceId);
+	NamedIdDto getModel(Integer modelId);
 
-	NamedIdDto getAppleSilicon(Integer deviceId);
+	NamedIdDto getAppleSilicon(Integer modelAppleSiliconId);
 
-	NamedIdDto getUnifiedMemory(Integer deviceId);
+	NamedIdDto getUnifiedMemory(Integer modelUnifiedMemoryId);
 
-	NamedIdDto getStorage(Integer deviceId);
+	NamedIdDto getStorage(Integer modelStorageId);
 
-	NamedIdDto getColor(Integer deviceId);
+	NamedIdDto getColor(Integer modelColorId);
 
-	String getTechnicalSpecsUrl(Integer deviceId);
+	String getTechnicalSpecsUrl(Integer modelId);
 
 	String getModelNumber(Integer modelId);
 }
