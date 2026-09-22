@@ -6,13 +6,16 @@
   <li>Commit: {{ buildInfo.commit }}</li>
 </ul>
 <hr>
+<ul>
+  <li>Locale: {{ currentLocale }}</li>
+</ul>
+<h5>User info</h5>
+
+<pre>{{ userData() | json }}</pre>
+
 <div class="mt-2">
   GitHub:
   <a href="https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice" target="_blank">
     https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice
   </a>
 </div>
-
-<h5>User info</h5>
-
-<pre>{{ userData() | json }}</pre>
