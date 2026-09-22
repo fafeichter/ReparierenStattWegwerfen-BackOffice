@@ -13,9 +13,12 @@
 <ul>
   <li>Angular version: {{ angularVersion }}</li>
 </ul>
-<h5>User info</h5>
 
+<h5>User info</h5>
 <pre>{{ userData() | json }}</pre>
+
+<h5>Environment</h5>
+<pre>{{ environment | json }}</pre>
 
 <div class="mt-2">
   GitHub:

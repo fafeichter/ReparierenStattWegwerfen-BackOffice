@@ -4,6 +4,7 @@ import { DatePipe, JsonPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { map } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-technical-details',
@@ -15,6 +16,7 @@ export class TechnicalDetails {
   buildInfo = buildInfo;
   readonly currentLocale = inject(LOCALE_ID);
   readonly angularVersion = VERSION.full;
+  protected readonly environment = environment;
   private readonly oidcSecurityService = inject(OidcSecurityService);
   readonly userData = toSignal(
     this.oidcSecurityService.userData$.pipe(map(({ userData }) => userData)),
