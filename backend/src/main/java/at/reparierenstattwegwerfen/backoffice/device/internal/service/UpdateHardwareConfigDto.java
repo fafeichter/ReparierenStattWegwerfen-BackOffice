@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * @author Fabian Feichter
+ * @since 09.07.2026
  */
 @Data
 public class UpdateHardwareConfigDto {

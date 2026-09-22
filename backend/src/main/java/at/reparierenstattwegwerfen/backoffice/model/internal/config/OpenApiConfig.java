@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Fabian Feichter
+ * @since 19.06.2026
  */
 @Configuration("modelOpenApiConfig")
 public class OpenApiConfig {

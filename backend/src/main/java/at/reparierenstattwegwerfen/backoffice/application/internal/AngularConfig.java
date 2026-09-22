@@ -12,6 +12,10 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import java.io.IOException;
 
+/**
+ * @author Fabian Feichter
+ * @since 07.06.2026
+ */
 @Configuration
 @Profile("prod")
 @Slf4j

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
+ * @since 19.09.2026
  */
 @Getter
 public class BusinessPartnerAddressChanged extends AbstractBusinessPartnerActivityEvent {

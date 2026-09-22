@@ -3,6 +3,10 @@ package at.reparierenstattwegwerfen.backoffice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.modulith.Modulith;
 
+/**
+ * @author Fabian Feichter
+ * @since 20.05.2026
+ */
 @Modulith(
 	systemName = "Reparieren Statt Wegwerfen - Backoffice",
 	sharedModules = {"shared"}

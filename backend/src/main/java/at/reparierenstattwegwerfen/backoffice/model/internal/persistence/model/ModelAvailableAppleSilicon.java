@@ -10,6 +10,7 @@ import java.util.Set;
 
 /**
  * @author Fabian Feichter
+ * @since 25.05.2026
  */
 @Entity
 @Table(name = "model_available_apple_silicon")

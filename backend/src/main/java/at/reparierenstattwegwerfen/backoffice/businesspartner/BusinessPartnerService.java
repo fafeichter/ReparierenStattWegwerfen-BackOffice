@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
+ * @since 13.07.2026
  */
 public interface BusinessPartnerService {
 

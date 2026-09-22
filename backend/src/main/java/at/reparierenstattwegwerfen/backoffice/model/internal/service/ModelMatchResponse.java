@@ -12,6 +12,7 @@ import java.util.Optional;
 
 /**
  * @author Fabian Feichter
+ * @since 20.06.2026
  */
 @Value
 @RequiredArgsConstructor

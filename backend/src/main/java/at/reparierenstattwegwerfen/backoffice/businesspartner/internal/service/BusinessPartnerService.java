@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 16.06.2026
  */
 @Service
 @RequiredArgsConstructor

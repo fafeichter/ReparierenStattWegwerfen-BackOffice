@@ -4,6 +4,7 @@ import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 
 /**
  * @author Fabian Feichter
+ * @since 24.06.2026
  */
 public interface DeviceInspection {
 	NamedIdDto getModel();

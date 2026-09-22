@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * @author Fabian Feichter
+ * @since 17.06.2026
  */
 @Data
 @Builder

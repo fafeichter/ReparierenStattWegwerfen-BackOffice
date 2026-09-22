@@ -8,6 +8,7 @@ import lombok.Setter;
 
 /**
  * @author Fabian Feichter
+ * @since 25.05.2026
  */
 @Entity
 @Table(name = "business_partner")

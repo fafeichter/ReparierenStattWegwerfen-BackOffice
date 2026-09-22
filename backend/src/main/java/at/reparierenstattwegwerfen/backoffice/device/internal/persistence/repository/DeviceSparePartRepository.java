@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 29.06.2026
  */
 @Repository
 public interface DeviceSparePartRepository extends JpaRepository<DeviceSparePart, Integer> {

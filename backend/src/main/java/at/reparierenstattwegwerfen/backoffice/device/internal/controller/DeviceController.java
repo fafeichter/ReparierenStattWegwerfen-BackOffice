@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 24.06.2026
  */
 @RestController
 @RequestMapping("/api/devices")

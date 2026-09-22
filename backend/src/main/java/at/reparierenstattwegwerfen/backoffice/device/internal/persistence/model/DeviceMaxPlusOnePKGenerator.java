@@ -5,6 +5,7 @@ import org.hibernate.id.IdentifierGenerator;
 
 /**
  * @author Fabian Feichter
+ * @since 17.09.2026
  */
 public class DeviceMaxPlusOnePKGenerator implements IdentifierGenerator {
 

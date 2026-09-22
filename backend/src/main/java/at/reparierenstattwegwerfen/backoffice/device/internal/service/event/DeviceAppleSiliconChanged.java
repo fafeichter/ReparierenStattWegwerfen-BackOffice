@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
+ * @since 20.09.2026
  */
 @Getter
 public class DeviceAppleSiliconChanged extends AbstractDeviceActivityEvent {

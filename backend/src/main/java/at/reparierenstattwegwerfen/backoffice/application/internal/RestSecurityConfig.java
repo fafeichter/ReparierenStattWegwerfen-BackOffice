@@ -10,6 +10,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsUtils;
 
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
 @Configuration
 @EnableWebSecurity
 public class RestSecurityConfig {

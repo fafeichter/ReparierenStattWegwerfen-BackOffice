@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 /**
  * @author Fabian Feichter
+ * @since 20.06.2026
  */
 @Value
 @AllArgsConstructor

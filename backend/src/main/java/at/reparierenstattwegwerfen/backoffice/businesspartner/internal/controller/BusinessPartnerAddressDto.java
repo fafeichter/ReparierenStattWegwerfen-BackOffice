@@ -9,6 +9,7 @@ import lombok.Value;
 
 /**
  * @author Fabian Feichter
+ * @since 16.06.2026
  */
 @Value
 @Builder

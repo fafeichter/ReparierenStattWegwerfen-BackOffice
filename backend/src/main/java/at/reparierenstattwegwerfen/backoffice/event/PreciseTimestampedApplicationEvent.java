@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author Fabian Feichter
+ * @since 21.09.2026
  */
 @Getter
 public class PreciseTimestampedApplicationEvent extends ApplicationEvent {

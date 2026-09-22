@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Fabian Feichter
+ * @since 19.06.2026
  */
 @Configuration("deviceOpenApiConfig")
 @RegisterReflectionForBinding(ModuleImportPlugin.class)

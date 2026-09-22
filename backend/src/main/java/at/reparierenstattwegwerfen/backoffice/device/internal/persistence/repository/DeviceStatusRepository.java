@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 20.06.2026
  */
 @Repository
 public interface DeviceStatusRepository extends JpaRepository<DeviceStatus, Integer> {

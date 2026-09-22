@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 06.07.2026
  */
 @RestController
 @RequestMapping("/api/devices/{deviceId}/base")

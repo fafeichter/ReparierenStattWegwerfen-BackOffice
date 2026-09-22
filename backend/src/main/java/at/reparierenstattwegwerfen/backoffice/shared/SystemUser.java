@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
+ * @since 17.09.2026
  */
 public class SystemUser {
 

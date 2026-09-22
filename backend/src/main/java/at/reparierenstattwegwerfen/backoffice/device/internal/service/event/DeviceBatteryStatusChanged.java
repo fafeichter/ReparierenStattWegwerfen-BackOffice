@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
+ * @since 07.07.2026
  */
 @Getter
 public class DeviceBatteryStatusChanged extends AbstractDeviceActivityEvent {

@@ -19,10 +19,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Downloads an ad and asks the AI model to extract the device's specs and reported
- * condition from its text content.
+ * Downloads an ad and asks the AI model to extract the device's specs and reported defect from its text content.
  *
  * @author Fabian Feichter
+ * @since 24.06.2026
  */
 @Component
 @RequiredArgsConstructor

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author Fabian Feichter
+ * @since 25.05.2026
  */
 @Entity
 @Table(name = "device_note")

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 07.07.2026
  */
 @Service
 @RequiredArgsConstructor

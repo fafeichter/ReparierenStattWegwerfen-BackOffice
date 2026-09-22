@@ -6,6 +6,7 @@ import org.springframework.modulith.docs.Documenter;
 
 /**
  * @author Fabian Feichter
+ * @since 29.06.2026
  */
 public class DocumentationTests {
 

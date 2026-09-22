@@ -5,6 +5,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
 @Configuration
 @Profile("dev")
 public class CorsConfig implements WebMvcConfigurer {

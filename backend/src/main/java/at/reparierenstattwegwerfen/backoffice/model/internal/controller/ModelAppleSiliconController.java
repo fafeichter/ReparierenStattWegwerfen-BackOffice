@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 09.07.2026
  */
 @RestController
 @RequestMapping("/api/models/{modelId}/apple-silicons")

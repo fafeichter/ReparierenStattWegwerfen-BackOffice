@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Fabian Feichter
+ * @since 29.06.2026
  */
 @Repository
 public interface DeviceBaseDetailsRepository extends JpaRepository<Device, Integer> {

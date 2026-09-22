@@ -7,6 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.modulith.core.ApplicationModules;
 
+/**
+ * @author Fabian Feichter
+ * @since 20.05.2026
+ */
 @Import({
 	TestcontainersConfiguration.class,
 	MockedOauth2ResourceServerConfig.class,

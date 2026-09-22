@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 19.09.2026
  */
 @Repository
 public interface BusinessPartnerActivityRepository extends JpaRepository<BusinessPartnerActivity, Integer> {

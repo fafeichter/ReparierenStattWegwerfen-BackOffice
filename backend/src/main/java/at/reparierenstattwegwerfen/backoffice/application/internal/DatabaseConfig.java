@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 /**
  * @author Fabian Feichter
+ * @since 07.06.2026
  */
 @Configuration
 public class DatabaseConfig {

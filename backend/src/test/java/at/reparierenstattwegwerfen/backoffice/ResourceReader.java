@@ -6,6 +6,10 @@ import org.springframework.util.ResourceUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
 public class ResourceReader {
 
 	public static String readFileToString(String fileLocation) throws IOException {

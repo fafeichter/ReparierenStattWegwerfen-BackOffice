@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Fabian Feichter
+ * @since 10.07.2026
  */
 @Service
 @RequiredArgsConstructor

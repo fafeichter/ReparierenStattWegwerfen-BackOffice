@@ -7,6 +7,7 @@ import org.springframework.web.client.RestClient;
 
 /**
  * @author Fabian Feichter
+ * @since 24.06.2026
  */
 @Service
 @RequiredArgsConstructor

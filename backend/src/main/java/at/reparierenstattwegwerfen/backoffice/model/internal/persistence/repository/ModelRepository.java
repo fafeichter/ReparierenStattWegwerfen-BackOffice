@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * @author Fabian Feichter
+ * @since 09.06.2026
  */
 @Repository
 public interface ModelRepository extends JpaRepository<Model, Integer> {

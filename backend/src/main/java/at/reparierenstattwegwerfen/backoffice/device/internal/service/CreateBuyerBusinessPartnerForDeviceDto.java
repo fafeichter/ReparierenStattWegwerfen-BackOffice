@@ -8,6 +8,7 @@ import lombok.Data;
 
 /**
  * @author Fabian Feichter
+ * @since 16.06.2026
  */
 @Data
 public class CreateBuyerBusinessPartnerForDeviceDto {

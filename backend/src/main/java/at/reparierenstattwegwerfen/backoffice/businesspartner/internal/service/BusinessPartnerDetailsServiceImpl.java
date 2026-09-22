@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Fabian Feichter
+ * @since 29.06.2026
  */
 @Service
 @RequiredArgsConstructor

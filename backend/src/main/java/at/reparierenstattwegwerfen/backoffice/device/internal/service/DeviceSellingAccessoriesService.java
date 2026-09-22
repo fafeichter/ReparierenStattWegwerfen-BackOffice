@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Fabian Feichter
+ * @since 08.07.2026
  */
 @Service
 @RequiredArgsConstructor

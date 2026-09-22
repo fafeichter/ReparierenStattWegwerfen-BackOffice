@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Fabian Feichter
+ * @since 18.09.2026
  */
 @Component
 @RequiredArgsConstructor

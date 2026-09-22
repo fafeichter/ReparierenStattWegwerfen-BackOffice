@@ -15,8 +15,8 @@ import org.springframework.util.MimeType;
 import org.springframework.util.MimeTypeUtils;
 
 /**
- *
  * @author Fabian Feichter
+ * @since 10.07.2026
  */
 @Component
 @RequiredArgsConstructor

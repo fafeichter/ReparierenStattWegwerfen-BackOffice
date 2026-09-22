@@ -15,6 +15,7 @@ import java.util.Base64;
 
 /**
  * @author Fabian Feichter
+ * @since 25.05.2026
  */
 @TestConfiguration
 public class MockedOauth2ResourceServerConfig {

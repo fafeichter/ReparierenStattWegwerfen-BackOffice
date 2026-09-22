@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Fabian Feichter
+ * @since 20.06.2026
  */
 @Repository
 public interface DeviceActivityTypeRepository extends JpaRepository<DeviceActivityType, Integer> {

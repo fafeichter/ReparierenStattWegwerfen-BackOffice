@@ -7,6 +7,7 @@ import lombok.Value;
 
 /**
  * @author Fabian Feichter
+ * @since 07.07.2026
  */
 @Value
 public class BatteryHealthDto {

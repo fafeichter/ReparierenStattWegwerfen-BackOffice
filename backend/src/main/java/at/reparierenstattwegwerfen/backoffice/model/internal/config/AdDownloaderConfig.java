@@ -6,6 +6,7 @@ import org.springframework.web.client.RestClient;
 
 /**
  * @author Fabian Feichter
+ * @since 19.06.2026
  */
 @Configuration
 public class AdDownloaderConfig {

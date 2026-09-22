@@ -11,6 +11,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * @author Fabian Feichter
+ * @since 17.09.2026
  */
 @IdGeneratorType(DeviceMaxPlusOnePKGenerator.class)
 @Target({METHOD, FIELD})

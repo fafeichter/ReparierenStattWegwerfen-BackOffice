@@ -16,6 +16,7 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 
 /**
  * @author Fabian Feichter
+ * @since 02.07.2026
  */
 @Service
 @RequiredArgsConstructor

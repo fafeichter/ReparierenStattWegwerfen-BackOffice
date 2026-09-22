@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Fabian Feichter
+ * @since 29.06.2026
  */
 @RestController
 @RequestMapping("/api/devices/{deviceId}")

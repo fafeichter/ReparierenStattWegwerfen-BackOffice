@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 /**
  * @author Fabian Feichter
+ * @since 25.05.2026
  */
 @Entity
 @Table(name = "sale_invoice")

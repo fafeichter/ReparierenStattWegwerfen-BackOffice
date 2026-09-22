@@ -3,11 +3,12 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.service;
 import java.util.Optional;
 
 /**
- * Common contract shared by the AI's primary device match and each of its alternative
- * candidates. Extracted so that {@link ModelResolutionService} can resolve both
- * shapes with the same code instead of duplicating the resolution logic per type.
+ * Common contract shared by the AI's primary device match and each of its alternative candidates. Extracted so that
+ * {@link ModelResolutionService} can resolve both shapes with the same code instead of duplicating the resolution
+ * logic per type.
  *
  * @author Fabian Feichter
+ * @since 24.06.2026
  */
 public interface ModelMatchCandidate {
 

@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
+ * @since 21.09.2026
  */
 @Getter
 public class DeviceBusinessPartnerSetAsSeller extends PreciseTimestampedApplicationEvent {

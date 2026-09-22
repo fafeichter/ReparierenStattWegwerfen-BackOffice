@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Fabian Feichter
+ * @since 10.07.2026
  */
 @Repository
 public interface BusinessPartnerAddressCountryRepository extends JpaRepository<BusinessPartnerAddressCountry, Integer> {

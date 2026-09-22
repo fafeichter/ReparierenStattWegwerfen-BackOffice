@@ -8,6 +8,10 @@ import lombok.Value;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Fabian Feichter
+ * @since 24.06.2026
+ */
 @Value
 @Builder
 public class ResolvedModelMatch implements DeviceInspection {

@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author Fabian Feichter
+ * @since 17.09.2026
  */
 public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 

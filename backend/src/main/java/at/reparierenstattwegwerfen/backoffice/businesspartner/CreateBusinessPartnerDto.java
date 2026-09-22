@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author Fabian Feichter
+ * @since 16.06.2026
  */
 @Data
 @NoArgsConstructor

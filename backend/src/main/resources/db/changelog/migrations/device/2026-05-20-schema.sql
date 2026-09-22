@@ -76,7 +76,7 @@ CREATE TABLE device
     url                                   varchar(512)   NOT NULL,
     serial_number                         varchar(128)            DEFAULT NULL,
     device_status_id                      int            NOT NULL DEFAULT 1,
-    status_date timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    status_date                           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     seller_business_partner_id            int                     DEFAULT NULL,
     buyer_business_partner_id             int                     DEFAULT NULL,
     purchase_price                        DECIMAL(10, 2) NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE device_audit
     audit_timestamp                       timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     device_id                             int            NOT NULL,
     model_id                              int            NOT NULL,
-    buying_date date                  DEFAULT (CURRENT_DATE) NOT NULL,
+    buying_date                           date                    DEFAULT (CURRENT_DATE) NOT NULL,
     model_apple_silicon_id                int                     DEFAULT NULL,
     model_apple_silicon_unified_memory_id int                     DEFAULT NULL,
     model_storage_id                      int                     DEFAULT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE device_audit
     url                                   varchar(512)   NOT NULL,
     serial_number                         varchar(128)            DEFAULT NULL,
     device_status_id                      int            NOT NULL DEFAULT 1,
-    status_date timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    status_date                           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     seller_business_partner_id            int                     DEFAULT NULL,
     buyer_business_partner_id             int                     DEFAULT NULL,
     purchase_price                        DECIMAL(10, 2) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE device_audit
     updated_at                            timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_audit_id),
     KEY                                   idx_audit_device_id (device_id),
-    KEY         idx_audit_timestamp (audit_timestamp)
+    KEY                                   idx_audit_timestamp (audit_timestamp)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_spare_part
@@ -200,7 +200,7 @@ CREATE TABLE device_note_audit
     PRIMARY KEY (device_note_audit_id),
     KEY                  idx_dna_device_note_id (device_note_id),
     KEY                  idx_dna_device_id (device_id),
-    KEY idx_dna_audit_timestamp (audit_timestamp)
+    KEY                  idx_dna_audit_timestamp (audit_timestamp)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_tag
@@ -261,7 +261,7 @@ CREATE TABLE device_activity
     device_id               int          NOT NULL,
     name                    varchar(256) NOT NULL,
     actor                   varchar(256) NOT NULL,
-    device_activity_type_id int NOT NULL,
+    device_activity_type_id int          NOT NULL,
     date                    datetime(6)     NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     created_at              timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at              timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),

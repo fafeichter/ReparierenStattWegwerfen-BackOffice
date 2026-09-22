@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author Fabian Feichter
+ * @since 29.06.2026
  */
 @Data
 @Builder

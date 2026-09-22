@@ -5,10 +5,11 @@ import lombok.Getter;
 import java.util.regex.Pattern;
 
 /**
- * The ad page's raw HTML with all markup, scripts, and boilerplate stripped away,
- * leaving just the plain text that's relevant to feed to the AI.
+ * The ad page's raw HTML with all markup, scripts, and boilerplate stripped away, leaving just the plain text that's
+ * relevant to feed to the AI.
  *
  * @author Fabian Feichter
+ * @since 20.06.2026
  */
 @Getter
 public class AdPlainText {

@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author Fabian Feichter
+ * @since 10.07.2026
  */
 @Value
 @RequiredArgsConstructor

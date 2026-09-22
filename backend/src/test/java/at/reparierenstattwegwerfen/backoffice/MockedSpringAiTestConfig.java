@@ -12,6 +12,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author Fabian Feichter
+ * @since 17.06.2026
  */
 @TestConfiguration
 public class MockedSpringAiTestConfig {

@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * @author Fabian Feichter
+ * @since 09.06.2026
  */
 @SpringBootTest
 @AutoConfigureMockMvc

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Fabian Feichter
+ * @since 08.07.2026
  */
 @RestController
 @RequestMapping("/api/devices/{deviceId}/defects")

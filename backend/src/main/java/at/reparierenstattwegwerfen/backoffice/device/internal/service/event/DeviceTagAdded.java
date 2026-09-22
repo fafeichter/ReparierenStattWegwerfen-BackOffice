@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
+ * @since 02.07.2026
  */
 @Getter
 public class DeviceTagAdded extends AbstractDeviceActivityEvent {
