@@ -80,7 +80,7 @@ public class DeviceDefectDetailsService {
 		Device device = deviceRepository.getReferenceById(deviceId);
 		device.setDiagnosedDefect("WIE ANGEGEBEN");
 
-		// todo
+		// todo: checkbox?
 		deviceRepository.save(device);
 	}
 }

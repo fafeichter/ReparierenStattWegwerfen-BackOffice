@@ -65,7 +65,7 @@ public class DeviceStatusService {
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-	public void on(DeviceStatusChanged event) {
+	public void setDeviceSellingDate(DeviceStatusChanged event) {
 		Device device = deviceRepository.getReferenceById(event.getDeviceId());
 
 		Integer newStatusId = event.getNewStatusId();
@@ -82,6 +82,13 @@ public class DeviceStatusService {
 				.build();
 			events.publishEvent(sellingDateChangedEvent);
 		}
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void setDeviceStatusDate(DeviceStatusChanged event) {
+		Device device = deviceRepository.getReferenceById(event.getDeviceId());
+		device.setStatusDate(event.getExactTimestamp());
+		deviceRepository.save(device);
 	}
 
 	@Transactional

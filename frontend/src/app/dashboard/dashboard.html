@@ -1,9 +1,26 @@
 <div class="clr-row">
   <div class="clr-col-lg-12 clr-col-sm-12 clr-col-12">
     <div class="card">
-      <div class="card-header">Dashboard</div>
+      <div class="card-header">
+        Dashboard
+      </div>
       <div class="card-block">
-        <app-add-device></app-add-device>
+        <div class="clr-row">
+          <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
+            <h4>Bestellt / gekauft
+              <app-add-device/>
+            </h4>
+            <app-devices-ordered/>
+          </div>
+          <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
+            <h4>Zum Fertigstellen</h4>
+            <app-devices-to-finish/>
+          </div>
+          <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
+            <h4>Zum Verkauf angeboten</h4>
+            <app-devices-offered-for-sale/>
+          </div>
+        </div>
       </div>
     </div>
   </div>

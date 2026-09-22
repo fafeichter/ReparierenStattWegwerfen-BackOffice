@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author Fabian Feichter
@@ -50,6 +51,9 @@ public class Device implements NamedId {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "device_status_id")
 	private DeviceStatus status;
+
+	@Column(name = "status_date")
+	private LocalDateTime statusDate;
 
 	@Column(name = "seller_business_partner_id")
 	private Integer sellerBusinessPartnerId;

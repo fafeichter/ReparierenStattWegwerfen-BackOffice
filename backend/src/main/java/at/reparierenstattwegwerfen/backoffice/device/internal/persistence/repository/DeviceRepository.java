@@ -16,6 +16,8 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
 	List<Device> findBySellerBusinessPartnerId(Integer sellerBusinessPartnerId);
 
+	List<Device> findAllByStatusIdIn(List<Integer> statusIds);
+
 	List<Device> findByBuyerBusinessPartnerId(Integer sellerBusinessPartnerId);
 
 	@Query("""

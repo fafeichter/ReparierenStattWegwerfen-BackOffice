@@ -1,0 +1,20 @@
+<clr-datagrid>
+  <clr-dg-column>Device</clr-dg-column>
+  <clr-dg-column>Status date</clr-dg-column>
+  <clr-dg-column>
+    Model
+  </clr-dg-column>
+  <clr-dg-placeholder>All done!</clr-dg-placeholder>
+  <clr-dg-row *clrDgItems="let device of devicesOfferedForSale()" [clrDgItem]="device">
+    <clr-dg-cell><a [routerLink]="['/devices', device.deviceId]">#{{ device.deviceId }}</a></clr-dg-cell>
+    <clr-dg-cell>{{ device.statusDate  | date:'dd.MM.yyyy' }}</clr-dg-cell>
+    <clr-dg-cell>{{ device.model?.name }}</clr-dg-cell>
+    <clr-dg-row-detail *clrIfExpanded>
+      Chip: {{ device.appleSilicon?.name | orElse }}<br>
+      Unified Memory: {{ device.unifiedMemory?.name | orElse }}<br>
+      Storage: {{ device.storage?.name | orElse }}
+    </clr-dg-row-detail>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{ devicesOfferedForSale().length }}  device(s)</clr-dg-footer>
+</clr-datagrid>
