@@ -1,4 +1,4 @@
-import { Component, inject, LOCALE_ID } from '@angular/core';
+import { Component, inject, LOCALE_ID, VERSION } from '@angular/core';
 import { buildInfo } from '../../../environments/build.info';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -14,6 +14,7 @@ import { map } from 'rxjs';
 export class TechnicalDetails {
   buildInfo = buildInfo;
   readonly currentLocale = inject(LOCALE_ID);
+  readonly angularVersion = VERSION.full;
   private readonly oidcSecurityService = inject(OidcSecurityService);
   readonly userData = toSignal(
     this.oidcSecurityService.userData$.pipe(map(({ userData }) => userData)),
