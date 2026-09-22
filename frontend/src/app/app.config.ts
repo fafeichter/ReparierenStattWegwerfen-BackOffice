@@ -15,6 +15,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { Configuration as ModelConfig } from '@api/model';
 import { Configuration as BusinesspartnerConfig } from '@api/businesspartner';
 import { Configuration as DeviceConfig } from '@api/device';
+import { Configuration as AppConfig } from '@api/application';
 import { environment } from '../environments/environment';
 
 import localeAt from '@angular/common/locales/de-AT';
@@ -36,6 +37,7 @@ export const appConfig: ApplicationConfig = {
       useValue: new BusinesspartnerConfig({ basePath: environment.backendUrl }),
     },
     { provide: DeviceConfig, useValue: new DeviceConfig({ basePath: environment.backendUrl }) },
+    { provide: AppConfig, useValue: new AppConfig({ basePath: environment.backendUrl }) },
     { provide: LOCALE_ID, useValue: 'de-AT' },
   ],
 };
