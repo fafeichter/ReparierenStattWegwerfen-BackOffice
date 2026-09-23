@@ -16,7 +16,7 @@ public interface DeviceGradeRepository extends JpaRepository<DeviceGrade, Intege
 
 	@Query("""
 		SELECT n FROM DeviceGrade n
-		ORDER BY n.sortOrder ASC
+		ORDER BY n.sortOrder
 		""")
 	List<DeviceGrade> getAllStatus();
 }

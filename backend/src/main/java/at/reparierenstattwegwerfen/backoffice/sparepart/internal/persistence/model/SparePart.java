@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
+package at.reparierenstattwegwerfen.backoffice.sparepart.internal.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
@@ -9,25 +9,22 @@ import lombok.Setter;
 
 /**
  * @author Fabian Feichter
- * @since 25.05.2026
+ * @since 23.09.2026
  */
 @Entity
-@Table(name = "device_grade")
+@Table(name = "spare_part")
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceGrade implements NamedId, Sortable {
+public class SparePart implements NamedId, Sortable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "device_grade_id")
+	@Column(name = "spare_part_id")
 	private Integer id;
 
 	@Column(name = "name")
 	private String name;
-
-	@Column(name = "description")
-	private String description;
 
 	@Column(name = "sort_order")
 	private Integer sortOrder;

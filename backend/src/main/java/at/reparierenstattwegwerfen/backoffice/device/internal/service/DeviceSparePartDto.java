@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class DeviceSparePartDto {
 
 	@NotNull
-	private final Integer sparePartId;
+	private final Integer deviceSparePartId;
 
 	@NotNull
 	private final String name;
@@ -24,5 +24,5 @@ public class DeviceSparePartDto {
 	private final Double priceNetto;
 
 	@NotNull
-	private final LocalDateTime timestamp;
+	private final LocalDateTime date;
 }

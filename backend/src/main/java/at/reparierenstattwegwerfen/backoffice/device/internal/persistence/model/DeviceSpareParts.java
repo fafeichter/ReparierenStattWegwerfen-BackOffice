@@ -1,6 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model;
 
-import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,11 +12,11 @@ import java.time.LocalDateTime;
  * @since 25.05.2026
  */
 @Entity
-@Table(name = "device_spare_part")
+@Table(name = "device_spare_parts")
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceSparePart implements NamedId {
+public class DeviceSpareParts {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +26,12 @@ public class DeviceSparePart implements NamedId {
 	@Column(name = "device_id")
 	private Integer deviceId;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "spare_part_id")
+	private Integer sparePartId;
 
 	@Column(name = "price_netto")
 	private Double priceNetto;
 
-	@Column(name = "timestamp")
-	private LocalDateTime timestamp;
+	@Column(name = "date")
+	private LocalDateTime date;
 }

@@ -161,13 +161,13 @@ CREATE TABLE device_spare_parts
 (
     device_spare_part_id int            NOT NULL AUTO_INCREMENT,
     device_id            int            NOT NULL,
-    spare_part_id int NOT NULL,
+    spare_part_id        int            NOT NULL,
     price_netto          DECIMAL(10, 2) NOT NULL,
-    date          datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    date                 datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     created_at           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     KEY                  idx_device_spare_part_device_id (device_id),
-    KEY           idx_device_spare_part_timestamp (date),
+    KEY                  idx_device_spare_part_timestamp (date),
     PRIMARY KEY (device_spare_part_id),
     CONSTRAINT fk_device_spare_part_device_id FOREIGN KEY (device_id) REFERENCES device (device_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_spare_part_spare_part_id FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id) ON DELETE RESTRICT ON UPDATE RESTRICT

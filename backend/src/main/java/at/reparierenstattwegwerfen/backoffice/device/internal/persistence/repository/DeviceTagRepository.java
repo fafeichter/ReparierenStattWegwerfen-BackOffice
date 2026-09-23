@@ -34,6 +34,7 @@ public interface DeviceTagRepository extends JpaRepository<DeviceTag, Integer> {
 		  WHERE dts.device.id = t.id
 		  AND dts.device.id = :deviceId
 		)
+		ORDER BY t.sortOrder
 		""")
 	List<DeviceTag> getAvailableTagsForDevice(Integer deviceId, Integer modelSeriesId);
 }
