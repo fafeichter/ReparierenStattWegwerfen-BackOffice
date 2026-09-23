@@ -34,16 +34,24 @@ scalability, and clean boundaries:
 
 The following domains have been identified:
 
-| Domain               | Module Name       | Description                                                                                                                                                        |
-|:---------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Model**            | `model`           | Manages the catalog of supported hardware definitions (specifically Apple Silicon M1 or newer devices) targeted for repair and refurbishment.                      |
-| **Business Partner** | `businesspartner` | Handles data of both suppliers (sellers) and clients (buyers).                                                                                                     |
-| **Device**           | `device`          | Tracks the entire lifecycle of a specific, physical asset—from initial acquisition through repair stages to a successful sale, or its disassembly for spare parts. |
-| **Sale**             | `sale`            | Aggregates data from the Model, Business Partner, and Device domains to generate invoices.                                                                         |
+| Domain               | Module Name       | Description                                                                                                                                                                  |
+|:---------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Device**           | `device`          | Tracks the entire lifecycle of a specific MacBook or iPad within the company — from initial acquisition through repair stages to resale, or its disassembly for spare parts. |
+| **Business Partner** | `businesspartner` | A person or a company I buy from or sell devices and/or spare parts to..                                                                                                     |
+| **Model**            | `model`           | Defines all models I repair or refurbish: MacBooks and iPads with Apple Silicon.                                                                                             |
+| **Spare Part**       | `sparepart`       | Manages spare parts required for device repair and refurbishment, sourced from business partners or harvested from disassembled devices.                                     |
+| **Accounting**       | `accounting`      | Keeps track of balances, taxes, and invoices. (To be implemented as part of milestone 2).                                                                                    |
 
 ![Application Modules](./backend/docs/spring-modulith/modules.svg)
 
 ---
+
+## 📌 Development Milestones
+
+- **Milestone 1 (Target: Q4 2026):** Replace the existing Apple Numbers spreadsheet with a modern web application based on Domain-Driven Design (DDD) principles.
+- **Milestone 2 (Target: 2027)**: Integrate the Accounting domain.
+
+_Every milestone includes maintaining code health and stability, as well as strictly adhering to DDD principles._
 
 ## 🛠️ Tech Stack
 

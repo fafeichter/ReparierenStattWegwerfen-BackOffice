@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.sale.internal.config;
+package at.reparierenstattwegwerfen.backoffice.sparepart.internal.config;
 
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
@@ -8,15 +8,15 @@ import org.springframework.context.annotation.Configuration;
  * @author Fabian Feichter
  * @since 19.06.2026
  */
-@Configuration("saleOpenApiConfig")
+@Configuration("sparePartOpenApiConfig")
 public class OpenApiConfig {
 
 	@Bean
-	public GroupedOpenApi saleOpenApi() {
+	public GroupedOpenApi sparePartOpenApi() {
 		return GroupedOpenApi
 			.builder()
-			.group("sale")
-			.packagesToScan("at.reparierenstattwegwerfen.backoffice.sale")
+			.group("sparepart")
+			.packagesToScan("at.reparierenstattwegwerfen.backoffice.sparepart")
 			.build();
 	}
 }

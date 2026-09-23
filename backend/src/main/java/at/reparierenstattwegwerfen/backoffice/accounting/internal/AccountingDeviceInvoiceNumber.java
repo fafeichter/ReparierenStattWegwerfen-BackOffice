@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.sale.internal;
+package at.reparierenstattwegwerfen.backoffice.accounting.internal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,13 +13,13 @@ import lombok.Setter;
  * @since 25.05.2026
  */
 @Entity
-@Table(name = "sale_number")
+@Table(name = "accounting_device_invoice_number")
 @Getter
 @Setter
 @NoArgsConstructor
-public class SaleInvoiceNumber {
+public class AccountingDeviceInvoiceNumber {
 
 	@Id
-	@Column(name = "current_sale_number")
-	private Integer currentInvoiceNumber;
+	@Column(name = "current_device_invoice_number")
+	private Integer currentDeviceInvoiceNumber;
 }

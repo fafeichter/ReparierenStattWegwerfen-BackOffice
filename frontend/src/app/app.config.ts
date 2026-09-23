@@ -15,6 +15,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { Configuration as ModelConfig } from '@api/model';
 import { Configuration as BusinesspartnerConfig } from '@api/businesspartner';
 import { Configuration as DeviceConfig } from '@api/device';
+import { Configuration as AccountingConfig } from '@api/accounting';
+import { Configuration as SparePartConfig } from '@api/sparepart';
 import { Configuration as AppConfig } from '@api/application';
 import { environment } from '../environments/environment';
 
@@ -37,6 +39,14 @@ export const appConfig: ApplicationConfig = {
       useValue: new BusinesspartnerConfig({ basePath: environment.backendUrl }),
     },
     { provide: DeviceConfig, useValue: new DeviceConfig({ basePath: environment.backendUrl }) },
+    {
+      provide: AccountingConfig,
+      useValue: new AccountingConfig({ basePath: environment.backendUrl }),
+    },
+    {
+      provide: SparePartConfig,
+      useValue: new SparePartConfig({ basePath: environment.backendUrl }),
+    },
     { provide: AppConfig, useValue: new AppConfig({ basePath: environment.backendUrl }) },
     { provide: LOCALE_ID, useValue: 'de-AT' },
   ],

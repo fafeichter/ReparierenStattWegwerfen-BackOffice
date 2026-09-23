@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.sale.internal;
+package at.reparierenstattwegwerfen.backoffice.accounting.internal;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,15 +12,15 @@ import java.time.LocalDate;
  * @since 25.05.2026
  */
 @Entity
-@Table(name = "sale_invoice")
+@Table(name = "accounting_device_invoice")
 @Getter
 @Setter
 @NoArgsConstructor
-public class SaleInvoice {
+public class AccountingDeviceInvoice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "sale_id")
+	@Column(name = "accounting_device_invoice_id")
 	private Integer id;
 
 	@Column(name = "number")
