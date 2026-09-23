@@ -157,19 +157,20 @@ CREATE TABLE device_audit
     KEY                                   idx_audit_timestamp (audit_timestamp)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE device_spare_part
+CREATE TABLE device_spare_parts
 (
     device_spare_part_id int            NOT NULL AUTO_INCREMENT,
     device_id            int            NOT NULL,
-    name                 varchar(256)   NOT NULL,
+    spare_part_id int NOT NULL,
     price_netto          DECIMAL(10, 2) NOT NULL,
-    timestamp            timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    date          datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     created_at           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     KEY                  idx_device_spare_part_device_id (device_id),
-    KEY                  idx_device_spare_part_timestamp (timestamp),
+    KEY           idx_device_spare_part_timestamp (date),
+    PRIMARY KEY (device_spare_part_id),
     CONSTRAINT fk_device_spare_part_device_id FOREIGN KEY (device_id) REFERENCES device (device_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    PRIMARY KEY (device_spare_part_id)
+    CONSTRAINT fk_device_spare_part_spare_part_id FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE device_note
