@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Fabian Feichter
@@ -24,8 +25,8 @@ public class SparePartServiceImpl implements SparePartService {
 	}
 
 	@Override
-	public List<NamedIdDto> getSparePartsForModelSeries(Integer modelSeriesId) {
-		return sparePartRepository.getSparePartsForModelSeries(modelSeriesId).stream()
+	public List<NamedIdDto> getSparePartsForModelSeriesExcluding(Integer modelSeriesId, Set<Integer> excludeIds) {
+		return sparePartRepository.getSparePartsForModelSeriesExcluding(modelSeriesId, excludeIds).stream()
 			.map(NamedIdDto::from)
 			.toList();
 	}

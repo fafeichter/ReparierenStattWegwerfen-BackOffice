@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Fabian Feichter
@@ -20,7 +21,8 @@ public interface SparePartRepository extends JpaRepository<SparePart, Integer> {
 		JOIN SparePartAvailableModelSeries spms
 		  ON spms.sparePart.id = s.id
 		WHERE spms.modelSeriesId = :modelSeriesId
+		  AND s.id NOT IN (:excludeIds)
 		ORDER BY s.sortOrder
 		""")
-	List<SparePart> getSparePartsForModelSeries(Integer modelSeriesId);
+	List<SparePart> getSparePartsForModelSeriesExcluding(Integer modelSeriesId, Set<Integer> excludeIds);
 }

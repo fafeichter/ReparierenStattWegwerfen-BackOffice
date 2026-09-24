@@ -70,7 +70,10 @@ export class Repair implements OnInit {
       .subscribe((data) => this.deviceDefects.set(data));
     this.sparePartsApi
       .getDeviceSpareParts(this.deviceId())
-      .subscribe((data) => this.deviceSpareParts.set(data));
+      .subscribe((deviceSpareParts) => this.deviceSpareParts.set(deviceSpareParts));
+    this.sparePartsApi
+      .getAvailableSparePartsForDevice(this.deviceId())
+      .subscribe((availableSpareParts) => console.log(availableSpareParts));
   }
 
   updateDefects() {
