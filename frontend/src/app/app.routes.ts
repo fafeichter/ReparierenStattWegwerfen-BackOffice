@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { Dashboard } from './dashboard/dashboard';
 import { AutoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
 import { ModelDetail } from './domain/model/model-detail/model-detail';
-import { Statistics } from './domain/statistics/statistics';
 import { TechnicalDetails } from './layout/technical-details/technical-details';
 import { BusinesspartnerDetail } from './domain/businesspartner/businesspartner-detail/businesspartner-detail';
 import { DeviceDetail } from './domain/device/device-detail/device-detail';
@@ -10,6 +9,7 @@ import { BusinesspartnerCreate } from './domain/businesspartner/businesspartner-
 import { Devices } from './domain/device/devices-list/devices';
 import { BusinessPartners } from './domain/businesspartner/businesspartners-list/business-partners.component';
 import { Models } from './domain/model/models-list/models';
+import { Accounting } from './domain/accounting/accounting';
 
 export const routes: Routes = [
   {
@@ -81,10 +81,10 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'statistics',
-        component: Statistics,
+        path: 'accounting',
+        component: Accounting,
         data: {
-          breadcrumb: 'Statistics',
+          breadcrumb: 'Accounting',
         },
       },
       {

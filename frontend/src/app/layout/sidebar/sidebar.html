@@ -4,15 +4,10 @@
     Dashboard
   </a>
   <div class="nav-divider"></div>
-  <clr-vertical-nav-group [clrVerticalNavGroupExpanded]="true" routerLinkActive="active">
+  <a [routerLink]="['/devices']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="computer"/>
     Devices
-    <clr-vertical-nav-group-children>
-      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Ordered</a>
-      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">In progress</a>
-      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Done</a>
-    </clr-vertical-nav-group-children>
-  </clr-vertical-nav-group>
+  </a>
   <div class="nav-divider"></div>
   <a [routerLink]="['/businesspartners']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="user"/>
@@ -25,11 +20,11 @@
   <div class="nav-divider"></div>
   <clr-vertical-nav-group [clrVerticalNavGroupExpanded]="true" routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="analytics"/>
-    Statistics
+    Accounting
     <clr-vertical-nav-group-children>
-      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">By month</a>
-      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">By quarter</a>
-      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Total</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Invoices</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Sales</a>
+      <a [routerLink]="['/normal/pidgey']" clrVerticalNavLink routerLinkActive="active">Taxes</a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
 </clr-vertical-nav>
