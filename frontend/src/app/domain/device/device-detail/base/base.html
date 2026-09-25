@@ -9,70 +9,98 @@
 <div class="card" id="device">
   <div class="card-header">Device</div>
   <div class="card-block">
-    <ul class="list">
-      <li>Model:
-        <a [routerLink]="['/models', deviceBase()?.model?.id]">{{ deviceBase()?.modelNumber }}</a></li>
-      <li>Technical Specs: <a [href]=" deviceBase()?.technicalSpecsUrl" target="_blank">
-        {{ deviceBase()?.technicalSpecsUrl }}
-        <cds-icon role="img" shape="pop-out"/>
-      </a></li>
-      <hr>
+    <dl>
+      <dt>Model</dt>
+      <dd>
+        <a [routerLink]="['/models', deviceBase()?.model?.id]">{{ deviceBase()?.modelNumber }}</a>
+      </dd>
+      <dt>Technical Specs</dt>
+      <dd>
+        <a [href]=" deviceBase()?.technicalSpecsUrl" target="_blank">
+          {{ deviceBase()?.technicalSpecsUrl }}
+          <cds-icon role="img" shape="pop-out"/>
+        </a>
+      </dd>
+    </dl>
+    <hr>
+    <dl>
       @if (!hardwareConfigEditModeActive()) {
-        <li>Chip:  {{ deviceBase()?.appleSilicon?.name | orElse }}</li>
-        <li>Memory: {{ deviceBase()?.unifiedMemory?.name | orElse }}</li>
-        <li>Storage: {{ deviceBase()?.storage?.name | orElse }}</li>
-        <li>Color: {{ deviceBase()?.color?.name | orElse }}</li>
-        <button (click)="activateHardwareConfigEditMode()" class="btn btn-link">
-          <cds-icon role="img" shape="edit"/>
-          Edit
-        </button>
-        <hr>
+        <dt>Chip</dt>
+        <dd>
+          {{ deviceBase()?.appleSilicon?.name | orElse }}
+        </dd>
+        <dt>Unified Memory</dt>
+        <dd>
+          {{ deviceBase()?.unifiedMemory?.name | orElse }}
+        </dd>
+        <dt>Storage</dt>
+        <dd>
+          {{ deviceBase()?.storage?.name | orElse }}
+        </dd>
+        <dt>Color</dt>
+        <dd>
+          {{ deviceBase()?.color?.name | orElse }}
+        </dd>
+        <dt></dt>
+        <dd>
+          <button (click)="activateHardwareConfigEditMode()" class="btn btn-link">
+            <cds-icon role="img" shape="edit"/>
+            Edit
+          </button>
+        </dd>
       } @else {
-        <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" clrForm>
-          <clr-select-container>
-            <label>Chip</label>
-            <select (change)="loadMemoryOptions($event)" clrSelect formControlName="newAppleSiliconId">
-              @for (appleSilicon of modelAppleSilicons(); track appleSilicon.id) {
-                <option [value]="appleSilicon.id">{{ appleSilicon.name }}</option>
-              }
-            </select>
-          </clr-select-container>
-          <clr-select-container>
-            <label>Memory</label>
-            <select (change)="loadStorageOptions()" clrSelect formControlName="newMemoryId">
-              @for (memory of modelMemories(); track memory.id) {
-                <option [value]="memory.id">{{ memory.name }}</option>
-              }
-            </select>
-          </clr-select-container>
-          <clr-select-container>
-            <label>Storage</label>
-            <select clrSelect formControlName="newStorageId">
-              @for (storage of modelStorages(); track storage.id) {
-                <option [value]="storage.id">{{ storage.name }}</option>
-              }
-            </select>
-          </clr-select-container>
-          <clr-select-container>
-            <label>Color</label>
-            <select clrSelect formControlName="newColorId">
-              @for (color of modelColors(); track color.id) {
-                <option [value]="color.id">{{ color.name }}</option>
-              }
-            </select>
-          </clr-select-container>
-          <button (click)="hardwareConfigEditModeActive.set(false)" class="btn btn-link" type="button">
-            <cds-icon role="img" shape="close"/>
-            Cancel
-          </button>
-          <button [disabled]="hardwareConfigForm.invalid" class="btn btn-link ml-1!" type="submit">
-            <cds-icon role="img" shape="check"/>
-            Save
-          </button>
-        </form>
+        <dt></dt>
+        <dd>
+          <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" clrForm>
+            <clr-select-container>
+              <label>Chip</label>
+              <select (change)="loadMemoryOptions($event)" clrSelect formControlName="newAppleSiliconId">
+                @for (appleSilicon of modelAppleSilicons(); track appleSilicon.id) {
+                  <option [value]="appleSilicon.id">{{ appleSilicon.name }}</option>
+                }
+              </select>
+            </clr-select-container>
+            <clr-select-container>
+              <label>Unified Memory</label>
+              <select (change)="loadStorageOptions()" clrSelect formControlName="newMemoryId">
+                @for (memory of modelMemories(); track memory.id) {
+                  <option [value]="memory.id">{{ memory.name }}</option>
+                }
+              </select>
+            </clr-select-container>
+            <clr-select-container>
+              <label>Storage</label>
+              <select clrSelect formControlName="newStorageId">
+                @for (storage of modelStorages(); track storage.id) {
+                  <option [value]="storage.id">{{ storage.name }}</option>
+                }
+              </select>
+            </clr-select-container>
+            <clr-select-container>
+              <label>Color</label>
+              <select clrSelect formControlName="newColorId">
+                @for (color of modelColors(); track color.id) {
+                  <option [value]="color.id">{{ color.name }}</option>
+                }
+              </select>
+            </clr-select-container>
+            <button (click)="hardwareConfigEditModeActive.set(false)" class="btn btn-link" type="button">
+              <cds-icon role="img" shape="close"/>
+              Cancel
+            </button>
+            <button [disabled]="hardwareConfigForm.invalid" class="btn btn-link ml-1!" type="submit">
+              <cds-icon role="img" shape="check"/>
+              Save
+            </button>
+          </form>
+        </dd>
       }
-      <li>
-        Status:
+    </dl>
+    <hr>
+
+    <dl>
+      <dt>Status</dt>
+      <dd>
         @if (!statusEditModeActive()) {
           <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
           <button (click)="activateStatusEditMode()" class="btn btn-link">
@@ -80,7 +108,7 @@
             Edit
           </button>
         } @else {
-          <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm>
+          <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm clrLayout="vertical">
             <select (change)="statusFormRef.requestSubmit()" formControlName="newStatusId">
               @for (deviceStatus of deviceStatus(); track deviceStatus.id) {
                 @if (deviceStatus.id === 7) {
@@ -95,17 +123,21 @@
             </button>
           </form>
         }
-      </li>
-      <hr>
-      <li>Serial Number:
+      </dd>
+    </dl>
+    <hr>
+
+    <dl>
+      <dt>Serial Number</dt>
+      <dd>
         @if (!serialNumberEditModeActive()) {
           {{ deviceBase()?.serialNumber | orElse }}
-          <button (click)="activateSerialNumberEditMode()" class="btn btn-link">
+          <button (click)="activateSerialNumberEditMode()" class="btn btn-link ml-1!">
             <cds-icon role="img" shape="edit"/>
             Edit
           </button>
         } @else {
-          <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm>
+          <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm clrLayout="vertical">
             <clr-input-container>
               <input autofocus clrInput formControlName="newSerialNumber" type="text">
             </clr-input-container>
@@ -119,9 +151,13 @@
             </button>
           </form>
         }
-      </li>
-      <li>
-        Battery:
+      </dd>
+    </dl>
+    <hr>
+
+    <dl>
+      <dt>Battery</dt>
+      <dd>
         @if (!batteryEditModeActive()) {
           {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
             /
@@ -151,8 +187,9 @@
             </button>
           </form>
         }
-      </li>
-      <li>Battery status:
+      </dd>
+      <dt>Battery Status</dt>
+      <dd>
         @if (!batteryStatusEditModeActive()) {
           <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>
           <button (click)="activateBatteryStatusEditMode()" class="btn btn-link">
@@ -173,9 +210,13 @@
             </button>
           </form>
         }
-      </li>
-      <hr>
-      <li>Grade:
+      </dd>
+    </dl>
+    <hr>
+
+    <dl>
+      <dt>Grade</dt>
+      <dd>
         @if (!gradeEditModeActive()) {
           <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
           <button (click)="activateGradeEditMode()" class="btn btn-link">
@@ -196,36 +237,42 @@
             </button>
           </form>
         }
-      </li>
-    </ul>
-  </div>
-  <div class="card-block">
-    Tags:
-    @for (tag of deviceBase()?.tags; track tag.id) {
-      <clr-label>
-        {{ tag.name }}
-        <cds-icon (click)="removeTag(tag.id)" shape="close"/>
-      </clr-label>
-    } @empty {
-      -
-    }
-    <button (click)="activateTagEditMode()" class="btn btn-link">
-      <cds-icon role="img" shape="plus"/>
-      Add
-    </button>
-    @if (tagEditModeActive()) {
-      <form #tagFormRef (ngSubmit)="addTag()" [formGroup]="tagForm" clrForm>
-        <select (change)="tagFormRef.requestSubmit()" formControlName="newTagId">
-          <option disabled selected value="null">-- Choose --</option>
-          @for (deviceTag of deviceTags(); track deviceTag.id) {
-            <option [value]="deviceTag.id">{{ deviceTag.name }}</option>
+      </dd>
+    </dl>
+    <hr>
+
+    <dl>
+      <dt>Tags</dt>
+      <dd>
+        @for (tag of deviceBase()?.tags; track tag.id) {
+          <clr-label>
+            {{ tag.name }}
+            <cds-icon (click)="removeTag(tag.id)" [style.cursor]="'pointer'" shape="close"/>
+          </clr-label>
+        }
+        @if (!tagEditModeActive()) {
+          @if (!deviceBase()?.tags?.length) {
+            -
           }
-        </select>
-        <button (click)="tagEditModeActive.set(false)" class="btn btn-link" type="button">
-          <cds-icon role="img" shape="close"/>
-          Cancel
-        </button>
-      </form>
-    }
+          <button (click)="activateTagEditMode()" class="btn btn-link ml-1!">
+            <cds-icon role="img" shape="plus"/>
+            Add
+          </button>
+        } @else {
+          <form #tagFormRef (ngSubmit)="addTag()" [formGroup]="tagForm" clrForm>
+            <select (change)="tagFormRef.requestSubmit()" formControlName="newTagId">
+              <option disabled selected value="null">-- Choose --</option>
+              @for (deviceTag of availableDeviceTags(); track deviceTag.id) {
+                <option [value]="deviceTag.id">{{ deviceTag.name }}</option>
+              }
+            </select>
+            <button (click)="tagEditModeActive.set(false)" class="btn btn-link" type="button">
+              <cds-icon role="img" shape="close"/>
+              Cancel
+            </button>
+          </form>
+        }
+      </dd>
+    </dl>
   </div>
 </div>

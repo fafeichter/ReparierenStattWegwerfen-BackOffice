@@ -1,14 +1,10 @@
 <div class="card" id="notes">
   <div class="card-header">Notes</div>
   <div class="card-block">
-    <button (click)="modalOpened.set(true)" class="btn btn-link" type="button">
-      <clr-icon shape="plus"></clr-icon>
-      Add
-    </button>
     <table class="table">
       <thead>
       <tr>
-        <th class="left">Note</th>
+        <th class="left">Text</th>
         <th class="right">Date</th>
       </tr>
       </thead>
@@ -17,24 +13,32 @@
           <tr>
             <td class="left">{{ note.text }}
               <button (click)="deleteNote(note.noteId)" class="btn btn-link btn-icon" type="button">
-                <clr-icon shape="trash" size="xs"></clr-icon>
+                <clr-icon shape="trash" size="xs"/>
               </button>
             </td>
             <td class="right">{{ note.date | date:'dd.MM.yyyy HH:mm:ss' }}</td>
           </tr>
+        } @empty {
+          <tr>
+            <td class="text-center" colspan="2">No notes</td>
+          </tr>
         }
       </tbody>
     </table>
+    <button (click)="modalOpened.set(true)" class="btn btn-link" type="button">
+      <clr-icon shape="plus"/>
+      Add
+    </button>
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="xl">
+<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="l">
   <div class="modal-title">Add note</div>
   <div class="modal-body">
     <form (ngSubmit)="addNote()" [formGroup]="form" clrForm>
       <clr-textarea-container>
         <label><span class="clr-required-mark">Text</span></label>
-        <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="5"></textarea>
+        <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="2"></textarea>
         @if (form.controls.text.hasError('required')) {
           <clr-control-error>Text is required.</clr-control-error>
         }

@@ -2,11 +2,16 @@ li {
   margin-bottom: .2rem;
 }
 
-hr {
-  margin-top: 1.2rem;
-  margin-bottom: 1.2rem;
-}
-
 :host ::ng-deep clr-dg-column.right .datagrid-column-title {
   justify-content: flex-end !important;
+}
+
+.datagrid-cell.total-cell {
+  display: flex;
+  align-items: center; /* Vertically centers the <hr> */
+}
+
+.datagrid-cell > .total {
+  width: 100%;
+  color: grey;
 }

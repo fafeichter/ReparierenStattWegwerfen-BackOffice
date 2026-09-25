@@ -1,0 +1,9 @@
+.card-block > hr {
+  margin-top: .7rem;
+  margin-bottom: .70rem;
+  color: #cccccc;
+}
+
+.datagrid-cell > hr {
+
+}

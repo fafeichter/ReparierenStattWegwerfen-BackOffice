@@ -143,6 +143,9 @@ export class Repair implements OnInit {
   }
 
   deleteDeviceSparePart(oldDeviceSparePartId: number) {
+    this.sparePartEditModeActive.set(false);
+    this.form.reset();
+
     if (confirm('Do you really want to remove this spare part?')) {
       this.deviceSparePartsApi
         .deleteDeviceSparePart(this.deviceId(), oldDeviceSparePartId)

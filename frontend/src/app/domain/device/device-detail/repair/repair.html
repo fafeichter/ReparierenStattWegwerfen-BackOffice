@@ -1,50 +1,76 @@
 <div class="card" id="repair">
   <div class="card-header">Repair</div>
   <div class="card-block">
-    <ul class="list">
-      <li>
-        <div class="underline">Original defect:</div>
+    <dl>
+      <dt>Original Defect</dt>
+      <dd>
         {{ deviceDefects()?.reportedDefect | orElse }}
         <br/>
         @if (!deviceDefects()?.diagnosedDefect) {
-          <button (click)="confirmOriginalDefect()" class="btn btn-link">
-            <clr-icon shape="tasks"></clr-icon>
+          <button (click)="confirmOriginalDefect()" class="btn btn-link ml-1!">
+            <clr-icon shape="tasks"/>
             Confirm
           </button>
         }
-      </li>
-      <li class="mt-5">
-        <div class="underline">Confirmed defect:</div>
+      </dd>
+      <dt>Confirmed Defect</dt>
+      <dd>
         {{ deviceDefects()?.diagnosedDefect | orElse }}
-        <button (click)="modalOpened.set(true)" class="btn btn-link">
+        <button (click)="modalOpened.set(true)" class="btn btn-link ml-1!">
           <cds-icon role="img" shape="edit"/>
           Edit
         </button>
-      </li>
-    </ul>
+      </dd>
+    </dl>
+    <hr>
+
     <h5>Spare Parts</h5>
+
     <clr-datagrid>
       <clr-dg-column>Name</clr-dg-column>
       <clr-dg-column>Price (Netto)</clr-dg-column>
       <clr-dg-column class="right">Date</clr-dg-column>
+      <clr-dg-placeholder>No spare parts.</clr-dg-placeholder>
       <clr-dg-row *clrDgItems="let deviceSparePart of deviceSpareParts()">
         <clr-dg-cell>
           {{ deviceSparePart.name }}
           <button (click)="deleteDeviceSparePart(deviceSparePart.deviceSparePartId)" class="btn btn-link btn-icon"
                   type="button">
-            <clr-icon shape="trash" size="xs"></clr-icon>
+            <clr-icon shape="trash" size="xs"/>
           </button>
         </clr-dg-cell>
-        <clr-dg-cell>{{ deviceSparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-cell>
-        <clr-dg-cell class="right">{{ deviceSparePart.date  | date:'dd.MM.yyyy' }}</clr-dg-cell>
+        <clr-dg-cell>
+          {{ deviceSparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}
+        </clr-dg-cell>
+        <clr-dg-cell class="right">{{ deviceSparePart.date  | date:'dd.MM.yyyy HH:mm' }}</clr-dg-cell>
       </clr-dg-row>
+      @if (deviceSpareParts().length > 0) {
+        <clr-dg-row>
+          <clr-dg-cell/>
+          <clr-dg-cell class="total-cell">
+            <hr class="total">
+          </clr-dg-cell>
+          <clr-dg-cell/>
+        </clr-dg-row>
+        <clr-dg-row>
+          <clr-dg-cell/>
+          <clr-dg-cell>
+            <span class="font-bold">Sum:</span>
+            {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}
+          </clr-dg-cell>
+          <clr-dg-cell/>
+        </clr-dg-row>
+      }
 
       @if (sparePartEditModeActive()) {
         <clr-dg-row>
+          <clr-dg-cell/>
           <clr-dg-cell>
-            <form (ngSubmit)="saveSparePart()" [formGroup]="form" class="clr-form-full-width" clrForm>
+            <form (ngSubmit)="saveSparePart()" [formGroup]="form" class="clr-form-full-width" clrForm
+                  clrLayout="horizontal">
               <clr-select-container>
-                <select class="clr-col-7" clrSelect formControlName="sparePartId">
+                <label>Spare Part</label>
+                <select class="clr-col-5" clrSelect formControlName="sparePartId">
                   <option disabled selected value="null">-- Choose --</option>
                   @for (availableSparePart of availableSpareParts(); track availableSparePart.id) {
                     <option [value]="availableSparePart.id">{{ availableSparePart.name }}</option>
@@ -55,7 +81,8 @@
                 }
               </clr-select-container>
               <clr-number-input-container>
-                <input clrNumberInput formControlName="priceNetto" prefix="€" type="number"/>
+                <label>Price</label>
+                <input class="clr-col-4" clrNumberInput formControlName="priceNetto" prefix="€" type="number"/>
                 @if (form.controls.priceNetto.hasError('required')) {
                   <clr-control-error>Price is required.</clr-control-error>
                 }
@@ -85,7 +112,6 @@
           }
         </clr-dg-cell>
       </clr-dg-row>
-      <clr-dg-footer>Sum: {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-footer>
     </clr-datagrid>
   </div>
 </div>
@@ -95,11 +121,11 @@
   <div class="modal-body">
     <form (ngSubmit)="updateDefects()" [formGroup]="defectsForm" clrForm>
       <clr-textarea-container>
-        <label><span class="clr-required-mark">Original defect</span></label>
+        <label><span class="clr-required-mark">Original Defect</span></label>
         <textarea class="w-full!" clrTextarea formControlName="originalDefect" required rows="1"></textarea>
       </clr-textarea-container>
       <clr-textarea-container>
-        <label>Confirmed defect</label>
+        <label>Confirmed Defect</label>
         <textarea autofocus class="w-full!" clrTextarea formControlName="confirmedDefect" rows="1"></textarea>
       </clr-textarea-container>
     </form>

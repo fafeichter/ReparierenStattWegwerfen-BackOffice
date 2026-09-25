@@ -225,7 +225,9 @@ public class DeviceActivityService {
 	public void on(DeviceSparePartAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		DeviceSpareParts deviceSpareParts = deviceSparePartsRepository.getReferenceById(event.getDeviceSparePartId());
-		deviceActivity.setName(sparePartService.getSparePartById(deviceSpareParts.getSparePartId()).getName() + " / " + deviceSpareParts.getPriceNetto() + " €");
+		Price sparePartPriceNetto = new Price(deviceSpareParts.getPriceNetto());
+		deviceActivity.setName(sparePartService.getSparePartById(deviceSpareParts.getSparePartId()).getName() + " / " +
+			sparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(18));
 
@@ -235,7 +237,8 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSparePartDeleted event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(event.getOldDeviceSparePartName() + " / " + event.getOldDeviceSparePartPriceNetto() + " €");
+		Price oldSparePartPriceNetto = new Price(event.getOldDeviceSparePartPriceNetto());
+		deviceActivity.setName(event.getOldDeviceSparePartName() + " / " + oldSparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(19));
 

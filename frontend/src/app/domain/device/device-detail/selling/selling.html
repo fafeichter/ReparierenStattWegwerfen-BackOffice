@@ -1,11 +1,13 @@
 <div class="card" id="selling">
   <div class="card-header">Selling</div>
   <div class="card-block">
-    <ul class="list">
-      <li>
-        Price:  {{ deviceSelling()?.price | currency:'EUR':'symbol':'1.2-2' | orElse }}
-      </li>
-      <li>Buyer:
+    <dl>
+      <dt>Price</dt>
+      <dd>
+        {{ deviceSelling()?.price | currency:'EUR':'symbol':'1.2-2' | orElse }}
+      </dd>
+      <dt>Buyer</dt>
+      <dd>
         @if (deviceSelling()?.buyer) {
           <a [routerLink]="['/businesspartners', deviceSelling()?.buyer?.id]">
             {{ deviceSelling()?.buyer?.name }}
@@ -15,46 +17,66 @@
           <button
             [queryParams]="{ 'device-id':  deviceId()}"
             [routerLink]="['/businesspartners/create']"
-            class="btn btn-link">
+            class="btn btn-link ml-1!">
             <cds-icon role="img" shape="pop-out"/>
             Add
           </button>
         }
-      </li>
-      <li>Date: {{ deviceSelling()?.date | date:'dd.MM.yyyy' | orElse }}</li>
-      <hr>
-      <li>Charger included:
+      </dd>
+      <dt>Date</dt>
+      <dd>
+        {{ deviceSelling()?.date | date:'dd.MM.yyyy' | orElse }}
+      </dd>
+    </dl>
+    <hr>
+
+    <dl>
+      <dt>Charger included</dt>
+      <dd>
         @if (deviceAccessories()?.charger !== null) {
           <cds-icon [shape]="deviceAccessories()?.charger ? 'check': 'close'" role="img"/>
+          <span class="ml-1">
+            {{ deviceAccessories()?.charger ? 'Yes' : 'No' }}
+          </span>
         } @else {
           -
         }
-      </li>
-      <li>Charging cable included:
+      </dd>
+      <dt>Charging cable included</dt>
+      <dd>
         @if (deviceAccessories()?.chargingCable !== null) {
           <cds-icon [shape]="deviceAccessories()?.chargingCable ? 'check': 'close'" role="img"/>
+          <span class="ml-1">
+            {{ deviceAccessories()?.chargingCable ? 'Yes' : 'No' }}
+          </span>
         } @else {
           -
         }
-      </li>
-      <li>Original packaging included:
+      </dd>
+      <dt>Original packaging included</dt>
+      <dd>
         @if (deviceAccessories()?.originalPackaging !== null) {
           <cds-icon [shape]="deviceAccessories()?.originalPackaging ? 'check': 'close'" role="img"/>
+          <span class="ml-1">
+            {{ deviceAccessories()?.originalPackaging ? 'Yes' : 'No' }}
+          </span>
         } @else {
           -
         }
-      </li>
-      <button (click)="modalOpened.set(true)" class="btn btn-link">
-        <cds-icon role="img" shape="edit"/>
-        Edit
-      </button>
-      <hr>
-      Invoice: <a href="#">Invoice_Franz_Kornthaler.pdf</a>
-    </ul>
+      </dd>
+      <dt>
+      </dt>
+      <dd>
+        <button (click)="modalOpened.set(true)" class="btn btn-link">
+          <cds-icon role="img" shape="edit"/>
+          Edit
+        </button>
+      </dd>
+    </dl>
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="xl">
+<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="s">
   <div class="modal-title">Set selling accessories</div>
   <div class="modal-body">
     <form (ngSubmit)="updateAccessories()" [formGroup]="accessoriesForm" clrForm>
@@ -73,16 +95,16 @@
         </clr-checkbox-wrapper>
       </clr-checkbox-container>
     </form>
-    <div class="modal-footer mt-4">
-      <button (click)="modalOpened.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-      <button (click)="updateAccessories()" [disabled]="accessoriesForm.invalid || isSubmitting()"
-              class="btn btn-primary"
-              type="submit">
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-        }
-        {{ isSubmitting() ? 'Setting...' : 'Set' }}
-      </button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalOpened.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+    <button (click)="updateAccessories()" [disabled]="accessoriesForm.invalid || isSubmitting()"
+            class="btn btn-primary"
+            type="submit">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+      }
+      {{ isSubmitting() ? 'Setting...' : 'Set' }}
+    </button>
   </div>
 </clr-modal>

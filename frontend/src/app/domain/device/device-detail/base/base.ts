@@ -67,7 +67,7 @@ export class Base implements OnInit {
   deviceGrades = signal<DeviceGradeDto[]>([]);
   statusEditModeActive = signal<boolean>(false);
   tagEditModeActive = signal<boolean>(false);
-  deviceTags = signal<NamedIdDto[]>([]);
+  availableDeviceTags = signal<NamedIdDto[]>([]);
 
   serialNumberEditModeActive = signal<boolean>(false);
   batteryEditModeActive = signal<boolean>(false);
@@ -366,21 +366,23 @@ export class Base implements OnInit {
       newTagId: null,
     });
 
-    this.api.getAvailableTags(this.deviceId()).subscribe((data) => {
-      this.deviceTags.set(data);
+    this.api.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
+      this.availableDeviceTags.set(deviceTags);
     });
   }
 
   addTag() {
-    this.api.addTag(this.deviceId(), this.tagForm.controls.newTagId.value!).subscribe(() => {
+    const selectedTagId = this.tagForm.controls.newTagId.value!;
+    this.api.addTag(this.deviceId(), selectedTagId).subscribe(() => {
       this.tagEditModeActive.set(false);
 
       this.deviceBase.update((deviceBase) => {
-        let addedTag: NamedIdDto = this.deviceTags().find((deviceTag) => {
-          return deviceTag.id == this.tagForm.controls.newTagId.value!;
+        let addedTag: NamedIdDto = this.availableDeviceTags().find((deviceTag) => {
+          return deviceTag.id == selectedTagId;
         })!;
 
         this.deviceBase()?.tags!.push(addedTag);
+        this.availableDeviceTags.update((tags) => tags.filter((tag) => tag.id !== selectedTagId));
 
         return {
           ...deviceBase!,
@@ -397,6 +399,10 @@ export class Base implements OnInit {
           this.deviceBase()!.tags = this.deviceBase()!.tags!.filter(
             (deviceTag) => deviceTag.id !== tagId,
           );
+
+          this.api.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
+            this.availableDeviceTags.set(deviceTags);
+          });
 
           return {
             ...deviceBase!,
