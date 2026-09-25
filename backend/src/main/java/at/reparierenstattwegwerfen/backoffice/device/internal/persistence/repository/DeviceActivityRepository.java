@@ -17,7 +17,7 @@ public interface DeviceActivityRepository extends JpaRepository<DeviceActivity, 
 	@Query("""
 		SELECT a FROM DeviceActivity a
 		LEFT JOIN FETCH a.activityType
-		WHERE a.device.id = :deviceId
+		WHERE a.deviceId = :deviceId
 		ORDER BY a.date DESC
 		""")
 	List<DeviceActivity> getByIdWithRelations(Integer deviceId);

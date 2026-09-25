@@ -6,3 +6,7 @@ hr {
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
 }
+
+:host ::ng-deep clr-dg-column.right .datagrid-column-title {
+  justify-content: flex-end !important;
+}

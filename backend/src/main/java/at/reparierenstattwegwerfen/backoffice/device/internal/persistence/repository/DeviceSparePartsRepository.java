@@ -12,13 +12,13 @@ import java.util.List;
  * @since 29.06.2026
  */
 @Repository
-public interface DeviceSparePartRepository extends JpaRepository<DeviceSpareParts, Integer> {
+public interface DeviceSparePartsRepository extends JpaRepository<DeviceSpareParts, Integer> {
 
 	@Query("""
 		SELECT n
 		FROM DeviceSpareParts n
 		WHERE n.deviceId = :deviceId
-		ORDER BY n.date DESC
+		ORDER BY n.date
 		""")
 	List<DeviceSpareParts> getSparePartsForDevice(Integer deviceId);
 }

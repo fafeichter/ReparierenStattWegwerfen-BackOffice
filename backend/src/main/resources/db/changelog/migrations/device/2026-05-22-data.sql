@@ -92,4 +92,6 @@ VALUES (1, 'Erstellt'),
        (14, 'Kaufdatum geändert'),
        (15, 'Verkaufsdatum geändert'),
        (16, 'Notiz hinzugefügt'),
-       (17, 'Notiz gelöscht');
+       (17, 'Notiz gelöscht'),
+       (18, 'Ersatzteil hinzugefügt'),
+       (19, 'Ersatzteil gelöscht');

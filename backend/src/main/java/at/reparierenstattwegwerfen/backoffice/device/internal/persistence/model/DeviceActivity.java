@@ -31,9 +31,8 @@ public class DeviceActivity implements NamedId {
 	@Column(name = "actor")
 	private String actor;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "device_id")
-	private Device device;
+	@Column(name = "device_id")
+	private Integer deviceId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "device_activity_type_id")

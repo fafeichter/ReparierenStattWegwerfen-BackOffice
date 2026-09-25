@@ -26,11 +26,64 @@
     <clr-datagrid>
       <clr-dg-column>Name</clr-dg-column>
       <clr-dg-column>Price (Netto)</clr-dg-column>
-      <clr-dg-row *clrDgItems="let sparePart of deviceSpareParts()">
+      <clr-dg-column class="right">Date</clr-dg-column>
+      <clr-dg-row *clrDgItems="let deviceSparePart of deviceSpareParts()">
         <clr-dg-cell>
-          {{ sparePart.name }}
+          {{ deviceSparePart.name }}
+          <button (click)="deleteDeviceSparePart(deviceSparePart.deviceSparePartId)" class="btn btn-link btn-icon"
+                  type="button">
+            <clr-icon shape="trash" size="xs"></clr-icon>
+          </button>
         </clr-dg-cell>
-        <clr-dg-cell>{{ sparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-cell>
+        <clr-dg-cell>{{ deviceSparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-cell>
+        <clr-dg-cell class="right">{{ deviceSparePart.date  | date:'dd.MM.yyyy' }}</clr-dg-cell>
+      </clr-dg-row>
+
+      @if (sparePartEditModeActive()) {
+        <clr-dg-row>
+          <clr-dg-cell>
+            <form (ngSubmit)="saveSparePart()" [formGroup]="form" class="clr-form-full-width" clrForm>
+              <clr-select-container>
+                <select class="clr-col-7" clrSelect formControlName="sparePartId">
+                  <option disabled selected value="null">-- Choose --</option>
+                  @for (availableSparePart of availableSpareParts(); track availableSparePart.id) {
+                    <option [value]="availableSparePart.id">{{ availableSparePart.name }}</option>
+                  }
+                </select>
+                @if (form.controls.sparePartId.hasError('required')) {
+                  <clr-control-error>Spare Part is required.</clr-control-error>
+                }
+              </clr-select-container>
+              <clr-number-input-container>
+                <input clrNumberInput formControlName="priceNetto" prefix="€" type="number"/>
+                @if (form.controls.priceNetto.hasError('required')) {
+                  <clr-control-error>Price is required.</clr-control-error>
+                }
+                @if (form.controls.priceNetto.hasError('min')) {
+                  <clr-control-error>Please enter a valid Price.</clr-control-error>
+                }
+              </clr-number-input-container>
+              <button (click)="sparePartEditModeActive.set(false); this.form.reset()" class="btn btn-link"
+                      type="button">
+                <cds-icon role="img" shape="close"/>
+                Cancel
+              </button>
+              <button [disabled]="form.invalid" class="btn btn-link ml-1!" type="submit">
+                <cds-icon role="img" shape="check"/>
+                Save
+              </button>
+            </form>
+          </clr-dg-cell>
+        </clr-dg-row>
+      }
+      <clr-dg-row>
+        <clr-dg-cell>
+          @if (!sparePartEditModeActive()) {
+            <button (click)="sparePartEditModeActive.set(true)" class="btn btn-outline-secondary btn-sm">
+              <cds-icon shape="plus"/>
+            </button>
+          }
+        </clr-dg-cell>
       </clr-dg-row>
       <clr-dg-footer>Sum: {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}</clr-dg-footer>
     </clr-datagrid>
