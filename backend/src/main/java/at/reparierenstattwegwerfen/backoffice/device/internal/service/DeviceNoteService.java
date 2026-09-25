@@ -54,13 +54,15 @@ public class DeviceNoteService {
 
 	@Transactional
 	public void delete(Integer deviceId, Integer oldDeviceNoteId, UserDetails actor) {
-		deviceNoteRepository.deleteById(deviceId);
+		String oldDeviceNoteText = deviceNoteRepository.getReferenceById(oldDeviceNoteId).getName();
+		deviceNoteRepository.deleteById(oldDeviceNoteId);
 
 		DeviceNoteDeleted noteDeletedEvent = DeviceNoteDeleted.builder()
 			.source(this)
 			.actor(actor)
 			.deviceId(deviceId)
 			.oldNoteId(oldDeviceNoteId)
+			.oldNoteText(oldDeviceNoteText)
 			.build();
 		events.publishEvent(noteDeletedEvent);
 	}

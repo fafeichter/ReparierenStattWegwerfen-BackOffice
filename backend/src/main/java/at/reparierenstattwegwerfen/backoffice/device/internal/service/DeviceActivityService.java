@@ -211,7 +211,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceNoteDeleted event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(deviceNoteRepository.getReferenceById(event.getOldNoteId()).getName());
+		deviceActivity.setName(event.getOldNoteText());
 		deviceActivity.setDevice(deviceRepository.getReferenceById(event.getDeviceId()));
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(17));
 

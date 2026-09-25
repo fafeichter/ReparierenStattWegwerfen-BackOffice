@@ -12,10 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class DeviceNoteDeleted extends AbstractDeviceActivityEvent {
 
 	final Integer oldNoteId;
+	final String oldNoteText;
 
 	@Builder
-	public DeviceNoteDeleted(Object source, UserDetails actor, Integer deviceId, Integer oldNoteId) {
+	public DeviceNoteDeleted(Object source, UserDetails actor, Integer deviceId, Integer oldNoteId, String oldNoteText) {
 		super(source, deviceId, actor);
 		this.oldNoteId = oldNoteId;
+		this.oldNoteText = oldNoteText;
 	}
 }
