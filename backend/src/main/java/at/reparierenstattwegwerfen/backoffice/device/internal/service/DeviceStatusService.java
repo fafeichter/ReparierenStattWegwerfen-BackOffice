@@ -214,7 +214,7 @@ public class DeviceStatusService {
 
 	@Transactional
 	public void removeTag(Integer deviceId, Integer oldDeviceTagId, UserDetails actor) {
-		deviceTagsRepository.deleteById(oldDeviceTagId);
+		deviceTagsRepository.deleteByDeviceTagId(oldDeviceTagId);
 
 		DeviceTagRemoved deviceTagRemovedEvent = DeviceTagRemoved.builder()
 			.source(this)

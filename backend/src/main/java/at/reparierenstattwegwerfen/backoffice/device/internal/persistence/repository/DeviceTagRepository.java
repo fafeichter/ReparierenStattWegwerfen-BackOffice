@@ -31,7 +31,7 @@ public interface DeviceTagRepository extends JpaRepository<DeviceTag, Integer> {
 		AND NOT EXISTS (
 		  SELECT 1
 		  FROM DeviceTags dts
-		  WHERE dts.device.id = t.id
+		  WHERE dts.deviceTag.id = t.id
 		  AND dts.device.id = :deviceId
 		)
 		ORDER BY t.sortOrder
