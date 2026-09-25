@@ -7,18 +7,18 @@
       <div class="card-block">
         <div class="clr-row">
           <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
-            <h4>Bestellt / gekauft
+            <h4>Bestellt / gekauft: {{ orderedCount }}
               <app-add-device/>
             </h4>
-            <app-devices-ordered/>
+            <app-devices-ordered (devicesOrderedCount)="orderedCount = $event"/>
           </div>
           <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
-            <h4>Zum Fertigstellen</h4>
-            <app-devices-to-finish/>
+            <h4>Zum Fertigstellen: {{ toFinishCount }}</h4>
+            <app-devices-to-finish (devicesToFinishCount)="toFinishCount = $event"/>
           </div>
           <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
-            <h4>Zum Verkauf angeboten</h4>
-            <app-devices-offered-for-sale/>
+            <h4>Zum Verkauf angeboten: {{ offeredForSaleCount }}</h4>
+            <app-devices-offered-for-sale (devicesOfferedForSaleCount)="offeredForSaleCount = $event"/>
           </div>
         </div>
       </div>

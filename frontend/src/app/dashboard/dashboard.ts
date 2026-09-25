@@ -21,4 +21,8 @@ import { DevicesToFinish } from '../domain/device/devices-to-finish/devices-to-f
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
 })
-export class Dashboard {}
+export class Dashboard {
+  orderedCount = 0;
+  toFinishCount = 0;
+  offeredForSaleCount = 0;
+}

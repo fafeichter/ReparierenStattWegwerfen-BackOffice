@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { DeviceControllerService, DeviceOfferedForSaleDto } from '@api/device';
 import { ClrDatagridModule } from '@clr/angular';
 import { DatePipe } from '@angular/common';
@@ -12,12 +12,15 @@ import { RouterLink } from '@angular/router';
   templateUrl: './devices-offered-for-sale.html',
 })
 export class DevicesOfferedForSale implements OnInit {
+  devicesOfferedForSaleCount = output<number>();
+
   devicesOfferedForSale = signal<DeviceOfferedForSaleDto[]>([]);
   private devicesApi = inject(DeviceControllerService);
 
   ngOnInit(): void {
-    this.devicesApi
-      .getDevicesOfferedForSale()
-      .subscribe((devices) => this.devicesOfferedForSale.set(devices));
+    this.devicesApi.getDevicesOfferedForSale().subscribe((devices) => {
+      this.devicesOfferedForSale.set(devices);
+      this.devicesOfferedForSaleCount.emit(devices.length);
+    });
   }
 }
