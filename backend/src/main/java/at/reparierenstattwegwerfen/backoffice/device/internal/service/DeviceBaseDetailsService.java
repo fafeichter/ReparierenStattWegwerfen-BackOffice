@@ -25,14 +25,15 @@ public class DeviceBaseDetailsService {
 	@Transactional(readOnly = true)
 	public DeviceBaseDetailsDto load(Integer deviceId) {
 		Device device = deviceRepository.getByIdWithRelations(deviceId);
+		Integer deviceModelId = device.getModelId();
 
 		return DeviceBaseDetailsDto.builder()
 			.deviceId(deviceId)
 			.status(NamedIdDto.from(device.getStatus()))
-			.model(modelDetailsService.getModel(device.getModelId()))
-			.modelNumber(modelDetailsService.getModelNumber(device.getModelId()))
+			.model(modelDetailsService.getModel(deviceModelId))
+			.modelNumber(modelDetailsService.getModelNumber(deviceModelId))
 			.grade(NamedIdDto.from(device.getGrade()))
-			.technicalSpecsUrl(modelDetailsService.getTechnicalSpecsUrl(deviceId))
+			.technicalSpecsUrl(modelDetailsService.getTechnicalSpecsUrl(deviceModelId))
 			.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
 			.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
 			.storage(modelDetailsService.getStorage(device.getModelStorageId()))
