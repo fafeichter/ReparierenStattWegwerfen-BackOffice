@@ -8,6 +8,7 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persisten
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class BusinessPartnerService {
 
 	private final BusinessPartnerRepository businessPartnerRepository;
 
+	@Transactional(readOnly = true)
 	public List<BusinessPartnerDto> getAllBusinessPartners() {
 		return businessPartnerRepository.findAllBusinessPartners()
 			.stream()
@@ -35,6 +37,7 @@ public class BusinessPartnerService {
 			.toList();
 	}
 
+	@Transactional(readOnly = true)
 	public BusinessPartnerDetailDto getBusinessPartnerDetails(Integer businessPartnerId) {
 		BusinessPartner businessPartner = businessPartnerRepository.getBusinessPartnerDetails(businessPartnerId);
 

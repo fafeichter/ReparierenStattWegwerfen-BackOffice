@@ -7,7 +7,7 @@
   <clr-dg-placeholder>All done!</clr-dg-placeholder>
   <clr-dg-row *clrDgItems="let device of devicesOfferedForSale()" [clrDgItem]="device">
     <clr-dg-cell><a [routerLink]="['/devices', device.deviceId]">#{{ device.deviceId }}</a></clr-dg-cell>
-    <clr-dg-cell>{{ device.statusDate  | date:'dd.MM.yyyy' }}</clr-dg-cell>
+    <clr-dg-cell>{{ device.statusDate | date:'dd.MM.yyyy' }}</clr-dg-cell>
     <clr-dg-cell>{{ device.model?.name }}</clr-dg-cell>
     <clr-dg-row-detail *clrIfExpanded>
       Chip: {{ device.appleSilicon?.name | orElse }}<br>

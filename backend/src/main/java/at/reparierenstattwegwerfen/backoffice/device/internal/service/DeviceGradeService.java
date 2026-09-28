@@ -3,6 +3,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.service;
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository.DeviceGradeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class DeviceGradeService {
 
 	private final DeviceGradeRepository deviceGradeRepository;
 
+	@Transactional(readOnly = true)
 	public List<DeviceGradeDto> getAllStatus() {
 		return deviceGradeRepository.getAllStatus()
 			.stream()

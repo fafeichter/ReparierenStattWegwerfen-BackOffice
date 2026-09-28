@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.reposit
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Fabian Feichter
@@ -20,42 +21,50 @@ public class ModelDetailsServiceImpl implements ModelDetailsService {
 	private final ModelStorageRepository modelStorageRepository;
 	private final ModelColorRepository modelColorRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getModel(Integer modelId) {
 		return NamedIdDto.from(modelRepository.getModel(modelId));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getAppleSilicon(Integer modelAppleSiliconId) {
 		return NamedIdDto.from(modelAppleSiliconRepository.getAppleSilicon(modelAppleSiliconId));
 
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getUnifiedMemory(Integer modelUnifiedMemoryId) {
 		return NamedIdDto.from(modelAppleSiliconUnifiedMemoryRepository.getUnifiedMemory(modelUnifiedMemoryId));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getStorage(Integer modelStorageId) {
 		return NamedIdDto.from(modelStorageRepository.getStorage(modelStorageId));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getColor(Integer modelColorId) {
 		return NamedIdDto.from(modelColorRepository.getColor(modelColorId));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public String getTechnicalSpecsUrl(Integer modelId) {
 		return modelRepository.getModel(modelId).getTechnicalSpecsUrl();
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public String getModelNumber(Integer modelId) {
 		return modelRepository.getModel(modelId).getModelNumber();
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getModelSeries(Integer modelId) {
 		return NamedIdDto.from(modelRepository.getModel(modelId).getModelSeries());

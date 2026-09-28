@@ -4,6 +4,7 @@ import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.reposit
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class ModelAppleSiliconService {
 
 	private final ModelAppleSiliconRepository modelAppleSiliconRepository;
 
+	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAllAppleSiliconsForModel(Integer modelId) {
 		return modelAppleSiliconRepository.getAppleSiliconsForModel(modelId).stream()
 			.map(NamedIdDto::from)

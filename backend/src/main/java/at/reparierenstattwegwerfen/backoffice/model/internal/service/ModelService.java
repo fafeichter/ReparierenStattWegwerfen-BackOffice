@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.model.internal.persistence.reposit
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.unit.DataUnit;
 
 import java.util.List;
@@ -22,10 +23,12 @@ public class ModelService {
 	private final ModelMatchExtractor modelMatchExtractor;
 	private final ModelResolutionService modelResolutionService;
 
+	@Transactional(readOnly = true)
 	public List<ModelDto> getAllMacBooks() {
 		return toModelDtos(modelRepository.findAllMacbooks());
 	}
 
+	@Transactional(readOnly = true)
 	public List<ModelDto> getAllIPads() {
 		return toModelDtos(modelRepository.findAllIPads());
 	}
@@ -42,6 +45,7 @@ public class ModelService {
 			.toList();
 	}
 
+	@Transactional(readOnly = true)
 	public ModelDetailDto getModelDetails(Integer modelId) {
 		Model model = modelRepository.getModelDetails(modelId);
 
@@ -107,6 +111,7 @@ public class ModelService {
 			.build();
 	}
 
+	@Transactional(readOnly = true)
 	public ResolvedModelMatch getModelDetailsFromAd(String adUrl) {
 		ModelMatchResponse rawAiResponse = modelMatchExtractor.extractModelDetails(adUrl);
 		return modelResolutionService.resolveToDomainResponse(rawAiResponse);

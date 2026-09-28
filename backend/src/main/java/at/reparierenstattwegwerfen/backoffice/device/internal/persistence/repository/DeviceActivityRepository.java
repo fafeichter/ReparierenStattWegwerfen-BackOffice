@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -21,4 +22,7 @@ public interface DeviceActivityRepository extends JpaRepository<DeviceActivity, 
 		ORDER BY a.date DESC
 		""")
 	List<DeviceActivity> getByIdWithRelations(Integer deviceId);
+
+	@Query("SELECT MAX(a.date) FROM DeviceActivity a WHERE a.deviceId = :deviceId")
+	LocalDateTime getLastActivityDateForDevice(Integer deviceId);
 }

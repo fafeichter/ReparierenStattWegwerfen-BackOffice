@@ -4,6 +4,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.reposi
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class DeviceBatteryStatusService {
 
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 
-
+	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAllStatus() {
 		return deviceBatteryStatusRepository.getAllStatus()
 			.stream()

@@ -6,6 +6,7 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persisten
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class BusinessPartnerAddressCountryService {
 
 	private final BusinessPartnerAddressCountryRepository addressCountryRepository;
 
+	@Transactional(readOnly = true)
 	public List<BusinessPartnerAddressCountryDto> getAllCountries() {
 		return addressCountryRepository.findAll(Sort.by(Sort.Direction.ASC, BusinessPartnerAddressCountry_.SORT_ORDER))
 			.stream()

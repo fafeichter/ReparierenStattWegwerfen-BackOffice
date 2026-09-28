@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persisten
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Fabian Feichter
@@ -16,6 +17,7 @@ public class BusinessPartnerDetailsServiceImpl implements BusinessPartnerDetails
 
 	private final BusinessPartnerRepository businessPartnerRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getBusinessPartner(Integer businessPartnerId) {
 		return NamedIdDto.from(businessPartnerRepository.getBusinessPartner(businessPartnerId));

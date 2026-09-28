@@ -1,1 +1,47 @@
-<p>devices works!</p>
+<clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading()">
+  <clr-dg-column [style.width.px]="250">
+    ID
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250">
+    Model
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250">
+    Chip
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250">
+    Unified Memory
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250">
+    Storage
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250">
+    Last activity
+  </clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let device of devices()" [clrDgItem]="device">
+    <clr-dg-cell>
+      <a [routerLink]="['/devices', device.deviceId]">
+        {{ device.deviceId }}
+      </a>
+    </clr-dg-cell>
+    <clr-dg-cell>{{ device.model?.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ device.appleSilicon?.name | orElse }}</clr-dg-cell>
+    <clr-dg-cell>{{ device.unifiedMemory?.name | orElse }}</clr-dg-cell>
+    <clr-dg-cell>{{ device.storage?.name | orElse }}</clr-dg-cell>
+    <clr-dg-cell>{{ device.lastActivity | date:'dd.MM.yyyy HH:mm' }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination
+      #pagination
+      [(clrDgPage)]="page"
+      [clrDgLastPage]="lastPage()"
+      [clrDgPageSize]="pageSize()"
+      [clrDgTotalItems]="totalItems()">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
+        Elements per page
+      </clr-dg-page-size>
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ pagination.totalItems }} elements
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>

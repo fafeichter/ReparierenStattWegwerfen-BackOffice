@@ -14,6 +14,7 @@ import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSe
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
@@ -74,6 +75,7 @@ public class BusinessPartnerActivityService {
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}
 
+	@Transactional(readOnly = true)
 	public List<BusinessPartnerActivityDto> getActivitiesForBusinessPartner(Integer businessPartnerId) {
 		return businessPartnerActivityRepository.getByIdWithRelations(businessPartnerId).stream().map(activity ->
 				BusinessPartnerActivityDto.builder()

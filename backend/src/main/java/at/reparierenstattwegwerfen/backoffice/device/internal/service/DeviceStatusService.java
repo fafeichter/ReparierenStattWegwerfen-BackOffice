@@ -40,6 +40,7 @@ public class DeviceStatusService {
 	private final ApplicationEventPublisher events;
 	private final ModelDetailsService modelDetailsService;
 
+	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAllNonSystemStatus() {
 		return deviceStatusRepository.getAllNonSystemStatus()
 			.stream()
@@ -225,6 +226,7 @@ public class DeviceStatusService {
 		events.publishEvent(deviceTagRemovedEvent);
 	}
 
+	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAvailableTagsForDevice(Integer deviceId) {
 		Integer deviceModelId = deviceRepository.getReferenceById(deviceId).getModelId();
 		Integer deviceModelSeriesId = modelDetailsService.getModelSeries(deviceModelId).getId();

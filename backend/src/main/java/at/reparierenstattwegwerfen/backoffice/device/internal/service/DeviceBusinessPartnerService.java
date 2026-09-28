@@ -27,6 +27,7 @@ public class DeviceBusinessPartnerService {
 	private final BusinessPartnerService businessPartnerService;
 	private final ApplicationEventPublisher events;
 
+	@Transactional(readOnly = true)
 	public DeviceBusinesspartnerDto getDevicesOfBusinessPartner(Integer businessPartnerId) {
 		List<NamedIdDto> soldDevices = deviceRepository.findBySellerBusinessPartnerId(businessPartnerId).stream()
 			.map(NamedIdDto::from)

@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.sparepart.SparePartService;
 import at.reparierenstattwegwerfen.backoffice.sparepart.internal.persistence.repository.SparePartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -19,11 +20,13 @@ public class SparePartServiceImpl implements SparePartService {
 
 	private final SparePartRepository sparePartRepository;
 
+	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getSparePartById(Integer sparePartId) {
 		return NamedIdDto.from(sparePartRepository.getReferenceById(sparePartId));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<NamedIdDto> getSparePartsForModelSeriesExcluding(Integer modelSeriesId, Set<Integer> excludeIds) {
 		return sparePartRepository.getSparePartsForModelSeriesExcluding(modelSeriesId, excludeIds).stream()

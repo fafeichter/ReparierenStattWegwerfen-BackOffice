@@ -9,9 +9,11 @@ import at.reparierenstattwegwerfen.backoffice.sparepart.SparePartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
@@ -245,6 +247,7 @@ public class DeviceActivityService {
 		deviceActivityRepository.save(deviceActivity);
 	}
 
+	@Transactional(readOnly = true)
 	public List<DeviceActivityDto> getActivitiesForDevice(Integer deviceId) {
 		return deviceActivityRepository.getByIdWithRelations(deviceId).stream().map(activity ->
 				DeviceActivityDto.builder()
@@ -255,5 +258,10 @@ public class DeviceActivityService {
 					.date(activity.getDate())
 					.build())
 			.toList();
+	}
+
+	@Transactional(readOnly = true)
+	public LocalDateTime getLastActivityDateForDevice(Integer deviceId) {
+		return deviceActivityRepository.getLastActivityDateForDevice(deviceId);
 	}
 }

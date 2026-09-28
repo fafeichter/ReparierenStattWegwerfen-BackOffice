@@ -36,6 +36,7 @@ public class DeviceSparePartService {
 	private final ModelDetailsService modelDetailsService;
 	private final ApplicationEventPublisher events;
 
+	@Transactional(readOnly = true)
 	public List<DeviceSparePartDto> load(Integer deviceId) {
 		return deviceSparePartsRepository.getSparePartsForDevice(deviceId)
 			.stream()
@@ -50,6 +51,7 @@ public class DeviceSparePartService {
 			}).toList();
 	}
 
+	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAvailableSparePartsForDevice(@NonNull Integer deviceId) {
 		Set<Integer> alreadyAddedSparePartsIds = deviceSparePartsRepository
 			.getSparePartsForDevice(deviceId).stream()
