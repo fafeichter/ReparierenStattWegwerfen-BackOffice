@@ -1,11 +1,11 @@
 import { Component, inject, LOCALE_ID, OnInit, signal, VERSION } from '@angular/core';
-import { buildInfo } from '../../../environments/build.info';
+import { buildInfo } from '../../environments/build.info';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { map } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { AppInfoControllerService, AppInfoDto } from '@api/application';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-technical-details',

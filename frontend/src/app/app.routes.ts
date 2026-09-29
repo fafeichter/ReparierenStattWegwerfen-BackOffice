@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Dashboard } from './dashboard/dashboard';
 import { AutoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
 import { ModelDetail } from './domain/model/model-detail/model-detail';
-import { TechnicalDetails } from './layout/technical-details/technical-details';
+import { TechnicalDetails } from './technical-details/technical-details';
 import { BusinesspartnerDetail } from './domain/businesspartner/businesspartner-detail/businesspartner-detail';
 import { DeviceDetail } from './domain/device/device-detail/device-detail';
 import { BusinesspartnerCreate } from './domain/businesspartner/businesspartner-create/businesspartner-create';
