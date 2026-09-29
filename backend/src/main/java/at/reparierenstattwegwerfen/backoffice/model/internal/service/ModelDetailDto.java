@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 import java.math.BigDecimal;
+import java.time.YearMonth;
 import java.util.List;
 
 /**
@@ -39,8 +40,7 @@ public class ModelDetailDto {
 	String technicalSpecsUrl;
 
 	@NotNull
-	@Positive
-	Short releaseYear;
+	YearMonth releaseDate;
 
 	@NotNull
 	@Positive

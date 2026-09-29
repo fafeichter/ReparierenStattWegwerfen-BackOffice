@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.unit.DataUnit;
 
+import java.time.YearMonth;
 import java.util.List;
 
 /**
@@ -55,7 +56,7 @@ public class ModelService {
 			.series(model.getModelSeries().getName())
 			.modelNumber(model.getModelNumber())
 			.technicalSpecsUrl(model.getTechnicalSpecsUrl())
-			.releaseYear(model.getReleaseYear())
+			.releaseDate(YearMonth.of(model.getReleaseYear(), model.getReleaseMonth()))
 			.displaySize(model.getDisplaySize())
 			.displaySizeExact(model.getDisplaySizeExact())
 			.colors(model.getAvailableColors().stream()

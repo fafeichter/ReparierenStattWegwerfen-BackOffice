@@ -7,8 +7,9 @@ import {
   signal,
 } from '@angular/core';
 import { ModelControllerService, ModelDetailDto, SiliconDto, SizeDto } from '@api/model';
-import { ActivatedRoute } from '@angular/router';
-import { ClrLabel } from '@clr/angular';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/angular';
+import { DatePipe } from '@angular/common';
 
 interface SizeAvailability {
   id: number;
@@ -19,12 +20,18 @@ interface SizeAvailability {
 
 @Component({
   selector: 'app-model-detail',
-  imports: [ClrLabel],
+  imports: [ClrLabel, ClrIcon, DatePipe, ClrVerticalNavModule, RouterLink],
   templateUrl: './model-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './model-detail.css',
+  standalone: true,
 })
 export class ModelDetail implements OnInit {
+  navItems = [
+    { id: 'model', label: 'Model' },
+    { id: 'hardware', label: 'Hardware' },
+    { id: 'features', label: 'Features' },
+  ];
   protected readonly model = signal<ModelDetailDto | undefined>(undefined);
   /** Colors sorted by name. */
   protected readonly colors = computed(() =>
@@ -63,6 +70,10 @@ export class ModelDetail implements OnInit {
   ngOnInit(): void {
     const modelId = Number(this.route.snapshot.paramMap.get('modelId'));
     this.api.getModelDetails(modelId).subscribe((data) => this.model.set(data));
+  }
+
+  scrollToSection(sectionId: string): void {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   }
 
   private buildAvailability(pick: (s: SiliconDto) => SizeDto[] | undefined): SizeAvailability[] {
