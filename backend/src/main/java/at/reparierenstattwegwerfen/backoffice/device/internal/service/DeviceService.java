@@ -78,11 +78,11 @@ public class DeviceService {
 		return deviceRepository.findAll(PageRequest.of(pageNumber - 1, pageSize, Sort.by("id")))
 			.map(device -> DeviceDto.builder()
 				.deviceId(device.getId())
+				.status(NamedIdDto.from(device.getStatus()))
 				.model(modelDetailsService.getModel(device.getModelId()))
 				.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
 				.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
 				.storage(modelDetailsService.getStorage(device.getModelStorageId()))
-				.status(NamedIdDto.from(device.getStatus()))
 				.lastActivity(deviceActivityService.getLastActivityDateForDevice(device.getId()))
 				.build());
 	}

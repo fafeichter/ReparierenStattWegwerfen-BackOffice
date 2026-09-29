@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 public class DeviceDto {
 
 	private Integer deviceId;
+	private NamedIdDto status;
 	private NamedIdDto model;
 	private NamedIdDto appleSilicon;
 	private NamedIdDto unifiedMemory;
 	private NamedIdDto storage;
-	private NamedIdDto status;
 	private LocalDateTime lastActivity;
 }

@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { DeviceDto, DeviceSearchControllerService } from '@api/device';
-import { ClrDatagridModule, ClrDatagridStateInterface } from '@clr/angular';
+import { ClrDatagridModule, ClrDatagridStateInterface, ClrLabel } from '@clr/angular';
 import { OrElsePipe } from '../../../pipes/or-else-pipe';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-devices',
-  imports: [ClrDatagridModule, OrElsePipe, DatePipe, RouterLink],
+  imports: [ClrDatagridModule, OrElsePipe, DatePipe, RouterLink, ClrLabel],
   templateUrl: './devices.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './devices.css',

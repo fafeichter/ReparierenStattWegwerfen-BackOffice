@@ -1,0 +1,3 @@
+clr-dg-column.right .datagrid-column-title {
+  justify-content: flex-end !important;
+}
