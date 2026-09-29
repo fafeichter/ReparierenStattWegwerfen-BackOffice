@@ -8,11 +8,15 @@
     <cds-icon clrVerticalNavIcon shape="computer"/>
     Devices
   </a>
-  <div class="nav-divider"></div>
   <a [routerLink]="['/businesspartners']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="user"/>
     Business Partners
   </a>
+  <a [routerLink]="['/spareparts']" clrVerticalNavLink routerLinkActive="active">
+    <cds-icon clrVerticalNavIcon shape="scatter-plot"/>
+    Spare Parts
+  </a>
+  <div class="nav-divider"></div>
   <a [queryParams]="{ type: 'macbook' }" [routerLink]="['/models']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="pod"/>
     Models
