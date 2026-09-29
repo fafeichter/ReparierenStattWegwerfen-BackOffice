@@ -12,6 +12,7 @@ import { ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/angular';
 import { DatePipe } from '@angular/common';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
+import { scrollToSection } from '../../../clarity-addons/js/scrollspy';
 
 export const modelTitle: TitleFn = (route) => {
   const modelId = route.paramMap.get('modelId')!;
@@ -75,16 +76,13 @@ export class ModelDetail implements OnInit {
   protected readonly storageOptions = computed(() =>
     this.buildAvailability((s) => s.storageOptions),
   );
+  protected readonly scrollToSection = scrollToSection;
   private api = inject(ModelControllerService);
   private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     const modelId = Number(this.route.snapshot.paramMap.get('modelId'));
     this.api.getModelDetails(modelId).subscribe((data) => this.model.set(data));
-  }
-
-  scrollToSection(sectionId: string): void {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   }
 
   private buildAvailability(pick: (s: SiliconDto) => SizeDto[] | undefined): SizeAvailability[] {

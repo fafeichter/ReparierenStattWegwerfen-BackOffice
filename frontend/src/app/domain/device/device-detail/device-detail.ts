@@ -23,6 +23,7 @@ import { Buying } from './buying/buying';
 import { RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { TitleFn } from '../../../layout/route-title.service';
+import { scrollToSection } from '../../../clarity-addons/js/scrollspy';
 
 export const deviceTitle: TitleFn = (route) => {
   const deviceId = route.paramMap.get('deviceId')!;
@@ -73,8 +74,5 @@ export class DeviceDetail {
     { id: 'notes', label: 'Notes' },
     { id: 'activity', label: 'Activity' },
   ];
-
-  scrollToSection(sectionId: string): void {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  }
+  protected readonly scrollToSection = scrollToSection;
 }
