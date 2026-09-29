@@ -49,7 +49,12 @@ The following domains have been identified:
 ## 📌 Development Milestones
 
 - **Milestone 1 (Target: Q4 2026):** Replace the existing Apple Numbers spreadsheet with a modern web application based on Domain-Driven Design (DDD) principles.
-- **Milestone 2 (Target: 2027)**: Integrate the Accounting domain.
+- **Milestone 2 (Target: 2027)**: Add the Accounting domain.
+
+Not planned in yet:
+
+- Implement the Spare Parts domain.
+- Send updates to client via WebSocket or similar instead of reloading the data.
 
 _Every milestone includes maintaining code health and stability, as well as strictly adhering to DDD principles._
 
