@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
+import { filter, startWith } from 'rxjs';
 import { BreadcrumbItem, ClrBreadcrumbsModule } from '@clr/angular';
 
 @Component({
@@ -12,14 +13,19 @@ import { BreadcrumbItem, ClrBreadcrumbsModule } from '@clr/angular';
 })
 export class Breadcrumbs {
   items: BreadcrumbItem[] = [];
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      this.items = this.buildBreadcrumbs();
-    });
+  constructor() {
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        startWith(null), // build once on init, in case NavigationEnd already fired
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => {
+        this.items = this.buildBreadcrumbs();
+      });
   }
 
   private buildBreadcrumbs(): BreadcrumbItem[] {
@@ -32,21 +38,26 @@ export class Breadcrumbs {
       route = route.firstChild;
 
       const routeUrl = route.snapshot.url.map((segment) => segment.path).join('/');
-
       if (routeUrl) {
         url += `/${routeUrl}`;
       }
 
-      const label = route.snapshot.data['breadcrumb'];
+      // routeConfig.data = only what THIS route defines (no inheritance from the parent)
+      const template = route.snapshot.routeConfig?.data?.['breadcrumb'] as string | undefined;
 
-      if (label) {
+      if (template) {
         breadcrumbs.push({
-          label,
+          label: this.resolveLabel(template, route.snapshot),
           routerLink: url || '/',
         });
       }
     }
 
     return breadcrumbs;
+  }
+
+  /** Replaces ":param" tokens with the value from the route params, e.g. "#:deviceId" -> "#2" */
+  private resolveLabel(template: string, snapshot: ActivatedRouteSnapshot): string {
+    return template.replace(/:(\w+)/g, (_, param) => snapshot.paramMap.get(param) ?? '');
   }
 }

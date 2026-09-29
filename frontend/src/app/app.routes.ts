@@ -26,9 +26,6 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: Dashboard,
-        data: {
-          breadcrumb: 'Dashboard',
-        },
       },
       {
         path: 'devices',
@@ -41,15 +38,13 @@ export const routes: Routes = [
           {
             path: ':deviceId',
             component: DeviceDetail,
-            data: { breadcrumb: 'Details' },
+            data: { breadcrumb: '#:deviceId' },
           },
         ],
       },
       {
         path: 'businesspartners',
-        data: {
-          breadcrumb: 'Business Partners',
-        },
+        data: { breadcrumb: 'Business Partners' },
         children: [
           {
             path: '',
@@ -62,7 +57,7 @@ export const routes: Routes = [
           {
             path: ':businessPartnerId',
             component: BusinesspartnerDetail,
-            data: { breadcrumb: 'Details' },
+            data: { breadcrumb: ':businessPartnerId' },
           },
         ],
       },
@@ -77,30 +72,24 @@ export const routes: Routes = [
           {
             path: ':modelId',
             component: ModelDetail,
-            data: { breadcrumb: 'Details' },
+            data: { breadcrumb: ':modelId' },
           },
         ],
       },
       {
         path: 'spareparts',
         component: Spareparts,
-        data: {
-          breadcrumb: 'Spare Parts',
-        },
+        data: { breadcrumb: 'Spare Parts' },
       },
       {
         path: 'accounting',
         component: Accounting,
-        data: {
-          breadcrumb: 'Accounting',
-        },
+        data: { breadcrumb: 'Accounting' },
       },
       {
         path: 'technical-details',
         component: TechnicalDetails,
-        data: {
-          breadcrumb: 'Technical details',
-        },
+        data: { breadcrumb: 'Technical details' },
       },
     ],
   },
