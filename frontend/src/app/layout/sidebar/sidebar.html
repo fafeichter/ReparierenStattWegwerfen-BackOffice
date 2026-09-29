@@ -17,7 +17,13 @@
     Spare Parts
   </a>
   <div class="nav-divider"></div>
-  <a [queryParams]="{ type: 'macbook' }" [routerLink]="['/models']" clrVerticalNavLink routerLinkActive="active">
+  <a [queryParams]="{ type: 'macbook' }" [routerLinkActiveOptions]="{
+    paths: 'subset',
+    queryParams: 'ignored',
+    fragment: 'ignored',
+    matrixParams: 'ignored'
+  }" [routerLink]="['/models']" clrVerticalNavLink
+     routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="pod"/>
     Models
   </a>
