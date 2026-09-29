@@ -69,7 +69,10 @@ _Every milestone includes maintaining code health and stability, as well as stri
 
 ## 👨‍💻️ Development Setup
 
-Executing `generateDoc` to render the project's module diagrams requires Graphviz. You can install the dependency via Homebrew:
+To run the application, install Docker and execute the preconfigured Angular and Spring Boot run configurations
+directly within IntelliJ IDEA.
+
+Optional: Rendering the project module diagram shown above requires `Graphviz`. You can install it via Homebrew:
 
 ```bash
 brew install graphviz
