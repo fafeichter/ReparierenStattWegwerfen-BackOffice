@@ -5,6 +5,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Activity } from './activity/activity';
 import { Contact } from './contact/contact';
 import { Devices } from './devices/devices';
+import { TitleFn } from '../../../layout/route-title.service';
+import { map } from 'rxjs';
+import { BusinessPartnerControllerService } from '@api/businesspartner';
+
+export const businessPartnerTitle: TitleFn = (route) => {
+  const businessPartnerId = route.paramMap.get('businessPartnerId')!;
+  const api = inject(BusinessPartnerControllerService);
+
+  return api
+    .getBusinessPartnerDetails(Number(businessPartnerId!))
+    .pipe(map((businessPartner) => `${businessPartner.name}`));
+};
 
 @Component({
   selector: 'app-businesspartner-detail',
@@ -20,6 +32,7 @@ import { Devices } from './devices/devices';
   ],
   templateUrl: './businesspartner-detail.html',
   styleUrl: './businesspartner-detail.css',
+  standalone: true,
 })
 export class BusinesspartnerDetail {
   navItems = [

@@ -2,15 +2,6 @@
   <div class="card" id="contact">
     <div class="card-header">Contact</div>
     <div class="card-block">
-      <div class="card-title">Name</div>
-      <div class="card-text">
-        {{ businessPartner.name }}
-        @if (businessPartner.scammer) {
-          <clr-label clrColor="danger" clrText="Scammer!" clrType="solid"></clr-label>
-        }
-      </div>
-    </div>
-    <div class="card-block">
       <div class="card-title">Address</div>
       <div class="card-text">
         {{ businessPartner.address?.street | orElse }} {{ businessPartner.address?.houseNumber  | orElse }}<br>

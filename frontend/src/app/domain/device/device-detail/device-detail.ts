@@ -1,5 +1,5 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { DeviceBaseControllerService, DeviceBaseDetailsDto } from '@api/device';
+import { Component, inject, input } from '@angular/core';
+import { DeviceBaseControllerService } from '@api/device';
 import {
   ClrCommonFormsModule,
   ClrDatagridModule,
@@ -21,6 +21,17 @@ import { Activity } from './activity/activity';
 import { Selling } from './selling/selling';
 import { Buying } from './buying/buying';
 import { RouterLink } from '@angular/router';
+import { map } from 'rxjs';
+import { TitleFn } from '../../../layout/route-title.service';
+
+export const deviceTitle: TitleFn = (route) => {
+  const deviceId = route.paramMap.get('deviceId')!;
+  const api = inject(DeviceBaseControllerService);
+
+  return api
+    .getDeviceBaseDetails(Number(deviceId!))
+    .pipe(map((device) => `#${deviceId} - ${device.model.name}`));
+};
 
 @Component({
   selector: 'app-device-detail',
@@ -50,11 +61,10 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   styleUrl: './device-detail.css',
 })
-export class DeviceDetail implements OnInit {
+export class DeviceDetail {
   deviceId = input.required<number, string>({
     transform: (value: string) => Number(value),
   });
-  deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
   navItems = [
     { id: 'device', label: 'Device' },
     { id: 'buying', label: 'Buying' },
@@ -63,13 +73,6 @@ export class DeviceDetail implements OnInit {
     { id: 'notes', label: 'Notes' },
     { id: 'activity', label: 'Activity' },
   ];
-  private baseApi = inject(DeviceBaseControllerService);
-
-  ngOnInit(): void {
-    this.baseApi
-      .getDeviceBaseDetails(this.deviceId())
-      .subscribe((data) => this.deviceBase.set(data));
-  }
 
   scrollToSection(sectionId: string): void {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });

@@ -1,35 +1,38 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
-import { filter, startWith } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { combineLatest, filter, map, Observable, of, startWith, switchMap } from 'rxjs';
 import { BreadcrumbItem, ClrBreadcrumbsModule } from '@clr/angular';
+import { RouteTitleService } from '../route-title.service'; // adjust to where the file lives
 
 @Component({
   selector: 'app-breadcrumbs',
   imports: [ClrBreadcrumbsModule],
   templateUrl: './breadcrumbs.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './breadcrumbs.css',
+  standalone: true,
 })
 export class Breadcrumbs {
-  items: BreadcrumbItem[] = [];
-  private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
+  readonly items = signal<BreadcrumbItem[]>([]);
+
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly routeTitle = inject(RouteTitleService);
 
   constructor() {
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         startWith(null), // build once on init, in case NavigationEnd already fired
+        // switchMap cancels the previous build if the user navigates again
+        switchMap(() => this.buildBreadcrumbs$()),
         takeUntilDestroyed(),
       )
-      .subscribe(() => {
-        this.items = this.buildBreadcrumbs();
-      });
+      .subscribe((items) => this.items.set(items));
   }
 
-  private buildBreadcrumbs(): BreadcrumbItem[] {
-    const breadcrumbs: BreadcrumbItem[] = [];
+  private buildBreadcrumbs$(): Observable<BreadcrumbItem[]> {
+    const crumbs: Observable<BreadcrumbItem>[] = [];
 
     let route = this.activatedRoute.root;
     let url = '';
@@ -42,22 +45,14 @@ export class Breadcrumbs {
         url += `/${routeUrl}`;
       }
 
-      // routeConfig.data = only what THIS route defines (no inheritance from the parent)
-      const template = route.snapshot.routeConfig?.data?.['breadcrumb'] as string | undefined;
-
-      if (template) {
-        breadcrumbs.push({
-          label: this.resolveLabel(template, route.snapshot),
-          routerLink: url || '/',
-        });
+      const label$ = this.routeTitle.resolve(route.snapshot);
+      if (label$) {
+        const routerLink = url || '/';
+        crumbs.push(label$.pipe(map((label) => ({ label, routerLink }))));
       }
     }
 
-    return breadcrumbs;
-  }
-
-  /** Replaces ":param" tokens with the value from the route params, e.g. "#:deviceId" -> "#2" */
-  private resolveLabel(template: string, snapshot: ActivatedRouteSnapshot): string {
-    return template.replace(/:(\w+)/g, (_, param) => snapshot.paramMap.get(param) ?? '');
+    // combineLatest of an empty array completes without emitting
+    return crumbs.length ? combineLatest(crumbs) : of([]);
   }
 }

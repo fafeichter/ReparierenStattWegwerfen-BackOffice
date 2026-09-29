@@ -9,6 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [DatePipe],
   templateUrl: './activity.html',
   styleUrl: './activity.css',
+  standalone: true,
 })
 export class Activity implements OnInit {
   deviceId = input.required<number>();

@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './devices.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './devices.css',
+  standalone: true,
 })
 export class Devices {
   protected readonly loading = signal(true);

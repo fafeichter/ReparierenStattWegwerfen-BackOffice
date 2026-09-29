@@ -44,6 +44,7 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
   ],
   templateUrl: './add-device.html',
   styleUrl: './add-device.css',
+  standalone: true,
 })
 export class AddDevice {
   @ViewChild('input') urlInput!: ElementRef<HTMLInputElement>;

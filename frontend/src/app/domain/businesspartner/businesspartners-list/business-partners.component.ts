@@ -10,6 +10,7 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
   templateUrl: './business-partners.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './business-partners.component.css',
+  standalone: true,
 })
 export class BusinessPartners {
   private api = inject(BusinessPartnerControllerService);

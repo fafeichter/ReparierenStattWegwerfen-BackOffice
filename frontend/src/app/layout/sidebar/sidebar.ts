@@ -17,6 +17,7 @@ import { map } from 'rxjs';
   templateUrl: './sidebar.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sidebar.css',
+  standalone: true,
 })
 export class Sidebar implements AfterViewInit {
   @ViewChild(ClrVerticalNav) verticalNav!: ClrVerticalNav;

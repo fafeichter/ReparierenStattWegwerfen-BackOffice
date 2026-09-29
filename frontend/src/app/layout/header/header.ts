@@ -11,6 +11,7 @@ import { map } from 'rxjs';
   templateUrl: './header.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './header.css',
+  standalone: true,
 })
 export class Header {
   private readonly oidcSecurityService = inject(OidcSecurityService);

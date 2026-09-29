@@ -8,6 +8,7 @@ import { DeviceControllerService, DeviceToFinishDto } from '@api/device';
   imports: [ClrDatagridModule, OrElsePipe, RouterLink],
   selector: 'app-devices-to-finish',
   styleUrl: './devices-to-finish.css',
+  standalone: true,
   templateUrl: './devices-to-finish.html',
 })
 export class DevicesToFinish implements OnInit {

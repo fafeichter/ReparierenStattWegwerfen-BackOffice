@@ -22,6 +22,7 @@ import { map } from 'rxjs';
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.css',
+  standalone: true,
 })
 export class App {
   private readonly oidc = inject(OidcSecurityService);

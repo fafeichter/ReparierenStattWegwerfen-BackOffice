@@ -20,6 +20,7 @@ import { DevicesToFinish } from '../domain/device/devices-to-finish/devices-to-f
   templateUrl: './dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
+  standalone: true,
 })
 export class Dashboard {
   orderedCount = 0;

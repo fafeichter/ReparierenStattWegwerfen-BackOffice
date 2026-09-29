@@ -34,6 +34,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   ],
   templateUrl: './selling.html',
   styleUrl: './selling.css',
+  standalone: true,
 })
 export class Selling implements OnInit {
   deviceId = input.required<number>();

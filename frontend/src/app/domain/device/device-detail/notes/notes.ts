@@ -23,6 +23,7 @@ import { DeviceNoteDto, DeviceNotesControllerService } from '@api/device';
   ],
   templateUrl: './notes.html',
   styleUrl: './notes.css',
+  standalone: true,
 })
 export class Notes implements OnInit {
   deviceId = input.required<number>();

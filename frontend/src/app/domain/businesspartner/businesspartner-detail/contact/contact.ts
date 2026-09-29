@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { ClrCommonFormsModule, ClrFileInputModule, ClrIcon, ClrLabel } from '@clr/angular';
+import { ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from '@clr/angular';
 import {
   FormControl,
   FormGroup,
@@ -20,13 +20,13 @@ import { ActivatedRoute, Router } from '@angular/router';
     ClrCommonFormsModule,
     ClrFileInputModule,
     ClrIcon,
-    ClrLabel,
     FormsModule,
     OrElsePipe,
     ReactiveFormsModule,
   ],
   selector: 'app-contact',
   styleUrl: './contact.css',
+  standalone: true,
   templateUrl: './contact.html',
 })
 export class Contact implements OnInit {

@@ -16,6 +16,7 @@ export enum ModelTab {
   imports: [ClrTabsModule, MacbookList, IpadList],
   templateUrl: './models.html',
   styleUrl: './models.css',
+  standalone: true,
 })
 export class Models {
   protected readonly ModelTab = ModelTab;

@@ -10,6 +10,17 @@ import { ModelControllerService, ModelDetailDto, SiliconDto, SizeDto } from '@ap
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/angular';
 import { DatePipe } from '@angular/common';
+import { TitleFn } from '../../../layout/route-title.service';
+import { map } from 'rxjs';
+
+export const modelTitle: TitleFn = (route) => {
+  const modelId = route.paramMap.get('modelId')!;
+  const api = inject(ModelControllerService);
+
+  return api
+    .getModelDetails(Number(modelId!))
+    .pipe(map((model) => `${model.modelNumber} | ${model.name}`));
+};
 
 interface SizeAvailability {
   id: number;

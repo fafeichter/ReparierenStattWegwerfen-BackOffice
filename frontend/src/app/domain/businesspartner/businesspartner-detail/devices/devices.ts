@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   selector: 'app-devices',
   styleUrl: './devices.css',
+  standalone: true,
   templateUrl: './devices.html',
 })
 export class Devices implements OnInit {

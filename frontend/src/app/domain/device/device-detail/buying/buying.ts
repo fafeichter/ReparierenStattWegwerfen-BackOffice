@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   templateUrl: './buying.html',
   styleUrl: './buying.css',
+  standalone: true,
 })
 export class Buying implements OnInit {
   deviceId = input.required<number>();

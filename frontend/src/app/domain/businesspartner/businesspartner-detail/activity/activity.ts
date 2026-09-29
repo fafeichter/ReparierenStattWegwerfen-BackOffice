@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
   imports: [DatePipe],
   selector: 'app-activity',
   styleUrl: './activity.css',
+  standalone: true,
   templateUrl: './activity.html',
 })
 export class Activity implements OnInit {

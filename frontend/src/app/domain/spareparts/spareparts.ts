@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   imports: [],
   selector: 'app-spareparts',
   styleUrl: './spareparts.css',
+  standalone: true,
   templateUrl: './spareparts.html',
 })
 export class Spareparts {}

@@ -9,6 +9,7 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
   imports: [ClrDatagridModule, RouterLink, DatePipe, OrElsePipe],
   selector: 'app-devices-ordered',
   styleUrl: './devices-ordered.css',
+  standalone: true,
   templateUrl: './devices-ordered.html',
 })
 export class DevicesOrdered implements OnInit {
