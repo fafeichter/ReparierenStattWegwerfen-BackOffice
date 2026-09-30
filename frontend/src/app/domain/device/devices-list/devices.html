@@ -1,3 +1,13 @@
+<div class="flex justify-end">
+  <clr-toggle-container class="clr-toggle-right">
+    <clr-toggle-wrapper>
+      <input (ngModelChange)="toggleInactiveDevices($event)" [ngModel]="showInactiveDevices()"
+             clrToggle="showInactiveDevices" type="checkbox"/>
+      <label>Show inactive devices</label>
+    </clr-toggle-wrapper>
+  </clr-toggle-container>
+</div>
+
 <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading()">
   <clr-dg-column [style.width.px]="100">ID</clr-dg-column>
   <clr-dg-column [style.width.px]="400">Model</clr-dg-column>

@@ -74,8 +74,10 @@ public class DeviceService {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<DeviceDto> search(Integer pageNumber, Integer pageSize) {
-		return deviceRepository.findAll(PageRequest.of(pageNumber - 1, pageSize, Sort.by("id")))
+	public Page<DeviceDto> search(Integer pageNumber, Integer pageSize, Boolean includeInactiveDevices) {
+		PageRequest page = PageRequest.of(pageNumber - 1, pageSize, Sort.by("id"));
+
+		return deviceRepository.search(page, includeInactiveDevices)
 			.map(device -> DeviceDto.builder()
 				.deviceId(device.getId())
 				.status(NamedIdDto.from(device.getStatus()))

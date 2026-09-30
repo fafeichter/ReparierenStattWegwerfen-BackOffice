@@ -1,6 +1,8 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.persistence.repository;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.persistence.model.Device;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -36,4 +38,14 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
 				and d.sellingDate < CURRENT_DATE - 365 day
 		""")
 	List<Integer> findDevicesToArchive();
+
+	@Query("""
+		select d
+		from Device d
+		where :includeInactiveDevices = true
+		   or d.status.id in (select s.id
+				   			  from DeviceStatus s
+						   	  where s.isEndstatus is false)
+		""")
+	Page<Device> search(Pageable page, Boolean includeInactiveDevices);
 }

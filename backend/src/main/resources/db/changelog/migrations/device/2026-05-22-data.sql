@@ -24,20 +24,19 @@ VALUES (1, 'common'),
        (2, 'rare'),
        (3, 'system-only');
 
-INSERT INTO device_status (device_status_id, name, sort_order, device_status_classification_id)
-VALUES (1, 'bestellt / gekauft', 0, 1),
-       (2, 'eingetroffen', 1, 1),
-       (3, 'in Reparatur', 2, 1),
-       (4, 'repariert', 3, 1),
-       (5, 'zum Verkauf angeboten', 4, 1),
-       (6, 'verkauft', 5, 1),
-       (7, 'zum Ausschlachten verfügbar', 6, 1),
-       (8, 'archiviert', 99999, 3),
-       (9, 'falscher Artikel eingetroffen', 7, 2),
-       (10, 'zurückgeschickt', 8, 2),
-       (11, 'Verkäufer/in hat sich anders entschieden', 9, 2),
-       (12, 'nie bekommen - Geld nicht zurückbekommen', 10, 2),
-       (13, 'nie bekommen - Geld zurückbekommen', 11, 2);
+INSERT INTO device_status (device_status_id, name, is_endstatus, sort_order, device_status_classification_id)
+VALUES (1, 'bestellt / gekauft', false, 0, 1),
+       (2, 'eingetroffen', false, 1, 1),
+       (3, 'in Reparatur', false, 2, 1),
+       (4, 'repariert', false, 3, 1),
+       (5, 'zum Verkauf angeboten', false, 4, 1),
+       (6, 'verkauft', true, 5, 1),
+       (7, 'zum Ausschlachten verfügbar', true, 6, 1),
+       (8, 'archiviert', true, 99999, 3),
+       (9, 'zurückgeschickt', true, 7, 2),
+       (10, 'Verkäufer/in hat sich anders entschieden', true, 8, 2),
+       (11, 'nie bekommen - Geld nicht zurückbekommen', true, 9, 2),
+       (12, 'nie bekommen - Geld zurückbekommen', true, 10, 2);
 
 INSERT INTO device_tag (device_tag_id, name, sort_order)
 VALUES (1, 'Activation Lock', 1),

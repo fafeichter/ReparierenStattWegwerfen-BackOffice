@@ -26,6 +26,9 @@ public class DeviceStatus implements NamedId, Sortable {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "is_endstatus")
+	private Boolean isEndstatus;
+
 	@Column(name = "sort_order")
 	private Integer sortOrder;
 

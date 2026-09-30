@@ -21,7 +21,8 @@ public class DeviceSearchController {
 
 	@GetMapping("/")
 	public Page<DeviceDto> search(@RequestParam(defaultValue = "1", required = false) Integer pageNumber,
-								  @RequestParam Integer pageSize) {
-		return deviceService.search(pageNumber, pageSize);
+								  @RequestParam Integer pageSize,
+								  @RequestParam(defaultValue = "false") Boolean includeInactiveDevices) {
+		return deviceService.search(pageNumber, pageSize, includeInactiveDevices);
 	}
 }
