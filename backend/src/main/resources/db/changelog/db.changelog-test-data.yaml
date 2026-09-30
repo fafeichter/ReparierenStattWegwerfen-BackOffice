@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: ./db.changelog-master.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: migrations/businesspartner/test-data.sql
+  - include:
+      relativeToChangelogFile: true
+      file: migrations/device/test-data.sql
