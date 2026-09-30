@@ -50,3 +50,12 @@ VALUES (1, 'Erstellt'),
        (2, 'Adresse geändert'),
        (3, 'Gerät gekauft'),
        (4, 'Gerät verkauft');
+
+INSERT INTO business_partner_address (business_partner_address_id, street, house_number, zip_code, city,
+                                      business_partner_address_country_id)
+VALUES (1, 'Georg-Simon-Ohm-Str.', '6', '15236', 'Frankfurt (O.)', 2);
+
+INSERT INTO business_partner (business_partner_id, first_name, last_name, telephone, email, company_name, company_uid,
+                              scammer, business_partner_address_id)
+VALUES (1, 'WIRKAUFENS', NULL, '+49 335 74 3899 70', 'info@wirkaufens.de', 'asgoodasnew electronics GmbH',
+        'DE263602886', NULL, 1);
