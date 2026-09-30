@@ -71,5 +71,5 @@ CREATE TABLE business_partner_activity
     CONSTRAINT fk_activity_business_partner_id
         FOREIGN KEY (business_partner_id) REFERENCES business_partner (business_partner_id),
     CONSTRAINT fk_activity_business_partner_activity_type_id
-        FOREIGN KEY (business_partner_id) REFERENCES business_partner_activity_type (business_partner_activity_type_id)
+        FOREIGN KEY (business_partner_activity_type_id) REFERENCES business_partner_activity_type (business_partner_activity_type_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
