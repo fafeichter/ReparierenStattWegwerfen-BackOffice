@@ -1,6 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.model.openai.autoconfigure.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 	OpenAiAudioTranscriptionAutoConfiguration.class,
 	OpenAiAudioSpeechAutoConfiguration.class
 })
-@Disabled
 public class OpenApiSpecsGenerator {
 	private static final List<String> MODULES_TO_IGNORE = List.of(
 		"shared",
