@@ -106,6 +106,12 @@ tasks.named<BootBuildImage>("bootBuildImage") {
     }
 }
 
+tasks.named<Test>("test") {
+    useJUnitPlatform {
+        excludeTags("openapi")
+    }
+}
+
 val generateOpenApiSpecs = tasks.register<Test>("generateOpenApiSpecs") {
     group = "openapi"
     description = "Generates OpenAPI JSON definitions"
@@ -114,9 +120,8 @@ val generateOpenApiSpecs = tasks.register<Test>("generateOpenApiSpecs") {
     testClassesDirs = sourceSets["test"].output.classesDirs
     classpath = sourceSets["test"].runtimeClasspath
 
-    filter {
-        // leading wildcard so it matches regardless of package
-        includeTestsMatching("*OpenApiSpecsGenerator.generateOpenApiSpecs")
+    useJUnitPlatform {
+        includeTags("openapi")
     }
 
     // The test produces files as a side effect; declare them so Gradle
