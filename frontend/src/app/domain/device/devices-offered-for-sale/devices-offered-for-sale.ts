@@ -9,7 +9,6 @@ import { RouterLink } from '@angular/router';
   imports: [ClrDatagridModule, DatePipe, OrElsePipe, RouterLink],
   selector: 'app-devices-offered-for-sale',
   styleUrl: './devices-offered-for-sale.css',
-  standalone: true,
   templateUrl: './devices-offered-for-sale.html',
 })
 export class DevicesOfferedForSale implements OnInit {

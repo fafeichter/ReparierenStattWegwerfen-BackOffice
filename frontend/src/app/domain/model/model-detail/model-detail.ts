@@ -36,7 +36,6 @@ interface SizeAvailability {
   templateUrl: './model-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './model-detail.css',
-  standalone: true,
 })
 export class ModelDetail implements OnInit {
   navItems = [

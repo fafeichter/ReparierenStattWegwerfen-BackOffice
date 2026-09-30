@@ -16,7 +16,6 @@ import {
   imports: [ClrInputModule, ReactiveFormsModule, ClrSelectModule, ClrButtonGroupModule],
   templateUrl: './businesspartner-create.html',
   styleUrl: './businesspartner-create.css',
-  standalone: true,
 })
 export class BusinesspartnerCreate implements OnInit {
   businessPartnerAddressCountries = signal<BusinessPartnerAddressCountryDto[]>([]);

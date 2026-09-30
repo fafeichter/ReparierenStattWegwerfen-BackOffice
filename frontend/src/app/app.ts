@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   ClrBreadcrumbsModule,
   ClrDropdownModule,
@@ -20,9 +20,7 @@ import { map } from 'rxjs';
     ClrSpinnerModule,
   ],
   templateUrl: './app.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.css',
-  standalone: true,
 })
 export class App {
   private readonly oidc = inject(OidcSecurityService);

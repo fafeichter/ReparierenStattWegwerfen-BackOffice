@@ -38,7 +38,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   ],
   templateUrl: './repair.html',
   styleUrl: './repair.css',
-  standalone: true,
 })
 export class Repair implements OnInit {
   deviceId = input.required<number>();

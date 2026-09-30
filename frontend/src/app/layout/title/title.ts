@@ -8,7 +8,6 @@ import { RouteTitleService } from '../route-title.service';
   selector: 'app-title',
   styleUrl: './title.css',
   templateUrl: './title.html',
-  standalone: true,
 })
 export class Title {
   readonly title: Signal<string>;

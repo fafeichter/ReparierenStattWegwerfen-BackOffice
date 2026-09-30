@@ -12,7 +12,6 @@ import { ReleaseDateFilter } from '../models-list/ReleaseDateFilter';
   providers: [DatePipe],
   selector: 'app-macbook-list',
   styleUrl: './macbook-list.css',
-  standalone: true,
   templateUrl: './macbook-list.html',
 })
 export class MacbookList implements OnInit {

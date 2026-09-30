@@ -53,7 +53,7 @@ CREATE TABLE device_status
 (
     device_status_id                int          NOT NULL AUTO_INCREMENT,
     name                            varchar(256) NOT NULL,
-    is_endstatus boolean NOT NULL,
+    is_endstatus                    boolean      NOT NULL,
     sort_order                      int          NOT NULL,
     device_status_classification_id int          NOT NULL,
     created_at                      timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),

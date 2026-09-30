@@ -26,7 +26,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   ],
   selector: 'app-contact',
   styleUrl: './contact.css',
-  standalone: true,
   templateUrl: './contact.html',
 })
 export class Contact implements OnInit {

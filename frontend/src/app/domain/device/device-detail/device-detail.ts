@@ -59,7 +59,6 @@ export const deviceTitle: TitleFn = (route) => {
     ClrMainContainerModule,
   ],
   templateUrl: './device-detail.html',
-  standalone: true,
   styleUrl: './device-detail.css',
 })
 export class DeviceDetail {

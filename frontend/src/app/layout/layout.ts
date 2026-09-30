@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ClrDropdownModule, ClrMainContainerModule, ClrVerticalNavModule } from '@clr/angular';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
@@ -19,8 +19,6 @@ import { Title } from './title/title';
     ClrMainContainerModule,
   ],
   templateUrl: './layout.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './layout.css',
-  standalone: true,
 })
 export class Layout {}

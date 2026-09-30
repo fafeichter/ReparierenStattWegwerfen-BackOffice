@@ -12,7 +12,6 @@ import { environment } from '../../environments/environment';
   imports: [DatePipe, JsonPipe],
   templateUrl: './technical-details.html',
   styleUrl: './technical-details.css',
-  standalone: true,
 })
 export class TechnicalDetails implements OnInit {
   buildInfo = buildInfo;

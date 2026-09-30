@@ -52,7 +52,6 @@ import {
   ],
   templateUrl: './base.html',
   styleUrl: './base.css',
-  standalone: true,
 })
 export class Base implements OnInit {
   deviceId = input.required<number>();

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { BusinessPartnerControllerService, BusinessPartnerDto } from '@api/businesspartner';
 import { ClrDatagridModule, ClrLabel, ClrTabsModule } from '@clr/angular';
 import { RouterLink } from '@angular/router';
@@ -8,9 +8,7 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
   selector: 'app-businesspartners',
   imports: [ClrDatagridModule, ClrTabsModule, RouterLink, ClrLabel, OrElsePipe],
   templateUrl: './business-partners.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './business-partners.component.css',
-  standalone: true,
 })
 export class BusinessPartners {
   private api = inject(BusinessPartnerControllerService);

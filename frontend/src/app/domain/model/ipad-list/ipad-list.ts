@@ -12,7 +12,6 @@ import { ReleaseDateFilter } from '../models-list/ReleaseDateFilter';
   providers: [DatePipe],
   selector: 'app-ipad-list',
   styleUrl: './ipad-list.css',
-  standalone: true,
   templateUrl: './ipad-list.html',
 })
 export class IpadList implements OnInit {

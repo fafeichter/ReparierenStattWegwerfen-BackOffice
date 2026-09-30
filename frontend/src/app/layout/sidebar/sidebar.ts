@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { ClrIcon, ClrVerticalNav, ClrVerticalNavModule } from '@clr/angular';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -15,9 +9,7 @@ import { map } from 'rxjs';
   selector: 'app-sidebar',
   imports: [ClrIcon, ClrVerticalNavModule, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sidebar.css',
-  standalone: true,
 })
 export class Sidebar implements AfterViewInit {
   @ViewChild(ClrVerticalNav) verticalNav!: ClrVerticalNav;

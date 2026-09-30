@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { DeviceDto, DeviceSearchControllerService } from '@api/device';
 import {
   ClrCheckboxModule,
@@ -23,9 +23,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
   ],
   templateUrl: './devices.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './devices.css',
-  standalone: true,
 })
 export class Devices {
   showInactiveDevices = signal(false);

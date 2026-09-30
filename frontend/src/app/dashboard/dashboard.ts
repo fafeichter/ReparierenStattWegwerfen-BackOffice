@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule, ClrVerticalNavModule } from '@clr/angular';
 import { AddDevice } from '../domain/device/add-device/add-device';
@@ -18,12 +18,10 @@ import { DevicesToFinish } from '../domain/device/devices-to-finish/devices-to-f
     DevicesToFinish,
   ],
   templateUrl: './dashboard.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
-  standalone: true,
 })
 export class Dashboard {
-  orderedCount = 0;
-  toFinishCount = 0;
-  offeredForSaleCount = 0;
+  orderedCount = signal<number>(0);
+  toFinishCount = signal<number>(0);
+  offeredForSaleCount = signal<number>(0);
 }

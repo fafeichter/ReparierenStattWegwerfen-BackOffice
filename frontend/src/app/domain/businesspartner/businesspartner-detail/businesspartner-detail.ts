@@ -33,7 +33,6 @@ export const businessPartnerTitle: TitleFn = (route) => {
   ],
   templateUrl: './businesspartner-detail.html',
   styleUrl: './businesspartner-detail.css',
-  standalone: true,
 })
 export class BusinesspartnerDetail {
   navItems = [

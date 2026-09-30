@@ -20,4 +20,6 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
+
+# Generated build metadata
 src/environments/build.info.production.ts

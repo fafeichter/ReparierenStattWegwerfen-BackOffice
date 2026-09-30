@@ -10,7 +10,6 @@ import { RouteTitleService } from '../route-title.service'; // adjust to where t
   imports: [ClrBreadcrumbsModule],
   templateUrl: './breadcrumbs.html',
   styleUrl: './breadcrumbs.css',
-  standalone: true,
 })
 export class Breadcrumbs {
   readonly items = signal<BreadcrumbItem[]>([]);
