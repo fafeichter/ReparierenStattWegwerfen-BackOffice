@@ -59,3 +59,7 @@ INSERT INTO business_partner (business_partner_id, first_name, last_name, teleph
                               scammer, business_partner_address_id)
 VALUES (1, 'WIRKAUFENS', NULL, '+49 335 74 3899 70', 'info@wirkaufens.de', 'asgoodasnew electronics GmbH',
         'DE263602886', NULL, 1);
+
+INSERT INTO business_partner_activity (business_partner_activity_id, business_partner_id, name, actor,
+                                       business_partner_activity_type_id, date)
+VALUES (1, 1, '#1', 'system', 1, CURRENT_TIMESTAMP(6))
