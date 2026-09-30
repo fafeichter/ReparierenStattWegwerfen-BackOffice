@@ -169,12 +169,8 @@ export class Base implements OnInit {
       });
 
     if (this.deviceBase()!.appleSilicon) {
-      if (this.deviceBase()!.unifiedMemory) {
-        this.loadMemoryOptionsForAppleSilicon(this.deviceBase()!.appleSilicon?.id!);
-      }
-      if (this.deviceBase()!.storage) {
-        this.loadStorageOptions();
-      }
+      this.loadMemoryOptionsForAppleSilicon(this.deviceBase()!.appleSilicon?.id!);
+      this.loadStorageOptions();
     }
 
     this.colorApi.getColorsForModel(this.deviceBase()!.model.id).subscribe((data) => {
