@@ -48,8 +48,8 @@ VALUES (1, 'Österreich', 'AT', 1),
 INSERT INTO business_partner_activity_type (business_partner_activity_type_id, name)
 VALUES (1, 'Erstellt'),
        (2, 'Adresse geändert'),
-       (3, 'Gerät gekauft'),
-       (4, 'Gerät verkauft');
+       (3, 'Gerät verkauft'),
+       (4, 'Gerät gekauft');
 
 INSERT INTO business_partner_address (business_partner_address_id, street, house_number, zip_code, city,
                                       business_partner_address_country_id)
