@@ -30,7 +30,8 @@ public class ModelResolutionService {
 
 		List<ResolvedModelMatch.Alternative> alternatives = aiResponse.alternativeCandidates() == null
 			? Collections.emptyList()
-			: aiResponse.alternativeCandidates().stream()
+			: aiResponse.alternativeCandidates()
+			.stream()
 			.map(this::resolveAlternative)
 			.toList();
 

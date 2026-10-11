@@ -20,7 +20,8 @@ public class ModelAppleSiliconService {
 
 	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAllAppleSiliconsForModel(Integer modelId) {
-		return modelAppleSiliconRepository.getAppleSiliconsForModel(modelId).stream()
+		return modelAppleSiliconRepository.getAppleSiliconsForModel(modelId)
+			.stream()
 			.map(NamedIdDto::from)
 			.toList();
 	}

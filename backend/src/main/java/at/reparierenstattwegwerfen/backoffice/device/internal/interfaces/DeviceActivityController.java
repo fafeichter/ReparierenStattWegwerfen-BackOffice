@@ -1,0 +1,28 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.interfaces;
+
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity.DeviceActivityService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceActivityDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * @author Fabian Feichter
+ * @since 29.06.2026
+ */
+@RestController
+@RequestMapping("/api/devices/{deviceId}/activities")
+@RequiredArgsConstructor
+public class DeviceActivityController {
+
+	private final DeviceActivityService deviceActivityService;
+
+	@GetMapping("/")
+	public List<DeviceActivityDto> getActivities(@PathVariable Integer deviceId) {
+		return deviceActivityService.getActivitiesForDevice(deviceId);
+	}
+}

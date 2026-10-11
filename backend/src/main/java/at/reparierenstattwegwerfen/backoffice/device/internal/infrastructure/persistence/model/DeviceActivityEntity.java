@@ -1,0 +1,48 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.model;
+
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDateTime;
+
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
+@Entity
+@Table(name = "device_activity")
+@Getter
+@Setter
+@NoArgsConstructor
+public class DeviceActivityEntity implements NamedId {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "device_activity_id")
+	private Integer id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "actor")
+	private String actor;
+
+	@Column(name = "device_id")
+	private Integer deviceId;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "device_activity_type_id")
+	private DeviceActivityTypeEntity activityType;
+
+	@Column(name = "date")
+	private LocalDateTime date;
+
+	public DeviceActivityEntity(LocalDateTime date, UserDetails actor) {
+		this.date = date;
+		this.actor = actor.getUsername();
+	}
+}

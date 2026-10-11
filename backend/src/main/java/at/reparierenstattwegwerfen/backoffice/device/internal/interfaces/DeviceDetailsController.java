@@ -1,0 +1,36 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.interfaces;
+
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.buying.DeviceBuyingDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.DeviceDefectDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceBuyingDetailsDto;
+import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceSellingDetailsDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author Fabian Feichter
+ * @since 29.06.2026
+ */
+@RestController
+@RequestMapping("/api/devices/{deviceId}")
+@RequiredArgsConstructor
+public class DeviceDetailsController {
+
+	private final DeviceBuyingDetailsService buyingDetailsService;
+	private final DeviceSellingDetailsService sellingDetailsService;
+	private final DeviceDefectDetailsService defectDetailsService;
+
+	@GetMapping("/buying")
+	public DeviceBuyingDetailsDto getDeviceBuyingDetails(@PathVariable Integer deviceId) {
+		return buyingDetailsService.load(deviceId);
+	}
+
+	@GetMapping("/selling")
+	public DeviceSellingDetailsDto getDeviceSellingDetails(@PathVariable Integer deviceId) {
+		return sellingDetailsService.load(deviceId);
+	}
+}

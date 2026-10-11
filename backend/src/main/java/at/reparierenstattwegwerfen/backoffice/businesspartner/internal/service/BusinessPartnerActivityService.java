@@ -77,7 +77,9 @@ public class BusinessPartnerActivityService {
 
 	@Transactional(readOnly = true)
 	public List<BusinessPartnerActivityDto> getActivitiesForBusinessPartner(Integer businessPartnerId) {
-		return businessPartnerActivityRepository.getByIdWithRelations(businessPartnerId).stream().map(activity ->
+		return businessPartnerActivityRepository.getByIdWithRelations(businessPartnerId)
+			.stream()
+			.map(activity ->
 				BusinessPartnerActivityDto.builder()
 					.id(activity.getId())
 					.action(activity.getActivityType().getName())

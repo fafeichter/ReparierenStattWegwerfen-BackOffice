@@ -1,0 +1,23 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+
+/**
+ * @author Fabian Feichter
+ * @since 29.06.2026
+ */
+@Data
+@Builder
+public class DeviceSellingAccessoriesDto {
+
+	@NotNull
+	private final Boolean charger;
+
+	@NotNull
+	private final Boolean chargingCable;
+
+	@NotNull
+	private final Boolean originalPackaging;
+}

@@ -1,0 +1,68 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes;
+
+import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceNoteDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+/**
+ * @author Fabian Feichter
+ * @since 29.06.2026
+ */
+@Service
+@RequiredArgsConstructor
+public class DeviceNoteService {
+
+	private final DeviceNoteRepository deviceNoteRepository;
+	private final ApplicationEventPublisher events;
+
+	public List<DeviceNoteDto> load(Integer deviceId) {
+		return deviceNoteRepository.getNotesForDevice(deviceId)
+			.stream()
+			.map(note ->
+				DeviceNoteDto.builder()
+					.noteId(note.getId())
+					.text(note.getText())
+					.date(note.getDate())
+					.build())
+			.toList();
+	}
+
+	@Transactional
+	public void add(Integer deviceId, String text, UserDetails actor) {
+		DeviceNote note = new DeviceNote();
+		note.setDeviceId(deviceId);
+		note.setText(text);
+		note.setDate(LocalDateTime.now());
+
+		Integer newNoteId = deviceNoteRepository.save(note).getId();
+
+		DeviceNoteAdded noteAddedEvent = DeviceNoteAdded.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.newNoteId(newNoteId)
+			.build();
+		events.publishEvent(noteAddedEvent);
+	}
+
+	@Transactional
+	public void delete(Integer deviceId, Integer oldDeviceNoteId, UserDetails actor) {
+		String oldDeviceNoteText = deviceNoteRepository.getReferenceById(oldDeviceNoteId).getName();
+		deviceNoteRepository.deleteById(oldDeviceNoteId);
+
+		DeviceNoteDeleted noteDeletedEvent = DeviceNoteDeleted.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.oldNoteId(oldDeviceNoteId)
+			.oldNoteText(oldDeviceNoteText)
+			.build();
+		events.publishEvent(noteDeletedEvent);
+	}
+}

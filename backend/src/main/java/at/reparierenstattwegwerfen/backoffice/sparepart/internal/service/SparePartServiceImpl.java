@@ -29,7 +29,8 @@ public class SparePartServiceImpl implements SparePartService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<NamedIdDto> getSparePartsForModelSeriesExcluding(Integer modelSeriesId, Set<Integer> excludeIds) {
-		return sparePartRepository.getSparePartsForModelSeriesExcluding(modelSeriesId, excludeIds).stream()
+		return sparePartRepository.getSparePartsForModelSeriesExcluding(modelSeriesId, excludeIds)
+			.stream()
 			.map(NamedIdDto::from)
 			.toList();
 	}

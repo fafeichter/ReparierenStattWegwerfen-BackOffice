@@ -10,11 +10,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.jwt.Jwt;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author Fabian Feichter
@@ -25,7 +23,7 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
 	@Override
 	public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
 		// Extract Keycloak roles from 'realm_access.roles'
-		Collection<GrantedAuthority> authorities = extractRealmRoles(jwt);
+		List<? extends GrantedAuthority> authorities = extractRealmRoles(jwt);
 
 		// Select the principal username
 		String username = jwt.getClaimAsString("preferred_username");
@@ -48,7 +46,7 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
 	}
 
 	@SuppressWarnings("unchecked")
-	private Collection<GrantedAuthority> extractRealmRoles(Jwt jwt) {
+	private List<? extends GrantedAuthority> extractRealmRoles(Jwt jwt) {
 		Map<String, Object> realmAccess = jwt.getClaim("realm_access");
 		if (realmAccess == null || !realmAccess.containsKey("roles")) {
 			return Collections.emptyList();
@@ -57,6 +55,6 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
 		List<String> roles = (List<String>) realmAccess.get("roles");
 		return roles.stream()
 			.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-			.collect(Collectors.toList());
+			.toList();
 	}
 }

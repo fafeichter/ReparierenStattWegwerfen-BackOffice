@@ -1,0 +1,18 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade;
+
+import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
+import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class DeviceGrade implements NamedId, Sortable {
+
+	private Integer id;
+	private String name;
+	private String description;
+	private Integer sortOrder;
+}

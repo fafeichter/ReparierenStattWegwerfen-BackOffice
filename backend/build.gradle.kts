@@ -14,6 +14,7 @@ plugins {
 
 extra["springAiVersion"] = "2.0.1"
 extra["springModulithVersion"] = "2.1.1"
+extra["mapstructVersion"] = "1.6.3"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -29,6 +30,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
     implementation("org.springframework.ai:spring-ai-starter-model-openai")
     implementation("org.springframework.boot:spring-boot-starter-mustache")
+    implementation("org.mapstruct:mapstruct:${property("mapstructVersion")}")
     compileOnly("org.projectlombok:lombok")
     compileOnly("org.hibernate.orm:hibernate-processor")
     annotationProcessor("org.hibernate.orm:hibernate-processor")
@@ -38,6 +40,8 @@ dependencies {
     developmentOnly("org.springframework.ai:spring-ai-spring-boot-docker-compose")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstructVersion")}")
     testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
     testImplementation("org.springframework.boot:spring-boot-starter-liquibase-test")
@@ -216,4 +220,15 @@ tasks.register("generateModulithDoc") {
 
     dependsOn(generateSpringModulithPuml)
     dependsOn("plantumlModules")
+}
+
+tasks.named<JavaCompile>("compileJava") {
+    options.compilerArgs.addAll(
+        listOf(
+            "-Amapstruct.defaultComponentModel=spring",
+            "-Amapstruct.unmappedTargetPolicy=ERROR",
+            "-Amapstruct.unmappedSourcePolicy=IGNORE",
+            "-Amapstruct.defaultInjectionStrategy=constructor"
+        )
+    )
 }

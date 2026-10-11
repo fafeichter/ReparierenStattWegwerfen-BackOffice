@@ -3,10 +3,12 @@ import {
   BatteryHealthDto,
   DeviceBaseControllerService,
   DeviceBaseDetailsDto,
+  DeviceBatteryHealthControllerService,
   DeviceBatteryStatusControllerService,
   DeviceGradeControllerService,
   DeviceGradeDto,
   DeviceStatusControllerService,
+  DeviceTagsControllerService,
   NamedIdDto,
   UpdateHardwareConfigDto,
 } from '@api/device';
@@ -123,11 +125,13 @@ export class Base implements OnInit {
   private api = inject(DeviceBaseControllerService);
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
+  private batteryHealthApi = inject(DeviceBatteryHealthControllerService);
   private gradeApi = inject(DeviceGradeControllerService);
   private appleSiliconApi = inject(ModelAppleSiliconControllerService);
   private colorApi = inject(ModelColorControllerService);
   private memoryApi = inject(ModelUnifiedMemoryControllerService);
   private storageApi = inject(ModelStorageControllerService);
+  private tagsApi = inject(DeviceTagsControllerService);
 
   constructor() {
     this.editModes.forEach((active) => {
@@ -289,7 +293,7 @@ export class Base implements OnInit {
       maximumCapacity: this.batteryForm.controls.newMaximumCapacity.value!,
     };
 
-    this.api.updateBattery(this.deviceId(), newBatteryHealth).subscribe(() => {
+    this.batteryHealthApi.updateBattery(this.deviceId(), newBatteryHealth).subscribe(() => {
       this.batteryEditModeActive.set(false);
       this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
     });
@@ -307,7 +311,7 @@ export class Base implements OnInit {
   }
 
   changeBatteryStatus() {
-    this.api
+    this.batteryStatusApi
       .updateBatteryStatus(
         this.deviceId(),
         this.batteryStatusForm.controls.newBatteryStatusId.value!,
@@ -362,14 +366,14 @@ export class Base implements OnInit {
       newTagId: null,
     });
 
-    this.api.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
+    this.tagsApi.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
       this.availableDeviceTags.set(deviceTags);
     });
   }
 
   addTag() {
     const selectedTagId = this.tagForm.controls.newTagId.value!;
-    this.api.addTag(this.deviceId(), selectedTagId).subscribe(() => {
+    this.tagsApi.addTag(this.deviceId(), selectedTagId).subscribe(() => {
       this.tagEditModeActive.set(false);
 
       this.deviceBase.update((deviceBase) => {
@@ -390,13 +394,13 @@ export class Base implements OnInit {
 
   removeTag(tagId: number) {
     if (confirm('Do you really want to remove this tag?')) {
-      this.api.removeTag(this.deviceId(), tagId).subscribe(() => {
+      this.tagsApi.removeTag(this.deviceId(), tagId).subscribe(() => {
         this.deviceBase.update((deviceBase) => {
           this.deviceBase()!.tags = this.deviceBase()!.tags!.filter(
             (deviceTag) => deviceTag.id !== tagId,
           );
 
-          this.api.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
+          this.tagsApi.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
             this.availableDeviceTags.set(deviceTags);
           });
 

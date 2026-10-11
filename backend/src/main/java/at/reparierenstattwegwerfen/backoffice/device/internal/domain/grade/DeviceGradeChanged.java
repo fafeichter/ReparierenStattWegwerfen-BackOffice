@@ -1,0 +1,22 @@
+package at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade;
+
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.AbstractDeviceActivityEvent;
+import lombok.Builder;
+import lombok.Getter;
+import org.springframework.security.core.userdetails.UserDetails;
+
+/**
+ * @author Fabian Feichter
+ * @since 02.07.2026
+ */
+@Getter
+public class DeviceGradeChanged extends AbstractDeviceActivityEvent {
+
+	final Integer newGradeId;
+
+	@Builder
+	public DeviceGradeChanged(Object source, UserDetails actor, Integer deviceId, Integer newGradeId) {
+		super(source, deviceId, actor);
+		this.newGradeId = newGradeId;
+	}
+}

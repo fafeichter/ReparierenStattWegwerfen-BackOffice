@@ -22,7 +22,7 @@ import { Alternative, ModelControllerService, ResolvedModelMatch } from '@api/mo
 import {
   BusinessPartnerPlaceholderDto,
   CreateNewDeviceDto,
-  DeviceControllerService,
+  DeviceCreationControllerService,
 } from '@api/device';
 import { OrElsePipe } from '../../../pipes/or-else-pipe';
 
@@ -78,7 +78,7 @@ export class AddDevice {
   });
 
   private modelApi = inject(ModelControllerService);
-  private deviceApi = inject(DeviceControllerService);
+  private deviceCreationApi = inject(DeviceCreationControllerService);
   private router = inject(Router);
 
   constructor() {
@@ -126,7 +126,7 @@ export class AddDevice {
       defect: this.found()!.reportedDefect!,
     };
 
-    this.deviceApi.createNewDevice(newDevice).subscribe({
+    this.deviceCreationApi.createNewDevice(newDevice).subscribe({
       next: (deviceId) => this.router.navigate(['/devices', deviceId]),
       error: () => this.isSubmitting.set(false),
     });
