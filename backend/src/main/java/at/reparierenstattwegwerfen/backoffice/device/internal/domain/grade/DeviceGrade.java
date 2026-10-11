@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
 @Getter
 @Setter
 @NoArgsConstructor

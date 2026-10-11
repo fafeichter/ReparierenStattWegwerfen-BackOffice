@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -7,6 +7,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.per
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Fabian Feichter
+ * @since 12.10.2026
+ */
 @Repository
 @RequiredArgsConstructor
 public class DeviceTagsRepositoryAdapter implements DeviceTagsRepository {

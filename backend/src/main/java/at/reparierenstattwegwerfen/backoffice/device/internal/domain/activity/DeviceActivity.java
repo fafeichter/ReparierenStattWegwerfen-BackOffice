@@ -8,6 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -6,6 +6,10 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author Fabian Feichter
+ * @since 12.10.2026
+ */
 public interface DeviceRepository {
 
 	Optional<Device> findById(Integer id);

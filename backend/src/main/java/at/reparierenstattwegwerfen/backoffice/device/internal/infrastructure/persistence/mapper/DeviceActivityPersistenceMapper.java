@@ -6,6 +6,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.per
 import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.model.DeviceActivityTypeEntity;
 import org.mapstruct.Mapper;
 
+/**
+ * @author Fabian Feichter
+ * @since 12.10.2026
+ */
 @Mapper
 public interface DeviceActivityPersistenceMapper {
 

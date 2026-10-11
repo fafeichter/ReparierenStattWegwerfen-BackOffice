@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author Fabian Feichter
+ * @since 12.10.2026
+ */
 @Repository
 @RequiredArgsConstructor
 public class DeviceGradeRepositoryAdapter implements DeviceGradeRepository {
