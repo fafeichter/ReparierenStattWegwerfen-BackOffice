@@ -7,12 +7,12 @@ import {
   signal,
 } from '@angular/core';
 import { ModelControllerService, ModelDetailDto, SiliconDto, SizeDto } from '@api/model';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/angular';
 import { DatePipe } from '@angular/common';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
-import { scrollToSection } from '../../../clarity-addons/js/scrollspy';
+import { Navtem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
 
 export const modelTitle: TitleFn = (route) => {
   const modelId = route.paramMap.get('modelId')!;
@@ -32,13 +32,13 @@ interface SizeAvailability {
 
 @Component({
   selector: 'app-model-detail',
-  imports: [ClrLabel, ClrIcon, DatePipe, ClrVerticalNavModule, RouterLink],
+  imports: [ClrLabel, ClrIcon, DatePipe, ClrVerticalNavModule, Scrollspy],
   templateUrl: './model-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './model-detail.css',
 })
 export class ModelDetail implements OnInit {
-  navItems = [
+  navItems: Navtem[] = [
     { id: 'model', label: 'Model' },
     { id: 'hardware', label: 'Hardware' },
     { id: 'features', label: 'Features' },
@@ -75,7 +75,6 @@ export class ModelDetail implements OnInit {
   protected readonly storageOptions = computed(() =>
     this.buildAvailability((s) => s.storageOptions),
   );
-  protected readonly scrollToSection = scrollToSection;
   private api = inject(ModelControllerService);
   private route = inject(ActivatedRoute);
 

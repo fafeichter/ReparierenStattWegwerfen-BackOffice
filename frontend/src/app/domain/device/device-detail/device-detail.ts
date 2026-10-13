@@ -20,10 +20,9 @@ import { Repair } from './repair/repair';
 import { Activity } from './activity/activity';
 import { Selling } from './selling/selling';
 import { Buying } from './buying/buying';
-import { RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { TitleFn } from '../../../layout/route-title.service';
-import { scrollToSection } from '../../../clarity-addons/js/scrollspy';
+import { Navtem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
 
 export const deviceTitle: TitleFn = (route) => {
   const deviceId = route.paramMap.get('deviceId')!;
@@ -53,10 +52,10 @@ export const deviceTitle: TitleFn = (route) => {
     Activity,
     Selling,
     Buying,
-    RouterLink,
     ClrVerticalNavModule,
     ClrTabsModule,
     ClrMainContainerModule,
+    Scrollspy,
   ],
   templateUrl: './device-detail.html',
   styleUrl: './device-detail.css',
@@ -65,7 +64,7 @@ export class DeviceDetail {
   deviceId = input.required<number, string>({
     transform: (value: string) => Number(value),
   });
-  navItems = [
+  navItems: Navtem[] = [
     { id: 'device', label: 'Device' },
     { id: 'buying', label: 'Buying' },
     { id: 'repair', label: 'Repair' },
@@ -73,5 +72,4 @@ export class DeviceDetail {
     { id: 'notes', label: 'Notes' },
     { id: 'activity', label: 'Activity' },
   ];
-  protected readonly scrollToSection = scrollToSection;
 }

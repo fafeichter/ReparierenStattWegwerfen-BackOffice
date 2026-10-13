@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClrFileInputModule, ClrVerticalNavModule } from '@clr/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Activity } from './activity/activity';
@@ -8,7 +8,7 @@ import { Devices } from './devices/devices';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
 import { BusinessPartnerControllerService } from '@api/businesspartner';
-import { scrollToSection } from '../../../clarity-addons/js/scrollspy';
+import { Navtem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
 
 export const businessPartnerTitle: TitleFn = (route) => {
   const businessPartnerId = route.paramMap.get('businessPartnerId')!;
@@ -29,18 +29,17 @@ export const businessPartnerTitle: TitleFn = (route) => {
     Devices,
     Activity,
     ClrVerticalNavModule,
-    RouterLink,
+    Scrollspy,
   ],
   templateUrl: './businesspartner-detail.html',
   styleUrl: './businesspartner-detail.css',
 })
 export class BusinesspartnerDetail {
-  navItems = [
+  navItems: Navtem[] = [
     { id: 'contact', label: 'Contact' },
     { id: 'devices', label: 'Devices' },
     { id: 'activity', label: 'Activity' },
   ];
-  protected readonly scrollToSection = scrollToSection;
   private route = inject(ActivatedRoute);
   readonly businessPartnerId = signal<number>(
     Number(this.route.snapshot.paramMap.get('businessPartnerId')),

@@ -1,20 +1,12 @@
-<div class="container">
-  <clr-vertical-nav>
-    @for (item of navItems; track item.id) {
-      <a (click)="scrollToSection(item.id)" [fragment]="item.id" [routerLink]="[]"
-         clrVerticalNavLink>
-        {{ item.label }}
-      </a>
-    }
-  </clr-vertical-nav>
-  <div class="clr-row">
-    <div class="clr-col-lg-10 clr-col-md-10 clr-col-12">
-      <app-base [deviceId]="deviceId()"/>
-      <app-buying [deviceId]="deviceId()"/>
-      <app-repair [deviceId]="deviceId()"/>
-      <app-selling [deviceId]="deviceId()"/>
-      <app-notes [deviceId]="deviceId()"/>
-      <app-activity [deviceId]="deviceId()"/>
-    </div>
+<app-scrollspy [items]="navItems"/>
+
+<div class="clr-row">
+  <div class="clr-col-lg-10 clr-col-md-10 clr-col-12">
+    <app-base [deviceId]="deviceId()"/>
+    <app-buying [deviceId]="deviceId()"/>
+    <app-repair [deviceId]="deviceId()"/>
+    <app-selling [deviceId]="deviceId()"/>
+    <app-notes [deviceId]="deviceId()"/>
+    <app-activity [deviceId]="deviceId()"/>
   </div>
 </div>

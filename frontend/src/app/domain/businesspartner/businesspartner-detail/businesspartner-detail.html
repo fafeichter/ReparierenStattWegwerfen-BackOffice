@@ -3,20 +3,11 @@
     ← Back
   </button>
 }
-<div class="container">
-  <clr-vertical-nav>
-    @for (item of navItems; track item.id) {
-      <a (click)="scrollToSection(item.id)" [fragment]="item.id" [routerLink]="[]"
-         clrVerticalNavLink>
-        {{ item.label }}
-      </a>
-    }
-  </clr-vertical-nav>
-  <div class="clr-row">
-    <div class="clr-col-lg-8 clr-col-md-8 clr-col-10">
-      <app-contact [businessPartnerId]="businessPartnerId()"/>
-      <app-devices [businessPartnerId]="businessPartnerId()"/>
-      <app-activity [businessPartnerId]="businessPartnerId()"/>
-    </div>
+<app-scrollspy [items]="navItems"/>
+<div class="clr-row">
+  <div class="clr-col-lg-8 clr-col-md-8 clr-col-10">
+    <app-contact [businessPartnerId]="businessPartnerId()"/>
+    <app-devices [businessPartnerId]="businessPartnerId()"/>
+    <app-activity [businessPartnerId]="businessPartnerId()"/>
   </div>
 </div>

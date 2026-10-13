@@ -1,103 +1,94 @@
 @if (model(); as m) {
-  <div class="container">
-    <clr-vertical-nav>
-      @for (item of navItems; track item.id) {
-        <a (click)="scrollToSection(item.id)" [fragment]="item.id" [routerLink]="[]"
-           clrVerticalNavLink>
-          {{ item.label }}
-        </a>
-      }
-    </clr-vertical-nav>
-    <div class="clr-row">
-      <div class="clr-col-lg-6 clr-col-md-8 clr-col-12">
-        <div class="card" id="model">
-          <div class="card-header">
-            Model
-          </div>
-          <div class="card-block">
-            <p class="mt-0!">{{ m.releaseDate + '-01' | date:'MMM yyyy' }}</p>
-            <p class="mt-1!">
-              <a [href]="m.technicalSpecsUrl" target="_blank">
-                {{ m.technicalSpecsUrl }}
-                <cds-icon role="img" shape="pop-out"/>
-              </a>
-            </p>
-          </div>
-          <div class="card-block">
-            <div class="card-title">Colors</div>
-            <div class="card-text">
-              <ul class="list">
-                @for (color of colors(); track color.id) {
-                  <li>{{ color.name }}</li>
-                }
-              </ul>
-            </div>
-          </div>
+  <app-scrollspy [items]="navItems"/>
+  <div class="clr-row">
+    <div class="clr-col-lg-6 clr-col-md-8 clr-col-12">
+      <div class="card" id="model">
+        <div class="card-header">
+          Model
         </div>
-        <div class="card" id="hardware">
-          <div class="card-header">Hardware</div>
-          <div class="card-block">
-            <div class="card-title">Chip</div>
-            <div class="card-text">
-              @for (group of siliconGroups(); track group.shortName; let last = $last) {
-                <ul class="list">
-                  @for (chip of group.chips; track chip.id) {
-                    <li>{{ chip.name }}</li>
-                  }
-                </ul>
-                @if (!last) {
-                  <div></div>
-                }
+        <div class="card-block">
+          <p class="mt-0!">{{ m.releaseDate + '-01' | date:'MMM yyyy' }}</p>
+          <p class="mt-1!">
+            <a [href]="m.technicalSpecsUrl" target="_blank">
+              {{ m.technicalSpecsUrl }}
+              <cds-icon role="img" shape="pop-out"/>
+            </a>
+          </p>
+        </div>
+        <div class="card-block">
+          <div class="card-title">Colors</div>
+          <div class="card-text">
+            <ul class="list">
+              @for (color of colors(); track color.id) {
+                <li>{{ color.name }}</li>
               }
-            </div>
-          </div>
-          <div class="card-block">
-            <div class="card-title">Memory</div>
-            <div class="card-text">
-              <ul class="list">
-                @for (mem of memoryOptions(); track mem.id) {
-                  <li>
-                    {{ mem.label }}
-                    @if (!mem.onAllChips) {
-                      @for (availableOn of mem.availableOn; track availableOn) {
-                        <clr-label>{{ availableOn }}</clr-label>
-                      }
-                    }
-                  </li>
-                }
-              </ul>
-            </div>
-          </div>
-          <div class="card-block">
-            <div class="card-title">Storage</div>
-            <div class="card-text">
-              <ul class="list">
-                @for (storage of storageOptions(); track storage.id) {
-                  <li>
-                    {{ storage.label }}
-                    @if (!storage.onAllChips) {
-                      @for (availableOn of storage.availableOn; track availableOn) {
-                        <clr-label>{{ availableOn }}</clr-label>
-                      }
-                    }
-                  </li>
-                }
-              </ul>
-            </div>
+            </ul>
           </div>
         </div>
-        <div class="card" id="features">
-          <div class="card-header">
-            Features
-          </div>
-          <div class="card-block">
-            <div class="card-text">
+      </div>
+      <div class="card" id="hardware">
+        <div class="card-header">Hardware</div>
+        <div class="card-block">
+          <div class="card-title">Chip</div>
+          <div class="card-text">
+            @for (group of siliconGroups(); track group.shortName; let last = $last) {
               <ul class="list">
-                @for (feature of features(); track feature.id) {
-                  <li>{{ feature.name }}</li>
+                @for (chip of group.chips; track chip.id) {
+                  <li>{{ chip.name }}</li>
                 }
               </ul>
-            </div>
+              @if (!last) {
+                <div></div>
+              }
+            }
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-title">Memory</div>
+          <div class="card-text">
+            <ul class="list">
+              @for (mem of memoryOptions(); track mem.id) {
+                <li>
+                  {{ mem.label }}
+                  @if (!mem.onAllChips) {
+                    @for (availableOn of mem.availableOn; track availableOn) {
+                      <clr-label>{{ availableOn }}</clr-label>
+                    }
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="card-title">Storage</div>
+          <div class="card-text">
+            <ul class="list">
+              @for (storage of storageOptions(); track storage.id) {
+                <li>
+                  {{ storage.label }}
+                  @if (!storage.onAllChips) {
+                    @for (availableOn of storage.availableOn; track availableOn) {
+                      <clr-label>{{ availableOn }}</clr-label>
+                    }
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="features">
+        <div class="card-header">
+          Features
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <ul class="list">
+              @for (feature of features(); track feature.id) {
+                <li>{{ feature.name }}</li>
+              }
+            </ul>
           </div>
         </div>
       </div>
