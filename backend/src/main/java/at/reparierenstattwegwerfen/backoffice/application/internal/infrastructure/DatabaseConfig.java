@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.application.internal;
+package at.reparierenstattwegwerfen.backoffice.application.internal.infrastructure;
 
 import jakarta.persistence.EntityManagerFactory;
 import liquibase.integration.spring.SpringLiquibase;

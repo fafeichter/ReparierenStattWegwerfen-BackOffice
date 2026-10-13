@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.application.internal;
+package at.reparierenstattwegwerfen.backoffice.application.internal.infrastructure;
 
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;

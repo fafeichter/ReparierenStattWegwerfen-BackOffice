@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.application.internal;
+package at.reparierenstattwegwerfen.backoffice.application.internal.infrastructure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

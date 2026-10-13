@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.application.internal;
+package at.reparierenstattwegwerfen.backoffice.application.internal.interfaces;
 
 import lombok.Builder;
 import lombok.Data;

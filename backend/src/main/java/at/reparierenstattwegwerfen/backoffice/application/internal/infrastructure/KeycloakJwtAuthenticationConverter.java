@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.application.internal;
+package at.reparierenstattwegwerfen.backoffice.application.internal.infrastructure;
 
 import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;

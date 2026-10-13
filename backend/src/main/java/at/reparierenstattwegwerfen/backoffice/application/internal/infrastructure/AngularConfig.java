@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.application.internal;
+package at.reparierenstattwegwerfen.backoffice.application.internal.infrastructure;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
