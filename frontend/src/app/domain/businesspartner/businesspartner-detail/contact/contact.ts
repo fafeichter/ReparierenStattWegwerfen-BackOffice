@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from '@clr/angular';
+import { ClrCommonFormsModule, ClrFileInputModule, ClrIcon, ClrLabel } from '@clr/angular';
 import {
   FormControl,
   FormGroup,
@@ -23,6 +23,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     FormsModule,
     OrElsePipe,
     ReactiveFormsModule,
+    ClrLabel,
   ],
   selector: 'app-contact',
   styleUrl: './contact.css',
