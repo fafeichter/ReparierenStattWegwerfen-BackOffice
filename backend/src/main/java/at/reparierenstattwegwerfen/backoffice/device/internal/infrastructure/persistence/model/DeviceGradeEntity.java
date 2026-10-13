@@ -23,8 +23,8 @@ public class DeviceGradeEntity implements NamedId, Sortable {
 	@Column(name = "device_grade_id")
 	private Integer id;
 
-	@Column(name = "grade")
-	private String grade;
+	@Column(name = "tier")
+	private String tier;
 
 	@Column(name = "description")
 	private String description;
@@ -34,6 +34,6 @@ public class DeviceGradeEntity implements NamedId, Sortable {
 
 	@Override
 	public String getName() {
-		return grade + " - " + description;
+		return tier + " - " + description;
 	}
 }
