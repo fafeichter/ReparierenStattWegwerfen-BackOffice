@@ -28,17 +28,6 @@ CREATE TABLE device_grade
     UNIQUE KEY uq_device_grade_sort (sort_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE device_online_marketplace
-(
-    device_online_marketplace_id int          NOT NULL AUTO_INCREMENT,
-    name                         varchar(256) NOT NULL,
-    url                          varchar(256) NOT NULL,
-    created_at                   timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                   timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
-    PRIMARY KEY (device_online_marketplace_id),
-    UNIQUE KEY uq_online_marketplace_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE device_status_classification
 (
     device_status_classification_id int          NOT NULL AUTO_INCREMENT,
@@ -85,7 +74,6 @@ CREATE TABLE device
     reported_defect                       text           NOT NULL,
     reported_defect_confirmed             boolean                 DEFAULT NULL,
     corrected_defect                      text                    DEFAULT NULL,
-    selling_device_online_marketplace_id  int                     DEFAULT NULL,
     selling_date                          date                    DEFAULT NULL,
     selling_accessory_charger             boolean                 DEFAULT NULL,
     selling_accessory_charging_cable      boolean                 DEFAULT NULL,
@@ -106,7 +94,6 @@ CREATE TABLE device
     KEY                                   idx_device_seller_bp_id (seller_business_partner_id),
     KEY                                   idx_device_grade_id (device_grade_id),
     KEY                                   idx_device_model_storage_id (model_storage_id),
-    KEY                                   idx_device_selling_om (selling_device_online_marketplace_id),
     KEY                                   idx_device_battery_status_id (device_battery_status_id),
     CONSTRAINT fk_device_apple_silicon_id FOREIGN KEY (model_apple_silicon_id) REFERENCES model_apple_silicon (model_apple_silicon_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_battery_status_id FOREIGN KEY (device_battery_status_id) REFERENCES device_battery_status (device_battery_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -116,7 +103,6 @@ CREATE TABLE device
     CONSTRAINT fk_device_model_id FOREIGN KEY (model_id) REFERENCES model (model_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_model_storage_id FOREIGN KEY (model_storage_id) REFERENCES model_storage (model_storage_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_seller_bp_id FOREIGN KEY (seller_business_partner_id) REFERENCES business_partner (business_partner_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_selling_om_id FOREIGN KEY (selling_device_online_marketplace_id) REFERENCES device_online_marketplace (device_online_marketplace_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_status_id FOREIGN KEY (device_status_id) REFERENCES device_status (device_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT fk_device_unified_memory_id FOREIGN KEY (model_apple_silicon_unified_memory_id) REFERENCES model_apple_silicon_unified_memory (model_apple_silicon_unified_memory_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -144,7 +130,6 @@ CREATE TABLE device_audit
     reported_defect                       text           NOT NULL,
     reported_defect_confirmed             boolean                 DEFAULT NULL,
     corrected_defect                      text                    DEFAULT NULL,
-    selling_device_online_marketplace_id  int                     DEFAULT NULL,
     selling_date                          date                    DEFAULT NULL,
     selling_accessory_charger             boolean                 DEFAULT NULL,
     selling_accessory_charging_cable      boolean                 DEFAULT NULL,

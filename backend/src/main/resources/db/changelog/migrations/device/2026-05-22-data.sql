@@ -14,11 +14,6 @@ VALUES (1, 'Grade A', 'Wie neu', 'Makelloser Zustand ohne Gebrauchsspuren', 1),
         'Guter Zustand mit mehreren leichten Kratzern oder normalen Abnutzungen', 3),
        (4, 'Grade D', 'Tiefere Kratzer oder Kerben', 'Deutliche Gebrauchsspuren wie tiefere Kratzer oder Kerben', 4);
 
-INSERT INTO device_online_marketplace (device_online_marketplace_id, name, url)
-VALUES (1, 'willhaben', 'https://www.willhaben.at/'),
-       (2, 'Kleinanzeigen', 'https://kleinanzeigen.de/'),
-       (3, 'eBay', 'https://www.ebay.at/');
-
 INSERT INTO device_status_classification (device_status_classification_id, name)
 VALUES (1, 'common'),
        (2, 'rare'),

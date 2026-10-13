@@ -78,10 +78,6 @@ public class DeviceEntity implements NamedId {
 	@Column(name = "corrected_defect")
 	private String correctedDefect;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "selling_device_online_marketplace_id")
-	private DeviceOnlineMarketplaceEntity sellingDeviceOnlineMarketplace;
-
 	@Column(name = "selling_date")
 	private LocalDate sellingDate;
 

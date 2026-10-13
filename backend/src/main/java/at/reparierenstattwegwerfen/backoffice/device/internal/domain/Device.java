@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatus;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.buying.DeviceOnlineMarketplace;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGrade;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceStatus;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
@@ -38,7 +37,6 @@ public class Device implements NamedId {
 	private String reportedDefect;
 	private Boolean reportedDefectConfirmed;
 	private String correctedDefect;
-	private DeviceOnlineMarketplace sellingDeviceOnlineMarketplace;
 	private LocalDate sellingDate;
 	private Boolean sellingAccessoryCharger;
 	private Boolean sellingAccessoryChargingCable;

@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.pe
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatus;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.buying.DeviceOnlineMarketplace;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGrade;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceStatus;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceStatusClassification;
@@ -35,8 +34,4 @@ public interface DevicePersistenceMapper {
 	DeviceBatteryStatus toDomain(DeviceBatteryStatusEntity entity);
 
 	DeviceBatteryStatusEntity toEntity(DeviceBatteryStatus domain);
-
-	DeviceOnlineMarketplace toDomain(DeviceOnlineMarketplaceEntity entity);
-
-	DeviceOnlineMarketplaceEntity toEntity(DeviceOnlineMarketplace domain);
 }
