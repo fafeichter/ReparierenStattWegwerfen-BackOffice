@@ -40,7 +40,7 @@ The following domains have been identified:
 | **Business Partner** | `businesspartner` | A person or a company I buy from or sell devices and/or spare parts to..                                                                                                     |
 | **Model**            | `model`           | Defines all models I repair or refurbish: MacBooks and iPads with Apple Silicon.                                                                                             |
 | **Spare Part**       | `sparepart`       | Manages spare parts required for device repair and refurbishment, sourced from business partners or harvested from disassembled devices.                                     |
-| **Accounting**       | `accounting`      | Keeps track of balances, taxes, and invoices. (To be implemented as part of milestone 2).                                                                                    |
+| **Accounting**       | `accounting`      | Keeps track of balances, taxes, and invoices.                                                                                                                                |
 
 ![Application Modules](./backend/docs/spring-modulith/modules.svg)
 
@@ -49,7 +49,8 @@ The following domains have been identified:
 ## 📌 Development Milestones
 
 - **Milestone 1 (Target: Q4 2026):** Replace the existing Apple Numbers spreadsheet with a modern web application based on Domain-Driven Design (DDD) principles.
-- **Milestone 2 (Target: 2027)**: Add the Accounting domain.
+- **Milestone 2 (Target: 2027)**: Implement the Accounting domain.
+- **Milestone 3 (Target: N/A)**: Implement the Spare Parts domain.
 
 Not planned in yet:
 
