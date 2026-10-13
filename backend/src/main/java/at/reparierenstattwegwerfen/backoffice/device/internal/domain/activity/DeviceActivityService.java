@@ -6,8 +6,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.Dev
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.creation.DeviceBuyingDateChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.creation.DeviceCreated;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.DeviceDiagnosedDefectChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.DeviceCorrectedDefectChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.DeviceReportedDefectChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.DeviceReportedDefectConfirmed;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.DeviceReportedDefectNotConfirmed;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.hardware.*;
@@ -200,9 +202,9 @@ public class DeviceActivityService {
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-	public void on(DeviceDiagnosedDefectChanged event) {
+	public void on(DeviceCorrectedDefectChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(event.getDiagnosedDefect());
+		deviceActivity.setName(event.getCorrectedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(13));
 
@@ -291,6 +293,26 @@ public class DeviceActivityService {
 		deviceActivity.setName(businessPartner.getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(21));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceReportedDefectConfirmed event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		deviceActivity.setName(event.getReportedDefect());
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(22));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceReportedDefectNotConfirmed event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		deviceActivity.setName(event.getReportedDefect());
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(23));
 
 		deviceActivityRepository.save(deviceActivity);
 	}

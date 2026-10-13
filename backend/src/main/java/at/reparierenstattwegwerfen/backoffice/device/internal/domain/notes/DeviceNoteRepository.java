@@ -14,7 +14,7 @@ public interface DeviceNoteRepository {
 	DeviceNote getReferenceById(Integer id);
 
 	DeviceNote save(DeviceNote note);
-	
+
 	void deleteById(Integer id);
 
 	List<DeviceNote> getNotesForDevice(Integer deviceId);

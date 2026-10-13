@@ -7,16 +7,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Fabian Feichter
- * @since 20.09.2026
+ * @since 13.10.2026
  */
 @Getter
-public class DeviceDiagnosedDefectChanged extends AbstractDeviceActivityEvent {
+public class DeviceReportedDefectConfirmed extends AbstractDeviceActivityEvent {
 
-	final String diagnosedDefect;
+	private final String reportedDefect;
 
 	@Builder
-	public DeviceDiagnosedDefectChanged(Object source, UserDetails actor, Integer deviceId, String diagnosedDefect) {
+	public DeviceReportedDefectConfirmed(Object source, UserDetails actor, Integer deviceId, String reportedDefect) {
 		super(source, deviceId, actor);
-		this.diagnosedDefect = diagnosedDefect;
+		this.reportedDefect = reportedDefect;
 	}
 }

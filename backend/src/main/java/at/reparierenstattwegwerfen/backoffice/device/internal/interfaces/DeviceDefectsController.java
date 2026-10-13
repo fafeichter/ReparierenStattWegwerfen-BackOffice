@@ -31,8 +31,8 @@ public class DeviceDefectsController {
 		defectDetailsService.update(deviceId, deviceDefectsDto, currentUser);
 	}
 
-	@PostMapping("/confirm-original")
-	public void confirmOriginalDefect(@PathVariable Integer deviceId) {
-		defectDetailsService.confirmOriginalDefect(deviceId);
+	@PostMapping("/reported/confirm")
+	public void confirmReportedDefect(@PathVariable Integer deviceId, @AuthenticationPrincipal UserDetails currentUser) {
+		defectDetailsService.confirmReportedDefect(deviceId, currentUser);
 	}
 }

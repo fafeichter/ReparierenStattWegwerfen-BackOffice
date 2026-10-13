@@ -13,5 +13,5 @@ public class DeviceDefectsDto {
 	@NotEmpty
 	private final String reportedDefect;
 
-	private final String diagnosedDefect;
+	private final String correctedDefect;
 }

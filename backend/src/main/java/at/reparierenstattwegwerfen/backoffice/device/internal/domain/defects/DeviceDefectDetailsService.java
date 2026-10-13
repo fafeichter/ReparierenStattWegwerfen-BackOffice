@@ -10,9 +10,11 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Fabian Feichter
@@ -30,7 +32,10 @@ public class DeviceDefectDetailsService {
 		Device device = deviceRepository.getByIdWithRelations(deviceId);
 
 		return DeviceDefectsDetailsDto.builder()
-			.reportedDefect(device.getReportedDefect()).diagnosedDefect(device.getDiagnosedDefect()).build();
+			.reportedDefect(device.getReportedDefect())
+			.reportedDefectConfirmed(device.getReportedDefectConfirmed())
+			.correctedDefect(device.getCorrectedDefect())
+			.build();
 	}
 
 	@Transactional
@@ -41,12 +46,15 @@ public class DeviceDefectDetailsService {
 		if (reportedDefectChanged) {
 			device.setReportedDefect(deviceDefectsDto.getReportedDefect());
 		}
-		boolean diagnosedDefectChanged = !deviceDefectsDto.getDiagnosedDefect().equals(device.getDiagnosedDefect());
-		if (diagnosedDefectChanged) {
-			device.setDiagnosedDefect(deviceDefectsDto.getDiagnosedDefect());
+		final String correctedDefect = deviceDefectsDto.getCorrectedDefect();
+		boolean correctedDefectChanged = !Objects.equals(correctedDefect, device.getCorrectedDefect());
+		Boolean reportedDefectConfirmedOld = device.getReportedDefectConfirmed();
+		if (correctedDefectChanged) {
+			device.setCorrectedDefect(correctedDefect);
+			device.setReportedDefectConfirmed(false);
 		}
 
-		if (reportedDefectChanged || diagnosedDefectChanged) {
+		if (reportedDefectChanged || correctedDefectChanged) {
 			deviceRepository.save(device);
 
 			List<AbstractDeviceActivityEvent> deviceEvents = new ArrayList<>();
@@ -60,14 +68,28 @@ public class DeviceDefectDetailsService {
 				deviceEvents.add(reportedDefectChangedEvent);
 			}
 
-			if (diagnosedDefectChanged) {
-				DeviceDiagnosedDefectChanged diagnosedDefectChangedEvent = DeviceDiagnosedDefectChanged.builder()
-					.source(this)
-					.actor(actor)
-					.deviceId(deviceId)
-					.diagnosedDefect(deviceDefectsDto.getDiagnosedDefect())
-					.build();
-				deviceEvents.add(diagnosedDefectChangedEvent);
+			if (correctedDefectChanged) {
+				if (reportedDefectConfirmedOld == null || reportedDefectConfirmedOld) {
+					DeviceReportedDefectNotConfirmed reportedDefectNotConfirmedEvent = DeviceReportedDefectNotConfirmed.builder()
+						.source(this)
+						.actor(actor)
+						.deviceId(deviceId)
+						.reportedDefect(device.getReportedDefect())
+						.correctedDefect(deviceDefectsDto.getCorrectedDefect())
+						.build();
+					deviceEvents.add(reportedDefectNotConfirmedEvent);
+				}
+				if (StringUtils.hasText(correctedDefect)) {
+					DeviceCorrectedDefectChanged correctedDefectChangedEvent = DeviceCorrectedDefectChanged.builder()
+						.source(this)
+						.actor(actor)
+						.deviceId(deviceId)
+						.correctedDefect(correctedDefect)
+						.build();
+					deviceEvents.add(correctedDefectChangedEvent);
+				} else {
+					confirmReportedDefect(deviceId, actor);
+				}
 			}
 
 			deviceEvents.forEach(events::publishEvent);
@@ -75,11 +97,19 @@ public class DeviceDefectDetailsService {
 	}
 
 	@Transactional
-	public void confirmOriginalDefect(Integer deviceId) {
+	public void confirmReportedDefect(Integer deviceId, UserDetails actor) {
 		Device device = deviceRepository.getReferenceById(deviceId);
-		device.setDiagnosedDefect("WIE ANGEGEBEN");
+		device.setReportedDefectConfirmed(true);
+		device.setCorrectedDefect(null);
 
-		// todo: checkbox?
 		deviceRepository.save(device);
+
+		DeviceReportedDefectConfirmed reportedDefectConfirmedEvent = DeviceReportedDefectConfirmed.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.reportedDefect(device.getReportedDefect())
+			.build();
+		events.publishEvent(reportedDefectConfirmedEvent);
 	}
 }

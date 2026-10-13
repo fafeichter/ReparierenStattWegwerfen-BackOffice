@@ -3,6 +3,7 @@ import {
   ClrCommonFormsModule,
   ClrDatagridModule,
   ClrIcon,
+  ClrLabel,
   ClrModalModule,
   ClrNumberInputModule,
   ClrSelectModule,
@@ -35,6 +36,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
     ClrSelectModule,
     ClrNumberInputModule,
     DatePipe,
+    ClrLabel,
   ],
   templateUrl: './repair.html',
   styleUrl: './repair.css',
@@ -58,8 +60,8 @@ export class Repair implements OnInit {
   });
 
   defectsForm = new FormGroup({
-    originalDefect: new FormControl<string | null>(null, [Validators.required]),
-    confirmedDefect: new FormControl<string | null>(null),
+    reportedDefect: new FormControl<string | null>(null, [Validators.required]),
+    correctedDefect: new FormControl<string | null>(null),
   });
 
   availableSpareParts = signal<NamedIdDto[]>([]);
@@ -72,8 +74,8 @@ export class Repair implements OnInit {
       const defects = this.deviceDefects();
       if (defects) {
         this.defectsForm.patchValue({
-          originalDefect: defects.reportedDefect,
-          confirmedDefect: defects.diagnosedDefect,
+          reportedDefect: defects.reportedDefect,
+          correctedDefect: defects.correctedDefect,
         });
       }
 
@@ -96,8 +98,8 @@ export class Repair implements OnInit {
 
   updateDefects() {
     const defects: DeviceDefectsDto = {
-      reportedDefect: this.defectsForm.controls.originalDefect.value!,
-      diagnosedDefect: this.defectsForm.controls.confirmedDefect.value!,
+      reportedDefect: this.defectsForm.controls.reportedDefect.value!,
+      correctedDefect: this.defectsForm.controls.correctedDefect.value!,
     };
 
     this.defectsApi.updateDefects(this.deviceId(), defects).subscribe(() => {
@@ -108,18 +110,20 @@ export class Repair implements OnInit {
 
         return {
           reportedDefect: defects.reportedDefect,
-          diagnosedDefect: defects.diagnosedDefect,
+          reportedDefectConfirmed: !defects.correctedDefect,
+          correctedDefect: defects.correctedDefect,
         };
       });
     });
   }
 
-  confirmOriginalDefect() {
-    this.defectsApi.confirmOriginalDefect(this.deviceId()).subscribe(() => {
+  confirmReportedDefect() {
+    this.defectsApi.confirmReportedDefect(this.deviceId()).subscribe(() => {
       this.deviceDefects.update((deviceDefects) => {
         return {
           ...deviceDefects!,
-          diagnosedDefect: 'WIE ANGEGEBEN',
+          reportedDefectConfirmed: true,
+          correctedDefect: undefined,
         };
       });
     });

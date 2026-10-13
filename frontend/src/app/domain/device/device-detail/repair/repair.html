@@ -2,20 +2,29 @@
   <div class="card-header">Repair</div>
   <div class="card-block">
     <dl>
-      <dt>Original Defect</dt>
+      <dt>Reported Defect</dt>
       <dd>
         {{ deviceDefects()?.reportedDefect | orElse }}
-        <br/>
-        @if (!deviceDefects()?.diagnosedDefect) {
-          <button (click)="confirmOriginalDefect()" class="btn btn-link ml-1!">
-            <clr-icon shape="tasks"/>
-            Confirm
+      </dd>
+      <dt></dt>
+      <dd>
+        @if (deviceDefects()?.reportedDefectConfirmed === null) {
+          <button (click)="confirmReportedDefect()" class="btn btn-link">
+            ✓ Confirm
           </button>
+        } @else {
+          @if (deviceDefects()?.reportedDefectConfirmed) {
+            <clr-label class="ml-1!">✓ Confirmed</clr-label>
+          } @else {
+            @if (!deviceDefects()?.reportedDefectConfirmed) {
+              <clr-label class="ml-1!">× Not as described</clr-label>
+            }
+          }
         }
       </dd>
-      <dt>Confirmed Defect</dt>
+      <dt>Corrected Defect</dt>
       <dd>
-        {{ deviceDefects()?.diagnosedDefect | orElse }}
+        {{ deviceDefects()?.correctedDefect | orElse }}
         <button (click)="modalOpened.set(true)" class="btn btn-link ml-1!">
           <cds-icon role="img" shape="edit"/>
           Edit
@@ -116,17 +125,18 @@
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="xl">
+<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="l">
   <div class="modal-title">Set defects</div>
   <div class="modal-body">
     <form (ngSubmit)="updateDefects()" [formGroup]="defectsForm" clrForm>
       <clr-textarea-container>
-        <label><span class="clr-required-mark">Original Defect</span></label>
-        <textarea class="w-full!" clrTextarea formControlName="originalDefect" required rows="1"></textarea>
+        <label><span class="clr-required-mark">Reported Defect</span></label>
+        <textarea class="w-full!" clrTextarea formControlName="reportedDefect" required
+                  rows="2"></textarea>
       </clr-textarea-container>
       <clr-textarea-container>
-        <label>Confirmed Defect</label>
-        <textarea autofocus class="w-full!" clrTextarea formControlName="confirmedDefect" rows="1"></textarea>
+        <label>Corrected Defect</label>
+        <textarea autofocus class="w-full!" clrTextarea formControlName="correctedDefect" rows="4"></textarea>
       </clr-textarea-container>
     </form>
     <div class="modal-footer mt-4">

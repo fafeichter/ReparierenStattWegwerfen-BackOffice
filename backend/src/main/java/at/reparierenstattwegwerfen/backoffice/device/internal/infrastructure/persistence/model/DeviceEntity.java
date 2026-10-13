@@ -72,8 +72,11 @@ public class DeviceEntity implements NamedId {
 	@Column(name = "reported_defect")
 	private String reportedDefect;
 
-	@Column(name = "diagnosed_defect")
-	private String diagnosedDefect;
+	@Column(name = "reported_defect_confirmed")
+	private Boolean reportedDefectConfirmed;
+
+	@Column(name = "corrected_defect")
+	private String correctedDefect;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "selling_device_online_marketplace_id")

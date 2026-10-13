@@ -36,7 +36,8 @@ public class Device implements NamedId {
 	private Double purchasePrice;
 	private DeviceGrade grade;
 	private String reportedDefect;
-	private String diagnosedDefect;
+	private Boolean reportedDefectConfirmed;
+	private String correctedDefect;
 	private DeviceOnlineMarketplace sellingDeviceOnlineMarketplace;
 	private LocalDate sellingDate;
 	private Boolean sellingAccessoryCharger;
