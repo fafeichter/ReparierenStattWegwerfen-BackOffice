@@ -57,7 +57,7 @@ VALUES (1, 'Georg-Simon-Ohm-Str.', '6', '15236', 'Frankfurt (O.)', 2);
 
 INSERT INTO business_partner (business_partner_id, first_name, last_name, telephone, email, company_name, company_uid,
                               scammer, business_partner_address_id)
-VALUES (1, 'WIRKAUFENS', NULL, '+49 335 74 3899 70', 'info@wirkaufens.de', 'asgoodasnew electronics GmbH',
+VALUES (1, 'Max', 'Friedel', '+49 178 6577643', 'max.friedel@asgoodasnew.com', 'asgoodasnew electronics GmbH',
         'DE263602886', NULL, 1);
 
 INSERT INTO business_partner_activity (business_partner_activity_id, business_partner_id, name, actor,
