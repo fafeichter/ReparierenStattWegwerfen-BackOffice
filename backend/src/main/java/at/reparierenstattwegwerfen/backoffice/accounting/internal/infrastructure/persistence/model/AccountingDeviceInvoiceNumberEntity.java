@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.accounting.internal;
+package at.reparierenstattwegwerfen.backoffice.accounting.internal.infrastructure.persistence.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountingDeviceInvoiceNumber {
+public class AccountingDeviceInvoiceNumberEntity {
 
 	@Id
 	@Column(name = "current_device_invoice_number")

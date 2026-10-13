@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to add @since tag to Java files based on their Git creation date
+# Script to add @since tag to Java files based on Git history or file system creation date
 # Usage: ./add_since_tag.sh /path/to/project
 
 if [ $# -eq 0 ]; then
@@ -32,11 +32,24 @@ while IFS= read -r file; do
     # Get initial Git commit date for the file
     creation_date=$(git log --follow --format="%ad" --date=format:"%d.%m.%Y" -- "$file" 2>/dev/null | tail -1)
 
-    # Skip untracked files with no Git history
+    # Fallback to file system creation date if no Git history is found
     if [ -z "$creation_date" ]; then
-        echo "⊘ SKIP: $file (no Git commit history found)"
-        ((skipped++))
-        continue
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            # macOS stat
+            file_ts=$(stat -f %B "$file" 2>/dev/null)
+            [ -z "$file_ts" ] || [ "$file_ts" -eq 0 ] && file_ts=$(stat -f %m "$file" 2>/dev/null)
+            creation_date=$(date -r "$file_ts" "+%d.%m.%Y" 2>/dev/null)
+        else
+            # Linux stat
+            file_ts=$(stat -c %W "$file" 2>/dev/null)
+            [ -z "$file_ts" ] || [ "$file_ts" -eq 0 ] || [ "$file_ts" = "-" ] && file_ts=$(stat -c %Y "$file" 2>/dev/null)
+            creation_date=$(date -d "@$file_ts" "+%d.%m.%Y" 2>/dev/null)
+        fi
+    fi
+
+    # Ultimate fallback if file system timestamp extraction fails
+    if [ -z "$creation_date" ]; then
+        creation_date=$(date "+%d.%m.%Y")
     fi
 
     # Skip if file already has @since tag anywhere
