@@ -21,9 +21,6 @@ public class CreateBuyerBusinessPartnerForDeviceDto {
 	@Size(max = 256)
 	private final String lastName;
 
-	@NotNull
-	Integer deviceId;
-
 	@NotBlank
 	@Size(max = 256)
 	String street;

@@ -9,6 +9,7 @@ import {
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import {
+  DeviceBusinessPartnerControllerService,
   DeviceDetailsControllerService,
   DeviceSellingAccessoriesControllerService,
   DeviceSellingAccessoriesDto,
@@ -51,6 +52,7 @@ export class Selling implements OnInit {
   });
 
   private api = inject(DeviceDetailsControllerService);
+  private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
   private accessoriesApi = inject(DeviceSellingAccessoriesControllerService);
 
   constructor() {
@@ -84,7 +86,7 @@ export class Selling implements OnInit {
 
     this.accessoriesApi
       .updateSellingAccessories(this.deviceId(), deviceAccessories)
-      .subscribe((data) => {
+      .subscribe(() => {
         this.deviceAccessories.update(() => {
           this.accessoriesForm.reset();
           this.isSubmitting.set(false);
@@ -97,5 +99,16 @@ export class Selling implements OnInit {
           };
         });
       });
+  }
+
+  protected setBuyerToAsgoodasnew() {
+    this.deviceBusinessPartnerApi.setBuyerToAsgoodasnew(this.deviceId()).subscribe((response) => {
+      this.deviceSelling.update((deviceSelling) => {
+        return {
+          ...deviceSelling!,
+          buyer: response,
+        };
+      });
+    });
   }
 }

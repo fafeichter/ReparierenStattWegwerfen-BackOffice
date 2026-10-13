@@ -49,6 +49,6 @@ public class BusinessPartner implements NamedId {
 
 	@Override
 	public String getName() {
-		return firstName + " " + lastName;
+		return companyName != null ? companyName : firstName + " " + lastName;
 	}
 }

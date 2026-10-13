@@ -11,4 +11,6 @@ public interface BusinessPartnerService {
 	Integer createBusinessPartner(CreateBusinessPartnerDto businessPartnerDto, UserDetails actor);
 
 	Integer createBusinessPartnerPlaceholder(CreateBusinessPartnerPlaceholderDto businessPartnerPlaceholder, UserDetails actor);
+
+	Integer getAsgoodasnewBusinessPartnerId();
 }

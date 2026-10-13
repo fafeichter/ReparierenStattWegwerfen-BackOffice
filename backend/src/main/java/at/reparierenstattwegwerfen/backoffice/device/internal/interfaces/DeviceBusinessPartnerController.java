@@ -3,6 +3,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.interfaces;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.DeviceBusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.CreateBuyerBusinessPartnerForDeviceDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceBusinesspartnerDto;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,21 +15,28 @@ import org.springframework.web.bind.annotation.*;
  * @since 29.06.2026
  */
 @RestController
-@RequestMapping("/api/devices/businesspartners")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class DeviceBusinessPartnerController {
 
 	private final DeviceBusinessPartnerService businessPartnerService;
 
-	@GetMapping("/{businessPartnerId}/")
+	@GetMapping("/devices/businesspartners/{businessPartnerId}/")
 	public DeviceBusinesspartnerDto getDevicesOfBusinessPartner(@PathVariable Integer businessPartnerId) {
 		return businessPartnerService.getDevicesOfBusinessPartner(businessPartnerId);
 	}
 
-	@PostMapping("/buyer")
+	@PostMapping("/devices/{deviceId}/businesspartners/buyer")
 	public void createBuyerBusinessPartnerForDevice(
+		@PathVariable Integer deviceId,
 		@Valid @RequestBody CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice,
 		@AuthenticationPrincipal UserDetails currentUser) {
-		businessPartnerService.createBuyerBusinessPartnerForDevice(buyerBusinessPartnerForDevice, currentUser);
+		businessPartnerService.createBuyerBusinessPartnerForDevice(deviceId, buyerBusinessPartnerForDevice, currentUser);
+	}
+
+	@PostMapping("/devices/{deviceId}/businesspartners/buyer/asgoodasnew")
+	public NamedIdDto setBuyerToAsgoodasnew(@PathVariable Integer deviceId,
+											@AuthenticationPrincipal UserDetails currentUser) {
+		return businessPartnerService.setBuyerToAsgoodasnew(deviceId, currentUser);
 	}
 }

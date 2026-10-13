@@ -17,9 +17,15 @@
           <button
             [queryParams]="{ 'device-id':  deviceId()}"
             [routerLink]="['/businesspartners/create']"
-            class="btn btn-link ml-1!">
+            class="btn btn-link ml-1! mr-2!">
             <cds-icon role="img" shape="pop-out"/>
             Add
+          </button>
+          |
+          <button
+            (click)="setBuyerToAsgoodasnew()"
+            class="btn btn-link ml-2!">
+            Sell to asgoodasnew
           </button>
         }
       </dd>

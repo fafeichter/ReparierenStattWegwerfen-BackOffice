@@ -48,7 +48,6 @@ export class BusinesspartnerCreate implements OnInit {
     const businessPartner: CreateBuyerBusinessPartnerForDeviceDto = {
       firstName: this.businessPartnerForm.controls.firstName.value!,
       lastName: this.businessPartnerForm.controls.firstName.value!,
-      deviceId: this.deviceId()!,
       street: this.businessPartnerForm.controls.street.value!,
       houseNumber: this.businessPartnerForm.controls.houseNumber.value!,
       zipCode: this.businessPartnerForm.controls.zipCode.value!,
@@ -57,7 +56,7 @@ export class BusinesspartnerCreate implements OnInit {
     };
 
     this.deviceBusinessPartnerApi
-      .createBuyerBusinessPartnerForDevice(businessPartner)
+      .createBuyerBusinessPartnerForDevice(this.deviceId()!, businessPartner)
       .subscribe(() => {
         this.isSubmitting.set(false);
 

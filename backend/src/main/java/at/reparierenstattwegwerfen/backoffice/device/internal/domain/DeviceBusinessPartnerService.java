@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain;
 
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.CreateBuyerBusinessPartnerForDeviceDto;
@@ -26,6 +27,7 @@ public class DeviceBusinessPartnerService {
 	private final DeviceRepository deviceRepository;
 	private final BusinessPartnerService businessPartnerService;
 	private final ApplicationEventPublisher events;
+	private final BusinessPartnerDetailsService businessPartnerDetailsService;
 
 	@Transactional(readOnly = true)
 	public DeviceBusinesspartnerDto getDevicesOfBusinessPartner(Integer businessPartnerId) {
@@ -45,14 +47,14 @@ public class DeviceBusinessPartnerService {
 	}
 
 	@Transactional
-	public void createBuyerBusinessPartnerForDevice(CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice,
+	public void createBuyerBusinessPartnerForDevice(Integer deviceId,
+													CreateBuyerBusinessPartnerForDeviceDto buyerBusinessPartnerForDevice,
 													UserDetails actor) {
 		CreateBusinessPartnerDto createBusinessPartnerDto = new CreateBusinessPartnerDto();
 		BeanUtils.copyProperties(buyerBusinessPartnerForDevice, createBusinessPartnerDto);
 
 		Integer buyerBusinessPartnerId = businessPartnerService.createBusinessPartner(createBusinessPartnerDto, actor);
 
-		Integer deviceId = buyerBusinessPartnerForDevice.getDeviceId();
 		Device device = deviceRepository.getReferenceById(deviceId);
 		device.setBuyerBusinessPartnerId(buyerBusinessPartnerId);
 		deviceRepository.save(device);
@@ -64,5 +66,23 @@ public class DeviceBusinessPartnerService {
 			.deviceId(deviceId)
 			.build();
 		events.publishEvent(businessPartnerSetAsBuyerEvent);
+	}
+
+	@Transactional
+	public NamedIdDto setBuyerToAsgoodasnew(Integer deviceId, UserDetails actor) {
+		Device device = deviceRepository.getReferenceById(deviceId);
+		int asgoodasnewBusinessPartnerId = businessPartnerService.getAsgoodasnewBusinessPartnerId();
+		device.setBuyerBusinessPartnerId(asgoodasnewBusinessPartnerId);
+		deviceRepository.save(device);
+
+		DeviceBusinessPartnerSetAsBuyer businessPartnerSetAsBuyerEvent = DeviceBusinessPartnerSetAsBuyer.builder()
+			.source(this)
+			.actor(actor)
+			.buyerBusinessPartnerId(asgoodasnewBusinessPartnerId)
+			.deviceId(deviceId)
+			.build();
+		events.publishEvent(businessPartnerSetAsBuyerEvent);
+
+		return businessPartnerDetailsService.getBusinessPartner(asgoodasnewBusinessPartnerId);
 	}
 }

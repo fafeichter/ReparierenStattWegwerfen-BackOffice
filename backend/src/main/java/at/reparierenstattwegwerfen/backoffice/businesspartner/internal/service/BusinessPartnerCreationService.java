@@ -85,4 +85,9 @@ public class BusinessPartnerCreationService implements BusinessPartnerService {
 
 		return businessPartnerId;
 	}
+
+	@Override
+	public Integer getAsgoodasnewBusinessPartnerId() {
+		return 1;
+	}
 }
