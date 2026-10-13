@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, output, signal } from '@angular/core';
-import { DeviceControllerService, DeviceOrderedDto } from '@api/device';
+import { DeviceOrderedDto, DeviceSearchControllerService } from '@api/device';
 import { ClrDatagridModule } from '@clr/angular';
 import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -15,10 +15,10 @@ export class DevicesOrdered implements OnInit {
   devicesOrderedCount = output<number>();
 
   devicesOrdered = signal<DeviceOrderedDto[]>([]);
-  private devicesApi = inject(DeviceControllerService);
+  private deviceSearchApi = inject(DeviceSearchControllerService);
 
   ngOnInit(): void {
-    this.devicesApi.getDevicesOrdered().subscribe((devices) => {
+    this.deviceSearchApi.getDevicesOrdered().subscribe((devices) => {
       this.devicesOrdered.set(devices);
       this.devicesOrderedCount.emit(devices.length);
     });

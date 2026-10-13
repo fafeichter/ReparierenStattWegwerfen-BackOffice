@@ -2,7 +2,7 @@ import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { ClrDatagridModule } from '@clr/angular';
 import { OrElsePipe } from '../../../pipes/or-else-pipe';
 import { RouterLink } from '@angular/router';
-import { DeviceStatusControllerService, DeviceToFinishDto } from '@api/device';
+import { DeviceSearchControllerService, DeviceToFinishDto } from '@api/device';
 
 @Component({
   imports: [ClrDatagridModule, OrElsePipe, RouterLink],
@@ -14,10 +14,10 @@ export class DevicesToFinish implements OnInit {
   devicesToFinishCount = output<number>();
 
   devicesToFinish = signal<DeviceToFinishDto[]>([]);
-  private deviceStatusApi = inject(DeviceStatusControllerService);
+  private deviceSearchApi = inject(DeviceSearchControllerService);
 
   ngOnInit(): void {
-    this.deviceStatusApi.getDevicesToFinish().subscribe((devices) => {
+    this.deviceSearchApi.getDevicesToFinish().subscribe((devices) => {
       this.devicesToFinish.set(devices);
       this.devicesToFinishCount.emit(devices.length);
     });

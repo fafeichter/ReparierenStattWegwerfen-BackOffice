@@ -3,17 +3,11 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.domain.status;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.AbstractDeviceActivityEvent;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.DeviceRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGrade;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.hardware.*;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagsRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOfferedForSaleDto;
-import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceToFinishDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.UpdateHardwareConfigDto;
-import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -38,12 +32,8 @@ public class DeviceStatusService {
 
 	private final DeviceRepository deviceRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
-	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final DeviceGradeRepository deviceGradeRepository;
-	private final DeviceTagRepository deviceTagRepository;
-	private final DeviceTagsRepository deviceTagsRepository;
 	private final ApplicationEventPublisher events;
-	private final ModelDetailsService modelDetailsService;
 
 	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAllNonSystemStatus() {
@@ -70,39 +60,6 @@ public class DeviceStatusService {
 			events.publishEvent(deviceStatusChangedEvent);
 		}
 	}
-
-	@Transactional(readOnly = true)
-	public List<DeviceToFinishDto> getDevicesToFinish() {
-		return deviceRepository.findAllByStatusIdIn(List.of(2, 3, 4))
-			.stream()
-			.map(device ->
-				DeviceToFinishDto.builder()
-					.deviceId(device.getId())
-					.status(NamedIdDto.from(device.getStatus()))
-					.model(modelDetailsService.getModel(device.getModelId()))
-					.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-					.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-					.storage(modelDetailsService.getStorage(device.getModelStorageId()))
-					.build())
-			.toList();
-	}
-
-	@Transactional(readOnly = true)
-	public List<DeviceOfferedForSaleDto> getDevicesOfferedForSale() {
-		return deviceRepository.findAllByStatusIdIn(List.of(5))
-			.stream()
-			.map(device ->
-				DeviceOfferedForSaleDto.builder()
-					.deviceId(device.getId())
-					.statusDate(device.getStatusDate().toLocalDate())
-					.model(modelDetailsService.getModel(device.getModelId()))
-					.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-					.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-					.storage(modelDetailsService.getStorage(device.getModelStorageId()))
-					.build())
-			.toList();
-	}
-
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void setDeviceStatusDate(DeviceStatusChanged event) {

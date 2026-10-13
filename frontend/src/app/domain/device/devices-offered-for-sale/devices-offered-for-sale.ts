@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, output, signal } from '@angular/core';
-import { DeviceOfferedForSaleDto, DeviceStatusControllerService } from '@api/device';
+import { DeviceOfferedForSaleDto, DeviceSearchControllerService } from '@api/device';
 import { ClrDatagridModule } from '@clr/angular';
 import { DatePipe } from '@angular/common';
 import { OrElsePipe } from '../../../pipes/or-else-pipe';
@@ -15,10 +15,10 @@ export class DevicesOfferedForSale implements OnInit {
   devicesOfferedForSaleCount = output<number>();
 
   devicesOfferedForSale = signal<DeviceOfferedForSaleDto[]>([]);
-  private deviceStatusApi = inject(DeviceStatusControllerService);
+  private deviceSearchApi = inject(DeviceSearchControllerService);
 
   ngOnInit(): void {
-    this.deviceStatusApi.getDevicesOfferedForSale().subscribe((devices) => {
+    this.deviceSearchApi.getDevicesOfferedForSale().subscribe((devices) => {
       this.devicesOfferedForSale.set(devices);
       this.devicesOfferedForSaleCount.emit(devices.length);
     });
