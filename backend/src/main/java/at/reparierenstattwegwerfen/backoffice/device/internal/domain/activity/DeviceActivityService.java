@@ -1,5 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity;
 
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.creation.DeviceBuyingDateChanged;
@@ -23,7 +25,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.Device
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagRemoved;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceActivityDto;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
 import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.sparepart.SparePartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
@@ -56,6 +61,8 @@ public class DeviceActivityService {
 	private final ModelDetailsService modelDetailsService;
 	private final DeviceSparePartsRepository deviceSparePartsRepository;
 	private final SparePartService sparePartService;
+	private final BusinessPartnerService businessPartnerService;
+	private final BusinessPartnerDetailsService businessPartnerDetailsService;
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceCreated event) {
@@ -262,6 +269,28 @@ public class DeviceActivityService {
 		deviceActivity.setName(event.getOldDeviceSparePartName() + " / " + oldSparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(19));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBusinessPartnerSetAsSeller event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		NamedIdDto businessPartner = businessPartnerDetailsService.getBusinessPartner(event.getSellerBusinessPartnerId());
+		deviceActivity.setName(businessPartner.getName());
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(20));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBusinessPartnerSetAsBuyer event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		NamedIdDto businessPartner = businessPartnerDetailsService.getBusinessPartner(event.getBuyerBusinessPartnerId());
+		deviceActivity.setName(businessPartner.getName());
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(21));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
