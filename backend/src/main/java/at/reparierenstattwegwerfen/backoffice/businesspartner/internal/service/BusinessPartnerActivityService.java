@@ -1,6 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.service;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.controller.BusinessPartnerActivityDto;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartner;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartnerActivity;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.model.BusinessPartnerAddress;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.persistence.repository.BusinessPartnerActivityRepository;
@@ -37,8 +38,9 @@ public class BusinessPartnerActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(BusinessPartnerCreated event) {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
-		businessPartnerActivity.setName("#" + event.getBusinessPartnerId());
-		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getReferenceById(event.getBusinessPartnerId()));
+		BusinessPartner businessPartner = businessPartnerRepository.getReferenceById(event.getBusinessPartnerId());
+		businessPartnerActivity.setName(businessPartner.getName());
+		businessPartnerActivity.setBusinessPartner(businessPartner);
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getReferenceById(1));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
