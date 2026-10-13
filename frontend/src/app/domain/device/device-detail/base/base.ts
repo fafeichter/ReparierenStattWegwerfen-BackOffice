@@ -7,6 +7,7 @@ import {
   DeviceBatteryStatusControllerService,
   DeviceGradeControllerService,
   DeviceGradeDto,
+  DeviceHardwareControllerService,
   DeviceStatusControllerService,
   DeviceTagsControllerService,
   NamedIdDto,
@@ -123,6 +124,7 @@ export class Base implements OnInit {
   ];
 
   private api = inject(DeviceBaseControllerService);
+  private hardwareApi = inject(DeviceHardwareControllerService);
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
   private batteryHealthApi = inject(DeviceBatteryHealthControllerService);
@@ -204,7 +206,7 @@ export class Base implements OnInit {
       modelStorageId: this.hardwareConfigForm.controls.newStorageId.value!,
       modelColorId: this.hardwareConfigForm.controls.newColorId.value!,
     };
-    this.api.updateHardwareConfig(this.deviceId(), updateHardwareConfig).subscribe(() => {
+    this.hardwareApi.updateHardwareConfig(this.deviceId(), updateHardwareConfig).subscribe(() => {
       this.hardwareConfigEditModeActive.set(false);
 
       this.deviceBase.update((deviceBase) => {
@@ -239,7 +241,7 @@ export class Base implements OnInit {
   }
 
   changeStatus() {
-    this.api
+    this.statusApi
       .updateStatus(this.deviceId(), this.statusForm.controls.newStatusId.value!)
       .subscribe(() => {
         this.statusEditModeActive.set(false);
@@ -266,7 +268,7 @@ export class Base implements OnInit {
   }
 
   changeSerialNumber() {
-    this.api
+    this.hardwareApi
       .updateSerialNumber(this.deviceId(), this.serialNumberForm.controls.newSerialNumber.value!)
       .subscribe(() => {
         this.serialNumberEditModeActive.set(false);
@@ -344,7 +346,7 @@ export class Base implements OnInit {
   }
 
   changeGrade() {
-    this.api
+    this.gradeApi
       .updateGrade(this.deviceId(), this.gradeForm.controls.newGradeId.value!)
       .subscribe(() => {
         this.gradeEditModeActive.set(false);
