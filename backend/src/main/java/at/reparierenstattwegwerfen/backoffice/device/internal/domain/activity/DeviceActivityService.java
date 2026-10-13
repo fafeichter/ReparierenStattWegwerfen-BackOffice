@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.creation.DeviceBuyingDateChanged;
@@ -63,7 +62,6 @@ public class DeviceActivityService {
 	private final ModelDetailsService modelDetailsService;
 	private final DeviceSparePartsRepository deviceSparePartsRepository;
 	private final SparePartService sparePartService;
-	private final BusinessPartnerService businessPartnerService;
 	private final BusinessPartnerDetailsService businessPartnerDetailsService;
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)

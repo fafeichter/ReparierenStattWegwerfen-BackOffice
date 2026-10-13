@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.creation;
 
-import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerCreationService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerPlaceholderDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.AbstractDeviceActivityEvent;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
@@ -37,7 +37,7 @@ public class DeviceCreationService {
 	private final DeviceRepository deviceRepository;
 	private final DeviceBatteryStatusRepository deviceBatteryStatusRepository;
 	private final DeviceStatusRepository deviceStatusRepository;
-	private final BusinessPartnerService businessPartnerService;
+	private final BusinessPartnerCreationService businessPartnerService;
 	private final ApplicationEventPublisher events;
 
 	@Transactional

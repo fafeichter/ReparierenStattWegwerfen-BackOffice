@@ -1,0 +1,28 @@
+package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces;
+
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.activity.BusinessPartnerActivityService;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerActivityDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * @author Fabian Feichter
+ * @since 16.06.2026
+ */
+@RestController
+@RequestMapping("/api/businesspartners/{businessPartnerId}/activities")
+@RequiredArgsConstructor
+public class BusinessPartnerActivityController {
+
+	private final BusinessPartnerActivityService deviceActivityService;
+
+	@GetMapping("/")
+	public List<BusinessPartnerActivityDto> getActivities(@PathVariable Integer businessPartnerId) {
+		return deviceActivityService.getActivitiesForBusinessPartner(businessPartnerId);
+	}
+}

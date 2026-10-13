@@ -1,7 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain;
 
+import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerCreationService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPartnerDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.CreateBuyerBusinessPartnerForDeviceDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceBusinesspartnerDto;
@@ -25,7 +25,7 @@ import java.util.List;
 public class DeviceBusinessPartnerService {
 
 	private final DeviceRepository deviceRepository;
-	private final BusinessPartnerService businessPartnerService;
+	private final BusinessPartnerCreationService businessPartnerService;
 	private final ApplicationEventPublisher events;
 	private final BusinessPartnerDetailsService businessPartnerDetailsService;
 
