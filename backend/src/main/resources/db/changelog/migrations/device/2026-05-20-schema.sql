@@ -15,14 +15,14 @@ CREATE TABLE device_battery_status
 CREATE TABLE device_grade
 (
     device_grade_id  int          NOT NULL AUTO_INCREMENT,
-    name             varchar(256) NOT NULL,
+    tier varchar(256) NOT NULL,
     description      varchar(512) NOT NULL,
     description_long varchar(768) NOT NULL,
     sort_order       int          NOT NULL,
     created_at       timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at       timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_grade_id),
-    UNIQUE KEY uq_device_grade_name (name),
+    UNIQUE KEY uq_device_grade_tier (tier),
     UNIQUE KEY uq_device_grade_description (description),
     UNIQUE KEY uq_device_grade_description_long (description_long),
     UNIQUE KEY uq_device_grade_sort (sort_order)

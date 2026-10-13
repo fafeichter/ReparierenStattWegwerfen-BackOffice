@@ -6,7 +6,7 @@ VALUES (1, 'nicht getauscht', 1),
        (2, 'freiwillig getauscht', 2),
        (3, 'getauscht wegen Defekt', 3);
 
-INSERT INTO device_grade (device_grade_id, name, description, description_long, sort_order)
+INSERT INTO device_grade (device_grade_id, tier, description, description_long, sort_order)
 VALUES (1, 'Grade A', 'Wie neu', 'Makelloser Zustand ohne Gebrauchsspuren', 1),
        (2, 'Grade B', 'Minimale, kaum sichtbare Gebrauchsspuren',
         'Sehr guter Zustand mit minimalen, kaum sichtbaren Gebrauchsspuren', 2),

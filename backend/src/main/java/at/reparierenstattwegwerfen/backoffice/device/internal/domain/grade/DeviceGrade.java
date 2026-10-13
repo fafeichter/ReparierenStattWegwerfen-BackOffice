@@ -16,7 +16,12 @@ import lombok.Setter;
 public class DeviceGrade implements NamedId, Sortable {
 
 	private Integer id;
-	private String name;
+	private String grade;
 	private String description;
 	private Integer sortOrder;
+
+	@Override
+	public String getName() {
+		return grade + " - " + description;
+	}
 }

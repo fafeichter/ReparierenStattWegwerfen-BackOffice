@@ -23,12 +23,17 @@ public class DeviceGradeEntity implements NamedId, Sortable {
 	@Column(name = "device_grade_id")
 	private Integer id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "grade")
+	private String grade;
 
 	@Column(name = "description")
 	private String description;
 
 	@Column(name = "sort_order")
 	private Integer sortOrder;
+
+	@Override
+	public String getName() {
+		return grade + " - " + description;
+	}
 }
