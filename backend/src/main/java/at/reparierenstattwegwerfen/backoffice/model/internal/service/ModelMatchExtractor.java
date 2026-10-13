@@ -51,7 +51,7 @@ public class ModelMatchExtractor {
 
 	public ModelMatchResponse extractModelDetails(String adUrl) {
 		// 1. Fetch and clean data
-		String adText = adDownloader.downloadAd(adUrl).getText();
+		String adText = adDownloader.downloadAd(adUrl).text();
 
 		// 2. Build instructions prompt
 		String formattedPrompt = compilePrompt(adText);

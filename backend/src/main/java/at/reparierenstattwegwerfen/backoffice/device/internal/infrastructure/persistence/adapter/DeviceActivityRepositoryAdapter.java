@@ -28,10 +28,10 @@ public class DeviceActivityRepositoryAdapter implements DeviceActivityRepository
 	}
 
 	@Override
-	public DeviceActivity save(DeviceActivity activity) {
+	public void save(DeviceActivity activity) {
 		var entity = mapper.toEntity(activity);
-		var saved = jpaRepository.save(entity);
-		return mapper.toDomain(saved);
+		jpaRepository.save(entity);
+
 	}
 
 	@Override

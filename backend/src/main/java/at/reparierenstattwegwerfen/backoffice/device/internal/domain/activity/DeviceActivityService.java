@@ -144,7 +144,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceAppleSiliconChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getAppleSilicon(event.getModelAppleSiliconId()).getName());
+		deviceActivity.setName(modelDetailsService.getAppleSilicon(event.getModelAppleSiliconId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(7));
 
@@ -154,7 +154,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceUnifiedMemoryChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getUnifiedMemory(event.getModelUnifiedMemoryId()).getName());
+		deviceActivity.setName(modelDetailsService.getUnifiedMemory(event.getModelUnifiedMemoryId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(8));
 
@@ -164,7 +164,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceStorageChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getStorage(event.getModelStorageId()).getName());
+		deviceActivity.setName(modelDetailsService.getStorage(event.getModelStorageId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(9));
 
@@ -174,7 +174,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceColorChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getColor(event.getModelColorId()).getName());
+		deviceActivity.setName(modelDetailsService.getColor(event.getModelColorId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(10));
 
@@ -256,7 +256,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		DeviceSpareParts deviceSpareParts = deviceSparePartsRepository.getReferenceById(event.getDeviceSparePartId());
 		Price sparePartPriceNetto = new Price(deviceSpareParts.getPriceNetto());
-		deviceActivity.setName(sparePartService.getSparePartById(deviceSpareParts.getSparePartId()).getName() + " / " +
+		deviceActivity.setName(sparePartService.getSparePartById(deviceSpareParts.getSparePartId()).name() + " / " +
 			sparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(18));
@@ -279,7 +279,7 @@ public class DeviceActivityService {
 	public void on(DeviceBusinessPartnerSetAsSeller event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		NamedIdDto businessPartner = businessPartnerDetailsService.getBusinessPartner(event.getSellerBusinessPartnerId());
-		deviceActivity.setName(businessPartner.getName());
+		deviceActivity.setName(businessPartner.name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(20));
 
@@ -290,7 +290,7 @@ public class DeviceActivityService {
 	public void on(DeviceBusinessPartnerSetAsBuyer event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		NamedIdDto businessPartner = businessPartnerDetailsService.getBusinessPartner(event.getBuyerBusinessPartnerId());
-		deviceActivity.setName(businessPartner.getName());
+		deviceActivity.setName(businessPartner.name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(21));
 

@@ -41,7 +41,7 @@ public class DeviceSparePartService {
 				NamedIdDto sparePart = sparePartService.getSparePartById(deviceSparePart.getSparePartId());
 				return DeviceSparePartDto.builder()
 					.deviceSparePartId(deviceSparePart.getId())
-					.name(sparePart.getName())
+					.name(sparePart.name())
 					.priceNetto(deviceSparePart.getPriceNetto())
 					.date(deviceSparePart.getDate())
 					.build();
@@ -57,7 +57,7 @@ public class DeviceSparePartService {
 			.collect(toUnmodifiableSet());
 
 		Integer modelId = deviceRepository.getReferenceById(deviceId).getModelId();
-		Integer modelSeriesId = modelDetailsService.getModelSeries(modelId).getId();
+		Integer modelSeriesId = modelDetailsService.getModelSeries(modelId).id();
 
 		return sparePartService.getSparePartsForModelSeriesExcluding(
 			modelSeriesId,
@@ -86,7 +86,7 @@ public class DeviceSparePartService {
 	@Transactional
 	public void deleteDeviceSparePart(Integer deviceId, Integer oldDeviceSparePartId, UserDetails actor) {
 		DeviceSpareParts deviceSparePart = deviceSparePartsRepository.getReferenceById(oldDeviceSparePartId);
-		String oldSparePartName = sparePartService.getSparePartById(deviceSparePart.getSparePartId()).getName();
+		String oldSparePartName = sparePartService.getSparePartById(deviceSparePart.getSparePartId()).name();
 		Double oldSparePartPriceNetto = deviceSparePart.getPriceNetto();
 
 		DeviceSparePartDeleted deviceSparePartDeletedEvent = DeviceSparePartDeleted.builder()

@@ -57,7 +57,7 @@ public class DeviceTagsService {
 	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAvailableTagsForDevice(Integer deviceId) {
 		Integer deviceModelId = deviceRepository.getReferenceById(deviceId).getModelId();
-		Integer deviceModelSeriesId = modelDetailsService.getModelSeries(deviceModelId).getId();
+		Integer deviceModelSeriesId = modelDetailsService.getModelSeries(deviceModelId).id();
 
 		return deviceTagRepository.getAvailableTagsForDevice(deviceId, deviceModelSeriesId)
 			.stream()

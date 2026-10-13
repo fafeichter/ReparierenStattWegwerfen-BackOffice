@@ -145,7 +145,7 @@ val apiClientsTasks = apiModules.map { module ->
 
     tasks.register<GenerateTask>("generate${capitalizedModule}ApiClients") {
         group = "openapi"
-        description = "Generates the ${module} TypeScript clients."
+        description = "Generates the $module TypeScript clients."
 
         generatorName = "typescript-angular"
 

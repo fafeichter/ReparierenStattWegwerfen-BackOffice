@@ -1,9 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.shared;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
 
 import java.io.Serializable;
 
@@ -11,16 +8,7 @@ import java.io.Serializable;
  * @author Fabian Feichter
  * @since 20.06.2026
  */
-@Value
-@AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class NamedIdDto implements Serializable {
-
-	@NotNull
-	Integer id;
-
-	@NotNull
-	String name;
+public record NamedIdDto(@NotNull Integer id, @NotNull String name) implements Serializable {
 
 	public static NamedIdDto from(NamedId namedId) {
 		if (namedId == null) {

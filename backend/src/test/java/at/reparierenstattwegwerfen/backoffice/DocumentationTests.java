@@ -10,7 +10,7 @@ import org.springframework.modulith.docs.Documenter;
  */
 public class DocumentationTests {
 
-	ApplicationModules modules = ApplicationModules.of(BackofficeApplication.class);
+	final ApplicationModules modules = ApplicationModules.of(BackofficeApplication.class);
 
 	@Test
 	public void writeDocumentationSnippets() {

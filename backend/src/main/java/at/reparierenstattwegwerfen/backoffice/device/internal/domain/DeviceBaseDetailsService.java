@@ -41,7 +41,7 @@ public class DeviceBaseDetailsService {
 			.batteryMaximumCapacity(device.getBatteryMaximumCapacity())
 			.batteryCycleCount(device.getBatteryCycleCount())
 			.batteryStatus(NamedIdDto.from(device.getBatteryStatus()))
-			.tags(deviceTagRepository.getTagsForDevice(deviceId).stream().map(tag -> NamedIdDto.from(tag)).toList())
+			.tags(deviceTagRepository.getTagsForDevice(deviceId).stream().map(NamedIdDto::from).toList())
 			.build();
 	}
 }

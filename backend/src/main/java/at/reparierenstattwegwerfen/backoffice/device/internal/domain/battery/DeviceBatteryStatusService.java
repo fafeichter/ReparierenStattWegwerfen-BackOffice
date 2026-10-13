@@ -29,7 +29,7 @@ public class DeviceBatteryStatusService {
 	public List<NamedIdDto> getAllStatus() {
 		return deviceBatteryStatusRepository.getAllStatus()
 			.stream()
-			.map(deviceStatus -> NamedIdDto.from(deviceStatus))
+			.map(NamedIdDto::from)
 			.toList();
 	}
 

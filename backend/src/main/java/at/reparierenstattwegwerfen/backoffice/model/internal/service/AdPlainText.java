@@ -1,7 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.service;
 
-import lombok.Getter;
-
 import java.util.regex.Pattern;
 
 /**
@@ -11,8 +9,7 @@ import java.util.regex.Pattern;
  * @author Fabian Feichter
  * @since 20.06.2026
  */
-@Getter
-public class AdPlainText {
+public record AdPlainText(String text) {
 
 	// Pre-compile patterns for performance
 	private static final Pattern CODE_BLOCKS = Pattern.compile("<(script|style|noscript|meta|link|iframe|header|footer|nav|aside|img)[^>]*?>[\\s\\S]*?</\\1>", Pattern.CASE_INSENSITIVE);
@@ -20,10 +17,8 @@ public class AdPlainText {
 	private static final Pattern HTML_ENTITIES = Pattern.compile("&nbsp;|&amp;|&lt;|&gt;|&quot;|&#\\d+;");
 	private static final Pattern WHITESPACE = Pattern.compile("\\s+");
 
-	private final String text;
-
-	public AdPlainText(String html) {
-		this.text = stripHtmlTrash(html);
+	public AdPlainText(String text) {
+		this.text = stripHtmlTrash(text);
 	}
 
 	private static String stripHtmlTrash(String html) {

@@ -15,7 +15,7 @@ CREATE TABLE device_battery_status
 CREATE TABLE device_grade
 (
     device_grade_id  int          NOT NULL AUTO_INCREMENT,
-    tier varchar(256) NOT NULL,
+    tier             varchar(256) NOT NULL,
     description      varchar(512) NOT NULL,
     description_long varchar(768) NOT NULL,
     sort_order       int          NOT NULL,

@@ -12,7 +12,7 @@ public interface DeviceActivityRepository {
 
 	Optional<DeviceActivity> findById(Integer id);
 
-	DeviceActivity save(DeviceActivity activity);
+	void save(DeviceActivity activity);
 
 	List<DeviceActivity> getByIdWithRelations(Integer deviceId);
 

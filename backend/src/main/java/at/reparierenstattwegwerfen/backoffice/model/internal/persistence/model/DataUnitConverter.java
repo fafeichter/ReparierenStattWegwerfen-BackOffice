@@ -8,7 +8,7 @@ import org.springframework.util.unit.DataUnit;
  * @author Fabian Feichter
  * @since 09.06.2026
  */
-@Converter(autoApply = false)
+@Converter
 public class DataUnitConverter implements AttributeConverter<DataUnit, String> {
 
 	public static String toSuffix(DataUnit unit) {

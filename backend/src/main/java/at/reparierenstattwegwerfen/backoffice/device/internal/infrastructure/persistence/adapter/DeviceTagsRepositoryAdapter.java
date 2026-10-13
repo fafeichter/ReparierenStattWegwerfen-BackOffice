@@ -24,9 +24,8 @@ public class DeviceTagsRepositoryAdapter implements DeviceTagsRepository {
 	}
 
 	@Override
-	public DeviceTags save(DeviceTags deviceTags) {
+	public void save(DeviceTags deviceTags) {
 		var entity = mapper.toEntity(deviceTags);
-		var saved = jpaRepository.save(entity);
-		return mapper.toDomain(saved);
+		jpaRepository.save(entity);
 	}
 }
