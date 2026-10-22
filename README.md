@@ -83,10 +83,11 @@ OPENAI_API_KEY_DEV=<your_api_key>
 
 ### Optional Dependencies
 
-Generating the project module diagram shown above requires `Graphviz`. You can install it using Homebrew:
+Generating the project module diagram shown above requires `Graphviz`. You can install it using Homebrew and
+this projects `Brewfile`:
 
 ```bash
-brew install graphviz
+brew bundle
 ```
 
 ---
