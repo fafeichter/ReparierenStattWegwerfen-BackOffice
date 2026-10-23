@@ -18,7 +18,4 @@ public class DeviceGradeDto {
 
 	@NotEmpty
 	private final String name;
-
-	@NotEmpty
-	private final String description;
 }

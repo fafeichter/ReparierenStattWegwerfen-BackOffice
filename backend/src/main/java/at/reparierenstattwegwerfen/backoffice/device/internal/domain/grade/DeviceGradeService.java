@@ -32,7 +32,6 @@ public class DeviceGradeService {
 			.map(deviceStatus -> DeviceGradeDto.builder()
 				.id(deviceStatus.getId())
 				.name(deviceStatus.getName())
-				.description(deviceStatus.getDescription())
 				.build())
 			.toList();
 	}
