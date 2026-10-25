@@ -474,7 +474,7 @@
       "username": "fabian",
       "firstName": "Fabian",
       "lastName": "Feichter",
-      "email": "me@fabian-feichter.at",
+      "email": "fabian@reparieren-statt-wegwerfen.at",
       "emailVerified": true,
       "enabled": true,
       "createdTimestamp": 1774632852320,
@@ -486,34 +486,6 @@
           "userLabel": "My password",
           "createdDate": 1774632871808,
           "secretData": "{\"value\":\"MIC9rbF1y/hZQKDd7I9XCidL3B6Sj6sK9kI9H+jlZio=\",\"salt\":\"y1Z9ZkXl13vp/hNiR0SMeg==\",\"additionalParameters\":{}}",
-          "credentialData": "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
-        }
-      ],
-      "disableableCredentialTypes": [],
-      "requiredActions": [],
-      "realmRoles": [
-        "default-roles-reparieren-statt-wegwerfen-backoffice"
-      ],
-      "notBefore": 0,
-      "groups": []
-    },
-    {
-      "id": "59b00799-b0e2-453f-ab57-653e6c079fd4",
-      "username": "reparieren-statt-wegwerfen",
-      "firstName": "Reparieren",
-      "lastName": "Statt Wegwerfen",
-      "email": "fabian@reparieren-statt-wegwerfen.at",
-      "emailVerified": true,
-      "enabled": true,
-      "createdTimestamp": 1774632904162,
-      "totp": false,
-      "credentials": [
-        {
-          "id": "c7a5696b-5b7d-4dad-b00b-b34f5af38cf2",
-          "type": "password",
-          "userLabel": "My password",
-          "createdDate": 1774897122433,
-          "secretData": "{\"value\":\"AAA38iVV6JUKV5TRq1ko32kWtT/V4kRqv9LluJDkvss=\",\"salt\":\"4MEdrYlwWYhEqXm/TyFiYQ==\",\"additionalParameters\":{}}",
           "credentialData": "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
         }
       ],
