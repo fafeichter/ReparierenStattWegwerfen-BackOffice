@@ -1,19 +1,20 @@
 @if (businessPartner(); as businessPartner) {
-  <div class="card" id="contact">
+  <clr-card id="contact">
     <div [class.scammer-header]="businessPartner.scammer" class="card-header">
       {{ businessPartner.name }}
       @if (businessPartner.scammer) {
         <clr-label clrColor="danger" clrText="Scammer!" clrType="solid"></clr-label>
       }
     </div>
-    <div class="card-header">Contact</div>
+    <clr-card-header>Contact</clr-card-header>
     <div class="card-block">
-      <div class="card-title">Address</div>
-      <div class="card-text">
+      <clr-card-body-title>Address
+      </clr-card-body-title>
+      <clr-card-body-text>
         {{ businessPartner.address?.street | orElse }} {{ businessPartner.address?.houseNumber  | orElse }}<br>
         {{ businessPartner.address?.zipCode  | orElse }} {{ businessPartner.address?.city  | orElse }}<br>
         {{ businessPartner.address?.country  | orElse }}
-      </div>
+      </clr-card-body-text>
 
       @if (!addressEditModeActive()) {
         <button (click)="addressEditModeActive.set(true)" class="btn btn-link">
@@ -38,22 +39,22 @@
       }
     </div>
     <div class="card-block">
-      <div class="card-title">Company</div>
-      <div class="card-text">
+      <clr-card-body-title>Company</clr-card-body-title>
+      <clr-card-body-text>
         <ul class="list">
           <li>Name: {{ businessPartner.companyName | orElse }}</li>
           <li>UID: {{ businessPartner.companyUid | orElse }}</li>
         </ul>
-      </div>
+      </clr-card-body-text>
     </div>
     <div class="card-block">
-      <div class="card-title">Contact</div>
-      <div class="card-text">
+      <clr-card-body-title>Contact</clr-card-body-title>
+      <clr-card-body-text>
         <ul class="list">
           <li>E-Mail: {{ businessPartner.email | orElse }}</li>
           <li>Telephone: {{ businessPartner.telephone | orElse }}</li>
         </ul>
-      </div>
+      </clr-card-body-text>
     </div>
-  </div>
+  </clr-card>
 }

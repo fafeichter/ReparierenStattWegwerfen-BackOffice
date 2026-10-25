@@ -2,10 +2,10 @@
   <app-scrollspy [items]="navItems"/>
   <div class="clr-row">
     <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-      <div class="card" id="model">
-        <div class="card-header">
+      <clr-card id="model">
+        <clr-card-header>
           Model
-        </div>
+        </clr-card-header>
         <div class="card-block">
           <p class="mt-0!">{{ m.releaseDate + '-01' | date:'MMM yyyy' }}</p>
           <p class="mt-1!">
@@ -16,21 +16,21 @@
           </p>
         </div>
         <div class="card-block">
-          <div class="card-title">Colors</div>
-          <div class="card-text">
+          <clr-card-body-title>Colors</clr-card-body-title>
+          <clr-card-body-text>
             <ul class="list">
               @for (color of colors(); track color.id) {
                 <li>{{ color.name }}</li>
               }
             </ul>
-          </div>
+          </clr-card-body-text>
         </div>
-      </div>
-      <div class="card" id="hardware">
-        <div class="card-header">Hardware</div>
+      </clr-card>
+      <clr-card id="hardware">
+        <clr-card-header>Hardware</clr-card-header>
         <div class="card-block">
-          <div class="card-title">Chip</div>
-          <div class="card-text">
+          <clr-card-body-title>Chip</clr-card-body-title>
+          <clr-card-body-text>
             @for (group of siliconGroups(); track group.shortName; let last = $last) {
               <ul class="list">
                 @for (chip of group.chips; track chip.id) {
@@ -41,11 +41,11 @@
                 <div></div>
               }
             }
-          </div>
+          </clr-card-body-text>
         </div>
         <div class="card-block">
-          <div class="card-title">Memory</div>
-          <div class="card-text">
+          <clr-card-body-title>Memory</clr-card-body-title>
+          <clr-card-body-text>
             <ul class="list">
               @for (mem of memoryOptions(); track mem.id) {
                 <li>
@@ -58,11 +58,11 @@
                 </li>
               }
             </ul>
-          </div>
+          </clr-card-body-text>
         </div>
         <div class="card-block">
-          <div class="card-title">Storage</div>
-          <div class="card-text">
+          <clr-card-body-title>Storage</clr-card-body-title>
+          <clr-card-body-text>
             <ul class="list">
               @for (storage of storageOptions(); track storage.id) {
                 <li>
@@ -75,23 +75,23 @@
                 </li>
               }
             </ul>
-          </div>
+          </clr-card-body-text>
         </div>
-      </div>
-      <div class="card" id="features">
-        <div class="card-header">
+      </clr-card>
+      <clr-card id="features">
+        <clr-card-header>
           Features
-        </div>
+        </clr-card-header>
         <div class="card-block">
-          <div class="card-text">
+          <clr-card-body-text>
             <ul class="list">
               @for (feature of features(); track feature.id) {
                 <li>{{ feature.name }}</li>
               }
             </ul>
-          </div>
+          </clr-card-body-text>
         </div>
-      </div>
+      </clr-card>
     </div>
   </div>
 }

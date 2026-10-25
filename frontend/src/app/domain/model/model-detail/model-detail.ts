@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ModelControllerService, ModelDetailDto, SiliconDto, SizeDto } from '@api/model';
 import { ActivatedRoute } from '@angular/router';
-import { ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/angular';
+import { ClrCardModule, ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/angular';
 import { DatePipe } from '@angular/common';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
@@ -32,7 +32,7 @@ interface SizeAvailability {
 
 @Component({
   selector: 'app-model-detail',
-  imports: [ClrLabel, ClrIcon, DatePipe, ClrVerticalNavModule, Scrollspy],
+  imports: [ClrLabel, ClrIcon, DatePipe, ClrVerticalNavModule, Scrollspy, ClrCardModule],
   templateUrl: './model-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './model-detail.css',

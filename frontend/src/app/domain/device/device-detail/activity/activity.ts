@@ -3,10 +3,11 @@ import { DatePipe } from '@angular/common';
 import { DeviceActivityControllerService, DeviceActivityDto } from '@api/device';
 import { interval, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ClrCardModule } from '@clr/angular';
 
 @Component({
   selector: 'app-activity',
-  imports: [DatePipe],
+  imports: [DatePipe, ClrCardModule],
   templateUrl: './activity.html',
   styleUrl: './activity.css',
 })

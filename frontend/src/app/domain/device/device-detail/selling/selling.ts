@@ -1,5 +1,6 @@
 import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
 import {
+  ClrCardModule,
   ClrCheckboxModule,
   ClrCommonFormsModule,
   ClrIcon,
@@ -32,6 +33,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
     ClrTextareaModule,
     ReactiveFormsModule,
     ClrCheckboxModule,
+    ClrCardModule,
   ],
   templateUrl: './selling.html',
   styleUrl: './selling.css',

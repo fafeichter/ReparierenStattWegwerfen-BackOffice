@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { DeviceBuyingDetailsDto, DeviceDetailsControllerService } from '@api/device';
-import { ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from '@clr/angular';
+import { ClrCardModule, ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from '@clr/angular';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ClrFileInputModule,
     FormsModule,
     ReactiveFormsModule,
+    ClrCardModule,
   ],
   templateUrl: './buying.html',
   styleUrl: './buying.css',

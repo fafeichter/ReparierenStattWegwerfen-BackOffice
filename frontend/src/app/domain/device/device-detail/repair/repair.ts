@@ -1,5 +1,6 @@
 import { Component, computed, effect, inject, input, OnInit, signal } from '@angular/core';
 import {
+  ClrCardModule,
   ClrCommonFormsModule,
   ClrDatagridModule,
   ClrIcon,
@@ -37,6 +38,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
     ClrNumberInputModule,
     DatePipe,
     ClrLabel,
+    ClrCardModule,
   ],
   templateUrl: './repair.html',
   styleUrl: './repair.css',

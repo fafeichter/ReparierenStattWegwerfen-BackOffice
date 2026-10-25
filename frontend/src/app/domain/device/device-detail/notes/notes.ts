@@ -1,5 +1,11 @@
 import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
-import { ClrCommonFormsModule, ClrIcon, ClrModalModule, ClrTextareaModule } from '@clr/angular';
+import {
+  ClrCardModule,
+  ClrCommonFormsModule,
+  ClrIcon,
+  ClrModalModule,
+  ClrTextareaModule,
+} from '@clr/angular';
 import { DatePipe } from '@angular/common';
 import {
   FormControl,
@@ -20,6 +26,7 @@ import { DeviceNoteDto, DeviceNotesControllerService } from '@api/device';
     DatePipe,
     FormsModule,
     ReactiveFormsModule,
+    ClrCardModule,
   ],
   templateUrl: './notes.html',
   styleUrl: './notes.css',

@@ -6,9 +6,10 @@ import {
   BusinessPartnerActivityDto,
 } from '@api/businesspartner';
 import { DatePipe } from '@angular/common';
+import { ClrCardModule } from '@clr/angular';
 
 @Component({
-  imports: [DatePipe],
+  imports: [DatePipe, ClrCardModule],
   selector: 'app-activity',
   styleUrl: './activity.css',
   templateUrl: './activity.html',

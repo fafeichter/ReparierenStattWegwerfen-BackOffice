@@ -1,9 +1,10 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { DeviceBusinessPartnerControllerService, DeviceBusinesspartnerDto } from '@api/device';
 import { RouterLink } from '@angular/router';
+import { ClrCardModule } from '@clr/angular';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, ClrCardModule],
   selector: 'app-devices',
   styleUrl: './devices.css',
   templateUrl: './devices.html',
