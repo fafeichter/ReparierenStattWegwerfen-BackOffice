@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.application.internal.interfaces;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Version;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.SpringVersion;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,6 @@ public class AppInfoController {
 			.javaVersion(System.getProperty("java.version"))
 			.javaVendor(System.getProperty("java.vendor"))
 			.javaRuntimeName(System.getProperty("java.runtime.name"))
-			.hibernateVersion(Version.getVersionString())
 			.osName(System.getProperty("os.name"))
 			.osVersion(System.getProperty("os.version"))
 			.osArch(System.getProperty("os.arch"))

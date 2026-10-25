@@ -1,29 +1,63 @@
-<ul>
-  <li>Build Date: {{ buildInfo.date | date:'MMM d, y, HH:mm:ss' }}</li>
-  <li>Branch: {{ buildInfo.branch }}</li>
-  <li>Commit: {{ buildInfo.commit }}</li>
-</ul>
-<hr>
-<ul>
-  <li>Locale: {{ currentLocale }}</li>
-</ul>
-<hr>
-<ul>
-  <li>Angular version: {{ angularVersion }}</li>
-</ul>
-
-<h5>User info</h5>
-<pre>{{ userData() | json }}</pre>
-
-<h5>Backend</h5>
-<pre>{{ backendAppInfo() | json }}</pre>
-
-<h5>Frontend Environment</h5>
-<pre>{{ environment | json }}</pre>
-
-<div class="mt-2">
-  GitHub:
-  <a href="https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice" target="_blank">
-    https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice
-  </a>
-</div>
+<clr-card>
+  <clr-card-body>
+    <clr-card-body-title>Build</clr-card-body-title>
+    <clr-card-body-text>
+      <ul>
+        <li>Build Date: {{ buildInfo.date | date:'MMM d, y, HH:mm:ss' }}</li>
+        <li>Branch: {{ buildInfo.branch }}</li>
+        <li>Commit: {{ buildInfo.commit }}</li>
+        <li>GitHub:
+          <a href="https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice" target="_blank">
+            https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice
+            <cds-icon role="img" shape="pop-out"/>
+          </a>
+        </li>
+      </ul>
+    </clr-card-body-text>
+    <hr>
+    <clr-card-body-title>Backend</clr-card-body-title>
+    <clr-card-body-text>
+      <ul>
+        <li>Spring Boot: {{ backendAppInfo()?.springBootVersion }}</li>
+        <li>Spring Framework: {{ backendAppInfo()?.springVersion }}</li>
+        <li>Java: {{ backendAppInfo()?.javaRuntimeName }} {{ backendAppInfo()?.javaVersion }}
+          ({{ backendAppInfo()?.javaVendor }})
+        </li>
+        <li>OS: {{ backendAppInfo()?.osName }} {{ backendAppInfo()?.osVersion }}
+          ({{ backendAppInfo()?.osArch }})
+        </li>
+      </ul>
+    </clr-card-body-text>
+    <hr>
+    <clr-card-body-title>Frontend</clr-card-body-title>
+    <clr-card-body-text>
+      <ul>
+        <li>Angular: {{ angularVersion }}</li>
+        <li>Clarity UI: {{ clarityUiVersion }}</li>
+        <li>Clarity Angular: {{ clarityAngularVersion }}</li>
+        <li>Locale: {{ currentLocale }}</li>
+        <li>Environment:
+          <pre class="border-none!">{{ frontendEnvironment | json }}</pre>
+        </li>
+      </ul>
+    </clr-card-body-text>
+    <hr>
+    <clr-card-body-title>User Info</clr-card-body-title>
+    <clr-card-body-text>
+      <ul>
+        <li>User Data:
+          <pre class="border-none!">{{ accessTokenPayload() | json }}</pre>
+        </li>
+      </ul>
+    </clr-card-body-text>
+    <hr>
+    <clr-card-body-title>Authentication</clr-card-body-title>
+    <clr-card-body-text>
+      <ul>
+        <li>Authenticated: {{ authenticated().isAuthenticated }}</li>
+        <li>Token: {{ accessToken() }}</li>
+        <li>Refresh Token: {{ refreshToken() }}</li>
+      </ul>
+    </clr-card-body-text>
+  </clr-card-body>
+</clr-card>

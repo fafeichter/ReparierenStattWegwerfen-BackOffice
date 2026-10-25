@@ -15,7 +15,6 @@ public class AppInfoDto {
 	private String javaVersion;
 	private String javaVendor;
 	private String javaRuntimeName;
-	private String hibernateVersion;
 	private String osName;
 	private String osVersion;
 	private String osArch;
