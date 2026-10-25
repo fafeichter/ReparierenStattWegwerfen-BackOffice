@@ -1,0 +1,18 @@
+package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestClient;
+
+/**
+ * @author Fabian Feichter
+ * @since 19.06.2026
+ */
+@Configuration
+public class AdDownloaderConfig {
+
+	@Bean
+	public RestClient adDownloaderRestClient() {
+		return RestClient.create();
+	}
+}

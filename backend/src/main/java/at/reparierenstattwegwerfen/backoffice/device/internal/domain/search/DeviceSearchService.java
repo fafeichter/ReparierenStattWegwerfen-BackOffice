@@ -6,7 +6,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.De
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOfferedForSaleDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOrderedDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceToFinishDto;
-import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,6 +27,10 @@ public class DeviceSearchService {
 
 	private final DeviceRepository deviceRepository;
 	private final ModelDetailsService modelDetailsService;
+	private final ModelAppleSiliconDetailsService modelAppleSiliconDetailsService;
+	private final ModelUnifiedMemoryDetailsService modelUnifiedMemoryDetailsService;
+	private final ModelColorDetailsService modelColorDetailsService;
+	private final ModelStorageDetailsService modelStorageDetailsService;
 	private final DeviceActivityService deviceActivityService;
 
 	@Transactional(readOnly = true)
@@ -38,9 +42,9 @@ public class DeviceSearchService {
 				.deviceId(device.getId())
 				.status(NamedIdDto.from(device.getStatus()))
 				.model(modelDetailsService.getModel(device.getModelId()))
-				.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-				.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-				.storage(modelDetailsService.getStorage(device.getModelStorageId()))
+				.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
+				.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+				.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
 				.lastActivity(deviceActivityService.getLastActivityDateForDevice(device.getId()))
 				.build());
 	}
@@ -54,9 +58,9 @@ public class DeviceSearchService {
 					.deviceId(device.getId())
 					.status(NamedIdDto.from(device.getStatus()))
 					.model(modelDetailsService.getModel(device.getModelId()))
-					.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-					.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-					.storage(modelDetailsService.getStorage(device.getModelStorageId()))
+					.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
+					.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+					.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
 					.build())
 			.toList();
 	}
@@ -70,9 +74,9 @@ public class DeviceSearchService {
 					.deviceId(device.getId())
 					.statusDate(device.getStatusDate().toLocalDate())
 					.model(modelDetailsService.getModel(device.getModelId()))
-					.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-					.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-					.storage(modelDetailsService.getStorage(device.getModelStorageId()))
+					.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
+					.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+					.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
 					.build())
 			.toList();
 	}
@@ -85,9 +89,9 @@ public class DeviceSearchService {
 				.deviceId(device.getId())
 				.buyingDate(device.getBuyingDate())
 				.model(modelDetailsService.getModel(device.getModelId()))
-				.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-				.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-				.storage(modelDetailsService.getStorage(device.getModelStorageId()))
+				.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
+				.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+				.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
 				.build())
 			.toList();
 	}

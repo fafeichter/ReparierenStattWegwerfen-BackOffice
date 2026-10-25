@@ -1,0 +1,28 @@
+package at.reparierenstattwegwerfen.backoffice.model.internal.interfaces;
+
+import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.ModelAppleSiliconService;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * @author Fabian Feichter
+ * @since 09.07.2026
+ */
+@RestController
+@RequestMapping("/api/models/{modelId}/apple-silicons")
+@RequiredArgsConstructor
+public class ModelAppleSiliconController {
+
+	private final ModelAppleSiliconService modelAppleSiliconService;
+
+	@GetMapping("/")
+	public List<NamedIdDto> getAllAppleSiliconsForModel(@PathVariable Integer modelId) {
+		return modelAppleSiliconService.getAllAppleSiliconsForModel(modelId);
+	}
+}

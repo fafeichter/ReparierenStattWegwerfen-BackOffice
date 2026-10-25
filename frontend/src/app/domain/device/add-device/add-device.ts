@@ -18,7 +18,12 @@ import {
   ClrTooltipModule,
 } from '@clr/angular';
 
-import { Alternative, ModelControllerService, ResolvedModelMatch } from '@api/model';
+import {
+  Alternative,
+  ModelControllerService,
+  ModelResolutionControllerService,
+  ResolvedModelMatch,
+} from '@api/model';
 import {
   BusinessPartnerPlaceholderDto,
   CreateNewDeviceDto,
@@ -79,6 +84,7 @@ export class AddDevice {
 
   private modelApi = inject(ModelControllerService);
   private deviceCreationApi = inject(DeviceCreationControllerService);
+  private modelResolutionApi = inject(ModelResolutionControllerService);
   private router = inject(Router);
 
   constructor() {
@@ -137,7 +143,7 @@ export class AddDevice {
       this.isLoadingModel.set(true);
       const adUrl = this.form.controls.url.value;
 
-      this.modelApi.getModelNumberFromAdUrl(adUrl).subscribe({
+      this.modelResolutionApi.resolveModelDetailsFromAd(adUrl).subscribe({
         next: (data) => {
           this.found.set(data);
           this.isLoadingModel.set(false);

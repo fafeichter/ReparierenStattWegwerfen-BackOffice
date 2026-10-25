@@ -1,0 +1,28 @@
+package at.reparierenstattwegwerfen.backoffice.model.internal.interfaces;
+
+import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.ModelColorService;
+import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * @author Fabian Feichter
+ * @since 09.07.2026
+ */
+@RestController
+@RequestMapping("/api/models/{modelId}/colors")
+@RequiredArgsConstructor
+public class ModelColorController {
+
+	private final ModelColorService modelColorService;
+
+	@GetMapping("/")
+	public List<NamedIdDto> getColorsForModel(@PathVariable Integer modelId) {
+		return modelColorService.getColorsForModel(modelId);
+	}
+}

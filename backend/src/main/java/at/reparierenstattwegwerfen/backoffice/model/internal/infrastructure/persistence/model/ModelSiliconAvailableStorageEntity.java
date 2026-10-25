@@ -1,0 +1,31 @@
+package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.persistence.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/**
+ * @author Fabian Feichter
+ * @since 25.05.2026
+ */
+@Entity
+@Table(name = "model_silicon_available_storage")
+@Getter
+@Setter
+@NoArgsConstructor
+public class ModelSiliconAvailableStorageEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "model_silicon_available_storage_id")
+	private Integer id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_available_apple_silicon_id")
+	private ModelAvailableAppleSiliconEntity availableAppleSilicon;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_storage_id")
+	private ModelStorageEntity storage;
+}

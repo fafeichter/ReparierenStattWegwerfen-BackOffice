@@ -10,14 +10,6 @@ public interface ModelDetailsService {
 
 	NamedIdDto getModel(Integer modelId);
 
-	NamedIdDto getAppleSilicon(Integer modelAppleSiliconId);
-
-	NamedIdDto getUnifiedMemory(Integer modelUnifiedMemoryId);
-
-	NamedIdDto getStorage(Integer modelStorageId);
-
-	NamedIdDto getColor(Integer modelColorId);
-
 	String getTechnicalSpecsUrl(Integer modelId);
 
 	String getModelNumber(Integer modelId);

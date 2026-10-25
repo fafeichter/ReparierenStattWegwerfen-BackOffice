@@ -28,7 +28,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.Device
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceActivityDto;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
-import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.ModelAppleSiliconDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.ModelColorDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.ModelStorageDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.ModelUnifiedMemoryDetailsService;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.sparepart.SparePartService;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +62,10 @@ public class DeviceActivityService {
 	private final DeviceGradeRepository deviceGradeRepository;
 	private final DeviceTagRepository deviceTagRepository;
 	private final DeviceNoteRepository deviceNoteRepository;
-	private final ModelDetailsService modelDetailsService;
+	private final ModelAppleSiliconDetailsService modelAppleSiliconDetailsService;
+	private final ModelUnifiedMemoryDetailsService modelUnifiedMemoryDetailsService;
+	private final ModelColorDetailsService modelColorDetailsService;
+	private final ModelStorageDetailsService modelStorageDetailsService;
 	private final DeviceSparePartsRepository deviceSparePartsRepository;
 	private final SparePartService sparePartService;
 	private final BusinessPartnerDetailsService businessPartnerDetailsService;
@@ -142,7 +148,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceAppleSiliconChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getAppleSilicon(event.getModelAppleSiliconId()).name());
+		deviceActivity.setName(modelAppleSiliconDetailsService.getAppleSilicon(event.getModelAppleSiliconId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(7));
 
@@ -152,7 +158,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceUnifiedMemoryChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getUnifiedMemory(event.getModelUnifiedMemoryId()).name());
+		deviceActivity.setName(modelUnifiedMemoryDetailsService.getUnifiedMemory(event.getModelUnifiedMemoryId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(8));
 
@@ -162,7 +168,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceStorageChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getStorage(event.getModelStorageId()).name());
+		deviceActivity.setName(modelStorageDetailsService.getStorage(event.getModelStorageId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(9));
 
@@ -172,7 +178,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceColorChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(modelDetailsService.getColor(event.getModelColorId()).name());
+		deviceActivity.setName(modelColorDetailsService.getColor(event.getModelColorId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(10));
 

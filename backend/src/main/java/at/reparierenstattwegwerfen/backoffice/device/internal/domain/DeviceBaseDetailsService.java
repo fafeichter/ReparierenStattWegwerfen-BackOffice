@@ -2,7 +2,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.domain;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceBaseDetailsDto;
-import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.*;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,11 @@ public class DeviceBaseDetailsService {
 
 	private final DeviceRepository deviceRepository;
 	private final DeviceTagRepository deviceTagRepository;
-
 	private final ModelDetailsService modelDetailsService;
+	private final ModelAppleSiliconDetailsService modelAppleSiliconDetailsService;
+	private final ModelUnifiedMemoryDetailsService modelUnifiedMemoryDetailsService;
+	private final ModelColorDetailsService modelColorDetailsService;
+	private final ModelStorageDetailsService modelStorageDetailsService;
 
 	@Transactional(readOnly = true)
 	public DeviceBaseDetailsDto load(Integer deviceId) {
@@ -33,10 +36,10 @@ public class DeviceBaseDetailsService {
 			.modelNumber(modelDetailsService.getModelNumber(deviceModelId))
 			.grade(NamedIdDto.from(device.getGrade()))
 			.technicalSpecsUrl(modelDetailsService.getTechnicalSpecsUrl(deviceModelId))
-			.appleSilicon(modelDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-			.unifiedMemory(modelDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-			.storage(modelDetailsService.getStorage(device.getModelStorageId()))
-			.color(modelDetailsService.getColor(device.getModelColorId()))
+			.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
+			.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+			.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
+			.color(modelColorDetailsService.getColor(device.getModelColorId()))
 			.serialNumber(device.getSerialNumber())
 			.batteryMaximumCapacity(device.getBatteryMaximumCapacity())
 			.batteryCycleCount(device.getBatteryCycleCount())
