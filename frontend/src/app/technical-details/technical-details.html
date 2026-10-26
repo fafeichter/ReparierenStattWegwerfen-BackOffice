@@ -20,6 +20,7 @@
       <ul>
         <li>Spring Boot: {{ backendAppInfo()?.springBootVersion }}</li>
         <li>Spring Framework: {{ backendAppInfo()?.springVersion }}</li>
+        <li>Spring Active Profiles: {{ backendAppInfo()?.springActiveProfiles!.join(', ') }}</li>
         <li>Java: {{ backendAppInfo()?.javaRuntimeName }} {{ backendAppInfo()?.javaVersion }}
           ({{ backendAppInfo()?.javaVendor }})
         </li>
@@ -35,10 +36,8 @@
         <li>Angular: {{ angularVersion }}</li>
         <li>Clarity UI: {{ clarityUiVersion }}</li>
         <li>Clarity Angular: {{ clarityAngularVersion }}</li>
+        <li>Production: {{ frontendProduction }}</li>
         <li>Locale: {{ currentLocale }}</li>
-        <li>Environment:
-          <pre class="border-none!">{{ frontendEnvironment | json }}</pre>
-        </li>
       </ul>
     </clr-card-body-text>
     <hr>

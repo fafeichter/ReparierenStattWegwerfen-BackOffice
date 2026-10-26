@@ -12,6 +12,7 @@ import lombok.Data;
 public class AppInfoDto {
 	private String springBootVersion;
 	private String springVersion;
+	private String[] springActiveProfiles;
 	private String javaVersion;
 	private String javaVendor;
 	private String javaRuntimeName;

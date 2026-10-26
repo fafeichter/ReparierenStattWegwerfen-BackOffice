@@ -22,7 +22,7 @@ export class TechnicalDetails implements OnInit {
   backendAppInfo = signal<AppInfoDto | undefined>(undefined);
   clarityUiVersion = clarityUiVersion;
   clarityAngularVersion = clarityAngularVersion;
-  protected readonly frontendEnvironment = environment;
+  protected readonly frontendProduction = environment.production;
   private readonly oidcSecurityService = inject(OidcSecurityService);
   readonly authenticated = this.oidcSecurityService.authenticated;
   readonly accessToken = toSignal(this.oidcSecurityService.getAccessToken(), {
