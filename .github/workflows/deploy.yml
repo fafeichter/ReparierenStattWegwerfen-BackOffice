@@ -21,7 +21,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build with Gradle
         run: |
-          ./gradlew :backend:generateApiClients
           ./gradlew build -x test
       - uses: actions/upload-artifact@v7
         with:

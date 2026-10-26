@@ -232,3 +232,6 @@ tasks.named<JavaCompile>("compileJava") {
         )
     )
 }
+
+project(":frontend").tasks.matching { it.name in listOf("npmTest", "npmBuild", "npmStart") }
+    .configureEach { dependsOn(tasks.named("generateApiClients")) }
