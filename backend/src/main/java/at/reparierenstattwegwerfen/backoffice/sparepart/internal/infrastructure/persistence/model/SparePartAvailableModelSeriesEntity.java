@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.sparepart.internal.persistence.model;
+package at.reparierenstattwegwerfen.backoffice.sparepart.internal.infrastructure.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,14 +7,14 @@ import lombok.Setter;
 
 /**
  * @author Fabian Feichter
- * @since 23.09.2026
+ * @since 25.05.2026
  */
 @Entity
 @Table(name = "spare_part_available_model_series")
 @Getter
 @Setter
 @NoArgsConstructor
-public class SparePartAvailableModelSeries {
+public class SparePartAvailableModelSeriesEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class SparePartAvailableModelSeries {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "spare_part_id")
-	private SparePart sparePart;
+	private SparePartEntity sparePart;
 
 	@Column(name = "model_series_id")
 	private Integer modelSeriesId;

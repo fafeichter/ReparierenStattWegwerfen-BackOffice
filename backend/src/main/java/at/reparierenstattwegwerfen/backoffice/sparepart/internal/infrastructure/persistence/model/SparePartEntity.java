@@ -1,7 +1,6 @@
-package at.reparierenstattwegwerfen.backoffice.sparepart.internal.persistence.model;
+package at.reparierenstattwegwerfen.backoffice.sparepart.internal.infrastructure.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
-import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,14 +8,14 @@ import lombok.Setter;
 
 /**
  * @author Fabian Feichter
- * @since 23.09.2026
+ * @since 25.05.2026
  */
 @Entity
 @Table(name = "spare_part")
 @Getter
 @Setter
 @NoArgsConstructor
-public class SparePart implements NamedId, Sortable {
+public class SparePartEntity implements NamedId {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

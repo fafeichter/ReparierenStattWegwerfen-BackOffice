@@ -1,8 +1,7 @@
-package at.reparierenstattwegwerfen.backoffice.sparepart.internal.service;
+package at.reparierenstattwegwerfen.backoffice.sparepart.internal.domain;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.sparepart.SparePartService;
-import at.reparierenstattwegwerfen.backoffice.sparepart.internal.persistence.repository.SparePartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +11,7 @@ import java.util.Set;
 
 /**
  * @author Fabian Feichter
- * @since 23.09.2026
+ * @since 25.05.2026
  */
 @Service
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ public class SparePartServiceImpl implements SparePartService {
 	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getSparePartById(Integer sparePartId) {
-		return NamedIdDto.from(sparePartRepository.getReferenceById(sparePartId));
+		return NamedIdDto.from(sparePartRepository.getSparePartById(sparePartId));
 	}
 
 	@Transactional(readOnly = true)

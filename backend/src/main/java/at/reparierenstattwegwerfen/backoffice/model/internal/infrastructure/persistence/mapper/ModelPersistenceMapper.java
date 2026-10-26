@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
  * @author Fabian Feichter
  * @since 25.10.2026
  */
-@Mapper(componentModel = "spring")
+@Mapper
 public interface ModelPersistenceMapper {
 
 	@Mapping(target = "availableColors", ignore = true)

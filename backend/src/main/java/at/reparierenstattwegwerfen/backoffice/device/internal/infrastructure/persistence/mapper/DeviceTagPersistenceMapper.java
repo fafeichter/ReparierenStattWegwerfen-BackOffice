@@ -10,7 +10,7 @@ import org.mapstruct.Mapper;
  * @author Fabian Feichter
  * @since 12.10.2026
  */
-@Mapper(componentModel = "spring", uses = DevicePersistenceMapper.class)
+@Mapper(uses = DevicePersistenceMapper.class)
 public interface DeviceTagPersistenceMapper {
 
 	DeviceTag toDomain(DeviceTagEntity entity);

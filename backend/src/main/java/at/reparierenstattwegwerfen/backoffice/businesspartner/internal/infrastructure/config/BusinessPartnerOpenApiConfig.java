@@ -8,15 +8,15 @@ import org.springframework.context.annotation.Configuration;
  * @author Fabian Feichter
  * @since 19.06.2026
  */
-@Configuration("businessPartnerOpenApiConfig")
-public class OpenApiConfig {
+@Configuration
+public class BusinessPartnerOpenApiConfig {
 
 	@Bean
 	public GroupedOpenApi businessPartnerOpenApi() {
 		return GroupedOpenApi
 			.builder()
 			.group("businesspartner")
-			.packagesToScan("at.reparierenstattwegwerfen.backoffice.businesspartner")
+			.packagesToScan("at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces")
 			.build();
 	}
 }
