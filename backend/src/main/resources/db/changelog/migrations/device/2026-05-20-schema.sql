@@ -64,7 +64,7 @@ CREATE TABLE device
     model_storage_id                      int                     DEFAULT NULL,
     model_color_id                        int                     DEFAULT NULL,
     url                                   varchar(512)   NOT NULL,
-    serial_number                         varchar(128)            DEFAULT NULL,
+    serial_number varchar(12) DEFAULT NULL,
     device_status_id                      int            NOT NULL DEFAULT 1,
     status_date                           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     seller_business_partner_id            int                     DEFAULT NULL,

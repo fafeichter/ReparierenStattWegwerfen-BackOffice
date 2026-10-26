@@ -38,6 +38,7 @@ import {
   ModelStorageControllerService,
   ModelUnifiedMemoryControllerService,
 } from '@api/model';
+import { SerialNumber } from './serial-number';
 
 @Component({
   selector: 'app-base',
@@ -54,6 +55,7 @@ import {
     ClrSelectModule,
     ClrAlertModule,
     ClrCardModule,
+    SerialNumber,
   ],
   templateUrl: './base.html',
   styleUrl: './base.css',
@@ -92,7 +94,12 @@ export class Base implements OnInit {
   });
 
   serialNumberForm = new FormGroup({
-    newSerialNumber: new FormControl<string | null>(null),
+    newSerialNumber: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(12),
+      Validators.pattern(/^[A-Z0-9]*$/),
+    ]),
   });
 
   batteryForm = new FormGroup({

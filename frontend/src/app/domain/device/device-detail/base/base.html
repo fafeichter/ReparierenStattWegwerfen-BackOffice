@@ -139,7 +139,19 @@
         } @else {
           <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm clrLayout="vertical">
             <clr-input-container>
-              <input autofocus clrInput formControlName="newSerialNumber" type="text">
+              <input appSerialNumber autofocus clrInput formControlName="newSerialNumber" type="text">
+              @if (serialNumberForm.controls.newSerialNumber.hasError('required')) {
+                <clr-control-error>Serial number must be provided</clr-control-error>
+              }
+              @if (serialNumberForm.controls.newSerialNumber.hasError('minlength')) {
+                <clr-control-error>Serial number must be at least 10 characters long</clr-control-error>
+              }
+              @if (serialNumberForm.controls.newSerialNumber.hasError('maxlength')) {
+                <clr-control-error>Serial number must be at max 12 characters long</clr-control-error>
+              }
+              @if (serialNumberForm.controls.newSerialNumber.hasError('pattern')) {
+                <clr-control-error>Serial number must only contain characters and digits</clr-control-error>
+              }
             </clr-input-container>
             <button (click)="serialNumberEditModeActive.set(false)" class="btn btn-link" type="button">
               <cds-icon role="img" shape="close"/>
