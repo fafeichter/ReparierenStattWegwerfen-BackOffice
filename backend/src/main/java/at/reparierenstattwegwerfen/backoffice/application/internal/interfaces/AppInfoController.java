@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+
 /**
  * @author Fabian Feichter
  * @since 22.09.2026
@@ -19,7 +21,7 @@ public class AppInfoController {
 
 	private final Environment environment;
 
-	@GetMapping("/spring-boot-version")
+	@GetMapping("/app-info")
 	public AppInfoDto getAppInfo() {
 		return AppInfoDto.builder()
 			.springBootVersion(SpringBootVersion.getVersion())
@@ -32,5 +34,12 @@ public class AppInfoController {
 			.osVersion(System.getProperty("os.version"))
 			.osArch(System.getProperty("os.arch"))
 			.build();
+	}
+
+	@GetMapping("/is-running-on-prod-db-and-data")
+	public Boolean isRunningOnProdDbAndData() {
+		boolean isRunningInProductionSystem = Arrays.asList(environment.getActiveProfiles()).contains("prod");
+		boolean isRunningWithTestData = Arrays.asList(environment.getActiveProfiles()).contains("test-data");
+		return isRunningInProductionSystem && !isRunningWithTestData;
 	}
 }

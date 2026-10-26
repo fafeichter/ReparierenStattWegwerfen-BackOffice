@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+footer {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.test-data-warning {
+  color: red;
+}

@@ -5,6 +5,7 @@ import { Header } from './header/header';
 import { Sidebar } from './sidebar/sidebar';
 import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 import { Title } from './title/title';
+import { Footer } from './footer/footer';
 
 @Component({
   selector: 'app-layout',
@@ -17,6 +18,7 @@ import { Title } from './title/title';
     Breadcrumbs,
     Title,
     ClrMainContainerModule,
+    Footer,
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
