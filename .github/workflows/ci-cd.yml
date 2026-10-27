@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build application
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -38,7 +38,7 @@ jobs:
   test-backend:
     name: Run backend tests
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       checks: write
       contents: read
@@ -65,7 +65,7 @@ jobs:
   test-frontend:
     name: Run frontend tests
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       checks: write
       contents: read
@@ -97,7 +97,7 @@ jobs:
   artifact:
     name: Build and publish artifact
     needs: [ test-backend, test-frontend ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -133,7 +133,7 @@ jobs:
   deploy:
     name: Deploy artifact
     needs: [ artifact ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     environment: Production
     steps:
       - name: Set up SSH
