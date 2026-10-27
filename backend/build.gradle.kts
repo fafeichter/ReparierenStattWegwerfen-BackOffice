@@ -93,7 +93,7 @@ tasks.processResources {
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {
-    imageName = "registry.fabian-feichter.at/reparieren-statt-wegwerfen-backoffice"
+    imageName = "reparieren-statt-wegwerfen-backoffice"
     buildpacks = listOf(
         "urn:cnb:builder:paketo-buildpacks/java-native-image",
         "paketobuildpacks/health-checker:latest"

@@ -1,4 +1,4 @@
-name: Deployment
+name: CI/CD
 
 on:
   push:
@@ -39,9 +39,6 @@ jobs:
     name: Run backend tests
     needs: [ build ]
     runs-on: ubuntu-26.04
-    permissions:
-      checks: write
-      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -50,12 +47,11 @@ jobs:
         with:
           java-version: '25'
           distribution: 'graalvm'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
       - name: Run backend tests
         run: ./gradlew :backend:test
-      - name: Publish rest report
+      - name: Publish test report
         if: success() || failure()
         uses: ScalableCapital/action-surefire-report@v2
         with:
@@ -66,9 +62,6 @@ jobs:
     name: Run frontend tests
     needs: [ build ]
     runs-on: ubuntu-26.04
-    permissions:
-      checks: write
-      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -98,6 +91,7 @@ jobs:
     name: Build and publish artifact
     needs: [ test-backend, test-frontend ]
     runs-on: ubuntu-26.04
+    environment: Production
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -111,9 +105,14 @@ jobs:
         with:
           java-version: '25'
           distribution: 'graalvm'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
+      - name: Login to private container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ${{ secrets.DOCKER_REGISTRY_HOST }}
+          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: Build Docker image
         env:
           SPRING_PROFILES_ACTIVE: prod,native
@@ -121,14 +120,10 @@ jobs:
           ./gradlew :backend:bootBuildImage \
             -x test \
             -PskipFrontendBuild=true
-      - name: Login to private container registry
-        uses: docker/login-action@v4
-        with:
-          registry: registry.fabian-feichter.at
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Push Docker image
-        run: docker push registry.fabian-feichter.at/reparieren-statt-wegwerfen-backoffice:latest
+      - name: Publish Docker image
+        run: |
+          docker tag reparieren-statt-wegwerfen-backoffice:latest ${{ secrets.DOCKER_REGISTRY_HOST }}/reparieren-statt-wegwerfen-backoffice:latest
+          docker push ${{ secrets.DOCKER_REGISTRY_HOST }}/reparieren-statt-wegwerfen-backoffice:latest
 
   deploy:
     name: Deploy artifact
@@ -138,13 +133,13 @@ jobs:
     steps:
       - name: Set up SSH
         env:
-          SSH_KEY: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.PRODUCTION_SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
       - name: Run remote deployment script
         run: >-
-          ssh ${{ secrets.PRODUCTION_SSH_USER }}@${{ secrets.PRODUCTION_SSH_HOST }}
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
           "sh /cloud/scripts/reparieren-statt-wegwerfen-backoffice-deploy.sh"
