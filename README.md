@@ -1,6 +1,6 @@
 [![Qodana](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml/badge.svg)](
 https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml)
-[![Deployment](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/ci-cd.yml/badge.svg)](
+[![CI/CD](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/ci-cd.yml/badge.svg)](
 https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/ci-cd.yml)
 
 # Reparieren Statt Wegwerfen - Backoffice
