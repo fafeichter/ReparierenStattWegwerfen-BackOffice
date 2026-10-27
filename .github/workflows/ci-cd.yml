@@ -13,19 +13,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-      - name: Setup Java
-        uses: actions/setup-java@v6
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
         with:
-          distribution: temurin
           java-version: '25'
+          distribution: 'graalvm'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: '26.9.0'
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
       - name: Build with Gradle
         run: ./gradlew build testClasses -x test
       - name: Upload Angular build output
@@ -65,19 +65,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-      - name: Setup Java
-        uses: actions/setup-java@v6
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
         with:
-          distribution: temurin
           java-version: '25'
+          distribution: 'graalvm'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: '26.9.0'
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6
       - name: Run frontend tests
         run: ./gradlew :frontend:npmTest
       - name: Publish rest report
