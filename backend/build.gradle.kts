@@ -79,10 +79,9 @@ tasks.withType<Test> {
     }
 }
 
-// === AUTOMATED FRONTEND BUILD INTEGRATION ===
-// Since bootBuildImage builds from the bootJar output, it inherits the assets automatically
+// Copy the frontend assets into the backend resources.
 val copyFrontendAssets = tasks.register<Copy>("copyFrontendAssets") {
-    description = "Copies production compiled frontend assets into the backend static resources"
+    description = "Copies compiled frontend assets into the backend static resources"
 
     from(project(":frontend").projectDir.resolve("dist/browser"))
     into(layout.buildDirectory.dir("resources/main/static"))
@@ -93,7 +92,6 @@ tasks.processResources {
     dependsOn(copyFrontendAssets)
 }
 
-// === OCI CONTAINER BUILD (spring-boot-maven-plugin equivalent) ===
 tasks.named<BootBuildImage>("bootBuildImage") {
     imageName = "registry.fabian-feichter.at/reparieren-statt-wegwerfen-backoffice"
     buildpacks = listOf(
@@ -116,11 +114,12 @@ tasks.named<Test>("test") {
     }
 }
 
+val apiModules = listOf("model", "businesspartner", "device", "accounting", "sparepart", "application")
+
 val generateOpenApiSpecs = tasks.register<Test>("generateOpenApiSpecs") {
     group = "openapi"
     description = "Generates OpenAPI JSON definitions"
 
-    // Wire the custom Test task to the test source set
     testClassesDirs = sourceSets["test"].output.classesDirs
     classpath = sourceSets["test"].runtimeClasspath
 
@@ -128,17 +127,15 @@ val generateOpenApiSpecs = tasks.register<Test>("generateOpenApiSpecs") {
         includeTags("openapi")
     }
 
-    // The test produces files as a side effect; declare them so Gradle
-    // tracks the output and re-runs when they're missing
-    outputs.dir(layout.buildDirectory.dir("openapi"))
-
-    // The test produces files as a side effect; Gradle should not track
-    // the output and re-generate the files every time
-    outputs.upToDateWhen { false }
+    // Declared output: Gradle re-runs if it is missing and restores it
+    // from the build cache when the test classes and classpath are unchanged.
+    outputs.files(
+        apiModules.map { module ->
+            layout.buildDirectory.file("openapi/$module.json")
+        }
+    )
+    outputs.cacheIf { true }
 }
-
-// 2. Dynamic generation of TS clients
-val apiModules = listOf("model", "businesspartner", "device", "accounting", "sparepart", "application")
 
 val apiClientsTasks = apiModules.map { module ->
     val capitalizedModule = module.replaceFirstChar { it.uppercase() }
@@ -232,6 +229,3 @@ tasks.named<JavaCompile>("compileJava") {
         )
     )
 }
-
-project(":frontend").tasks.matching { it.name in listOf("npmTest", "npmBuild", "npmStart") }
-    .configureEach { dependsOn(tasks.named("generateApiClients")) }

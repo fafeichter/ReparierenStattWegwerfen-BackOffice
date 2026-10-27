@@ -7,13 +7,6 @@ plugins {
 
 val skipFrontendBuild = project.findProperty("skipFrontendBuild")?.toString()?.toBoolean() ?: false
 
-node {
-    version.set("26.9.0")
-    npmVersion.set("11.19.1")
-    download.set(true)
-    nodeProjectDir.set(projectDir)
-}
-
 tasks.clean {
     delete("dist")
 }
@@ -25,7 +18,7 @@ val npmTest = tasks.register<NpmTask>("npmTest") {
 
     args.set(listOf("run", "test"))
 
-    dependsOn(tasks.npmInstall)
+    dependsOn(tasks.npmInstall, project(":backend").tasks.named("generateApiClients"))
 }
 
 // Bind the Angular test task to Gradle's native lifecycle
@@ -37,7 +30,7 @@ tasks.test {
 val npmBuild = tasks.register<NpmTask>("npmBuild") {
     description = "Builds the frontend production assets"
     args.set(listOf("run", "prod"))
-    dependsOn(tasks.npmInstall)
+    dependsOn(tasks.npmInstall, project(":backend").tasks.named("generateApiClients"))
     onlyIf { !skipFrontendBuild }
 }
 
