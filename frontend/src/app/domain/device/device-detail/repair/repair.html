@@ -1,5 +1,8 @@
-<clr-card id="repair">
-  <clr-card-header>Repair</clr-card-header>
+<clr-card [id]="navItem().id">
+  <clr-card-header>
+    <cds-icon [shape]="navItem().icon" size="lg"/>
+    {{ navItem().label }}
+  </clr-card-header>
   <div class="card-block">
     <dl>
       <dt>Reported Defect</dt>
@@ -26,7 +29,7 @@
       <dd>
         {{ deviceDefects()?.correctedDefect | orElse }}
         <button (click)="modalOpened.set(true)" class="btn btn-link ml-1!">
-          <cds-icon role="img" shape="edit"/>
+          <cds-icon shape="edit"/>
           Edit
         </button>
       </dd>
@@ -101,11 +104,11 @@
               </clr-number-input-container>
               <button (click)="sparePartEditModeActive.set(false); this.form.reset()" class="btn btn-link"
                       type="button">
-                <cds-icon role="img" shape="close"/>
+                <cds-icon shape="close"/>
                 Cancel
               </button>
               <button [disabled]="form.invalid" class="btn btn-link ml-1!" type="submit">
-                <cds-icon role="img" shape="check"/>
+                <cds-icon shape="check"/>
                 Save
               </button>
             </form>

@@ -3,16 +3,18 @@ import { DatePipe } from '@angular/common';
 import { DeviceActivityControllerService, DeviceActivityDto } from '@api/device';
 import { interval, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ClrCardModule } from '@clr/angular';
+import { ClrCardModule, ClrIcon } from '@clr/angular';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-activity',
-  imports: [DatePipe, ClrCardModule],
+  imports: [DatePipe, ClrCardModule, ClrIcon],
   templateUrl: './activity.html',
   styleUrl: './activity.css',
 })
 export class Activity implements OnInit {
   deviceId = input.required<number>();
+  navItem = input.required<NavItem>();
 
   deviceActivities = signal<DeviceActivityDto[]>([]);
 

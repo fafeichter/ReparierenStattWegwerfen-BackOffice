@@ -4,6 +4,7 @@ import { ClrCardModule, ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-buying',
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class Buying implements OnInit {
   deviceId = input.required<number>();
+  navItem = input.required<NavItem>();
 
   deviceBuying = signal<DeviceBuyingDetailsDto | undefined>(undefined);
 

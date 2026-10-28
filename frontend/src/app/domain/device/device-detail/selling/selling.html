@@ -1,5 +1,8 @@
-<clr-card id="selling">
-  <clr-card-header>Selling</clr-card-header>
+<clr-card [id]="navItem().id">
+  <clr-card-header>
+    <cds-icon [shape]="navItem().icon" size="lg"/>
+    {{ navItem().label }}
+  </clr-card-header>
   <div class="card-block">
     <dl>
       <dt>Price</dt>
@@ -18,7 +21,7 @@
             [queryParams]="{ 'device-id':  deviceId()}"
             [routerLink]="['/businesspartners/create']"
             class="btn btn-link ml-1! mr-2!">
-            <cds-icon role="img" shape="pop-out"/>
+          <cds-icon shape="pop-out"/>
             Add
           </button>
           |
@@ -40,7 +43,7 @@
       <dt>Charger included</dt>
       <dd>
         @if (deviceAccessories()?.charger !== null) {
-          <cds-icon [shape]="deviceAccessories()?.charger ? 'check': 'close'" role="img"/>
+          <cds-icon [shape]="deviceAccessories()?.charger ? 'check': 'close'"/>
           <span class="ml-1">
             {{ deviceAccessories()?.charger ? 'Yes' : 'No' }}
           </span>
@@ -51,7 +54,7 @@
       <dt>Charging cable included</dt>
       <dd>
         @if (deviceAccessories()?.chargingCable !== null) {
-          <cds-icon [shape]="deviceAccessories()?.chargingCable ? 'check': 'close'" role="img"/>
+          <cds-icon [shape]="deviceAccessories()?.chargingCable ? 'check': 'close'"/>
           <span class="ml-1">
             {{ deviceAccessories()?.chargingCable ? 'Yes' : 'No' }}
           </span>
@@ -62,7 +65,7 @@
       <dt>Original packaging included</dt>
       <dd>
         @if (deviceAccessories()?.originalPackaging !== null) {
-          <cds-icon [shape]="deviceAccessories()?.originalPackaging ? 'check': 'close'" role="img"/>
+          <cds-icon [shape]="deviceAccessories()?.originalPackaging ? 'check': 'close'"/>
           <span class="ml-1">
             {{ deviceAccessories()?.originalPackaging ? 'Yes' : 'No' }}
           </span>
@@ -74,7 +77,7 @@
       </dt>
       <dd>
         <button (click)="modalOpened.set(true)" class="btn btn-link">
-          <cds-icon role="img" shape="edit"/>
+          <cds-icon shape="edit"/>
           Edit
         </button>
       </dd>

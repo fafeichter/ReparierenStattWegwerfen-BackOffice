@@ -6,8 +6,8 @@
 <app-scrollspy [items]="navItems"/>
 <div class="clr-row">
   <div class="clr-col-lg-7 clr-col-md-10 clr-col-12">
-    <app-contact [businessPartnerId]="businessPartnerId()"/>
-    <app-devices [businessPartnerId]="businessPartnerId()"/>
-    <app-activity [businessPartnerId]="businessPartnerId()"/>
+    <app-contact [businessPartnerId]="businessPartnerId()" [navItem]="navItems[0]"/>
+    <app-devices [businessPartnerId]="businessPartnerId()" [navItem]="navItems[1]"/>
+    <app-activity [businessPartnerId]="businessPartnerId()" [navItem]="navItems[2]"/>
   </div>
 </div>

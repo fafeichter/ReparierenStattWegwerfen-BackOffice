@@ -1,5 +1,8 @@
-<clr-card id="buying">
-  <clr-card-header>Buying</clr-card-header>
+<clr-card [id]="navItem().id">
+  <clr-card-header>
+    <cds-icon [shape]="navItem().icon" size="lg"/>
+    {{ navItem().label }}
+  </clr-card-header>
   <div class="card-block">
     <dl>
       <dt>Date</dt>
@@ -13,7 +16,7 @@
       <dt>URL</dt>
       <dd>
         <a [href]="deviceBuying()?.url" target="_blank">{{ deviceBuying()?.url }}
-          <cds-icon role="img" shape="pop-out"/>
+          <cds-icon shape="pop-out"/>
         </a>
       </dd>
     </dl>
@@ -29,7 +32,7 @@
           [queryParams]="{ 'edit-address': true, 'device-id':  deviceId()}"
           [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]"
           class="btn btn-link ml-1!">
-          <cds-icon role="img" shape="pop-out"/>
+          <cds-icon shape="pop-out"/>
           Edit
         </button>
       </dd>

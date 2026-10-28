@@ -39,6 +39,7 @@ import {
   ModelUnifiedMemoryControllerService,
 } from '@api/model';
 import { SerialNumber } from './serial-number';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-base',
@@ -62,6 +63,7 @@ import { SerialNumber } from './serial-number';
 })
 export class Base implements OnInit {
   deviceId = input.required<number>();
+  navItem = input.required<NavItem>();
 
   deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
 

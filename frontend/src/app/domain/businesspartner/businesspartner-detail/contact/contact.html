@@ -1,12 +1,20 @@
 @if (businessPartner(); as businessPartner) {
-  <clr-card id="contact">
-    <div [class.scammer-header]="businessPartner.scammer" class="card-header">
-      {{ businessPartner.name }}
-      @if (businessPartner.scammer) {
-        <clr-label clrColor="danger" clrText="Scammer!" clrType="solid"></clr-label>
-      }
+  <clr-card [id]="navItem().id">
+    <clr-card-header>
+      <cds-icon [shape]="navItem().icon" size="lg"/>
+      {{ navItem().label }}
+    </clr-card-header>
+    <div class="card-block">
+      <clr-card-body-title>Name</clr-card-body-title>
+      <clr-card-body-text>
+        {{ businessPartner.name }}
+        @if (businessPartner.scammer) {
+          <clr-label clrColor="danger">
+            Scammer
+          </clr-label>
+        }
+      </clr-card-body-text>
     </div>
-    <clr-card-header>Contact</clr-card-header>
     <div class="card-block">
       <clr-card-body-title>Address
       </clr-card-body-title>
@@ -18,7 +26,7 @@
 
       @if (!addressEditModeActive()) {
         <button (click)="addressEditModeActive.set(true)" class="btn btn-link">
-          <cds-icon role="img" shape="edit"/>
+          <cds-icon shape="edit"/>
           Edit
         </button>
       } @else {
@@ -33,7 +41,7 @@
           </clr-file-input-container>
         </form>
         <button (click)="cancelForm()" class="btn btn-link" type="button">
-          <cds-icon role="img" shape="close"/>
+          <cds-icon shape="close"/>
           Cancel
         </button>
       }

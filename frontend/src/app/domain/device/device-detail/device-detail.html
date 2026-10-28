@@ -2,12 +2,12 @@
 
 <div class="clr-row">
   <div class="clr-col-lg-8 clr-col-md-10 clr-col-12">
-    <app-base [deviceId]="deviceId()"/>
-    <app-buying [deviceId]="deviceId()"/>
-    <app-repair [deviceId]="deviceId()"/>
-    <app-selling [deviceId]="deviceId()"/>
-    <app-invoice [deviceId]="deviceId()"/>
-    <app-notes [deviceId]="deviceId()"/>
-    <app-activity [deviceId]="deviceId()"/>
+    <app-base [deviceId]="deviceId()" [navItem]="navItems[0]"/>
+    <app-buying [deviceId]="deviceId()" [navItem]="navItems[1]"/>
+    <app-repair [deviceId]="deviceId()" [navItem]="navItems[2]"/>
+    <app-selling [deviceId]="deviceId()" [navItem]="navItems[3]"/>
+    <app-invoice [deviceId]="deviceId()" [navItem]="navItems[4]"/>
+    <app-notes [deviceId]="deviceId()" [navItem]="navItems[5]"/>
+    <app-activity [deviceId]="deviceId()" [navItem]="navItems[6]"/>
   </div>
 </div>

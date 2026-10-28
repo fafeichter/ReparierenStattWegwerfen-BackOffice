@@ -8,6 +8,7 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import { DeviceInvoiceControllerService } from '@api/device';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   imports: [
@@ -25,6 +26,7 @@ import { DeviceInvoiceControllerService } from '@api/device';
 })
 export class Invoice implements OnInit {
   deviceId = input.required<number>();
+  navItem = input.required<NavItem>();
   saleInvoiceNumber = signal<number | undefined>(undefined);
 
   private deviceInvoiceApi = inject(DeviceInvoiceControllerService);

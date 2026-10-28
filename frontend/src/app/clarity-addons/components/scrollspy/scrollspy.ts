@@ -1,20 +1,21 @@
 import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ClrVerticalNavModule } from '@clr/angular';
+import { ClrCardModule, ClrVerticalNavModule } from '@clr/angular';
 
-export interface Navtem {
+export interface NavItem {
   id: string;
   label: string;
+  icon: string;
 }
 
 @Component({
-  imports: [RouterLink, ClrVerticalNavModule],
+  imports: [RouterLink, ClrVerticalNavModule, ClrCardModule],
   selector: 'app-scrollspy',
   styleUrl: './scrollspy.css',
   templateUrl: './scrollspy.html',
 })
 export class Scrollspy {
-  items = input.required<Navtem[]>();
+  items = input.required<NavItem[]>();
 
   scrollToSection(sectionId: string): void {
     if (typeof document === 'undefined') return;

@@ -22,6 +22,7 @@ import {
   NamedIdDto,
 } from '@api/device';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-repair',
@@ -45,6 +46,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class Repair implements OnInit {
   deviceId = input.required<number>();
+  navItem = input.required<NavItem>();
 
   deviceDefects = signal<DeviceDefectsDetailsDto | undefined>(undefined);
   deviceSpareParts = signal<DeviceSparePartDto[]>([]);

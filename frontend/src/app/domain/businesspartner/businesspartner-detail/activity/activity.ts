@@ -6,16 +6,18 @@ import {
   BusinessPartnerActivityDto,
 } from '@api/businesspartner';
 import { DatePipe } from '@angular/common';
-import { ClrCardModule } from '@clr/angular';
+import { ClrCardModule, ClrIcon } from '@clr/angular';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
-  imports: [DatePipe, ClrCardModule],
+  imports: [DatePipe, ClrCardModule, ClrIcon],
   selector: 'app-activity',
   styleUrl: './activity.css',
   templateUrl: './activity.html',
 })
 export class Activity implements OnInit {
   businessPartnerId = input.required<number>();
+  navItem = input.required<NavItem>();
 
   businessPartnerActivities = signal<BusinessPartnerActivityDto[]>([]);
 

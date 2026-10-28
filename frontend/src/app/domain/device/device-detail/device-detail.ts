@@ -22,7 +22,7 @@ import { Selling } from './selling/selling';
 import { Buying } from './buying/buying';
 import { map } from 'rxjs';
 import { TitleFn } from '../../../layout/route-title.service';
-import { Navtem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
 import { Invoice } from './invoice/invoice';
 
 export const deviceTitle: TitleFn = (route) => {
@@ -66,13 +66,13 @@ export class DeviceDetail {
   deviceId = input.required<number, string>({
     transform: (value: string) => Number(value),
   });
-  navItems: Navtem[] = [
-    { id: 'device', label: 'Device' },
-    { id: 'buying', label: 'Buying' },
-    { id: 'repair', label: 'Repair' },
-    { id: 'selling', label: 'Selling' },
-    { id: 'invoice', label: 'Invoice' },
-    { id: 'notes', label: 'Notes' },
-    { id: 'activity', label: 'Activity' },
+  navItems: NavItem[] = [
+    { id: 'device', label: 'Device', icon: 'cpu' },
+    { id: 'buying', label: 'Buying', icon: 'user' },
+    { id: 'repair', label: 'Repair', icon: 'wrench' },
+    { id: 'selling', label: 'Selling', icon: 'tag' },
+    { id: 'invoice', label: 'Invoice', icon: 'pdf-file' },
+    { id: 'notes', label: 'Notes', icon: 'note' },
+    { id: 'activity', label: 'Activity', icon: 'timeline' },
   ];
 }

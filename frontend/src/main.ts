@@ -10,6 +10,7 @@ import {
   loadMiniIconSet,
   loadSocialIconSet,
   loadTechnologyIconSet,
+  loadTextEditIconSet,
 } from '@clr/angular/icon';
 
 loadCommerceIconSet();
@@ -19,5 +20,6 @@ loadMiniIconSet();
 loadChartIconSet();
 loadSocialIconSet();
 loadTechnologyIconSet();
+loadTextEditIconSet();
 
 bootstrapApplication(App, appConfig).catch((err) => console.error(err));

@@ -12,7 +12,7 @@ import { ClrCardModule, ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/ang
 import { DatePipe } from '@angular/common';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
-import { Navtem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
 
 export const modelTitle: TitleFn = (route) => {
   const modelId = route.paramMap.get('modelId')!;
@@ -38,10 +38,10 @@ interface SizeAvailability {
   styleUrl: './model-detail.css',
 })
 export class ModelDetail implements OnInit {
-  navItems: Navtem[] = [
-    { id: 'model', label: 'Model' },
-    { id: 'hardware', label: 'Hardware' },
-    { id: 'features', label: 'Features' },
+  navItems: NavItem[] = [
+    { id: 'model', label: 'Model', icon: 'details' },
+    { id: 'hardware', label: 'Hardware', icon: 'nvme' },
+    { id: 'features', label: 'Features', icon: 'star' },
   ];
   protected readonly model = signal<ModelDetailDto | undefined>(undefined);
   /** Colors sorted by name. */

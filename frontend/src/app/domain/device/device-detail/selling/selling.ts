@@ -19,6 +19,7 @@ import {
 } from '@api/device';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-selling',
@@ -40,6 +41,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class Selling implements OnInit {
   deviceId = input.required<number>();
+  navItem = input.required<NavItem>();
 
   deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
   deviceAccessories = signal<DeviceSellingAccessoriesDto | undefined>(undefined);

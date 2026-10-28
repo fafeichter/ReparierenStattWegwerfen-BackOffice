@@ -15,6 +15,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DeviceNoteDto, DeviceNotesControllerService } from '@api/device';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-notes',
@@ -33,6 +34,7 @@ import { DeviceNoteDto, DeviceNotesControllerService } from '@api/device';
 })
 export class Notes implements OnInit {
   deviceId = input.required<number>();
+  navItem = input.required<NavItem>();
   deviceNotes = signal<DeviceNoteDto[]>([]);
   modalOpened = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);

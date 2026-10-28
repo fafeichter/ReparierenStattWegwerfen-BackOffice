@@ -20,6 +20,7 @@ import {
   BusinessPartnerDetailDto,
 } from '@api/businesspartner';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   imports: [
@@ -38,6 +39,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class Contact implements OnInit {
   businessPartnerId = input.required<number>();
+  navItem = input.required<NavItem>();
   readonly businessPartner = signal<BusinessPartnerDetailDto | undefined>(undefined);
   form = new FormGroup({
     shippingLabelImage: new FormControl<FileList | null>(null, [Validators.required]),

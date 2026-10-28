@@ -1,6 +1,9 @@
 <clr-card>
   <clr-card-body>
-    <clr-card-body-title>Build</clr-card-body-title>
+    <clr-card-body-title>
+      <cds-icon shape="code" size="sm"/>
+      Build
+    </clr-card-body-title>
     <clr-card-body-text>
       <ul>
         <li>Build Date: {{ buildInfo.date | date:'MMM d, y, HH:mm:ss' }}</li>
@@ -9,13 +12,16 @@
         <li>GitHub:
           <a href="https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice" target="_blank">
             https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice
-            <cds-icon role="img" shape="pop-out"/>
+            <cds-icon shape="pop-out"/>
           </a>
         </li>
       </ul>
     </clr-card-body-text>
     <hr>
-    <clr-card-body-title>Backend</clr-card-body-title>
+    <clr-card-body-title>
+      <cds-icon shape="host" size="sm"/>
+      Backend
+    </clr-card-body-title>
     <clr-card-body-text>
       <ul>
         <li>Spring Boot: {{ backendAppInfo()?.springBootVersion }}</li>
@@ -30,7 +36,10 @@
       </ul>
     </clr-card-body-text>
     <hr>
-    <clr-card-body-title>Frontend</clr-card-body-title>
+    <clr-card-body-title>
+      <cds-icon shape="application" size="sm"/>
+      Frontend
+    </clr-card-body-title>
     <clr-card-body-text>
       <ul>
         <li>Angular: {{ angularVersion }}</li>
@@ -41,7 +50,10 @@
       </ul>
     </clr-card-body-text>
     <hr>
-    <clr-card-body-title>User Info</clr-card-body-title>
+    <clr-card-body-title>
+      <cds-icon shape="id-badge" size="sm"/>
+      User Info
+    </clr-card-body-title>
     <clr-card-body-text>
       <ul>
         <li>User Data:
@@ -50,7 +62,10 @@
       </ul>
     </clr-card-body-text>
     <hr>
-    <clr-card-body-title>Authentication</clr-card-body-title>
+    <clr-card-body-title>
+      <cds-icon shape="certificate" size="sm"/>
+      Authentication
+    </clr-card-body-title>
     <clr-card-body-text>
       <ul>
         <li>Authenticated: {{ authenticated().isAuthenticated }}</li>

@@ -8,7 +8,7 @@ import { Devices } from './devices/devices';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
 import { BusinessPartnerControllerService } from '@api/businesspartner';
-import { Navtem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
 
 export const businessPartnerTitle: TitleFn = (route) => {
   const businessPartnerId = route.paramMap.get('businessPartnerId')!;
@@ -35,10 +35,10 @@ export const businessPartnerTitle: TitleFn = (route) => {
   styleUrl: './businesspartner-detail.css',
 })
 export class BusinesspartnerDetail {
-  navItems: Navtem[] = [
-    { id: 'contact', label: 'Contact' },
-    { id: 'devices', label: 'Devices' },
-    { id: 'activity', label: 'Activity' },
+  navItems: NavItem[] = [
+    { id: 'contact', label: 'Contact', icon: 'user' },
+    { id: 'devices', label: 'Devices', icon: 'computer' },
+    { id: 'activity', label: 'Activity', icon: 'timeline' },
   ];
   private route = inject(ActivatedRoute);
   readonly businessPartnerId = signal<number>(

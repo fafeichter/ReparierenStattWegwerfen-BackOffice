@@ -2,19 +2,26 @@
   <app-scrollspy [items]="navItems"/>
   <div class="clr-row">
     <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
-      <clr-card id="model">
+      <clr-card [id]="navItems[0].id">
         <clr-card-header>
-          Model
+          <cds-icon [shape]="navItems[0].icon" size="lg"/>
+          {{ navItems[0].label }}
         </clr-card-header>
         <div class="card-block">
           <p class="mt-0!">{{ m.releaseDate + '-01' | date:'MMM yyyy' }}</p>
           <p class="mt-1!">
             <a [href]="m.technicalSpecsUrl" target="_blank">
               {{ m.technicalSpecsUrl }}
-              <cds-icon role="img" shape="pop-out"/>
+              <cds-icon shape="pop-out"/>
             </a>
           </p>
         </div>
+      </clr-card>
+      <clr-card [id]="navItems[1].id">
+        <clr-card-header>
+          <cds-icon [shape]="navItems[1].icon" size="lg"/>
+          {{ navItems[1].label }}
+        </clr-card-header>
         <div class="card-block">
           <clr-card-body-title>Colors</clr-card-body-title>
           <clr-card-body-text>
@@ -25,9 +32,6 @@
             </ul>
           </clr-card-body-text>
         </div>
-      </clr-card>
-      <clr-card id="hardware">
-        <clr-card-header>Hardware</clr-card-header>
         <div class="card-block">
           <clr-card-body-title>Chip</clr-card-body-title>
           <clr-card-body-text>
@@ -78,9 +82,10 @@
           </clr-card-body-text>
         </div>
       </clr-card>
-      <clr-card id="features">
+      <clr-card [id]="navItems[2].id">
         <clr-card-header>
-          Features
+          <cds-icon [shape]="navItems[2].icon" size="lg"/>
+          {{ navItems[2].label }}
         </clr-card-header>
         <div class="card-block">
           <clr-card-body-text>

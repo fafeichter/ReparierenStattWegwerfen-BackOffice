@@ -6,8 +6,11 @@
   </clr-alert>
 }
 
-<clr-card id="device">
-  <clr-card-header>Device</clr-card-header>
+<clr-card [id]="navItem().id">
+  <clr-card-header>
+    <cds-icon [shape]="navItem().icon" size="lg"/>
+    {{ navItem().label }}
+  </clr-card-header>
   <div class="card-block">
     <dl>
       <dt>Model</dt>
@@ -18,7 +21,7 @@
       <dd>
         <a [href]=" deviceBase()?.technicalSpecsUrl" target="_blank">
           {{ deviceBase()?.technicalSpecsUrl }}
-          <cds-icon role="img" shape="pop-out"/>
+          <cds-icon shape="pop-out"/>
         </a>
       </dd>
     </dl>
@@ -44,7 +47,7 @@
         <dt></dt>
         <dd>
           <button (click)="activateHardwareConfigEditMode()" class="btn btn-link">
-            <cds-icon role="img" shape="edit"/>
+            <cds-icon shape="edit"/>
             Edit
           </button>
         </dd>
@@ -85,11 +88,11 @@
               </select>
             </clr-select-container>
             <button (click)="hardwareConfigEditModeActive.set(false)" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
+              <cds-icon shape="close"/>
               Cancel
             </button>
             <button [disabled]="hardwareConfigForm.invalid" class="btn btn-link ml-1!" type="submit">
-              <cds-icon role="img" shape="check"/>
+              <cds-icon shape="check"/>
               Save
             </button>
           </form>
@@ -104,7 +107,7 @@
         @if (!statusEditModeActive()) {
           <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
           <button (click)="activateStatusEditMode()" class="btn btn-link">
-            <cds-icon role="img" shape="edit"/>
+            <cds-icon shape="edit"/>
             Edit
           </button>
         } @else {
@@ -118,7 +121,7 @@
               }
             </select>
             <button (click)="statusEditModeActive.set(false)" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
+              <cds-icon shape="close"/>
               Cancel
             </button>
           </form>
@@ -133,7 +136,7 @@
         @if (!serialNumberEditModeActive()) {
           {{ deviceBase()?.serialNumber | orElse }}
           <button (click)="activateSerialNumberEditMode()" class="btn btn-link ml-1!">
-            <cds-icon role="img" shape="edit"/>
+            <cds-icon shape="edit"/>
             Edit
           </button>
         } @else {
@@ -154,11 +157,11 @@
               }
             </clr-input-container>
             <button (click)="serialNumberEditModeActive.set(false)" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
+              <cds-icon shape="close"/>
               Cancel
             </button>
             <button [disabled]="serialNumberForm.invalid" class="btn btn-link ml-1!" type="submit">
-              <cds-icon role="img" shape="check"/>
+              <cds-icon shape="check"/>
               Save
             </button>
           </form>
@@ -176,7 +179,7 @@
           {{ deviceBase()?.batteryCycleCount |orElse }}
           cycles
           <button (click)="activateBatteryEditMode()" class="btn btn-link">
-            <cds-icon role="img" shape="edit"/>
+            <cds-icon shape="edit"/>
             Edit
           </button>
         } @else {
@@ -190,11 +193,11 @@
               <div clrInputSuffix>cycles</div>
             </clr-input-container>
             <button (click)="batteryEditModeActive.set(false)" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
+              <cds-icon shape="close"/>
               Cancel
             </button>
             <button [disabled]="batteryForm.invalid" class="btn btn-link" type="submit">
-              <cds-icon role="img" shape="check"/>
+              <cds-icon shape="check"/>
               Save
             </button>
           </form>
@@ -205,7 +208,7 @@
         @if (!batteryStatusEditModeActive()) {
           <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>
           <button (click)="activateBatteryStatusEditMode()" class="btn btn-link">
-            <cds-icon role="img" shape="edit"/>
+            <cds-icon shape="edit"/>
             Edit
           </button>
         } @else {
@@ -217,7 +220,7 @@
               }
             </select>
             <button (click)="batteryStatusEditModeActive.set(false)" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
+              <cds-icon shape="close"/>
               Cancel
             </button>
           </form>
@@ -232,7 +235,7 @@
         @if (!gradeEditModeActive()) {
           <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
           <button (click)="activateGradeEditMode()" class="btn btn-link">
-            <cds-icon role="img" shape="edit"/>
+            <cds-icon shape="edit"/>
             Edit
           </button>
         } @else {
@@ -244,7 +247,7 @@
               }
             </select>
             <button (click)="gradeEditModeActive.set(false)" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
+              <cds-icon shape="close"/>
               Cancel
             </button>
           </form>
@@ -267,7 +270,7 @@
             -
           }
           <button (click)="activateTagEditMode()" class="btn btn-link ml-1!">
-            <cds-icon role="img" shape="plus"/>
+            <cds-icon shape="plus"/>
             Add
           </button>
         } @else {
@@ -279,7 +282,7 @@
               }
             </select>
             <button (click)="tagEditModeActive.set(false)" class="btn btn-link" type="button">
-              <cds-icon role="img" shape="close"/>
+              <cds-icon shape="close"/>
               Cancel
             </button>
           </form>
