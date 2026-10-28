@@ -2,7 +2,7 @@ import { Directive, HostListener } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: '[appSerialNumber]',
+  selector: '[deviceSerialNumber]',
 })
 export class SerialNumber {
   constructor(private control: NgControl) {}

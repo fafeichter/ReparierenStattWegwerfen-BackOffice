@@ -95,4 +95,9 @@ public class DeviceSearchService {
 				.build())
 			.toList();
 	}
+
+	@Transactional(readOnly = true)
+	public Integer findDeviceIdBySerialNumber(String serialNumber) {
+		return deviceRepository.findDeviceIdBySerialNumber(serialNumber);
+	}
 }

@@ -19,31 +19,36 @@ import java.util.List;
  * @since 28.09.2026
  */
 @RestController
-@RequestMapping("/api/devices/search")
+@RequestMapping("/api/devices")
 @RequiredArgsConstructor
 public class DeviceSearchController {
 
-	private final DeviceSearchService deviceSearhService;
+	private final DeviceSearchService deviceSearchService;
 
-	@GetMapping("/")
+	@GetMapping
 	public Page<DeviceDto> search(@RequestParam(defaultValue = "1", required = false) Integer pageNumber,
 								  @RequestParam Integer pageSize,
 								  @RequestParam(defaultValue = "false") Boolean includeInactiveDevices) {
-		return deviceSearhService.search(pageNumber, pageSize, includeInactiveDevices);
+		return deviceSearchService.search(pageNumber, pageSize, includeInactiveDevices);
+	}
+
+	@GetMapping("/lookup")
+	public Integer findDeviceIdBySerialNumber(@RequestParam String serialNumber) {
+		return deviceSearchService.findDeviceIdBySerialNumber(serialNumber);
 	}
 
 	@GetMapping("/to-finish")
 	public List<DeviceToFinishDto> getDevicesToFinish() {
-		return deviceSearhService.getDevicesToFinish();
+		return deviceSearchService.getDevicesToFinish();
 	}
 
 	@GetMapping("/offered-for-sale")
 	public List<DeviceOfferedForSaleDto> getDevicesOfferedForSale() {
-		return deviceSearhService.getDevicesOfferedForSale();
+		return deviceSearchService.getDevicesOfferedForSale();
 	}
 
 	@GetMapping("/ordered")
 	public List<DeviceOrderedDto> getDevicesOrdered() {
-		return deviceSearhService.getDevicesOrdered();
+		return deviceSearchService.getDevicesOrdered();
 	}
 }

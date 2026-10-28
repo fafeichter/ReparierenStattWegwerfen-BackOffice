@@ -81,4 +81,10 @@ public class DeviceRepositoryAdapter implements DeviceRepository {
 		var entity = baseDetailsRepository.getByIdWithRelations(id);
 		return mapper.toDomain(entity);
 	}
+
+	@Override
+	public Integer findDeviceIdBySerialNumber(String serialNumber) {
+		String serialNumberSearchPattern = "%" + serialNumber.trim() + "%";
+		return jpaRepository.findDeviceIdBySerialNumberLike(serialNumberSearchPattern);
+	}
 }

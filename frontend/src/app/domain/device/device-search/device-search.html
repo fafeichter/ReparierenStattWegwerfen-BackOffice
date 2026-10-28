@@ -1,0 +1,28 @@
+<form (ngSubmit)="searchDevice()" [formGroup]="deviceSearchForm" class="clr-form-full-width" clrForm
+      clrLayout="vertical">
+  <clr-input-container class="mt-0!">
+    <label class="clr-col-4">Device ID</label>
+    <input class="clr-col-4" clrInput formControlName="deviceId" placeholder="e.g. 1"/>
+    <div clrInputPrefix>#</div>
+  </clr-input-container>
+  <clr-input-container class="mt-7!">
+    <label class="clr-col-5">Serial number</label>
+    <input class="clr-col-5" clrInput deviceSerialNumber formControlName="deviceSerialNumber"
+           placeholder="e.g. MQJ6Q79GCR"/>
+    @if (deviceSearchForm.hasError('noneProvided')) {
+      <clr-control-error>Either Device ID or serial number must be set</clr-control-error>
+    }
+    @if (deviceSearchForm.hasError('tooManyProvided')) {
+      <clr-control-error>Only one search field must be set</clr-control-error>
+    }
+  </clr-input-container>
+  <button [disabled]="deviceSearchForm.invalid || isSubmitting()" class="btn btn-icon mt-5!" type="submit">
+    <clr-icon class="rotate-90" shape="arrow-mini"></clr-icon>
+    @if (isSubmitting()) {
+      <span class="spinner spinner-inline"></span>
+      Searching ...
+    } @else {
+      Go to device
+    }
+  </button>
+</form>

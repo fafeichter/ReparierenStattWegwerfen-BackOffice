@@ -5,6 +5,7 @@ import { AddDevice } from '../domain/device/add-device/add-device';
 import { DevicesOrdered } from '../domain/device/devices-ordered/devices-ordered';
 import { DevicesOfferedForSale } from '../domain/device/devices-offered-for-sale/devices-offered-for-sale';
 import { DevicesToFinish } from '../domain/device/devices-to-finish/devices-to-finish';
+import { DeviceSearch } from '../domain/device/device-search/device-search';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { DevicesToFinish } from '../domain/device/devices-to-finish/devices-to-f
     DevicesOrdered,
     DevicesOfferedForSale,
     DevicesToFinish,
+    DeviceSearch,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',

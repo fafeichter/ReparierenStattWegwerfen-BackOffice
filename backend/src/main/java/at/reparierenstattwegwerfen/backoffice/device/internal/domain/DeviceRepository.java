@@ -28,4 +28,6 @@ public interface DeviceRepository {
 	Page<Device> search(Pageable page, Boolean includeInactiveDevices);
 
 	Device getByIdWithRelations(Integer id);
+
+	Integer findDeviceIdBySerialNumber(String serialNumber);
 }

@@ -139,7 +139,7 @@
         } @else {
           <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm clrLayout="vertical">
             <clr-input-container>
-              <input appSerialNumber autofocus clrInput formControlName="newSerialNumber" type="text">
+              <input autofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
               @if (serialNumberForm.controls.newSerialNumber.hasError('required')) {
                 <clr-control-error>Serial number must be provided</clr-control-error>
               }
