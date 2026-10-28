@@ -39,7 +39,8 @@ VALUES (1, 'A18 Pro mit 6‑Core CPU und 5-Core GPU', 'A18 Pro', 4, 2, 0, 5),
        (34, 'M5 Pro mit 15‑Core CPU und 16‑Core GPU', 'M5 Pro', 0, 10, 5, 16),
        (35, 'M5 Pro mit 18‑Core CPU und 20‑Core GPU', 'M5 Pro', 0, 12, 6, 20),
        (36, 'M5 Max mit 18‑Core CPU und 32‑Core GPU', 'M5 Max', 0, 12, 6, 32),
-       (37, 'M5 Max mit 18‑Core CPU und 40‑Core GPU', 'M5 Max', 0, 12, 6, 40);
+       (37, 'M5 Max mit 18‑Core CPU und 40‑Core GPU', 'M5 Max', 0, 12, 6, 40),
+       (38, 'M6 mit 12‑Core CPU und 12‑Core GPU', 'M6', 6, 4, 2, 12);
 
 INSERT INTO model_apple_silicon_unified_memory (model_apple_silicon_unified_memory_id, size, unit)
 VALUES (1, 8, 'GB'),
@@ -181,7 +182,8 @@ VALUES (1, 'MacBook Air (M1, 2020)', 1, 'A2337', 'https://support.apple.com/de-a
        (58, 'iPad Air 11" (M4, Wi‑Fi + Cellular)', 5, 'A3460', 'https://support.apple.com/de-de/126471', 2026, 11,
         11.0, 3),
        (59, 'iPad Air 13" (M4, Wi‑Fi + Cellular)', 5, 'A3462', 'https://support.apple.com/de-de/126472', 2026, 13,
-        13.0, 3);
+        13.0, 3),
+       (60, 'MacBook Pro (14", M6)', 2, 'A3536', 'XXX', 2026, 14, 14.2, 11);
 
 INSERT INTO model_available_apple_silicon (model_available_apple_silicon_id, model_id, model_apple_silicon_id)
 VALUES (1, 1, 2),
@@ -281,7 +283,8 @@ VALUES (1, 1, 2),
        (95, 56, 18),
        (96, 57, 18),
        (97, 58, 23),
-       (98, 59, 23);
+       (98, 59, 23),
+       (99, 60, 38);
 
 INSERT INTO model_available_color (model_available_color_id, model_id, model_color_id)
 VALUES (1, 1, 1),
@@ -450,7 +453,9 @@ VALUES (1, 1, 1),
        (164, 59, 11),
        (165, 59, 12),
        (166, 59, 5),
-       (167, 59, 2);
+       (167, 59, 2),
+       (168, 60, 1),
+       (169, 60, 6);
 
 INSERT INTO model_available_feature (model_available_feature_id, model_id, model_feature_id)
 VALUES (1, 1, 1),
@@ -587,7 +592,11 @@ VALUES (1, 1, 1),
        (132, 56, 8),
        (133, 57, 7),
        (134, 58, 7),
-       (135, 59, 7);
+       (135, 59, 7),
+       (136, 60, 1),
+       (137, 60, 2),
+       (138, 60, 3),
+       (139, 60, 4);
 
 INSERT INTO model_silicon_available_storage (model_silicon_available_storage_id,
                                              model_available_apple_silicon_id,
@@ -955,7 +964,10 @@ VALUES (1, 1, 3),
        (361, 98, 2),
        (362, 98, 3),
        (363, 98, 4),
-       (364, 98, 5);
+       (364, 98, 5),
+       (365, 99, 5),
+       (366, 99, 6),
+       (367, 99, 7);
 
 INSERT INTO model_silicon_available_unified_memory (model_silicon_available_unified_memory_id,
                                                     model_available_apple_silicon_id,
@@ -1152,4 +1164,7 @@ VALUES (1, 1, 1),
        (190, 95, 1),
        (191, 96, 1),
        (192, 97, 2),
-       (193, 98, 2);
+       (193, 98, 2),
+       (194, 99, 3),
+       (195, 99, 5),
+       (196, 99, 6);
