@@ -8,6 +8,7 @@ import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
@@ -22,6 +23,11 @@ public class DeviceInvoiceService {
 	private final DeviceRepository deviceRepository;
 	private final AccountingInvoiceService accountingInvoiceService;
 	private final ApplicationEventPublisher events;
+
+	@Transactional(readOnly = true)
+	public Integer getDeviceSaleInvoiceNumber(Integer deviceId) {
+		return deviceRepository.getById(deviceId).getInvoiceNumber();
+	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void setDeviceInvoiseNumber(DeviceSold event) {
