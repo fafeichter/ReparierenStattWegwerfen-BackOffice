@@ -12,22 +12,19 @@ import java.time.LocalDate;
  * @since 25.05.2026
  */
 @Entity
-@Table(name = "accounting_device_invoice")
+@Table(name = "accounting_invoice")
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountingDeviceInvoiceEntity {
+public class AccountingInvoiceEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "accounting_device_invoice_id")
+	@Column(name = "accounting_invoice_id")
 	private Integer id;
 
 	@Column(name = "number")
 	private Integer number;
-
-	@Column(name = "device_id")
-	private Integer deviceId;
 
 	@Column(name = "date")
 	private LocalDate date;

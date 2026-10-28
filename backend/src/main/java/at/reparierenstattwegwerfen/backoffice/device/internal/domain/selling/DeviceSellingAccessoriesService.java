@@ -20,7 +20,7 @@ public class DeviceSellingAccessoriesService {
 
 	@Transactional(readOnly = true)
 	public DeviceSellingAccessoriesDto load(Integer deviceId) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		return DeviceSellingAccessoriesDto.builder()
 			.charger(device.getSellingAccessoryCharger())
@@ -31,7 +31,7 @@ public class DeviceSellingAccessoriesService {
 
 	@Transactional
 	public void update(Integer deviceId, DeviceSellingAccessoriesFormDto accessoriesFormDto) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		device.setSellingAccessoryCharger(accessoriesFormDto.getCharger());
 		device.setSellingAccessoryChargingCable(accessoriesFormDto.getChargingCable());

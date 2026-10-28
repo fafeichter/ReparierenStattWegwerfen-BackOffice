@@ -28,8 +28,8 @@ public class DeviceTagsService {
 	@Transactional
 	public void addTag(Integer deviceId, Integer newDeviceTagId, UserDetails actor) {
 		DeviceTags deviceTags = new DeviceTags();
-		deviceTags.setDevice(deviceRepository.getReferenceById(deviceId));
-		deviceTags.setDeviceTag(deviceTagRepository.getReferenceById(newDeviceTagId));
+		deviceTags.setDevice(deviceRepository.getById(deviceId));
+		deviceTags.setDeviceTag(deviceTagRepository.getById(newDeviceTagId));
 		deviceTagsRepository.save(deviceTags);
 
 		DeviceTagAdded deviceTagAddedEvent = DeviceTagAdded.builder()
@@ -56,7 +56,7 @@ public class DeviceTagsService {
 
 	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAvailableTagsForDevice(Integer deviceId) {
-		Integer deviceModelId = deviceRepository.getReferenceById(deviceId).getModelId();
+		Integer deviceModelId = deviceRepository.getById(deviceId).getModelId();
 		Integer deviceModelSeriesId = modelDetailsService.getModelSeries(deviceModelId).id();
 
 		return deviceTagRepository.getAvailableTagsForDevice(deviceId, deviceModelSeriesId)

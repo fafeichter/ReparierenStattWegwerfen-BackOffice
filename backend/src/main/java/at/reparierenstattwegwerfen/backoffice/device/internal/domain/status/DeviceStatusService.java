@@ -35,10 +35,10 @@ public class DeviceStatusService {
 
 	@Transactional
 	public void updateStatusOfDevice(Integer deviceId, Integer newStatusId, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		if (!newStatusId.equals(device.getStatus().getId())) {
-			device.setStatus(deviceStatusRepository.getReferenceById(newStatusId));
+			device.setStatus(deviceStatusRepository.getById(newStatusId));
 			deviceRepository.save(device);
 
 			DeviceStatusChanged deviceStatusChangedEvent = DeviceStatusChanged.builder()
@@ -53,7 +53,7 @@ public class DeviceStatusService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void setDeviceStatusDate(DeviceStatusChanged event) {
-		Device device = deviceRepository.getReferenceById(event.getDeviceId());
+		Device device = deviceRepository.getById(event.getDeviceId());
 		device.setStatusDate(event.getExactTimestamp());
 		deviceRepository.save(device);
 	}

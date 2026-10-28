@@ -13,10 +13,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountingDeviceInvoice {
+public class AccountingInvoice {
 
 	private Integer id;
 	private Integer number;
-	private Integer deviceId;
 	private LocalDate date;
 }

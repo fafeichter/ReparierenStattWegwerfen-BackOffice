@@ -21,6 +21,6 @@ public class DeviceController {
 
 	@GetMapping("/{deviceId}")
 	public Device getDeviceDetails(@PathVariable Integer deviceId) {
-		return deviceRepository.findById(deviceId).orElse(null);
+		return deviceRepository.getById(deviceId);
 	}
 }

@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -22,12 +21,7 @@ public class DeviceTagRepositoryAdapter implements DeviceTagRepository {
 	private final DeviceTagPersistenceMapper mapper;
 
 	@Override
-	public Optional<DeviceTag> findById(Integer id) {
-		return jpaRepository.findById(id).map(mapper::toDomain);
-	}
-
-	@Override
-	public DeviceTag getReferenceById(Integer id) {
+	public DeviceTag getById(Integer id) {
 		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 

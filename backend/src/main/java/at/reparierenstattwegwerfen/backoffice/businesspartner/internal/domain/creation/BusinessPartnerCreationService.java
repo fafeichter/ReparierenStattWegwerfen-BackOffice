@@ -59,7 +59,7 @@ public class BusinessPartnerCreationService implements at.reparierenstattwegwerf
 		businessPartnerAddress.setZipCode(businessPartnerDto.getZipCode());
 		businessPartnerAddress.setCity(businessPartnerDto.getCity());
 		businessPartnerAddress.setStreet(businessPartnerDto.getStreet());
-		businessPartnerAddress.setCountry(businessPartnerAddressCountryRepository.getReferenceById(businessPartnerDto.getCountryId()));
+		businessPartnerAddress.setCountry(businessPartnerAddressCountryRepository.getById(businessPartnerDto.getCountryId()));
 
 		BusinessPartnerAddress address = businessPartnerAddressRepository.save(businessPartnerAddress);
 		businessPartner.setAddress(address);

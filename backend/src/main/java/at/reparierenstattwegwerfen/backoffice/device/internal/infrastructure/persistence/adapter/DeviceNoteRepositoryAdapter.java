@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -22,12 +21,7 @@ public class DeviceNoteRepositoryAdapter implements DeviceNoteRepository {
 	private final DeviceNotePersistenceMapper mapper;
 
 	@Override
-	public Optional<DeviceNote> findById(Integer id) {
-		return jpaRepository.findById(id).map(mapper::toDomain);
-	}
-
-	@Override
-	public DeviceNote getReferenceById(Integer id) {
+	public DeviceNote getById(Integer id) {
 		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 

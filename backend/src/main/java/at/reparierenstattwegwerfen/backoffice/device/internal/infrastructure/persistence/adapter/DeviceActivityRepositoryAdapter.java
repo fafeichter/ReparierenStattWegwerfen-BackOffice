@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -21,11 +20,6 @@ public class DeviceActivityRepositoryAdapter implements DeviceActivityRepository
 
 	private final SpringDataDeviceActivityRepository jpaRepository;
 	private final DeviceActivityPersistenceMapper mapper;
-
-	@Override
-	public Optional<DeviceActivity> findById(Integer id) {
-		return jpaRepository.findById(id).map(mapper::toDomain);
-	}
 
 	@Override
 	public void save(DeviceActivity activity) {

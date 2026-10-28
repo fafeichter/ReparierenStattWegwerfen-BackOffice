@@ -27,7 +27,7 @@ public class BusinessPartnerAddressService {
 	public void extractAddressFromImage(Integer businessPartnerId, MultipartFile shippingLabelImage, UserDetails actor) {
 		BusinessPartnerAddressExtractResponse address = addressExtractor.extractAddress(shippingLabelImage.getResource());
 
-		BusinessPartner businessPartner = businessPartnerRepository.getReferenceById(businessPartnerId);
+		BusinessPartner businessPartner = businessPartnerRepository.getById(businessPartnerId);
 		BusinessPartnerAddressCountry country = countryRepository.getByCode(address.countryCode());
 
 		businessPartner.setFirstName(address.firstName());
@@ -37,7 +37,7 @@ public class BusinessPartnerAddressService {
 		if (businessPartner.getAddress() == null) {
 			businessPartnerAddress = new BusinessPartnerAddress();
 		} else {
-			businessPartnerAddress = addressRepository.getReferenceById(businessPartner.getAddress().getId());
+			businessPartnerAddress = addressRepository.getById(businessPartner.getAddress().getId());
 		}
 
 		businessPartnerAddress.setStreet(address.street());

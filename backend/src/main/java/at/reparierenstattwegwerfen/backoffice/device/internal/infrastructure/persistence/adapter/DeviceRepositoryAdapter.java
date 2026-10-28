@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -26,12 +25,7 @@ public class DeviceRepositoryAdapter implements DeviceRepository {
 	private final DevicePersistenceMapper mapper;
 
 	@Override
-	public Optional<Device> findById(Integer id) {
-		return jpaRepository.findById(id).map(mapper::toDomain);
-	}
-
-	@Override
-	public Device getReferenceById(Integer id) {
+	public Device getById(Integer id) {
 		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 

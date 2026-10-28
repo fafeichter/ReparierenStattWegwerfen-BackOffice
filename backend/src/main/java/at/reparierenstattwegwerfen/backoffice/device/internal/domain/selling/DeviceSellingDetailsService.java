@@ -3,7 +3,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.DeviceRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceStatusChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceSold;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceSellingDetailsDto;
 import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,6 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * @author Fabian Feichter
@@ -40,22 +39,19 @@ public class DeviceSellingDetailsService {
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-	public void setDeviceSellingDate(DeviceStatusChanged event) {
-		Device device = deviceRepository.getReferenceById(event.getDeviceId());
+	public void setDeviceSellingDate(DeviceSold event) {
+		Device device = deviceRepository.getById(event.getDeviceId());
 
-		Integer newStatusId = event.getNewStatusId();
-		if (!Objects.equals(newStatusId, device.getStatus().getId()) && newStatusId == 6) {
-			LocalDate sellingDate = LocalDate.now();
-			device.setSellingDate(sellingDate);
-			deviceRepository.save(device);
+		LocalDate sellingDate = LocalDate.now();
+		device.setSellingDate(sellingDate);
+		deviceRepository.save(device);
 
-			DeviceSellingDateChanged sellingDateChangedEvent = DeviceSellingDateChanged.builder()
-				.source(this)
-				.actor(SystemUser.get())
-				.deviceId(event.getDeviceId())
-				.sellingDate(sellingDate)
-				.build();
-			events.publishEvent(sellingDateChangedEvent);
-		}
+		DeviceSellingDateChanged sellingDateChangedEvent = DeviceSellingDateChanged.builder()
+			.source(this)
+			.actor(SystemUser.get())
+			.deviceId(event.getDeviceId())
+			.sellingDate(sellingDate)
+			.build();
+		events.publishEvent(sellingDateChangedEvent);
 	}
 }

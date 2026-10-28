@@ -56,7 +56,7 @@ public class DeviceSparePartService {
 			.map(DeviceSpareParts::getSparePartId)
 			.collect(toUnmodifiableSet());
 
-		Integer modelId = deviceRepository.getReferenceById(deviceId).getModelId();
+		Integer modelId = deviceRepository.getById(deviceId).getModelId();
 		Integer modelSeriesId = modelDetailsService.getModelSeries(modelId).id();
 
 		return sparePartService.getSparePartsForModelSeriesExcluding(
@@ -85,7 +85,7 @@ public class DeviceSparePartService {
 
 	@Transactional
 	public void deleteDeviceSparePart(Integer deviceId, Integer oldDeviceSparePartId, UserDetails actor) {
-		DeviceSpareParts deviceSparePart = deviceSparePartsRepository.getReferenceById(oldDeviceSparePartId);
+		DeviceSpareParts deviceSparePart = deviceSparePartsRepository.getById(oldDeviceSparePartId);
 		String oldSparePartName = sparePartService.getSparePartById(deviceSparePart.getSparePartId()).name();
 		Double oldSparePartPriceNetto = deviceSparePart.getPriceNetto();
 

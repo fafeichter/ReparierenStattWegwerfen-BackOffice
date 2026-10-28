@@ -14,9 +14,17 @@ public class DeviceStatusChanged extends AbstractDeviceActivityEvent {
 
 	final Integer newStatusId;
 
-	@Builder
-	public DeviceStatusChanged(Object source, UserDetails actor, Integer deviceId, Integer newStatusId) {
+	DeviceStatusChanged(Object source, UserDetails actor, Integer deviceId, Integer newStatusId) {
 		super(source, deviceId, actor);
 		this.newStatusId = newStatusId;
+	}
+
+	@Builder
+	public static DeviceStatusChanged of(Object source, UserDetails actor, Integer deviceId, Integer newStatusId) {
+		if (Integer.valueOf(6).equals(newStatusId)) {
+			return new DeviceSold(source, actor, deviceId);
+		}
+
+		return new DeviceStatusChanged(source, actor, deviceId, newStatusId);
 	}
 }

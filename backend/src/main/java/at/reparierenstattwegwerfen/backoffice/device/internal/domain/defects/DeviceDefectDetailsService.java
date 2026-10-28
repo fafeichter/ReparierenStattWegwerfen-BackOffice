@@ -40,7 +40,7 @@ public class DeviceDefectDetailsService {
 
 	@Transactional
 	public void update(Integer deviceId, DeviceDefectsDto deviceDefectsDto, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		boolean reportedDefectChanged = !deviceDefectsDto.getReportedDefect().equals(device.getReportedDefect());
 		if (reportedDefectChanged) {
@@ -98,7 +98,7 @@ public class DeviceDefectDetailsService {
 
 	@Transactional
 	public void confirmReportedDefect(Integer deviceId, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 		device.setReportedDefectConfirmed(true);
 		device.setCorrectedDefect(null);
 

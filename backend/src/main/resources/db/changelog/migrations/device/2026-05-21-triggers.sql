@@ -14,7 +14,7 @@ BEGIN
                               reported_defect_confirmed, corrected_defect, selling_date, selling_accessory_charger,
                               selling_accessory_charging_cable, selling_accessory_original_packaging,
                               battery_maximum_capacity, battery_cycle_count, device_battery_status_id, selling_price,
-                              created_at, updated_at)
+                              invoice_number, created_at, updated_at)
     VALUES ('INSERT', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.model_id, NEW.buying_date,
             NEW.model_apple_silicon_id, NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id,
             NEW.model_color_id, NEW.url, NEW.serial_number, NEW.device_status_id, NEW.status_date,
@@ -22,8 +22,7 @@ BEGIN
             NEW.reported_defect, NEW.reported_defect_confirmed, NEW.corrected_defect, NEW.selling_date,
             NEW.selling_accessory_charger, NEW.selling_accessory_charging_cable,
             NEW.selling_accessory_original_packaging, NEW.battery_maximum_capacity, NEW.battery_cycle_count,
-            NEW.device_battery_status_id, NEW.selling_price,
-            NEW.created_at, NEW.updated_at);
+            NEW.device_battery_status_id, NEW.selling_price, NEW.invoice_number, NEW.created_at, NEW.updated_at);
 END $$
 
 CREATE TRIGGER tr_device_update
@@ -38,7 +37,7 @@ BEGIN
                               reported_defect_confirmed, corrected_defect, selling_date, selling_accessory_charger,
                               selling_accessory_charging_cable, selling_accessory_original_packaging,
                               battery_maximum_capacity, battery_cycle_count, device_battery_status_id, selling_price,
-                              created_at, updated_at)
+                              invoice_number, created_at, updated_at)
     VALUES ('UPDATE', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.model_id, NEW.buying_date, NEW.model_apple_silicon_id,
             NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
             NEW.serial_number, NEW.device_status_id, NEW.status_date, NEW.seller_business_partner_id,
@@ -46,7 +45,7 @@ BEGIN
             NEW.reported_defect_confirmed, NEW.corrected_defect, NEW.selling_date, NEW.selling_accessory_charger,
             NEW.selling_accessory_charging_cable, NEW.selling_accessory_original_packaging,
             NEW.battery_maximum_capacity, NEW.battery_cycle_count, NEW.device_battery_status_id, NEW.selling_price,
-            NEW.created_at, NEW.updated_at);
+            NEW.invoice_number, NEW.created_at, NEW.updated_at);
 END $$
 
 CREATE TRIGGER tr_device_delete
@@ -61,7 +60,7 @@ BEGIN
                               reported_defect_confirmed, corrected_defect, selling_date, selling_accessory_charger,
                               selling_accessory_charging_cable, selling_accessory_original_packaging,
                               battery_maximum_capacity, battery_cycle_count, device_battery_status_id, selling_price,
-                              created_at, updated_at)
+                              invoice_number, created_at, updated_at)
     VALUES ('DELETE', CURRENT_TIMESTAMP(6), OLD.device_id, OLD.model_id, OLD.buying_date,
             OLD.model_apple_silicon_id, OLD.model_apple_silicon_unified_memory_id, OLD.model_storage_id,
             OLD.model_color_id, OLD.url, OLD.serial_number, OLD.device_status_id, OLD.status_date,
@@ -69,7 +68,7 @@ BEGIN
             OLD.reported_defect, OLD.reported_defect_confirmed, OLD.corrected_defect, OLD.selling_date,
             OLD.selling_accessory_charger, OLD.selling_accessory_charging_cable,
             OLD.selling_accessory_original_packaging, OLD.battery_maximum_capacity, OLD.battery_cycle_count,
-            OLD.device_battery_status_id, OLD.selling_price, OLD.created_at, OLD.updated_at);
+            OLD.device_battery_status_id, OLD.selling_price, OLD.invoice_number, OLD.created_at, OLD.updated_at);
 END $$
 
 CREATE TRIGGER tr_device_note_insert

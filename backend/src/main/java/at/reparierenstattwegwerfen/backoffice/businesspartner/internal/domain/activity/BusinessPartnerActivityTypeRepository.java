@@ -5,5 +5,5 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.a
  * @since 13.10.2026
  */
 public interface BusinessPartnerActivityTypeRepository {
-	BusinessPartnerActivityType getReferenceById(Integer id);
+	BusinessPartnerActivityType getById(Integer id);
 }

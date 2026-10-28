@@ -103,6 +103,9 @@ public class DeviceEntity implements NamedId {
 	@Column(name = "selling_price")
 	private Double sellingPrice;
 
+	@Column(name = "invoice_number")
+	private Integer invoiceNumber;
+
 	@Override
 	public String getName() {
 		return "#" + getId();

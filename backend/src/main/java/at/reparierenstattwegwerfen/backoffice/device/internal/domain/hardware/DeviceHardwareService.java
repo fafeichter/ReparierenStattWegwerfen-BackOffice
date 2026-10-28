@@ -27,7 +27,7 @@ public class DeviceHardwareService {
 
 	@Transactional
 	public void updateSerialNumber(Integer deviceId, String newSerialNumber, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		if (!Objects.equals(newSerialNumber, device.getSerialNumber())) {
 			device.setSerialNumber(newSerialNumber);
@@ -46,7 +46,7 @@ public class DeviceHardwareService {
 
 	@Transactional
 	public void updateHardwareConfigOfDevice(Integer deviceId, UpdateHardwareConfigDto updateHardwareConfigDto, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		Integer newModelAppleSiliconId = updateHardwareConfigDto.getModelAppleSiliconId();
 		boolean updateModelAppleSilicon = !Objects.equals(newModelAppleSiliconId, device.getModelAppleSiliconId());

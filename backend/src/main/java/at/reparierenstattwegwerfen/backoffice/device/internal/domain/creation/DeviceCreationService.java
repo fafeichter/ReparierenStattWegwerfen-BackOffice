@@ -49,7 +49,7 @@ public class DeviceCreationService {
 
 		device.setBuyingDate(newDevice.getBuyingDate());
 		device.setUrl(newDevice.getUrl());
-		device.setStatus(deviceStatusRepository.getReferenceById(1));
+		device.setStatus(deviceStatusRepository.getById(1));
 		device.setStatusDate(LocalDateTime.now());
 
 		device.setModelId(newDevice.getModelId());
@@ -91,7 +91,7 @@ public class DeviceCreationService {
 		}
 
 		if (setBatteryStatus) {
-			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(batteryHealth.determineStatusId()));
+			device.setBatteryStatus(deviceBatteryStatusRepository.getById(batteryHealth.determineStatusId()));
 		}
 
 		boolean setSerialNumber = newDevice.getSerialNumber() != null;

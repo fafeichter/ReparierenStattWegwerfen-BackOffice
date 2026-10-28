@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -12,9 +11,7 @@ import java.util.Optional;
  */
 public interface DeviceRepository {
 
-	Optional<Device> findById(Integer id);
-
-	Device getReferenceById(Integer id);
+	Device getById(Integer id);
 
 	Device save(Device device);
 

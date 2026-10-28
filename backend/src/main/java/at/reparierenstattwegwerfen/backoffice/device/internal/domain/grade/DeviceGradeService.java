@@ -38,14 +38,14 @@ public class DeviceGradeService {
 
 	@Transactional
 	public void updateGrade(Integer deviceId, Integer newGradeId, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		Integer currentGradeId = Optional.ofNullable(device.getGrade())
 			.map(DeviceGrade::getId)
 			.orElse(null);
 
 		if (!Objects.equals(currentGradeId, newGradeId)) {
-			device.setGrade(deviceGradeRepository.getReferenceById(newGradeId));
+			device.setGrade(deviceGradeRepository.getById(newGradeId));
 			deviceRepository.save(device);
 
 			DeviceGradeChanged deviceGradeChangedEvent = DeviceGradeChanged.builder()

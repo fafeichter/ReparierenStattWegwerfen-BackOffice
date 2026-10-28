@@ -5,7 +5,7 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.a
  * @since 13.10.2026
  */
 public interface BusinessPartnerAddressRepository {
-	BusinessPartnerAddress getReferenceById(Integer id);
+	BusinessPartnerAddress getById(Integer id);
 
 	BusinessPartnerAddress save(BusinessPartnerAddress address);
 }

@@ -92,4 +92,5 @@ VALUES (1, 'Erstellt'),
        (20, 'Verkäufer eingetragen'),
        (21, 'Käufer eingetragen'),
        (22, 'Angegebenen Defekt bestätigt'),
-       (23, 'Angegebenen Defekt nicht bestätigt');
+       (23, 'Angegebenen Defekt nicht bestätigt'),
+       (24, 'Rechnungsnummer zugewiesen');

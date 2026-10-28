@@ -26,7 +26,7 @@ public class DeviceActivityTypeRepositoryAdapter implements DeviceActivityTypeRe
 	}
 
 	@Override
-	public DeviceActivityType getReferenceById(Integer id) {
+	public DeviceActivityType getById(Integer id) {
 		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 }

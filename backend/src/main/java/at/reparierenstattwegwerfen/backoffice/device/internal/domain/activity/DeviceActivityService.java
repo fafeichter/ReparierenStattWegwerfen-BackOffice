@@ -12,6 +12,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.Dev
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.hardware.*;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.invoice.DeviceInvoiceNumberAssigned;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteAdded;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteDeleted;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteRepository;
@@ -37,6 +38,7 @@ import at.reparierenstattwegwerfen.backoffice.sparepart.SparePartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -75,7 +77,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName("#" + event.getDeviceId());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(1));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(1));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -83,9 +85,9 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceStatusChanged event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(deviceStatusRepository.getReferenceById(event.getNewStatusId()).getName());
+		deviceActivity.setName(deviceStatusRepository.getById(event.getNewStatusId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(2));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(2));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -96,13 +98,13 @@ public class DeviceActivityService {
 		Integer newBatteryStatusId = event.getNewBatteryStatusId();
 		String activityValue;
 		if (newBatteryStatusId != null) {
-			activityValue = deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId).getName();
+			activityValue = deviceBatteryStatusRepository.getById(newBatteryStatusId).getName();
 		} else {
 			activityValue = "-";
 		}
 		deviceActivity.setName(activityValue);
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(3));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(3));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -114,13 +116,13 @@ public class DeviceActivityService {
 		Integer newGradeId = event.getNewGradeId();
 		String activityValue;
 		if (newGradeId != null) {
-			activityValue = deviceGradeRepository.getReferenceById(newGradeId).getName();
+			activityValue = deviceGradeRepository.getById(newGradeId).getName();
 		} else {
 			activityValue = "-";
 		}
 		deviceActivity.setName(activityValue);
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(4));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(4));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -128,9 +130,9 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceTagAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getNewDeviceTagId()).getName());
+		deviceActivity.setName(deviceTagRepository.getById(event.getNewDeviceTagId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(5));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(5));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -138,9 +140,9 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceTagRemoved event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(deviceTagRepository.getReferenceById(event.getOldDeviceTagId()).getName());
+		deviceActivity.setName(deviceTagRepository.getById(event.getOldDeviceTagId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(6));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(6));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -150,7 +152,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(modelAppleSiliconDetailsService.getAppleSilicon(event.getModelAppleSiliconId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(7));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(7));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -160,7 +162,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(modelUnifiedMemoryDetailsService.getUnifiedMemory(event.getModelUnifiedMemoryId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(8));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(8));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -170,7 +172,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(modelStorageDetailsService.getStorage(event.getModelStorageId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(9));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(9));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -180,7 +182,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(modelColorDetailsService.getColor(event.getModelColorId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(10));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(10));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -190,7 +192,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getSerialNumber());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(11));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(11));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -200,7 +202,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getReportedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(12));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(12));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -210,7 +212,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getCorrectedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(13));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(13));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -220,7 +222,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getBuyingDate().format(ofPattern("dd.MM.yyyy")));
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(14));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(14));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -230,7 +232,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getSellingDate().format(ofPattern("dd.MM.yyyy")));
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(15));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(15));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -238,9 +240,9 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceNoteAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		deviceActivity.setName(deviceNoteRepository.getReferenceById(event.getNewNoteId()).getName());
+		deviceActivity.setName(deviceNoteRepository.getById(event.getNewNoteId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(16));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(16));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -250,7 +252,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getOldNoteText());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(17));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(17));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -258,12 +260,12 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSparePartAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		DeviceSpareParts deviceSpareParts = deviceSparePartsRepository.getReferenceById(event.getDeviceSparePartId());
+		DeviceSpareParts deviceSpareParts = deviceSparePartsRepository.getById(event.getDeviceSparePartId());
 		Price sparePartPriceNetto = new Price(deviceSpareParts.getPriceNetto());
 		deviceActivity.setName(sparePartService.getSparePartById(deviceSpareParts.getSparePartId()).name() + " / " +
 			sparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(18));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(18));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -274,7 +276,7 @@ public class DeviceActivityService {
 		Price oldSparePartPriceNetto = new Price(event.getOldDeviceSparePartPriceNetto());
 		deviceActivity.setName(event.getOldDeviceSparePartName() + " / " + oldSparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(19));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(19));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -285,7 +287,7 @@ public class DeviceActivityService {
 		NamedIdDto businessPartner = businessPartnerDetailsService.getBusinessPartner(event.getSellerBusinessPartnerId());
 		deviceActivity.setName(businessPartner.name());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(20));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(20));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -296,7 +298,7 @@ public class DeviceActivityService {
 		NamedIdDto businessPartner = businessPartnerDetailsService.getBusinessPartner(event.getBuyerBusinessPartnerId());
 		deviceActivity.setName(businessPartner.name());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(21));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(21));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -306,7 +308,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getReportedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(22));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(22));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
@@ -316,7 +318,18 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(event.getReportedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
-		deviceActivity.setActivityType(deviceActivityTypeRepository.getReferenceById(23));
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(23));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void on(DeviceInvoiceNumberAssigned event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		deviceActivity.setName(String.valueOf(event.getInvoiceNumber()));
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(24));
 
 		deviceActivityRepository.save(deviceActivity);
 	}

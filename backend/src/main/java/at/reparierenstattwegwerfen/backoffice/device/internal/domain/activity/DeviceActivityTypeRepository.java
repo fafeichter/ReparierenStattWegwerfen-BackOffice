@@ -10,5 +10,5 @@ public interface DeviceActivityTypeRepository {
 
 	Optional<DeviceActivityType> findById(Integer id);
 
-	DeviceActivityType getReferenceById(Integer id);
+	DeviceActivityType getById(Integer id);
 }

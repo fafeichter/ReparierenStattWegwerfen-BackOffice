@@ -11,7 +11,7 @@ import java.util.List;
 public interface BusinessPartnerAddressCountryRepository {
 	List<BusinessPartnerAddressCountry> findAll(Sort sort);
 
-	BusinessPartnerAddressCountry getReferenceById(Integer id);
+	BusinessPartnerAddressCountry getById(Integer id);
 
 	BusinessPartnerAddressCountry getByCode(String code);
 }

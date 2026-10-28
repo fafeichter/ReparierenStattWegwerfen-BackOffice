@@ -45,6 +45,7 @@ public class Device implements NamedId {
 	private Integer batteryCycleCount;
 	private DeviceBatteryStatus batteryStatus;
 	private Double sellingPrice;
+	private Integer invoiceNumber;
 
 	@Override
 	public String getName() {

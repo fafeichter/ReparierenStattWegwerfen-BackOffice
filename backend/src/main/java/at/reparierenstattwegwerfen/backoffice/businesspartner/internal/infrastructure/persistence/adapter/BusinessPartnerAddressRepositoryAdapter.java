@@ -18,7 +18,7 @@ public class BusinessPartnerAddressRepositoryAdapter implements BusinessPartnerA
 	private final BusinessPartnerAddressPersistenceMapper mapper;
 
 	@Override
-	public BusinessPartnerAddress getReferenceById(Integer id) {
+	public BusinessPartnerAddress getById(Integer id) {
 		return mapper.toDomain(repository.getReferenceById(id));
 	}
 

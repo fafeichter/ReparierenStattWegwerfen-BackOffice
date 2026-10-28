@@ -53,7 +53,7 @@ public class DeviceNoteService {
 
 	@Transactional
 	public void delete(Integer deviceId, Integer oldDeviceNoteId, UserDetails actor) {
-		String oldDeviceNoteText = deviceNoteRepository.getReferenceById(oldDeviceNoteId).getName();
+		String oldDeviceNoteText = deviceNoteRepository.getById(oldDeviceNoteId).getName();
 		deviceNoteRepository.deleteById(oldDeviceNoteId);
 
 		DeviceNoteDeleted noteDeletedEvent = DeviceNoteDeleted.builder()

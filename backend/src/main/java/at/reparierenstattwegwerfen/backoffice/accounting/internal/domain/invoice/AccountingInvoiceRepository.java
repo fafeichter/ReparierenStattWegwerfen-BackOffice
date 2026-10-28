@@ -4,6 +4,6 @@ package at.reparierenstattwegwerfen.backoffice.accounting.internal.domain.invoic
  * @author Fabian Feichter
  * @since 13.10.2026
  */
-public interface AccountingDeviceInvoiceRepository {
-	AccountingDeviceInvoice getReferenceById(Integer id);
+public interface AccountingInvoiceRepository {
+	AccountingInvoice getById(Integer id);
 }

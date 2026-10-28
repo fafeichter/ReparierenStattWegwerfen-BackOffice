@@ -35,14 +35,14 @@ public class DeviceBatteryStatusService {
 
 	@Transactional
 	public void updateBatteryStatus(Integer deviceId, Integer newBatteryStatusId, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		Integer currentBatteryStatusId = Optional.ofNullable(device.getBatteryStatus())
 			.map(DeviceBatteryStatus::getId)
 			.orElse(null);
 
 		if (!Objects.equals(currentBatteryStatusId, newBatteryStatusId)) {
-			device.setBatteryStatus(deviceBatteryStatusRepository.getReferenceById(newBatteryStatusId));
+			device.setBatteryStatus(deviceBatteryStatusRepository.getById(newBatteryStatusId));
 			deviceRepository.save(device);
 
 			DeviceBatteryStatusChanged deviceBatteryStatusChangedEvent = DeviceBatteryStatusChanged.builder()

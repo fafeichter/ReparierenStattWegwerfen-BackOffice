@@ -26,7 +26,7 @@ public class DeviceBatteryHealthService {
 
 	@Transactional
 	public void updateBatteryHealth(Integer deviceId, BatteryHealthDto newDeviceBaseBattery, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 
 		if (!Objects.equals(newDeviceBaseBattery.getCycleCount(), device.getBatteryCycleCount()) ||
 			!Objects.equals(newDeviceBaseBattery.getMaximumCapacity(), device.getBatteryMaximumCapacity())) {
@@ -41,7 +41,7 @@ public class DeviceBatteryHealthService {
 
 			if (batteryStatusAutomaticallySetOrUpdated) {
 				device.setBatteryStatus(newDeviceBaseBattery.determineStatusId() != null ?
-					deviceBatteryStatusRepository.getReferenceById(newDeviceBaseBattery.determineStatusId()) : null);
+					deviceBatteryStatusRepository.getById(newDeviceBaseBattery.determineStatusId()) : null);
 			}
 
 			deviceRepository.save(device);

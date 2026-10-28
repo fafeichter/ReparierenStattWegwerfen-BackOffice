@@ -18,7 +18,7 @@ public class BusinessPartnerActivityTypeRepositoryAdapter implements BusinessPar
 	private final BusinessPartnerActivityTypePersistenceMapper mapper;
 
 	@Override
-	public BusinessPartnerActivityType getReferenceById(Integer id) {
+	public BusinessPartnerActivityType getById(Integer id) {
 		return mapper.toDomain(repository.getReferenceById(id));
 	}
 }

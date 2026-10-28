@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -9,9 +8,7 @@ import java.util.Optional;
  */
 public interface DeviceTagRepository {
 
-	Optional<DeviceTag> findById(Integer id);
-
-	DeviceTag getReferenceById(Integer id);
+	DeviceTag getById(Integer id);
 
 	List<DeviceTag> getTagsForDevice(Integer deviceId);
 

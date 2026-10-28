@@ -27,7 +27,7 @@ public class BusinessPartnerAddressCountryRepositoryAdapter implements BusinessP
 	}
 
 	@Override
-	public BusinessPartnerAddressCountry getReferenceById(Integer id) {
+	public BusinessPartnerAddressCountry getById(Integer id) {
 		return mapper.toDomain(repository.getReferenceById(id));
 	}
 

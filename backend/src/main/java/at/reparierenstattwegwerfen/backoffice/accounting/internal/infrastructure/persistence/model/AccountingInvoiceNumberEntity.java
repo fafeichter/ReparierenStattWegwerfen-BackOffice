@@ -13,13 +13,13 @@ import lombok.Setter;
  * @since 25.05.2026
  */
 @Entity
-@Table(name = "accounting_device_invoice_number")
+@Table(name = "accounting_invoice_number")
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountingDeviceInvoiceNumberEntity {
+public class AccountingInvoiceNumberEntity {
 
 	@Id
-	@Column(name = "current_device_invoice_number")
-	private Integer currentDeviceInvoiceNumber;
+	@Column(name = "current_invoice_number")
+	private Integer currentInvoiceNumber;
 }

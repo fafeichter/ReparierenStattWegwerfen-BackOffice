@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -22,12 +21,7 @@ public class DeviceStatusRepositoryAdapter implements DeviceStatusRepository {
 	private final DevicePersistenceMapper mapper;
 
 	@Override
-	public Optional<DeviceStatus> findById(Integer id) {
-		return jpaRepository.findById(id).map(mapper::toDomain);
-	}
-
-	@Override
-	public DeviceStatus getReferenceById(Integer id) {
+	public DeviceStatus getById(Integer id) {
 		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 

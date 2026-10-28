@@ -55,7 +55,7 @@ public class DeviceBusinessPartnerService {
 
 		Integer buyerBusinessPartnerId = businessPartnerService.createBusinessPartner(createBusinessPartnerDto, actor);
 
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 		device.setBuyerBusinessPartnerId(buyerBusinessPartnerId);
 		deviceRepository.save(device);
 
@@ -70,7 +70,7 @@ public class DeviceBusinessPartnerService {
 
 	@Transactional
 	public NamedIdDto setBuyerToAsgoodasnew(Integer deviceId, UserDetails actor) {
-		Device device = deviceRepository.getReferenceById(deviceId);
+		Device device = deviceRepository.getById(deviceId);
 		int asgoodasnewBusinessPartnerId = businessPartnerService.getAsgoodasnewBusinessPartnerId();
 		device.setBuyerBusinessPartnerId(asgoodasnewBusinessPartnerId);
 		deviceRepository.save(device);

@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -37,17 +36,12 @@ public class BusinessPartnerRepositoryAdapter implements BusinessPartnerReposito
 	}
 
 	@Override
-	public BusinessPartner getReferenceById(Integer id) {
+	public BusinessPartner getById(Integer id) {
 		return mapper.toDomain(repository.getReferenceById(id));
 	}
 
 	@Override
 	public BusinessPartner save(BusinessPartner businessPartner) {
 		return mapper.toDomain(repository.save(mapper.toEntity(businessPartner)));
-	}
-
-	@Override
-	public Optional<BusinessPartner> findById(Integer id) {
-		return repository.findById(id).map(mapper::toDomain);
 	}
 }
