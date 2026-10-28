@@ -15,15 +15,15 @@ import java.util.Arrays;
  * @since 22.09.2026
  */
 @RestController
-@RequestMapping("/api/application")
+@RequestMapping("/api/system-info")
 @RequiredArgsConstructor
-public class AppInfoController {
+public class SystemInfoController {
 
 	private final Environment environment;
 
-	@GetMapping("/app-info")
-	public AppInfoDto getAppInfo() {
-		return AppInfoDto.builder()
+	@GetMapping("/")
+	public SystemInfoDto getSystemInfo() {
+		return SystemInfoDto.builder()
 			.springBootVersion(SpringBootVersion.getVersion())
 			.springVersion(SpringVersion.getVersion())
 			.springActiveProfiles(environment.getActiveProfiles())

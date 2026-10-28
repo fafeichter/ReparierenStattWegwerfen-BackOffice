@@ -24,14 +24,14 @@
     </clr-card-body-title>
     <clr-card-body-text>
       <ul>
-        <li>Spring Boot: {{ backendAppInfo()?.springBootVersion }}</li>
-        <li>Spring Framework: {{ backendAppInfo()?.springVersion }}</li>
-        <li>Spring Active Profiles: {{ backendAppInfo()?.springActiveProfiles!.join(', ') }}</li>
-        <li>Java: {{ backendAppInfo()?.javaRuntimeName }} {{ backendAppInfo()?.javaVersion }}
-          ({{ backendAppInfo()?.javaVendor }})
+        <li>Spring Boot: {{ backendSystemInfo()?.springBootVersion }}</li>
+        <li>Spring Framework: {{ backendSystemInfo()?.springVersion }}</li>
+        <li>Spring Active Profiles: {{ backendSystemInfo()?.springActiveProfiles!.join(', ') }}</li>
+        <li>Java: {{ backendSystemInfo()?.javaRuntimeName }} {{ backendSystemInfo()?.javaVersion }}
+          ({{ backendSystemInfo()?.javaVendor }})
         </li>
-        <li>OS: {{ backendAppInfo()?.osName }} {{ backendAppInfo()?.osVersion }}
-          ({{ backendAppInfo()?.osArch }})
+        <li>OS: {{ backendSystemInfo()?.osName }} {{ backendSystemInfo()?.osVersion }}
+          ({{ backendSystemInfo()?.osArch }})
         </li>
       </ul>
     </clr-card-body-text>

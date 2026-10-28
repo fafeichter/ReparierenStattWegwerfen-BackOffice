@@ -24,13 +24,13 @@
         <cds-icon direction="down" shape="angle"/>
       </button>
       <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-        <a [routerLink]="['/technical-details']" clrDropdownItem>
+        <a [routerLink]="['/systeminfo']" clrDropdownItem>
           <cds-icon shape="bug"/>
-          Technical details
+          System Info
         </a>
         <a (click)="logout()" clrDropdownItem>
           <cds-icon shape="logout"/>
-          Log out
+          Logout
         </a>
       </clr-dropdown-menu>
     </clr-dropdown>

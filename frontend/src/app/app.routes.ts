@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Dashboard } from './dashboard/dashboard';
 import { AutoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
 import { ModelDetail, modelTitle } from './domain/model/model-detail/model-detail';
-import { TechnicalDetails } from './technical-details/technical-details';
+import { SystemInfo } from './system-info/system-info';
 import {
   BusinesspartnerDetail,
   businessPartnerTitle,
@@ -90,9 +90,9 @@ export const routes: Routes = [
         data: { title: 'Accounting' },
       },
       {
-        path: 'technical-details',
-        component: TechnicalDetails,
-        data: { title: 'Technical Details' },
+        path: 'systeminfo',
+        component: SystemInfo,
+        data: { title: 'System Info' },
       },
     ],
   },

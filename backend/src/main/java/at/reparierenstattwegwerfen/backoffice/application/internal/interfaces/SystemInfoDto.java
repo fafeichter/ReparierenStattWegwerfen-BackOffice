@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class AppInfoDto {
+public class SystemInfoDto {
 	private String springBootVersion;
 	private String springVersion;
 	private String[] springActiveProfiles;
