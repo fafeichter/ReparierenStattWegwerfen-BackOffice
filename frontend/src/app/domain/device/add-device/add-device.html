@@ -1,9 +1,9 @@
-<button (click)="modalOpened.set(true)" class="btn btn-primary">
+<button (click)="modalOpen.set(true)" class="btn btn-primary">
   <cds-icon shape="plus"/>
   Add device
 </button>
 
-<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="xl">
+<clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="xl">
   <div class="modal-title">Add device</div>
   <div class="modal-body">
     <form (ngSubmit)="addDevice()" [formGroup]="form" clrForm>
@@ -76,7 +76,7 @@
     }
 
     <div class="modal-footer">
-      <button (click)="modalOpened.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+      <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
       <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting() || isLoadingModel()"
               class="btn btn-primary"
               type="submit">

@@ -54,7 +54,7 @@ export class Repair implements OnInit {
     return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
   });
 
-  modalOpened = signal<boolean>(false);
+  modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
 
   sparePartEditModeActive = signal<boolean>(false);
@@ -110,7 +110,7 @@ export class Repair implements OnInit {
       this.deviceDefects.update(() => {
         this.defectsForm.reset();
         this.isSubmitting.set(false);
-        this.modalOpened.set(false);
+        this.modalOpen.set(false);
 
         return {
           reportedDefect: defects.reportedDefect,

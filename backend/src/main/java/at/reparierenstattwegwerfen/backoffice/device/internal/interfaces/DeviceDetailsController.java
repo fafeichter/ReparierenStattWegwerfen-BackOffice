@@ -2,7 +2,7 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.interfaces;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.buying.DeviceBuyingDetailsService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.DeviceDefectDetailsService;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceBuyingDetailsDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceSellingDetailsDto;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeviceDetailsController {
 
 	private final DeviceBuyingDetailsService buyingDetailsService;
-	private final DeviceSellingDetailsService sellingDetailsService;
+	private final DeviceSellingService sellingDetailsService;
 	private final DeviceDefectDetailsService defectDetailsService;
 
 	@GetMapping("/buying")

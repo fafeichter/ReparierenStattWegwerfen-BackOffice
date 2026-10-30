@@ -3,17 +3,13 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.DeviceRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceSold;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceSellingDetailsDto;
-import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
+import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceSellingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionPhase;
-import org.springframework.transaction.event.TransactionalEventListener;
-
-import java.time.LocalDate;
 
 /**
  * @author Fabian Feichter
@@ -21,7 +17,7 @@ import java.time.LocalDate;
  */
 @Service
 @RequiredArgsConstructor
-public class DeviceSellingDetailsService {
+public class DeviceSellingService {
 
 	private final DeviceRepository deviceRepository;
 	private final BusinessPartnerDetailsService businessPartnerDetailsService;
@@ -38,20 +34,27 @@ public class DeviceSellingDetailsService {
 			.build();
 	}
 
-	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-	public void setDeviceSellingDate(DeviceSold event) {
-		Device device = deviceRepository.getById(event.getDeviceId());
+	@Transactional
+	public void setSellingDetails(Integer deviceId, DeviceSellingDto sellingDto, UserDetails actor) {
+		Device device = deviceRepository.getById(deviceId);
 
-		LocalDate sellingDate = LocalDate.now();
-		device.setSellingDate(sellingDate);
+		device.setSellingDate(sellingDto.getSellingDate());
+		device.setSellingPrice(sellingDto.getSellingPrice());
 		deviceRepository.save(device);
 
 		DeviceSellingDateChanged sellingDateChangedEvent = DeviceSellingDateChanged.builder()
 			.source(this)
-			.actor(SystemUser.get())
-			.deviceId(event.getDeviceId())
-			.sellingDate(sellingDate)
+			.actor(actor)
+			.deviceId(deviceId)
+			.sellingDate(sellingDto.getSellingDate())
+			.build();
+		DeviceSellingPriceChanged sellingPriceChangedEvent = DeviceSellingPriceChanged.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.sellingPrice(sellingDto.getSellingPrice())
 			.build();
 		events.publishEvent(sellingDateChangedEvent);
+		events.publishEvent(sellingPriceChangedEvent);
 	}
 }

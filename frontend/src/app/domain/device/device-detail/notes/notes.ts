@@ -36,7 +36,7 @@ export class Notes implements OnInit {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
   deviceNotes = signal<DeviceNoteDto[]>([]);
-  modalOpened = signal<boolean>(false);
+  modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
   form = new FormGroup({
     text: new FormControl<string | null>(null, [Validators.required]),
@@ -46,7 +46,7 @@ export class Notes implements OnInit {
   constructor() {
     // Automatically reset the form whenever the modal opens
     effect(() => {
-      if (this.modalOpened()) {
+      if (this.modalOpen()) {
         this.form.reset();
       }
     });
@@ -60,7 +60,7 @@ export class Notes implements OnInit {
     this.notesApi
       .addDeviceNote(this.deviceId(), this.form.controls.text.value || '')
       .subscribe(() => {
-        this.modalOpened.set(false);
+        this.modalOpen.set(false);
         this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => {
           this.deviceNotes.set(data);
         });

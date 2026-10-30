@@ -18,12 +18,7 @@ import {
   ClrTooltipModule,
 } from '@clr/angular';
 
-import {
-  Alternative,
-  ModelControllerService,
-  ModelResolutionControllerService,
-  ResolvedModelMatch,
-} from '@api/model';
+import { Alternative, ModelResolutionControllerService, ResolvedModelMatch } from '@api/model';
 import {
   BusinessPartnerPlaceholderDto,
   CreateNewDeviceDto,
@@ -53,7 +48,7 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
 export class AddDevice {
   @ViewChild('input') urlInput!: ElementRef<HTMLInputElement>;
 
-  modalOpened = signal<boolean>(false);
+  modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
   isLoadingModel = signal<boolean>(false);
   found = signal<ResolvedModelMatch | undefined>(undefined);
@@ -82,14 +77,13 @@ export class AddDevice {
     ]),
   });
 
-  private modelApi = inject(ModelControllerService);
   private deviceCreationApi = inject(DeviceCreationControllerService);
   private modelResolutionApi = inject(ModelResolutionControllerService);
   private router = inject(Router);
 
   constructor() {
     effect(() => {
-      if (this.modalOpened()) {
+      if (this.modalOpen()) {
         this.resetFormState();
         // Uses standard frame animation timing instead of arbitrary magic numbers
         requestAnimationFrame(() => this.urlInput?.nativeElement.focus());

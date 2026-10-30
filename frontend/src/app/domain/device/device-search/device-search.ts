@@ -10,9 +10,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ClrCommonFormsModule, ClrIcon, ClrInputModule } from '@clr/angular';
-import { SerialNumber } from '../device-detail/base/serial-number';
 import { Router } from '@angular/router';
 import { DeviceSearchControllerService } from '@api/device';
+import { SerialNumber } from '../serial-number';
 
 @Component({
   imports: [

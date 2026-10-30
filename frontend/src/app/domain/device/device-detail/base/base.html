@@ -112,7 +112,7 @@
           </button>
         } @else {
           <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm clrLayout="vertical">
-            <select (change)="statusFormRef.requestSubmit()" formControlName="newStatusId">
+            <select (change)="statusFormRef.requestSubmit(); statusSelected($event)" formControlName="newStatusId">
               @for (deviceStatus of deviceStatus(); track deviceStatus.id) {
                 @if (deviceStatus.id === 7) {
                   <hr>
@@ -291,3 +291,5 @@
     </dl>
   </div>
 </clr-card>
+
+<app-selling-modal [deviceId]="deviceId()" [modalOpen]="statusSellingModeActive()"/>

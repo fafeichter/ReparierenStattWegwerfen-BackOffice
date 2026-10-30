@@ -89,8 +89,9 @@ VALUES (1, 'Erstellt'),
        (17, 'Notiz gelöscht'),
        (18, 'Ersatzteil hinzugefügt'),
        (19, 'Ersatzteil gelöscht'),
-       (20, 'Verkäufer eingetragen'),
+       (20, 'Verkäufer geändert'),
        (21, 'Käufer eingetragen'),
        (22, 'Angegebenen Defekt bestätigt'),
        (23, 'Angegebenen Defekt nicht bestätigt'),
-       (24, 'Rechnungsnummer zugewiesen');
+       (24, 'Rechnungsnummer zugewiesen'),
+       (25, 'Verkaufspreis geändert');

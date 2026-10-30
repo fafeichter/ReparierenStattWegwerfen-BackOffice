@@ -48,7 +48,7 @@ export class Selling implements OnInit {
   deviceAccessories = signal<DeviceSellingAccessoriesDto | undefined>(undefined);
   invoiceNumber = signal<number | undefined>(undefined);
 
-  modalOpened = signal<boolean>(false);
+  modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
 
   accessoriesForm = new FormGroup({
@@ -102,7 +102,7 @@ export class Selling implements OnInit {
         this.deviceAccessories.update(() => {
           this.accessoriesForm.reset();
           this.isSubmitting.set(false);
-          this.modalOpened.set(false);
+          this.modalOpen.set(false);
 
           return {
             charger: deviceAccessories.charger,

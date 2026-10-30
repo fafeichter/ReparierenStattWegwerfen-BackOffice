@@ -41,7 +41,7 @@
       <dt>
       </dt>
       <dd>
-        <button (click)="modalOpened.set(true)" class="btn btn-link">
+        <button (click)="modalOpen.set(true)" class="btn btn-link">
           <cds-icon shape="edit"/>
           Edit
         </button>
@@ -91,7 +91,7 @@
   </div>
 </clr-card>
 
-<clr-modal [(clrModalOpen)]="modalOpened" [clrModalStaticBackdrop]="false" clrModalSize="s">
+<clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="s">
   <div class="modal-title">Set selling accessories</div>
   <div class="modal-body">
     <form (ngSubmit)="updateAccessories()" [formGroup]="accessoriesForm" clrForm>
@@ -112,7 +112,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button (click)="modalOpened.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
     <button (click)="updateAccessories()" [disabled]="accessoriesForm.invalid || isSubmitting()"
             class="btn btn-primary"
             type="submit">

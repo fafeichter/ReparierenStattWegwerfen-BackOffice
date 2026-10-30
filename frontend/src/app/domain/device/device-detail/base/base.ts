@@ -38,8 +38,9 @@ import {
   ModelStorageControllerService,
   ModelUnifiedMemoryControllerService,
 } from '@api/model';
-import { SerialNumber } from './serial-number';
 import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { SerialNumber } from '../../serial-number';
+import { SellingModal } from '../selling/selling-modal/selling-modal';
 
 @Component({
   selector: 'app-base',
@@ -57,6 +58,7 @@ import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrolls
     ClrAlertModule,
     ClrCardModule,
     SerialNumber,
+    SellingModal,
   ],
   templateUrl: './base.html',
   styleUrl: './base.css',
@@ -77,6 +79,7 @@ export class Base implements OnInit {
   statusEditModeActive = signal<boolean>(false);
   tagEditModeActive = signal<boolean>(false);
   availableDeviceTags = signal<NamedIdDto[]>([]);
+  statusSellingModeActive = signal<boolean>(false);
 
   serialNumberEditModeActive = signal<boolean>(false);
   batteryEditModeActive = signal<boolean>(false);
@@ -423,6 +426,16 @@ export class Base implements OnInit {
           };
         });
       });
+    }
+  }
+
+  statusSelected($event: Event) {
+    const selectedId = Number(($event.target as HTMLSelectElement).value);
+
+    if (selectedId === 6) {
+      this.statusSellingModeActive.set(true);
+    } else {
+      this.statusSellingModeActive.set(false);
     }
   }
 
