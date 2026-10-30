@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.domain.invoice;
+package at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling;
 
 import at.reparierenstattwegwerfen.backoffice.accounting.AccountingInvoiceService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
@@ -18,14 +18,14 @@ import org.springframework.transaction.event.TransactionalEventListener;
  */
 @Service
 @RequiredArgsConstructor
-public class DeviceInvoiceService {
+public class DeviceSellingInvoiceService {
 
 	private final DeviceRepository deviceRepository;
 	private final AccountingInvoiceService accountingInvoiceService;
 	private final ApplicationEventPublisher events;
 
 	@Transactional(readOnly = true)
-	public Integer getDeviceSaleInvoiceNumber(Integer deviceId) {
+	public Integer getDeviceSellingInvoiceNumber(Integer deviceId) {
 		return deviceRepository.getById(deviceId).getInvoiceNumber();
 	}
 
@@ -39,13 +39,13 @@ public class DeviceInvoiceService {
 
 			deviceRepository.save(device);
 
-			DeviceInvoiceNumberAssigned deviceInvoiceNumberAssignedEvent = DeviceInvoiceNumberAssigned.builder()
+			DeviceSellingInvoiceNumberAssigned deviceSellingInvoiceNumberAssignedEvent = DeviceSellingInvoiceNumberAssigned.builder()
 				.source(this)
 				.actor(SystemUser.get())
 				.deviceId(event.getDeviceId())
 				.invoiceNumber(nextInvoiceNumber)
 				.build();
-			events.publishEvent(deviceInvoiceNumberAssignedEvent);
+			events.publishEvent(deviceSellingInvoiceNumberAssignedEvent);
 		}
 	}
 }

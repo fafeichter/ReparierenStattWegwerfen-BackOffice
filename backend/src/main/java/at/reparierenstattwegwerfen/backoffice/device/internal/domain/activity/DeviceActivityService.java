@@ -12,11 +12,11 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.defects.Dev
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.DeviceGradeRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.hardware.*;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.invoice.DeviceInvoiceNumberAssigned;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteAdded;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteDeleted;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingDateChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingInvoiceNumberAssigned;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSparePartAdded;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSparePartDeleted;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSpareParts;
@@ -325,7 +325,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void on(DeviceInvoiceNumberAssigned event) {
+	public void on(DeviceSellingInvoiceNumberAssigned event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
 		deviceActivity.setName(String.valueOf(event.getInvoiceNumber()));
 		deviceActivity.setDeviceId(event.getDeviceId());

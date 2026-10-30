@@ -5,41 +5,6 @@
   </clr-card-header>
   <div class="card-block">
     <dl>
-      <dt>Price</dt>
-      <dd>
-        {{ deviceSelling()?.price | currency:'EUR':'symbol':'1.2-2' | orElse }}
-      </dd>
-      <dt>Buyer</dt>
-      <dd>
-        @if (deviceSelling()?.buyer) {
-          <a [routerLink]="['/businesspartners', deviceSelling()?.buyer?.id]">
-            {{ deviceSelling()?.buyer?.name }}
-          </a>
-        } @else {
-          -
-          <button
-            [queryParams]="{ 'device-id':  deviceId()}"
-            [routerLink]="['/businesspartners/create']"
-            class="btn btn-link ml-1! mr-2!">
-            <cds-icon shape="pop-out"/>
-            Add
-          </button>
-          |
-          <button
-            (click)="setBuyerToAsgoodasnew()"
-            class="btn btn-link ml-2!">
-            Sell to asgoodasnew
-          </button>
-        }
-      </dd>
-      <dt>Date</dt>
-      <dd>
-        {{ deviceSelling()?.date | date:'dd.MM.yyyy' | orElse }}
-      </dd>
-    </dl>
-    <hr>
-
-    <dl>
       <dt>Charger included</dt>
       <dd>
         @if (deviceAccessories()?.charger !== null) {
@@ -80,6 +45,47 @@
           <cds-icon shape="edit"/>
           Edit
         </button>
+      </dd>
+    </dl>
+    <hr>
+    <dl>
+      <dt>Date</dt>
+      <dd>
+        {{ deviceSelling()?.date | date:'dd.MM.yyyy' | orElse }}
+      </dd>
+      <dt>Price</dt>
+      <dd>
+        {{ deviceSelling()?.price | currency:'EUR':'symbol':'1.2-2' | orElse }}
+      </dd>
+      <dt>Buyer</dt>
+      <dd>
+        @if (deviceSelling()?.buyer) {
+          <a [routerLink]="['/businesspartners', deviceSelling()?.buyer?.id]">
+            {{ deviceSelling()?.buyer?.name }}
+          </a>
+        } @else {
+          -
+          <button
+            [queryParams]="{ 'device-id':  deviceId()}"
+            [routerLink]="['/businesspartners/create']"
+            class="btn btn-link ml-1! mr-2!">
+            <cds-icon shape="pop-out"/>
+            Add
+          </button>
+          |
+          <button
+            (click)="setBuyerToAsgoodasnew()"
+            class="btn btn-link ml-2!">
+            Sell to asgoodasnew
+          </button>
+        }
+      </dd>
+    </dl>
+    <hr>
+    <dl>
+      <dt>Invoice number</dt>
+      <dd>
+        {{ invoiceNumber() | orElse }}
       </dd>
     </dl>
   </div>

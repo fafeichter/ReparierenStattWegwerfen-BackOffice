@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice.device.internal.domain.invoice;
+package at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.AbstractDeviceActivityEvent;
 import lombok.Builder;
@@ -10,12 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @since 28.10.2026
  */
 @Getter
-public class DeviceInvoiceNumberAssigned extends AbstractDeviceActivityEvent {
+public class DeviceSellingInvoiceNumberAssigned extends AbstractDeviceActivityEvent {
 
 	final Integer invoiceNumber;
 
 	@Builder
-	public DeviceInvoiceNumberAssigned(Object source, UserDetails actor, Integer deviceId, Integer invoiceNumber) {
+	public DeviceSellingInvoiceNumberAssigned(Object source, UserDetails actor, Integer deviceId, Integer invoiceNumber) {
 		super(source, deviceId, actor);
 		this.invoiceNumber = invoiceNumber;
 	}

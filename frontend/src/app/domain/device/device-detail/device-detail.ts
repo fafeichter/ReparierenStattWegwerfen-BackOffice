@@ -23,7 +23,6 @@ import { Buying } from './buying/buying';
 import { map } from 'rxjs';
 import { TitleFn } from '../../../layout/route-title.service';
 import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
-import { Invoice } from './invoice/invoice';
 
 export const deviceTitle: TitleFn = (route) => {
   const deviceId = route.paramMap.get('deviceId')!;
@@ -57,7 +56,6 @@ export const deviceTitle: TitleFn = (route) => {
     ClrTabsModule,
     ClrMainContainerModule,
     Scrollspy,
-    Invoice,
   ],
   templateUrl: './device-detail.html',
   styleUrl: './device-detail.css',
@@ -71,7 +69,6 @@ export class DeviceDetail {
     { id: 'buying', label: 'Buying', icon: 'user' },
     { id: 'repair', label: 'Repair', icon: 'wrench' },
     { id: 'selling', label: 'Selling', icon: 'tag' },
-    { id: 'invoice', label: 'Invoice', icon: 'pdf-file' },
     { id: 'notes', label: 'Notes', icon: 'note' },
     { id: 'activity', label: 'Activity', icon: 'timeline' },
   ];

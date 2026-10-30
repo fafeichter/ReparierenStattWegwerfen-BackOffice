@@ -16,6 +16,7 @@ import {
   DeviceSellingAccessoriesDto,
   DeviceSellingAccessoriesFormDto,
   DeviceSellingDetailsDto,
+  DeviceSellingInvoiceControllerService,
 } from '@api/device';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -45,6 +46,7 @@ export class Selling implements OnInit {
 
   deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
   deviceAccessories = signal<DeviceSellingAccessoriesDto | undefined>(undefined);
+  invoiceNumber = signal<number | undefined>(undefined);
 
   modalOpened = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -55,9 +57,10 @@ export class Selling implements OnInit {
     originalPackaging: new FormControl<boolean | null>(null, [Validators.required]),
   });
 
-  private api = inject(DeviceDetailsControllerService);
+  private deviceApi = inject(DeviceDetailsControllerService);
   private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
-  private accessoriesApi = inject(DeviceSellingAccessoriesControllerService);
+  private deviceAccessoriesApi = inject(DeviceSellingAccessoriesControllerService);
+  private deviceInvoiceApi = inject(DeviceSellingInvoiceControllerService);
 
   constructor() {
     effect(() => {
@@ -73,12 +76,17 @@ export class Selling implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api
+    this.deviceApi
       .getDeviceSellingDetails(this.deviceId())
       .subscribe((data) => this.deviceSelling.set(data));
-    this.accessoriesApi.getSellingAccessories(this.deviceId()).subscribe((data) => {
+    this.deviceAccessoriesApi.getSellingAccessories(this.deviceId()).subscribe((data) => {
       this.deviceAccessories.set(data);
     });
+    this.deviceInvoiceApi
+      .getDeviceSellingInvoiceNumber(this.deviceId())
+      .subscribe((saleInvoiceNumber) => {
+        this.invoiceNumber.set(saleInvoiceNumber);
+      });
   }
 
   protected updateAccessories() {
@@ -88,7 +96,7 @@ export class Selling implements OnInit {
       originalPackaging: this.accessoriesForm.controls.originalPackaging.value!,
     };
 
-    this.accessoriesApi
+    this.deviceAccessoriesApi
       .updateSellingAccessories(this.deviceId(), deviceAccessories)
       .subscribe(() => {
         this.deviceAccessories.update(() => {
