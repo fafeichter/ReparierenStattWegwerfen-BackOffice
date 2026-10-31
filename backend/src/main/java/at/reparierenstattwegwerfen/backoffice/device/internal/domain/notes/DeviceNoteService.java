@@ -34,7 +34,7 @@ public class DeviceNoteService {
 	}
 
 	@Transactional
-	public void add(Integer deviceId, String text, UserDetails actor) {
+	public void addNote(Integer deviceId, String text, UserDetails actor) {
 		DeviceNote note = new DeviceNote();
 		note.setDeviceId(deviceId);
 		note.setText(text);
@@ -52,7 +52,23 @@ public class DeviceNoteService {
 	}
 
 	@Transactional
-	public void delete(Integer deviceId, Integer oldDeviceNoteId, UserDetails actor) {
+	public void editNote(Integer deviceId, Integer deviceNoteId, String noteNewText, UserDetails actor) {
+		DeviceNote note = deviceNoteRepository.getById(deviceNoteId);
+		note.setText(noteNewText);
+		deviceNoteRepository.save(note);
+
+		DeviceNoteEdited noteEditedEvent = DeviceNoteEdited.builder()
+			.source(this)
+			.actor(actor)
+			.deviceId(deviceId)
+			.noteId(deviceNoteId)
+			.noteNewText(noteNewText)
+			.build();
+		events.publishEvent(noteEditedEvent);
+	}
+
+	@Transactional
+	public void deleteNote(Integer deviceId, Integer oldDeviceNoteId, UserDetails actor) {
 		String oldDeviceNoteText = deviceNoteRepository.getById(oldDeviceNoteId).getName();
 		deviceNoteRepository.deleteById(oldDeviceNoteId);
 

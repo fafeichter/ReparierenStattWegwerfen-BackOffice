@@ -94,4 +94,5 @@ VALUES (1, 'Erstellt'),
        (22, 'Angegebenen Defekt bestätigt'),
        (23, 'Angegebenen Defekt nicht bestätigt'),
        (24, 'Rechnungsnummer zugewiesen'),
-       (25, 'Verkaufspreis geändert');
+       (25, 'Verkaufspreis geändert'),
+       (26, 'Notiz geändert');

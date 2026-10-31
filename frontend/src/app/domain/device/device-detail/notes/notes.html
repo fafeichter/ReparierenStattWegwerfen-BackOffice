@@ -14,9 +14,15 @@
       <tbody>
         @for (note of deviceNotes(); track note.noteId) {
           <tr>
-            <td class="left">{{ note.text }}
-              <button (click)="deleteNote(note.noteId)" class="btn btn-link btn-icon" type="button">
+            <td class="left">
+              {{ note.text }}
+              <button (click)="activateEditMode(note.noteId)" class="btn btn-link btn-icon" type="button">
+                <clr-icon shape="pencil" size="xs"/>
+                Edit
+              </button>
+              <button (click)="deleteNote(note.noteId)" class="btn btn-link btn-icon ml-1!" type="button">
                 <clr-icon shape="trash" size="xs"/>
+                Delete
               </button>
             </td>
             <td class="right">{{ note.date | date:'dd.MM.yyyy HH:mm:ss' }}</td>
@@ -57,6 +63,33 @@
           <span class="spinner spinner-inline"></span>
         }
         {{ isSubmitting() ? 'Adding...' : 'Add' }}
+      </button>
+    </div>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="modalEditOpen" [clrModalStaticBackdrop]="false" clrModalSize="l">
+  <div class="modal-title">Edit note</div>
+  <div class="modal-body">
+    <form (ngSubmit)="editNote()" [formGroup]="form" clrForm>
+      <clr-textarea-container>
+        <label><span class="clr-required-mark">Text</span></label>
+        <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="2"></textarea>
+        @if (form.controls.text.hasError('required')) {
+          <clr-control-error>Text is required.</clr-control-error>
+        }
+      </clr-textarea-container>
+    </form>
+
+    <div class="modal-footer mt-4">
+      <button (click)="modalEditOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+      <button (click)="editNote()" [disabled]="form.invalid || isSubmitting()"
+              class="btn btn-primary"
+              type="submit">
+        @if (isSubmitting()) {
+          <span class="spinner spinner-inline"></span>
+        }
+        {{ isSubmitting() ? 'Editing...' : 'Edit' }}
       </button>
     </div>
   </div>

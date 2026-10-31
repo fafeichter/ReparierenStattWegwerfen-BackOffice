@@ -37,6 +37,8 @@ export class Notes implements OnInit {
   navItem = input.required<NavItem>();
   deviceNotes = signal<DeviceNoteDto[]>([]);
   modalOpen = signal<boolean>(false);
+  modalEditOpen = signal<boolean>(false);
+  noteIdInEditMode = signal<number | undefined>(undefined);
   isSubmitting = signal<boolean>(false);
   form = new FormGroup({
     text: new FormControl<string | null>(null, [Validators.required]),
@@ -48,6 +50,10 @@ export class Notes implements OnInit {
     effect(() => {
       if (this.modalOpen()) {
         this.form.reset();
+      }
+      if (this.modalEditOpen()) {
+        this.form.reset();
+        this.noteIdInEditMode.set(undefined);
       }
     });
   }
@@ -75,5 +81,30 @@ export class Notes implements OnInit {
         });
       });
     }
+  }
+
+  activateEditMode(noteId: number) {
+    this.modalEditOpen.set(true);
+    this.noteIdInEditMode.set(noteId);
+    const note = this.deviceNotes().find((note) => note.noteId === noteId);
+    this.form.patchValue({
+      text: note!.text,
+    });
+  }
+
+  editNote() {
+    this.notesApi
+      .editDeviceNote(
+        this.deviceId(),
+        this.noteIdInEditMode()!,
+        this.form.controls.text.value || '',
+      )
+      .subscribe(() => {
+        this.modalEditOpen.set(false);
+        this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => {
+          this.modalEditOpen.set(false);
+          this.deviceNotes.set(data);
+        });
+      });
   }
 }
