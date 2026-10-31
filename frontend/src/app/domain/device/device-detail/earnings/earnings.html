@@ -1,0 +1,15 @@
+<div class="mt-3 inline-flex items-center gap-3 rounded bg-slate-50 px-4 py-2 shadow-sm border border-slate-200">
+  <cds-icon class="flex w-5 h-5 shrink-0 items-center justify-center" shape="calculator"></cds-icon>
+  <div class="flex flex-col">
+    <span class=" font-medium text-slate-500">
+      @if (earnings() >= 0) {
+        Gewinn
+      } @else {
+        Verlust
+      }
+    </span>
+    <span class="text-base font-bold leading-tight text-{{ earnings() >= 0 ? 'green' : 'red' }}-800">
+      {{ earnings() | currency:'EUR':'symbol':'1.2-2' }}
+    </span>
+  </div>
+</div>

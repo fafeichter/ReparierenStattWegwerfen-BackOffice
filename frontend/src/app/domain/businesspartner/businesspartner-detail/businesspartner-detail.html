@@ -3,7 +3,9 @@
     ← Back
   </button>
 }
-<app-scrollspy [items]="navItems"/>
+<app-page-sidebar>
+  <app-scrollspy [items]="navItems"/>
+</app-page-sidebar>
 <div class="clr-row">
   <div class="clr-col-lg-7 clr-col-md-10 clr-col-12">
     <app-contact [businessPartnerId]="businessPartnerId()" [navItem]="navItems[0]"/>

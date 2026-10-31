@@ -9,6 +9,7 @@ import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
 import { BusinessPartnerControllerService } from '@api/businesspartner';
 import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
+import { PageSidebar } from '../../../clarity-addons/components/page-sidebar/page-sidebar';
 
 export const businessPartnerTitle: TitleFn = (route) => {
   const businessPartnerId = route.paramMap.get('businessPartnerId')!;
@@ -30,6 +31,7 @@ export const businessPartnerTitle: TitleFn = (route) => {
     Activity,
     ClrVerticalNavModule,
     Scrollspy,
+    PageSidebar,
   ],
   templateUrl: './businesspartner-detail.html',
   styleUrl: './businesspartner-detail.css',

@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
 import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
+import { PageSidebar } from '../../../clarity-addons/components/page-sidebar/page-sidebar';
 
 export const modelTitle: TitleFn = (route) => {
   const modelId = route.paramMap.get('modelId')!;
@@ -32,7 +33,15 @@ interface SizeAvailability {
 
 @Component({
   selector: 'app-model-detail',
-  imports: [ClrLabel, ClrIcon, DatePipe, ClrVerticalNavModule, Scrollspy, ClrCardModule],
+  imports: [
+    ClrLabel,
+    ClrIcon,
+    DatePipe,
+    ClrVerticalNavModule,
+    Scrollspy,
+    ClrCardModule,
+    PageSidebar,
+  ],
   templateUrl: './model-detail.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './model-detail.css',

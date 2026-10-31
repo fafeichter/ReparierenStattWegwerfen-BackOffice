@@ -1,4 +1,7 @@
-<app-scrollspy [items]="navItems"/>
+<app-page-sidebar>
+  <app-scrollspy [items]="navItems"/>
+  <app-earnings [deviceId]="deviceId()"/>
+</app-page-sidebar>
 
 <div class="clr-row">
   <div class="clr-col-lg-8 clr-col-md-10 clr-col-12">

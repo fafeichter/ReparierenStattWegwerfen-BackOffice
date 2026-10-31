@@ -1,0 +1,11 @@
+div {
+  position: sticky;
+  height: min-content;
+  padding-top: var(--clr-base-vertical-offset-2xl);
+  padding-right: var(--clr-base-vertical-offset-2xl);
+  scroll-target-group: auto;
+
+  @media (min-width: 768px) {
+    top: 0;
+  }
+}
