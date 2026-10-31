@@ -8,7 +8,7 @@
         Verlust
       }
     </span>
-    <span class="text-base font-bold leading-tight text-{{ earnings() >= 0 ? 'green' : 'red' }}-800">
+    <span [class]="earnings() >= 0 ? 'text-green-800' : 'text-red-800'" class="text-base font-bold leading-tight">
       {{ earnings() | currency:'EUR':'symbol':'1.2-2' }}
     </span>
   </div>
