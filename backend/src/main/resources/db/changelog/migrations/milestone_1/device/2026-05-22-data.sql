@@ -12,7 +12,8 @@ VALUES (1, 'Grade A', 'Wie neu', 'Makelloser Zustand ohne Gebrauchsspuren', 1),
         'Sehr guter Zustand mit minimalen, kaum sichtbaren Gebrauchsspuren', 2),
        (3, 'Grade C', 'Mehrere leichte Kratzer und/oder normale Abnutzungen',
         'Guter Zustand mit mehreren leichten Kratzern oder normalen Abnutzungen', 3),
-       (4, 'Grade D', 'Tiefere Kratzer oder Kerben', 'Deutliche Gebrauchsspuren wie tiefere Kratzer oder Kerben', 4);
+       (4, 'Grade D', 'Stark sichtbare Kratzer oder Kerben', 'Deutliche Gebrauchsspuren wie starke Kratzer oder Kerben',
+        4);
 
 INSERT INTO device_status_classification (device_status_classification_id, name)
 VALUES (1, 'common'),
