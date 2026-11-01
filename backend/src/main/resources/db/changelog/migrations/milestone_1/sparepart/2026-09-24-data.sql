@@ -18,7 +18,9 @@ VALUES (1, 'LCD Panel', 1),
        (14, 'Touch ID', 14),
        (15, 'Audio Jack', 15),
        (16, 'Hard Buttons', 16),
-       (17, 'Schrauben', 17);
+       (17, 'Schrauben', 17),
+       (18, 'apfelgenie Robert Majowski (Dienstleistung)', 18),
+       (19, 'MacRepairGuy (Dienstleistung)', 19);
 
 INSERT INTO spare_part_available_model_series (spare_part_available_model_series_id, spare_part_id, model_series_id)
 VALUES (1, 1, 1),
@@ -78,4 +80,14 @@ VALUES (1, 1, 1),
        (55, 17, 2),
        (56, 17, 3),
        (57, 17, 4),
-       (58, 17, 5);
+       (58, 17, 5),
+       (59, 18, 1),
+       (60, 18, 2),
+       (61, 18, 3),
+       (62, 18, 4),
+       (63, 18, 5),
+       (64, 19, 1),
+       (65, 19, 2),
+       (66, 19, 3),
+       (67, 19, 4),
+       (68, 19, 5);
