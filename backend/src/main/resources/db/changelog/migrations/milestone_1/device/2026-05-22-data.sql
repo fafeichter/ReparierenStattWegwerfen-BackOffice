@@ -40,7 +40,8 @@ VALUES (1, 'Activation Lock', 1),
        (3, 'QWERTY Tastaturlayout', 3),
        (4, 'Tastaturlayout auf QWERTZ umgebaut', 4),
        (5, 'Retoure', 5),
-       (6, 'Gewährleistungs-Fall', 6);
+       (6, 'Gewährleistungs-Fall', 6),
+       (7, 'Aus Numbers importiert', 7);
 
 INSERT INTO device_tag_available_model_series (device_tag_available_model_series_id, device_tag_id, model_series_id)
 VALUES (1, 1, 1),
