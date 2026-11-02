@@ -19,8 +19,10 @@ VALUES (1, 'LCD Panel', 1),
        (15, 'Audio Jack', 15),
        (16, 'Hard Buttons', 16),
        (17, 'Schrauben', 17),
-       (18, 'apfelgenie Robert Majowski (Dienstleistung)', 18),
-       (19, 'MacRepairGuy (Dienstleistung)', 19);
+       (18, 'Display Gasket', 18),
+       (19, 'LCD Screen Cable', 19),
+       (20, 'apfelgenie Robert Majowski (Dienstleistung)', 20),
+       (21, 'MacRepairGuy (Dienstleistung)', 21);
 
 INSERT INTO spare_part_available_model_series (spare_part_available_model_series_id, spare_part_id, model_series_id)
 VALUES (1, 1, 1),
