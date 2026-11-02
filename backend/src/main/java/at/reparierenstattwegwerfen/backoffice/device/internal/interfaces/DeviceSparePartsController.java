@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.interfaces;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSparePartService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSparePartsService;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.CreateDeviceSparePartDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceSparePartDto;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
@@ -21,27 +21,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DeviceSparePartsController {
 
-	private final DeviceSparePartService deviceSparePartService;
+	private final DeviceSparePartsService deviceSparePartsService;
 
 	@GetMapping("/")
 	public List<DeviceSparePartDto> getDeviceSpareParts(@PathVariable Integer deviceId) {
-		return deviceSparePartService.load(deviceId);
+		return deviceSparePartsService.load(deviceId);
 	}
 
 	@GetMapping("/available")
 	public List<NamedIdDto> getAvailableSparePartsForDevice(@PathVariable Integer deviceId) {
-		return deviceSparePartService.getAvailableSparePartsForDevice(deviceId);
+		return deviceSparePartsService.getAvailableSparePartsForDevice(deviceId);
 	}
 
 	@PostMapping("/")
 	public void addDeviceSparePart(@PathVariable Integer deviceId, @Valid @RequestBody CreateDeviceSparePartDto newDeviceSparePartDto,
 								   @AuthenticationPrincipal UserDetails currentUser) {
-		deviceSparePartService.addDeviceSparePart(deviceId, newDeviceSparePartDto, currentUser);
+		deviceSparePartsService.addDeviceSparePart(deviceId, newDeviceSparePartDto, currentUser);
 	}
 
 	@DeleteMapping("/{deviceSparePartId}")
 	public void deleteDeviceSparePart(@PathVariable Integer deviceId, @PathVariable Integer deviceSparePartId,
 									  @AuthenticationPrincipal UserDetails currentUser) {
-		deviceSparePartService.deleteDeviceSparePart(deviceId, deviceSparePartId, currentUser);
+		deviceSparePartsService.deleteDeviceSparePart(deviceId, deviceSparePartId, currentUser);
 	}
 }

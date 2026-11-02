@@ -19,10 +19,10 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.Devic
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingDateChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingInvoiceNumberAssigned;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingPriceChanged;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePart;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePartRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSparePartAdded;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSparePartDeleted;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSpareParts;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSparePartsRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagAdded;
@@ -70,7 +70,7 @@ public class DeviceActivityService {
 	private final ModelUnifiedMemoryDetailsService modelUnifiedMemoryDetailsService;
 	private final ModelColorDetailsService modelColorDetailsService;
 	private final ModelStorageDetailsService modelStorageDetailsService;
-	private final DeviceSparePartsRepository deviceSparePartsRepository;
+	private final DeviceInstalledSparePartRepository deviceInstalledSparePartRepository;
 	private final SparePartService sparePartService;
 	private final BusinessPartnerDetailsService businessPartnerDetailsService;
 
@@ -282,9 +282,9 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSparePartAdded event) {
 		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
-		DeviceSpareParts deviceSpareParts = deviceSparePartsRepository.getById(event.getDeviceSparePartId());
-		Price sparePartPriceNetto = new Price(deviceSpareParts.getPriceNetto());
-		deviceActivity.setName(sparePartService.getSparePartById(deviceSpareParts.getSparePartId()).name() + " / " +
+		DeviceInstalledSparePart deviceInstalledSparePart = deviceInstalledSparePartRepository.getById(event.getDeviceSparePartId());
+		Price sparePartPriceNetto = new Price(deviceInstalledSparePart.getPriceNetto());
+		deviceActivity.setName(sparePartService.getSparePartById(deviceInstalledSparePart.getSparePartId()).name() + " / " +
 			sparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(18));

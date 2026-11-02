@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceSpareParts {
+public class DeviceInstalledSparePart {
 
 	private Integer id;
 	private Integer deviceId;

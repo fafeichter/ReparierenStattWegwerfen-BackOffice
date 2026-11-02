@@ -1,7 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.earnings;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceSpareParts;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePart;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DeviceEarning {
 
 	private final Device device;
-	private final List<DeviceSpareParts> spareParts;
+	private final List<DeviceInstalledSparePart> spareParts;
 
 	public Double getProfitOrLoss() {
 		if (device.getSellingPrice() == null) {
@@ -23,7 +23,7 @@ public class DeviceEarning {
 			double rohDifferenz = device.getSellingPrice() - device.getPurchasePrice();
 			double ust = rohDifferenz * 20 / 120;
 			double sparePartsNetto = spareParts.stream()
-				.mapToDouble(DeviceSpareParts::getPriceNetto)
+				.mapToDouble(DeviceInstalledSparePart::getPriceNetto)
 				.sum();
 
 			return rohDifferenz - ust - sparePartsNetto;

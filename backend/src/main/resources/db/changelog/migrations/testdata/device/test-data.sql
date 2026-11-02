@@ -208,8 +208,9 @@ VALUES (1, 2, '10€ Preisreduktion gemacht weil MagSafe Kabel gefehlt hat.', '2
        (8, 6, 'Hat QWERTY Layout -> umgebaut', '2026-09-30 16:48:28.835514', '2026-09-30 14:48:28.835613',
         '2026-09-30 14:48:28.835613');
 
-INSERT INTO device_spare_parts (device_spare_part_id, device_id, spare_part_id, price_netto, date, created_at,
-                                updated_at)
+INSERT INTO device_installed_spare_part (device_installed_spare_part_id, device_id, spare_part_id, price_netto, date,
+                                         created_at,
+                                         updated_at)
 VALUES (1, 2, 1, 87.65, '2026-09-30 15:47:43.091064', '2026-09-30 13:47:43.091668', '2026-09-30 13:47:43.091668'),
        (2, 3, 1, 114.80, '2026-09-30 15:49:52.209737', '2026-09-30 13:49:52.209437', '2026-09-30 13:49:52.209437'),
        (3, 4, 7, 87.18, '2026-09-30 16:42:03.074792', '2026-09-30 14:42:03.075713', '2026-09-30 14:42:03.075713'),

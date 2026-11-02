@@ -25,9 +25,9 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
  */
 @Service
 @RequiredArgsConstructor
-public class DeviceSparePartService {
+public class DeviceSparePartsService {
 
-	private final DeviceSparePartsRepository deviceSparePartsRepository;
+	private final DeviceInstalledSparePartRepository deviceInstalledSparePartRepository;
 	private final SparePartService sparePartService;
 	private final DeviceRepository deviceRepository;
 	private final ModelDetailsService modelDetailsService;
@@ -35,7 +35,7 @@ public class DeviceSparePartService {
 
 	@Transactional(readOnly = true)
 	public List<DeviceSparePartDto> load(Integer deviceId) {
-		return deviceSparePartsRepository.getSparePartsForDevice(deviceId)
+		return deviceInstalledSparePartRepository.getSparePartsForDevice(deviceId)
 			.stream()
 			.map(deviceSparePart -> {
 				NamedIdDto sparePart = sparePartService.getSparePartById(deviceSparePart.getSparePartId());
@@ -50,10 +50,10 @@ public class DeviceSparePartService {
 
 	@Transactional(readOnly = true)
 	public List<NamedIdDto> getAvailableSparePartsForDevice(@NonNull Integer deviceId) {
-		Set<Integer> alreadyAddedSparePartsIds = deviceSparePartsRepository
+		Set<Integer> alreadyAddedSparePartsIds = deviceInstalledSparePartRepository
 			.getSparePartsForDevice(deviceId)
 			.stream()
-			.map(DeviceSpareParts::getSparePartId)
+			.map(DeviceInstalledSparePart::getSparePartId)
 			.collect(toUnmodifiableSet());
 
 		Integer modelId = deviceRepository.getById(deviceId).getModelId();
@@ -66,13 +66,13 @@ public class DeviceSparePartService {
 
 	@Transactional
 	public void addDeviceSparePart(Integer deviceId, CreateDeviceSparePartDto newDeviceSparePartDto, UserDetails actor) {
-		DeviceSpareParts deviceSpareParts = new DeviceSpareParts();
-		deviceSpareParts.setDeviceId(deviceId);
-		deviceSpareParts.setSparePartId(newDeviceSparePartDto.getSparePartId());
-		deviceSpareParts.setPriceNetto(newDeviceSparePartDto.getPriceNetto());
-		deviceSpareParts.setDate(LocalDateTime.now());
+		DeviceInstalledSparePart deviceInstalledSparePart = new DeviceInstalledSparePart();
+		deviceInstalledSparePart.setDeviceId(deviceId);
+		deviceInstalledSparePart.setSparePartId(newDeviceSparePartDto.getSparePartId());
+		deviceInstalledSparePart.setPriceNetto(newDeviceSparePartDto.getPriceNetto());
+		deviceInstalledSparePart.setDate(LocalDateTime.now());
 
-		Integer newDeviceSparePartsId = deviceSparePartsRepository.save(deviceSpareParts).getId();
+		Integer newDeviceSparePartsId = deviceInstalledSparePartRepository.save(deviceInstalledSparePart).getId();
 
 		DeviceSparePartAdded deviceSparePartAddedEvent = DeviceSparePartAdded.builder()
 			.source(this)
@@ -85,7 +85,7 @@ public class DeviceSparePartService {
 
 	@Transactional
 	public void deleteDeviceSparePart(Integer deviceId, Integer oldDeviceSparePartId, UserDetails actor) {
-		DeviceSpareParts deviceSparePart = deviceSparePartsRepository.getById(oldDeviceSparePartId);
+		DeviceInstalledSparePart deviceSparePart = deviceInstalledSparePartRepository.getById(oldDeviceSparePartId);
 		String oldSparePartName = sparePartService.getSparePartById(deviceSparePart.getSparePartId()).name();
 		Double oldSparePartPriceNetto = deviceSparePart.getPriceNetto();
 
@@ -99,6 +99,6 @@ public class DeviceSparePartService {
 			.build();
 		events.publishEvent(deviceSparePartDeletedEvent);
 
-		deviceSparePartsRepository.deleteById(oldDeviceSparePartId);
+		deviceInstalledSparePartRepository.deleteById(oldDeviceSparePartId);
 	}
 }
