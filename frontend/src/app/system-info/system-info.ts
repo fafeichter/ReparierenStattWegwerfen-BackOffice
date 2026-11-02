@@ -8,14 +8,25 @@ import { ClrCardModule, ClrIcon } from '@clr/angular';
 import { version as clarityUiVersion } from '@clr/ui/package.json';
 import { version as clarityAngularVersion } from '@clr/angular/package.json';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { PageSidebar } from '../clarity-addons/components/page-sidebar/page-sidebar';
+import { NavItem, Scrollspy } from '../clarity-addons/components/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-system-info',
-  imports: [DatePipe, ClrCardModule, ClrIcon, JsonPipe],
+  imports: [DatePipe, ClrCardModule, ClrIcon, JsonPipe, PageSidebar, Scrollspy],
   templateUrl: './system-info.html',
   styleUrl: './system-info.css',
 })
 export class SystemInfo implements OnInit {
+  navItems: NavItem[] = [
+    { id: 'build', label: 'Build', icon: 'code' },
+    { id: 'backen', label: 'Backend', icon: 'host' },
+    { id: 'frontend', label: 'Frontend', icon: 'application' },
+    { id: 'database', label: 'Database', icon: 'storage' },
+    { id: 'userinfo', label: 'User Info', icon: 'id-badge' },
+    { id: 'authentication', label: 'Authentication', icon: 'certificate' },
+  ];
+
   buildInfo = buildInfo;
   readonly currentLocale = inject(LOCALE_ID);
   readonly angularVersion = VERSION.full;

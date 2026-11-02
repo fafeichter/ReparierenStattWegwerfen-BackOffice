@@ -5,3 +5,15 @@ li {
 hr {
   margin: .5rem 0 !important;
 }
+
+:host {
+  display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  > .clr-row {
+    flex: 1;
+  }
+}

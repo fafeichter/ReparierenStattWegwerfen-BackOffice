@@ -1,77 +1,129 @@
-<clr-card>
-  <clr-card-body>
-    <clr-card-body-title>
-      <cds-icon shape="code" size="sm"/>
-      Build
-    </clr-card-body-title>
-    <clr-card-body-text>
-      <ul>
-        <li>Build Date: {{ buildInfo.date | date:'MMM d, y, HH:mm:ss' }}</li>
-        <li>Branch: {{ buildInfo.branch }}</li>
-        <li>Commit: {{ buildInfo.commit }}</li>
-        <li>GitHub:
-          <a href="https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice" target="_blank">
-            https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice
-            <cds-icon shape="pop-out"/>
-          </a>
-        </li>
-      </ul>
-    </clr-card-body-text>
-    <hr>
-    <clr-card-body-title>
-      <cds-icon shape="host" size="sm"/>
-      Backend
-    </clr-card-body-title>
-    <clr-card-body-text>
-      <ul>
-        <li>Spring Boot: {{ backendSystemInfo()?.springBootVersion }}</li>
-        <li>Spring Framework: {{ backendSystemInfo()?.springVersion }}</li>
-        <li>Spring Active Profiles: {{ backendSystemInfo()?.springActiveProfiles!.join(', ') }}</li>
-        <li>Java: {{ backendSystemInfo()?.javaRuntimeName }} {{ backendSystemInfo()?.javaVersion }}
-          ({{ backendSystemInfo()?.javaVendor }})
-        </li>
-        <li>OS: {{ backendSystemInfo()?.osName }} {{ backendSystemInfo()?.osVersion }}
-          ({{ backendSystemInfo()?.osArch }})
-        </li>
-      </ul>
-    </clr-card-body-text>
-    <hr>
-    <clr-card-body-title>
-      <cds-icon shape="application" size="sm"/>
-      Frontend
-    </clr-card-body-title>
-    <clr-card-body-text>
-      <ul>
-        <li>Angular: {{ angularVersion }}</li>
-        <li>Clarity UI: {{ clarityUiVersion }}</li>
-        <li>Clarity Angular: {{ clarityAngularVersion }}</li>
-        <li>Production: {{ frontendProduction }}</li>
-        <li>Locale: {{ currentLocale }}</li>
-      </ul>
-    </clr-card-body-text>
-    <hr>
-    <clr-card-body-title>
-      <cds-icon shape="id-badge" size="sm"/>
-      User Info
-    </clr-card-body-title>
-    <clr-card-body-text>
-      <ul>
-        <li>User Data:
-          <pre class="border-none!">{{ accessTokenPayload() | json }}</pre>
-        </li>
-      </ul>
-    </clr-card-body-text>
-    <hr>
-    <clr-card-body-title>
-      <cds-icon shape="certificate" size="sm"/>
-      Authentication
-    </clr-card-body-title>
-    <clr-card-body-text>
-      <ul>
-        <li>Authenticated: {{ authenticated().isAuthenticated }}</li>
-        <li class="break-all">Token: {{ accessToken() }}</li>
-        <li class="break-all">Refresh Token: {{ refreshToken() }}</li>
-      </ul>
-    </clr-card-body-text>
-  </clr-card-body>
-</clr-card>
+<app-page-sidebar>
+  <app-scrollspy [items]="navItems"/>
+</app-page-sidebar>
+
+<div class="clr-row">
+  <div class="clr-col-lg-8 clr-col-md-10 clr-col-12">
+    <clr-card [id]="navItems[0].id">
+      <clr-card-header>
+        <cds-icon [shape]="navItems[0].icon" size="lg"/>
+        {{ navItems[0].label }}
+      </clr-card-header>
+      <clr-card-body>
+        <clr-card-body-text>
+          <ul>
+            <li>Build Date: {{ buildInfo.date | date:'MMM d, y, HH:mm:ss' }}</li>
+            <li>Branch: {{ buildInfo.branch }}</li>
+            <li>Commit: {{ buildInfo.commit }}</li>
+            <li>GitHub:
+              <a href="https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice" target="_blank">
+                https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice
+                <cds-icon shape="pop-out"/>
+              </a>
+            </li>
+          </ul>
+        </clr-card-body-text>
+      </clr-card-body>
+    </clr-card>
+    <clr-card [id]="navItems[1].id">
+      <clr-card-header>
+        <cds-icon [shape]="navItems[1].icon" size="lg"/>
+        {{ navItems[1].label }}
+      </clr-card-header>
+      <clr-card-body>
+        <clr-card-body-text>
+          <ul>
+            <li>Spring Boot: {{ backendSystemInfo()?.spring?.bootVersion }}</li>
+            <li>Spring Framework: {{ backendSystemInfo()?.spring?.frameworkVersion }}</li>
+            <li>Spring Active Profiles: {{ backendSystemInfo()?.spring?.activeProfiles!.join(', ') }}</li>
+            <li>Java: {{ backendSystemInfo()?.java?.runtimeName }} {{ backendSystemInfo()?.java?.version }}
+              ({{ backendSystemInfo()?.java?.vendor }})
+            </li>
+            <li>OS: {{ backendSystemInfo()?.os?.name }} {{ backendSystemInfo()?.os?.version }}
+              ({{ backendSystemInfo()?.os?.arch }})
+            </li>
+          </ul>
+        </clr-card-body-text>
+      </clr-card-body>
+    </clr-card>
+    <clr-card [id]="navItems[2].id">
+      <clr-card-header>
+        <cds-icon [shape]="navItems[2].icon" size="lg"/>
+        {{ navItems[2].label }}
+      </clr-card-header>
+      <clr-card-body>
+        <clr-card-body-text>
+          <ul>
+            <li>Angular: {{ angularVersion }}</li>
+            <li>Clarity UI: {{ clarityUiVersion }}</li>
+            <li>Clarity Angular: {{ clarityAngularVersion }}</li>
+            <li>Production: {{ frontendProduction }}</li>
+            <li>Locale: {{ currentLocale }}</li>
+          </ul>
+        </clr-card-body-text>
+      </clr-card-body>
+    </clr-card>
+    <clr-card [id]="navItems[3].id">
+      <clr-card-header>
+        <cds-icon [shape]="navItems[3].icon" size="lg"/>
+        {{ navItems[3].label }}
+      </clr-card-header>
+      <clr-card-body>
+        <clr-card-body-text>
+          <clr-card-body-text>
+            @let database = backendSystemInfo()?.database;
+            @let pool = database?.connectionPool;
+            <ul>
+              <li>Version: {{ database?.version }}</li>
+              <li>Connection Pool:
+                <ul>
+                  <li>Maximum Pool Size: {{ pool?.maximumPoolSize }}</li>
+                  <li>Minimum Idle: {{ pool?.minimumIdle }}</li>
+                  <li>Idle Timeout: {{ pool?.idleTimeout }} ms</li>
+                  <li>Max Lifetime: {{ pool?.maxLifetime }} ms</li>
+                  <li>Connection Timeout: {{ pool?.connectionTimeout }} ms</li>
+                  <li>Leak Detection Threshold: {{ pool?.leakDetectionThreshold }} ms</li>
+                  <li>Connections:
+                    {{ pool?.activeConnections }} active,
+                    {{ pool?.idleConnections }} idle,
+                    {{ pool?.totalConnections }} total
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </clr-card-body-text>
+        </clr-card-body-text>
+      </clr-card-body>
+    </clr-card>
+    <clr-card [id]="navItems[4].id">
+      <clr-card-header>
+        <cds-icon [shape]="navItems[4].icon" size="lg"/>
+        {{ navItems[4].label }}
+      </clr-card-header>
+      <clr-card-body>
+        <clr-card-body-text>
+          <ul>
+            <li>User Data:
+              <pre class="border-none!">{{ accessTokenPayload() | json }}</pre>
+            </li>
+          </ul>
+        </clr-card-body-text>
+      </clr-card-body>
+    </clr-card>
+    <clr-card [id]="navItems[5].id">
+      <clr-card-header>
+        <cds-icon [shape]="navItems[5].icon" size="lg"/>
+        {{ navItems[5].label }}
+      </clr-card-header>
+      <clr-card-body>
+        <clr-card-body-text>
+          <ul>
+            <li>Authenticated: {{ authenticated().isAuthenticated }}</li>
+            <li class="break-all">Token: {{ accessToken() }}</li>
+            <li class="break-all">Refresh Token: {{ refreshToken() }}</li>
+          </ul>
+        </clr-card-body-text>
+      </clr-card-body>
+    </clr-card>
+  </div>
+</div>
