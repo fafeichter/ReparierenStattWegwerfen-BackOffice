@@ -9,8 +9,9 @@
     <form (ngSubmit)="addDevice()" [formGroup]="form" clrForm>
       <clr-input-container>
         <label><span class="clr-required-mark">URL</span></label>
-        <input #input (click)="input.select()" (focusout)="selectUrlText()" clrInput formControlName="url" size="999"
-               type="url"/>
+        <input #input (click)="input.select()" (focusout)="selectUrlText()" autocomplete="off" clrInput
+               formControlName="url"
+               size="999" type="url"/>
         <clr-control-helper>From Kleinanzeigen, Willhaben etc.</clr-control-helper>
         @if (form.controls.url.hasError('required')) {
           <clr-control-error>URL is required.</clr-control-error>
