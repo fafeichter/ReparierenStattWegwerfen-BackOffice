@@ -1,6 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryHealthChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.battery.DeviceBatteryStatusRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.creation.DeviceBuyingDateChanged;
@@ -195,6 +196,19 @@ public class DeviceActivityService {
 		deviceActivity.setName(event.getSerialNumber());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(11));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBatteryHealthChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		Object batteryMaximumCapacity = event.getMaximumCapacity() != null ? event.getMaximumCapacity() : "-";
+		Object batteryCycleCount = event.getCycleCount() != null ? event.getCycleCount() : "-";
+
+		deviceActivity.setName(batteryMaximumCapacity + " % / " + batteryCycleCount + " cycles");
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(27));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
