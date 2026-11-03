@@ -3,8 +3,9 @@
 
 INSERT INTO device_battery_status (device_battery_status_id, name, sort_order)
 VALUES (1, 'nicht getauscht', 1),
-       (2, 'freiwillig getauscht', 2),
-       (3, 'getauscht wegen Defekt', 3);
+       (2, 'getauscht wegen \"Service empfohlen\"', 2),
+       (3, 'getauscht wegen Defekt', 3),
+       (4, 'freiwillig getauscht', 4);
 
 INSERT INTO device_grade (device_grade_id, tier, description, description_long, sort_order)
 VALUES (1, 'Grade A', 'Wie neu', 'Makelloser Zustand ohne Gebrauchsspuren', 1),

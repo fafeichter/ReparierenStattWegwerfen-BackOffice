@@ -37,7 +37,8 @@ public class DeviceBatteryHealthService {
 			boolean batteryStatusAutomaticallySetOrUpdated =
 				(newDeviceBaseBattery.determineStatusId() != null && device.getBatteryStatus() == null) ||
 					(newDeviceBaseBattery.determineStatusId() == null && device.getBatteryStatus() != null) ||
-					(!Objects.equals(newDeviceBaseBattery.determineStatusId(), device.getBatteryStatus().getId()));
+					(!Objects.equals(newDeviceBaseBattery.determineStatusId(),
+						device.getBatteryStatus() != null ? device.getBatteryStatus().getId() : null));
 
 			if (batteryStatusAutomaticallySetOrUpdated) {
 				device.setBatteryStatus(newDeviceBaseBattery.determineStatusId() != null ?
