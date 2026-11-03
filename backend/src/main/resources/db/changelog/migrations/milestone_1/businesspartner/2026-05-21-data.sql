@@ -43,7 +43,7 @@ VALUES (1, 'Österreich', 'AT', 1),
        (39, 'Ukraine', 'UA', 39),
        (40, 'Ungarn', 'HU', 40),
        (41, 'Vatikanstadt', 'VA', 41),
-       (44, 'Zypern', 'CY', 42);
+       (42, 'Zypern', 'CY', 42);
 
 INSERT INTO business_partner_activity_type (business_partner_activity_type_id, name)
 VALUES (1, 'Erstellt'),

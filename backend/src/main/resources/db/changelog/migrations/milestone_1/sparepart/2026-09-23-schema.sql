@@ -6,22 +6,25 @@ CREATE TABLE spare_part
     spare_part_id int auto_increment,
     name          varchar(256) NOT NULL,
     sort_order    int          NOT NULL,
-    created_at    timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at    timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (spare_part_id),
-    UNIQUE KEY spare_part_name (name),
+    UNIQUE KEY uq_spare_part_name (name),
     UNIQUE KEY uq_spare_part_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE spare_part_available_model_series
 (
-    spare_part_available_model_series_id int          NOT NULL AUTO_INCREMENT,
-    spare_part_id                        int          NOT NULL,
-    model_series_id                      int          NOT NULL,
-    created_at                           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    spare_part_available_model_series_id int NOT NULL AUTO_INCREMENT,
+    spare_part_id                        int NOT NULL,
+    model_series_id                      int NOT NULL,
+    created_at                           datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                           datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (spare_part_available_model_series_id),
     UNIQUE KEY uq_spare_part_model_series (spare_part_id, model_series_id),
-    FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id) ON DELETE CASCADE,
-    FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    KEY                                  idx_spams_model_series_id (model_series_id),
+    CONSTRAINT fk_spams_spare_part_id
+        FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id),
+    CONSTRAINT fk_spams_model_series_id
+        FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;

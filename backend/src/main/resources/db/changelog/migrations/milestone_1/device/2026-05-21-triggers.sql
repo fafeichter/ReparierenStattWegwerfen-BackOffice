@@ -30,22 +30,24 @@ CREATE TRIGGER tr_device_update
     ON device
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, buying_date, model_apple_silicon_id,
-                              model_apple_silicon_unified_memory_id, model_storage_id, model_color_id, url,
-                              serial_number, device_status_id, status_date, seller_business_partner_id,
-                              buyer_business_partner_id, purchase_price, device_grade_id, reported_defect,
-                              reported_defect_confirmed, corrected_defect, selling_date, selling_accessory_charger,
-                              selling_accessory_charging_cable, selling_accessory_original_packaging,
-                              battery_maximum_capacity, battery_cycle_count, device_battery_status_id, selling_price,
-                              invoice_number, created_at, updated_at)
-    VALUES ('UPDATE', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.model_id, NEW.buying_date, NEW.model_apple_silicon_id,
-            NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
-            NEW.serial_number, NEW.device_status_id, NEW.status_date, NEW.seller_business_partner_id,
-            NEW.buyer_business_partner_id, NEW.purchase_price, NEW.device_grade_id, NEW.reported_defect,
-            NEW.reported_defect_confirmed, NEW.corrected_defect, NEW.selling_date, NEW.selling_accessory_charger,
-            NEW.selling_accessory_charging_cable, NEW.selling_accessory_original_packaging,
-            NEW.battery_maximum_capacity, NEW.battery_cycle_count, NEW.device_battery_status_id, NEW.selling_price,
-            NEW.invoice_number, NEW.created_at, NEW.updated_at);
+    IF NOT (NEW.updated_at <=> OLD.updated_at) THEN
+        INSERT INTO device_audit (audit_action, audit_timestamp, device_id, model_id, buying_date, model_apple_silicon_id,
+                                  model_apple_silicon_unified_memory_id, model_storage_id, model_color_id, url,
+                                  serial_number, device_status_id, status_date, seller_business_partner_id,
+                                  buyer_business_partner_id, purchase_price, device_grade_id, reported_defect,
+                                  reported_defect_confirmed, corrected_defect, selling_date, selling_accessory_charger,
+                                  selling_accessory_charging_cable, selling_accessory_original_packaging,
+                                  battery_maximum_capacity, battery_cycle_count, device_battery_status_id, selling_price,
+                                  invoice_number, created_at, updated_at)
+        VALUES ('UPDATE', CURRENT_TIMESTAMP(6), NEW.device_id, NEW.model_id, NEW.buying_date, NEW.model_apple_silicon_id,
+                NEW.model_apple_silicon_unified_memory_id, NEW.model_storage_id, NEW.model_color_id, NEW.url,
+                NEW.serial_number, NEW.device_status_id, NEW.status_date, NEW.seller_business_partner_id,
+                NEW.buyer_business_partner_id, NEW.purchase_price, NEW.device_grade_id, NEW.reported_defect,
+                NEW.reported_defect_confirmed, NEW.corrected_defect, NEW.selling_date, NEW.selling_accessory_charger,
+                NEW.selling_accessory_charging_cable, NEW.selling_accessory_original_packaging,
+                NEW.battery_maximum_capacity, NEW.battery_cycle_count, NEW.device_battery_status_id, NEW.selling_price,
+                NEW.invoice_number, NEW.created_at, NEW.updated_at);
+END IF;
 END $$
 
 CREATE TRIGGER tr_device_delete
@@ -87,10 +89,12 @@ CREATE TRIGGER tr_device_note_update
     ON device_note
     FOR EACH ROW
 BEGIN
-    INSERT INTO device_note_audit (audit_action, audit_timestamp, device_note_id, device_id, text, date, created_at,
-                                   updated_at)
-    VALUES ('UPDATE', CURRENT_TIMESTAMP(6), NEW.device_note_id, NEW.device_id, NEW.text, NEW.date, NEW.created_at,
-            NEW.updated_at);
+    IF NOT (NEW.updated_at <=> OLD.updated_at) THEN
+        INSERT INTO device_note_audit (audit_action, audit_timestamp, device_note_id, device_id, text, date, created_at,
+                                       updated_at)
+        VALUES ('UPDATE', CURRENT_TIMESTAMP(6), NEW.device_note_id, NEW.device_id, NEW.text, NEW.date, NEW.created_at,
+                NEW.updated_at);
+END IF;
 END $$
 
 CREATE TRIGGER tr_device_note_delete

@@ -6,37 +6,37 @@ CREATE TABLE device_battery_status
     device_battery_status_id int          NOT NULL AUTO_INCREMENT,
     name                     varchar(256) NOT NULL,
     sort_order               int          NOT NULL,
-    created_at               timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at               timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_battery_status_id),
     UNIQUE KEY uq_device_battery_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_grade
 (
     device_grade_id  int          NOT NULL AUTO_INCREMENT,
-    tier             varchar(256) NOT NULL,
-    description      varchar(512) NOT NULL,
-    description_long varchar(768) NOT NULL,
+    tier             varchar(16)  NOT NULL,
+    description      varchar(128) NOT NULL,
+    description_long varchar(256) NOT NULL,
     sort_order       int          NOT NULL,
-    created_at       timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at       timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at       datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at       datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_grade_id),
     UNIQUE KEY uq_device_grade_tier (tier),
     UNIQUE KEY uq_device_grade_description (description),
     UNIQUE KEY uq_device_grade_description_long (description_long),
     UNIQUE KEY uq_device_grade_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_status_classification
 (
     device_status_classification_id int          NOT NULL AUTO_INCREMENT,
     name                            varchar(256) NOT NULL,
-    created_at                      timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                      timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_status_classification_id),
     UNIQUE KEY uq_device_status_class_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_status
 (
@@ -45,48 +45,51 @@ CREATE TABLE device_status
     is_endstatus                    boolean      NOT NULL,
     sort_order                      int          NOT NULL,
     device_status_classification_id int          NOT NULL,
-    created_at                      timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                      timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_status_id),
     UNIQUE KEY uq_device_status_name (name),
     UNIQUE KEY uq_device_status_sort (sort_order),
     KEY                             idx_device_status_classification_id (device_status_classification_id),
-    CONSTRAINT fk_device_status_classification_id FOREIGN KEY (device_status_classification_id) REFERENCES device_status_classification (device_status_classification_id) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    CONSTRAINT fk_device_status_classification_id
+        FOREIGN KEY (device_status_classification_id) REFERENCES device_status_classification (device_status_classification_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device
 (
-    device_id                             int            NOT NULL,
-    model_id                              int            NOT NULL,
-    buying_date                           date                    DEFAULT (CURRENT_DATE) NOT NULL,
-    model_apple_silicon_id                int                     DEFAULT NULL,
-    model_apple_silicon_unified_memory_id int                     DEFAULT NULL,
-    model_storage_id                      int                     DEFAULT NULL,
-    model_color_id                        int                     DEFAULT NULL,
-    url                                   varchar(512)   NOT NULL,
-    serial_number                         varchar(12)             DEFAULT NULL,
-    device_status_id                      int            NOT NULL DEFAULT 1,
-    status_date                           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    seller_business_partner_id            int                     DEFAULT NULL,
-    buyer_business_partner_id             int                     DEFAULT NULL,
-    purchase_price                        DECIMAL(10, 2) NOT NULL,
-    device_grade_id                       int                     DEFAULT NULL,
-    reported_defect                       text           NOT NULL,
-    reported_defect_confirmed             boolean                 DEFAULT NULL,
-    corrected_defect                      text                    DEFAULT NULL,
-    selling_date                          date                    DEFAULT NULL,
-    selling_accessory_charger             boolean                 DEFAULT NULL,
-    selling_accessory_charging_cable      boolean                 DEFAULT NULL,
-    selling_accessory_original_packaging  boolean                 DEFAULT NULL,
-    battery_maximum_capacity              tinyint                 DEFAULT NULL,
-    battery_cycle_count                   int                     DEFAULT NULL,
-    device_battery_status_id              int                     DEFAULT NULL,
-    selling_price                         DECIMAL(10, 2)          DEFAULT NULL,
-    invoice_number                        int                     DEFAULT NULL,
-    created_at                            timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                            timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    device_id                             int                                   NOT NULL,
+    model_id                              int                                   NOT NULL,
+    buying_date                           date           DEFAULT (CURRENT_DATE) NOT NULL,
+    model_apple_silicon_id                int            DEFAULT NULL,
+    model_apple_silicon_unified_memory_id int            DEFAULT NULL,
+    model_storage_id                      int            DEFAULT NULL,
+    model_color_id                        int            DEFAULT NULL,
+    url                                   varchar(512)                          NOT NULL,
+    serial_number                         varchar(12)    DEFAULT NULL,
+    device_status_id                      int                                   NOT NULL,
+    status_date                           datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    seller_business_partner_id            int            DEFAULT NULL,
+    buyer_business_partner_id             int            DEFAULT NULL,
+    purchase_price                        DECIMAL(10, 2)                        NOT NULL,
+    device_grade_id                       int            DEFAULT NULL,
+    reported_defect                       text                                  NOT NULL,
+    reported_defect_confirmed             boolean        DEFAULT NULL,
+    corrected_defect                      text           DEFAULT NULL,
+    selling_date                          date           DEFAULT NULL,
+    selling_accessory_charger             boolean        DEFAULT NULL,
+    selling_accessory_charging_cable      boolean        DEFAULT NULL,
+    selling_accessory_original_packaging  boolean        DEFAULT NULL,
+    battery_maximum_capacity              tinyint        DEFAULT NULL,
+    battery_cycle_count                   int            DEFAULT NULL,
+    device_battery_status_id              int            DEFAULT NULL,
+    selling_price                         DECIMAL(10, 2) DEFAULT NULL,
+    invoice_number                        int            DEFAULT NULL,
+    created_at                            datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                            datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_id),
-    KEY                                   idx_device_model_id (model_id),
+    UNIQUE KEY uq_device_serial_number (serial_number),
+    KEY                                   idx_device_model_silicon (model_id, model_apple_silicon_id),
+    KEY                                   idx_device_model_color (model_id, model_color_id),
     KEY                                   idx_device_apple_silicon_id (model_apple_silicon_id),
     KEY                                   idx_device_unified_memory_id (model_apple_silicon_unified_memory_id),
     KEY                                   idx_device_buyer_bp_id (buyer_business_partner_id),
@@ -96,155 +99,177 @@ CREATE TABLE device
     KEY                                   idx_device_grade_id (device_grade_id),
     KEY                                   idx_device_model_storage_id (model_storage_id),
     KEY                                   idx_device_battery_status_id (device_battery_status_id),
-    CONSTRAINT fk_device_apple_silicon_id FOREIGN KEY (model_apple_silicon_id) REFERENCES model_apple_silicon (model_apple_silicon_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_battery_status_id FOREIGN KEY (device_battery_status_id) REFERENCES device_battery_status (device_battery_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_buyer_bp_id FOREIGN KEY (buyer_business_partner_id) REFERENCES business_partner (business_partner_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_device_grade_id FOREIGN KEY (device_grade_id) REFERENCES device_grade (device_grade_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_model_color_id FOREIGN KEY (model_color_id) REFERENCES model_color (model_color_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_model_id FOREIGN KEY (model_id) REFERENCES model (model_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_model_storage_id FOREIGN KEY (model_storage_id) REFERENCES model_storage (model_storage_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_seller_bp_id FOREIGN KEY (seller_business_partner_id) REFERENCES business_partner (business_partner_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_status_id FOREIGN KEY (device_status_id) REFERENCES device_status (device_status_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_unified_memory_id FOREIGN KEY (model_apple_silicon_unified_memory_id) REFERENCES model_apple_silicon_unified_memory (model_apple_silicon_unified_memory_id) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    CONSTRAINT fk_device_apple_silicon_id
+        FOREIGN KEY (model_apple_silicon_id) REFERENCES model_apple_silicon (model_apple_silicon_id),
+    CONSTRAINT fk_device_battery_status_id
+        FOREIGN KEY (device_battery_status_id) REFERENCES device_battery_status (device_battery_status_id),
+    CONSTRAINT fk_device_buyer_bp_id
+        FOREIGN KEY (buyer_business_partner_id) REFERENCES business_partner (business_partner_id),
+    CONSTRAINT fk_device_device_grade_id
+        FOREIGN KEY (device_grade_id) REFERENCES device_grade (device_grade_id),
+    CONSTRAINT fk_device_model_color_id
+        FOREIGN KEY (model_color_id) REFERENCES model_color (model_color_id),
+    CONSTRAINT fk_device_model_id
+        FOREIGN KEY (model_id) REFERENCES model (model_id),
+    CONSTRAINT fk_device_model_storage_id
+        FOREIGN KEY (model_storage_id) REFERENCES model_storage (model_storage_id),
+    CONSTRAINT fk_device_seller_bp_id
+        FOREIGN KEY (seller_business_partner_id) REFERENCES business_partner (business_partner_id),
+    CONSTRAINT fk_device_status_id
+        FOREIGN KEY (device_status_id) REFERENCES device_status (device_status_id),
+    CONSTRAINT fk_device_unified_memory_id
+        FOREIGN KEY (model_apple_silicon_unified_memory_id) REFERENCES model_apple_silicon_unified_memory (model_apple_silicon_unified_memory_id),
+    CONSTRAINT fk_device_model_silicon_combo
+        FOREIGN KEY (model_id, model_apple_silicon_id) REFERENCES model_available_apple_silicon (model_id, model_apple_silicon_id),
+    CONSTRAINT fk_device_model_color_combo
+        FOREIGN KEY (model_id, model_color_id) REFERENCES model_available_color (model_id, model_color_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_audit
 (
     device_audit_id                       bigint         NOT NULL AUTO_INCREMENT,
     audit_action                          enum('INSERT','UPDATE','DELETE') NOT NULL,
-    audit_timestamp                       timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    audit_timestamp                       datetime(6)    NOT NULL,
     device_id                             int            NOT NULL,
     model_id                              int            NOT NULL,
-    buying_date                           date                    DEFAULT (CURRENT_DATE) NOT NULL,
-    model_apple_silicon_id                int                     DEFAULT NULL,
-    model_apple_silicon_unified_memory_id int                     DEFAULT NULL,
-    model_storage_id                      int                     DEFAULT NULL,
-    model_color_id                        int                     DEFAULT NULL,
+    buying_date                           date,
+    model_apple_silicon_id                int,
+    model_apple_silicon_unified_memory_id int,
+    model_storage_id                      int,
+    model_color_id                        int,
     url                                   varchar(512)   NOT NULL,
-    serial_number                         varchar(128)            DEFAULT NULL,
-    device_status_id                      int            NOT NULL DEFAULT 1,
-    status_date                           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    seller_business_partner_id            int                     DEFAULT NULL,
-    buyer_business_partner_id             int                     DEFAULT NULL,
+    serial_number                         varchar(12),
+    device_status_id                      int NOT NULL,
+    status_date                           datetime(6)    NOT NULL,
+    seller_business_partner_id            int,
+    buyer_business_partner_id             int,
     purchase_price                        DECIMAL(10, 2) NOT NULL,
-    device_grade_id                       int                     DEFAULT NULL,
+    device_grade_id                       int,
     reported_defect                       text           NOT NULL,
-    reported_defect_confirmed             boolean                 DEFAULT NULL,
-    corrected_defect                      text                    DEFAULT NULL,
-    selling_date                          date                    DEFAULT NULL,
-    selling_accessory_charger             boolean                 DEFAULT NULL,
-    selling_accessory_charging_cable      boolean                 DEFAULT NULL,
-    selling_accessory_original_packaging  boolean                 DEFAULT NULL,
-    battery_maximum_capacity              tinyint                 DEFAULT NULL,
-    battery_cycle_count                   int                     DEFAULT NULL,
-    device_battery_status_id              int                     DEFAULT NULL,
-    selling_price                         DECIMAL(10, 2)          DEFAULT NULL,
-    invoice_number                        int                     DEFAULT NULL,
-    created_at                            timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                            timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    reported_defect_confirmed             boolean,
+    corrected_defect                      text,
+    selling_date                          date,
+    selling_accessory_charger             boolean,
+    selling_accessory_charging_cable      boolean,
+    selling_accessory_original_packaging  boolean,
+    battery_maximum_capacity              tinyint,
+    battery_cycle_count                   int,
+    device_battery_status_id              int,
+    selling_price                         DECIMAL(10, 2),
+    invoice_number                        int,
+    created_at                            datetime(6)    NOT NULL,
+    updated_at                            datetime(6)    NOT NULL,
     PRIMARY KEY (device_audit_id),
     KEY                                   idx_audit_device_id (device_id),
     KEY                                   idx_audit_timestamp (audit_timestamp)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_installed_spare_part
 (
-    device_installed_spare_part_id int NOT NULL AUTO_INCREMENT,
-    device_id            int            NOT NULL,
-    spare_part_id        int            NOT NULL,
-    price_netto          DECIMAL(10, 2) NOT NULL,
-    date                 datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    created_at           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at           timestamp(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
-    KEY                  idx_device_spare_part_device_id (device_id),
-    KEY                  idx_device_spare_part_timestamp (date),
+    device_installed_spare_part_id int            NOT NULL AUTO_INCREMENT,
+    device_id                      int            NOT NULL,
+    spare_part_id                  int            NOT NULL,
+    price_netto                    DECIMAL(10, 2) NOT NULL,
+    date                           datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    created_at                     datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                     datetime(6)    NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    KEY                            idx_device_spare_part_device_date (device_id, date),
+    KEY                            idx_device_spare_part_spare_part_id (spare_part_id),
+    KEY                            idx_device_spare_part_timestamp (date),
     PRIMARY KEY (device_installed_spare_part_id),
-    CONSTRAINT fk_device_spare_part_device_id FOREIGN KEY (device_id) REFERENCES device (device_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-    CONSTRAINT fk_device_spare_part_spare_part_id FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    CONSTRAINT fk_device_spare_part_device_id
+        FOREIGN KEY (device_id) REFERENCES device (device_id),
+    CONSTRAINT fk_device_spare_part_spare_part_id
+        FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_note
 (
-    device_note_id int          NOT NULL AUTO_INCREMENT,
-    device_id      int          NOT NULL,
-    text           text         NOT NULL,
+    device_note_id int  NOT NULL AUTO_INCREMENT,
+    device_id      int  NOT NULL,
+    text           text NOT NULL,
     date           datetime(6)      NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    created_at     timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at     timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at     datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at     datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_note_id),
-    KEY            idx_device_note_device_id (device_id),
+    KEY            idx_device_note_device_date (device_id, date),
     KEY            idx_device_note_date (date),
-    CONSTRAINT fk_device_note_device_id FOREIGN KEY (device_id) REFERENCES device (device_id) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    CONSTRAINT fk_device_note_device_id
+        FOREIGN KEY (device_id) REFERENCES device (device_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_note_audit
 (
-    device_note_audit_id bigint       NOT NULL AUTO_INCREMENT,
+    device_note_audit_id bigint NOT NULL AUTO_INCREMENT,
     audit_action         enum('INSERT','UPDATE','DELETE') NOT NULL,
-    audit_timestamp      timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    device_note_id       int          NOT NULL,
-    device_id            int          NOT NULL,
-    text                 text         NOT NULL,
+    audit_timestamp      datetime(6)  NOT NULL,
+    device_note_id       int    NOT NULL,
+    device_id            int    NOT NULL,
+    text                 text   NOT NULL,
     date                 datetime(6)      NOT NULL,
-    created_at           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at           datetime(6)  NOT NULL,
+    updated_at           datetime(6)  NOT NULL,
     PRIMARY KEY (device_note_audit_id),
     KEY                  idx_dna_device_note_id (device_note_id),
     KEY                  idx_dna_device_id (device_id),
     KEY                  idx_dna_audit_timestamp (audit_timestamp)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_tag
 (
     device_tag_id int          NOT NULL AUTO_INCREMENT,
     name          varchar(256) NOT NULL,
     sort_order    int          NOT NULL,
-    created_at    timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at    timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_tag_id),
     UNIQUE KEY uq_device_tag_name (name),
-    UNIQUE KEY uq_device_tags_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    UNIQUE KEY uq_device_tag_sort (sort_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_tag_available_model_series
 (
-    device_tag_available_model_series_id int          NOT NULL AUTO_INCREMENT,
-    device_tag_id                        int          NOT NULL,
-    model_series_id                      int          NOT NULL,
-    created_at                           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                           timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    device_tag_available_model_series_id int NOT NULL AUTO_INCREMENT,
+    device_tag_id                        int NOT NULL,
+    model_series_id                      int NOT NULL,
+    created_at                           datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                           datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_tag_available_model_series_id),
     UNIQUE KEY uq_device_tag_model_series (device_tag_id, model_series_id),
-    FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id) ON DELETE CASCADE,
-    FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    KEY                                  idx_dtams_model_series_id (model_series_id),
+    CONSTRAINT fk_dtams_device_tag_id
+        FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id),
+    CONSTRAINT fk_dtams_model_series_id
+        FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_added_tag
 (
     device_added_tag_id int AUTO_INCREMENT,
-    device_id      int          NOT NULL,
-    device_tag_id  int          NOT NULL,
-    created_at     timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at     timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    device_id     int NOT NULL,
+    device_tag_id int NOT NULL,
+    created_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_added_tag_id),
-    CONSTRAINT uq_device_tags_device_id_device_tag_id
+    KEY           idx_device_added_tag_device_tag_id (device_tag_id),
+    CONSTRAINT uq_device_added_tag_device_id_device_tag_id
         UNIQUE (device_id, device_tag_id),
-    CONSTRAINT fk_device_tags_device_id
+    CONSTRAINT fk_device_added_tag_device_id
         FOREIGN KEY (device_id) REFERENCES device (device_id),
-    CONSTRAINT fk_device_tags_device_tag_id
+    CONSTRAINT fk_device_added_tag_device_tag_id
         FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_activity_type
 (
     device_activity_type_id int auto_increment,
     name                    varchar(256) NOT NULL,
-    created_at              timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at              timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_activity_type_id),
     CONSTRAINT uq_device_activity_type_name
         UNIQUE (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE device_activity
 (
@@ -254,11 +279,13 @@ CREATE TABLE device_activity
     actor                   varchar(256) NOT NULL,
     device_activity_type_id int          NOT NULL,
     date                    datetime(6)     NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    created_at              timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at              timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_activity_id),
+    KEY        idx_device_activity_device_date (device_id, date),
+    KEY        idx_device_activity_type_id (device_activity_type_id),
     CONSTRAINT fk_activity_device_id
         FOREIGN KEY (device_id) REFERENCES device (device_id),
     CONSTRAINT fk_activity_device_activity_type_id
         FOREIGN KEY (device_activity_type_id) REFERENCES device_activity_type (device_activity_type_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;

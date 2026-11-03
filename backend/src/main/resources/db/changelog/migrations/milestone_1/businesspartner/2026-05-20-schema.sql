@@ -7,11 +7,13 @@ CREATE TABLE business_partner_address_country
     name                                varchar(256) NOT NULL,
     code                                char(2)      NOT NULL COMMENT 'ISO-3166',
     sort_order                          int          NOT NULL,
-    created_at                          timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                          timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_address_country_id),
-    UNIQUE KEY uq_business_partner_address_country_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    UNIQUE KEY uq_business_partner_address_country_sort (sort_order),
+    UNIQUE KEY uq_business_partner_address_country_name (name),
+    UNIQUE KEY uq_business_partner_address_country_code (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE business_partner_address
 (
@@ -21,41 +23,44 @@ CREATE TABLE business_partner_address
     zip_code                            varchar(10)  NOT NULL,
     city                                varchar(256) NOT NULL,
     business_partner_address_country_id int          NOT NULL,
-    created_at                          timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                          timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_address_id),
     KEY                                 idx_bpa_country_id (business_partner_address_country_id),
-    CONSTRAINT fk_bpa_country_id FOREIGN KEY (business_partner_address_country_id) REFERENCES business_partner_address_country (business_partner_address_country_id) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    CONSTRAINT fk_bpa_country_id
+        FOREIGN KEY (business_partner_address_country_id) REFERENCES business_partner_address_country (business_partner_address_country_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE business_partner
 (
     business_partner_id         int          NOT NULL AUTO_INCREMENT,
     first_name                  varchar(256) NOT NULL,
-    last_name                   varchar(256)          DEFAULT NULL,
-    telephone                   varchar(64)           DEFAULT NULL,
-    email                       varchar(256)          DEFAULT NULL,
-    company_name                varchar(256)          DEFAULT NULL,
-    company_uid                 varchar(32)           DEFAULT NULL,
+    last_name                   varchar(256) DEFAULT NULL,
+    telephone                   varchar(64)  DEFAULT NULL,
+    email                       varchar(256) DEFAULT NULL,
+    company_name                varchar(256) DEFAULT NULL,
+    company_uid                 varchar(32)  DEFAULT NULL,
     scammer                     tinyint(1)    DEFAULT NULL,
-    business_partner_address_id int                   DEFAULT NULL,
-    created_at                  timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                  timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    business_partner_address_id int          DEFAULT NULL,
+    created_at                  datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                  datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_id),
+    UNIQUE KEY uq_bp_company_uid (company_uid),
     KEY                         idx_bp_address_id (business_partner_address_id),
-    CONSTRAINT fk_bp_address_id FOREIGN KEY (business_partner_address_id) REFERENCES business_partner_address (business_partner_address_id) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    CONSTRAINT fk_bp_address_id
+        FOREIGN KEY (business_partner_address_id) REFERENCES business_partner_address (business_partner_address_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE business_partner_activity_type
 (
     business_partner_activity_type_id int auto_increment,
     name                              varchar(256) NOT NULL,
-    created_at                        timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                        timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_activity_type_id),
     CONSTRAINT uq_business_partner_activity_type_name
         UNIQUE (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 CREATE TABLE business_partner_activity
 (
@@ -63,13 +68,15 @@ CREATE TABLE business_partner_activity
     business_partner_id               int          NOT NULL,
     name                              varchar(256) NOT NULL,
     actor                             varchar(256) NOT NULL,
-    business_partner_activity_type_id int          NOT NULL NULL,
+    business_partner_activity_type_id int NOT NULL,
     date                              datetime(6)      NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    created_at                        timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at                        timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                        datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                        datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_activity_id),
+    KEY                               idx_bp_activity_business_partner_date (business_partner_id, date),
+    KEY                               idx_bp_activity_type_id (business_partner_activity_type_id),
     CONSTRAINT fk_activity_business_partner_id
         FOREIGN KEY (business_partner_id) REFERENCES business_partner (business_partner_id),
     CONSTRAINT fk_activity_business_partner_activity_type_id
         FOREIGN KEY (business_partner_activity_type_id) REFERENCES business_partner_activity_type (business_partner_activity_type_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
