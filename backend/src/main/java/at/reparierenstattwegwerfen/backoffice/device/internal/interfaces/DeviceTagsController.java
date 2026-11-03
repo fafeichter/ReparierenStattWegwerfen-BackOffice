@@ -28,12 +28,12 @@ public class DeviceTagsController {
 	@PostMapping("/")
 	public void addTag(@PathVariable Integer deviceId, @RequestBody Integer newTagId,
 					   @AuthenticationPrincipal UserDetails currentUser) {
-		deviceTagsService.addTag(deviceId, newTagId, currentUser);
+		deviceTagsService.addTagToDevice(deviceId, newTagId, currentUser);
 	}
 
 	@DeleteMapping("/")
 	public void removeTag(@PathVariable Integer deviceId, @RequestBody Integer tagId,
 						  @AuthenticationPrincipal UserDetails currentUser) {
-		deviceTagsService.removeTag(deviceId, tagId, currentUser);
+		deviceTagsService.removeTagFromDevice(deviceId, tagId, currentUser);
 	}
 }

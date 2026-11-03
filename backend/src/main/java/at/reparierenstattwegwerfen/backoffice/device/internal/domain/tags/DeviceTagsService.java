@@ -21,16 +21,16 @@ public class DeviceTagsService {
 
 	private final DeviceRepository deviceRepository;
 	private final DeviceTagRepository deviceTagRepository;
-	private final DeviceTagsRepository deviceTagsRepository;
+	private final DeviceAddedTagRepository deviceAddedTagRepository;
 	private final ApplicationEventPublisher events;
 	private final ModelDetailsService modelDetailsService;
 
 	@Transactional
-	public void addTag(Integer deviceId, Integer newDeviceTagId, UserDetails actor) {
-		DeviceTags deviceTags = new DeviceTags();
-		deviceTags.setDevice(deviceRepository.getById(deviceId));
-		deviceTags.setDeviceTag(deviceTagRepository.getById(newDeviceTagId));
-		deviceTagsRepository.save(deviceTags);
+	public void addTagToDevice(Integer deviceId, Integer newDeviceTagId, UserDetails actor) {
+		DeviceAddedTag deviceAddedTag = new DeviceAddedTag();
+		deviceAddedTag.setDevice(deviceRepository.getById(deviceId));
+		deviceAddedTag.setDeviceTag(deviceTagRepository.getById(newDeviceTagId));
+		deviceAddedTagRepository.save(deviceAddedTag);
 
 		DeviceTagAdded deviceTagAddedEvent = DeviceTagAdded.builder()
 			.source(this)
@@ -42,8 +42,8 @@ public class DeviceTagsService {
 	}
 
 	@Transactional
-	public void removeTag(Integer deviceId, Integer oldDeviceTagId, UserDetails actor) {
-		deviceTagsRepository.deleteByDeviceTagId(oldDeviceTagId);
+	public void removeTagFromDevice(Integer deviceId, Integer oldDeviceTagId, UserDetails actor) {
+		deviceAddedTagRepository.removeTagFromDevice(oldDeviceTagId);
 
 		DeviceTagRemoved deviceTagRemovedEvent = DeviceTagRemoved.builder()
 			.source(this)

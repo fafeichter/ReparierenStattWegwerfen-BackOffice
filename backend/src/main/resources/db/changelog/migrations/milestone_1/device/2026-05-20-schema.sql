@@ -219,14 +219,14 @@ CREATE TABLE device_tag_available_model_series
     FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE device_tags
+CREATE TABLE device_added_tag
 (
-    device_tags_id int AUTO_INCREMENT,
+    device_added_tag_id int AUTO_INCREMENT,
     device_id      int          NOT NULL,
     device_tag_id  int          NOT NULL,
     created_at     timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at     timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
-    PRIMARY KEY (device_tags_id),
+    PRIMARY KEY (device_added_tag_id),
     CONSTRAINT uq_device_tags_device_id_device_tag_id
         UNIQUE (device_id, device_tag_id),
     CONSTRAINT fk_device_tags_device_id

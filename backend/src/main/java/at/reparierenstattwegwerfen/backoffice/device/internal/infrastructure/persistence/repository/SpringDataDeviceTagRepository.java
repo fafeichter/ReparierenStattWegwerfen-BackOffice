@@ -16,11 +16,11 @@ public interface SpringDataDeviceTagRepository extends JpaRepository<DeviceTagEn
 
 	@Query("""
 		SELECT t FROM DeviceTagEntity t
-		JOIN DeviceTagsEntity d ON d.deviceTag.id = t.id
+		JOIN DeviceAddedTagEntity d ON d.deviceTag.id = t.id
 		WHERE d.device.id = :deviceId
 		ORDER BY t.sortOrder
 		""")
-	List<DeviceTagEntity> getTagsForDevice(Integer deviceId);
+	List<DeviceTagEntity> getAddedTagsForDevice(Integer deviceId);
 
 	@Query("""
 		SELECT t
@@ -30,7 +30,7 @@ public interface SpringDataDeviceTagRepository extends JpaRepository<DeviceTagEn
 		WHERE ts.modelSeriesId = :modelSeriesId
 		AND NOT EXISTS (
 		  SELECT 1
-		  FROM DeviceTagsEntity dts
+		  FROM DeviceAddedTagEntity dts
 		  WHERE dts.deviceTag.id = t.id
 		  AND dts.device.id = :deviceId
 		)

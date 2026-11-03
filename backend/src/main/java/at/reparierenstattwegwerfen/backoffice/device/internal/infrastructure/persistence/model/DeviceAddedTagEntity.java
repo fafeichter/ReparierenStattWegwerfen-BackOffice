@@ -10,15 +10,15 @@ import lombok.Setter;
  * @since 25.05.2026
  */
 @Entity
-@Table(name = "device_tags")
+@Table(name = "device_added_tag")
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceTagsEntity {
+public class DeviceAddedTagEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "device_tags_id")
+	@Column(name = "device_added_tag_id")
 	private Integer id;
 
 	@ManyToOne(fetch = FetchType.LAZY)

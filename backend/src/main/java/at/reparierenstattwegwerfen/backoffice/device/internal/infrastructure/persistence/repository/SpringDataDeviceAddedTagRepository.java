@@ -1,6 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.repository;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.model.DeviceTagsEntity;
+import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.model.DeviceAddedTagEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @since 20.06.2026
  */
 @Repository
-public interface SpringDataDeviceTagsRepository extends JpaRepository<DeviceTagsEntity, Integer> {
+public interface SpringDataDeviceAddedTagRepository extends JpaRepository<DeviceAddedTagEntity, Integer> {
 
 	void deleteByDeviceTagId(Integer deviceTagId);
 }

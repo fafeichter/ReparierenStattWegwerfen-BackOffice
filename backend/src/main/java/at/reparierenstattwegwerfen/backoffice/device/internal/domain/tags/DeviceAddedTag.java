@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DeviceTags {
+public class DeviceAddedTag {
 
 	private Integer id;
 	private Device device;

@@ -26,8 +26,8 @@ public class DeviceTagRepositoryAdapter implements DeviceTagRepository {
 	}
 
 	@Override
-	public List<DeviceTag> getTagsForDevice(Integer deviceId) {
-		return jpaRepository.getTagsForDevice(deviceId)
+	public List<DeviceTag> getAddedTagsForDevice(Integer deviceId) {
+		return jpaRepository.getAddedTagsForDevice(deviceId)
 			.stream()
 			.map(mapper::toDomain)
 			.toList();

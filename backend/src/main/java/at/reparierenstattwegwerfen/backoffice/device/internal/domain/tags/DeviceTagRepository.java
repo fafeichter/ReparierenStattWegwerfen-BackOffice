@@ -10,7 +10,7 @@ public interface DeviceTagRepository {
 
 	DeviceTag getById(Integer id);
 
-	List<DeviceTag> getTagsForDevice(Integer deviceId);
+	List<DeviceTag> getAddedTagsForDevice(Integer deviceId);
 
 	List<DeviceTag> getAvailableTagsForDevice(Integer deviceId, Integer modelSeriesId);
 }
