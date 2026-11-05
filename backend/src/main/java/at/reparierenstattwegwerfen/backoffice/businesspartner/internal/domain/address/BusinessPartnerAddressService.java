@@ -2,12 +2,12 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.a
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.BusinessPartner;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.BusinessPartnerRepository;
+import at.reparierenstattwegwerfen.backoffice.shared.SystemUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Fabian Feichter
@@ -24,8 +24,8 @@ public class BusinessPartnerAddressService {
 	private final ApplicationEventPublisher events;
 
 	@Transactional
-	public void extractAddressFromImage(Integer businessPartnerId, MultipartFile shippingLabelImage, UserDetails actor) {
-		BusinessPartnerAddressExtractResponse address = addressExtractor.extractAddress(shippingLabelImage.getResource());
+	public void extractAddressFromImage(Integer businessPartnerId, Resource shippingLabelImage) {
+		BusinessPartnerAddressExtractResponse address = addressExtractor.extractAddress(shippingLabelImage);
 
 		BusinessPartner businessPartner = businessPartnerRepository.getById(businessPartnerId);
 		BusinessPartnerAddressCountry country = countryRepository.getByCode(address.countryCode());
@@ -51,12 +51,21 @@ public class BusinessPartnerAddressService {
 
 		businessPartnerRepository.save(businessPartner);
 
+		BusinessPartnerNameChanged businessPartnerNameChangedEvent = BusinessPartnerNameChanged.builder()
+			.source(this)
+			.actor(SystemUser.get())
+			.businessPartnerId(businessPartnerId)
+			.firstName(address.firstName())
+			.lastName(address.lastName())
+			.build();
 		BusinessPartnerAddressChanged businessPartnerAddressChangedEvent = BusinessPartnerAddressChanged.builder()
 			.source(this)
-			.actor(actor)
+			.actor(SystemUser.get())
 			.businessPartnerId(businessPartnerId)
 			.businessPartnerAddressId(savedBusinessPartnerAddress.getId())
 			.build();
+
+		events.publishEvent(businessPartnerNameChangedEvent);
 		events.publishEvent(businessPartnerAddressChangedEvent);
 	}
 }

@@ -3,8 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfac
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,8 +19,7 @@ public class BusinessPartnerAddressExtractionController {
 
 	@PostMapping(value = "/address", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public void extractAddressFromImage(@PathVariable Integer businessPartnerId,
-										@RequestPart("shippingLabelImage") MultipartFile shippingLabelImage,
-										@AuthenticationPrincipal UserDetails currentUser) {
-		businessPartnerAddressService.extractAddressFromImage(businessPartnerId, shippingLabelImage, currentUser);
+										@RequestPart("shippingLabelImage") MultipartFile shippingLabelImage) {
+		businessPartnerAddressService.extractAddressFromImage(businessPartnerId, shippingLabelImage.getResource());
 	}
 }

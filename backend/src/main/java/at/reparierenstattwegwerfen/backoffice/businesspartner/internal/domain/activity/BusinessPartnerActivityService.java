@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.Bu
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddress;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddressChanged;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddressRepository;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerNameChanged;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.creation.BusinessPartnerCreated;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerActivityDto;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
@@ -49,6 +50,16 @@ public class BusinessPartnerActivityService {
 		BusinessPartnerAddress address = businessPartnerAddressRepository.getById(event.getBusinessPartnerAddressId());
 		businessPartnerActivity.setName(address.toString());
 		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getBusinessPartnerId()));
+		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(3));
+
+		businessPartnerActivityRepository.save(businessPartnerActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(BusinessPartnerNameChanged event) {
+		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
+		businessPartnerActivity.setName(event.getNameFormatted());
+		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getBusinessPartnerId()));
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(2));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
@@ -59,7 +70,7 @@ public class BusinessPartnerActivityService {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
 		businessPartnerActivity.setName("#" + event.getDeviceId());
 		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getSellerBusinessPartnerId()));
-		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(3));
+		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(4));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}
@@ -69,7 +80,7 @@ public class BusinessPartnerActivityService {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
 		businessPartnerActivity.setName("#" + event.getDeviceId());
 		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getBuyerBusinessPartnerId()));
-		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(4));
+		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(5));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}
