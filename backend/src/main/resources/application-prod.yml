@@ -19,6 +19,10 @@ spring:
     openai:
       # OpenAI API key must be provided via environment variables (https://platform.openai.com/api-keys)
       api-key: ...
+    google:
+      genai:
+        # Gemini API key must be provided via environment variables (https://aistudio.google.com/api-keys)
+        api-key: ...
 springdoc:
   api-docs:
     enabled: false

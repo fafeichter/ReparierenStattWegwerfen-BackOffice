@@ -12,7 +12,7 @@ plugins {
     id("io.github.redgreencoding.plantuml") version "0.3.0"
 }
 
-extra["springAiVersion"] = "2.0.1"
+extra["springAiVersion"] = "2.0.2"
 extra["springModulithVersion"] = "2.1.1"
 extra["mapstructVersion"] = "1.6.3"
 
@@ -29,6 +29,7 @@ dependencies {
     implementation("org.springframework.modulith:spring-modulith-runtime")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
     implementation("org.springframework.ai:spring-ai-starter-model-openai")
+    implementation("org.springframework.ai:spring-ai-starter-model-google-genai")
     implementation("org.springframework.boot:spring-boot-starter-mustache")
     implementation("org.mapstruct:mapstruct:${property("mapstructVersion")}")
     compileOnly("org.projectlombok:lombok")

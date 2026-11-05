@@ -13,6 +13,11 @@ spring:
       chat:
         model: gpt-5.6
         reasoning-effort: medium
+    google:
+      genai:
+        chat:
+          model: gemini-3.5-flash-lite
+          service-tier: priority
   servlet:
     multipart:
       max-file-size: 15MB
