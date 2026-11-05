@@ -6,8 +6,8 @@ CREATE TABLE device_battery_status
     device_battery_status_id int          NOT NULL AUTO_INCREMENT,
     name                     varchar(256) NOT NULL,
     sort_order               int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at               datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at               datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_battery_status_id),
     UNIQUE KEY uq_device_battery_sort (sort_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -32,8 +32,8 @@ CREATE TABLE device_status_classification
 (
     device_status_classification_id int          NOT NULL AUTO_INCREMENT,
     name                            varchar(256) NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_status_classification_id),
     UNIQUE KEY uq_device_status_class_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -45,8 +45,8 @@ CREATE TABLE device_status
     is_endstatus                    boolean      NOT NULL,
     sort_order                      int          NOT NULL,
     device_status_classification_id int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_status_id),
     UNIQUE KEY uq_device_status_name (name),
     UNIQUE KEY uq_device_status_sort (sort_order),
@@ -139,7 +139,7 @@ CREATE TABLE device_audit
     model_color_id                        int,
     url                                   varchar(512)   NOT NULL,
     serial_number                         varchar(12),
-    device_status_id                      int NOT NULL,
+    device_status_id                      int            NOT NULL,
     status_date                           datetime(6)    NOT NULL,
     seller_business_partner_id            int,
     buyer_business_partner_id             int,
@@ -220,8 +220,8 @@ CREATE TABLE device_tag
     device_tag_id int          NOT NULL AUTO_INCREMENT,
     name          varchar(256) NOT NULL,
     sort_order    int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_tag_id),
     UNIQUE KEY uq_device_tag_name (name),
     UNIQUE KEY uq_device_tag_sort (sort_order)
@@ -246,12 +246,12 @@ CREATE TABLE device_tag_available_model_series
 CREATE TABLE device_added_tag
 (
     device_added_tag_id int AUTO_INCREMENT,
-    device_id     int NOT NULL,
-    device_tag_id int NOT NULL,
-    created_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    device_id           int NOT NULL,
+    device_tag_id       int NOT NULL,
+    created_at          datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at          datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_added_tag_id),
-    KEY           idx_device_added_tag_device_tag_id (device_tag_id),
+    KEY                 idx_device_added_tag_device_tag_id (device_tag_id),
     CONSTRAINT uq_device_added_tag_device_id_device_tag_id
         UNIQUE (device_id, device_tag_id),
     CONSTRAINT fk_device_added_tag_device_id
@@ -264,8 +264,8 @@ CREATE TABLE device_activity_type
 (
     device_activity_type_id int auto_increment,
     name                    varchar(256) NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at              datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at              datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_activity_type_id),
     CONSTRAINT uq_device_activity_type_name
         UNIQUE (name)
@@ -279,11 +279,11 @@ CREATE TABLE device_activity
     actor                   varchar(256) NOT NULL,
     device_activity_type_id int          NOT NULL,
     date                    datetime(6)     NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at              datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at              datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_activity_id),
-    KEY        idx_device_activity_device_date (device_id, date),
-    KEY        idx_device_activity_type_id (device_activity_type_id),
+    KEY                     idx_device_activity_device_date (device_id, date),
+    KEY                     idx_device_activity_type_id (device_activity_type_id),
     CONSTRAINT fk_activity_device_id
         FOREIGN KEY (device_id) REFERENCES device (device_id),
     CONSTRAINT fk_activity_device_activity_type_id

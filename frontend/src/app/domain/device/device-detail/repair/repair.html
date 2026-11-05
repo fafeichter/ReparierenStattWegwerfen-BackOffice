@@ -142,16 +142,16 @@
         <textarea autofocus class="w-full!" clrTextarea formControlName="correctedDefect" rows="4"></textarea>
       </clr-textarea-container>
     </form>
-    <div class="modal-footer mt-4">
-      <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-      <button (click)="updateDefects()" [disabled]="defectsForm.invalid || isSubmitting()"
-              class="btn btn-primary"
-              type="submit">
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-        }
-        {{ isSubmitting() ? 'Setting...' : 'Set' }}
-      </button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+    <button (click)="updateDefects()" [disabled]="defectsForm.invalid || isSubmitting()"
+            class="btn btn-primary"
+            type="submit">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+      }
+      {{ isSubmitting() ? 'Setting...' : 'Set' }}
+    </button>
   </div>
 </clr-modal>

@@ -1,4 +1,4 @@
-<button (click)="modalOpen.set(true)" class="btn btn-primary">
+<button (click)="modalOpen.set(true)" class="btn btn-secondary mt-3! rounded-xl!">
   <cds-icon shape="plus"/>
   Add device
 </button>
@@ -46,9 +46,9 @@
     </form>
 
     @if (isLoadingModel()) {
-      <div class="spinner-container">
-        <clr-spinner [clrMedium]="true"></clr-spinner>
-        <span>Loading model details ...</span>
+      <div class="spinner-container mt-6!">
+        <clr-spinner [clrSmall]="true"></clr-spinner>
+        <span>Detecting model...</span>
       </div>
     } @else {
       <div class="mt-5 mb-1">Found model:</div>
@@ -75,29 +75,29 @@
         }
       }
     }
-
-    <div class="modal-footer">
-      <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-      <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting() || isLoadingModel()"
-              class="btn btn-primary"
-              type="submit">
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-        }
-        {{ isSubmitting() ? 'Adding...' : 'Add' }}
-      </button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+    <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting() || isLoadingModel()"
+            class="btn btn-primary"
+            type="submit">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+      }
+      {{ isSubmitting() ? 'Adding...' : 'Add' }}
+    </button>
   </div>
 </clr-modal>
 
 <ng-template #modelCard let-model>
   <div [style.background-color]="getConfidenceColor(model.confidence)" class="found">
-    <strong>{{ model.model?.name }}
-      {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} / {{ model.modelStorage?.name | orElse }}</strong>
-    <a [routerLink]="['/models', model.model.id]" class="ml-1" target="_blank">
-      <cds-icon shape="pop-out"/>
-    </a>
-    <br>
+    <div class="font-bold mb-1">
+      {{ model.model?.name }}
+      {{ model.modelAppleSiliconUnifiedMemory?.name | orElse }} / {{ model.modelStorage?.name | orElse }}
+      <a [routerLink]="['/models', model.model.id]" class="ml-1" target="_blank">
+        <cds-icon shape="pop-out"/>
+      </a>
+    </div>
     Chip: {{ model.modelAppleSilicon?.name | orElse }}<br>
     Color: {{ model.modelColor?.name | orElse }}<br>
     Battery: {{ model.batteryMaximumCapacity | orElse }} % ({{ model.batteryCycleCount | orElse }} cycles)<br>

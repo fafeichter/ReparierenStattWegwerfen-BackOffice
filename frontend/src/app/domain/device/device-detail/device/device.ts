@@ -43,7 +43,7 @@ import { SerialNumber } from '../../serial-number';
 import { SellingModal } from '../selling/selling-modal/selling-modal';
 
 @Component({
-  selector: 'app-base',
+  selector: 'app-device',
   imports: [
     OrElsePipe,
     RouterLink,
@@ -60,10 +60,10 @@ import { SellingModal } from '../selling/selling-modal/selling-modal';
     SerialNumber,
     SellingModal,
   ],
-  templateUrl: './base.html',
-  styleUrl: './base.css',
+  templateUrl: './device.html',
+  styleUrl: './device.css',
 })
-export class Base implements OnInit {
+export class Device implements OnInit {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
 

@@ -7,8 +7,8 @@ CREATE TABLE business_partner_address_country
     name                                varchar(256) NOT NULL,
     code                                char(2)      NOT NULL COMMENT 'ISO-3166',
     sort_order                          int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                          datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                          datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_address_country_id),
     UNIQUE KEY uq_business_partner_address_country_sort (sort_order),
     UNIQUE KEY uq_business_partner_address_country_name (name),
@@ -23,8 +23,8 @@ CREATE TABLE business_partner_address
     zip_code                            varchar(10)  NOT NULL,
     city                                varchar(256) NOT NULL,
     business_partner_address_country_id int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                          datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                          datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_address_id),
     KEY                                 idx_bpa_country_id (business_partner_address_country_id),
     CONSTRAINT fk_bpa_country_id
@@ -55,8 +55,8 @@ CREATE TABLE business_partner_activity_type
 (
     business_partner_activity_type_id int auto_increment,
     name                              varchar(256) NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                        datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                        datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (business_partner_activity_type_id),
     CONSTRAINT uq_business_partner_activity_type_name
         UNIQUE (name)
@@ -68,7 +68,7 @@ CREATE TABLE business_partner_activity
     business_partner_id               int          NOT NULL,
     name                              varchar(256) NOT NULL,
     actor                             varchar(256) NOT NULL,
-    business_partner_activity_type_id int NOT NULL,
+    business_partner_activity_type_id int          NOT NULL,
     date                              datetime(6)      NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     created_at                        datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at                        datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),

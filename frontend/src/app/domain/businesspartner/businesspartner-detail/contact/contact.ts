@@ -1,10 +1,12 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
 import {
+  ClrAlertModule,
   ClrCardModule,
   ClrCommonFormsModule,
   ClrFileInputModule,
   ClrIcon,
   ClrLabel,
+  ClrSpinnerModule,
 } from '@clr/angular';
 import {
   FormControl,
@@ -32,6 +34,8 @@ import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrolls
     ReactiveFormsModule,
     ClrLabel,
     ClrCardModule,
+    ClrSpinnerModule,
+    ClrAlertModule,
   ],
   selector: 'app-contact',
   styleUrl: './contact.css',
@@ -44,19 +48,27 @@ export class Contact implements OnInit {
   form = new FormGroup({
     shippingLabelImage: new FormControl<FileList | null>(null, [Validators.required]),
   });
+  isLoading = signal<boolean>(false);
+  success = signal<boolean>(false);
   private businessPartnerAdressExtractionApi = inject(
     BusinessPartnerAddressExtractionControllerService,
   );
   private router = inject(Router);
   private api = inject(BusinessPartnerControllerService);
-
   private route = inject(ActivatedRoute);
   addressEditModeActive = signal<boolean>(
     this.route.snapshot.queryParamMap.get('edit-address') === 'true',
   );
-
   private rawDeviceId = this.route.snapshot.queryParamMap.get('device-id');
   deviceId = signal<number | undefined>(this.rawDeviceId ? Number(this.rawDeviceId) : undefined);
+
+  constructor() {
+    effect(() => {
+      if (this.addressEditModeActive()) {
+        this.success.set(false);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.api
@@ -68,21 +80,33 @@ export class Contact implements OnInit {
     const shippingLabelImage: File = this.form.controls.shippingLabelImage.value![0];
 
     if (shippingLabelImage) {
+      this.isLoading.set(true);
       this.businessPartnerAdressExtractionApi
         .extractAddressFromImage(this.businessPartnerId()!, shippingLabelImage)
         .subscribe(() => {
-          this.api
-            .getBusinessPartnerDetails(this.businessPartnerId()!)
-            .subscribe((data) => this.businessPartner.set(data));
+          this.api.getBusinessPartnerDetails(this.businessPartnerId()!).subscribe((data) => {
+            this.businessPartner.set(data);
+            this.success.set(true);
+            this.resetForm();
+          });
         });
+    } else {
+      this.resetForm();
     }
   }
 
   cancelForm() {
     if (!this.deviceId()) {
       this.addressEditModeActive.set(false);
+      this.isLoading.set(false);
     } else {
       this.router.navigate(['/devices', this.deviceId()]);
     }
+  }
+
+  private resetForm() {
+    this.isLoading.set(false);
+    this.form.reset();
+    this.form.markAsUntouched();
   }
 }

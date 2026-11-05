@@ -6,8 +6,8 @@ CREATE TABLE spare_part
     spare_part_id int auto_increment,
     name          varchar(256) NOT NULL,
     sort_order    int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at    datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (spare_part_id),
     UNIQUE KEY uq_spare_part_name (name),
     UNIQUE KEY uq_spare_part_sort (sort_order)

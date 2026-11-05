@@ -10,8 +10,8 @@ CREATE TABLE model_apple_silicon
     number_cpu_performance_cores int          NOT NULL,
     number_cpu_super_cores       int          NOT NULL,
     number_gpu_cores             int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                   datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                   datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_apple_silicon_id),
     UNIQUE KEY uq_apple_silicon_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -32,8 +32,8 @@ CREATE TABLE model_color
 (
     model_color_id int          NOT NULL AUTO_INCREMENT,
     name           varchar(256) NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at     datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at     datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_color_id),
     UNIQUE KEY uq_model_color_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -42,8 +42,8 @@ CREATE TABLE model_feature_category
 (
     model_feature_category_id int          NOT NULL AUTO_INCREMENT,
     value                     varchar(128) NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_feature_category_id),
     UNIQUE KEY uq_model_feature_cat_value (value)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -52,8 +52,8 @@ CREATE TABLE model_series
 (
     model_series_id int          NOT NULL AUTO_INCREMENT,
     name            varchar(256) NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_series_id),
     UNIQUE KEY uq_model_series_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -80,8 +80,8 @@ CREATE TABLE model
     release_month       tinyint       NOT NULL,
     display_size        smallint      NOT NULL,
     display_size_exact  DECIMAL(4, 1) NOT NULL,
-    created_at datetime(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at          datetime(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at          datetime(6)   NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_id),
     UNIQUE KEY uq_model_name_number (name, model_number) USING BTREE,
     KEY                 idx_model_series_id (model_series_id),
@@ -94,8 +94,8 @@ CREATE TABLE model_feature
     model_feature_id          int          NOT NULL AUTO_INCREMENT,
     name                      varchar(512) NOT NULL,
     model_feature_category_id int          NOT NULL,
-    created_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    updated_at datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    created_at                datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at                datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_feature_id),
     UNIQUE KEY uq_model_feature_name (name),
     KEY                       idx_mf_category_id (model_feature_category_id),

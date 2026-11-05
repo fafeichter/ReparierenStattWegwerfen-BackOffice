@@ -4,18 +4,9 @@
       <span class="title">Reparieren Statt Wegwerfen - Back Office</span>
     </a>
   </div>
-
-  <form class="search">
-    <label for="search_input">
-      <input id="search_input" placeholder="Search for keywords..." type="text"/>
-    </label>
-  </form>
   <div class="header-actions">
     <a (click)="refreshPage()" aria-label="refresh" class="nav-link nav-icon cursor-pointer">
       <cds-icon shape="refresh"/>
-    </a>
-    <a aria-label="notifications" class="nav-link nav-icon">
-      <cds-icon shape="bell"/>
     </a>
     <clr-dropdown>
       <button aria-label="open user profile" class="nav-text" clrDropdownTrigger>
@@ -30,7 +21,7 @@
         </a>
         <a (click)="logout()" clrDropdownItem>
           <cds-icon shape="logout"/>
-          Logout
+          Log Out
         </a>
       </clr-dropdown-menu>
     </clr-dropdown>

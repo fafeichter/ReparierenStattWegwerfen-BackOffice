@@ -1,7 +1,9 @@
 @if (deviceId()) {
-  <button (click)="goBack()" class="btn btn-link">
-    ← Back
-  </button>
+  <div class="back-bar">
+    <button (click)="goBack()" class="btn btn-link">
+      ← Back
+    </button>
+  </div>
 }
 <app-page-sidebar>
   <app-scrollspy [items]="navItems"/>

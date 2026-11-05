@@ -87,6 +87,11 @@ export class AddDevice {
         this.resetFormState();
         // Uses standard frame animation timing instead of arbitrary magic numbers
         requestAnimationFrame(() => this.urlInput?.nativeElement.focus());
+      } else {
+        this.isSubmitting.set(false);
+        this.isLoadingModel.set(false);
+        this.found.set(undefined);
+        this.selectedAlternative.set(-1);
       }
     });
   }

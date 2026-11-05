@@ -15,7 +15,7 @@ import {
 } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Notes } from './notes/notes';
-import { Base } from './base/base';
+import { Device } from './device/device';
 import { Repair } from './repair/repair';
 import { Activity } from './activity/activity';
 import { Selling } from './selling/selling';
@@ -49,7 +49,7 @@ export const deviceTitle: TitleFn = (route) => {
     ReactiveFormsModule,
     ClrTextareaModule,
     Notes,
-    Base,
+    Device,
     Repair,
     Activity,
     Selling,

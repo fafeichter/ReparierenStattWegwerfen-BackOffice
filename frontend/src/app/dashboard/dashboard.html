@@ -6,22 +6,31 @@
           <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
             <h4 class="mt-2!">
               <cds-icon shape="calendar" size="lg"/>
-              Bestellt / gekauft: {{ orderedCount() }}
-              <app-add-device/>
+              Bestellt / gekauft
+              <clr-badge clrType="outlined">
+                {{ orderedCount() }}
+              </clr-badge>
             </h4>
             <app-devices-ordered (devicesOrderedCount)="orderedCount.set($event)"/>
+            <app-add-device class="mt-4!"/>
           </div>
           <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
             <h4 class="mt-2!">
               <cds-icon shape="hourglass" size="lg"/>
-              Zum Fertigstellen: {{ toFinishCount() }}
+              Zum Fertigstellen
+              <clr-badge clrType="outlined">
+                {{ toFinishCount() }}
+              </clr-badge>
             </h4>
             <app-devices-to-finish (devicesToFinishCount)="toFinishCount.set($event)"/>
           </div>
           <div class="clr-col-12 clr-col-lg-6 clr-col-xl-4">
             <h4 class="mt-2!">
               <cds-icon shape="tags" size="lg"/>
-              Zum Verkauf angeboten: {{ offeredForSaleCount() }}
+              Zum Verkauf angeboten
+              <clr-badge clrType="outlined">
+                {{ offeredForSaleCount() }}
+              </clr-badge>
             </h4>
             <app-devices-offered-for-sale (devicesOfferedForSaleCount)="offeredForSaleCount.set($event)"/>
           </div>

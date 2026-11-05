@@ -15,7 +15,10 @@
     <dl>
       <dt>Model</dt>
       <dd>
-        <a [routerLink]="['/models', deviceBase()?.model?.id]">{{ deviceBase()?.modelNumber }}</a>
+        <a [routerLink]="['/models', deviceBase()?.model?.id]" target="_blank">
+          {{ deviceBase()?.modelNumber }}
+          <cds-icon shape="pop-out"/>
+        </a>
       </dd>
       <dt>Technical Specs</dt>
       <dd>
@@ -26,8 +29,8 @@
       </dd>
     </dl>
     <hr>
-    <dl>
-      @if (!hardwareConfigEditModeActive()) {
+    @if (!hardwareConfigEditModeActive()) {
+      <dl>
         <dt>Chip</dt>
         <dd>
           {{ deviceBase()?.appleSilicon?.name | orElse }}
@@ -51,42 +54,53 @@
             Edit
           </button>
         </dd>
-      } @else {
-        <dt></dt>
-        <dd>
-          <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" clrForm>
+      </dl>
+    } @else {
+      <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" class="p-0!" clrForm
+            clrLayout="vertical">
+        <dl class="form-multi">
+          <dt>Chip</dt>
+          <dd>
             <clr-select-container>
-              <label>Chip</label>
               <select (change)="loadMemoryOptions($event)" clrSelect formControlName="newAppleSiliconId">
                 @for (appleSilicon of modelAppleSilicons(); track appleSilicon.id) {
                   <option [value]="appleSilicon.id">{{ appleSilicon.name }}</option>
                 }
               </select>
             </clr-select-container>
+          </dd>
+          <dt>Unified Memory</dt>
+          <dd>
             <clr-select-container>
-              <label>Unified Memory</label>
               <select (change)="loadStorageOptions()" clrSelect formControlName="newMemoryId">
                 @for (memory of modelMemories(); track memory.id) {
                   <option [value]="memory.id">{{ memory.name }}</option>
                 }
               </select>
             </clr-select-container>
+          </dd>
+          <dt>Storage</dt>
+          <dd>
             <clr-select-container>
-              <label>Storage</label>
               <select clrSelect formControlName="newStorageId">
                 @for (storage of modelStorages(); track storage.id) {
                   <option [value]="storage.id">{{ storage.name }}</option>
                 }
               </select>
             </clr-select-container>
+          </dd>
+          <dt>Color</dt>
+          <dd>
             <clr-select-container>
-              <label>Color</label>
               <select clrSelect formControlName="newColorId">
                 @for (color of modelColors(); track color.id) {
                   <option [value]="color.id">{{ color.name }}</option>
                 }
               </select>
             </clr-select-container>
+          </dd>
+          <dt></dt>
+          <dd>
             <button (click)="hardwareConfigEditModeActive.set(false)" class="btn btn-link" type="button">
               <cds-icon shape="close"/>
               Cancel
@@ -95,10 +109,10 @@
               <cds-icon shape="check"/>
               Save
             </button>
-          </form>
-        </dd>
-      }
-    </dl>
+          </dd>
+        </dl>
+      </form>
+    }
     <hr>
 
     <dl>
@@ -141,21 +155,19 @@
           </button>
         } @else {
           <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm clrLayout="vertical">
-            <clr-input-container>
-              <input autofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
-              @if (serialNumberForm.controls.newSerialNumber.hasError('required')) {
-                <clr-control-error>Serial number must be provided</clr-control-error>
-              }
-              @if (serialNumberForm.controls.newSerialNumber.hasError('minlength')) {
-                <clr-control-error>Serial number must be at least 10 characters long</clr-control-error>
-              }
-              @if (serialNumberForm.controls.newSerialNumber.hasError('maxlength')) {
-                <clr-control-error>Serial number must be at max 12 characters long</clr-control-error>
-              }
-              @if (serialNumberForm.controls.newSerialNumber.hasError('pattern')) {
-                <clr-control-error>Serial number must only contain characters and digits</clr-control-error>
-              }
-            </clr-input-container>
+            <input autofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
+            @if (serialNumberForm.controls.newSerialNumber.hasError('required')) {
+              <clr-control-error>Serial number must be provided</clr-control-error>
+            }
+            @if (serialNumberForm.controls.newSerialNumber.hasError('minlength')) {
+              <clr-control-error>Serial number must be at least 10 characters long</clr-control-error>
+            }
+            @if (serialNumberForm.controls.newSerialNumber.hasError('maxlength')) {
+              <clr-control-error>Serial number must be at max 12 characters long</clr-control-error>
+            }
+            @if (serialNumberForm.controls.newSerialNumber.hasError('pattern')) {
+              <clr-control-error>Serial number must only contain characters and digits</clr-control-error>
+            }
             <button (click)="serialNumberEditModeActive.set(false)" class="btn btn-link" type="button">
               <cds-icon shape="close"/>
               Cancel
@@ -183,7 +195,7 @@
             Edit
           </button>
         } @else {
-          <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" clrForm>
+          <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" clrForm clrLayout="vertical">
             <clr-input-container>
               <input clrInput formControlName="newMaximumCapacity"/>
               <div clrInputSuffix>%</div>
@@ -258,13 +270,15 @@
 
     <dl>
       <dt>Tags</dt>
-      <dd>
-        @for (tag of deviceBase()?.tags; track tag.id) {
-          <clr-label>
-            {{ tag.name }}
-            <cds-icon (click)="removeTag(tag.id)" [style.cursor]="'pointer'" shape="close"/>
-          </clr-label>
-        }
+      <dd class="tags">
+        <div class="tags-row">
+          @for (tag of deviceBase()?.tags; track tag.id) {
+            <clr-label>
+              {{ tag.name }}
+              <cds-icon (click)="removeTag(tag.id)" [style.cursor]="'pointer'" shape="close"/>
+            </clr-label>
+          }
+        </div>
         @if (!tagEditModeActive()) {
           @if (!deviceBase()?.tags?.length) {
             -

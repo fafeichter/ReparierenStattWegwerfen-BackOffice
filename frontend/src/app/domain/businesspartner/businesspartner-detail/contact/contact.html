@@ -30,20 +30,35 @@
           Edit
         </button>
       } @else {
-        <form #formRef (ngSubmit)="updateAddress()" [formGroup]="form" clrForm clrLayout="vertical">
+        <form [formGroup]="form" clrForm clrLayout="vertical">
           <clr-file-input-container clrButtonLabel="Browse">
             <label>Set address from image</label>
-            <input (change)="formRef.requestSubmit()" accept="image/*" capture="environment"
-                   clrFileInput formControlName="shippingLabelImage" multiple name="file"
-                   required type="file"/>
+            <input (change)="updateAddress()" accept="image/*" capture="environment" clrFileInput
+                   formControlName="shippingLabelImage" name="file" required type="file"/>
             <clr-control-helper>Photo of shipping label</clr-control-helper>
             <clr-control-error *clrIfError="'required'">Required</clr-control-error>
           </clr-file-input-container>
         </form>
-        <button (click)="cancelForm()" class="btn btn-link" type="button">
-          <cds-icon shape="close"/>
-          Cancel
-        </button>
+        @if (isLoading()) {
+          <div class="spinner-container">
+            <clr-spinner [clrSmall]="true"></clr-spinner>
+            <span>Detecting address...</span>
+          </div>
+        } @else {
+          @if (success()) {
+            <div class="w-fit">
+              <clr-alert [clrAlertClosable]="false" [clrAlertSizeSmall]="true" clrAlertType="success">
+                <clr-alert-item>
+                  <span class="alert-text">Name and address were set successfully.</span>
+                </clr-alert-item>
+              </clr-alert>
+            </div>
+          }
+          <button (click)="cancelForm()" class="btn btn-link" type="button">
+            <cds-icon shape="close"/>
+            Cancel
+          </button>
+        }
       }
     </div>
     <div class="card-block">

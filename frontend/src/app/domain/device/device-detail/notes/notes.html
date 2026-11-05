@@ -53,18 +53,17 @@
         }
       </clr-textarea-container>
     </form>
-
-    <div class="modal-footer mt-4">
-      <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-      <button (click)="addNote()" [disabled]="form.invalid || isSubmitting()"
-              class="btn btn-primary"
-              type="submit">
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-        }
-        {{ isSubmitting() ? 'Adding...' : 'Add' }}
-      </button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+    <button (click)="addNote()" [disabled]="form.invalid || isSubmitting()"
+            class="btn btn-primary"
+            type="submit">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+      }
+      {{ isSubmitting() ? 'Adding...' : 'Add' }}
+    </button>
   </div>
 </clr-modal>
 
@@ -80,17 +79,16 @@
         }
       </clr-textarea-container>
     </form>
-
-    <div class="modal-footer mt-4">
-      <button (click)="modalEditOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-      <button (click)="editNote()" [disabled]="form.invalid || isSubmitting()"
-              class="btn btn-primary"
-              type="submit">
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-        }
-        {{ isSubmitting() ? 'Editing...' : 'Edit' }}
-      </button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalEditOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+    <button (click)="editNote()" [disabled]="form.invalid || isSubmitting()"
+            class="btn btn-primary"
+            type="submit">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+      }
+      {{ isSubmitting() ? 'Editing...' : 'Edit' }}
+    </button>
   </div>
 </clr-modal>
