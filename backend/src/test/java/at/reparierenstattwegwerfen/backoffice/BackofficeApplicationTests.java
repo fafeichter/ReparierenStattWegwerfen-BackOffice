@@ -1,11 +1,19 @@
 package at.reparierenstattwegwerfen.backoffice;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.ai.google.genai.GoogleGenAiChatModel;
+import org.springframework.ai.model.google.genai.autoconfigure.chat.GoogleGenAiChatAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.embedding.GoogleGenAiEmbeddingConnectionAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.embedding.GoogleGenAiTextEmbeddingAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.image.GoogleGenAiImageAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.image.GoogleGenAiImageConnectionAutoConfiguration;
 import org.springframework.ai.model.openai.autoconfigure.*;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.modulith.core.ApplicationModules;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 /**
  * @author Fabian Feichter
@@ -13,8 +21,7 @@ import org.springframework.modulith.core.ApplicationModules;
  */
 @Import({
 	TestcontainersConfiguration.class,
-	MockedOauth2ResourceServerConfig.class,
-	MockedSpringAiTestConfig.class
+	MockedOauth2ResourceServerConfig.class
 })
 @SpringBootTest
 @EnableAutoConfiguration(exclude = {
@@ -23,8 +30,14 @@ import org.springframework.modulith.core.ApplicationModules;
 	OpenAiEmbeddingAutoConfiguration.class,
 	OpenAiChatAutoConfiguration.class,
 	OpenAiAudioTranscriptionAutoConfiguration.class,
-	OpenAiAudioSpeechAutoConfiguration.class
+	OpenAiAudioSpeechAutoConfiguration.class,
+	GoogleGenAiChatAutoConfiguration.class,
+	GoogleGenAiImageAutoConfiguration.class,
+	GoogleGenAiEmbeddingConnectionAutoConfiguration.class,
+	GoogleGenAiTextEmbeddingAutoConfiguration.class,
+	GoogleGenAiImageConnectionAutoConfiguration.class
 })
+@MockitoBean(types = {OpenAiChatModel.class, GoogleGenAiChatModel.class})
 class BackofficeApplicationTests {
 
 	@Test

@@ -2,7 +2,14 @@ package at.reparierenstattwegwerfen.backoffice;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.ai.google.genai.GoogleGenAiChatModel;
+import org.springframework.ai.model.google.genai.autoconfigure.chat.GoogleGenAiChatAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.embedding.GoogleGenAiEmbeddingConnectionAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.embedding.GoogleGenAiTextEmbeddingAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.image.GoogleGenAiImageAutoConfiguration;
+import org.springframework.ai.model.google.genai.autoconfigure.image.GoogleGenAiImageConnectionAutoConfiguration;
 import org.springframework.ai.model.openai.autoconfigure.*;
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +18,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.modulith.core.ApplicationModule;
 import org.springframework.modulith.core.ApplicationModuleIdentifier;
 import org.springframework.modulith.core.ApplicationModules;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.file.Files;
@@ -31,7 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Import({
 	TestcontainersConfiguration.class,
 	MockedOauth2ResourceServerConfig.class,
-	MockedSpringAiTestConfig.class
 })
 @EnableAutoConfiguration(exclude = {
 	OpenAiModerationAutoConfiguration.class,
@@ -39,8 +46,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 	OpenAiEmbeddingAutoConfiguration.class,
 	OpenAiChatAutoConfiguration.class,
 	OpenAiAudioTranscriptionAutoConfiguration.class,
-	OpenAiAudioSpeechAutoConfiguration.class
+	OpenAiAudioSpeechAutoConfiguration.class,
+	GoogleGenAiChatAutoConfiguration.class,
+	GoogleGenAiImageAutoConfiguration.class,
+	GoogleGenAiEmbeddingConnectionAutoConfiguration.class,
+	GoogleGenAiTextEmbeddingAutoConfiguration.class,
+	GoogleGenAiImageConnectionAutoConfiguration.class
 })
+@MockitoBean(types = {OpenAiChatModel.class, GoogleGenAiChatModel.class})
 @Tag("openapi")
 public class OpenApiSpecsGenerator {
 	private static final List<String> MODULES_TO_IGNORE = List.of(
