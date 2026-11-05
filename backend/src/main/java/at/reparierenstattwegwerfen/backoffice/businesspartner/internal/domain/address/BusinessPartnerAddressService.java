@@ -46,8 +46,8 @@ public class BusinessPartnerAddressService {
 		businessPartnerAddress.setZipCode(address.zipCode());
 		businessPartnerAddress.setCountry(country);
 
-		Integer businessPartnerAddressId = addressRepository.save(businessPartnerAddress).getId();
-		businessPartner.setAddress(businessPartnerAddress);
+		BusinessPartnerAddress savedBusinessPartnerAddress = addressRepository.save(businessPartnerAddress);
+		businessPartner.setAddress(savedBusinessPartnerAddress);
 
 		businessPartnerRepository.save(businessPartner);
 
@@ -55,7 +55,7 @@ public class BusinessPartnerAddressService {
 			.source(this)
 			.actor(actor)
 			.businessPartnerId(businessPartnerId)
-			.businessPartnerAddressId(businessPartnerAddressId)
+			.businessPartnerAddressId(savedBusinessPartnerAddress.getId())
 			.build();
 		events.publishEvent(businessPartnerAddressChangedEvent);
 	}
