@@ -18,4 +18,28 @@ public class BusinessPartnerAddress {
 	private String zipCode;
 	private String city;
 	private BusinessPartnerAddressCountry country;
+
+	@Override
+	public String toString() {
+		String streetVal = getValueOrDefault(street);
+		String houseNumberVal = getValueOrDefault(houseNumber);
+		String zipCodeVal = getValueOrDefault(zipCode);
+		String cityVal = getValueOrDefault(city);
+
+		String countryVal = "-";
+		if (country != null) {
+			countryVal = getValueOrDefault(country.getName());
+		}
+
+		return String.format(
+			"%s %s, %s %s, %s",
+			streetVal, houseNumberVal,
+			zipCodeVal, cityVal,
+			countryVal
+		);
+	}
+
+	private String getValueOrDefault(String value) {
+		return (value != null && !value.isBlank()) ? value.trim() : "-";
+	}
 }
