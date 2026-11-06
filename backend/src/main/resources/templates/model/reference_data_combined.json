@@ -36,7 +36,8 @@
     "34": "M5 Pro mit 15‑Core CPU und 16‑Core GPU",
     "35": "M5 Pro mit 18‑Core CPU und 20‑Core GPU",
     "36": "M5 Max mit 18‑Core CPU und 32‑Core GPU",
-    "37": "M5 Max mit 18‑Core CPU und 40‑Core GPU"
+    "37": "M5 Max mit 18‑Core CPU und 40‑Core GPU",
+    "38": "M6 mit 12‑Core CPU und 12‑Core GPU"
   },
   "storage": {
     "1": "64GB",
@@ -46,7 +47,8 @@
     "5": "1TB",
     "6": "2TB",
     "7": "4TB",
-    "8": "8TB"
+    "8": "8TB",
+    "9": "16TB"
   },
   "memory": {
     "1": "8GB",
@@ -1611,6 +1613,91 @@
       ],
       "memory": [
         2
+      ]
+    },
+    {
+      "id": 60,
+      "model": "A3500",
+      "name": "MacBook Pro (14\", M6, 2026)",
+      "release_date": "2026-11",
+      "screen_size_inch": 14.2,
+      "silicon": [
+        38
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        5,
+        6,
+        7
+      ],
+      "memory": [
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "id": 61,
+      "model": "A3601",
+      "name": "MacBook Pro (14\", PROLED XDR, 2026)",
+      "release_date": "2026-11",
+      "screen_size_inch": 14.2,
+      "silicon": [
+        34,
+        35,
+        36,
+        37
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "memory": [
+        5,
+        7,
+        8,
+        9,
+        11
+      ]
+    },
+    {
+      "id": 62,
+      "model": "A3603",
+      "name": "MacBook Pro (16\", PROLED XDR, 2026)",
+      "release_date": "2026-11",
+      "screen_size_inch": 16.2,
+      "silicon": [
+        35,
+        36,
+        37
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "memory": [
+        5,
+        7,
+        8,
+        9,
+        11
       ]
     }
   ]
