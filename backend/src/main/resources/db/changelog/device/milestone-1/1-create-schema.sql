@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-20-schema context:device
+--changeset fabian:1-create-schema
 
 CREATE TABLE device_battery_status
 (
@@ -10,7 +10,7 @@ CREATE TABLE device_battery_status
     updated_at               datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_battery_status_id),
     UNIQUE KEY uq_device_battery_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_grade
 (
@@ -26,7 +26,7 @@ CREATE TABLE device_grade
     UNIQUE KEY uq_device_grade_description (description),
     UNIQUE KEY uq_device_grade_description_long (description_long),
     UNIQUE KEY uq_device_grade_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_status_classification
 (
@@ -36,7 +36,7 @@ CREATE TABLE device_status_classification
     updated_at                      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (device_status_classification_id),
     UNIQUE KEY uq_device_status_class_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_status
 (
@@ -53,7 +53,7 @@ CREATE TABLE device_status
     KEY                             idx_device_status_classification_id (device_status_classification_id),
     CONSTRAINT fk_device_status_classification_id
         FOREIGN KEY (device_status_classification_id) REFERENCES device_status_classification (device_status_classification_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device
 (
@@ -123,7 +123,7 @@ CREATE TABLE device
         FOREIGN KEY (model_id, model_apple_silicon_id) REFERENCES model_available_apple_silicon (model_id, model_apple_silicon_id),
     CONSTRAINT fk_device_model_color_combo
         FOREIGN KEY (model_id, model_color_id) REFERENCES model_available_color (model_id, model_color_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_audit
 (
@@ -162,7 +162,7 @@ CREATE TABLE device_audit
     PRIMARY KEY (device_audit_id),
     KEY                                   idx_audit_device_id (device_id),
     KEY                                   idx_audit_timestamp (audit_timestamp)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_installed_spare_part
 (
@@ -181,7 +181,7 @@ CREATE TABLE device_installed_spare_part
         FOREIGN KEY (device_id) REFERENCES device (device_id),
     CONSTRAINT fk_device_spare_part_spare_part_id
         FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_note
 (
@@ -196,7 +196,7 @@ CREATE TABLE device_note
     KEY            idx_device_note_date (date),
     CONSTRAINT fk_device_note_device_id
         FOREIGN KEY (device_id) REFERENCES device (device_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_note_audit
 (
@@ -213,7 +213,7 @@ CREATE TABLE device_note_audit
     KEY                  idx_dna_device_note_id (device_note_id),
     KEY                  idx_dna_device_id (device_id),
     KEY                  idx_dna_audit_timestamp (audit_timestamp)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_tag
 (
@@ -225,7 +225,7 @@ CREATE TABLE device_tag
     PRIMARY KEY (device_tag_id),
     UNIQUE KEY uq_device_tag_name (name),
     UNIQUE KEY uq_device_tag_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_tag_available_model_series
 (
@@ -241,7 +241,7 @@ CREATE TABLE device_tag_available_model_series
         FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id),
     CONSTRAINT fk_dtams_model_series_id
         FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_added_tag
 (
@@ -258,7 +258,7 @@ CREATE TABLE device_added_tag
         FOREIGN KEY (device_id) REFERENCES device (device_id),
     CONSTRAINT fk_device_added_tag_device_tag_id
         FOREIGN KEY (device_tag_id) REFERENCES device_tag (device_tag_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_activity_type
 (
@@ -269,7 +269,7 @@ CREATE TABLE device_activity_type
     PRIMARY KEY (device_activity_type_id),
     CONSTRAINT uq_device_activity_type_name
         UNIQUE (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE device_activity
 (
@@ -288,4 +288,4 @@ CREATE TABLE device_activity
         FOREIGN KEY (device_id) REFERENCES device (device_id),
     CONSTRAINT fk_activity_device_activity_type_id
         FOREIGN KEY (device_activity_type_id) REFERENCES device_activity_type (device_activity_type_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);

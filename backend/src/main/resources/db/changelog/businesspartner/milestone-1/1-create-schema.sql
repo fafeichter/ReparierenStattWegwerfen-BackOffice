@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-20-schema context:businesspartner
+--changeset fabian:1-create-schema
 
 CREATE TABLE business_partner_address_country
 (
@@ -13,7 +13,7 @@ CREATE TABLE business_partner_address_country
     UNIQUE KEY uq_business_partner_address_country_sort (sort_order),
     UNIQUE KEY uq_business_partner_address_country_name (name),
     UNIQUE KEY uq_business_partner_address_country_code (code)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE business_partner_address
 (
@@ -29,7 +29,7 @@ CREATE TABLE business_partner_address
     KEY                                 idx_bpa_country_id (business_partner_address_country_id),
     CONSTRAINT fk_bpa_country_id
         FOREIGN KEY (business_partner_address_country_id) REFERENCES business_partner_address_country (business_partner_address_country_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE business_partner
 (
@@ -49,7 +49,7 @@ CREATE TABLE business_partner
     KEY                         idx_bp_address_id (business_partner_address_id),
     CONSTRAINT fk_bp_address_id
         FOREIGN KEY (business_partner_address_id) REFERENCES business_partner_address (business_partner_address_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE business_partner_activity_type
 (
@@ -60,7 +60,7 @@ CREATE TABLE business_partner_activity_type
     PRIMARY KEY (business_partner_activity_type_id),
     CONSTRAINT uq_business_partner_activity_type_name
         UNIQUE (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE business_partner_activity
 (
@@ -79,4 +79,4 @@ CREATE TABLE business_partner_activity
         FOREIGN KEY (business_partner_id) REFERENCES business_partner (business_partner_id),
     CONSTRAINT fk_activity_business_partner_activity_type_id
         FOREIGN KEY (business_partner_activity_type_id) REFERENCES business_partner_activity_type (business_partner_activity_type_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);

@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-09-24-data context:sparepart
+--changeset fabian:2-add-master-data
 
 INSERT INTO spare_part (spare_part_id, name, sort_order)
 VALUES (1, 'LCD Panel', 1),

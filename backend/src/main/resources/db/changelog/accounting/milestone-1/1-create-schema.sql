@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-20-schema context:accounting
+--changeset fabian:1-create-schema
 
 CREATE TABLE accounting_invoice
 (
@@ -10,11 +10,11 @@ CREATE TABLE accounting_invoice
     updated_at            datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (accounting_invoice_id),
     UNIQUE KEY uq_accounting_invoice_number (number)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE accounting_invoice_number
 (
     current_invoice_number int NOT NULL DEFAULT '0',
     created_at             datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updated_at             datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);

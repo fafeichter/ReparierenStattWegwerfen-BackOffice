@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-21-triggers context:device endDelimiter:$$
+--changeset fabian:2-create-triggers endDelimiter:$$
 -- --------------------------------------------------------
 
 CREATE TRIGGER tr_device_insert

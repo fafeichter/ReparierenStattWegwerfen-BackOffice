@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-09-23-schema context:sparepart
+--changeset fabian:1-create-schema
 
 CREATE TABLE spare_part
 (
@@ -11,7 +11,7 @@ CREATE TABLE spare_part
     PRIMARY KEY (spare_part_id),
     UNIQUE KEY uq_spare_part_name (name),
     UNIQUE KEY uq_spare_part_sort (sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE spare_part_available_model_series
 (
@@ -27,4 +27,4 @@ CREATE TABLE spare_part_available_model_series
         FOREIGN KEY (spare_part_id) REFERENCES spare_part (spare_part_id),
     CONSTRAINT fk_spams_model_series_id
         FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);

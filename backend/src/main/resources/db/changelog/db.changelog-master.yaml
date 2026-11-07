@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
       relativeToChangelogFile: true
-      file: migrations/milestone_1/db.changelog-milestone_1.yaml
+      file: db.changelog-milestone-1.yaml

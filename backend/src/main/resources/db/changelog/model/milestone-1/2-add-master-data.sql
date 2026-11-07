@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-21-data context:model
+--changeset fabian:2-add-master-data
 
 INSERT INTO model_apple_silicon (model_apple_silicon_id, name, name_short, number_cpu_efficiency_cores,
                                  number_cpu_performance_cores, number_cpu_super_cores, number_gpu_cores)

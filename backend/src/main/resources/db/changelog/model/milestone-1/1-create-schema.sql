@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:2026-05-20-schema context:model
+--changeset fabian:1-create-schema
 
 CREATE TABLE model_apple_silicon
 (
@@ -14,7 +14,7 @@ CREATE TABLE model_apple_silicon
     updated_at                   datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_apple_silicon_id),
     UNIQUE KEY uq_apple_silicon_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_apple_silicon_unified_memory
 (
@@ -26,7 +26,7 @@ CREATE TABLE model_apple_silicon_unified_memory
     PRIMARY KEY (model_apple_silicon_unified_memory_id),
     CONSTRAINT uq_model_apple_silicon_unified_memory
         UNIQUE (size, unit)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_color
 (
@@ -36,7 +36,7 @@ CREATE TABLE model_color
     updated_at     datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_color_id),
     UNIQUE KEY uq_model_color_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_feature_category
 (
@@ -46,7 +46,7 @@ CREATE TABLE model_feature_category
     updated_at                datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_feature_category_id),
     UNIQUE KEY uq_model_feature_cat_value (value)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_series
 (
@@ -56,7 +56,7 @@ CREATE TABLE model_series
     updated_at      datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_series_id),
     UNIQUE KEY uq_model_series_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_storage
 (
@@ -67,7 +67,7 @@ CREATE TABLE model_storage
     updated_at       datetime(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
     PRIMARY KEY (model_storage_id),
     UNIQUE KEY uq_model_storage_size (size, unit)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model
 (
@@ -87,7 +87,7 @@ CREATE TABLE model
     KEY                 idx_model_series_id (model_series_id),
     CONSTRAINT fk_model_series_id
         FOREIGN KEY (model_series_id) REFERENCES model_series (model_series_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_feature
 (
@@ -101,7 +101,7 @@ CREATE TABLE model_feature
     KEY                       idx_mf_category_id (model_feature_category_id),
     CONSTRAINT fk_mf_category_id
         FOREIGN KEY (model_feature_category_id) REFERENCES model_feature_category (model_feature_category_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_available_apple_silicon
 (
@@ -117,7 +117,7 @@ CREATE TABLE model_available_apple_silicon
         FOREIGN KEY (model_apple_silicon_id) REFERENCES model_apple_silicon (model_apple_silicon_id),
     CONSTRAINT fk_maas_model_id
         FOREIGN KEY (model_id) REFERENCES model (model_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_available_color
 (
@@ -133,7 +133,7 @@ CREATE TABLE model_available_color
         FOREIGN KEY (model_color_id) REFERENCES model_color (model_color_id),
     CONSTRAINT fk_mac_model_id
         FOREIGN KEY (model_id) REFERENCES model (model_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_available_feature
 (
@@ -149,7 +149,7 @@ CREATE TABLE model_available_feature
         FOREIGN KEY (model_feature_id) REFERENCES model_feature (model_feature_id),
     CONSTRAINT fk_maf_model_id
         FOREIGN KEY (model_id) REFERENCES model (model_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_silicon_available_storage
 (
@@ -165,7 +165,7 @@ CREATE TABLE model_silicon_available_storage
         FOREIGN KEY (model_available_apple_silicon_id) REFERENCES model_available_apple_silicon (model_available_apple_silicon_id),
     CONSTRAINT fk_msas_storage_id
         FOREIGN KEY (model_storage_id) REFERENCES model_storage (model_storage_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
 
 CREATE TABLE model_silicon_available_unified_memory
 (
@@ -181,4 +181,4 @@ CREATE TABLE model_silicon_available_unified_memory
         FOREIGN KEY (model_available_apple_silicon_id) REFERENCES model_available_apple_silicon (model_available_apple_silicon_id),
     CONSTRAINT fk_msaum_memory
         FOREIGN KEY (model_apple_silicon_unified_memory_id) REFERENCES model_apple_silicon_unified_memory (model_apple_silicon_unified_memory_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+);
