@@ -13,7 +13,6 @@ import { Devices } from './domain/device/devices-list/devices';
 import { BusinessPartners } from './domain/businesspartner/businesspartners-list/business-partners.component';
 import { Models } from './domain/model/models-list/models';
 import { Accounting } from './domain/accounting/accounting';
-import { Spareparts } from './domain/spareparts/spareparts';
 
 export const routes: Routes = [
   {
@@ -78,11 +77,6 @@ export const routes: Routes = [
             data: { title: modelTitle },
           },
         ],
-      },
-      {
-        path: 'spareparts',
-        component: Spareparts,
-        data: { title: 'Spare Parts' },
       },
       {
         path: 'accounting',
