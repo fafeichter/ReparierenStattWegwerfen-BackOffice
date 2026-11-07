@@ -45,6 +45,7 @@ public class SystemInfoDto {
 	@Data
 	@Builder
 	public static class DatabaseInfo {
+		private String name;
 		private String version;
 		private ConnectionPoolInfo connectionPool;
 

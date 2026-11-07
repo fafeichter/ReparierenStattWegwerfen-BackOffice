@@ -74,6 +74,7 @@
             @let database = backendSystemInfo()?.database;
             @let pool = database?.connectionPool;
             <ul>
+              <li>Name: {{ database?.name }}</li>
               <li>Version: {{ database?.version }}</li>
               <li>Connection Pool:
                 <ul>
