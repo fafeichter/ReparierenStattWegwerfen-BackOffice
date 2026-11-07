@@ -4,17 +4,19 @@
     <label class="clr-col-4">Device ID</label>
     <input class="clr-col-4" clrInput formControlName="deviceId" placeholder="e.g. 1"/>
     <div clrInputPrefix>#</div>
+    <clr-control-error *clrIfError="'min'">Minimum lenght not met</clr-control-error>
+    <clr-control-error *clrIfError="'pattern'">Must be a valid device ID</clr-control-error>
+    <clr-control-error *clrIfError="'noneProvided'">Either Device ID or serial number must be set</clr-control-error>
+    <clr-control-error *clrIfError="'tooManyProvided'">Only one search field must be set</clr-control-error>
   </clr-input-container>
   <clr-input-container class="mt-7!">
     <label class="clr-col-5">Serial number</label>
     <input class="clr-col-5" clrInput deviceSerialNumber formControlName="deviceSerialNumber"
            placeholder="e.g. MQJ6Q79GCR"/>
-    @if (deviceSearchForm.hasError('noneProvided')) {
-      <clr-control-error>Either Device ID or serial number must be set</clr-control-error>
-    }
-    @if (deviceSearchForm.hasError('tooManyProvided')) {
-      <clr-control-error>Only one search field must be set</clr-control-error>
-    }
+    <clr-control-error *clrIfError="'min'">Minimum lenght not met</clr-control-error>
+    <clr-control-error *clrIfError="'pattern'">Must be a valid serial number</clr-control-error>
+    <clr-control-error *clrIfError="'noneProvided'">Either Device ID or serial number must be set</clr-control-error>
+    <clr-control-error *clrIfError="'tooManyProvided'">Only one search field must be set</clr-control-error>
   </clr-input-container>
   <button [disabled]="deviceSearchForm.invalid || isSubmitting()" class="btn btn-icon mt-5!" type="submit">
     <clr-icon direction="right" shape="arrow-mini"></clr-icon>

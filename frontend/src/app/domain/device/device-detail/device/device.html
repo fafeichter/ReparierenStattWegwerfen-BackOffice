@@ -158,18 +158,11 @@
           <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" autocomplete="off" clrForm
                 clrLayout="vertical">
             <input autofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
-            @if (serialNumberForm.controls.newSerialNumber.hasError('required')) {
-              <clr-control-error>Serial number must be provided</clr-control-error>
-            }
-            @if (serialNumberForm.controls.newSerialNumber.hasError('minlength')) {
-              <clr-control-error>Serial number must be at least 10 characters long</clr-control-error>
-            }
-            @if (serialNumberForm.controls.newSerialNumber.hasError('maxlength')) {
-              <clr-control-error>Serial number must be at max 12 characters long</clr-control-error>
-            }
-            @if (serialNumberForm.controls.newSerialNumber.hasError('pattern')) {
-              <clr-control-error>Serial number must only contain characters and digits</clr-control-error>
-            }
+            <clr-control-error *clrIfError="'required'">Serial number must be provided</clr-control-error>
+            <clr-control-error *clrIfError="'min'">Serial number must be at least 10 characters long</clr-control-error>
+            <clr-control-error *clrIfError="'max'">Serial number must be at max 12 characters long</clr-control-error>
+            <clr-control-error *clrIfError="'pattern'">Serial number must only contain characters and digits
+            </clr-control-error>
             <button (click)="serialNumberEditModeActive.set(false)" class="btn btn-link" type="button">
               <cds-icon shape="close"/>
               Cancel
@@ -227,8 +220,7 @@
           </button>
         } @else {
           <form #batteryStatusFormRef (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm"
-                autocomplete="off"
-                clrForm>
+                autocomplete="off" clrForm>
             <select (change)="batteryStatusFormRef.requestSubmit()" formControlName="newBatteryStatusId">
               <option disabled selected value="null">-- Choose --</option>
               @for (deviceBatteryStatus of deviceBatteryStatus(); track deviceBatteryStatus.id) {

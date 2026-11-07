@@ -45,7 +45,7 @@ export class DeviceSearch {
 
     // Error if both are filled out
     if (hasDeviceId && hasDeviceSerial) {
-      return { bothProvided: true };
+      return { tooManyProvided: true };
     }
 
     // Error if neither is filled out
@@ -64,7 +64,7 @@ export class DeviceSearch {
         Validators.pattern(/^[1-9]\d*$/),
       ]),
       deviceSerialNumber: new FormControl<string | null>(null, [
-        Validators.minLength(3),
+        Validators.minLength(10),
         Validators.pattern(/^[a-zA-Z0-9]+$/),
       ]),
     },

@@ -88,19 +88,13 @@
                     <option [value]="availableSparePart.id">{{ availableSparePart.name }}</option>
                   }
                 </select>
-                @if (form.controls.sparePartId.hasError('required')) {
-                  <clr-control-error>Spare Part is required.</clr-control-error>
-                }
+                <clr-control-error *clrIfError="'required'">Spare Part is required.</clr-control-error>
               </clr-select-container>
               <clr-number-input-container>
                 <label>Price</label>
                 <input class="clr-col-4" clrNumberInput formControlName="priceNetto" prefix="€" type="number"/>
-                @if (form.controls.priceNetto.hasError('required')) {
-                  <clr-control-error>Price is required.</clr-control-error>
-                }
-                @if (form.controls.priceNetto.hasError('min')) {
-                  <clr-control-error>Please enter a valid Price.</clr-control-error>
-                }
+                <clr-control-error *clrIfError="'required'">Price is required.</clr-control-error>
+                <clr-control-error *clrIfError="'min'">Please enter a valid Price.</clr-control-error>
               </clr-number-input-container>
               <button (click)="sparePartEditModeActive.set(false); this.form.reset()" class="btn btn-link"
                       type="button">

@@ -48,17 +48,13 @@
       <clr-textarea-container>
         <label><span class="clr-required-mark">Text</span></label>
         <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="2"></textarea>
-        @if (form.controls.text.hasError('required')) {
-          <clr-control-error>Text is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">Text is required.</clr-control-error>
       </clr-textarea-container>
     </form>
   </div>
   <div class="modal-footer">
     <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-    <button (click)="addNote()" [disabled]="form.invalid || isSubmitting()"
-            class="btn btn-primary"
-            type="submit">
+    <button (click)="addNote()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
       }
@@ -74,17 +70,13 @@
       <clr-textarea-container>
         <label><span class="clr-required-mark">Text</span></label>
         <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="2"></textarea>
-        @if (form.controls.text.hasError('required')) {
-          <clr-control-error>Text is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">Text is required.</clr-control-error>
       </clr-textarea-container>
     </form>
   </div>
   <div class="modal-footer">
     <button (click)="modalEditOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-    <button (click)="editNote()" [disabled]="form.invalid || isSubmitting()"
-            class="btn btn-primary"
-            type="submit">
+    <button (click)="editNote()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
       }

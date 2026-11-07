@@ -6,18 +6,14 @@
       <clr-input-container>
         <label><span class="clr-required-mark">First name</span></label>
         <input clrInput formControlName="firstName" type="text"/>
-        @if (businessPartnerForm.controls.firstName.hasError('required')) {
-          <clr-control-error>First name is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">First name is required.</clr-control-error>
       </clr-input-container>
     </div>
     <div class="clr-col-md-3">
       <clr-input-container>
         <label><span class="clr-required-mark">Last name</span></label>
         <input clrInput formControlName="lastName" type="text"/>
-        @if (businessPartnerForm.controls.lastName.hasError('required')) {
-          <clr-control-error>Last name is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">Last name is required.</clr-control-error>
       </clr-input-container>
     </div>
   </div>
@@ -26,18 +22,14 @@
       <clr-input-container>
         <label><span class="clr-required-mark">Street</span></label>
         <input clrInput formControlName="street" type="text"/>
-        @if (businessPartnerForm.controls.street.hasError('required')) {
-          <clr-control-error>Street is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">Street is required.</clr-control-error>
       </clr-input-container>
     </div>
     <div class="clr-col-md-3">
       <clr-input-container>
         <label><span class="clr-required-mark">House number</span></label>
         <input class="clr-col-4" clrInput formControlName="houseNumber" type="text"/>
-        @if (businessPartnerForm.controls.houseNumber.hasError('required')) {
-          <clr-control-error>House number is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">House number is required.</clr-control-error>
       </clr-input-container>
     </div>
   </div>
@@ -46,18 +38,14 @@
       <clr-input-container>
         <label><span class="clr-required-mark">ZIP code</span></label>
         <input class="clr-col-5" clrInput formControlName="zipCode" type="text"/>
-        @if (businessPartnerForm.controls.zipCode.hasError('required')) {
-          <clr-control-error>ZIP code is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">ZIP code is required.</clr-control-error>
       </clr-input-container>
     </div>
     <div class="clr-col-md-3">
       <clr-input-container>
         <label><span class="clr-required-mark">City</span></label>
         <input clrInput formControlName="city" type="text"/>
-        @if (businessPartnerForm.controls.city.hasError('required')) {
-          <clr-control-error>City is required.</clr-control-error>
-        }
+        <clr-control-error *clrIfError="'required'">City is required.</clr-control-error>
       </clr-input-container>
     </div>
   </div>
