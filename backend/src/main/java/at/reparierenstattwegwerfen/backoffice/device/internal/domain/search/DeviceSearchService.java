@@ -2,11 +2,17 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.domain.search;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.DeviceRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity.DeviceActivityService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.earnings.DeviceEarning;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePart;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePartRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOfferedForSaleDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOrderedDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceToFinishDto;
-import at.reparierenstattwegwerfen.backoffice.model.*;
+import at.reparierenstattwegwerfen.backoffice.model.ModelAppleSiliconDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.ModelDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.ModelStorageDetailsService;
+import at.reparierenstattwegwerfen.backoffice.model.ModelUnifiedMemoryDetailsService;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,24 +35,31 @@ public class DeviceSearchService {
 	private final ModelDetailsService modelDetailsService;
 	private final ModelAppleSiliconDetailsService modelAppleSiliconDetailsService;
 	private final ModelUnifiedMemoryDetailsService modelUnifiedMemoryDetailsService;
-	private final ModelColorDetailsService modelColorDetailsService;
 	private final ModelStorageDetailsService modelStorageDetailsService;
 	private final DeviceActivityService deviceActivityService;
+	private final DeviceInstalledSparePartRepository deviceInstalledSparePartRepository;
 
 	@Transactional(readOnly = true)
 	public Page<DeviceDto> search(Integer pageNumber, Integer pageSize, Boolean includeInactiveDevices) {
 		PageRequest page = PageRequest.of(pageNumber - 1, pageSize, Sort.by("id"));
 
 		return deviceRepository.search(page, includeInactiveDevices)
-			.map(device -> DeviceDto.builder()
-				.deviceId(device.getId())
-				.status(NamedIdDto.from(device.getStatus()))
-				.model(modelDetailsService.getModel(device.getModelId()))
-				.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-				.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
-				.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
-				.lastActivity(deviceActivityService.getLastActivityDateForDevice(device.getId()))
-				.build());
+			.map(device -> {
+				List<DeviceInstalledSparePart> spareParts = deviceInstalledSparePartRepository.getSparePartsForDevice(device.getId());
+				DeviceEarning deviceEarning = new DeviceEarning(device, spareParts);
+
+				return
+					DeviceDto.builder()
+						.deviceId(device.getId())
+						.status(NamedIdDto.from(device.getStatus()))
+						.model(modelDetailsService.getModel(device.getModelId()))
+						.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
+						.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+						.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
+						.earning(deviceEarning.getEarning())
+						.lastActivity(deviceActivityService.getLastActivityDateForDevice(device.getId()))
+						.build();
+			});
 	}
 
 	@Transactional(readOnly = true)

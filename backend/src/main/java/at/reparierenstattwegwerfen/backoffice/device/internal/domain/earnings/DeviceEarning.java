@@ -16,7 +16,7 @@ public class DeviceEarning {
 	private final Device device;
 	private final List<DeviceInstalledSparePart> spareParts;
 
-	public Double getProfitOrLoss() {
+	public Double getEarning() {
 		if (device.getSellingPrice() == null) {
 			return device.getPurchasePrice() * -1;
 		} else {

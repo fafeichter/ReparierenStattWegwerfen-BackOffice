@@ -24,6 +24,6 @@ public class DeviceEarningsService {
 		Device device = deviceRepository.getById(deviceId);
 		List<DeviceInstalledSparePart> spareParts = deviceInstalledSparePartRepository.getSparePartsForDevice(deviceId);
 
-		return new DeviceEarning(device, spareParts).getProfitOrLoss();
+		return new DeviceEarning(device, spareParts).getEarning();
 	}
 }

@@ -7,7 +7,7 @@ import {
   ClrLabel,
 } from '@clr/angular';
 import { OrElsePipe } from '../../../pipes/or-else-pipe';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     ClrLabel,
     ClrCheckboxModule,
     FormsModule,
+    CurrencyPipe,
   ],
   templateUrl: './devices.html',
   styleUrl: './devices.css',

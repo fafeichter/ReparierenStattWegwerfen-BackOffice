@@ -20,5 +20,6 @@ public class DeviceDto {
 	private NamedIdDto appleSilicon;
 	private NamedIdDto unifiedMemory;
 	private NamedIdDto storage;
+	private Double earning;
 	private LocalDateTime lastActivity;
 }
