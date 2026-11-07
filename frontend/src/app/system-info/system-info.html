@@ -102,6 +102,37 @@
       </clr-card-header>
       <clr-card-body>
         <clr-card-body-text>
+          <clr-card-body-text>
+            @let openAiModel = backendSystemInfo()?.aiModels?.openAiModel;
+            @let geminiAiModel = backendSystemInfo()?.aiModels?.geminiModel;
+            <ul>
+              <li>OpenAI:
+                <ul>
+                  <li>Model: {{ openAiModel?.model }}</li>
+                  <li>Reasoning Effort: {{ openAiModel?.reasoningEffort | orElse }}</li>
+                  <li>Temperature: {{ openAiModel?.temperature | orElse }}</li>
+                </ul>
+              </li>
+              <li>Gemini:
+                <ul>
+                  <li>Model: {{ geminiAiModel?.model }}</li>
+                  <li>Thinking Level: {{ geminiAiModel?.thinkingLevel | orElse }}</li>
+                  <li>Temperature: {{ geminiAiModel?.temperature | orElse }}</li>
+                  <li>Service Tier: {{ geminiAiModel?.serviceTier | orElse }}</li>
+                </ul>
+              </li>
+            </ul>
+          </clr-card-body-text>
+        </clr-card-body-text>
+      </clr-card-body>
+    </clr-card>
+    <clr-card [id]="navItems[5].id">
+      <clr-card-header>
+        <cds-icon [shape]="navItems[5].icon" size="lg"/>
+        {{ navItems[5].label }}
+      </clr-card-header>
+      <clr-card-body>
+        <clr-card-body-text>
           <ul>
             <li>User Data:
               <pre class="border-none!">{{ accessTokenPayload() | json }}</pre>
@@ -110,10 +141,10 @@
         </clr-card-body-text>
       </clr-card-body>
     </clr-card>
-    <clr-card [id]="navItems[5].id">
+    <clr-card [id]="navItems[6].id">
       <clr-card-header>
-        <cds-icon [shape]="navItems[5].icon" size="lg"/>
-        {{ navItems[5].label }}
+        <cds-icon [shape]="navItems[6].icon" size="lg"/>
+        {{ navItems[6].label }}
       </clr-card-header>
       <clr-card-body>
         <clr-card-body-text>

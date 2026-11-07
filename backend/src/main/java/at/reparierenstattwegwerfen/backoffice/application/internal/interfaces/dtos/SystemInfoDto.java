@@ -16,6 +16,7 @@ public class SystemInfoDto {
 	private JavaInfo javaInfo; // can not be named "java" because of Lombok
 	private OsInfo os;
 	private DatabaseInfo database;
+	private AiModelsInfo aiModels;
 
 	@Data
 	@Builder
@@ -46,20 +47,44 @@ public class SystemInfoDto {
 	public static class DatabaseInfo {
 		private String version;
 		private ConnectionPoolInfo connectionPool;
+
+		@Data
+		@Builder
+		public static class ConnectionPoolInfo {
+			private Integer maximumPoolSize;
+			private Integer minimumIdle;
+			private Long idleTimeout;
+			private Long maxLifetime;
+			private Long connectionTimeout;
+			private Long leakDetectionThreshold;
+
+			private Integer activeConnections;
+			private Integer idleConnections;
+			private Integer totalConnections;
+		}
 	}
 
 	@Data
 	@Builder
-	public static class ConnectionPoolInfo {
-		private Integer maximumPoolSize;
-		private Integer minimumIdle;
-		private Long idleTimeout;
-		private Long maxLifetime;
-		private Long connectionTimeout;
-		private Long leakDetectionThreshold;
+	public static class AiModelsInfo {
+		private OpenAiModelInfo openAiModel;
+		private GeminiModelInfo geminiModel;
 
-		private Integer activeConnections;
-		private Integer idleConnections;
-		private Integer totalConnections;
+		@Data
+		@Builder
+		public static class OpenAiModelInfo {
+			private String model;
+			private String reasoningEffort;
+			private Double temperature;
+		}
+
+		@Data
+		@Builder
+		public static class GeminiModelInfo {
+			private String model;
+			private String thinkingLevel;
+			private Double temperature;
+			private String serviceTier;
+		}
 	}
 }
