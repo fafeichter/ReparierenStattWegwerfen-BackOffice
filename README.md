@@ -109,6 +109,7 @@ Create a `secrets.env` file in the root directory and provide the required secre
 
 ```.env
 OPENAI_API_KEY_DEV=<your_api_key>
+GEMINI_API_KEY_DEV=<your_api_key>
 ```
 
 ### Optional Dependencies
