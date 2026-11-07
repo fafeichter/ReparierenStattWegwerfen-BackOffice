@@ -46,18 +46,48 @@ The following domains have been identified:
 
 ---
 
-## 📌 Development Milestones
+## 📌 Roadmap
 
-- **Milestone 1 (Target: Q4 2026):** Replace the existing Apple Numbers spreadsheet with a modern web application based on Domain-Driven Design (DDD) principles.
-- **Milestone 2 (Target: 2027)**: Implement the Accounting domain.
-- **Milestone 3 (Target: N/A)**: Implement the Spare Parts domain.
+| Milestone | Name                  | Target            |
+|-----------|-----------------------|-------------------|
+| 1         | Excel Ablöse          | Autumn 2026       |
+| 2         | Make Backoffice Great | Q4 2026 / Q1 2027 |
+| 3         | Accounting Domain     | 2027              |
+| 4         | Spare Parts Domain    | 2027              |
 
-Not planned in yet:
+### Milestone 1 – "Excel Ablöse"
 
-- Implement the Spare Parts domain.
-- Send updates to client via WebSocket or similar instead of reloading the data.
+**Target:** Autumn 2026
 
-_Every milestone includes maintaining code health and stability, as well as strictly adhering to DDD principles._
+Replace the existing Apple Numbers spreadsheet with a modern web application built on Domain-Driven Design (DDD) principles.
+
+### Milestone 2 – "Make Backoffice Great"
+
+**Target:** Q4 2026 / Q1 2027
+
+Improve the application based on experience from daily use, with a focus on UI/UX.
+
+### Milestone 3 – "Accounting Domain"
+
+**Target:** 2027
+
+Implement the Accounting domain.
+
+### Milestone 4 – "Spare Parts Domain"
+
+**Target:** 2027
+
+Implement the Spare Parts domain.
+
+---
+
+### Backlog (not yet scheduled)
+
+- **Real-Time Updates:** Push changes to the client via WebSockets (or a similar technology) instead of reloading the data.
+
+---
+
+> **Note:** Every milestone includes ongoing work to keep the codebase healthy and stable, and strict adherence to DDD principles.
 
 ## 🛠️ Tech Stack
 
