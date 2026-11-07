@@ -1,7 +1,7 @@
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false">
   <h3 class="modal-title">Set selling details</h3>
   <div class="modal-body">
-    <form (ngSubmit)="setSellingDetails()" [formGroup]="form" clrForm>
+    <form (ngSubmit)="setSellingDetails()" [formGroup]="form" autocomplete="off" clrForm>
       <clr-number-input-container>
         <label><span class="clr-required-mark">Price</span></label>
         <input clrNumberInput formControlName="sellingPrice" prefix="€" type="number"/>
@@ -15,7 +15,7 @@
 
       <clr-date-container>
         <label><span class="clr-required-mark">Selling date</span></label>
-        <input [max]="(now | date:'yyyy-MM-dd')!" autocomplete="off" clrDate formControlName="sellingDate"
+        <input [max]="(now | date:'yyyy-MM-dd')!" clrDate formControlName="sellingDate"
                type="date"/>
         @if (this.form.controls.sellingDate.hasError('required')) {
           <clr-control-error>Buying date is required.</clr-control-error>

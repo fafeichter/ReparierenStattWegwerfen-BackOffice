@@ -78,8 +78,8 @@
         <clr-dg-row>
           <clr-dg-cell/>
           <clr-dg-cell>
-            <form (ngSubmit)="saveSparePart()" [formGroup]="form" class="clr-form-full-width" clrForm
-                  clrLayout="horizontal">
+            <form (ngSubmit)="saveSparePart()" [formGroup]="form" autocomplete="off" class="clr-form-full-width"
+                  clrForm clrLayout="horizontal">
               <clr-select-container>
                 <label>Spare Part</label>
                 <select class="clr-col-5" clrSelect formControlName="sparePartId">
@@ -131,11 +131,10 @@
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="l">
   <div class="modal-title">Set defects</div>
   <div class="modal-body">
-    <form (ngSubmit)="updateDefects()" [formGroup]="defectsForm" clrForm>
+    <form (ngSubmit)="updateDefects()" [formGroup]="defectsForm" autocomplete="off" clrForm>
       <clr-textarea-container>
         <label><span class="clr-required-mark">Reported Defect</span></label>
-        <textarea class="w-full!" clrTextarea formControlName="reportedDefect" required
-                  rows="2"></textarea>
+        <textarea class="w-full!" clrTextarea formControlName="reportedDefect" required rows="2"></textarea>
       </clr-textarea-container>
       <clr-textarea-container>
         <label>Corrected Defect</label>

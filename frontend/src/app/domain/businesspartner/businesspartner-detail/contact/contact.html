@@ -30,7 +30,7 @@
           Edit
         </button>
       } @else {
-        <form [formGroup]="form" clrForm clrLayout="vertical">
+        <form [formGroup]="form" autocomplete="off" clrForm clrLayout="vertical">
           <clr-file-input-container clrButtonLabel="Browse">
             <label>Set address from image</label>
             <input (change)="updateAddress()" accept="image/*" capture="environment" clrFileInput

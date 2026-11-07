@@ -56,8 +56,8 @@
         </dd>
       </dl>
     } @else {
-      <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" class="p-0!" clrForm
-            clrLayout="vertical">
+      <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" autocomplete="off" class="p-0!"
+            clrForm clrLayout="vertical">
         <dl class="form-multi">
           <dt>Chip</dt>
           <dd>
@@ -125,7 +125,8 @@
             Edit
           </button>
         } @else {
-          <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" clrForm clrLayout="vertical">
+          <form #statusFormRef (ngSubmit)="changeStatus()" [formGroup]="statusForm" autocomplete="off" clrForm
+                clrLayout="vertical">
             <select (change)="statusFormRef.requestSubmit(); statusSelected($event)" formControlName="newStatusId">
               @for (deviceStatus of deviceStatus(); track deviceStatus.id) {
                 @if (deviceStatus.id === 7) {
@@ -154,7 +155,8 @@
             Edit
           </button>
         } @else {
-          <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" clrForm clrLayout="vertical">
+          <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" autocomplete="off" clrForm
+                clrLayout="vertical">
             <input autofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
             @if (serialNumberForm.controls.newSerialNumber.hasError('required')) {
               <clr-control-error>Serial number must be provided</clr-control-error>
@@ -195,7 +197,7 @@
             Edit
           </button>
         } @else {
-          <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" clrForm clrLayout="vertical">
+          <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" autocomplete="off" clrForm clrLayout="vertical">
             <clr-input-container>
               <input clrInput formControlName="newMaximumCapacity"/>
               <div clrInputSuffix>%</div>
@@ -224,7 +226,9 @@
             Edit
           </button>
         } @else {
-          <form #batteryStatusFormRef (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm" clrForm>
+          <form #batteryStatusFormRef (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm"
+                autocomplete="off"
+                clrForm>
             <select (change)="batteryStatusFormRef.requestSubmit()" formControlName="newBatteryStatusId">
               <option disabled selected value="null">-- Choose --</option>
               @for (deviceBatteryStatus of deviceBatteryStatus(); track deviceBatteryStatus.id) {
@@ -251,7 +255,7 @@
             Edit
           </button>
         } @else {
-          <form #gradeFormRef (ngSubmit)="changeGrade()" [formGroup]="gradeForm" clrForm>
+          <form #gradeFormRef (ngSubmit)="changeGrade()" [formGroup]="gradeForm" autocomplete="off" clrForm>
             <select (change)="gradeFormRef.requestSubmit()" formControlName="newGradeId">
               <option disabled selected value="null">-- Choose --</option>
               @for (deviceGrade of deviceGrades(); track deviceGrade.id) {
@@ -288,7 +292,7 @@
             Add
           </button>
         } @else {
-          <form #tagFormRef (ngSubmit)="addTag()" [formGroup]="tagForm" clrForm>
+          <form #tagFormRef (ngSubmit)="addTag()" [formGroup]="tagForm" autocomplete="off" clrForm>
             <select (change)="tagFormRef.requestSubmit()" formControlName="newTagId">
               <option disabled selected value="null">-- Choose --</option>
               @for (deviceTag of availableDeviceTags(); track deviceTag.id) {

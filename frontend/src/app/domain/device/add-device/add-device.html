@@ -6,10 +6,10 @@
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="xl">
   <div class="modal-title">Add device</div>
   <div class="modal-body">
-    <form (ngSubmit)="addDevice()" [formGroup]="form" clrForm>
+    <form (ngSubmit)="addDevice()" [formGroup]="form" autocomplete="off" clrForm>
       <clr-input-container>
         <label><span class="clr-required-mark">URL</span></label>
-        <input #input (click)="input.select()" (focusout)="selectUrlText()" autocomplete="off" clrInput
+        <input #input (click)="input.select()" (focusout)="selectUrlText()" clrInput
                formControlName="url"
                size="999" type="url"/>
         <clr-control-helper>From Kleinanzeigen, Willhaben etc.</clr-control-helper>
@@ -34,7 +34,7 @@
 
       <clr-date-container>
         <label><span class="clr-required-mark">Buying date</span></label>
-        <input [max]="(now | date:'yyyy-MM-dd')!" autocomplete="off" clrDate formControlName="buyingDate"
+        <input [max]="(now | date:'yyyy-MM-dd')!" clrDate formControlName="buyingDate"
                type="date"/>
         @if (this.form.controls.buyingDate.hasError('required')) {
           <clr-control-error>Buying date is required.</clr-control-error>

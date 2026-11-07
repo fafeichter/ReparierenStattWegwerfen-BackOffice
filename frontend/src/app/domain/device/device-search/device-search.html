@@ -1,5 +1,5 @@
-<form (ngSubmit)="searchDevice()" [formGroup]="deviceSearchForm" class="clr-form-full-width" clrForm
-      clrLayout="vertical">
+<form (ngSubmit)="searchDevice()" [formGroup]="deviceSearchForm" autocomplete="off" class="clr-form-full-width"
+      clrForm clrLayout="vertical">
   <clr-input-container class="mt-0!">
     <label class="clr-col-4">Device ID</label>
     <input class="clr-col-4" clrInput formControlName="deviceId" placeholder="e.g. 1"/>

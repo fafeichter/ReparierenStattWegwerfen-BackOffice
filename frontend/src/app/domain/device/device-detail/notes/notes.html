@@ -44,7 +44,7 @@
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="l">
   <div class="modal-title">Add note</div>
   <div class="modal-body">
-    <form (ngSubmit)="addNote()" [formGroup]="form" clrForm>
+    <form (ngSubmit)="addNote()" [formGroup]="form" autocomplete="off" clrForm>
       <clr-textarea-container>
         <label><span class="clr-required-mark">Text</span></label>
         <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="2"></textarea>
@@ -70,7 +70,7 @@
 <clr-modal [(clrModalOpen)]="modalEditOpen" [clrModalStaticBackdrop]="false" clrModalSize="l">
   <div class="modal-title">Edit note</div>
   <div class="modal-body">
-    <form (ngSubmit)="editNote()" [formGroup]="form" clrForm>
+    <form (ngSubmit)="editNote()" [formGroup]="form" autocomplete="off" clrForm>
       <clr-textarea-container>
         <label><span class="clr-required-mark">Text</span></label>
         <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="2"></textarea>
