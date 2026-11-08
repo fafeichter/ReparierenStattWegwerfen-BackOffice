@@ -232,7 +232,7 @@
         @if (!batteryEditModeActive()) {
           {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
             /
-          {{ deviceBase()?.batteryCycleCount |orElse }}
+          {{ deviceBase()?.batteryCycleCount | orElse }}
           cycles
           <button (click)="activateBatteryEditMode()" class="btn btn-link">
             <cds-icon shape="edit"/>
