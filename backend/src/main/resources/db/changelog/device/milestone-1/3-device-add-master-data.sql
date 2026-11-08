@@ -99,4 +99,5 @@ VALUES (1, 'Erstellt'),
        (24, 'Rechnungsnummer zugewiesen'),
        (25, 'Verkaufspreis geändert'),
        (26, 'Notiz geändert'),
-       (27, 'Akku Zustand geändert');
+       (27, 'Akku Zustand geändert'),
+       (28, 'Zubehör geändert');

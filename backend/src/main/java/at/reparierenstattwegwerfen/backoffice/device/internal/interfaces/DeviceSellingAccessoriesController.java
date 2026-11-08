@@ -5,6 +5,8 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.De
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceSellingAccessoriesFormDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -20,12 +22,13 @@ public class DeviceSellingAccessoriesController {
 
 	@GetMapping("/")
 	public DeviceSellingAccessoriesDto getSellingAccessories(@PathVariable Integer deviceId) {
-		return sellingAccessoriesService.load(deviceId);
+		return sellingAccessoriesService.getSellingAccessoriesForDevice(deviceId);
 	}
 
 	@PostMapping("/")
 	public void updateSellingAccessories(@PathVariable Integer deviceId,
-										 @Valid @RequestBody DeviceSellingAccessoriesFormDto accessoriesFormDto) {
-		sellingAccessoriesService.update(deviceId, accessoriesFormDto);
+										 @Valid @RequestBody DeviceSellingAccessoriesFormDto accessoriesFormDto,
+										 @AuthenticationPrincipal UserDetails currentUser) {
+		sellingAccessoriesService.updateSellingAccessories(deviceId, accessoriesFormDto, currentUser);
 	}
 }

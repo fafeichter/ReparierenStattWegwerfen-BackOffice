@@ -17,6 +17,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.Devic
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteDeleted;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteEdited;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.notes.DeviceNoteRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceAccessoriesChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingDateChanged;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingInvoiceNumberAssigned;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.selling.DeviceSellingPriceChanged;
@@ -335,6 +336,16 @@ public class DeviceActivityService {
 		deviceActivity.setName(businessPartner.name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(21));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceAccessoriesChanged event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event);
+		deviceActivity.setName(event.getNameFormatted());
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(28));
 
 		deviceActivityRepository.save(deviceActivity);
 	}
