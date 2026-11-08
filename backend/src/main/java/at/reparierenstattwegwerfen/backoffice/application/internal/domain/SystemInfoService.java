@@ -2,7 +2,10 @@ package at.reparierenstattwegwerfen.backoffice.application.internal.domain;
 
 import at.reparierenstattwegwerfen.backoffice.application.internal.interfaces.dtos.SystemInfoDto;
 import at.reparierenstattwegwerfen.backoffice.application.internal.interfaces.dtos.SystemInfoDto.*;
+import at.reparierenstattwegwerfen.backoffice.application.internal.interfaces.dtos.SystemInfoDto.AiModelsInfo.GeminiModelInfo;
 import at.reparierenstattwegwerfen.backoffice.application.internal.interfaces.dtos.SystemInfoDto.AiModelsInfo.OpenAiModelInfo;
+import at.reparierenstattwegwerfen.backoffice.application.internal.interfaces.dtos.SystemInfoDto.DatabaseInfo.ConnectionPoolInfo;
+import at.reparierenstattwegwerfen.backoffice.application.internal.interfaces.dtos.SystemInfoDto.DatabaseInfo.ConnectionPoolInfo.ConnectionPoolInfoBuilder;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariPoolMXBean;
 import jakarta.annotation.PostConstruct;
@@ -21,7 +24,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 /**
  * @author Fabian Feichter
@@ -64,8 +66,8 @@ public class SystemInfoService {
 	}
 
 	public Boolean isRunningOnProdDbAndData() {
-		boolean isRunningInProductionSystem = Arrays.asList(environment.getActiveProfiles()).contains("prod");
-		boolean isRunningWithTestData = Arrays.asList(environment.getActiveProfiles()).contains("test-data");
+		boolean isRunningInProductionSystem = environment.matchesProfiles("prod");
+		boolean isRunningWithTestData = environment.matchesProfiles("test-data");
 		return isRunningInProductionSystem && !isRunningWithTestData;
 	}
 
@@ -94,7 +96,7 @@ public class SystemInfoService {
 	}
 
 	private DatabaseInfo getDatabaseInfo() {
-		DatabaseInfo.ConnectionPoolInfo connectionPoolInfo = getConnectionPoolInfo();
+		ConnectionPoolInfo connectionPoolInfo = getConnectionPoolInfo();
 		return DatabaseInfo.builder()
 			.name(this.cachedDatabaseName)
 			.version(this.cachedDatabaseVersion)
@@ -103,8 +105,8 @@ public class SystemInfoService {
 	}
 
 	private AiModelsInfo getAiModelsInfo() {
-		OpenAiModelInfo openAiModelInfo = getOpenAiModelInfo(openAiChatModel.getOptions());
-		AiModelsInfo.GeminiModelInfo geminiModelInfo = getGeminiModelInfo(geminiChatModel.getOptions());
+		OpenAiModelInfo openAiModelInfo = getOpenAiModelInfo();
+		GeminiModelInfo geminiModelInfo = getGeminiModelInfo();
 
 		return AiModelsInfo.builder()
 			.openAiModel(openAiModelInfo)
@@ -112,7 +114,9 @@ public class SystemInfoService {
 			.build();
 	}
 
-	private OpenAiModelInfo getOpenAiModelInfo(OpenAiChatOptions openAiModelOptions) {
+	private OpenAiModelInfo getOpenAiModelInfo() {
+		OpenAiChatOptions openAiModelOptions = openAiChatModel.getOptions();
+
 		return OpenAiModelInfo.builder()
 			.model(openAiModelOptions.getModel())
 			.reasoningEffort(openAiModelOptions.getReasoningEffort())
@@ -120,8 +124,10 @@ public class SystemInfoService {
 			.build();
 	}
 
-	private AiModelsInfo.GeminiModelInfo getGeminiModelInfo(GoogleGenAiChatOptions geminiModelOptions) {
-		return AiModelsInfo.GeminiModelInfo.builder()
+	private GeminiModelInfo getGeminiModelInfo() {
+		GoogleGenAiChatOptions geminiModelOptions = geminiChatModel.getOptions();
+
+		return GeminiModelInfo.builder()
 			.model(geminiModelOptions.getModel())
 			.thinkingLevel(geminiModelOptions.getThinkingLevel() != null ? geminiModelOptions.getThinkingLevel().name() : null)
 			.serviceTier(geminiModelOptions.getServiceTier() != null ? geminiModelOptions.getServiceTier().getValue() : null)
@@ -129,21 +135,20 @@ public class SystemInfoService {
 			.build();
 	}
 
-	private DatabaseInfo.ConnectionPoolInfo getConnectionPoolInfo() {
+	private ConnectionPoolInfo getConnectionPoolInfo() {
 		if (!(dataSource instanceof HikariDataSource hikari)) {
 			return null;
 		}
 
-		DatabaseInfo.ConnectionPoolInfo.ConnectionPoolInfoBuilder builder = DatabaseInfo.ConnectionPoolInfo.builder()
+		HikariPoolMXBean pool = hikari.getHikariPoolMXBean();
+		ConnectionPoolInfoBuilder builder = ConnectionPoolInfo.builder()
 			.maximumPoolSize(hikari.getMaximumPoolSize())
 			.minimumIdle(hikari.getMinimumIdle())
 			.idleTimeout(hikari.getIdleTimeout())
 			.maxLifetime(hikari.getMaxLifetime())
 			.connectionTimeout(hikari.getConnectionTimeout())
-			.leakDetectionThreshold(hikari.getLeakDetectionThreshold());
-
-		HikariPoolMXBean pool = hikari.getHikariPoolMXBean();
-		builder.activeConnections(pool.getActiveConnections())
+			.leakDetectionThreshold(hikari.getLeakDetectionThreshold())
+			.activeConnections(pool.getActiveConnections())
 			.idleConnections(pool.getIdleConnections())
 			.totalConnections(pool.getTotalConnections());
 

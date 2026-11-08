@@ -14,11 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class BusinessPartnerActivityTypeRepositoryAdapter implements BusinessPartnerActivityTypeRepository {
-	private final SpringDataBusinessPartnerActivityTypeRepository repository;
+	private final SpringDataBusinessPartnerActivityTypeRepository jpaRepository;
 	private final BusinessPartnerActivityTypePersistenceMapper mapper;
 
 	@Override
 	public BusinessPartnerActivityType getById(Integer id) {
-		return mapper.toDomain(repository.getReferenceById(id));
+		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 }

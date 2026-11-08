@@ -22,7 +22,7 @@ import {
   BusinessPartnerDetailDto,
 } from '@api/businesspartner';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   imports: [

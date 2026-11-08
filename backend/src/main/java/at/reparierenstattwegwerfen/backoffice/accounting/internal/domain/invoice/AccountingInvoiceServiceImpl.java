@@ -20,7 +20,9 @@ public class AccountingInvoiceServiceImpl implements AccountingInvoiceService {
 	public synchronized Integer requestNextInvoiceNumber() {
 		AccountingInvoiceNumber invoiceNumber = accountingInvoiceNumberRepository.getCurrentNumberInvoiceNumber();
 		AccountingInvoiceNumber nextInvoiceNumber = new AccountingInvoiceNumber(invoiceNumber.getNextInvoiceNumber());
+
 		accountingInvoiceNumberRepository.save(nextInvoiceNumber);
+
 		return nextInvoiceNumber.getCurrentInvoiceNumber();
 	}
 }

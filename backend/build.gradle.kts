@@ -5,15 +5,14 @@ plugins {
     java
     id("org.springframework.boot") version "4.1.1"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.hibernate.orm") version "7.4.8.Final"
-    id("org.graalvm.buildtools.native") version "1.1.12"
+    id("org.graalvm.buildtools.native") version "1.1.18"
     // Plugin to generate TypeScript code from OpenAPI JSON file
-    id("org.openapi.generator") version "7.25.0"
+    id("org.openapi.generator") version "7.26.0"
     id("io.github.redgreencoding.plantuml") version "0.3.0"
 }
 
 extra["springAiVersion"] = "2.0.2"
-extra["springModulithVersion"] = "2.1.1"
+extra["springModulithVersion"] = "2.1.2"
 extra["mapstructVersion"] = "1.6.3"
 
 dependencies {
@@ -65,11 +64,6 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
         mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
-    }
-}
-
-hibernate {
-    enhancement {
     }
 }
 
@@ -156,7 +150,7 @@ val apiClientsTasks = apiModules.map { module ->
         configOptions = mapOf(
             "supportsES6" to "true",
             "providedInRoot" to "true",
-            "apiNameSuffix" to "${capitalizedModule}Service"
+            "serviceSuffix" to "Service"
         )
 
         dependsOn(generateOpenApiSpecs)

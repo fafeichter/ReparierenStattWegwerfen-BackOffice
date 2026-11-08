@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:1-create-schema
+--changeset fabian:1-sparepart-create-schema
 
 CREATE TABLE spare_part
 (

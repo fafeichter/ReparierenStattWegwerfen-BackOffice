@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice;
+package at.reparierenstattwegwerfen.backoffice.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -20,7 +20,7 @@ import java.util.Base64;
 @TestConfiguration
 public class MockedOauth2ResourceServerConfig {
 
-	@Value("#{T(at.reparierenstattwegwerfen.backoffice.ResourceReader).readFileToString('classpath:jwt/public_key" +
+	@Value("#{T(at.reparierenstattwegwerfen.backoffice.utils.ResourceReader).readFileToString('classpath:jwt/public_key" +
 		".txt')}")
 	private String publicKeyPEM;
 

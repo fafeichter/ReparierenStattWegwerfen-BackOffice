@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:1-create-schema
+--changeset fabian:1-business-partner-create-schema
 
 CREATE TABLE business_partner_address_country
 (

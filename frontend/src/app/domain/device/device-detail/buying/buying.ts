@@ -4,7 +4,7 @@ import { ClrCardModule, ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-buying',

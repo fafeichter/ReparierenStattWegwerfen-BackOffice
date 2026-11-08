@@ -1,19 +1,32 @@
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false">
-  <h3 class="modal-title">Set selling details</h3>
+  <h3 class="modal-title">
+    Set selling details
+  </h3>
   <div class="modal-body">
     <form (ngSubmit)="setSellingDetails()" [formGroup]="form" autocomplete="off" clrForm>
       <clr-number-input-container>
-        <label><span class="clr-required-mark">Price</span></label>
+        <label class="clr-required-mark">
+          Price
+        </label>
         <input clrNumberInput formControlName="sellingPrice" prefix="€" type="number"/>
-        <clr-control-error *clrIfError="'required'">Price is required.</clr-control-error>
-        <clr-control-error *clrIfError="'min'">Please enter a valid Price.</clr-control-error>
+        <clr-control-error *clrIfError="'required'">
+          Price is required
+        </clr-control-error>
+        <clr-control-error *clrIfError="'min'">
+          Please enter a valid price
+        </clr-control-error>
       </clr-number-input-container>
-
       <clr-date-container>
-        <label><span class="clr-required-mark">Selling date</span></label>
+        <label class="clr-required-mark">
+          Selling date
+        </label>
         <input [max]="(now | date:'yyyy-MM-dd')!" clrDate formControlName="sellingDate" type="date"/>
-        <clr-control-error *clrIfError="'required'">Buying date is required.</clr-control-error>
-        <clr-control-error *clrIfError="'futureDate'">Date must be in past or present</clr-control-error>
+        <clr-control-error *clrIfError="'required'">
+          Buying date is required
+        </clr-control-error>
+        <clr-control-error *clrIfError="'futureDate'">
+          Date must be in past or present
+        </clr-control-error>
       </clr-date-container>
     </form>
   </div>

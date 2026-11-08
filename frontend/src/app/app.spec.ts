@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { StsConfigLoader } from 'angular-auth-oidc-client';
 import { provideRouter } from '@angular/router';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -10,7 +9,6 @@ describe('App', () => {
       imports: [App],
       providers: [
         provideRouter([]),
-        provideAnimations(),
         {
           provide: StsConfigLoader,
         },

@@ -9,7 +9,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Fabian Feichter
@@ -18,21 +17,23 @@ import java.util.stream.Collectors;
 @Repository
 @RequiredArgsConstructor
 public class BusinessPartnerAddressCountryRepositoryAdapter implements BusinessPartnerAddressCountryRepository {
-	private final SpringDataBusinessPartnerAddressCountryRepository repository;
+	private final SpringDataBusinessPartnerAddressCountryRepository jpaRepository;
 	private final BusinessPartnerAddressCountryPersistenceMapper mapper;
 
 	@Override
 	public List<BusinessPartnerAddressCountry> findAll(Sort sort) {
-		return repository.findAll(sort).stream().map(mapper::toDomain).collect(Collectors.toList());
+		return jpaRepository.findAll(sort).stream()
+			.map(mapper::toDomain)
+			.toList();
 	}
 
 	@Override
 	public BusinessPartnerAddressCountry getById(Integer id) {
-		return mapper.toDomain(repository.getReferenceById(id));
+		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 
 	@Override
 	public BusinessPartnerAddressCountry getByCode(String code) {
-		return mapper.toDomain(repository.getByCode(code));
+		return mapper.toDomain(jpaRepository.getByCode(code));
 	}
 }

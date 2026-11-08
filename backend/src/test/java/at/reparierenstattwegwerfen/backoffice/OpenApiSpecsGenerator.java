@@ -1,5 +1,8 @@
 package at.reparierenstattwegwerfen.backoffice;
 
+import at.reparierenstattwegwerfen.backoffice.config.MockAiModels;
+import at.reparierenstattwegwerfen.backoffice.config.MockedOauth2ResourceServerConfig;
+import at.reparierenstattwegwerfen.backoffice.config.TestcontainersConfiguration;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

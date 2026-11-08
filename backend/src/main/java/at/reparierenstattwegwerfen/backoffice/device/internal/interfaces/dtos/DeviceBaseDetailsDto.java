@@ -29,7 +29,7 @@ public class DeviceBaseDetailsDto {
 	private final String modelNumber;
 
 	@NotNull
-	private final NamedIdDto grade; // todo: voller Name?
+	private final NamedIdDto grade;
 
 	@NotNull
 	private final String technicalSpecsUrl;

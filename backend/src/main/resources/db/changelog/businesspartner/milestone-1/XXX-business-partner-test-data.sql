@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:XXX-test-data context:@test-data
+--changeset fabian:XXX-business-partner-test-data context:@test-data
 
 INSERT INTO business_partner_address (business_partner_address_id, street, house_number, zip_code, city,
                                       business_partner_address_country_id)

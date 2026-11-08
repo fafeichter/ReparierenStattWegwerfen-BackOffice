@@ -5,17 +5,24 @@
   </clr-card-header>
   <div class="card-block">
     <dl>
-      <dt>Date</dt>
+      <dt>
+        Date
+      </dt>
       <dd>
         {{ deviceBuying()?.date | date:'dd.MM.yyyy' }}
       </dd>
-      <dt>Price</dt>
+      <dt>
+        Price
+      </dt>
       <dd>
         {{ deviceBuying()?.price | currency:'EUR':'symbol':'1.2-2' }}
       </dd>
-      <dt>URL</dt>
+      <dt>
+        URL
+      </dt>
       <dd>
-        <a [href]="deviceBuying()?.url" target="_blank">{{ deviceBuying()?.url }}
+        <a [href]="deviceBuying()?.url" target="_blank">
+          {{ deviceBuying()?.url }}
           <cds-icon shape="pop-out"/>
         </a>
       </dd>
@@ -23,15 +30,16 @@
     <hr>
 
     <dl>
-      <dt>Seller</dt>
+      <dt>
+        Seller
+      </dt>
       <dd>
         <a [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]">
           {{ deviceBuying()?.seller?.name }}
         </a>
         <button
           [queryParams]="{ 'edit-address': true, 'device-id':  deviceId()}"
-          [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]"
-          class="btn btn-link ml-1!">
+          [routerLink]="['/businesspartners', deviceBuying()?.seller?.id]" class="btn btn-link ml-1!">
           <cds-icon shape="pop-out"/>
           Edit
         </button>

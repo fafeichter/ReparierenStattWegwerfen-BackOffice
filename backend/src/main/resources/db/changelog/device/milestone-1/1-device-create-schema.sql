@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:1-create-schema
+--changeset fabian:1-device-create-schema
 
 CREATE TABLE device_battery_status
 (

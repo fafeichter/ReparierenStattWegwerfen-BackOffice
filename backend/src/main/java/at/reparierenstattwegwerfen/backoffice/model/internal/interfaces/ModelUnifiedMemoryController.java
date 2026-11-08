@@ -22,7 +22,8 @@ public class ModelUnifiedMemoryController {
 	private final ModelUnifiedMemoryService modelUnifiedMemoryService;
 
 	@GetMapping("/{appleSiliconId}/unified-memory/")
-	public List<NamedIdDto> getUnifiedMemoriesForModelAndAppleSilicon(@PathVariable Integer modelId, @PathVariable Integer appleSiliconId) {
+	public List<NamedIdDto> getUnifiedMemoriesForModelAndAppleSilicon(@PathVariable Integer modelId,
+																	  @PathVariable Integer appleSiliconId) {
 		return modelUnifiedMemoryService.getUnifiedMemoriesForModelAndAppleSilicon(modelId, appleSiliconId);
 	}
 }

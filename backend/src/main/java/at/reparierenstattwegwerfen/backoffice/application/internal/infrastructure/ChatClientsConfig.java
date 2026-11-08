@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Primary;
  * @since 05.11.2026
  */
 @Configuration
-public class ChatbotConfig {
+public class ChatClientsConfig {
 
 	@Bean
 	@Primary

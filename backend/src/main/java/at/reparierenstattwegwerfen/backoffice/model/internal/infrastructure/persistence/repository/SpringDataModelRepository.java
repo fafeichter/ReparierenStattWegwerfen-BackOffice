@@ -24,7 +24,7 @@ public interface SpringDataModelRepository extends JpaRepository<ModelEntity, In
 		                                                                                                    else 999
 		                                                                                                end
 		""")
-	List<ModelEntity> findAllMacbooks();
+	List<ModelEntity> findAllMacBooks();
 
 	@Query("""
 		from ModelEntity m

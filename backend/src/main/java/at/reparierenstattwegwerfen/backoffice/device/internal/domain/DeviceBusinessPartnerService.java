@@ -69,9 +69,9 @@ public class DeviceBusinessPartnerService {
 	}
 
 	@Transactional
-	public NamedIdDto setBuyerToAsgoodasnew(Integer deviceId, UserDetails actor) {
+	public NamedIdDto setBuyerToAsGoodAsNew(Integer deviceId, UserDetails actor) {
 		Device device = deviceRepository.getById(deviceId);
-		int asgoodasnewBusinessPartnerId = businessPartnerService.getAsgoodasnewBusinessPartnerId();
+		int asgoodasnewBusinessPartnerId = businessPartnerService.getAsGoodAsNewBusinessPartnerId();
 		device.setBuyerBusinessPartnerId(asgoodasnewBusinessPartnerId);
 		deviceRepository.save(device);
 

@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice;
+package at.reparierenstattwegwerfen.backoffice.utils;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.util.ResourceUtils;

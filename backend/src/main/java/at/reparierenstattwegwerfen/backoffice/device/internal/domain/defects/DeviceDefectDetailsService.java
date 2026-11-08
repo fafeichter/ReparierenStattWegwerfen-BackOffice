@@ -46,6 +46,7 @@ public class DeviceDefectDetailsService {
 		if (reportedDefectChanged) {
 			device.setReportedDefect(deviceDefectsDto.getReportedDefect());
 		}
+
 		final String correctedDefect = deviceDefectsDto.getCorrectedDefect();
 		boolean correctedDefectChanged = !Objects.equals(correctedDefect, device.getCorrectedDefect());
 		Boolean reportedDefectConfirmedOld = device.getReportedDefectConfirmed();

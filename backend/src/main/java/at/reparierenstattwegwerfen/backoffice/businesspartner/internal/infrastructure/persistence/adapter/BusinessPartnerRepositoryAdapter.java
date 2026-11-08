@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Fabian Feichter
@@ -17,31 +16,33 @@ import java.util.stream.Collectors;
 @Repository
 @RequiredArgsConstructor
 public class BusinessPartnerRepositoryAdapter implements BusinessPartnerRepository {
-	private final SpringDataBusinessPartnerRepository repository;
+	private final SpringDataBusinessPartnerRepository jpaRepository;
 	private final BusinessPartnerPersistenceMapper mapper;
 
 	@Override
 	public List<BusinessPartner> findAllBusinessPartners() {
-		return repository.findAllBusinessPartners().stream().map(mapper::toDomain).collect(Collectors.toList());
+		return jpaRepository.findAllBusinessPartners().stream()
+			.map(mapper::toDomain)
+			.toList();
 	}
 
 	@Override
 	public BusinessPartner getBusinessPartnerDetails(Integer businessPartnerId) {
-		return mapper.toDomain(repository.getBusinessPartnerDetails(businessPartnerId));
+		return mapper.toDomain(jpaRepository.getBusinessPartnerDetails(businessPartnerId));
 	}
 
 	@Override
 	public BusinessPartner getBusinessPartner(Integer businessPartnerId) {
-		return mapper.toDomain(repository.getBusinessPartner(businessPartnerId));
+		return mapper.toDomain(jpaRepository.getBusinessPartner(businessPartnerId));
 	}
 
 	@Override
 	public BusinessPartner getById(Integer id) {
-		return mapper.toDomain(repository.getReferenceById(id));
+		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 
 	@Override
 	public BusinessPartner save(BusinessPartner businessPartner) {
-		return mapper.toDomain(repository.save(mapper.toEntity(businessPartner)));
+		return mapper.toDomain(jpaRepository.save(mapper.toEntity(businessPartner)));
 	}
 }

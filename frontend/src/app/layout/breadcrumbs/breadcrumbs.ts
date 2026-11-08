@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { combineLatest, filter, map, Observable, of, startWith, switchMap } from 'rxjs';
 import { BreadcrumbItem, ClrBreadcrumbsModule } from '@clr/angular';
-import { RouteTitleService } from '../route-title.service'; // adjust to where the file lives
+import { RouteTitleService } from '../route-title.service';
 
 @Component({
   selector: 'app-breadcrumbs',

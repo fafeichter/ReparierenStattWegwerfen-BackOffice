@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:3-add-master-data
+--changeset fabian:3-device-add-master-data
 
 INSERT INTO device_battery_status (device_battery_status_id, name, sort_order)
 VALUES (1, 'nicht getauscht', 1),

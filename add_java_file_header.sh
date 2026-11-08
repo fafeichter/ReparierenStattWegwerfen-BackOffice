@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to add @since tag to Java files based on Git history or file system creation date
-# Usage: ./add_since_tag.sh /path/to/project
+# Usage: ./add_java_file_header.sh /path/to/project
 
 if [ $# -eq 0 ]; then
     echo "Usage: $0 /path/to/project"

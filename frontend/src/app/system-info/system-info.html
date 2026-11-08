@@ -12,10 +12,17 @@
       <clr-card-body>
         <clr-card-body-text>
           <ul>
-            <li>Build Date: {{ buildInfo.date | date:'MMM d, y, HH:mm:ss' }}</li>
-            <li>Branch: {{ buildInfo.branch }}</li>
-            <li>Commit: {{ buildInfo.commit }}</li>
-            <li>GitHub:
+            <li>
+              Build Date: {{ buildInfo.date | date:'MMM d, y, HH:mm:ss' }}
+            </li>
+            <li>
+              Branch: {{ buildInfo.branch }}
+            </li>
+            <li>
+              Commit: {{ buildInfo.commit }}
+            </li>
+            <li>
+              GitHub:
               <a href="https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice" target="_blank">
                 https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice
                 <cds-icon shape="pop-out"/>
@@ -33,13 +40,21 @@
       <clr-card-body>
         <clr-card-body-text>
           <ul>
-            <li>Spring Boot: {{ backendSystemInfo()?.spring?.bootVersion }}</li>
-            <li>Spring Framework: {{ backendSystemInfo()?.spring?.frameworkVersion }}</li>
-            <li>Spring Active Profiles: {{ backendSystemInfo()?.spring?.activeProfiles!.join(', ') }}</li>
-            <li>Java: {{ backendSystemInfo()?.java?.runtimeName }} {{ backendSystemInfo()?.java?.version }}
+            <li>
+              Spring Boot: {{ backendSystemInfo()?.spring?.bootVersion }}
+            </li>
+            <li>
+              Spring Framework: {{ backendSystemInfo()?.spring?.frameworkVersion }}
+            </li>
+            <li>
+              Spring Active Profiles: {{ backendSystemInfo()?.spring?.activeProfiles!.join(', ') }}
+            </li>
+            <li>
+              Java: {{ backendSystemInfo()?.java?.runtimeName }} {{ backendSystemInfo()?.java?.version }}
               ({{ backendSystemInfo()?.java?.vendor }})
             </li>
-            <li>OS: {{ backendSystemInfo()?.os?.name }} {{ backendSystemInfo()?.os?.version }}
+            <li>
+              OS: {{ backendSystemInfo()?.os?.name }} {{ backendSystemInfo()?.os?.version }}
               ({{ backendSystemInfo()?.os?.arch }})
             </li>
           </ul>
@@ -54,11 +69,21 @@
       <clr-card-body>
         <clr-card-body-text>
           <ul>
-            <li>Angular: {{ angularVersion }}</li>
-            <li>Clarity UI: {{ clarityUiVersion }}</li>
-            <li>Clarity Angular: {{ clarityAngularVersion }}</li>
-            <li>Production: {{ frontendProduction }}</li>
-            <li>Locale: {{ currentLocale }}</li>
+            <li>
+              Angular: {{ angularVersion }}
+            </li>
+            <li>
+              Clarity UI: {{ clarityUiVersion }}
+            </li>
+            <li>
+              Clarity Angular: {{ clarityAngularVersion }}
+            </li>
+            <li>
+              Production: {{ frontendProduction }}
+            </li>
+            <li>
+              Locale: {{ currentLocale }}
+            </li>
           </ul>
         </clr-card-body-text>
       </clr-card-body>
@@ -74,17 +99,35 @@
             @let database = backendSystemInfo()?.database;
             @let pool = database?.connectionPool;
             <ul>
-              <li>Name: {{ database?.name }}</li>
-              <li>Version: {{ database?.version }}</li>
-              <li>Connection Pool:
+              <li>
+                Name: {{ database?.name }}
+              </li>
+              <li>
+                Version: {{ database?.version }}
+              </li>
+              <li>
+                Connection Pool:
                 <ul>
-                  <li>Maximum Pool Size: {{ pool?.maximumPoolSize }}</li>
-                  <li>Minimum Idle: {{ pool?.minimumIdle }}</li>
-                  <li>Idle Timeout: {{ pool?.idleTimeout }} ms</li>
-                  <li>Max Lifetime: {{ pool?.maxLifetime }} ms</li>
-                  <li>Connection Timeout: {{ pool?.connectionTimeout }} ms</li>
-                  <li>Leak Detection Threshold: {{ pool?.leakDetectionThreshold }} ms</li>
-                  <li>Connections:
+                  <li>
+                    Maximum Pool Size: {{ pool?.maximumPoolSize }}
+                  </li>
+                  <li>
+                    Minimum Idle: {{ pool?.minimumIdle }}
+                  </li>
+                  <li>
+                    Idle Timeout: {{ pool?.idleTimeout }} ms
+                  </li>
+                  <li>
+                    Max Lifetime: {{ pool?.maxLifetime }} ms
+                  </li>
+                  <li>
+                    Connection Timeout: {{ pool?.connectionTimeout }} ms
+                  </li>
+                  <li>
+                    Leak Detection Threshold: {{ pool?.leakDetectionThreshold }} ms
+                  </li>
+                  <li>
+                    Connections:
                     {{ pool?.activeConnections }} active,
                     {{ pool?.idleConnections }} idle,
                     {{ pool?.totalConnections }} total
@@ -107,19 +150,34 @@
             @let openAiModel = backendSystemInfo()?.aiModels?.openAiModel;
             @let geminiAiModel = backendSystemInfo()?.aiModels?.geminiModel;
             <ul>
-              <li>OpenAI:
+              <li>
+                OpenAI:
                 <ul>
-                  <li>Model: {{ openAiModel?.model }}</li>
-                  <li>Reasoning Effort: {{ openAiModel?.reasoningEffort | orElse }}</li>
-                  <li>Temperature: {{ openAiModel?.temperature | orElse }}</li>
+                  <li>
+                    Model: {{ openAiModel?.model }}
+                  </li>
+                  <li>
+                    Reasoning Effort: {{ openAiModel?.reasoningEffort | orElse }}
+                  </li>
+                  <li>
+                    Temperature: {{ openAiModel?.temperature | orElse }}
+                  </li>
                 </ul>
               </li>
               <li>Gemini:
                 <ul>
-                  <li>Model: {{ geminiAiModel?.model }}</li>
-                  <li>Thinking Level: {{ geminiAiModel?.thinkingLevel | orElse }}</li>
-                  <li>Temperature: {{ geminiAiModel?.temperature | orElse }}</li>
-                  <li>Service Tier: {{ geminiAiModel?.serviceTier | orElse }}</li>
+                  <li>
+                    Model: {{ geminiAiModel?.model }}
+                  </li>
+                  <li>
+                    Thinking Level: {{ geminiAiModel?.thinkingLevel | orElse }}
+                  </li>
+                  <li>
+                    Temperature: {{ geminiAiModel?.temperature | orElse }}
+                  </li>
+                  <li>
+                    Service Tier: {{ geminiAiModel?.serviceTier | orElse }}
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -135,8 +193,11 @@
       <clr-card-body>
         <clr-card-body-text>
           <ul>
-            <li>User Data:
-              <pre class="border-none!">{{ accessTokenPayload() | json }}</pre>
+            <li>
+              User Data:
+              <pre class="border-none!">
+                {{ accessTokenPayload() | json }}
+              </pre>
             </li>
           </ul>
         </clr-card-body-text>
@@ -150,9 +211,15 @@
       <clr-card-body>
         <clr-card-body-text>
           <ul>
-            <li>Authenticated: {{ authenticated().isAuthenticated }}</li>
-            <li class="break-all">Token: {{ accessToken() }}</li>
-            <li class="break-all">Refresh Token: {{ refreshToken() }}</li>
+            <li>
+              Authenticated: {{ authenticated().isAuthenticated }}
+            </li>
+            <li class="break-all">
+              Token: {{ accessToken() }}
+            </li>
+            <li class="break-all">
+              Refresh Token: {{ refreshToken() }}
+            </li>
           </ul>
         </clr-card-body-text>
       </clr-card-body>

@@ -16,7 +16,8 @@ public class DeviceBusinessPartnerSetAsSeller extends PreciseTimestampedApplicat
 	final Integer sellerBusinessPartnerId;
 
 	@Builder
-	public DeviceBusinessPartnerSetAsSeller(Object source, UserDetails actor, Integer deviceId, Integer sellerBusinessPartnerId) {
+	public DeviceBusinessPartnerSetAsSeller(Object source, UserDetails actor, Integer deviceId,
+											Integer sellerBusinessPartnerId) {
 		super(source);
 		this.actor = actor;
 		this.deviceId = deviceId;

@@ -11,7 +11,6 @@ import {
   withAppInitializerAuthCheck,
 } from 'angular-auth-oidc-client';
 import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { Configuration as ModelConfig } from '@api/model';
 import { Configuration as BusinesspartnerConfig } from '@api/businesspartner';
 import { Configuration as DeviceConfig } from '@api/device';
@@ -32,7 +31,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withXhr(), withInterceptors([authInterceptor()])),
     provideAuth(authConfig, withAppInitializerAuthCheck()),
     { provide: AbstractSecurityStorage, useClass: DefaultLocalStorageService },
-    provideAnimations(),
     { provide: ModelConfig, useValue: new ModelConfig({ basePath: environment.backendUrl }) },
     {
       provide: BusinesspartnerConfig,

@@ -16,7 +16,8 @@ public class DeviceReportedDefectNotConfirmed extends AbstractDeviceActivityEven
 	private final String correctedDefect;
 
 	@Builder
-	public DeviceReportedDefectNotConfirmed(Object source, UserDetails actor, Integer deviceId, String reportedDefect, String correctedDefect) {
+	public DeviceReportedDefectNotConfirmed(Object source, UserDetails actor, Integer deviceId, String reportedDefect,
+											String correctedDefect) {
 		super(source, deviceId, actor);
 		this.reportedDefect = reportedDefect;
 		this.correctedDefect = correctedDefect;

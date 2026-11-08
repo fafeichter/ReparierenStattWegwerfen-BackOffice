@@ -1,6 +1,5 @@
 package at.reparierenstattwegwerfen.backoffice.application.internal.infrastructure;
 
-import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,16 +17,18 @@ import java.io.IOException;
  */
 @Configuration
 @Profile("prod")
-@Slf4j
 public class AngularConfig implements WebMvcConfigurer {
+
+	public static final String FRONTEND_LOCATION = "/static";
+	public static final String STATIC_INDEX_HTML = FRONTEND_LOCATION + "/index.html";
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/")
-			.addResourceLocations("classpath:/static/index.html");
+			.addResourceLocations("classpath:" + STATIC_INDEX_HTML);
 
 		registry.addResourceHandler("/**")
-			.addResourceLocations("classpath:/static/")
+			.addResourceLocations("classpath:" + FRONTEND_LOCATION + "/")
 			.resourceChain(true)
 			.addResolver(new PathResourceResolver() {
 
@@ -35,7 +36,7 @@ public class AngularConfig implements WebMvcConfigurer {
 				protected Resource getResource(@NonNull String resourcePath, @NonNull Resource location) throws IOException {
 					Resource requestedResource = location.createRelative(resourcePath);
 					return requestedResource.exists() && requestedResource.isReadable() ? requestedResource :
-						new ClassPathResource("/static/index.html");
+						new ClassPathResource(STATIC_INDEX_HTML);
 				}
 			});
 	}

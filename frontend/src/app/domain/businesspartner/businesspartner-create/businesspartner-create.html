@@ -4,62 +4,92 @@
   <div class="clr-row">
     <div class="clr-col-md-3">
       <clr-input-container>
-        <label><span class="clr-required-mark">First name</span></label>
-        <input clrInput formControlName="firstName" type="text"/>
-        <clr-control-error *clrIfError="'required'">First name is required.</clr-control-error>
+        <label class="clr-required-mark">
+          First name
+        </label>
+        <input clrInput formControlName="firstName" required type="text"/>
+        <clr-control-error *clrIfError="'required'">
+          First name is required
+        </clr-control-error>
       </clr-input-container>
     </div>
     <div class="clr-col-md-3">
       <clr-input-container>
-        <label><span class="clr-required-mark">Last name</span></label>
-        <input clrInput formControlName="lastName" type="text"/>
-        <clr-control-error *clrIfError="'required'">Last name is required.</clr-control-error>
-      </clr-input-container>
-    </div>
-  </div>
-  <div class="clr-row">
-    <div class="clr-col-md-3">
-      <clr-input-container>
-        <label><span class="clr-required-mark">Street</span></label>
-        <input clrInput formControlName="street" type="text"/>
-        <clr-control-error *clrIfError="'required'">Street is required.</clr-control-error>
-      </clr-input-container>
-    </div>
-    <div class="clr-col-md-3">
-      <clr-input-container>
-        <label><span class="clr-required-mark">House number</span></label>
-        <input class="clr-col-4" clrInput formControlName="houseNumber" type="text"/>
-        <clr-control-error *clrIfError="'required'">House number is required.</clr-control-error>
+        <label class="clr-required-mark">
+          Last name
+        </label>
+        <input clrInput formControlName="lastName" required type="text"/>
+        <clr-control-error *clrIfError="'required'">
+          Last name is required
+        </clr-control-error>
       </clr-input-container>
     </div>
   </div>
   <div class="clr-row">
     <div class="clr-col-md-3">
       <clr-input-container>
-        <label><span class="clr-required-mark">ZIP code</span></label>
-        <input class="clr-col-5" clrInput formControlName="zipCode" type="text"/>
-        <clr-control-error *clrIfError="'required'">ZIP code is required.</clr-control-error>
+        <label class="clr-required-mark">
+          Street
+        </label>
+        <input clrInput formControlName="street" required type="text"/>
+        <clr-control-error *clrIfError="'required'">
+          Street is required
+        </clr-control-error>
       </clr-input-container>
     </div>
     <div class="clr-col-md-3">
       <clr-input-container>
-        <label><span class="clr-required-mark">City</span></label>
-        <input clrInput formControlName="city" type="text"/>
-        <clr-control-error *clrIfError="'required'">City is required.</clr-control-error>
+        <label class="clr-required-mark">
+          House number
+        </label>
+        <input class="clr-col-4" clrInput formControlName="houseNumber" required type="text"/>
+        <clr-control-error *clrIfError="'required'">
+          House number is required
+        </clr-control-error>
+      </clr-input-container>
+    </div>
+  </div>
+  <div class="clr-row">
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label class="clr-required-mark">
+          ZIP code
+        </label>
+        <input class="clr-col-5" clrInput formControlName="zipCode" required type="text"/>
+        <clr-control-error *clrIfError="'required'">
+          ZIP code is required
+        </clr-control-error>
+      </clr-input-container>
+    </div>
+    <div class="clr-col-md-3">
+      <clr-input-container>
+        <label class="clr-required-mark">
+          City
+        </label>
+        <input clrInput formControlName="city" required type="text"/>
+        <clr-control-error *clrIfError="'required'">
+          City is required
+        </clr-control-error>
       </clr-input-container>
     </div>
   </div>
   <div class="clr-row">
     <div class="clr-col-md-3">
       <clr-select-container>
-        <label>Country</label>
-        <select class="clr-col-7" clrSelect formControlName="businessPartnerCountryId">
-          <option disabled selected value="null">-- Choose --</option>
+        <label class="clr-required-mark">
+          Country
+        </label>
+        <select class="clr-col-7" clrSelect formControlName="businessPartnerCountryId" required>
+          <option disabled selected value="null">
+            -- Choose --
+          </option>
           @for (country of businessPartnerAddressCountries(); track country.id) {
             @if (country.id === 3) {
               <hr>
             }
-            <option [value]="country.id">{{ country.code }} - {{ country.name }}</option>
+            <option [value]="country.id">
+              {{ country.code }} - {{ country.name }}
+            </option>
           }
         </select>
       </clr-select-container>

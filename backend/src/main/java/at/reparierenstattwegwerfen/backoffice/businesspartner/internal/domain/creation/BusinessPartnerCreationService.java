@@ -85,7 +85,7 @@ public class BusinessPartnerCreationService implements at.reparierenstattwegwerf
 	}
 
 	@Override
-	public Integer getAsgoodasnewBusinessPartnerId() {
+	public Integer getAsGoodAsNewBusinessPartnerId() {
 		return 1;
 	}
 }

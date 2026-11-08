@@ -24,7 +24,7 @@ public class DeviceNotesController {
 
 	@GetMapping("/")
 	public List<DeviceNoteDto> getDeviceNotes(@PathVariable Integer deviceId) {
-		return deviceNoteService.load(deviceId);
+		return deviceNoteService.getNotesForDevice(deviceId);
 	}
 
 	@PostMapping("/")

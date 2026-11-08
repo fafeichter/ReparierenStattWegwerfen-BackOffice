@@ -26,7 +26,6 @@ public class DeviceBatteryStatusController {
 	}
 
 
-	// todo
 	@PostMapping("/{deviceId}/battery/status")
 	public void updateBatteryStatus(@PathVariable Integer deviceId, @RequestBody Integer newBatteryStatusId,
 									@AuthenticationPrincipal UserDetails currentUser) {

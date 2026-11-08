@@ -22,7 +22,7 @@ import {
   NamedIdDto,
 } from '@api/device';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-repair',

@@ -38,7 +38,7 @@ import {
   ModelStorageControllerService,
   ModelUnifiedMemoryControllerService,
 } from '@api/model';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 import { SerialNumber } from '../../serial-number';
 import { SellingModal } from '../selling/selling-modal/selling-modal';
 

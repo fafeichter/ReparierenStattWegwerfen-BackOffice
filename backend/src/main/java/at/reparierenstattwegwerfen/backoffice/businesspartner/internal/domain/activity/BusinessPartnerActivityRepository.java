@@ -9,5 +9,5 @@ import java.util.List;
 public interface BusinessPartnerActivityRepository {
 	List<BusinessPartnerActivity> getByIdWithRelations(Integer businessPartnerId);
 
-	BusinessPartnerActivity save(BusinessPartnerActivity activity);
+	void save(BusinessPartnerActivity activity);
 }

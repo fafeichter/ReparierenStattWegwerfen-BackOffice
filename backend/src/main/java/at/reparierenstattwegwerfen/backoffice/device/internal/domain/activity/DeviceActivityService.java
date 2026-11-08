@@ -77,7 +77,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceCreated event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName("#" + event.getDeviceId());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(1));
@@ -87,7 +87,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceStatusChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(deviceStatusRepository.getById(event.getNewStatusId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(2));
@@ -97,7 +97,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceBatteryStatusChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		Integer newBatteryStatusId = event.getNewBatteryStatusId();
 		String activityValue;
 		if (newBatteryStatusId != null) {
@@ -114,7 +114,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceGradeChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 
 		Integer newGradeId = event.getNewGradeId();
 		String activityValue;
@@ -132,7 +132,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceTagAdded event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(deviceTagRepository.getById(event.getNewDeviceTagId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(5));
@@ -142,7 +142,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceTagRemoved event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(deviceTagRepository.getById(event.getOldDeviceTagId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(6));
@@ -152,7 +152,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceAppleSiliconChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(modelAppleSiliconDetailsService.getAppleSilicon(event.getModelAppleSiliconId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(7));
@@ -162,7 +162,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceUnifiedMemoryChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(modelUnifiedMemoryDetailsService.getUnifiedMemory(event.getModelUnifiedMemoryId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(8));
@@ -172,7 +172,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceStorageChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(modelStorageDetailsService.getStorage(event.getModelStorageId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(9));
@@ -182,7 +182,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceColorChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(modelColorDetailsService.getColor(event.getModelColorId()).name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(10));
@@ -192,7 +192,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSerialNumberChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getSerialNumber());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(11));
@@ -202,7 +202,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceBatteryHealthChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		Object batteryMaximumCapacity = event.getMaximumCapacity() != null ? event.getMaximumCapacity() : "-";
 		Object batteryCycleCount = event.getCycleCount() != null ? event.getCycleCount() : "-";
 
@@ -215,7 +215,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceReportedDefectChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getReportedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(12));
@@ -225,7 +225,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceCorrectedDefectChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getCorrectedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(13));
@@ -235,7 +235,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceBuyingDateChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getBuyingDate().format(ofPattern("dd.MM.yyyy")));
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(14));
@@ -245,7 +245,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSellingDateChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getSellingDate().format(ofPattern("dd.MM.yyyy")));
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(15));
@@ -255,7 +255,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSellingPriceChanged event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(new Price(event.getSellingPrice()).formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(25));
@@ -265,7 +265,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceNoteAdded event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(deviceNoteRepository.getById(event.getNewNoteId()).getName());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(16));
@@ -275,7 +275,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceNoteEdited event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getNoteNewText());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(26));
@@ -285,7 +285,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceNoteDeleted event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getOldNoteText());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(17));
@@ -295,7 +295,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSparePartAdded event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		DeviceInstalledSparePart deviceInstalledSparePart = deviceInstalledSparePartRepository.getById(event.getDeviceSparePartId());
 		Price sparePartPriceNetto = new Price(deviceInstalledSparePart.getPriceNetto());
 		deviceActivity.setName(sparePartService.getSparePartById(deviceInstalledSparePart.getSparePartId()).name() + " / " +
@@ -308,7 +308,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceSparePartDeleted event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		Price oldSparePartPriceNetto = new Price(event.getOldDeviceSparePartPriceNetto());
 		deviceActivity.setName(event.getOldDeviceSparePartName() + " / " + oldSparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
@@ -341,7 +341,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceReportedDefectConfirmed event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getReportedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(22));
@@ -351,7 +351,7 @@ public class DeviceActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(DeviceReportedDefectNotConfirmed event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(event.getReportedDefect());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(23));
@@ -362,7 +362,7 @@ public class DeviceActivityService {
 	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void on(DeviceSellingInvoiceNumberAssigned event) {
-		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		DeviceActivity deviceActivity = new DeviceActivity(event);
 		deviceActivity.setName(String.valueOf(event.getInvoiceNumber()));
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(24));

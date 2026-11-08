@@ -13,9 +13,7 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
 export class BusinessPartners {
   private api = inject(BusinessPartnerControllerService);
 
-  // 1. Private state signal
   private _businessPartners = signal<BusinessPartnerDto[]>([]);
-  // 2. Public read-only signals
   readonly businessPartners = this._businessPartners.asReadonly();
   private _businessPartnersLoading = signal<boolean>(false);
   readonly businessPartnersLoading = this._businessPartnersLoading.asReadonly();
@@ -24,11 +22,9 @@ export class BusinessPartners {
     this.loadAllBusinessPartners();
   }
 
-  // 3. Method to trigger fetch
   loadAllBusinessPartners() {
     this._businessPartnersLoading.set(true);
 
-    // Subscribe to the generated RxJS Observable
     this.api.getAllBusinessPartners().subscribe((data) => {
       this._businessPartners.set(data);
       this._businessPartnersLoading.set(false);

@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Fabian Feichter
@@ -17,16 +16,19 @@ import java.util.stream.Collectors;
 @Repository
 @RequiredArgsConstructor
 public class BusinessPartnerActivityRepositoryAdapter implements BusinessPartnerActivityRepository {
-	private final SpringDataBusinessPartnerActivityRepository repository;
+	private final SpringDataBusinessPartnerActivityRepository jpaRepository;
 	private final BusinessPartnerActivityPersistenceMapper mapper;
 
 	@Override
 	public List<BusinessPartnerActivity> getByIdWithRelations(Integer businessPartnerId) {
-		return repository.getByIdWithRelations(businessPartnerId).stream().map(mapper::toDomain).collect(Collectors.toList());
+		return jpaRepository.getByIdWithRelations(businessPartnerId).stream()
+			.map(mapper::toDomain)
+			.toList();
 	}
 
 	@Override
-	public BusinessPartnerActivity save(BusinessPartnerActivity activity) {
-		return mapper.toDomain(repository.save(mapper.toEntity(activity)));
+	public void save(BusinessPartnerActivity activity) {
+		var entity = mapper.toEntity(activity);
+		jpaRepository.save(entity);
 	}
 }

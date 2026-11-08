@@ -2,20 +2,25 @@ databaseChangeLog:
   - includeAll: {
     path: model/milestone-1/,
     relativeToChangelogFile: true,
+    labels: milestone-1
   }
   - includeAll: {
     path: businesspartner/milestone-1/,
-    relativeToChangelogFile: true
+    relativeToChangelogFile: true,
+    labels: milestone-1
   }
   - includeAll: {
     path: sparepart/milestone-1/,
-    relativeToChangelogFile: true
+    relativeToChangelogFile: true,
+    labels: milestone-1
   }
   - includeAll: {
     path: device/milestone-1/,
-    relativeToChangelogFile: true
+    relativeToChangelogFile: true,
+    labels: milestone-1
   }
   - includeAll: {
     path: accounting/milestone-1/,
-    relativeToChangelogFile: true
+    relativeToChangelogFile: true,
+    labels: milestone-1
   }

@@ -34,7 +34,8 @@ public class DeviceSparePartsController {
 	}
 
 	@PostMapping("/")
-	public void addDeviceSparePart(@PathVariable Integer deviceId, @Valid @RequestBody CreateDeviceSparePartDto newDeviceSparePartDto,
+	public void addDeviceSparePart(@PathVariable Integer deviceId,
+								   @Valid @RequestBody CreateDeviceSparePartDto newDeviceSparePartDto,
 								   @AuthenticationPrincipal UserDetails currentUser) {
 		deviceSparePartsService.addDeviceSparePart(deviceId, newDeviceSparePartDto, currentUser);
 	}

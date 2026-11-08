@@ -48,12 +48,12 @@ The following domains have been identified:
 
 ## 📌 Roadmap
 
-| Milestone | Name                  | Target            |
-|-----------|-----------------------|-------------------|
-| 1         | Excel Ablöse          | Autumn 2026       |
-| 2         | Make Backoffice Great | Q4 2026 / Q1 2027 |
-| 3         | Accounting Domain     | 2027              |
-| 4         | Spare Parts Domain    | 2027              |
+| Milestone | Name                  | Target            | Status  |
+|-----------|-----------------------|-------------------|---------|
+| 1         | Excel Ablöse          | Autumn 2026       | Done ✅ |
+| 2         | Make Backoffice Great | Q4 2026 / Q1 2027 | Planned |
+| 3         | Accounting Domain     | 2027              | -       |
+| 4         | Spare Parts Domain    | 2027              | -       |
 
 ### Milestone 1 – "Excel Ablöse"
 
@@ -108,8 +108,8 @@ within IntelliJ IDEA.
 Create a `secrets.env` file in the root directory and provide the required secrets:
 
 ```.env
-OPENAI_API_KEY_DEV=<your_api_key>
-GEMINI_API_KEY_DEV=<your_api_key>
+OPENAI_API_KEY=<your_api_key>
+GEMINI_API_KEY=<your_api_key>
 ```
 
 ### Optional Dependencies

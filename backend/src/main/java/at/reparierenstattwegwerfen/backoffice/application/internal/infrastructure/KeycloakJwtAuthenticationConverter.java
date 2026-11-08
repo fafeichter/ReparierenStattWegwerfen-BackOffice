@@ -48,12 +48,12 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
 	@SuppressWarnings("unchecked")
 	private List<? extends GrantedAuthority> extractRealmRoles(Jwt jwt) {
 		Map<String, Object> realmAccess = jwt.getClaim("realm_access");
+
 		if (realmAccess == null || !realmAccess.containsKey("roles")) {
 			return Collections.emptyList();
 		}
 
-		List<String> roles = (List<String>) realmAccess.get("roles");
-		return roles.stream()
+		return ((List<String>) realmAccess.get("roles")).stream()
 			.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
 			.toList();
 	}

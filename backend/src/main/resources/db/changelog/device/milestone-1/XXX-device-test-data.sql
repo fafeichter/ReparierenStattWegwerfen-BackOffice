@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:XXX-test-data context:@test-data
+--changeset fabian:XXX-device-test-data context:@test-data
 
 INSERT INTO device (device_id, model_id, buying_date, model_apple_silicon_id, model_apple_silicon_unified_memory_id,
                     model_storage_id, model_color_id, url, serial_number, device_status_id, status_date,

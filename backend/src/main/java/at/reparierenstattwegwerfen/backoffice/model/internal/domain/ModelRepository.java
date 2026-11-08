@@ -15,7 +15,7 @@ public interface ModelRepository {
 
 	Model getModelDetails(Integer modelId);
 
-	List<Model> findAllMacbooks();
+	List<Model> findAllMacBooks();
 
 	List<Model> findAllIPads();
 }

@@ -1,24 +1,32 @@
 <clr-datagrid [clrDgLoading]="businessPartnersLoading()">
-  <clr-dg-column>Name</clr-dg-column>
-  <clr-dg-column>Address</clr-dg-column>
-
+  <clr-dg-column>
+    Name
+  </clr-dg-column>
+  <clr-dg-column>
+    Address
+  </clr-dg-column>
   @for (businessPartner of businessPartners(); track businessPartner.id) {
     <clr-dg-row [class.scammer-row]="businessPartner.scammer">
       <clr-dg-cell>
-        <a [routerLink]="['/businesspartners', businessPartner.id]">{{ businessPartner.lastName }} {{
-            businessPartner.firstName
-          }}
+        <a [routerLink]="['/businesspartners', businessPartner.id]">
+          {{ businessPartner.lastName }} {{ businessPartner.firstName }}
           @if (businessPartner.scammer) {
-            <clr-label clrColor="danger" clrText="Scammer!" clrType="solid"></clr-label>
+            <clr-label clrColor="danger">
+              Scammer
+            </clr-label>
           }
         </a>
       </clr-dg-cell>
       <clr-dg-cell>
-        {{ businessPartner.address?.street  | orElse }} {{ businessPartner.address?.houseNumber  | orElse }}<br>
-        {{ businessPartner.address?.zipCode | orElse }} {{ businessPartner.address?.city | orElse }}<br>
+        {{ businessPartner.address?.street  | orElse }} {{ businessPartner.address?.houseNumber  | orElse }}
+        <br>
+        {{ businessPartner.address?.zipCode | orElse }} {{ businessPartner.address?.city | orElse }}
+        <br>
         {{ businessPartner.address?.country | orElse }}
       </clr-dg-cell>
     </clr-dg-row>
   }
-  <clr-dg-footer>{{ businessPartners().length }} business partners</clr-dg-footer>
+  <clr-dg-footer>
+    {{ businessPartners().length }} business partners
+  </clr-dg-footer>
 </clr-datagrid>

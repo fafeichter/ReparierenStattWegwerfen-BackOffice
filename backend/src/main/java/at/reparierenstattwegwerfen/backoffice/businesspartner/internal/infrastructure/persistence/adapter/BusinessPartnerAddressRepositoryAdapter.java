@@ -14,16 +14,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 public class BusinessPartnerAddressRepositoryAdapter implements BusinessPartnerAddressRepository {
-	private final SpringDataBusinessPartnerAddressRepository repository;
+	private final SpringDataBusinessPartnerAddressRepository jpaRepository;
 	private final BusinessPartnerAddressPersistenceMapper mapper;
 
 	@Override
 	public BusinessPartnerAddress getById(Integer id) {
-		return mapper.toDomain(repository.getReferenceById(id));
+		return mapper.toDomain(jpaRepository.getReferenceById(id));
 	}
 
 	@Override
 	public BusinessPartnerAddress save(BusinessPartnerAddress address) {
-		return mapper.toDomain(repository.save(mapper.toEntity(address)));
+		return mapper.toDomain(jpaRepository.save(mapper.toEntity(address)));
 	}
 }

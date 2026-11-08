@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -39,6 +40,7 @@ public class DeviceStatusService {
 
 		if (!newStatusId.equals(device.getStatus().getId())) {
 			device.setStatus(deviceStatusRepository.getById(newStatusId));
+			device.setStatusDate(LocalDateTime.now());
 			deviceRepository.save(device);
 
 			DeviceStatusChanged deviceStatusChangedEvent = DeviceStatusChanged.builder()
@@ -55,6 +57,7 @@ public class DeviceStatusService {
 	public void setDeviceStatusDate(DeviceStatusChanged event) {
 		Device device = deviceRepository.getById(event.getDeviceId());
 		device.setStatusDate(event.getExactTimestamp());
+
 		deviceRepository.save(device);
 	}
 }

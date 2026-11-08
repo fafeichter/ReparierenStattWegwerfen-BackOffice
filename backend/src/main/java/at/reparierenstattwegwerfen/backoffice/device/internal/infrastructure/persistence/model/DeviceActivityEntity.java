@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 
@@ -40,9 +39,4 @@ public class DeviceActivityEntity implements NamedId {
 
 	@Column(name = "date")
 	private LocalDateTime date;
-
-	public DeviceActivityEntity(LocalDateTime date, UserDetails actor) {
-		this.date = date;
-		this.actor = actor.getUsername();
-	}
 }

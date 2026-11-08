@@ -5,7 +5,9 @@
   </clr-card-header>
   <div class="card-block">
     <dl>
-      <dt>Reported Defect</dt>
+      <dt>
+        Reported Defect
+      </dt>
       <dd>
         {{ deviceDefects()?.reportedDefect | orElse }}
       </dd>
@@ -17,15 +19,21 @@
           </button>
         } @else {
           @if (deviceDefects()?.reportedDefectConfirmed) {
-            <clr-label class="ml-1!">✓ Confirmed</clr-label>
+            <clr-label class="ml-1!">
+              ✓ Confirmed
+            </clr-label>
           } @else {
             @if (!deviceDefects()?.reportedDefectConfirmed) {
-              <clr-label class="ml-1!">× Not as described</clr-label>
+              <clr-label class="ml-1!">
+                × Not as described
+              </clr-label>
             }
           }
         }
       </dd>
-      <dt>Corrected Defect</dt>
+      <dt>
+        Corrected Defect
+      </dt>
       <dd>
         {{ deviceDefects()?.correctedDefect | orElse }}
         <button (click)="modalOpen.set(true)" class="btn btn-link ml-1!">
@@ -36,25 +44,37 @@
     </dl>
     <hr>
 
-    <h5>Spare Parts</h5>
+    <h5>
+      Spare Parts
+    </h5>
 
     <clr-datagrid>
-      <clr-dg-column>Name</clr-dg-column>
-      <clr-dg-column>Price (Netto)</clr-dg-column>
-      <clr-dg-column class="right">Date</clr-dg-column>
-      <clr-dg-placeholder>No spare parts.</clr-dg-placeholder>
+      <clr-dg-column>
+        Name
+      </clr-dg-column>
+      <clr-dg-column>
+        Price (Netto)
+      </clr-dg-column>
+      <clr-dg-column class="right">
+        Date
+      </clr-dg-column>
+      <clr-dg-placeholder>
+        No spare parts.
+      </clr-dg-placeholder>
       <clr-dg-row *clrDgItems="let deviceSparePart of deviceSpareParts()">
         <clr-dg-cell>
           {{ deviceSparePart.name }}
           <button (click)="deleteDeviceSparePart(deviceSparePart.deviceSparePartId)" class="btn btn-link btn-icon"
                   type="button">
-            <clr-icon shape="trash" size="xs"/>
+            <cds-icon shape="trash" size="xs"/>
           </button>
         </clr-dg-cell>
         <clr-dg-cell>
           {{ deviceSparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}
         </clr-dg-cell>
-        <clr-dg-cell class="right">{{ deviceSparePart.date | date:'dd.MM.yyyy HH:mm' }}</clr-dg-cell>
+        <clr-dg-cell class="right">
+          {{ deviceSparePart.date | date:'dd.MM.yyyy HH:mm' }}
+        </clr-dg-cell>
       </clr-dg-row>
       @if (deviceSpareParts().length > 0) {
         <clr-dg-row>
@@ -67,7 +87,9 @@
         <clr-dg-row>
           <clr-dg-cell/>
           <clr-dg-cell>
-            <span class="font-bold">Sum:</span>
+            <span class="font-bold">
+              Sum:
+            </span>
             {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}
           </clr-dg-cell>
           <clr-dg-cell/>
@@ -81,20 +103,34 @@
             <form (ngSubmit)="saveSparePart()" [formGroup]="form" autocomplete="off" class="clr-form-full-width"
                   clrForm clrLayout="horizontal">
               <clr-select-container>
-                <label>Spare Part</label>
+                <label class="clr-required-mark">
+                  Spare Part
+                </label>
                 <select class="clr-col-5" clrSelect formControlName="sparePartId">
-                  <option disabled selected value="null">-- Choose --</option>
+                  <option disabled selected value="null">
+                    -- Choose --
+                  </option>
                   @for (availableSparePart of availableSpareParts(); track availableSparePart.id) {
-                    <option [value]="availableSparePart.id">{{ availableSparePart.name }}</option>
+                    <option [value]="availableSparePart.id">
+                      {{ availableSparePart.name }}
+                    </option>
                   }
                 </select>
-                <clr-control-error *clrIfError="'required'">Spare Part is required.</clr-control-error>
+                <clr-control-error *clrIfError="'required'">
+                  Spare Part is required
+                </clr-control-error>
               </clr-select-container>
               <clr-number-input-container>
-                <label>Price</label>
+                <label>
+                  Price
+                </label>
                 <input class="clr-col-4" clrNumberInput formControlName="priceNetto" prefix="€" type="number"/>
-                <clr-control-error *clrIfError="'required'">Price is required.</clr-control-error>
-                <clr-control-error *clrIfError="'min'">Please enter a valid Price.</clr-control-error>
+                <clr-control-error *clrIfError="'required'">
+                  Price is required
+                </clr-control-error>
+                <clr-control-error *clrIfError="'min'">
+                  Please enter a valid price
+                </clr-control-error>
               </clr-number-input-container>
               <button (click)="sparePartEditModeActive.set(false); this.form.reset()" class="btn btn-link"
                       type="button">
@@ -123,23 +159,30 @@
 </clr-card>
 
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="l">
-  <div class="modal-title">Set defects</div>
+  <div class="modal-title">
+    Set defects
+  </div>
   <div class="modal-body">
     <form (ngSubmit)="updateDefects()" [formGroup]="defectsForm" autocomplete="off" clrForm>
       <clr-textarea-container>
-        <label><span class="clr-required-mark">Reported Defect</span></label>
+        <label class="clr-required-mark">
+          Reported Defect
+        </label>
         <textarea class="w-full!" clrTextarea formControlName="reportedDefect" required rows="2"></textarea>
       </clr-textarea-container>
       <clr-textarea-container>
-        <label>Corrected Defect</label>
+        <label>
+          Corrected Defect
+        </label>
         <textarea autofocus class="w-full!" clrTextarea formControlName="correctedDefect" rows="4"></textarea>
       </clr-textarea-container>
     </form>
   </div>
   <div class="modal-footer">
-    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
-    <button (click)="updateDefects()" [disabled]="defectsForm.invalid || isSubmitting()"
-            class="btn btn-primary"
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      Cancel
+    </button>
+    <button (click)="updateDefects()" [disabled]="defectsForm.invalid || isSubmitting()" class="btn btn-primary"
             type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>

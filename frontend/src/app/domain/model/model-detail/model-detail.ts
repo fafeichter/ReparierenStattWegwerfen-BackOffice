@@ -12,8 +12,8 @@ import { ClrCardModule, ClrIcon, ClrLabel, ClrVerticalNavModule } from '@clr/ang
 import { DatePipe } from '@angular/common';
 import { TitleFn } from '../../../layout/route-title.service';
 import { map } from 'rxjs';
-import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
-import { PageSidebar } from '../../../clarity-addons/components/page-sidebar/page-sidebar';
+import { NavItem, Scrollspy } from '../../../clarity-addons/scrollspy/scrollspy';
+import { PageSidebar } from '../../../clarity-addons/page-sidebar/page-sidebar';
 
 export const modelTitle: TitleFn = (route) => {
   const modelId = route.paramMap.get('modelId')!;

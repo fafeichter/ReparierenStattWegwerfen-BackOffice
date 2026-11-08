@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:1-create-schema
+--changeset fabian:1-accounting-create-schema
 
 CREATE TABLE accounting_invoice
 (

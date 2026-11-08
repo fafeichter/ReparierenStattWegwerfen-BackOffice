@@ -15,7 +15,7 @@ public interface SpringDataBusinessPartnerActivityRepository extends JpaReposito
 	@Query("""
 		SELECT a FROM BusinessPartnerActivityEntity a
 		LEFT JOIN FETCH a.activityType
-		WHERE a.businessPartner.id = :businessPartnerId
+		WHERE a.businessPartnerId = :businessPartnerId
 		ORDER BY a.date DESC
 		""")
 	List<BusinessPartnerActivityEntity> getByIdWithRelations(Integer businessPartnerId);

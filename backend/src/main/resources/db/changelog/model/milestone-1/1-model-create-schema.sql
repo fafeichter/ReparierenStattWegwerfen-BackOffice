@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset fabian:1-create-schema
+--changeset fabian:1-model-create-schema
 
 CREATE TABLE model_apple_silicon
 (

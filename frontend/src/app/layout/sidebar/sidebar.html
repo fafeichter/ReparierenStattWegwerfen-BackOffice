@@ -12,18 +12,13 @@
     <cds-icon clrVerticalNavIcon shape="user"/>
     Business Partners
   </a>
-  <a [routerLink]="['/spareparts']" clrVerticalNavLink routerLinkActive="active">
-    <cds-icon clrVerticalNavIcon shape="scatter-plot"/>
-    Spare Parts
-  </a>
   <div class="nav-divider"></div>
   <a [queryParams]="{ type: 'macbook' }" [routerLinkActiveOptions]="{
     paths: 'subset',
     queryParams: 'ignored',
     fragment: 'ignored',
     matrixParams: 'ignored'
-  }" [routerLink]="['/models']" clrVerticalNavLink
-     routerLinkActive="active">
+  }" [routerLink]="['/models']" clrVerticalNavLink routerLinkActive="active">
     <cds-icon clrVerticalNavIcon shape="pod"/>
     Models
   </a>

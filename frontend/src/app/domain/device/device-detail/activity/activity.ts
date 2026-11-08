@@ -4,7 +4,7 @@ import { DeviceActivityControllerService, DeviceActivityDto } from '@api/device'
 import { interval, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ClrCardModule, ClrIcon } from '@clr/angular';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-activity',
@@ -26,7 +26,7 @@ export class Activity implements OnInit {
     interval(5000)
       .pipe(
         startWith(0),
-        switchMap(() => this.activityApi.getActivities(this.deviceId())),
+        switchMap(() => this.activityApi.getActivitiesForDevice(this.deviceId())),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((data) => this.deviceActivities.set(data));

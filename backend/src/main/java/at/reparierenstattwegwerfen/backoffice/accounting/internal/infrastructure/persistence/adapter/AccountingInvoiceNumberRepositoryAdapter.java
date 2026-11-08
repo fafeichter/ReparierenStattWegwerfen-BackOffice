@@ -3,7 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.accounting.internal.infrastructur
 import at.reparierenstattwegwerfen.backoffice.accounting.internal.domain.invoice.AccountingInvoiceNumber;
 import at.reparierenstattwegwerfen.backoffice.accounting.internal.domain.invoice.AccountingInvoiceNumberRepository;
 import at.reparierenstattwegwerfen.backoffice.accounting.internal.infrastructure.persistence.mapper.AccountingInvoiceNumberPersistenceMapper;
-import at.reparierenstattwegwerfen.backoffice.accounting.internal.infrastructure.persistence.model.AccountingInvoiceNumberEntity;
 import at.reparierenstattwegwerfen.backoffice.accounting.internal.infrastructure.persistence.repository.SpringDataAccountingInvoiceNumberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -30,7 +29,7 @@ public class AccountingInvoiceNumberRepositoryAdapter implements AccountingInvoi
 
 	@Override
 	public void save(AccountingInvoiceNumber number) {
-		AccountingInvoiceNumberEntity entity = mapper.toEntity(number);
+		var entity = mapper.toEntity(number);
 		jpaRepository.save(entity);
 	}
 }

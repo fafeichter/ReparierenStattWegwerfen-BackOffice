@@ -35,10 +35,10 @@ public class BusinessPartnerActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(BusinessPartnerCreated event) {
-		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
+		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event);
 		BusinessPartner businessPartner = businessPartnerRepository.getById(event.getBusinessPartnerId());
 		businessPartnerActivity.setName(businessPartner.getName());
-		businessPartnerActivity.setBusinessPartner(businessPartner);
+		businessPartnerActivity.setBusinessPartnerId(event.getBusinessPartnerId());
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(1));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
@@ -46,10 +46,10 @@ public class BusinessPartnerActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(BusinessPartnerAddressChanged event) {
-		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
+		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event);
 		BusinessPartnerAddress address = businessPartnerAddressRepository.getById(event.getBusinessPartnerAddressId());
 		businessPartnerActivity.setName(address.toString());
-		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getBusinessPartnerId()));
+		businessPartnerActivity.setBusinessPartnerId(event.getBusinessPartnerId());
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(3));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
@@ -57,9 +57,9 @@ public class BusinessPartnerActivityService {
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void on(BusinessPartnerNameChanged event) {
-		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
+		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event);
 		businessPartnerActivity.setName(event.getNameFormatted());
-		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getBusinessPartnerId()));
+		businessPartnerActivity.setBusinessPartnerId(event.getBusinessPartnerId());
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(2));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
@@ -69,7 +69,7 @@ public class BusinessPartnerActivityService {
 	public void on(DeviceBusinessPartnerSetAsSeller event) {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
 		businessPartnerActivity.setName("#" + event.getDeviceId());
-		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getSellerBusinessPartnerId()));
+		businessPartnerActivity.setBusinessPartnerId(event.getSellerBusinessPartnerId());
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(4));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
@@ -79,7 +79,7 @@ public class BusinessPartnerActivityService {
 	public void on(DeviceBusinessPartnerSetAsBuyer event) {
 		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
 		businessPartnerActivity.setName("#" + event.getDeviceId());
-		businessPartnerActivity.setBusinessPartner(businessPartnerRepository.getById(event.getBuyerBusinessPartnerId()));
+		businessPartnerActivity.setBusinessPartnerId(event.getBuyerBusinessPartnerId());
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(5));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);

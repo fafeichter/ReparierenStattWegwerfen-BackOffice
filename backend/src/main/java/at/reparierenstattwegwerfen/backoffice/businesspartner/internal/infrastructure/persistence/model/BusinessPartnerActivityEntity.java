@@ -29,9 +29,8 @@ public class BusinessPartnerActivityEntity {
 	@Column(name = "actor")
 	private String actor;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "business_partner_id")
-	private BusinessPartnerEntity businessPartner;
+	@Column(name = "business_partner_id")
+	private Integer businessPartnerId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "business_partner_activity_type_id")

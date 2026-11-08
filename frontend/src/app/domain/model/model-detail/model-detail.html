@@ -10,7 +10,9 @@
           {{ navItems[0].label }}
         </clr-card-header>
         <div class="card-block">
-          <p class="mt-0!">{{ m.releaseDate + '-01' | date:'MMM yyyy' }}</p>
+          <p class="mt-0!">
+            {{ m.releaseDate + '-01' | date:'MMM yyyy' }}
+          </p>
           <p class="mt-1!">
             <a [href]="m.technicalSpecsUrl" target="_blank">
               {{ m.technicalSpecsUrl }}
@@ -25,22 +27,30 @@
           {{ navItems[1].label }}
         </clr-card-header>
         <div class="card-block">
-          <clr-card-body-title>Colors</clr-card-body-title>
+          <clr-card-body-title>
+            Colors
+          </clr-card-body-title>
           <clr-card-body-text>
             <ul class="list">
               @for (color of colors(); track color.id) {
-                <li>{{ color.name }}</li>
+                <li>
+                  {{ color.name }}
+                </li>
               }
             </ul>
           </clr-card-body-text>
         </div>
         <div class="card-block">
-          <clr-card-body-title>Chip</clr-card-body-title>
+          <clr-card-body-title>
+            Chip
+          </clr-card-body-title>
           <clr-card-body-text>
             @for (group of siliconGroups(); track group.shortName; let last = $last) {
               <ul class="list">
                 @for (chip of group.chips; track chip.id) {
-                  <li>{{ chip.name }}</li>
+                  <li>
+                    {{ chip.name }}
+                  </li>
                 }
               </ul>
               @if (!last) {
@@ -50,7 +60,9 @@
           </clr-card-body-text>
         </div>
         <div class="card-block">
-          <clr-card-body-title>Memory</clr-card-body-title>
+          <clr-card-body-title>
+            Memory
+          </clr-card-body-title>
           <clr-card-body-text>
             <ul class="list">
               @for (mem of memoryOptions(); track mem.id) {
@@ -58,7 +70,9 @@
                   {{ mem.label }}
                   @if (!mem.onAllChips) {
                     @for (availableOn of mem.availableOn; track availableOn) {
-                      <clr-label>{{ availableOn }}</clr-label>
+                      <clr-label>
+                        {{ availableOn }}
+                      </clr-label>
                     }
                   }
                 </li>
@@ -67,7 +81,9 @@
           </clr-card-body-text>
         </div>
         <div class="card-block">
-          <clr-card-body-title>Storage</clr-card-body-title>
+          <clr-card-body-title>
+            Storage
+          </clr-card-body-title>
           <clr-card-body-text>
             <ul class="list">
               @for (storage of storageOptions(); track storage.id) {
@@ -75,7 +91,9 @@
                   {{ storage.label }}
                   @if (!storage.onAllChips) {
                     @for (availableOn of storage.availableOn; track availableOn) {
-                      <clr-label>{{ availableOn }}</clr-label>
+                      <clr-label>
+                        {{ availableOn }}
+                      </clr-label>
                     }
                   }
                 </li>
@@ -93,7 +111,9 @@
           <clr-card-body-text>
             <ul class="list">
               @for (feature of features(); track feature.id) {
-                <li>{{ feature.name }}</li>
+                <li>
+                  {{ feature.name }}
+                </li>
               }
             </ul>
           </clr-card-body-text>

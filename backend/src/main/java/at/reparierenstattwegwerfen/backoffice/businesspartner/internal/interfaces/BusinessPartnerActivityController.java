@@ -19,10 +19,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BusinessPartnerActivityController {
 
-	private final BusinessPartnerActivityService deviceActivityService;
+	private final BusinessPartnerActivityService businessPartnerActivityService;
 
 	@GetMapping("/")
 	public List<BusinessPartnerActivityDto> getActivities(@PathVariable Integer businessPartnerId) {
-		return deviceActivityService.getActivitiesForBusinessPartner(businessPartnerId);
+		return businessPartnerActivityService.getActivitiesForBusinessPartner(businessPartnerId);
 	}
 }

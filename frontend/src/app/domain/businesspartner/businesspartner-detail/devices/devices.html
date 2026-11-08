@@ -6,7 +6,9 @@
   <div class="card-block">
     <clr-card-body-text>
       <div>
-        <h5>Seller</h5>
+        <h5>
+          Seller
+        </h5>
         <ul>
           @for (businessPartnerDevice of businessPartnerDevices()?.soldDevices; track businessPartnerDevice.id) {
             <li>
@@ -20,7 +22,9 @@
         </ul>
       </div>
       <div class="mt-2">
-        <h5>Buyer</h5>
+        <h5>
+          Buyer
+        </h5>
         <ul>
           @for (businessPartnerDevice of businessPartnerDevices()?.boughtDevices; track businessPartnerDevice.id) {
             <li>

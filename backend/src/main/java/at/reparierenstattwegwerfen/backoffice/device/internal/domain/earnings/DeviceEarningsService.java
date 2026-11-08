@@ -6,6 +6,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class DeviceEarningsService {
 	private final DeviceRepository deviceRepository;
 	private final DeviceInstalledSparePartRepository deviceInstalledSparePartRepository;
 
+	@Transactional(readOnly = true)
 	public Double getDeviceEarnings(Integer deviceId) {
 		Device device = deviceRepository.getById(deviceId);
 		List<DeviceInstalledSparePart> spareParts = deviceInstalledSparePartRepository.getSparePartsForDevice(deviceId);

@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity.De
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.earnings.DeviceEarning;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePart;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePartRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.model.DeviceEntity_;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOfferedForSaleDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOrderedDto;
@@ -41,11 +42,12 @@ public class DeviceSearchService {
 
 	@Transactional(readOnly = true)
 	public Page<DeviceDto> search(Integer pageNumber, Integer pageSize, Boolean includeInactiveDevices) {
-		PageRequest page = PageRequest.of(pageNumber - 1, pageSize, Sort.by("id"));
+		PageRequest page = PageRequest.of(pageNumber - 1, pageSize, Sort.by(DeviceEntity_.ID));
 
 		return deviceRepository.search(page, includeInactiveDevices)
 			.map(device -> {
-				List<DeviceInstalledSparePart> spareParts = deviceInstalledSparePartRepository.getSparePartsForDevice(device.getId());
+				List<DeviceInstalledSparePart> spareParts = deviceInstalledSparePartRepository
+					.getSparePartsForDevice(device.getId());
 				DeviceEarning deviceEarning = new DeviceEarning(device, spareParts);
 
 				return
@@ -54,7 +56,8 @@ public class DeviceSearchService {
 						.status(NamedIdDto.from(device.getStatus()))
 						.model(modelDetailsService.getModel(device.getModelId()))
 						.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-						.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+						.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device
+							.getModelAppleSiliconUnifiedMemoryId()))
 						.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
 						.earning(deviceEarning.getEarning())
 						.lastActivity(deviceActivityService.getLastActivityDateForDevice(device.getId()))
@@ -72,7 +75,8 @@ public class DeviceSearchService {
 					.status(NamedIdDto.from(device.getStatus()))
 					.model(modelDetailsService.getModel(device.getModelId()))
 					.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-					.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+					.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device
+						.getModelAppleSiliconUnifiedMemoryId()))
 					.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
 					.build())
 			.toList();
@@ -88,7 +92,8 @@ public class DeviceSearchService {
 					.statusDate(device.getStatusDate().toLocalDate())
 					.model(modelDetailsService.getModel(device.getModelId()))
 					.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-					.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device.getModelAppleSiliconUnifiedMemoryId()))
+					.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device
+						.getModelAppleSiliconUnifiedMemoryId()))
 					.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
 					.build())
 			.toList();

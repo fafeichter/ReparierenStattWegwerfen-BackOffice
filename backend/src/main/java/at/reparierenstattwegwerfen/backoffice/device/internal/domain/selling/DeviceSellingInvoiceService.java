@@ -30,7 +30,7 @@ public class DeviceSellingInvoiceService {
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-	public void setDeviceInvoiseNumber(DeviceSold event) {
+	public void setDeviceInvoiceNumber(DeviceSold event) {
 		Device device = deviceRepository.getById(event.getDeviceId());
 
 		if (device.getInvoiceNumber() == null) {
@@ -39,12 +39,13 @@ public class DeviceSellingInvoiceService {
 
 			deviceRepository.save(device);
 
-			DeviceSellingInvoiceNumberAssigned deviceSellingInvoiceNumberAssignedEvent = DeviceSellingInvoiceNumberAssigned.builder()
-				.source(this)
-				.actor(SystemUser.get())
-				.deviceId(event.getDeviceId())
-				.invoiceNumber(nextInvoiceNumber)
-				.build();
+			DeviceSellingInvoiceNumberAssigned deviceSellingInvoiceNumberAssignedEvent =
+				DeviceSellingInvoiceNumberAssigned.builder()
+					.source(this)
+					.actor(SystemUser.get())
+					.deviceId(event.getDeviceId())
+					.invoiceNumber(nextInvoiceNumber)
+					.build();
 			events.publishEvent(deviceSellingInvoiceNumberAssignedEvent);
 		}
 	}

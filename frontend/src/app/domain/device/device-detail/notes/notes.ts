@@ -15,7 +15,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DeviceNoteDto, DeviceNotesControllerService } from '@api/device';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-notes',

@@ -22,8 +22,8 @@ import { Selling } from './selling/selling';
 import { Buying } from './buying/buying';
 import { map } from 'rxjs';
 import { TitleFn } from '../../../layout/route-title.service';
-import { NavItem, Scrollspy } from '../../../clarity-addons/components/scrollspy/scrollspy';
-import { PageSidebar } from '../../../clarity-addons/components/page-sidebar/page-sidebar';
+import { NavItem, Scrollspy } from '../../../clarity-addons/scrollspy/scrollspy';
+import { PageSidebar } from '../../../clarity-addons/page-sidebar/page-sidebar';
 import { Earnings } from './earnings/earnings';
 
 export const deviceTitle: TitleFn = (route) => {

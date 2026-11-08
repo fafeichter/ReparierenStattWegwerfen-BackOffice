@@ -22,7 +22,8 @@ public class ModelStorageController {
 	private final ModelStorageService modelStorageService;
 
 	@GetMapping("/{appleSiliconId}/storage/")
-	public List<NamedIdDto> getStoragesForModelAndAppleSilicon(@PathVariable Integer modelId, @PathVariable Integer appleSiliconId) {
+	public List<NamedIdDto> getStoragesForModelAndAppleSilicon(@PathVariable Integer modelId,
+															   @PathVariable Integer appleSiliconId) {
 		return modelStorageService.getStoragesForModelAndAppleSilicon(modelId, appleSiliconId);
 	}
 }

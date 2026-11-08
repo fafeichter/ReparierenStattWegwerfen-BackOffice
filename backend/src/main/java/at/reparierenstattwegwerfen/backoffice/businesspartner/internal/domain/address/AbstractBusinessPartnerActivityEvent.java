@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public abstract class AbstractBusinessPartnerActivityEvent extends PreciseTimestampedApplicationEvent {
 
-	final UserDetails actor;
-	final Integer businessPartnerId;
+	private final UserDetails actor;
+	private final Integer businessPartnerId;
 
 	public AbstractBusinessPartnerActivityEvent(Object source, Integer businessPartnerId, UserDetails actor) {
 		super(source);

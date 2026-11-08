@@ -2,7 +2,7 @@ import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { DeviceBusinessPartnerControllerService, DeviceBusinesspartnerDto } from '@api/device';
 import { RouterLink } from '@angular/router';
 import { ClrCardModule, ClrIcon } from '@clr/angular';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   imports: [RouterLink, ClrCardModule, ClrIcon],

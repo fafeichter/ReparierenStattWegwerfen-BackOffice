@@ -41,6 +41,7 @@ public class DatabaseConfig {
 		DatabaseStartupValidator validator = new DatabaseStartupValidator();
 		validator.setDataSource(dataSource);
 		validator.setTimeout(Integer.MAX_VALUE);
+
 		return validator;
 	}
 }

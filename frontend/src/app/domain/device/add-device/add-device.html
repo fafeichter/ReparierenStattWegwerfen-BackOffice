@@ -4,60 +4,81 @@
 </button>
 
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="xl">
-  <div class="modal-title">Add device</div>
+  <div class="modal-title">
+    Add device
+  </div>
   <div class="modal-body">
     <form (ngSubmit)="addDevice()" [formGroup]="form" autocomplete="off" clrForm>
       <clr-input-container>
-        <label><span class="clr-required-mark">URL</span></label>
-        <input #input (click)="input.select()" (focusout)="selectUrlText()" clrInput
-               formControlName="url"
+        <label class="clr-required-mark">
+          URL
+        </label>
+        <input #input (click)="input.select()" (focusout)="selectUrlText()" clrInput formControlName="url" required
                size="999" type="url"/>
-        <clr-control-helper>From Kleinanzeigen, Willhaben etc.</clr-control-helper>
-        <clr-control-error *clrIfError="'required'">URL is required.</clr-control-error>
-        <clr-control-error *clrIfError="'pattern'">Please enter a valid URL.</clr-control-error>
+        <clr-control-helper>
+          From Kleinanzeigen, Willhaben etc.
+        </clr-control-helper>
+        <clr-control-error *clrIfError="'required'">
+          URL is required
+        </clr-control-error>
+        <clr-control-error *clrIfError="'pattern'">
+          Please enter a valid URL
+        </clr-control-error>
       </clr-input-container>
 
       <clr-number-input-container>
-        <label><span class="clr-required-mark">Price</span></label>
-        <input clrNumberInput formControlName="price" prefix="€" type="number"/>
-        <clr-control-error *clrIfError="'required'">Price is required.</clr-control-error>
-        <clr-control-error *clrIfError="'min'">Please enter a valid Price.</clr-control-error>
+        <label class="clr-required-mark">
+          Price
+        </label>
+        <input clrNumberInput formControlName="price" prefix="€" required type="number"/>
+        <clr-control-error *clrIfError="'required'">
+          Price is required
+        </clr-control-error>
+        <clr-control-error *clrIfError="'min'">
+          Please enter a valid price
+        </clr-control-error>
       </clr-number-input-container>
-
       <clr-date-container>
-        <label><span class="clr-required-mark">Buying date</span></label>
-        <input [max]="(now | date:'yyyy-MM-dd')!" clrDate formControlName="buyingDate"
-               type="date"/>
-        <clr-control-error *clrIfError="'required'">Buying date is required.</clr-control-error>
-        <clr-control-error *clrIfError="'futureDate'">Date must be in past or present</clr-control-error>
+        <label class="clr-required-mark">
+          Buying date
+        </label>
+        <input [max]="(now | date:'yyyy-MM-dd')!" clrDate formControlName="buyingDate" required type="date"/>
+        <clr-control-error *clrIfError="'required'">
+          Buying date is required
+        </clr-control-error>
+        <clr-control-error *clrIfError="'futureDate'">
+          Date must be in past or present
+        </clr-control-error>
       </clr-date-container>
     </form>
 
     @if (isLoadingModel()) {
       <div class="spinner-container mt-6!">
-        <clr-spinner [clrSmall]="true"></clr-spinner>
-        <span>Detecting model...</span>
+        <clr-spinner [clrSmall]="true"/>
+        <span>
+          Detecting model...
+        </span>
       </div>
     } @else {
-      <div class="mt-5 mb-1">Found model:</div>
+      <div class="mt-5 mb-1">
+        Found model:
+      </div>
 
       @if (found(); as mainFound) {
         <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: mainFound }"></ng-container>
       }
 
       @if (found()?.alternativeCandidates?.length) {
-        <div class="mt-5 mb-1">Alternatives:</div>
+        <div class="mt-5 mb-1">
+          Alternatives:
+        </div>
         @for (alternative of found()?.alternativeCandidates; track alternative; let i = $index) {
           <clr-radio-wrapper>
-            <input
-              (change)="selectedAlternative.set(i)"
-              [checked]="selectedAlternative() === i"
-              [id]="'option-' + i"
-              [value]="i"
-              clrRadio
-              name="options"
-              type="radio"/>
-            <label [for]="'option-' + i">Alternative {{ i + 1 }}</label>
+            <input (change)="selectedAlternative.set(i)" [checked]="selectedAlternative() === i" [id]="'option-' + i"
+                   [value]="i" clrRadio name="options" type="radio"/>
+            <label [for]="'option-' + i">
+              Alternative {{ i + 1 }}
+            </label>
           </clr-radio-wrapper>
           <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: alternative }"></ng-container>
         }
@@ -65,10 +86,11 @@
     }
   </div>
   <div class="modal-footer">
-    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">Cancel</button>
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      Cancel
+    </button>
     <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting() || isLoadingModel()"
-            class="btn btn-primary"
-            type="submit">
+            class="btn btn-primary" type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
       }
@@ -86,9 +108,12 @@
         <cds-icon shape="pop-out"/>
       </a>
     </div>
-    Chip: {{ model.modelAppleSilicon?.name | orElse }}<br>
-    Color: {{ model.modelColor?.name | orElse }}<br>
-    Battery: {{ model.batteryMaximumCapacity | orElse }} % ({{ model.batteryCycleCount | orElse }} cycles)<br>
+    Chip: {{ model.modelAppleSilicon?.name | orElse }}
+    <br>
+    Color: {{ model.modelColor?.name | orElse }}
+    <br>
+    Battery: {{ model.batteryMaximumCapacity | orElse }} % ({{ model.batteryCycleCount | orElse }} cycles)
+    <br>
     Serial Number: {{ model.serialNumber | orElse }}
     <hr>
     Seller: {{ model.sellerFirstName | orElse }} {{ model.sellerLastName | orElse }}

@@ -24,7 +24,8 @@ public class DeviceSellingAccessoriesController {
 	}
 
 	@PostMapping("/")
-	public void updateSellingAccessories(@PathVariable Integer deviceId, @Valid @RequestBody DeviceSellingAccessoriesFormDto accessoriesFormDto) {
+	public void updateSellingAccessories(@PathVariable Integer deviceId,
+										 @Valid @RequestBody DeviceSellingAccessoriesFormDto accessoriesFormDto) {
 		sellingAccessoriesService.update(deviceId, accessoriesFormDto);
 	}
 }

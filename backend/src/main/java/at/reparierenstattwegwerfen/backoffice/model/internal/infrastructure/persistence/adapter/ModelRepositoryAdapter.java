@@ -37,8 +37,8 @@ public class ModelRepositoryAdapter implements ModelRepository {
 	}
 
 	@Override
-	public List<Model> findAllMacbooks() {
-		return jpaRepository.findAllMacbooks()
+	public List<Model> findAllMacBooks() {
+		return jpaRepository.findAllMacBooks()
 			.stream()
 			.map(mapper::toDomain)
 			.toList();

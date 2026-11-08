@@ -21,7 +21,8 @@ public class DeviceNoteService {
 	private final DeviceNoteRepository deviceNoteRepository;
 	private final ApplicationEventPublisher events;
 
-	public List<DeviceNoteDto> load(Integer deviceId) {
+	@Transactional(readOnly = true)
+	public List<DeviceNoteDto> getNotesForDevice(Integer deviceId) {
 		return deviceNoteRepository.getNotesForDevice(deviceId)
 			.stream()
 			.map(note ->

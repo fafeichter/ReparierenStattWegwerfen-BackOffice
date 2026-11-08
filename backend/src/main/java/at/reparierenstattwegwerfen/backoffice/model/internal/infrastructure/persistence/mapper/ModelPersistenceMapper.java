@@ -59,6 +59,7 @@ public interface ModelPersistenceMapper {
 			.stream()
 			.map(this::toDomainWithOptions)
 			.toList());
+
 		return model;
 	}
 
@@ -72,6 +73,7 @@ public interface ModelPersistenceMapper {
 			.stream()
 			.map(m -> toDomain(m.getUnifiedMemory()))
 			.toList());
+
 		return availableAppleSilicon;
 	}
 }

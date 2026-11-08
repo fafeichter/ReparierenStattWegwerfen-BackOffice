@@ -8,8 +8,8 @@ import { ClrCardModule, ClrIcon } from '@clr/angular';
 import { version as clarityUiVersion } from '@clr/ui/package.json';
 import { version as clarityAngularVersion } from '@clr/angular/package.json';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { PageSidebar } from '../clarity-addons/components/page-sidebar/page-sidebar';
-import { NavItem, Scrollspy } from '../clarity-addons/components/scrollspy/scrollspy';
+import { PageSidebar } from '../clarity-addons/page-sidebar/page-sidebar';
+import { NavItem, Scrollspy } from '../clarity-addons/scrollspy/scrollspy';
 import { OrElsePipe } from '../pipes/or-else-pipe';
 
 @Component({

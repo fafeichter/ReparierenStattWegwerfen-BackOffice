@@ -18,10 +18,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BusinessPartnerAddressCountryController {
 
-	private final BusinessPartnerAddressCountryService addressCountryService;
+	private final BusinessPartnerAddressCountryService businessPartnerAddressCountryService;
 
 	@GetMapping("/")
 	public List<BusinessPartnerAddressCountryDto> getAllCountries() {
-		return addressCountryService.getAllCountries();
+		return businessPartnerAddressCountryService.getAllCountries();
 	}
 }

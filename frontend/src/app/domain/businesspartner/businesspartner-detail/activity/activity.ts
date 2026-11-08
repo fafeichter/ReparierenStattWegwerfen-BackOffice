@@ -7,7 +7,7 @@ import {
 } from '@api/businesspartner';
 import { DatePipe } from '@angular/common';
 import { ClrCardModule, ClrIcon } from '@clr/angular';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   imports: [DatePipe, ClrCardModule, ClrIcon],

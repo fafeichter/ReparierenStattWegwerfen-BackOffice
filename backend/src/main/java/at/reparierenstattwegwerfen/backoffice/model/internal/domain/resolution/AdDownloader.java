@@ -17,7 +17,6 @@ public class AdDownloader {
 	private final RestClient restClient;
 
 	public AdPlainText downloadAd(String adUrl) {
-		// 1. Fetch and clean data
 		String rawHtml = restClient
 			.get()
 			.uri(adUrl)
@@ -26,5 +25,4 @@ public class AdDownloader {
 
 		return new AdPlainText(rawHtml);
 	}
-
 }

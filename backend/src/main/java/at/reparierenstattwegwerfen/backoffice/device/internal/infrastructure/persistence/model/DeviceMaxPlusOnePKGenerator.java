@@ -11,8 +11,9 @@ public class DeviceMaxPlusOnePKGenerator implements IdentifierGenerator {
 
 	@Override
 	public synchronized Object generate(SharedSessionContractImplementor session, Object object) {
-		return session
-			.createSelectionQuery("SELECT COALESCE(MAX(d.id), 0) + 1 FROM DeviceEntity d", Integer.class)
+		String query = "SELECT COALESCE(MAX(d.id), 0) + 1 FROM DeviceEntity d";
+
+		return session.createSelectionQuery(query, Integer.class)
 			.getSingleResult();
 	}
 }

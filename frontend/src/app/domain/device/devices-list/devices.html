@@ -3,48 +3,73 @@
     <clr-toggle-wrapper>
       <input (ngModelChange)="toggleInactiveDevices($event)" [ngModel]="showInactiveDevices()"
              clrToggle="showInactiveDevices" type="checkbox"/>
-      <label>Show inactive devices</label>
+      <label>
+        Show inactive devices
+      </label>
     </clr-toggle-wrapper>
   </clr-toggle-container>
 </div>
 
 <clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading()">
-  <clr-dg-column [style.width.px]="100">ID</clr-dg-column>
-  <clr-dg-column [style.width.px]="400">Model</clr-dg-column>
-  <clr-dg-column [style.width.px]="450">Chip</clr-dg-column>
-  <clr-dg-column [style.width.px]="250">Unified Memory / Storage</clr-dg-column>
-  <clr-dg-column [style.width.px]="250">Storage</clr-dg-column>
-  <clr-dg-column [style.width.px]="350">Status</clr-dg-column>
-  <clr-dg-column [style.width.px]="250" class="">Earning</clr-dg-column>
-  <clr-dg-column [style.width.px]="200" class="right">Last activity</clr-dg-column>
-
+  <clr-dg-column [style.width.px]="100">
+    ID
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="400">
+    Model
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="450">
+    Chip
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250">
+    Unified Memory / Storage
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250">
+    Storage
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="350">
+    Status
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="250" class="">
+    Earning
+  </clr-dg-column>
+  <clr-dg-column [style.width.px]="200" class="right">
+    Last activity
+  </clr-dg-column>
   <clr-dg-row *clrDgItems="let device of devices()" [clrDgItem]="device">
     <clr-dg-cell>
       <a [routerLink]="['/devices', device.deviceId]">
         #{{ device.deviceId }}
       </a>
     </clr-dg-cell>
-    <clr-dg-cell>{{ device.model?.name }}</clr-dg-cell>
-    <clr-dg-cell>{{ device.appleSilicon?.name | orElse }}</clr-dg-cell>
-    <clr-dg-cell>{{ device.unifiedMemory?.name | orElse }}</clr-dg-cell>
-    <clr-dg-cell>{{ device.storage?.name | orElse }}</clr-dg-cell>
     <clr-dg-cell>
-      <clr-label>{{ device.status?.name }}</clr-label>
+      {{ device.model?.name }}
+    </clr-dg-cell>
+    <clr-dg-cell>
+      {{ device.appleSilicon?.name | orElse }}
+    </clr-dg-cell>
+    <clr-dg-cell>
+      {{ device.unifiedMemory?.name | orElse }}
+    </clr-dg-cell>
+    <clr-dg-cell>
+      {{ device.storage?.name | orElse }}
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <clr-label>
+        {{ device.status?.name }}
+      </clr-label>
     </clr-dg-cell>
     <clr-dg-cell
       [class]="device.earning! >= 0 ? 'text-green-800' : 'text-red-800'">
       {{ device.earning | currency:'EUR':'symbol':'1.2-2' }}
     </clr-dg-cell>
-    <clr-dg-cell class="right">{{ device.lastActivity | date:'dd.MM.yyyy HH:mm' }}</clr-dg-cell>
+    <clr-dg-cell class="right">
+      {{ device.lastActivity | date:'dd.MM.yyyy HH:mm' }}
+    </clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>
-    <clr-dg-pagination
-      #pagination
-      [(clrDgPage)]="page"
-      [clrDgLastPage]="lastPage()"
-      [clrDgPageSize]="pageSize()"
-      [clrDgTotalItems]="totalItems()">
+    <clr-dg-pagination #pagination [(clrDgPage)]="page" [clrDgLastPage]="lastPage()" [clrDgPageSize]="pageSize()"
+                       [clrDgTotalItems]="totalItems()">
       <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100, 500]">
         Elements per page
       </clr-dg-page-size>

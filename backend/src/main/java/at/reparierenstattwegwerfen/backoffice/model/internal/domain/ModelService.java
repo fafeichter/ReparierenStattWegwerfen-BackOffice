@@ -8,7 +8,6 @@ import at.reparierenstattwegwerfen.backoffice.model.internal.interfaces.dtos.Mod
 import at.reparierenstattwegwerfen.backoffice.model.internal.interfaces.dtos.ModelDto;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.unit.DataUnit;
@@ -21,7 +20,6 @@ import java.util.List;
  * @since 09.06.2026
  */
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class ModelService implements ModelDetailsService {
 
@@ -53,7 +51,7 @@ public class ModelService implements ModelDetailsService {
 
 	@Transactional(readOnly = true)
 	public List<ModelDto> getAllMacBooks() {
-		return toModelDtos(modelRepository.findAllMacbooks());
+		return toModelDtos(modelRepository.findAllMacBooks());
 	}
 
 	@Transactional(readOnly = true)

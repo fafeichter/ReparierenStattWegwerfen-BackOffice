@@ -13,10 +13,10 @@ spring:
           issuer-uri: http://localhost:9000/realms/reparieren-statt-wegwerfen-backoffice
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY_DEV} # See `secrets.env`
+      api-key: ${OPENAI_API_KEY} # See `secrets.env`
     google:
       genai:
-        api-key: ${GEMINI_API_KEY_DEV} # See `secrets.env`
+        api-key: ${GEMINI_API_KEY} # See `secrets.env`
 
 logging:
   level:

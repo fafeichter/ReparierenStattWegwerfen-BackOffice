@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity;
 
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.AbstractDeviceActivityEvent;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,10 @@ public class DeviceActivity implements NamedId {
 	public DeviceActivity(LocalDateTime date, UserDetails actor) {
 		this.date = date;
 		this.actor = actor.getUsername();
+	}
+
+	public DeviceActivity(AbstractDeviceActivityEvent event) {
+		this.date = event.getExactTimestamp();
+		this.actor = event.getActor().getUsername();
 	}
 }

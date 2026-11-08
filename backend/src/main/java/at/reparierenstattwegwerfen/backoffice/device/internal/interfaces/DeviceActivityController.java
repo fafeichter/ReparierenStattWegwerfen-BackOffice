@@ -22,7 +22,7 @@ public class DeviceActivityController {
 	private final DeviceActivityService deviceActivityService;
 
 	@GetMapping("/")
-	public List<DeviceActivityDto> getActivities(@PathVariable Integer deviceId) {
+	public List<DeviceActivityDto> getActivitiesForDevice(@PathVariable Integer deviceId) {
 		return deviceActivityService.getActivitiesForDevice(deviceId);
 	}
 }

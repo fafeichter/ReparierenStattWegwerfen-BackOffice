@@ -20,7 +20,7 @@ import {
 } from '@api/device';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavItem } from '../../../../clarity-addons/components/scrollspy/scrollspy';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-selling',
@@ -114,7 +114,7 @@ export class Selling implements OnInit {
   }
 
   protected setBuyerToAsgoodasnew() {
-    this.deviceBusinessPartnerApi.setBuyerToAsgoodasnew(this.deviceId()).subscribe((response) => {
+    this.deviceBusinessPartnerApi.setBuyerToAsGoodAsNew(this.deviceId()).subscribe((response) => {
       this.deviceSelling.update((deviceSelling) => {
         return {
           ...deviceSelling!,

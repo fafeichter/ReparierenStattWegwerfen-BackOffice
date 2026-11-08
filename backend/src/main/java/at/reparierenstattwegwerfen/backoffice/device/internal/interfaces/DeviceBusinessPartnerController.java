@@ -35,8 +35,8 @@ public class DeviceBusinessPartnerController {
 	}
 
 	@PostMapping("/devices/{deviceId}/businesspartners/buyer/asgoodasnew")
-	public NamedIdDto setBuyerToAsgoodasnew(@PathVariable Integer deviceId,
+	public NamedIdDto setBuyerToAsGoodAsNew(@PathVariable Integer deviceId,
 											@AuthenticationPrincipal UserDetails currentUser) {
-		return businessPartnerService.setBuyerToAsgoodasnew(deviceId, currentUser);
+		return businessPartnerService.setBuyerToAsGoodAsNew(deviceId, currentUser);
 	}
 }

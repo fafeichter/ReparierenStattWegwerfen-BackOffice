@@ -1,4 +1,4 @@
-package at.reparierenstattwegwerfen.backoffice;
+package at.reparierenstattwegwerfen.backoffice.config;
 
 import org.springframework.ai.google.genai.GoogleGenAiChatModel;
 import org.springframework.ai.model.google.genai.autoconfigure.chat.GoogleGenAiChatAutoConfiguration;

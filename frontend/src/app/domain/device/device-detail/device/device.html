@@ -1,7 +1,9 @@
 @if (deviceBase()?.status?.id === 8) {
   <clr-alert [clrAlertClosable]="false" [clrAlertType]="'warning'">
     <clr-alert-item>
-      <span class="alert-text">Device is archived. Do not modify!</span>
+      <span class="alert-text">
+        Device is archived. Do not modify!
+      </span>
     </clr-alert-item>
   </clr-alert>
 }
@@ -13,14 +15,18 @@
   </clr-card-header>
   <div class="card-block">
     <dl>
-      <dt>Model</dt>
+      <dt>
+        Model
+      </dt>
       <dd>
         <a [routerLink]="['/models', deviceBase()?.model?.id]" target="_blank">
           {{ deviceBase()?.modelNumber }}
           <cds-icon shape="pop-out"/>
         </a>
       </dd>
-      <dt>Technical Specs</dt>
+      <dt>
+        Technical Specs
+      </dt>
       <dd>
         <a [href]=" deviceBase()?.technicalSpecsUrl" target="_blank">
           {{ deviceBase()?.technicalSpecsUrl }}
@@ -31,19 +37,27 @@
     <hr>
     @if (!hardwareConfigEditModeActive()) {
       <dl>
-        <dt>Chip</dt>
+        <dt>
+          Chip
+        </dt>
         <dd>
           {{ deviceBase()?.appleSilicon?.name | orElse }}
         </dd>
-        <dt>Unified Memory</dt>
+        <dt>
+          Unified Memory
+        </dt>
         <dd>
           {{ deviceBase()?.unifiedMemory?.name | orElse }}
         </dd>
-        <dt>Storage</dt>
+        <dt>
+          Storage
+        </dt>
         <dd>
           {{ deviceBase()?.storage?.name | orElse }}
         </dd>
-        <dt>Color</dt>
+        <dt>
+          Color
+        </dt>
         <dd>
           {{ deviceBase()?.color?.name | orElse }}
         </dd>
@@ -56,45 +70,61 @@
         </dd>
       </dl>
     } @else {
-      <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" autocomplete="off" class="p-0!"
-            clrForm clrLayout="vertical">
+      <form (ngSubmit)="changeHardwareConfig()" [formGroup]="hardwareConfigForm" autocomplete="off" class="p-0!" clrForm
+            clrLayout="vertical">
         <dl class="form-multi">
-          <dt>Chip</dt>
+          <dt>
+            Chip
+          </dt>
           <dd>
             <clr-select-container>
               <select (change)="loadMemoryOptions($event)" clrSelect formControlName="newAppleSiliconId">
                 @for (appleSilicon of modelAppleSilicons(); track appleSilicon.id) {
-                  <option [value]="appleSilicon.id">{{ appleSilicon.name }}</option>
+                  <option [value]="appleSilicon.id">
+                    {{ appleSilicon.name }}
+                  </option>
                 }
               </select>
             </clr-select-container>
           </dd>
-          <dt>Unified Memory</dt>
+          <dt>
+            Unified Memory
+          </dt>
           <dd>
             <clr-select-container>
               <select (change)="loadStorageOptions()" clrSelect formControlName="newMemoryId">
                 @for (memory of modelMemories(); track memory.id) {
-                  <option [value]="memory.id">{{ memory.name }}</option>
+                  <option [value]="memory.id">
+                    {{ memory.name }}
+                  </option>
                 }
               </select>
             </clr-select-container>
           </dd>
-          <dt>Storage</dt>
+          <dt>
+            Storage
+          </dt>
           <dd>
             <clr-select-container>
               <select clrSelect formControlName="newStorageId">
                 @for (storage of modelStorages(); track storage.id) {
-                  <option [value]="storage.id">{{ storage.name }}</option>
+                  <option [value]="storage.id">
+                    {{ storage.name }}
+                  </option>
                 }
               </select>
             </clr-select-container>
           </dd>
-          <dt>Color</dt>
+          <dt>
+            Color
+          </dt>
           <dd>
             <clr-select-container>
               <select clrSelect formControlName="newColorId">
                 @for (color of modelColors(); track color.id) {
-                  <option [value]="color.id">{{ color.name }}</option>
+                  <option [value]="color.id">
+                    {{ color.name }}
+                  </option>
                 }
               </select>
             </clr-select-container>
@@ -116,10 +146,14 @@
     <hr>
 
     <dl>
-      <dt>Status</dt>
+      <dt>
+        Status
+      </dt>
       <dd>
         @if (!statusEditModeActive()) {
-          <clr-label>{{ deviceBase()?.status?.name }}</clr-label>
+          <clr-label>
+            {{ deviceBase()?.status?.name }}
+          </clr-label>
           <button (click)="activateStatusEditMode()" class="btn btn-link">
             <cds-icon shape="edit"/>
             Edit
@@ -132,7 +166,9 @@
                 @if (deviceStatus.id === 7) {
                   <hr>
                 }
-                <option [value]="deviceStatus.id">{{ deviceStatus.name }}</option>
+                <option [value]="deviceStatus.id">
+                  {{ deviceStatus.name }}
+                </option>
               }
             </select>
             <button (click)="statusEditModeActive.set(false)" class="btn btn-link" type="button">
@@ -146,7 +182,9 @@
     <hr>
 
     <dl>
-      <dt>Serial Number</dt>
+      <dt>
+        Serial Number
+      </dt>
       <dd>
         @if (!serialNumberEditModeActive()) {
           {{ deviceBase()?.serialNumber | orElse }}
@@ -158,10 +196,17 @@
           <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" autocomplete="off" clrForm
                 clrLayout="vertical">
             <input autofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
-            <clr-control-error *clrIfError="'required'">Serial number must be provided</clr-control-error>
-            <clr-control-error *clrIfError="'min'">Serial number must be at least 10 characters long</clr-control-error>
-            <clr-control-error *clrIfError="'max'">Serial number must be at max 12 characters long</clr-control-error>
-            <clr-control-error *clrIfError="'pattern'">Serial number must only contain characters and digits
+            <clr-control-error *clrIfError="'required'">
+              Serial number must be provided
+            </clr-control-error>
+            <clr-control-error *clrIfError="'min'">
+              Serial number must be at least 10 characters long
+            </clr-control-error>
+            <clr-control-error *clrIfError="'max'">
+              Serial number must be at max 12 characters long
+            </clr-control-error>
+            <clr-control-error *clrIfError="'pattern'">
+              Serial number must only contain characters and digits
             </clr-control-error>
             <button (click)="serialNumberEditModeActive.set(false)" class="btn btn-link" type="button">
               <cds-icon shape="close"/>
@@ -178,7 +223,9 @@
     <hr>
 
     <dl>
-      <dt>Battery Health</dt>
+      <dt>
+        Battery Health
+      </dt>
       <dd>
         @if (!batteryEditModeActive()) {
           {{ deviceBase()?.batteryMaximumCapacity | orElse }} %
@@ -193,11 +240,15 @@
           <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" autocomplete="off" clrForm clrLayout="vertical">
             <clr-input-container>
               <input clrInput formControlName="newMaximumCapacity"/>
-              <div clrInputSuffix>%</div>
+              <div clrInputSuffix>
+                %
+              </div>
             </clr-input-container>
             <clr-input-container>
               <input clrInput formControlName="newCycleCount"/>
-              <div clrInputSuffix>cycles</div>
+              <div clrInputSuffix>
+                cycles
+              </div>
             </clr-input-container>
             <button (click)="batteryEditModeActive.set(false)" class="btn btn-link" type="button">
               <cds-icon shape="close"/>
@@ -210,10 +261,14 @@
           </form>
         }
       </dd>
-      <dt>Battery Status</dt>
+      <dt>
+        Battery Status
+      </dt>
       <dd>
         @if (!batteryStatusEditModeActive()) {
-          <clr-label>{{ deviceBase()?.batteryStatus?.name | orElse }}</clr-label>
+          <clr-label>
+            {{ deviceBase()?.batteryStatus?.name | orElse }}
+          </clr-label>
           <button (click)="activateBatteryStatusEditMode()" class="btn btn-link">
             <cds-icon shape="edit"/>
             Edit
@@ -222,9 +277,13 @@
           <form #batteryStatusFormRef (ngSubmit)="changeBatteryStatus()" [formGroup]="batteryStatusForm"
                 autocomplete="off" clrForm>
             <select (change)="batteryStatusFormRef.requestSubmit()" formControlName="newBatteryStatusId">
-              <option disabled selected value="null">-- Choose --</option>
+              <option disabled selected value="null">
+                -- Choose --
+              </option>
               @for (deviceBatteryStatus of deviceBatteryStatus(); track deviceBatteryStatus.id) {
-                <option [value]="deviceBatteryStatus.id">{{ deviceBatteryStatus.name }}</option>
+                <option [value]="deviceBatteryStatus.id">
+                  {{ deviceBatteryStatus.name }}
+                </option>
               }
             </select>
             <button (click)="batteryStatusEditModeActive.set(false)" class="btn btn-link" type="button">
@@ -238,10 +297,14 @@
     <hr>
 
     <dl>
-      <dt>Grade</dt>
+      <dt>
+        Grade
+      </dt>
       <dd>
         @if (!gradeEditModeActive()) {
-          <clr-label>{{ deviceBase()?.grade?.name | orElse }}</clr-label>
+          <clr-label>
+            {{ deviceBase()?.grade?.name | orElse }}
+          </clr-label>
           <button (click)="activateGradeEditMode()" class="btn btn-link">
             <cds-icon shape="edit"/>
             Edit
@@ -249,9 +312,13 @@
         } @else {
           <form #gradeFormRef (ngSubmit)="changeGrade()" [formGroup]="gradeForm" autocomplete="off" clrForm>
             <select (change)="gradeFormRef.requestSubmit()" formControlName="newGradeId">
-              <option disabled selected value="null">-- Choose --</option>
+              <option disabled selected value="null">
+                -- Choose --
+              </option>
               @for (deviceGrade of deviceGrades(); track deviceGrade.id) {
-                <option [value]="deviceGrade.id">{{ deviceGrade.name }}</option>
+                <option [value]="deviceGrade.id">
+                  {{ deviceGrade.name }}
+                </option>
               }
             </select>
             <button (click)="gradeEditModeActive.set(false)" class="btn btn-link" type="button">
@@ -265,7 +332,9 @@
     <hr>
 
     <dl>
-      <dt>Tags</dt>
+      <dt>
+        Tags
+      </dt>
       <dd class="tags">
         <div class="tags-row">
           @for (tag of deviceBase()?.tags; track tag.id) {
@@ -286,9 +355,13 @@
         } @else {
           <form #tagFormRef (ngSubmit)="addTag()" [formGroup]="tagForm" autocomplete="off" clrForm>
             <select (change)="tagFormRef.requestSubmit()" formControlName="newTagId">
-              <option disabled selected value="null">-- Choose --</option>
+              <option disabled selected value="null">
+                -- Choose --
+              </option>
               @for (deviceTag of availableDeviceTags(); track deviceTag.id) {
-                <option [value]="deviceTag.id">{{ deviceTag.name }}</option>
+                <option [value]="deviceTag.id">
+                  {{ deviceTag.name }}
+                </option>
               }
             </select>
             <button (click)="tagEditModeActive.set(false)" class="btn btn-link" type="button">

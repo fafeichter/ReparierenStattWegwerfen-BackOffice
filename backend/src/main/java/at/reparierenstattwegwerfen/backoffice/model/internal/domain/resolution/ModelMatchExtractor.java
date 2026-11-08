@@ -16,7 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.MimeTypeUtils;
 
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Downloads an ad and asks the AI model to extract the device's specs and reported defect from its text content.
@@ -93,7 +94,8 @@ public class ModelMatchExtractor {
 	@SneakyThrows
 	private String compilePrompt(String content) {
 		PromptContext context = PromptContext.builder().adHtmlContent(content).build();
-		InputStreamReader input = new InputStreamReader(mustacheTemplateResource.getInputStream(), StandardCharsets.UTF_8);
+		InputStreamReader input = new InputStreamReader(mustacheTemplateResource.getInputStream(), UTF_8);
+
 		return mustacheCompiler.compile(input).execute(context);
 	}
 }
