@@ -6,6 +6,7 @@ import { Sidebar } from './sidebar/sidebar';
 import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 import { Title } from './title/title';
 import { Footer } from './footer/footer';
+import { Alerts } from './alerts/alerts';
 
 @Component({
   selector: 'app-layout',
@@ -19,6 +20,7 @@ import { Footer } from './footer/footer';
     Title,
     ClrMainContainerModule,
     Footer,
+    Alerts,
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.css',

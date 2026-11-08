@@ -18,6 +18,13 @@ spring:
       genai:
         api-key: ${GEMINI_API_KEY} # See `secrets.env`
 
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origins: http://localhost:4200
+        allowed-methods: GET
+
 logging:
   level:
     at.reparierenstattwegwerfen.backoffice: DEBUG

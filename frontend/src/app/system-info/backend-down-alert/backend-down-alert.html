@@ -1,0 +1,7 @@
+@if (!isBackendUp()) {
+  <clr-alert [clrAlertAppLevel]="true" [clrAlertClosable]="false" clrAlertType="danger">
+    <clr-alert-item>
+      <span class="alert-text">Backend is not reachable.</span>
+    </clr-alert-item>
+  </clr-alert>
+}
