@@ -26,7 +26,7 @@ export class Activity implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    interval(5000)
+    interval(2500)
       .pipe(
         startWith(0),
         switchMap(() => this.activityApi.getActivities(this.businessPartnerId())),
