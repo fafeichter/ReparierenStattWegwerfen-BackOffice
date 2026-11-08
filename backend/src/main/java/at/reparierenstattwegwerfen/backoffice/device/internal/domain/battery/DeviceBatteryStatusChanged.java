@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceBatteryStatusChanged extends AbstractDeviceActivityEvent {
 
-	final Integer newBatteryStatusId;
+	private final Integer newBatteryStatusId;
 
 	@Builder
 	public DeviceBatteryStatusChanged(Object source, UserDetails actor, Integer deviceId, Integer newBatteryStatusId) {

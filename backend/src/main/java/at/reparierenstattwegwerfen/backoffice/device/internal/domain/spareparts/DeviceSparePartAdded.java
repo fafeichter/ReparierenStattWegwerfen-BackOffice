@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceSparePartAdded extends AbstractDeviceActivityEvent {
 
-	final Integer deviceSparePartId;
+	private final Integer deviceSparePartId;
 
 	@Builder
 	public DeviceSparePartAdded(Object source, UserDetails actor, Integer deviceId, Integer deviceSparePartId) {

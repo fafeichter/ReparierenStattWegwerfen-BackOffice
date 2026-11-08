@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public abstract class AbstractDeviceActivityEvent extends PreciseTimestampedApplicationEvent {
 
-	final UserDetails actor;
-	final Integer deviceId;
+	private final UserDetails actor;
+	private final Integer deviceId;
 
 	public AbstractDeviceActivityEvent(Object source, Integer deviceId, UserDetails actor) {
 		super(source);

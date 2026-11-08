@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceNoteDeleted extends AbstractDeviceActivityEvent {
 
-	final Integer oldNoteId;
-	final String oldNoteText;
+	private final Integer oldNoteId;
+	private final String oldNoteText;
 
 	@Builder
 	public DeviceNoteDeleted(Object source, UserDetails actor, Integer deviceId, Integer oldNoteId, String oldNoteText) {

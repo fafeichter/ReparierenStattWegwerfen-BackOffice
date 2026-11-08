@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceAppleSiliconChanged extends AbstractDeviceActivityEvent {
 
-	final Integer modelAppleSiliconId;
+	private final Integer modelAppleSiliconId;
 
 	@Builder
 	public DeviceAppleSiliconChanged(Object source, UserDetails actor, Integer deviceId, Integer modelAppleSiliconId) {

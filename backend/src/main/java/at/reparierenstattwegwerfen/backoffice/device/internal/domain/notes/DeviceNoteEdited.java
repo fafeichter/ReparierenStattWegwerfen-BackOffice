@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceNoteEdited extends AbstractDeviceActivityEvent {
 
-	final Integer noteId;
-	final String noteNewText;
+	private final Integer noteId;
+	private final String noteNewText;
 
 	@Builder
 	public DeviceNoteEdited(Object source, UserDetails actor, Integer deviceId, Integer noteId, String noteNewText) {

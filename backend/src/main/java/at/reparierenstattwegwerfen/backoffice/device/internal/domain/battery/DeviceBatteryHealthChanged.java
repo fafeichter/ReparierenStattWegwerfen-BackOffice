@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceBatteryHealthChanged extends AbstractDeviceActivityEvent {
 
-	final Integer maximumCapacity;
-	final Integer cycleCount;
+	private final Integer maximumCapacity;
+	private final Integer cycleCount;
 
 	@Builder
 	public DeviceBatteryHealthChanged(Object source, UserDetails actor, Integer deviceId, Integer maximumCapacity,

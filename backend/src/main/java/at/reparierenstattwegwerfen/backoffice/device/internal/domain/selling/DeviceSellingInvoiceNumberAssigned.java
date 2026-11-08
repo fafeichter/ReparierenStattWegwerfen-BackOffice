@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceSellingInvoiceNumberAssigned extends AbstractDeviceActivityEvent {
 
-	final Integer invoiceNumber;
+	private final Integer invoiceNumber;
 
 	@Builder
 	public DeviceSellingInvoiceNumberAssigned(Object source, UserDetails actor, Integer deviceId, Integer invoiceNumber) {

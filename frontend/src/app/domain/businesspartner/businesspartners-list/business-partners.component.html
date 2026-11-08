@@ -6,7 +6,7 @@
     Address
   </clr-dg-column>
   @for (businessPartner of businessPartners(); track businessPartner.id) {
-    <clr-dg-row [class.scammer-row]="businessPartner.scammer">
+    <clr-dg-row>
       <clr-dg-cell>
         <a [routerLink]="['/businesspartners', businessPartner.id]">
           {{ businessPartner.lastName }} {{ businessPartner.firstName }}

@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceSellingPriceChanged extends AbstractDeviceActivityEvent {
 
-	final Double sellingPrice;
+	private final Double sellingPrice;
 
 	@Builder
 	public DeviceSellingPriceChanged(Object source, UserDetails actor, Integer deviceId, Double sellingPrice) {

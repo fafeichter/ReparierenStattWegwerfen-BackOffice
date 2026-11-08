@@ -54,6 +54,7 @@ export const routes: Routes = [
           {
             path: 'create',
             component: BusinesspartnerCreate,
+            data: { title: 'Create Business Partner' },
           },
           {
             path: ':businessPartnerId',

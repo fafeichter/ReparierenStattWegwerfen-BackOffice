@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceColorChanged extends AbstractDeviceActivityEvent {
 
-	final Integer modelColorId;
+	private final Integer modelColorId;
 
 	@Builder
 	public DeviceColorChanged(Object source, UserDetails actor, Integer deviceId, Integer modelColorId) {

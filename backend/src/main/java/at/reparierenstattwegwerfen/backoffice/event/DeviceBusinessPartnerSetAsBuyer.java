@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceBusinessPartnerSetAsBuyer extends PreciseTimestampedApplicationEvent {
 
-	final UserDetails actor;
-	final Integer deviceId;
-	final Integer buyerBusinessPartnerId;
+	private final UserDetails actor;
+	private final Integer deviceId;
+	private final Integer buyerBusinessPartnerId;
 
 	@Builder
 	public DeviceBusinessPartnerSetAsBuyer(Object source, UserDetails actor, Integer deviceId,

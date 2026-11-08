@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceUnifiedMemoryChanged extends AbstractDeviceActivityEvent {
 
-	final Integer modelUnifiedMemoryId;
+	private final Integer modelUnifiedMemoryId;
 
 	@Builder
 	public DeviceUnifiedMemoryChanged(Object source, UserDetails actor, Integer deviceId, Integer modelUnifiedMemoryId) {

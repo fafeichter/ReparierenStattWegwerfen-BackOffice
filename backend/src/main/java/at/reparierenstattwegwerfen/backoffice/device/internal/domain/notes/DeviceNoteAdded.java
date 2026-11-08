@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceNoteAdded extends AbstractDeviceActivityEvent {
 
-	final Integer newNoteId;
+	private final Integer newNoteId;
 
 	@Builder
 	public DeviceNoteAdded(Object source, UserDetails actor, Integer deviceId, Integer newNoteId) {

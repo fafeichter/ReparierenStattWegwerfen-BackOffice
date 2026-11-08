@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceStatusChanged extends AbstractDeviceActivityEvent {
 
-	final Integer newStatusId;
+	private final Integer newStatusId;
 
 	DeviceStatusChanged(Object source, UserDetails actor, Integer deviceId, Integer newStatusId) {
 		super(source, deviceId, actor);

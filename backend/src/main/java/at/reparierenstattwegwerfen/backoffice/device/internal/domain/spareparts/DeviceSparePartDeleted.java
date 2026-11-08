@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceSparePartDeleted extends AbstractDeviceActivityEvent {
 
-	final Integer oldDeviceSparePartId;
-	final String oldDeviceSparePartName;
-	final Double oldDeviceSparePartPriceNetto;
+	private final Integer oldDeviceSparePartId;
+	private final String oldDeviceSparePartName;
+	private final Double oldDeviceSparePartPriceNetto;
 
 	@Builder
 	public DeviceSparePartDeleted(Object source, UserDetails actor, Integer deviceId, Integer oldDeviceSparePartId,

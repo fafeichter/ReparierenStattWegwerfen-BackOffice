@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceGradeChanged extends AbstractDeviceActivityEvent {
 
-	final Integer newGradeId;
+	private final Integer newGradeId;
 
 	@Builder
 	public DeviceGradeChanged(Object source, UserDetails actor, Integer deviceId, Integer newGradeId) {

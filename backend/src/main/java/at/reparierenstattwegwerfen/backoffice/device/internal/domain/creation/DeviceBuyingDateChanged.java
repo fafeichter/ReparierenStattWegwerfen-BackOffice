@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 public class DeviceBuyingDateChanged extends AbstractDeviceActivityEvent {
 
-	final LocalDate buyingDate;
+	private final LocalDate buyingDate;
 
 	@Builder
 	public DeviceBuyingDateChanged(Object source, UserDetails actor, Integer deviceId, LocalDate buyingDate) {

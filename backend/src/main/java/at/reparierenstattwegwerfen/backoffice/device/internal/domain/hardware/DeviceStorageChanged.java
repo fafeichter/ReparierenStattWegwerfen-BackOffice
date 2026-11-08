@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceStorageChanged extends AbstractDeviceActivityEvent {
 
-	final Integer modelStorageId;
+	private final Integer modelStorageId;
 
 	@Builder
 	public DeviceStorageChanged(Object source, UserDetails actor, Integer deviceId, Integer modelStorageId) {

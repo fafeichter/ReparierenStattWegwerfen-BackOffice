@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceTagRemoved extends AbstractDeviceActivityEvent {
 
-	final Integer oldDeviceTagId;
+	private final Integer oldDeviceTagId;
 
 	@Builder
 	public DeviceTagRemoved(Object source, UserDetails actor, Integer deviceId, Integer oldDeviceTagId) {

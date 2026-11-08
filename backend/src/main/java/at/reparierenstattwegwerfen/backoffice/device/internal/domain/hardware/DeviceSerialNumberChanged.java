@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceSerialNumberChanged extends AbstractDeviceActivityEvent {
 
-	final String serialNumber;
+	private final String serialNumber;
 
 	@Builder
 	public DeviceSerialNumberChanged(Object source, UserDetails actor, Integer deviceId, String serialNumber) {

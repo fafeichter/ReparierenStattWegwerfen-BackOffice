@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class DeviceCorrectedDefectChanged extends AbstractDeviceActivityEvent {
 
-	final String correctedDefect;
+	private final String correctedDefect;
 
 	@Builder
 	public DeviceCorrectedDefectChanged(Object source, UserDetails actor, Integer deviceId, String correctedDefect) {

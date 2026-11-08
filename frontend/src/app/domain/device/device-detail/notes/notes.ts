@@ -51,10 +51,6 @@ export class Notes implements OnInit {
       if (this.modalOpen()) {
         this.form.reset();
       }
-      if (this.modalEditOpen()) {
-        this.form.reset();
-        this.noteIdInEditMode.set(undefined);
-      }
     });
   }
 

@@ -3,7 +3,7 @@
     Set selling details
   </h3>
   <div class="modal-body">
-    <form (ngSubmit)="setSellingDetails()" [formGroup]="form" autocomplete="off" clrForm>
+    <form (ngSubmit)="setSellingDetails()" [formGroup]="form" autocomplete="off" clrForm clrLabelSize="3">
       <clr-number-input-container>
         <label class="clr-required-mark">
           Price
@@ -39,7 +39,7 @@
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
       }
-      {{ isSubmitting() ? 'Marking as sold...' : 'Set selling details' }}
+      {{ isSubmitting() ? 'Setting status to sold...' : 'Set status to sold' }}
     </button>
   </div>
 </clr-modal>
