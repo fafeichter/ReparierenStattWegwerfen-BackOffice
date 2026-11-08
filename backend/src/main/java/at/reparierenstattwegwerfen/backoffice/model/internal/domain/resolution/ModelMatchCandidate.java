@@ -1,5 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.domain.resolution;
 
+import java.util.Optional;
+
 /**
  * Common contract shared by the AI's primary device match and each of its alternative candidates. Extracted so that
  * {@link ModelResolutionService} can resolve both shapes with the same code instead of duplicating the resolution
@@ -12,19 +14,19 @@ public interface ModelMatchCandidate {
 
 	Integer modelId();
 
-	Integer modelAppleSiliconId();
+	Optional<Integer> modelAppleSiliconId();
 
-	Integer modelColorId();
+	Optional<Integer> modelColorId();
 
-	Integer modelStorageId();
+	Optional<Integer> modelStorageId();
 
-	Integer modelAppleSiliconUnifiedMemoryId();
+	Optional<Integer> modelAppleSiliconUnifiedMemoryId();
 
-	Integer batteryMaximumCapacity();
+	Optional<Integer> batteryMaximumCapacity();
 
-	Integer batteryCycleCount();
+	Optional<Integer> batteryCycleCount();
 
-	String serialNumber();
+	Optional<String> serialNumber();
 
 	Integer confidence();
 }

@@ -1,7 +1,10 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.domain.resolution;
 
 import at.reparierenstattwegwerfen.backoffice.model.internal.domain.ModelRepository;
-import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.*;
+import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.ModelAppleSiliconRepository;
+import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.ModelAppleSiliconUnifiedMemoryRepository;
+import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.ModelColorRepository;
+import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.ModelStorageRepository;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
@@ -48,13 +51,13 @@ public class ModelResolutionService {
 			.modelStorage(resolveStorage(aiResponse))
 			.modelAppleSilicon(resolveSilicon(aiResponse))
 			.modelAppleSiliconUnifiedMemory(resolveMemory(aiResponse))
-			.batteryMaximumCapacity(aiResponse.batteryMaximumCapacity())
-			.batteryCycleCount(aiResponse.batteryCycleCount())
-			.reportedDefect(aiResponse.reportedDefect())
-			.serialNumber(aiResponse.serialNumber())
+			.batteryMaximumCapacity(aiResponse.batteryMaximumCapacity().orElse(null))
+			.batteryCycleCount(aiResponse.batteryCycleCount().orElse(null))
+			.reportedDefect(aiResponse.reportedDefect().orElse(null))
+			.serialNumber(aiResponse.serialNumber().orElse(null))
 			.confidence(aiResponse.confidence())
-			.sellerFirstName(aiResponse.sellerFirstName())
-			.sellerLastName(aiResponse.sellerLastName())
+			.sellerFirstName(aiResponse.sellerFirstName().orElse(null))
+			.sellerLastName(aiResponse.sellerLastName().orElse(null))
 			.alternativeCandidates(alternatives)
 			.build();
 	}
@@ -66,9 +69,9 @@ public class ModelResolutionService {
 			.modelStorage(resolveStorage(candidate))
 			.modelAppleSilicon(resolveSilicon(candidate))
 			.modelAppleSiliconUnifiedMemory(resolveMemory(candidate))
-			.batteryMaximumCapacity(candidate.batteryMaximumCapacity())
-			.batteryCycleCount(candidate.batteryCycleCount())
-			.serialNumber(candidate.serialNumber())
+			.batteryMaximumCapacity(candidate.batteryMaximumCapacity().orElse(null))
+			.batteryCycleCount(candidate.batteryCycleCount().orElse(null))
+			.serialNumber(candidate.serialNumber().orElse(null))
 			.confidence(candidate.confidence())
 			.build();
 	}
@@ -79,22 +82,22 @@ public class ModelResolutionService {
 	}
 
 	private NamedIdDto resolveColor(ModelMatchCandidate candidate) {
-		ModelColor color = modelColorRepository.findById(candidate.modelColorId()).orElse(null);
+		NamedId color = candidate.modelColorId().flatMap(modelColorRepository::findById).orElse(null);
 		return NamedIdDto.from(color);
 	}
 
 	private NamedIdDto resolveStorage(ModelMatchCandidate candidate) {
-		NamedId storage = modelStorageRepository.findById(candidate.modelStorageId()).orElse(null);
+		NamedId storage = candidate.modelStorageId().flatMap(modelStorageRepository::findById).orElse(null);
 		return NamedIdDto.from(storage);
 	}
 
 	private NamedIdDto resolveSilicon(ModelMatchCandidate candidate) {
-		NamedId silicon = modelAppleSiliconRepository.findById(candidate.modelAppleSiliconId()).orElse(null);
+		NamedId silicon = candidate.modelAppleSiliconId().flatMap(modelAppleSiliconRepository::findById).orElse(null);
 		return NamedIdDto.from(silicon);
 	}
 
 	private NamedIdDto resolveMemory(ModelMatchCandidate candidate) {
-		NamedId memory = memoryRepository.findById(candidate.modelAppleSiliconUnifiedMemoryId()).orElse(null);
+		NamedId memory = candidate.modelAppleSiliconUnifiedMemoryId().flatMap(memoryRepository::findById).orElse(null);
 		return NamedIdDto.from(memory);
 	}
 }

@@ -8,6 +8,7 @@ import lombok.Value;
 import lombok.experimental.Accessors;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Fabian Feichter
@@ -25,43 +26,43 @@ public class ModelMatchResponse implements ModelMatchCandidate {
 
 	@JsonProperty(required = true, value = "model_apple_silicon_id")
 	@JsonPropertyDescription("Identifier for the Apple Silicon chip variant.")
-	Integer modelAppleSiliconId;
+	Optional<Integer> modelAppleSiliconId;
 
 	@JsonProperty(required = true, value = "model_color_id")
 	@JsonPropertyDescription("Identifier for the specific device color.")
-	Integer modelColorId;
+	Optional<Integer> modelColorId;
 
 	@JsonProperty(required = true, value = "model_storage_id")
 	@JsonPropertyDescription("Identifier for the storage capacity.")
-	Integer modelStorageId;
+	Optional<Integer> modelStorageId;
 
 	@JsonProperty(required = true, value = "model_apple_silicon_unified_memory_id")
 	@JsonPropertyDescription("Identifier for the unified memory capacity.")
-	Integer modelAppleSiliconUnifiedMemoryId;
+	Optional<Integer> modelAppleSiliconUnifiedMemoryId;
 
 	@JsonProperty(required = true, value = "battery_maximum_capacity")
 	@JsonPropertyDescription("The maximum battery capacity percentage between 0 and 100 inclusive.")
-	Integer batteryMaximumCapacity;
+	Optional<Integer> batteryMaximumCapacity;
 
 	@JsonProperty(required = true, value = "battery_cycle_count")
 	@JsonPropertyDescription("Total number of battery charge cycles completed.")
-	Integer batteryCycleCount;
+	Optional<Integer> batteryCycleCount;
 
 	@JsonProperty(required = true, value = "serial_number")
 	@JsonPropertyDescription("The serial number of the device")
-	String serialNumber;
+	Optional<String> serialNumber;
 
 	@JsonProperty(required = true, value = "reported_defect")
 	@JsonPropertyDescription("The defect the device has according to the seller.")
-	String reportedDefect;
+	Optional<String> reportedDefect;
 
 	@JsonProperty(required = true, value = "seller_first_name")
 	@JsonPropertyDescription("The first name of the seller - or if not provided - his username.")
-	String sellerFirstName;
+	Optional<String> sellerFirstName;
 
 	@JsonProperty(required = true, value = "seller_last_name")
 	@JsonPropertyDescription("The last name of the seller.")
-	String sellerLastName;
+	Optional<String> sellerLastName;
 
 	@JsonProperty(required = true, value = "alternative_candidates")
 	@JsonPropertyDescription("Alternative candidate matches, ordered by descending plausibility. Empty if the match is unambiguous.")
@@ -83,31 +84,31 @@ public class ModelMatchResponse implements ModelMatchCandidate {
 
 		@JsonProperty(required = true, value = "model_apple_silicon_id")
 		@JsonPropertyDescription("Identifier for the Apple Silicon chip variant.")
-		Integer modelAppleSiliconId;
+		Optional<Integer> modelAppleSiliconId;
 
 		@JsonProperty(required = true, value = "model_color_id")
 		@JsonPropertyDescription("Identifier for the specific device color.")
-		Integer modelColorId;
+		Optional<Integer> modelColorId;
 
 		@JsonProperty(required = true, value = "model_storage_id")
 		@JsonPropertyDescription("Identifier for the storage capacity.")
-		Integer modelStorageId;
+		Optional<Integer> modelStorageId;
 
 		@JsonProperty(required = true, value = "model_apple_silicon_unified_memory_id")
 		@JsonPropertyDescription("Identifier for the unified memory capacity.")
-		Integer modelAppleSiliconUnifiedMemoryId;
+		Optional<Integer> modelAppleSiliconUnifiedMemoryId;
 
 		@JsonProperty(required = true, value = "battery_maximum_capacity")
 		@JsonPropertyDescription("The maximum battery capacity percentage between 0 and 100 inclusive.")
-		Integer batteryMaximumCapacity;
+		Optional<Integer> batteryMaximumCapacity;
 
 		@JsonProperty(required = true, value = "battery_cycle_count")
 		@JsonPropertyDescription("Total number of battery charge cycles completed.")
-		Integer batteryCycleCount;
+		Optional<Integer> batteryCycleCount;
 
 		@JsonProperty(required = true, value = "serial_number")
 		@JsonPropertyDescription("The serial number of the device")
-		String serialNumber;
+		Optional<String> serialNumber;
 
 		@JsonProperty(required = true, value = "confidence")
 		@JsonPropertyDescription("Confidence level of the match.")
