@@ -1,7 +1,25 @@
-[![Qodana](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml/badge.svg)](
-https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml)
-[![CI/CD](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/ci-cd.yml/badge.svg)](
-https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/ci-cd.yml)
+<div align="center">
+
+[![CI/CD](https://img.shields.io/github/actions/workflow/status/fafeichter/ReparierenStattWegwerfen-BackOffice/ci-cd.yml?branch=main&style=flat&logo=githubactions&logoColor=white&label=CI%2FCD)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/ci-cd.yml)
+[![Qodana](https://img.shields.io/github/actions/workflow/status/fafeichter/ReparierenStattWegwerfen-BackOffice/qodana_code_quality.yml?branch=main&style=flat&logo=jetbrains&logoColor=white&label=Qodana)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/actions/workflows/qodana_code_quality.yml)
+[![Deployment](https://img.shields.io/github/deployments/fafeichter/ReparierenStattWegwerfen-BackOffice/production?style=flat&label=deployment)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/deployments)
+[![Release](https://img.shields.io/github/v/release/fafeichter/ReparierenStattWegwerfen-BackOffice?style=flat&logo=github)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/releases)
+
+[![Last Commit](https://img.shields.io/github/last-commit/fafeichter/ReparierenStattWegwerfen-BackOffice?style=flat)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/commits)
+[![Issues](https://img.shields.io/github/issues/fafeichter/ReparierenStattWegwerfen-BackOffice?style=flat)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/issues)
+[![PRs](https://img.shields.io/github/issues-pr/fafeichter/ReparierenStattWegwerfen-BackOffice?style=flat)](https://github.com/fafeichter/ReparierenStattWegwerfen-BackOffice/pulls)
+[![License](https://img.shields.io/badge/license-Non--Commercial-orange?style=flat)](LICENSE.md)
+
+![Java](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Ffafeichter%2FReparierenStattWegwerfen-BackOffice%2Fmain%2Fgradle%2Flibs.versions.toml&query=%24.versions.java&style=flat&logo=openjdk&logoColor=white&label=Java&color=ED8B00)
+![Spring Boot](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2Ffafeichter%2FReparierenStattWegwerfen-BackOffice%2Fmain%2Fgradle%2Flibs.versions.toml&query=%24.versions%5B%27spring-boot%27%5D&style=flat&logo=springboot&logoColor=white&label=Spring%20Boot&color=6DB33F)
+![Angular](https://img.shields.io/github/package-json/dependency-version/fafeichter/ReparierenStattWegwerfen-BackOffice/@angular/core?filename=frontend/package.json&style=flat&logo=angular&logoColor=white&label=Angular&color=DD0031)
+![TypeScript](https://img.shields.io/github/package-json/dependency-version/fafeichter/ReparierenStattWegwerfen-BackOffice/dev/typescript?filename=frontend/package.json&style=flat&logo=typescript&logoColor=white&label=TypeScript&color=3178C6)
+![Clarity](https://img.shields.io/github/package-json/dependency-version/fafeichter/ReparierenStattWegwerfen-BackOffice/@clr/angular?filename=frontend/package.json&style=flat&label=Clarity&color=0072A3)
+
+![Architecture](https://img.shields.io/badge/architecture-Modulith-blueviolet?style=flat)
+![Design](https://img.shields.io/badge/design-DDD-blue?style=flat)
+
+</div>
 
 # Reparieren Statt Wegwerfen - Backoffice
 

@@ -1,0 +1,29 @@
+[versions]
+java = "25"
+spring-boot = "4.1.2"
+spring-dependency-management = "1.1.7"
+hibernate = "7.4.5.Final"
+graalvm-native = "1.1.14"
+openapi-generator = "7.26.0"
+plantuml = "0.3.0"
+spring-ai = "2.0.2"
+spring-modulith = "2.1.2"
+springdoc = "3.0.2"
+mapstruct = "1.6.3"
+lombok-mapstruct-binding = "0.2.0"
+node-gradle = "7.1.0"
+
+[libraries]
+springdoc-openapi-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
+mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
+mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct" }
+lombok-mapstruct-binding = { module = "org.projectlombok:lombok-mapstruct-binding", version.ref = "lombok-mapstruct-binding" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+hibernate-orm = { id = "org.hibernate.orm", version.ref = "hibernate" }
+graalvm-native = { id = "org.graalvm.buildtools.native", version.ref = "graalvm-native" }
+openapi-generator = { id = "org.openapi.generator", version.ref = "openapi-generator" }
+plantuml = { id = "io.github.redgreencoding.plantuml", version.ref = "plantuml" }
+node-gradle = { id = "com.github.node-gradle.node", version.ref = "node-gradle" }

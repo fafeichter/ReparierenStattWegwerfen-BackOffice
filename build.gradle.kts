@@ -7,12 +7,14 @@ allprojects {
     }
 }
 
+val javaVersion = libs.versions.java.get()
+
 // Shared configuration applied ONLY to submodules that use Java (like backend)
 subprojects {
     plugins.withType<JavaPlugin> {
         configure<JavaPluginExtension> {
             toolchain {
-                languageVersion.set(JavaLanguageVersion.of(25))
+                languageVersion.set(JavaLanguageVersion.of(javaVersion))
             }
         }
     }

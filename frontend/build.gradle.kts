@@ -2,7 +2,7 @@ import com.github.gradle.node.npm.task.NpmTask
 
 plugins {
     java
-    id("com.github.node-gradle.node") version "7.1.0"
+    alias(libs.plugins.node.gradle)
 }
 
 val skipFrontendBuild = project.findProperty("skipFrontendBuild")?.toString()?.toBoolean() ?: false

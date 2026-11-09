@@ -3,18 +3,13 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     java
-    id("org.springframework.boot") version "4.1.2"
-    id("io.spring.dependency-management") version "1.1.7"
-    id("org.hibernate.orm") version "7.4.5.Final"
-    id("org.graalvm.buildtools.native") version "1.1.14"
-    // Plugin to generate TypeScript code from OpenAPI JSON file
-    id("org.openapi.generator") version "7.26.0"
-    id("io.github.redgreencoding.plantuml") version "0.3.0"
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.hibernate.orm)
+    alias(libs.plugins.graalvm.native)
+    alias(libs.plugins.openapi.generator)
+    alias(libs.plugins.plantuml)
 }
-
-extra["springAiVersion"] = "2.0.2"
-extra["springModulithVersion"] = "2.1.2"
-extra["mapstructVersion"] = "1.6.3"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -27,11 +22,11 @@ dependencies {
     implementation("org.springframework.modulith:spring-modulith-starter-core")
     implementation("org.springframework.modulith:spring-modulith-starter-jdbc")
     implementation("org.springframework.modulith:spring-modulith-runtime")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
+    implementation(libs.springdoc.openapi.webmvc.ui)
     implementation("org.springframework.ai:spring-ai-starter-model-openai")
     implementation("org.springframework.ai:spring-ai-starter-model-google-genai")
     implementation("org.springframework.boot:spring-boot-starter-mustache")
-    implementation("org.mapstruct:mapstruct:${property("mapstructVersion")}")
+    implementation(libs.mapstruct)
     compileOnly("org.projectlombok:lombok")
     compileOnly("org.hibernate.orm:hibernate-processor")
     annotationProcessor("org.hibernate.orm:hibernate-processor")
@@ -41,8 +36,8 @@ dependencies {
     developmentOnly("org.springframework.ai:spring-ai-spring-boot-docker-compose")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
-    annotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstructVersion")}")
+    annotationProcessor(libs.lombok.mapstruct.binding)
+    annotationProcessor(libs.mapstruct.processor)
     testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
     testImplementation("org.springframework.boot:spring-boot-starter-liquibase-test")
@@ -63,8 +58,8 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
-        mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
+        mavenBom("org.springframework.ai:spring-ai-bom:${libs.versions.spring.ai.get()}")
+        mavenBom("org.springframework.modulith:spring-modulith-bom:${libs.versions.spring.modulith.get()}")
     }
 }
 
