@@ -4,7 +4,7 @@
     <label class="clr-col-4">
       Device ID
     </label>
-    <input class="clr-col-4" clrInput formControlName="deviceId" placeholder="e.g. 1"/>
+    <input class="clr-col-4" clrInput formControlName="deviceId"/>
     <div clrInputPrefix>
       #
     </div>
@@ -25,13 +25,9 @@
     <label class="clr-col-5">
       Serial number
     </label>
-    <input class="clr-col-5" clrInput deviceSerialNumber formControlName="deviceSerialNumber"
-           placeholder="e.g. MQJ6Q79GCR"/>
+    <input class="clr-col-5 uppercase" clrInput formControlName="deviceSerialNumber"/>
     <clr-control-error *clrIfError="'min'">
       Minimum length not met
-    </clr-control-error>
-    <clr-control-error *clrIfError="'pattern'">
-      Must be a valid serial number
     </clr-control-error>
     <clr-control-error *clrIfError="'noneProvided'">
       Either Device ID or serial number must be set

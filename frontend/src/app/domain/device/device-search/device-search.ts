@@ -12,17 +12,9 @@ import {
 import { ClrCommonFormsModule, ClrIcon, ClrInputModule } from '@clr/angular';
 import { Router } from '@angular/router';
 import { DeviceSearchControllerService } from '@api/device';
-import { SerialNumber } from '../serial-number';
 
 @Component({
-  imports: [
-    ClrCommonFormsModule,
-    ClrIcon,
-    ClrInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SerialNumber,
-  ],
+  imports: [ClrCommonFormsModule, ClrIcon, ClrInputModule, FormsModule, ReactiveFormsModule],
   selector: 'app-device-search',
   styleUrl: './device-search.css',
   templateUrl: './device-search.html',
@@ -64,7 +56,7 @@ export class DeviceSearch {
         Validators.pattern(/^[1-9]\d*$/),
       ]),
       deviceSerialNumber: new FormControl<string | null>(null, [
-        Validators.minLength(10),
+        Validators.minLength(3),
         Validators.pattern(/^[a-zA-Z0-9]+$/),
       ]),
     },
