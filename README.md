@@ -33,9 +33,13 @@ secrets out of the repository.
 
 ---
 
-## Development Approach
+## 🚀 Development Approach
 
-Since I need this fast, I follow this approach: _Make it exist first, make it better later._
+This project follows a pragmatic, iterative philosophy: **"Make it exist first, make it better later."**
+
+- ⚡ **Deliver early:** Getting a working solution into daily use quickly comes first.
+- 🔁 **Improve over time:** Real-world use guides how features are refined, refactored and extended.
+- 🧹 **Keep the code healthy:** Improvements happen continuously, while the architecture and DDD principles described below are followed throughout.
 
 ---
 
