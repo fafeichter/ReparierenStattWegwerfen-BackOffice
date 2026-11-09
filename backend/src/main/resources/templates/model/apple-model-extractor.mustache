@@ -44,9 +44,21 @@ variants. Do this filtering FIRST, before extraction.
 
     STEP 3 — Extract raw attribute text.
     Pull out, verbatim from the ad, anything resembling: chip name/generation
-    (M1–M5, A-series, plus Pro/Max/Ultra variant), CPU core count, GPU core
+    (M1–M6 or later, A-series, plus Pro/Max/Ultra variant), CPU core count, GPU core
     count, color name, storage size, unified memory size. Don't map to IDs
     yet — just capture the text.
+    Core counts: record CPU and GPU core counts SEPARATELY, and only
+    assign a number to CPU or GPU if a keyword is attached to it:
+    - GPU: "GPU", "Grafik", "Grafikkerne", "GPU-Kerne"
+    (e.g. "10-Core GPU", "10 Grafikkerne", "GPU 10C" → GPU = 10).
+    - CPU: "CPU", "Prozessor", "Prozessorkerne", "CPU-Kerne"
+    (e.g. "8-Core CPU", "8C CPU" → CPU = 8).
+    - Combined shorthand "8C/10C", "8-Core CPU / 10-Core GPU", "8/10
+    Kerne" → first = CPU, second = GPU.
+    - A core count with no CPU/GPU keyword ("10-Core", "10 Kerne") →
+    keep it as unassigned; do not guess which one it is.
+    If a core type is not mentioned, record it as "not stated" — never
+    fill it in from the chip's base or default configuration.
 
     STEP 4 — Normalize and map to IDs (within the chosen row only).
     Before comparing chip text to `silicon[]` entries, normalize both sides:
@@ -54,10 +66,35 @@ variants. Do this filtering FIRST, before extraction.
     "mit"/"und" as equivalent to "with"/"and"/"+". A chip match requires:
     same chip generation (M4 ≠ M5), same Pro/Max/Ultra tier, AND matching
     CPU-core and GPU-core numbers.
+
+    STEP 4-chip — Choosing silicon_id when core counts are partial.
+    Every core count the ad DOES state is a hard filter; a core count the
+    ad does NOT state is a wildcard. Apply in this order:
+    0. Take the chosen row's silicon[] ids and look up each label in the
+    top-level `silicon` table. Read the CPU and GPU core counts from the
+    label ("M3 mit 8‑Core CPU und 10‑Core GPU" → CPU 8, GPU 10).
+    1. Keep only silicon[] entries with the right generation and tier.
+    2. If the ad states a GPU core count, remove every entry whose GPU
+    core count differs. If it states a CPU core count, do the same for
+    CPU. Example: row 8 has silicon [16, 17]. The ad says "M3 … 10-Core
+    GPU" with no CPU count → 16 (8-core GPU) is removed, 17 (10-core GPU)
+    stays → silicon_id = 17. Do NOT pick 16 just because it is the base
+    model or comes first in the list.
+    3. An unassigned core count from STEP 3 (no CPU/GPU keyword) is kept
+    only if it matches exactly one of CPU or GPU across the remaining
+    entries; then use it as a filter. Otherwise ignore it.
+    4. Exactly one entry left → use its id. More than one left → pick
+    the one with the lowest unstated core count (the base config that
+    still satisfies everything stated), and lower STEP 6 confidence.
+    Zero left → re-check STEP 2 (another row may fit); if still none,
+    set silicon_id to null. Never fall back to an entry that contradicts
+    a stated core count.
+    The base or most popular chip config is ONLY a tie-breaker in step 4.
+    It never overrides a core count written in the ad.
     For each of silicon_id / color_id / storage_id / memory_id:
     - Special rule: If the model only has one possible silicon in the
     `silicon[]` list in the reference data always use that silicon. Same
-    goes for memory.
+    goes for memory. If silicon[] has several entries, use STEP 4-chip.
     - If the normalized ad text matches an entry in that row's allowed
     list → use that entry's id.
     - If the ad gives a value but it does NOT appear in the row's allowed
@@ -73,7 +110,7 @@ variants. Do this filtering FIRST, before extraction.
     alone — anchor on keywords first:
     - STORAGE keywords: "SSD", "Festplatte", "interner Speicher",
     "Speicherplatz", "Speicherkapazität". Storage may be given in GB
-    (256GB, 512GB) or TB (1TB, 2TB, 4TB, 8TB) — TB is ALWAYS storage,
+    (256GB, 512GB) or TB (1TB, 2TB, 4TB, 8TB, 16TB) — TB is ALWAYS storage,
     never memory.
     - MEMORY keywords: "RAM", "Arbeitsspeicher", "Hauptspeicher",
     "Unified Memory", "Memory". Memory is always given in GB, never TB.
@@ -93,6 +130,51 @@ variants. Do this filtering FIRST, before extraction.
     "Gigabyte" are equivalent, and ignore spaces between number and
     unit ("512 GB" = "512GB"). Treat "1TB"/"2TB"/etc. as the matching
     catalog TB entry directly — don't convert it to a GB figure.
+
+    STEP 4b — Color mapping.
+    Catalog color labels are German. Ads often use English or mixed
+    spellings. Normalize (lowercase, ignore spaces/hyphens, "grey" =
+    "gray"), then map to the German label and look up its id:
+    - "space grey", "space gray", "spacegrau", "space grau", "grau" → "Space Grau"
+    - "silver", "silber" → "Silber"
+    - "gold" → "Gold"
+    - "midnight", "mitternacht", "mitternachtsblau" → "Mitternacht"
+    - "starlight", "polarstern" → "Polarstern"
+    - "space black", "space schwarz", "schwarz" → "Space Schwarz"
+    - "sky blue", "himmelblau", "hellblau" → "Himmelblau"
+    - "pink", "rose", "rosa" → "Rosa"
+    - "citrus", "zitrus", "gelb" → "Zitrus"
+    - "indigo" → "Indigo"
+    The resulting id must be in the chosen row's colors[] list; otherwise
+    follow the "not in the row's list" rule in STEP 4. A generic word
+    like "schwarz" or "grau" maps only if exactly one of the row's
+    colors fits; if not, set color_id to null.
+    Example: row 8 has colors [1, 2, 4, 5]; "space grey" → "Space Grau"
+    = id 2 → color_id = 2.
+
+    STEP 4c — Device condition fields (serial number, battery).
+    These are free-value fields, not catalog IDs. Extract them only when
+    the ad states them explicitly; otherwise set the field to the JSON
+    literal null (unquoted). Never infer, estimate, or derive them from
+    other attributes, and never output a placeholder like "N/A",
+    "unknown", -1, 0, or "" — use null. The "N/A" rule from STEP 7 does
+    NOT apply here.
+    - serial_number: keywords "Seriennummer", "Serial", "S/N", "SN".
+    Copy the value verbatim (uppercase, spaces removed). If the seller
+    says it is available on request ("auf Anfrage", "per PN") or the
+    value is masked/partial (e.g. "C02X****"), set null.
+    - battery_cycle_count: keywords "Ladezyklen", "Zyklen",
+    "Akkuzyklen", "Cycle Count". Output an integer (e.g. "nur 87
+    Ladezyklen" → 87). Vague text ("wenige Zyklen", "kaum benutzt")
+    → null.
+    - battery_max_capacity: keywords "Akkukapazität", "Maximale
+    Kapazität", "Akkuzustand", "Batteriezustand", "Battery Health",
+    "Kapazität". Output an integer percentage without the "%" sign
+    (e.g. "Akku 92%" → 92). Values outside 0–100, mAh/Wh figures, or
+    vague text ("Akku top", "hält lange") → null.
+    - Do not confuse these numbers with storage/memory values from
+    STEP 4a, and do not let them influence model or attribute matching.
+    These fields do not affect the STEP 6 confidence score.
 
     STEP 5 — iPad cellular rule.
     If the matched row is an iPad and the ad text contains no explicit
