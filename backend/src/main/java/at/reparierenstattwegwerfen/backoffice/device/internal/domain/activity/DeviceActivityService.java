@@ -299,7 +299,7 @@ public class DeviceActivityService {
 		DeviceActivity deviceActivity = new DeviceActivity(event);
 		DeviceInstalledSparePart deviceInstalledSparePart = deviceInstalledSparePartRepository.getById(event.getDeviceSparePartId());
 		Price sparePartPriceNetto = new Price(deviceInstalledSparePart.getPriceNetto());
-		deviceActivity.setName(sparePartService.getSparePartById(deviceInstalledSparePart.getSparePartId()).name() + " / " +
+		deviceActivity.setName(sparePartService.getSparePartById(deviceInstalledSparePart.getSparePartId()).name() + ": " +
 			sparePartPriceNetto.formatAsEuro());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(18));

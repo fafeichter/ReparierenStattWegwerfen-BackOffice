@@ -98,15 +98,14 @@
 
       @if (sparePartEditModeActive()) {
         <clr-dg-row>
-          <clr-dg-cell/>
           <clr-dg-cell>
-            <form (ngSubmit)="saveSparePart()" [formGroup]="form" autocomplete="off" class="clr-form-full-width"
-                  clrForm clrLayout="horizontal">
+            <form (ngSubmit)="saveSparePart()" [formGroup]="form" autocomplete="off"
+                  clrForm clrLabelSize="3" clrLayout="horizontal">
               <clr-select-container>
                 <label class="clr-required-mark">
                   Spare Part
                 </label>
-                <select class="clr-col-5" clrSelect formControlName="sparePartId">
+                <select clrSelect formControlName="sparePartId">
                   <option disabled selected value="null">
                     -- Choose --
                   </option>
@@ -122,9 +121,9 @@
               </clr-select-container>
               <clr-number-input-container>
                 <label class="clr-required-mark">
-                  Price
+                  Price (Netto)
                 </label>
-                <input class="clr-col-4" clrNumberInput formControlName="priceNetto" prefix="€" type="number"/>
+                <input clrNumberInput formControlName="priceNetto" prefix="€" type="number"/>
                 <clr-control-error *clrIfError="'required'">
                   Price is required
                 </clr-control-error>
@@ -143,6 +142,8 @@
               </button>
             </form>
           </clr-dg-cell>
+          <clr-dg-cell/>
+          <clr-dg-cell/>
         </clr-dg-row>
       }
       <clr-dg-row>
@@ -158,7 +159,7 @@
   </div>
 </clr-card>
 
-<clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="l">
+<clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="lg">
   <div class="modal-title">
     Set defects
   </div>

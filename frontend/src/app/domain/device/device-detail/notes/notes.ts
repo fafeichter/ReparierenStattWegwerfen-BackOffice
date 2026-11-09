@@ -70,7 +70,7 @@ export class Notes implements OnInit {
   }
 
   deleteNote(oldDeviceNoteId: number) {
-    if (confirm('Do you really want to remove this note?')) {
+    if (confirm('Do you really want to delete this note?')) {
       this.notesApi.deleteDeviceNote(this.deviceId(), oldDeviceNoteId).subscribe(() => {
         this.deviceNotes.update((deviceNotes) => {
           return deviceNotes.filter((note) => note.noteId !== oldDeviceNoteId);

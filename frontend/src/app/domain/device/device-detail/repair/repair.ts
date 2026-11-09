@@ -84,6 +84,7 @@ export class Repair implements OnInit {
       }
 
       if (this.sparePartEditModeActive()) {
+        this.form.reset();
         this.deviceSparePartsApi
           .getAvailableSparePartsForDevice(this.deviceId())
           .subscribe((availableSpareParts) => this.availableSpareParts.set(availableSpareParts));
