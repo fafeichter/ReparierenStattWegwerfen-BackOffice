@@ -3,9 +3,10 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     java
-    id("org.springframework.boot") version "4.1.1"
+    id("org.springframework.boot") version "4.1.2"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.graalvm.buildtools.native") version "1.1.18"
+    id("org.hibernate.orm") version "7.4.5.Final"
+    id("org.graalvm.buildtools.native") version "1.1.14"
     // Plugin to generate TypeScript code from OpenAPI JSON file
     id("org.openapi.generator") version "7.26.0"
     id("io.github.redgreencoding.plantuml") version "0.3.0"
@@ -64,6 +65,11 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.ai:spring-ai-bom:${property("springAiVersion")}")
         mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
+    }
+}
+
+hibernate {
+    enhancement {
     }
 }
 
