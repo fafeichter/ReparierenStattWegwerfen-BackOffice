@@ -18,15 +18,19 @@ public class DeviceEarning {
 
 	public Double getEarning() {
 		if (device.getSellingPrice() == null) {
-			return device.getPurchasePrice() * -1;
+			return device.getPurchasePrice() * -1 - getSparePartsNettoCost();
 		} else {
 			double rohDifferenz = device.getSellingPrice() - device.getPurchasePrice();
 			double ust = rohDifferenz * 20 / 120;
-			double sparePartsNetto = spareParts.stream()
-				.mapToDouble(DeviceInstalledSparePart::getPriceNetto)
-				.sum();
+			double sparePartsNetto = getSparePartsNettoCost();
 
 			return rohDifferenz - ust - sparePartsNetto;
 		}
+	}
+
+	private double getSparePartsNettoCost() {
+		return spareParts.stream()
+			.mapToDouble(DeviceInstalledSparePart::getPriceNetto)
+			.sum();
 	}
 }
