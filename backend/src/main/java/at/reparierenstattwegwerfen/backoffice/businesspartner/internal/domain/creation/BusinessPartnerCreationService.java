@@ -9,6 +9,7 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.ad
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddressCountryRepository;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddressRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
+@RegisterReflectionForBinding(CreateBusinessPartnerDto.class)
 public class BusinessPartnerCreationService implements at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerCreationService {
 
 	private final BusinessPartnerRepository businessPartnerRepository;
