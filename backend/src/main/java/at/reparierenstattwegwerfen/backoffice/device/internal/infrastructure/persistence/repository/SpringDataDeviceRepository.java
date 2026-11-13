@@ -47,6 +47,7 @@ public interface SpringDataDeviceRepository extends JpaRepository<DeviceEntity, 
 		   or d.status.id in (select s.id
 				   			  from DeviceStatusEntity s
 						   	  where s.isEndstatus is false)
+		  	order by d.id desc
 		""")
 	Page<DeviceEntity> search(Pageable page, Boolean includeInactiveDevices);
 
