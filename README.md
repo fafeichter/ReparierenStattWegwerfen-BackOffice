@@ -70,12 +70,12 @@ The following domains have been identified:
 
 ## 📌 Roadmap
 
-| Milestone | Name                  | Target            | Status  |
-|-----------|-----------------------|-------------------|---------|
-| 1         | Excel Ablöse          | Autumn 2026       | Done ✅ |
-| 2         | Make Backoffice Great | Q4 2026 / Q1 2027 | Planned |
-| 3         | Accounting Domain     | 2027              | -       |
-| 4         | Spare Parts Domain    | 2027              | -       |
+| Milestone | Name                  | Target            | Status      |
+|-----------|-----------------------|-------------------|-------------|
+| 1         | Excel Ablöse          | Autumn 2026       | Done ✅     |
+| 2         | Make Backoffice Great | Q4 2026 / Q1 2027 | In progress |
+| 3         | Accounting Domain     | 2027              | -           |
+| 4         | Spare Parts Domain    | 2027              | -           |
 
 ### Milestone 1 – "Excel Ablöse"
 
