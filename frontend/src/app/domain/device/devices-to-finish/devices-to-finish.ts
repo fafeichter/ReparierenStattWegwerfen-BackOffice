@@ -14,10 +14,13 @@ export class DevicesToFinish implements OnInit {
   devicesToFinishCount = output<number>();
 
   devicesToFinish = signal<DeviceToFinishDto[]>([]);
+  isLoading = signal<boolean>(true);
   private deviceSearchApi = inject(DeviceSearchControllerService);
 
   ngOnInit(): void {
+    this.isLoading.set(true);
     this.deviceSearchApi.getDevicesToFinish().subscribe((devices) => {
+      this.isLoading.set(false);
       this.devicesToFinish.set(devices);
       this.devicesToFinishCount.emit(devices.length);
     });

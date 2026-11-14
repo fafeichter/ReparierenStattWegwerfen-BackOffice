@@ -23,7 +23,7 @@ import { DeviceSearch } from '../domain/device/device-search/device-search';
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  orderedCount = signal<number>(0);
-  toFinishCount = signal<number>(0);
-  offeredForSaleCount = signal<number>(0);
+  orderedCount = signal<number | undefined>(undefined);
+  toFinishCount = signal<number | undefined>(undefined);
+  offeredForSaleCount = signal<number | undefined>(undefined);
 }

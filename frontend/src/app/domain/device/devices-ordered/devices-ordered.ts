@@ -15,10 +15,13 @@ export class DevicesOrdered implements OnInit {
   devicesOrderedCount = output<number>();
 
   devicesOrdered = signal<DeviceOrderedDto[]>([]);
+  isLoading = signal<boolean>(true);
   private deviceSearchApi = inject(DeviceSearchControllerService);
 
   ngOnInit(): void {
+    this.isLoading.set(true);
     this.deviceSearchApi.getDevicesOrdered().subscribe((devices) => {
+      this.isLoading.set(false);
       this.devicesOrdered.set(devices);
       this.devicesOrderedCount.emit(devices.length);
     });

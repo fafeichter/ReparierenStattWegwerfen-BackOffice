@@ -15,10 +15,13 @@ export class DevicesOfferedForSale implements OnInit {
   devicesOfferedForSaleCount = output<number>();
 
   devicesOfferedForSale = signal<DeviceOfferedForSaleDto[]>([]);
+  isLoading = signal<boolean>(true);
   private deviceSearchApi = inject(DeviceSearchControllerService);
 
   ngOnInit(): void {
+    this.isLoading.set(true);
     this.deviceSearchApi.getDevicesOfferedForSale().subscribe((devices) => {
+      this.isLoading.set(false);
       this.devicesOfferedForSale.set(devices);
       this.devicesOfferedForSaleCount.emit(devices.length);
     });
