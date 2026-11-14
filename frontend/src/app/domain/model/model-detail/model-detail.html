@@ -45,7 +45,7 @@
             Chip
           </clr-card-body-title>
           <clr-card-body-text>
-            @for (group of siliconGroups(); track group.shortName; let last = $last) {
+            @for (group of siliconGroups(); track group.variant.id; let last = $last) {
               <ul class="list">
                 @for (chip of group.chips; track chip.id) {
                   <li>

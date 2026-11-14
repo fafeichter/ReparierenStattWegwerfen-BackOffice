@@ -115,7 +115,7 @@ public class ModelService implements ModelDetailsService {
 		return ModelDetailDto.SiliconDto.builder()
 			.id(chip.getId())
 			.name(chip.getName())
-			.nameShort(chip.getNameShort())
+			.variant(NamedIdDto.from(chip.getVariant()))
 			.numberCpuEfficiencyCores(chip.getNumberCpuEfficiencyCores())
 			.numberCpuPerformanceCores(chip.getNumberCpuPerformanceCores())
 			.numberCpuSuperCores(chip.getNumberCpuSuperCores())

@@ -16,8 +16,7 @@ public class ModelAppleSilicon implements NamedId {
 
 	private Integer id;
 	private String name;
-	private String nameShort;
-	private ModelAppleSiliconGeneration generation;
+	private ModelAppleSiliconVariant variant;
 	private Integer numberCpuEfficiencyCores;
 	private Integer numberCpuPerformanceCores;
 	private Integer numberCpuSuperCores;

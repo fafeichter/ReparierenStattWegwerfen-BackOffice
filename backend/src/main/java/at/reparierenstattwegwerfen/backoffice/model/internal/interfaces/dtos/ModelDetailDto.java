@@ -1,5 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.interfaces.dtos;
 
+import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
@@ -104,9 +105,8 @@ public class ModelDetailDto {
 		@Size(max = 256)
 		String name;
 
-		@NotBlank
-		@Size(max = 64)
-		String nameShort;
+		@NotNull
+		NamedIdDto variant;
 
 		@NotNull
 		@PositiveOrZero
