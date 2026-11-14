@@ -70,10 +70,10 @@ export class DeviceDetail {
   });
   navItems: NavItem[] = [
     { id: 'device', label: 'Device', icon: 'cpu' },
+    { id: 'notes', label: 'Notes', icon: 'note' },
     { id: 'buying', label: 'Buying', icon: 'user' },
     { id: 'repair', label: 'Repair', icon: 'wrench' },
     { id: 'selling', label: 'Selling', icon: 'tag' },
-    { id: 'notes', label: 'Notes', icon: 'note' },
     { id: 'activity', label: 'Activity', icon: 'timeline' },
   ];
 }
