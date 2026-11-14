@@ -67,10 +67,10 @@ export class ModelDetail implements OnInit {
   /** Silicons grouped by short name; group order follows the sorted silicons. */
   protected readonly siliconGroups = computed(() => {
     const groups = new Map<string, SiliconDto[]>();
-    for (const s of this.silicons()) {
-      const list = groups.get(s.nameShort) ?? [];
-      list.push(s);
-      groups.set(s.nameShort, list);
+    for (const silicon of this.silicons()) {
+      const list = groups.get(silicon.nameShort) ?? [];
+      list.push(silicon);
+      groups.set(silicon.nameShort, list);
     }
     return [...groups.entries()].map(([shortName, chips]) => ({ shortName, chips }));
   });
@@ -121,10 +121,10 @@ export class ModelDetail implements OnInit {
   /** Collapses to the short name when every chip sharing that short name offers the size. */
   private describeChips(availableIds: Set<number>, silicons: SiliconDto[]): string[] {
     const byShort = new Map<string, SiliconDto[]>();
-    for (const s of silicons) {
-      const group = byShort.get(s.nameShort) ?? [];
-      group.push(s);
-      byShort.set(s.nameShort, group);
+    for (const silicon of silicons) {
+      const group = byShort.get(silicon.nameShort) ?? [];
+      group.push(silicon);
+      byShort.set(silicon.nameShort, group);
     }
 
     const tokens: string[] = [];

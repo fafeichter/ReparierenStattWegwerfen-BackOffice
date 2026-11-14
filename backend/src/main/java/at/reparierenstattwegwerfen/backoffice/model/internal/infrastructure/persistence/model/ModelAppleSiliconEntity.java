@@ -28,6 +28,10 @@ public class ModelAppleSiliconEntity implements NamedId {
 	@Column(name = "name_short")
 	private String nameShort;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "model_apple_silicon_generation_id")
+	private ModelAppleSiliconGenerationEntity generation;
+
 	@Column(name = "number_cpu_efficiency_cores")
 	private Integer numberCpuEfficiencyCores;
 

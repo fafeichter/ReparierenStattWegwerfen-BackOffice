@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - includeAll: {
+    path: model/milestone-2/,
+    relativeToChangelogFile: true,
+    labels: milestone-2
+  }
