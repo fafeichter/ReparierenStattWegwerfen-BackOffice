@@ -13,10 +13,35 @@
         <label class="clr-required-mark">
           URL
         </label>
-        <input #input (click)="input.select()" (focusout)="selectUrlText()" clrInput formControlName="url" required
+        <input #input (click)="input.select()" (focusout)="resolveModelDetails()" clrInput formControlName="url"
+               required
                size="999" type="url"/>
         <clr-control-helper>
           From Kleinanzeigen, Willhaben etc.
+          @if (devicesWithSameAdUrl()) {
+            <div class="mt-1">
+              <clr-alert [clrAlertClosable]="false" clrAlertType="warning">
+                <clr-alert-item>
+                  <div class="alert-text">
+                    <span class="font-bold">
+                      This URL is also used by other devices
+                    </span>
+                    <div class="mt-1 mb-2">
+                      Usually each device usually needs its own URL.
+                    </div>
+                    @for (deviceIdWithSameAdUrl of devicesWithSameAdUrl(); track deviceIdWithSameAdUrl) {
+                      <div class="mt-1">
+                        <a [routerLink]="['/devices', deviceIdWithSameAdUrl]" class="ml-1 " target="_blank">
+                          #{{ deviceIdWithSameAdUrl }}
+                          <cds-icon shape="pop-out"/>
+                        </a>
+                      </div>
+                    }
+                  </div>
+                </clr-alert-item>
+              </clr-alert>
+            </div>
+          }
         </clr-control-helper>
         <clr-control-error *clrIfError="'required'">
           URL is required
@@ -25,7 +50,6 @@
           Please enter a valid URL
         </clr-control-error>
       </clr-input-container>
-
       <clr-number-input-container>
         <label class="clr-required-mark">
           Price
@@ -89,7 +113,8 @@
     <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
       Cancel
     </button>
-    <button (click)="addDevice()" [disabled]="form.invalid || isSubmitting() || isLoadingModel()"
+    <button (click)="addDevice()"
+            [disabled]="form.invalid || isSubmitting() || isLoadingModel() || isLoadingDevicesWithSameUrl()"
             class="btn btn-primary" type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>

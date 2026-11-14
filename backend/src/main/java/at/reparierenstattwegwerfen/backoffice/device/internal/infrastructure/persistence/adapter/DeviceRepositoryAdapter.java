@@ -87,4 +87,9 @@ public class DeviceRepositoryAdapter implements DeviceRepository {
 		String serialNumberSearchPattern = "%" + serialNumber.trim() + "%";
 		return jpaRepository.findDeviceIdBySerialNumberLike(serialNumberSearchPattern);
 	}
+
+	@Override
+	public List<Integer> findDeviceIdsWithUrl(String deviceUrl) {
+		return jpaRepository.findDeviceIdsByUrl(deviceUrl);
+	}
 }

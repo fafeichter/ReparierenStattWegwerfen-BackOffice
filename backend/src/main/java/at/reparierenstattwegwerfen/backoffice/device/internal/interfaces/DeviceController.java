@@ -1,12 +1,11 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.interfaces;
 
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
-import at.reparierenstattwegwerfen.backoffice.device.internal.domain.DeviceRepository;
+import at.reparierenstattwegwerfen.backoffice.device.internal.domain.DeviceBaseDetailsService;
+import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceBaseDetailsDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Fabian Feichter
@@ -17,10 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class DeviceController {
 
-	private final DeviceRepository deviceRepository;
+	private final DeviceBaseDetailsService deviceDetailsService;
 
 	@GetMapping("/{deviceId}")
-	public Device getDeviceDetails(@PathVariable Integer deviceId) {
-		return deviceRepository.getById(deviceId);
+	public DeviceBaseDetailsDto getDeviceBaseDetails(@PathVariable Integer deviceId) {
+		return deviceDetailsService.load(deviceId);
+	}
+
+	@GetMapping("/")
+	public List<Integer> getDeviceIdsWithUrl(@RequestParam String deviceUrl) {
+		return deviceDetailsService.getDeviceIdsWithUrl(deviceUrl);
 	}
 }

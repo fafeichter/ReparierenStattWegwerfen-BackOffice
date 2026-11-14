@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Fabian Feichter
  * @since 29.06.2026
@@ -46,5 +48,10 @@ public class DeviceBaseDetailsService {
 			.batteryStatus(NamedIdDto.from(device.getBatteryStatus()))
 			.tags(deviceTagRepository.getAddedTagsForDevice(deviceId).stream().map(NamedIdDto::from).toList())
 			.build();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Integer> getDeviceIdsWithUrl(String deviceUrl) {
+		return deviceRepository.findDeviceIdsWithUrl(deviceUrl);
 	}
 }

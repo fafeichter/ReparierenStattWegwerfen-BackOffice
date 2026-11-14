@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import { DatePipe, NgTemplateOutlet } from '@angular/common';
 
 import {
+  ClrAlertModule,
   ClrButtonModule,
   ClrFormsModule,
   ClrIcon,
@@ -22,6 +23,7 @@ import { Alternative, ModelResolutionControllerService, ResolvedModelMatch } fro
 import {
   BusinessPartnerPlaceholderDto,
   CreateNewDeviceDto,
+  DeviceControllerService,
   DeviceCreationControllerService,
 } from '@api/device';
 import { OrElsePipe } from '../../../pipes/or-else-pipe';
@@ -41,6 +43,7 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
     ClrButtonModule,
     RouterLink,
     DatePipe,
+    ClrAlertModule,
   ],
   templateUrl: './add-device.html',
   styleUrl: './add-device.css',
@@ -51,7 +54,9 @@ export class AddDevice {
   modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
   isLoadingModel = signal<boolean>(false);
+  isLoadingDevicesWithSameUrl = signal<boolean>(false);
   found = signal<ResolvedModelMatch | undefined>(undefined);
+  devicesWithSameAdUrl = signal<number[] | undefined>(undefined);
   selectedAlternative = signal<number>(-1);
 
   now = new Date();
@@ -77,6 +82,7 @@ export class AddDevice {
     ]),
   });
 
+  private deviceApi = inject(DeviceControllerService);
   private deviceCreationApi = inject(DeviceCreationControllerService);
   private modelResolutionApi = inject(ModelResolutionControllerService);
   private router = inject(Router);
@@ -90,6 +96,8 @@ export class AddDevice {
       } else {
         this.isSubmitting.set(false);
         this.isLoadingModel.set(false);
+        this.devicesWithSameAdUrl.set(undefined);
+        this.isLoadingDevicesWithSameUrl.set(false);
         this.found.set(undefined);
         this.selectedAlternative.set(-1);
       }
@@ -137,10 +145,16 @@ export class AddDevice {
     });
   }
 
-  protected selectUrlText(): void {
+  protected resolveModelDetails(): void {
     if (this.form.controls.url.valid) {
       this.isLoadingModel.set(true);
       const adUrl = this.form.controls.url.value;
+
+      this.isLoadingDevicesWithSameUrl.set(true);
+      this.deviceApi.getDeviceIdsWithUrl(adUrl).subscribe((devicesWithSameAdUrl) => {
+        this.isLoadingDevicesWithSameUrl.set(false);
+        this.devicesWithSameAdUrl.set(devicesWithSameAdUrl);
+      });
 
       this.modelResolutionApi.resolveModelDetailsFromAd(adUrl).subscribe({
         next: (data) => {

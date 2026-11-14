@@ -57,4 +57,10 @@ public interface SpringDataDeviceRepository extends JpaRepository<DeviceEntity, 
 		WHERE LOWER(d.serialNumber) LIKE LOWER(CONCAT('%', :serialNumber))
 		""")
 	Integer findDeviceIdBySerialNumberLike(@Param("serialNumber") String serialNumber);
+
+	@Query("""
+		SELECT d.id FROM DeviceEntity d
+		WHERE d.url = :url
+		""")
+	List<Integer> findDeviceIdsByUrl(String url);
 }

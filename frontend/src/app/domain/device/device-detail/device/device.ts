@@ -1,10 +1,10 @@
 import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
 import {
   BatteryHealthDto,
-  DeviceBaseControllerService,
   DeviceBaseDetailsDto,
   DeviceBatteryHealthControllerService,
   DeviceBatteryStatusControllerService,
+  DeviceControllerService,
   DeviceGradeControllerService,
   DeviceGradeDto,
   DeviceHardwareControllerService,
@@ -137,7 +137,7 @@ export class Device implements OnInit {
     this.gradeEditModeActive,
   ];
 
-  private api = inject(DeviceBaseControllerService);
+  private api = inject(DeviceControllerService);
   private hardwareApi = inject(DeviceHardwareControllerService);
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);

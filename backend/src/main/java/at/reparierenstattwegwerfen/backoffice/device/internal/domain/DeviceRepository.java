@@ -30,4 +30,6 @@ public interface DeviceRepository {
 	Device getByIdWithRelations(Integer id);
 
 	Integer findDeviceIdBySerialNumber(String serialNumber);
+
+	List<Integer> findDeviceIdsWithUrl(String deviceUrl);
 }

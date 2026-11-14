@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { DeviceBaseControllerService } from '@api/device';
+import { DeviceControllerService } from '@api/device';
 import {
   ClrCommonFormsModule,
   ClrDatagridModule,
@@ -28,7 +28,7 @@ import { Earnings } from './earnings/earnings';
 
 export const deviceTitle: TitleFn = (route) => {
   const deviceId = route.paramMap.get('deviceId')!;
-  const api = inject(DeviceBaseControllerService);
+  const api = inject(DeviceControllerService);
 
   return api
     .getDeviceBaseDetails(Number(deviceId!))
