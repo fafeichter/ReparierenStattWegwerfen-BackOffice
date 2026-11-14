@@ -47,7 +47,7 @@ export class BusinesspartnerCreate implements OnInit {
 
     const businessPartner: CreateBuyerBusinessPartnerForDeviceDto = {
       firstName: this.businessPartnerForm.controls.firstName.value!,
-      lastName: this.businessPartnerForm.controls.firstName.value!,
+      lastName: this.businessPartnerForm.controls.lastName.value!,
       street: this.businessPartnerForm.controls.street.value!,
       houseNumber: this.businessPartnerForm.controls.houseNumber.value!,
       zipCode: this.businessPartnerForm.controls.zipCode.value!,
