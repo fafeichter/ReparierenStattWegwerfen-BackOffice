@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset fabian:1-model-add-apple-silicon-generation-table
+--changeset fabian:1-model-apple-silicon-generation-create-table
 CREATE TABLE model_apple_silicon_generation
 (
     model_apple_silicon_generation_id int         NOT NULL AUTO_INCREMENT,
@@ -11,7 +11,7 @@ CREATE TABLE model_apple_silicon_generation
     UNIQUE KEY uq_apple_silicon_generation_name (name)
 );
 
---changeset fabian:1-model-add-apple-silicon-generation-table-add-generations
+--changeset fabian:1-model-apple-silicon-generation-insert-data
 INSERT INTO model_apple_silicon_generation (model_apple_silicon_generation_id, name)
 VALUES (1, 'M1'),
        (2, 'M2'),
@@ -21,16 +21,16 @@ VALUES (1, 'M1'),
        (6, 'A18'), -- (MacBook Neo)
        (7, 'M6');
 
---changeset fabian:1-model-add-apple-silicon-add-silicon-generation-column
+--changeset fabian:1-model-apple-silicon-add-generation-column
 ALTER TABLE model_apple_silicon
     ADD model_apple_silicon_generation_id int AFTER name;
 
---changeset fabian:1-model-add-apple-silicon-add-silicon-generation-fk
+--changeset fabian:1-model-apple-silicon-add-generation-fk
 ALTER TABLE model_apple_silicon
     ADD CONSTRAINT fk_model_apple_silicon_generation_id
         FOREIGN KEY (model_apple_silicon_generation_id) REFERENCES model_apple_silicon_generation (model_apple_silicon_generation_id);
 
---changeset fabian:1-model-add-apple-silicon-assign-silicon-generation
+--changeset fabian:1-model-apple-silicon-assign-generation
 -- M1
 UPDATE model_apple_silicon
 SET model_apple_silicon_generation_id = 1
@@ -67,6 +67,6 @@ SET model_apple_silicon_generation_id = 7
 WHERE model_apple_silicon_id = 38;
 --rollback UPDATE model_apple_silicon SET model_apple_silicon_generation_id = NULL WHERE model_apple_silicon_id BETWEEN 1 AND 38;
 
---changeset fabian:1-model-add-apple-silicon-silicon-generation-not-null
+--changeset fabian:1-model-apple-silicon-set-generation-not-null
 ALTER TABLE model_apple_silicon
     MODIFY model_apple_silicon_generation_id int NOT NULL;

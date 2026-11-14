@@ -27,29 +27,20 @@ export class ModelDetail {
     { id: 'hardware', label: 'Hardware', icon: 'nvme' },
     { id: 'features', label: 'Features', icon: 'star' },
   ];
-  protected readonly memoryOptions = computed(() => this.availability((s) => s.memoryOptions));
-  protected readonly storageOptions = computed(() => this.availability((s) => s.storageOptions));
+  protected readonly memoryOptions = computed(() =>
+    this.availability((silicon) => silicon.memoryOptions),
+  );
+  protected readonly storageOptions = computed(() =>
+    this.availability((silicon) => silicon.storageOptions),
+  );
   private readonly api = inject(ModelControllerService);
   protected readonly model = toSignal(
     inject(ActivatedRoute).paramMap.pipe(
       switchMap((params) => this.api.getModelDetails(Number(params.get('modelId')))),
     ),
   );
-  protected readonly colors = computed(() =>
-    [...(this.model()?.colors ?? [])].sort((a, b) => a.name.localeCompare(b.name)),
-  );
-  protected readonly features = computed(() =>
-    [...(this.model()?.features ?? [])].sort(
-      (a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name),
-    ),
-  );
-  /** Sorted ascending by total CPU cores, then GPU cores. */
-  private readonly silicons = computed(() =>
-    [...(this.model()?.siliconOptions ?? [])].sort(
-      (a, b) => cpuCores(a) - cpuCores(b) || a.numberGpuCores - b.numberGpuCores,
-    ),
-  );
-  /** Grouped by variant, in the order of the sorted silicons. */
+  private readonly silicons = computed(() => this.model()?.siliconOptions ?? []);
+  /** Grouped by variant, in the order the silicons arrive. */
   protected readonly siliconGroups = computed(() => {
     const silicons = this.silicons();
     const variants = new Map(silicons.map((s) => [s.variant.id, s.variant]));
@@ -63,10 +54,10 @@ export class ModelDetail {
    * Every size offered by at least one chip. `availableOn` lists the variant name when all
    * its chips offer the size, otherwise the individual chip names.
    */
-  private availability(pick: (s: SiliconDto) => SizeDto[]) {
+  private availability(pick: (silicon: SiliconDto) => SizeDto[]) {
     const sizes = new Map(
       this.silicons()
-        .flatMap((s) => pick(s))
+        .flatMap((silicon) => pick(silicon))
         .map((size) => [size.id, size]),
     );
 
@@ -86,11 +77,7 @@ export class ModelDetail {
   }
 }
 
-function cpuCores(s: SiliconDto): number {
-  return s.numberCpuEfficiencyCores + s.numberCpuPerformanceCores + s.numberCpuSuperCores;
-}
-
 /** The database only stores GB and TB. */
-function toGb(s: SizeDto): number {
-  return s.unit === 'TB' ? s.size * 1024 : s.size;
+function toGb(size: SizeDto): number {
+  return size.unit === 'TB' ? size.size * 1024 : size.size;
 }

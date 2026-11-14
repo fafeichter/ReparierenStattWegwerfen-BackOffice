@@ -8,6 +8,11 @@ import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.*;
 import at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.persistence.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Fabian Feichter
@@ -20,6 +25,14 @@ public interface ModelPersistenceMapper {
 	@Mapping(target = "availableFeatures", ignore = true)
 	@Mapping(target = "availableAppleSilicons", ignore = true)
 	Model toDomain(ModelEntity entity);
+
+	/**
+	 * Also maps colors, features and chips with their options, each in {@code sort_order}.
+	 */
+	@Named("withDetails")
+	Model toDomainWithDetails(ModelEntity entity);
+
+	ModelAvailableAppleSilicon toDomain(ModelAvailableAppleSiliconEntity entity);
 
 	ModelSeries toDomain(ModelSeriesEntity entity);
 
@@ -35,45 +48,13 @@ public interface ModelPersistenceMapper {
 
 	ModelAppleSiliconUnifiedMemory toDomain(ModelAppleSiliconUnifiedMemoryEntity entity);
 
-	@Mapping(target = "availableStorages", ignore = true)
-	@Mapping(target = "availableUnifiedMemories", ignore = true)
-	ModelAvailableAppleSilicon toDomain(ModelAvailableAppleSiliconEntity entity);
-
-	default Model toDomainWithDetails(ModelEntity entity) {
-		if (entity == null) {
-			return null;
-		}
-
-		Model model = toDomain(entity);
-		model.setAvailableColors(entity.getAvailableColors()
-			.stream()
-			.map(ModelAvailableColorEntity::getColor)
+	/**
+	 * Chips sorted by the chip's {@code sort_order}; {@code @OrderBy} on the entity cannot reach it.
+	 */
+	default List<ModelAvailableAppleSilicon> toDomain(Set<ModelAvailableAppleSiliconEntity> entities) {
+		return entities.stream()
+			.sorted(Comparator.comparing(e -> e.getModelAppleSilicon().getSortOrder()))
 			.map(this::toDomain)
-			.toList());
-		model.setAvailableFeatures(entity.getAvailableFeatures()
-			.stream()
-			.map(ModelAvailableFeatureEntity::getFeature)
-			.map(this::toDomain)
-			.toList());
-		model.setAvailableAppleSilicons(entity.getAvailableAppleSilicons()
-			.stream()
-			.map(this::toDomainWithOptions)
-			.toList());
-
-		return model;
-	}
-
-	default ModelAvailableAppleSilicon toDomainWithOptions(ModelAvailableAppleSiliconEntity entity) {
-		ModelAvailableAppleSilicon availableAppleSilicon = toDomain(entity);
-		availableAppleSilicon.setAvailableStorages(entity.getAvailableStorages()
-			.stream()
-			.map(s -> toDomain(s.getStorage()))
-			.toList());
-		availableAppleSilicon.setAvailableUnifiedMemories(entity.getAvailableUnifiedMemories()
-			.stream()
-			.map(m -> toDomain(m.getUnifiedMemory()))
-			.toList());
-
-		return availableAppleSilicon;
+			.toList();
 	}
 }

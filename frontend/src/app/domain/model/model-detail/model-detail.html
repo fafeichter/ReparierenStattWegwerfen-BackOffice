@@ -1,4 +1,4 @@
-@if (model(); as m) {
+@if (model(); as model) {
   <app-page-sidebar>
     <app-scrollspy [items]="navItems"/>
   </app-page-sidebar>
@@ -11,11 +11,11 @@
         </clr-card-header>
         <div class="card-block">
           <p class="mt-0!">
-            {{ m.releaseDate + '-01' | date:'MMM yyyy' }}
+            {{ model.releaseDate + '-01' | date:'MMM yyyy' }}
           </p>
           <p class="mt-1!">
-            <a [href]="m.technicalSpecsUrl" target="_blank">
-              {{ m.technicalSpecsUrl }}
+            <a [href]="model.technicalSpecsUrl" target="_blank">
+              {{ model.technicalSpecsUrl }}
               <cds-icon shape="pop-out"/>
             </a>
           </p>
@@ -32,7 +32,7 @@
           </clr-card-body-title>
           <clr-card-body-text>
             <ul class="list">
-              @for (color of colors(); track color.id) {
+              @for (color of model.colors; track color.id) {
                 <li>
                   {{ color.name }}
                 </li>
@@ -65,11 +65,11 @@
           </clr-card-body-title>
           <clr-card-body-text>
             <ul class="list">
-              @for (mem of memoryOptions(); track mem.id) {
+              @for (memory of memoryOptions(); track memory.id) {
                 <li>
-                  {{ mem.label }}
-                  @if (!mem.onAllChips) {
-                    @for (availableOn of mem.availableOn; track availableOn) {
+                  {{ memory.label }}
+                  @if (!memory.onAllChips) {
+                    @for (availableOn of memory.availableOn; track availableOn) {
                       <clr-label>
                         {{ availableOn }}
                       </clr-label>
@@ -110,7 +110,7 @@
         <div class="card-block">
           <clr-card-body-text>
             <ul class="list">
-              @for (feature of features(); track feature.id) {
+              @for (feature of model.features; track feature.id) {
                 <li>
                   {{ feature.name }}
                 </li>

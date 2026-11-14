@@ -22,10 +22,11 @@ public interface SpringDataModelStorageRepository extends JpaRepository<ModelSto
 	ModelStorageEntity getStorage(Integer modelStorageId);
 
 	@Query("""
-		select m.storage
-		from ModelSiliconAvailableStorageEntity m
-		where m.availableAppleSilicon.model.id = :modelId
-				and m.availableAppleSilicon.modelAppleSilicon.id= :appleSiliconId
+		select available_storage.storage
+		from ModelSiliconAvailableStorageEntity available_storage
+		where available_storage.availableAppleSilicon.model.id = :modelId
+				and available_storage.availableAppleSilicon.modelAppleSilicon.id= :appleSiliconId
+		order by available_storage.storage.sortOrder
 		""")
 	List<ModelStorageEntity> getStoragesForModelAndAppleSilicon(Integer modelId, Integer appleSiliconId);
 }

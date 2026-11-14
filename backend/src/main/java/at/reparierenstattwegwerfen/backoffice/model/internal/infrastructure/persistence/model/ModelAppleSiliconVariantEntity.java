@@ -1,6 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
+import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ModelAppleSiliconVariantEntity implements NamedId {
+public class ModelAppleSiliconVariantEntity implements NamedId, Sortable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +29,7 @@ public class ModelAppleSiliconVariantEntity implements NamedId {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "model_apple_silicon_generation_id")
 	private ModelAppleSiliconGenerationEntity generation;
+
+	@Column(name = "sort_order")
+	private Integer sortOrder;
 }

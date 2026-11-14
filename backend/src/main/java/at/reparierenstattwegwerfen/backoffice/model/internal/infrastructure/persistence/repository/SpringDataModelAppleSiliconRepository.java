@@ -15,16 +15,17 @@ import java.util.List;
 public interface SpringDataModelAppleSiliconRepository extends JpaRepository<ModelAppleSiliconEntity, Integer> {
 
 	@Query("""
-		select m
-		from ModelAppleSiliconEntity m
-		where m.id = :modelAppleSiliconId
+		select silicon
+		from ModelAppleSiliconEntity silicon
+		where silicon.id = :modelAppleSiliconId
 		""")
 	ModelAppleSiliconEntity getAppleSilicon(Integer modelAppleSiliconId);
 
 	@Query("""
-		select m.modelAppleSilicon
-		from ModelAvailableAppleSiliconEntity m
-		where m.model.id = :modelId
+		select available_silicon.modelAppleSilicon
+		from ModelAvailableAppleSiliconEntity available_silicon
+		where available_silicon.model.id = :modelId
+		order by available_silicon.modelAppleSilicon.sortOrder
 		""")
 	List<ModelAppleSiliconEntity> getAppleSiliconsForModel(Integer modelId);
 }

@@ -15,17 +15,18 @@ import java.util.List;
 public interface SpringDataModelAppleSiliconUnifiedMemoryRepository extends JpaRepository<ModelAppleSiliconUnifiedMemoryEntity, Integer> {
 
 	@Query("""
-		select m
-		from ModelAppleSiliconUnifiedMemoryEntity m
-		where m.id = :modelUnifiedMemoryId
+		select memory
+		from ModelAppleSiliconUnifiedMemoryEntity memory
+		where memory.id = :modelUnifiedMemoryId
 		""")
 	ModelAppleSiliconUnifiedMemoryEntity getUnifiedMemory(Integer modelUnifiedMemoryId);
 
 	@Query("""
-		select m.unifiedMemory
-		from ModelSiliconAvailableUnifiedMemoryEntity m
-		where m.availableAppleSilicon.model.id = :modelId
-		and m.availableAppleSilicon.modelAppleSilicon.id= :appleSiliconId
+		select available_memory.unifiedMemory
+		from ModelSiliconAvailableUnifiedMemoryEntity available_memory
+		where available_memory.availableAppleSilicon.model.id = :modelId
+		and available_memory.availableAppleSilicon.modelAppleSilicon.id= :appleSiliconId
+		order by available_memory.unifiedMemory.sortOrder
 		""")
 	List<ModelAppleSiliconUnifiedMemoryEntity> getUnifiedMemoriesForModelAndAppleSilicon(Integer modelId, Integer appleSiliconId);
 }

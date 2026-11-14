@@ -22,9 +22,10 @@ public interface SpringDataModelColorRepository extends JpaRepository<ModelColor
 	ModelColorEntity getColor(Integer modelColorId);
 
 	@Query("""
-		select m.color
-		from ModelAvailableColorEntity m
-		where m.model.id = :modelId
+		select available_color.color
+		from ModelAvailableColorEntity available_color
+		where available_color.model.id = :modelId
+		order by available_color.color.sortOrder
 		""")
 	List<ModelColorEntity> getColorsForModel(Integer modelId);
 }

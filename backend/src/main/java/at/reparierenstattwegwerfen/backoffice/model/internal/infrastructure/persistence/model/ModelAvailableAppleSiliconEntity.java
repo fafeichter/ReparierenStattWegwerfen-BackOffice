@@ -31,9 +31,17 @@ public class ModelAvailableAppleSiliconEntity {
 	@JoinColumn(name = "model_apple_silicon_id")
 	private ModelAppleSiliconEntity modelAppleSilicon;
 
-	@OneToMany(mappedBy = "availableAppleSilicon")
-	private Set<ModelSiliconAvailableStorageEntity> availableStorages;
+	@ManyToMany
+	@JoinTable(name = "model_silicon_available_storage",
+		joinColumns = @JoinColumn(name = "model_available_apple_silicon_id"),
+		inverseJoinColumns = @JoinColumn(name = "model_storage_id"))
+	@OrderBy("sortOrder")
+	private Set<ModelStorageEntity> availableStorages;
 
-	@OneToMany(mappedBy = "availableAppleSilicon")
-	private Set<ModelSiliconAvailableUnifiedMemoryEntity> availableUnifiedMemories;
+	@ManyToMany
+	@JoinTable(name = "model_silicon_available_unified_memory",
+		joinColumns = @JoinColumn(name = "model_available_apple_silicon_id"),
+		inverseJoinColumns = @JoinColumn(name = "model_apple_silicon_unified_memory_id"))
+	@OrderBy("sortOrder")
+	private Set<ModelAppleSiliconUnifiedMemoryEntity> availableUnifiedMemories;
 }

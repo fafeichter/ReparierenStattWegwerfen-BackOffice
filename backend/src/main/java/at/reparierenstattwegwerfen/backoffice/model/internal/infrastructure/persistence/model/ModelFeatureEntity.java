@@ -1,6 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.persistence.model;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
+import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ModelFeatureEntity implements NamedId {
+public class ModelFeatureEntity implements NamedId, Sortable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +29,7 @@ public class ModelFeatureEntity implements NamedId {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "model_feature_category_id")
 	private ModelFeatureCategoryEntity modelFeatureCategory;
+
+	@Column(name = "sort_order")
+	private Integer sortOrder;
 }

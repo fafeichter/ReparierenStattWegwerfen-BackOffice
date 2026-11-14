@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset fabian:2-model-add-apple-silicon-variant-table
+--changeset fabian:2-model-apple-silicon-variant-create-table
 CREATE TABLE model_apple_silicon_variant
 (
     model_apple_silicon_variant_id    int         NOT NULL AUTO_INCREMENT,
@@ -14,7 +14,7 @@ CREATE TABLE model_apple_silicon_variant
         FOREIGN KEY (model_apple_silicon_generation_id) REFERENCES model_apple_silicon_generation (model_apple_silicon_generation_id)
 );
 
---changeset fabian:2-model-add-apple-silicon-variant-table-add-variants
+--changeset fabian:2-model-apple-silicon-variant-insert-data
 INSERT INTO model_apple_silicon_variant (model_apple_silicon_variant_id, name, model_apple_silicon_generation_id)
 VALUES (1, 'A18 Pro', 6), -- (MacBook Neo)
        (2, 'M1', 1),
@@ -34,16 +34,16 @@ VALUES (1, 'A18 Pro', 6), -- (MacBook Neo)
        (16, 'M5 Max', 5),
        (17, 'M6', 7);
 
---changeset fabian:2-model-add-apple-silicon-add-silicon-variant-column
+--changeset fabian:2-model-apple-silicon-add-variant-column
 ALTER TABLE model_apple_silicon
     ADD model_apple_silicon_variant_id int AFTER model_apple_silicon_generation_id;
 
---changeset fabian:2-model-add-apple-silicon-add-silicon-variant-fk
+--changeset fabian:2-model-apple-silicon-add-variant-fk
 ALTER TABLE model_apple_silicon
     ADD CONSTRAINT fk_model_apple_silicon_variant_id
         FOREIGN KEY (model_apple_silicon_variant_id) REFERENCES model_apple_silicon_variant (model_apple_silicon_variant_id);
 
---changeset fabian:2-model-add-apple-silicon-assign-silicon-variant
+--changeset fabian:2-model-apple-silicon-assign-variant
 -- A18 Pro
 UPDATE model_apple_silicon
 SET model_apple_silicon_variant_id = 1
@@ -130,21 +130,21 @@ SET model_apple_silicon_variant_id = 17
 WHERE model_apple_silicon_id = 38;
 --rollback UPDATE model_apple_silicon SET model_apple_silicon_variant_id = NULL WHERE model_apple_silicon_id BETWEEN 1 AND 38;
 
---changeset fabian:2-model-add-apple-silicon-silicon-variant-not-null
+--changeset fabian:2-model-apple-silicon-set-variant-not-null
 ALTER TABLE model_apple_silicon
     MODIFY model_apple_silicon_variant_id int NOT NULL;
 
---changeset fabian:2-model-add-apple-silicon-drop-silicon-generation-fk
+--changeset fabian:2-model-apple-silicon-drop-generation-fk
 ALTER TABLE model_apple_silicon
 DROP
 FOREIGN KEY fk_model_apple_silicon_generation_id;
 
---changeset fabian:2-model-add-apple-silicon-drop-silicon-generation-column
+--changeset fabian:2-model-apple-silicon-drop-generation-column
 ALTER TABLE model_apple_silicon
 DROP
 COLUMN model_apple_silicon_generation_id;
 
---changeset fabian:2-model-add-apple-silicon-drop-silicon-name-short-column
+--changeset fabian:2-model-apple-silicon-drop-name-short-column
 ALTER TABLE model_apple_silicon
 DROP
 COLUMN name_short;

@@ -50,11 +50,19 @@ public class ModelEntity implements NamedId {
 	@Column(name = "display_size_exact")
 	private BigDecimal displaySizeExact;
 
-	@OneToMany(mappedBy = "model")
-	private Set<ModelAvailableColorEntity> availableColors;
+	@ManyToMany
+	@JoinTable(name = "model_available_color",
+		joinColumns = @JoinColumn(name = "model_id"),
+		inverseJoinColumns = @JoinColumn(name = "model_color_id"))
+	@OrderBy("sortOrder")
+	private Set<ModelColorEntity> availableColors;
 
-	@OneToMany(mappedBy = "model")
-	private Set<ModelAvailableFeatureEntity> availableFeatures;
+	@ManyToMany
+	@JoinTable(name = "model_available_feature",
+		joinColumns = @JoinColumn(name = "model_id"),
+		inverseJoinColumns = @JoinColumn(name = "model_feature_id"))
+	@OrderBy("sortOrder")
+	private Set<ModelFeatureEntity> availableFeatures;
 
 	@OneToMany(mappedBy = "model")
 	private Set<ModelAvailableAppleSiliconEntity> availableAppleSilicons;
