@@ -139,7 +139,8 @@
       ],
       "memory": [
         1,
-        3
+        3,
+        5
       ]
     },
     {
@@ -334,8 +335,7 @@
         3,
         4,
         5,
-        6,
-        7
+        6
       ],
       "memory": [
         1,
@@ -362,8 +362,7 @@
         3,
         4,
         5,
-        6,
-        7
+        6
       ],
       "memory": [
         1,
@@ -403,9 +402,7 @@
       "screen_size_inch": 14.2,
       "silicon": [
         27,
-        28,
-        29,
-        30
+        28
       ],
       "colors": [
         1,
@@ -415,15 +412,11 @@
         4,
         5,
         6,
-        7,
-        8
+        7
       ],
       "memory": [
         5,
-        7,
-        8,
-        9,
-        11
+        8
       ]
     },
     {
@@ -433,8 +426,6 @@
       "release_date": "2024-11",
       "screen_size_inch": 14.2,
       "silicon": [
-        27,
-        28,
         29,
         30
       ],
@@ -443,14 +434,12 @@
         6
       ],
       "storage": [
-        4,
         5,
         6,
         7,
         8
       ],
       "memory": [
-        5,
         7,
         8,
         9,
@@ -533,8 +522,7 @@
         3,
         4,
         5,
-        6,
-        7
+        6
       ],
       "memory": [
         3,
@@ -561,8 +549,7 @@
         3,
         4,
         5,
-        6,
-        7
+        6
       ],
       "memory": [
         3,
@@ -858,7 +845,7 @@
     },
     {
       "id": 60,
-      "model": "A3500",
+      "model": "A3536",
       "name": "MacBook Pro (14\", M6, 2026)",
       "release_date": "2026-11",
       "screen_size_inch": 14.2,
@@ -882,15 +869,13 @@
     },
     {
       "id": 61,
-      "model": "A3601",
-      "name": "MacBook Pro (14\", PROLED XDR, 2026)",
+      "model": "A3468",
+      "name": "MacBook Pro (14\", PROLED XDR, M5 Pro)",
       "release_date": "2026-11",
       "screen_size_inch": 14.2,
       "silicon": [
         34,
-        35,
-        36,
-        37
+        35
       ],
       "colors": [
         1,
@@ -899,12 +884,35 @@
       "storage": [
         5,
         6,
+        7
+      ],
+      "memory": [
+        5,
+        8,
+        9
+      ]
+    },
+    {
+      "id": 62,
+      "model": "A3375",
+      "name": "MacBook Pro (14\", PROLED XDR, M5 Max)",
+      "release_date": "2026-11",
+      "screen_size_inch": 14.2,
+      "silicon": [
+        36,
+        37
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        6,
         7,
         8,
         9
       ],
       "memory": [
-        5,
         7,
         8,
         9,
@@ -912,15 +920,13 @@
       ]
     },
     {
-      "id": 62,
-      "model": "A3603",
-      "name": "MacBook Pro (16\", PROLED XDR, 2026)",
+      "id": 63,
+      "model": "A3469",
+      "name": "MacBook Pro (16\", PROLED XDR, M5 Pro)",
       "release_date": "2026-11",
-      "screen_size_inch": 16.2,
+      "screen_size_inch": 16.3,
       "silicon": [
-        35,
-        36,
-        37
+        35
       ],
       "colors": [
         1,
@@ -929,12 +935,35 @@
       "storage": [
         5,
         6,
+        7
+      ],
+      "memory": [
+        5,
+        8,
+        9
+      ]
+    },
+    {
+      "id": 64,
+      "model": "A3376",
+      "name": "MacBook Pro (16\", PROLED XDR, M5 Max)",
+      "release_date": "2026-11",
+      "screen_size_inch": 16.3,
+      "silicon": [
+        36,
+        37
+      ],
+      "colors": [
+        1,
+        6
+      ],
+      "storage": [
+        6,
         7,
         8,
         9
       ],
       "memory": [
-        5,
         7,
         8,
         9,
