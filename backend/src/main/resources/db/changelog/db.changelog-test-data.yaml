@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: db.changelog-master.yaml
+  # extra changesets for local development, only if the folder exists and has files
+  - includeAll:
+      relativeToChangelogFile: true
+      path: test-data/
+      errorIfMissingOrEmpty: false
+      labels: test-data
+      context: test-data

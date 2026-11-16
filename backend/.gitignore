@@ -4,3 +4,6 @@
 
 # Ignore Hibernate generated sources
 /src/main/generated/
+
+# Private test data
+/src/main/resources/db/changelog/test-data/
