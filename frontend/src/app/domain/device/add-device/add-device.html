@@ -18,7 +18,7 @@
                size="999" type="url"/>
         <clr-control-helper>
           From Kleinanzeigen, Willhaben etc.
-          @if (devicesWithSameAdUrl()) {
+          @if (devicesWithSameAdUrl()?.length) {
             <div class="mt-1">
               <clr-alert [clrAlertClosable]="false" clrAlertType="warning">
                 <clr-alert-item>
@@ -27,7 +27,7 @@
                       This URL is also used by other devices
                     </span>
                     <div class="mt-1 mb-2">
-                      Usually each device usually needs its own URL.
+                      Each device usually needs its own URL.
                     </div>
                     @for (deviceIdWithSameAdUrl of devicesWithSameAdUrl(); track deviceIdWithSameAdUrl) {
                       <div class="mt-1">
