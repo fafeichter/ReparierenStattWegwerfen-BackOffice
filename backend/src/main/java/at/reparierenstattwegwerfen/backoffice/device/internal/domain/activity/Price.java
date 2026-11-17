@@ -11,7 +11,7 @@ import java.util.Locale;
 public record Price(Double amount) {
 
 	public String formatAsEuro() {
-		DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.GERMAN);
 		symbols.setCurrencySymbol("€");
 
 		return new DecimalFormat("¤ #,##0.00", symbols)
