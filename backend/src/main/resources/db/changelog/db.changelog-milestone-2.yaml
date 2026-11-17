@@ -4,3 +4,8 @@ databaseChangeLog:
     path: model/milestone-2/,
     labels: milestone-2
   }
+  - includeAll: {
+    relativeToChangelogFile: true,
+    path: device/milestone-2/,
+    labels: milestone-2
+  }
