@@ -1,48 +1,56 @@
-<form (ngSubmit)="searchDevice()" [formGroup]="deviceSearchForm" autocomplete="off" class="clr-form-full-width"
-      clrForm clrLayout="vertical">
-  <clr-input-container class="mt-0!">
-    <label class="clr-col-4">
-      Device ID
-    </label>
-    <input class="clr-col-4" clrInput formControlName="deviceId"/>
-    <div clrInputPrefix>
-      #
-    </div>
-    <clr-control-error *clrIfError="'min'">
-      Minimum length not met
-    </clr-control-error>
-    <clr-control-error *clrIfError="'pattern'">
-      Must be a valid device ID
-    </clr-control-error>
-    <clr-control-error *clrIfError="'noneProvided'">
-      Either Device ID or serial number must be set
-    </clr-control-error>
-    <clr-control-error *clrIfError="'tooManyProvided'">
-      Only one search field must be set
-    </clr-control-error>
-  </clr-input-container>
-  <clr-input-container class="mt-7!">
-    <label class="clr-col-5">
-      Serial number
-    </label>
-    <input class="clr-col-5 uppercase" clrInput formControlName="deviceSerialNumber"/>
-    <clr-control-error *clrIfError="'min'">
-      Minimum length not met
-    </clr-control-error>
-    <clr-control-error *clrIfError="'noneProvided'">
-      Either Device ID or serial number must be set
-    </clr-control-error>
-    <clr-control-error *clrIfError="'tooManyProvided'">
-      Only one search field must be set
-    </clr-control-error>
-  </clr-input-container>
-  <button [disabled]="deviceSearchForm.invalid || isSubmitting()" class="btn btn-icon mt-5!" type="submit">
-    <cds-icon direction="right" shape="arrow-mini"/>
-    @if (isSubmitting()) {
-      <span class="spinner spinner-inline"></span>
-      Searching ...
-    } @else {
-      Go to device
-    }
-  </button>
-</form>
+<clr-card>
+  <clr-card-header>
+    <cds-icon shape="search" size="lg"/>
+    Search Device
+  </clr-card-header>
+  <div class="card-block">
+    <form (ngSubmit)="searchDevice()" [formGroup]="deviceSearchForm" autocomplete="off" class="clr-form-full-width"
+          clrForm clrLayout="vertical">
+      <clr-input-container class="mt-0!">
+        <label class="clr-col-4">
+          Device ID
+        </label>
+        <input class="clr-col-4" clrInput formControlName="deviceId"/>
+        <div clrInputPrefix>
+          #
+        </div>
+        <clr-control-error *clrIfError="'min'">
+          Minimum length not met
+        </clr-control-error>
+        <clr-control-error *clrIfError="'pattern'">
+          Must be a valid device ID
+        </clr-control-error>
+        <clr-control-error *clrIfError="'noneProvided'">
+          Either Device ID or serial number must be set
+        </clr-control-error>
+        <clr-control-error *clrIfError="'tooManyProvided'">
+          Only one search field must be set
+        </clr-control-error>
+      </clr-input-container>
+      <clr-input-container class="mt-7!">
+        <label class="clr-col-5">
+          Serial number
+        </label>
+        <input class="clr-col-5 uppercase" clrInput formControlName="deviceSerialNumber"/>
+        <clr-control-error *clrIfError="'min'">
+          Minimum length not met
+        </clr-control-error>
+        <clr-control-error *clrIfError="'noneProvided'">
+          Either Device ID or serial number must be set
+        </clr-control-error>
+        <clr-control-error *clrIfError="'tooManyProvided'">
+          Only one search field must be set
+        </clr-control-error>
+      </clr-input-container>
+      <button [disabled]="deviceSearchForm.invalid || isSubmitting()" class="btn btn-icon mt-5!" type="submit">
+        <cds-icon direction="right" shape="arrow-mini"/>
+        @if (isSubmitting()) {
+          <span class="spinner spinner-inline"></span>
+          Searching ...
+        } @else {
+          Go to device
+        }
+      </button>
+    </form>
+  </div>
+</clr-card>

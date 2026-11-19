@@ -1,6 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.repository;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.model.DeviceActivityEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,22 @@ public interface SpringDataDeviceActivityRepository extends JpaRepository<Device
 		WHERE a.deviceId = :deviceId
 		""")
 	LocalDateTime getLastActivityDateForDevice(Integer deviceId);
+
+	@Query("""
+		FROM DeviceActivityEntity a
+		LEFT JOIN FETCH a.activityType
+		WHERE a.date = (
+		    SELECT MAX(latestDay.date)
+		    FROM DeviceActivityEntity latestDay
+		    WHERE latestDay.deviceId = a.deviceId
+		)
+		AND a.id = (
+		    SELECT MAX(tieBreak.id)
+		    FROM DeviceActivityEntity tieBreak
+		    WHERE tieBreak.deviceId = a.deviceId
+		      AND tieBreak.date = a.date
+		)
+		ORDER BY a.date DESC, a.id DESC
+		""")
+	List<DeviceActivityEntity> getLastActivities(Pageable page);
 }

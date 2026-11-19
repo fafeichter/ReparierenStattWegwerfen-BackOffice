@@ -1,5 +1,7 @@
 package at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity;
 
+import org.springframework.data.domain.Pageable;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,4 +16,6 @@ public interface DeviceActivityRepository {
 	List<DeviceActivity> getByIdWithRelations(Integer deviceId);
 
 	LocalDateTime getLastActivityDateForDevice(Integer deviceId);
+
+	List<DeviceActivity> getLastActivities(Pageable page);
 }

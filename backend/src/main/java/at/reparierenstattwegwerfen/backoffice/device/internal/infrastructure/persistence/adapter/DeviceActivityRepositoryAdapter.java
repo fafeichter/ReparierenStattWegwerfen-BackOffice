@@ -5,6 +5,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity.De
 import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.mapper.DeviceActivityPersistenceMapper;
 import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.repository.SpringDataDeviceActivityRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -38,5 +39,13 @@ public class DeviceActivityRepositoryAdapter implements DeviceActivityRepository
 	@Override
 	public LocalDateTime getLastActivityDateForDevice(Integer deviceId) {
 		return jpaRepository.getLastActivityDateForDevice(deviceId);
+	}
+
+	@Override
+	public List<DeviceActivity> getLastActivities(Pageable page) {
+		return jpaRepository.getLastActivities(page)
+			.stream()
+			.map(mapper::toDomain)
+			.toList();
 	}
 }

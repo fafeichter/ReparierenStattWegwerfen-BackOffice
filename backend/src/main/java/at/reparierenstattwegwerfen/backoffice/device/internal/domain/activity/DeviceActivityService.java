@@ -31,6 +31,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.Device
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagRemoved;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags.DeviceTagRepository;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceActivityDto;
+import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceLastActivityDto;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
 import at.reparierenstattwegwerfen.backoffice.model.ModelAppleSiliconDetailsService;
@@ -41,6 +42,7 @@ import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import at.reparierenstattwegwerfen.backoffice.sparepart.SparePartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -387,7 +389,7 @@ public class DeviceActivityService {
 			.stream()
 			.map(activity ->
 				DeviceActivityDto.builder()
-					.id(activity.getId())
+					.deviceActivityId(activity.getId())
 					.action(activity.getActivityType().getName())
 					.value(activity.getName())
 					.actor(activity.getActor())
@@ -399,5 +401,19 @@ public class DeviceActivityService {
 	@Transactional(readOnly = true)
 	public LocalDateTime getLastActivityDateForDevice(Integer deviceId) {
 		return deviceActivityRepository.getLastActivityDateForDevice(deviceId);
+	}
+
+	@Transactional(readOnly = true)
+	public List<DeviceLastActivityDto> getLastActivities(Pageable page) {
+		return deviceActivityRepository.getLastActivities(page)
+			.stream()
+			.map(activity ->
+				DeviceLastActivityDto.builder()
+					.deviceId(activity.getDeviceId())
+					.action(activity.getActivityType().getName())
+					.actor(activity.getActor())
+					.date(activity.getDate())
+					.build())
+			.toList();
 	}
 }

@@ -1,0 +1,30 @@
+<clr-card>
+  <clr-card-header>
+    <cds-icon shape="timeline" size="lg"/>
+    Last Activities
+  </clr-card-header>
+  <div class="card-block">
+    <table class="table">
+      <tbody>
+        @for (activity of deviceLastActivities(); track activity.deviceId) {
+          <tr>
+            <td class="left">
+              <a [routerLink]="['/devices', activity.deviceId]">
+                #{{ activity.deviceId }}
+              </a>
+            </td>
+            <td class="left">
+              {{ activity.action }}
+            </td>
+            <td class="center">
+              {{ activity.actor }}
+            </td>
+            <td class="right">
+              {{ activity.date | date:'dd. MMM yyyy HH:mm' }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</clr-card>

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -9,12 +9,12 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { ClrCommonFormsModule, ClrIcon, ClrInputModule } from '@clr/angular';
-import { Router } from '@angular/router';
-import { DeviceSearchControllerService } from '@api/device';
+import {ClrCardModule, ClrCommonFormsModule, ClrIcon, ClrInputModule} from '@clr/angular';
+import {Router} from '@angular/router';
+import {DeviceSearchControllerService} from '@api/device';
 
 @Component({
-  imports: [ClrCommonFormsModule, ClrIcon, ClrInputModule, FormsModule, ReactiveFormsModule],
+  imports: [ClrCommonFormsModule, ClrIcon, ClrInputModule, FormsModule, ReactiveFormsModule, ClrCardModule],
   selector: 'app-device-search',
   styleUrl: './device-search.css',
   templateUrl: './device-search.html',

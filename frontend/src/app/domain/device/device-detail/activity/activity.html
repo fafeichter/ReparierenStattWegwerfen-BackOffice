@@ -22,7 +22,7 @@
       </tr>
       </thead>
       <tbody>
-        @for (activity of deviceActivities(); track activity.id) {
+        @for (activity of deviceActivities(); track activity.deviceActivityId) {
           <tr>
             <td class="left">
               {{ activity.action }}
