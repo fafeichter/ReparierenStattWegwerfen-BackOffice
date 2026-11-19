@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, OnInit, signal } from '@angular/core';
+import {Component, computed, effect, inject, input, OnInit, signal} from '@angular/core';
 import {
   ClrCardModule,
   ClrCommonFormsModule,
@@ -10,8 +10,8 @@ import {
   ClrSelectModule,
   ClrTextareaModule,
 } from '@clr/angular';
-import { CurrencyPipe, DatePipe } from '@angular/common';
-import { OrElsePipe } from '../../../../pipes/or-else-pipe';
+import {CurrencyPipe, DatePipe} from '@angular/common';
+import {OrElsePipe} from '../../../../pipes/or-else-pipe';
 import {
   CreateDeviceSparePartDto,
   DeviceDefectsControllerService,
@@ -21,8 +21,8 @@ import {
   DeviceSparePartsControllerService,
   NamedIdDto,
 } from '@api/device';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-repair',
@@ -53,6 +53,8 @@ export class Repair implements OnInit {
   totalSparePartsCost = computed(() => {
     return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
   });
+
+  isLoading = signal<boolean>(true);
 
   modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -95,10 +97,14 @@ export class Repair implements OnInit {
   ngOnInit(): void {
     this.defectsApi
       .getDeviceDefectDetails(this.deviceId())
-      .subscribe((data) => this.deviceDefects.set(data));
+      .subscribe((deviceDefects) => this.deviceDefects.set(deviceDefects));
+    this.isLoading.set(true);
     this.deviceSparePartsApi
       .getDeviceSpareParts(this.deviceId())
-      .subscribe((deviceSpareParts) => this.deviceSpareParts.set(deviceSpareParts));
+      .subscribe((deviceSpareParts) => {
+        this.isLoading.set(false);
+        this.deviceSpareParts.set(deviceSpareParts)
+      });
   }
 
   updateDefects() {
