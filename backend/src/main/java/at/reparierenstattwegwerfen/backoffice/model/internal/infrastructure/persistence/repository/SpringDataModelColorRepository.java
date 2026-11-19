@@ -15,7 +15,6 @@ import java.util.List;
 public interface SpringDataModelColorRepository extends JpaRepository<ModelColorEntity, Integer> {
 
 	@Query("""
-		select m
 		from ModelColorEntity m
 		where m.id = :modelColorId
 		""")

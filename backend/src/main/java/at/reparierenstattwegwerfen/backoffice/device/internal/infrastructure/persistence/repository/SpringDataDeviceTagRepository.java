@@ -15,7 +15,7 @@ import java.util.List;
 public interface SpringDataDeviceTagRepository extends JpaRepository<DeviceTagEntity, Integer> {
 
 	@Query("""
-		SELECT t FROM DeviceTagEntity t
+		FROM DeviceTagEntity t
 		JOIN DeviceAddedTagEntity d ON d.deviceTag.id = t.id
 		WHERE d.device.id = :deviceId
 		ORDER BY t.sortOrder
@@ -23,7 +23,6 @@ public interface SpringDataDeviceTagRepository extends JpaRepository<DeviceTagEn
 	List<DeviceTagEntity> getAddedTagsForDevice(Integer deviceId);
 
 	@Query("""
-		SELECT t
 		FROM DeviceTagEntity t
 		JOIN DeviceTagAvailableModelSeriesEntity ts
 		  ON t.id = ts.tag.id

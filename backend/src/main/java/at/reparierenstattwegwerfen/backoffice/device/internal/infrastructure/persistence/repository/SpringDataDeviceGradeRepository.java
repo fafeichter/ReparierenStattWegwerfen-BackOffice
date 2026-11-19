@@ -15,8 +15,8 @@ import java.util.List;
 public interface SpringDataDeviceGradeRepository extends JpaRepository<DeviceGradeEntity, Integer> {
 
 	@Query("""
-		SELECT n FROM DeviceGradeEntity n
-		ORDER BY n.sortOrder
+		FROM DeviceGradeEntity g
+		ORDER BY g.sortOrder
 		""")
 	List<DeviceGradeEntity> getAllGrades();
 }

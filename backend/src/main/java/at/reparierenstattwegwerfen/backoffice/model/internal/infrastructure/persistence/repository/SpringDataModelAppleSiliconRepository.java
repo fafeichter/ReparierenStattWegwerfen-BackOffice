@@ -15,7 +15,6 @@ import java.util.List;
 public interface SpringDataModelAppleSiliconRepository extends JpaRepository<ModelAppleSiliconEntity, Integer> {
 
 	@Query("""
-		select silicon
 		from ModelAppleSiliconEntity silicon
 		where silicon.id = :modelAppleSiliconId
 		""")

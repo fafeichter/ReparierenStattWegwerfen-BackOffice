@@ -36,6 +36,7 @@ public class DeviceRepositoryAdapter implements DeviceRepository {
 		return mapper.toDomain(saved);
 	}
 
+
 	@Override
 	public List<Device> findBySellerBusinessPartnerId(Integer sellerBusinessPartnerId) {
 		return jpaRepository.findBySellerBusinessPartnerId(sellerBusinessPartnerId)
@@ -45,8 +46,24 @@ public class DeviceRepositoryAdapter implements DeviceRepository {
 	}
 
 	@Override
-	public List<Device> findAllByStatusIdIn(List<Integer> statusIds) {
-		return jpaRepository.findAllByStatusIdIn(statusIds)
+	public List<Device> getDevicesOrdered() {
+		return jpaRepository.getDevicesOrdered()
+			.stream()
+			.map(mapper::toDomain)
+			.toList();
+	}
+
+	@Override
+	public List<Device> getDevicesToFinish() {
+		return jpaRepository.getDevicesToFinish()
+			.stream()
+			.map(mapper::toDomain)
+			.toList();
+	}
+
+	@Override
+	public List<Device> getDevicesOfferedForSale() {
+		return jpaRepository.getDevicesOfferedForSale()
 			.stream()
 			.map(mapper::toDomain)
 			.toList();

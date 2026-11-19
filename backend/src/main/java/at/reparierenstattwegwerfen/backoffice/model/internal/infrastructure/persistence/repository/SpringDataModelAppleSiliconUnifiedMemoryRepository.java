@@ -15,7 +15,6 @@ import java.util.List;
 public interface SpringDataModelAppleSiliconUnifiedMemoryRepository extends JpaRepository<ModelAppleSiliconUnifiedMemoryEntity, Integer> {
 
 	@Query("""
-		select memory
 		from ModelAppleSiliconUnifiedMemoryEntity memory
 		where memory.id = :modelUnifiedMemoryId
 		""")

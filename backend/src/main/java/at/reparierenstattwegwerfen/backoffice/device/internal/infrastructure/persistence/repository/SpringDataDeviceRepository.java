@@ -20,7 +20,26 @@ public interface SpringDataDeviceRepository extends JpaRepository<DeviceEntity, 
 
 	List<DeviceEntity> findBySellerBusinessPartnerId(Integer sellerBusinessPartnerId);
 
-	List<DeviceEntity> findAllByStatusIdIn(List<Integer> statusIds);
+	@Query("""
+		from DeviceEntity d
+		where d.status.id = 1
+		order by d.statusDate, d.id
+		""")
+	List<DeviceEntity> getDevicesOrdered();
+
+	@Query("""
+		from DeviceEntity d
+		where d.status.id in (2, 3, 4)
+		order by d.status.sortOrder, d.statusDate
+		""")
+	List<DeviceEntity> getDevicesToFinish();
+
+	@Query("""
+		from DeviceEntity d
+		where d.status.id = 5
+		order by d.statusDate, d.id
+		""")
+	List<DeviceEntity> getDevicesOfferedForSale();
 
 	List<DeviceEntity> findByBuyerBusinessPartnerId(Integer sellerBusinessPartnerId);
 
@@ -41,7 +60,6 @@ public interface SpringDataDeviceRepository extends JpaRepository<DeviceEntity, 
 	List<Integer> findDevicesToArchive();
 
 	@Query("""
-		select d
 		from DeviceEntity d
 		where :includeInactiveDevices = true
 		   or d.status.id in (select s.id
@@ -59,7 +77,8 @@ public interface SpringDataDeviceRepository extends JpaRepository<DeviceEntity, 
 	Integer findDeviceIdBySerialNumberLike(@Param("serialNumber") String serialNumber);
 
 	@Query("""
-		SELECT d.id FROM DeviceEntity d
+		SELECT d.id
+		FROM DeviceEntity d
 		WHERE d.url = :url
 		""")
 	List<Integer> findDeviceIdsByUrl(String url);

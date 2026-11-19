@@ -13,10 +13,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpringDataDeviceBaseDetailsRepository extends JpaRepository<DeviceEntity, Integer> {
 
-	@Query("SELECT d FROM DeviceEntity d " +
-		"LEFT JOIN FETCH d.status " +
-		"LEFT JOIN FETCH d.grade " +
-		"LEFT JOIN FETCH d.batteryStatus " +
-		"WHERE d.id = :id")
+	@Query("""
+		FROM DeviceEntity d
+		LEFT JOIN FETCH d.status
+		LEFT JOIN FETCH d.grade
+		LEFT JOIN FETCH d.batteryStatus
+		WHERE d.id = :id
+		""")
 	DeviceEntity getByIdWithRelations(@Param("id") Integer id);
 }

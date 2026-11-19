@@ -15,7 +15,6 @@ import java.util.List;
 public interface SpringDataModelStorageRepository extends JpaRepository<ModelStorageEntity, Integer> {
 
 	@Query("""
-		select m
 		from ModelStorageEntity m
 		where m.id = :modelStorageId
 		""")

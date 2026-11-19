@@ -16,7 +16,6 @@ import java.util.Set;
 public interface SpringDataSparePartRepository extends JpaRepository<SparePartEntity, Integer> {
 
 	@Query("""
-		SELECT s
 		FROM SparePartEntity s
 		JOIN SparePartAvailableModelSeriesEntity spms
 		  ON spms.sparePart.id = s.id

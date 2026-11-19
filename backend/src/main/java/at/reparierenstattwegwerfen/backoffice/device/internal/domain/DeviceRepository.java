@@ -17,7 +17,11 @@ public interface DeviceRepository {
 
 	List<Device> findBySellerBusinessPartnerId(Integer sellerBusinessPartnerId);
 
-	List<Device> findAllByStatusIdIn(List<Integer> statusIds);
+	List<Device> getDevicesOrdered();
+
+	List<Device> getDevicesToFinish();
+
+	List<Device> getDevicesOfferedForSale();
 
 	List<Device> findByBuyerBusinessPartnerId(Integer buyerBusinessPartnerId);
 

@@ -29,7 +29,6 @@ public interface SpringDataModelRepository extends JpaRepository<ModelEntity, In
 	List<ModelEntity> findAllIPads();
 
 	@Query("""
-		select m
 		from ModelEntity m
 		left join fetch m.modelSeries
 		left join fetch m.availableColors ac
@@ -43,7 +42,6 @@ public interface SpringDataModelRepository extends JpaRepository<ModelEntity, In
 	ModelEntity getModelDetails(Integer modelId);
 
 	@Query("""
-		select m
 		from ModelEntity m
 		where m.id = :modelId
 		""")

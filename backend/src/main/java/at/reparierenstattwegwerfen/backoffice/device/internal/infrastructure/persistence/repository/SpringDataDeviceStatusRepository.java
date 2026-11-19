@@ -15,7 +15,7 @@ import java.util.List;
 public interface SpringDataDeviceStatusRepository extends JpaRepository<DeviceStatusEntity, Integer> {
 
 	@Query("""
-		SELECT n FROM DeviceStatusEntity n
+		FROM DeviceStatusEntity n
 		WHERE n.deviceStatusClassification.id IN (1, 2)
 		ORDER BY n.sortOrder
 		""")

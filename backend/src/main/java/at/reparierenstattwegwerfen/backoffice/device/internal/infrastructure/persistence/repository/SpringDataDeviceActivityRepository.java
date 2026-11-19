@@ -16,13 +16,17 @@ import java.util.List;
 public interface SpringDataDeviceActivityRepository extends JpaRepository<DeviceActivityEntity, Integer> {
 
 	@Query("""
-		SELECT a FROM DeviceActivityEntity a
+		FROM DeviceActivityEntity a
 		LEFT JOIN FETCH a.activityType
 		WHERE a.deviceId = :deviceId
 		ORDER BY a.date DESC
 		""")
 	List<DeviceActivityEntity> getByIdWithRelations(Integer deviceId);
 
-	@Query("SELECT MAX(a.date) FROM DeviceActivityEntity a WHERE a.deviceId = :deviceId")
+	@Query("""
+		SELECT MAX(a.date)
+		FROM DeviceActivityEntity a
+		WHERE a.deviceId = :deviceId
+		""")
 	LocalDateTime getLastActivityDateForDevice(Integer deviceId);
 }

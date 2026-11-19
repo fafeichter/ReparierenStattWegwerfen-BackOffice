@@ -21,7 +21,6 @@ public interface SpringDataBusinessPartnerRepository extends JpaRepository<Busin
 	List<BusinessPartnerEntity> findAllBusinessPartners();
 
 	@Query("""
-		select bp
 		from BusinessPartnerEntity bp
 		left join fetch bp.address a
 		left join fetch a.country
@@ -30,7 +29,6 @@ public interface SpringDataBusinessPartnerRepository extends JpaRepository<Busin
 	BusinessPartnerEntity getBusinessPartnerDetails(Integer businessPartnerId);
 
 	@Query("""
-		select bp
 		from BusinessPartnerEntity bp
 		where bp.id = :businessPartnerId
 		""")

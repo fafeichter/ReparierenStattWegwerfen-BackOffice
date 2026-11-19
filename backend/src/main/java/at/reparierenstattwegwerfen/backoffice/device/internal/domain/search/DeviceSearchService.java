@@ -67,7 +67,7 @@ public class DeviceSearchService {
 
 	@Transactional(readOnly = true)
 	public List<DeviceToFinishDto> getDevicesToFinish() {
-		return deviceRepository.findAllByStatusIdIn(List.of(2, 3, 4))
+		return deviceRepository.getDevicesToFinish()
 			.stream()
 			.map(device ->
 				DeviceToFinishDto.builder()
@@ -84,7 +84,7 @@ public class DeviceSearchService {
 
 	@Transactional(readOnly = true)
 	public List<DeviceOfferedForSaleDto> getDevicesOfferedForSale() {
-		return deviceRepository.findAllByStatusIdIn(List.of(5))
+		return deviceRepository.getDevicesOfferedForSale()
 			.stream()
 			.map(device ->
 				DeviceOfferedForSaleDto.builder()
@@ -101,7 +101,7 @@ public class DeviceSearchService {
 
 	@Transactional(readOnly = true)
 	public List<DeviceOrderedDto> getDevicesOrdered() {
-		return deviceRepository.findAllByStatusIdIn(List.of(1))
+		return deviceRepository.getDevicesOrdered()
 			.stream()
 			.map(device -> DeviceOrderedDto.builder()
 				.deviceId(device.getId())
