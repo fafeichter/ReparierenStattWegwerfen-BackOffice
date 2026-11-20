@@ -75,6 +75,10 @@
           <a [routerLink]="['/businesspartners', deviceSelling()?.buyer?.id]">
             {{ deviceSelling()?.buyer?.name }}
           </a>
+          <button (click)="unsetBuyer()" class="btn btn-link ml-2!">
+            <cds-icon shape="edit"/>
+            Unset
+          </button>
         } @else {
           -
           <button [queryParams]="{ 'device-id':  deviceId()}" [routerLink]="['/businesspartners/create']"

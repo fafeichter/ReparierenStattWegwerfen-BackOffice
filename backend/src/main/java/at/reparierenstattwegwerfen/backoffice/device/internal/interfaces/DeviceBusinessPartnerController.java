@@ -39,4 +39,10 @@ public class DeviceBusinessPartnerController {
 											@AuthenticationPrincipal UserDetails currentUser) {
 		return businessPartnerService.setBuyerToAsGoodAsNew(deviceId, currentUser);
 	}
+
+	@DeleteMapping("/devices/{deviceId}/businesspartners/buyer")
+	public void unsetBuyer(@PathVariable Integer deviceId,
+						   @AuthenticationPrincipal UserDetails currentUser) {
+		businessPartnerService.unsetBuyer(deviceId, currentUser);
+	}
 }

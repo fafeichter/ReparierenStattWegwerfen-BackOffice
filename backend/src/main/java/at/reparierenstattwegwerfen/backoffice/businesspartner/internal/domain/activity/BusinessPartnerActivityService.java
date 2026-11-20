@@ -12,6 +12,7 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.cr
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerActivityDto;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerUnsetAsBuyer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Service;
@@ -83,6 +84,16 @@ public class BusinessPartnerActivityService {
 		businessPartnerActivity.setName("#" + event.getDeviceId());
 		businessPartnerActivity.setBusinessPartnerId(event.getBuyerBusinessPartnerId());
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(5));
+
+		businessPartnerActivityRepository.save(businessPartnerActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBusinessPartnerUnsetAsBuyer event) {
+		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event.getExactTimestamp(), event.getActor());
+		businessPartnerActivity.setName("#" + event.getDeviceId());
+		businessPartnerActivity.setBusinessPartnerId(event.getOldBuyerBusinessPartnerId());
+		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(8));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}

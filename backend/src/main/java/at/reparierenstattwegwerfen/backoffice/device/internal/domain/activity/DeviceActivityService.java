@@ -34,6 +34,7 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.De
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceLastActivityDto;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsSeller;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerUnsetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.model.ModelAppleSiliconDetailsService;
 import at.reparierenstattwegwerfen.backoffice.model.ModelColorDetailsService;
 import at.reparierenstattwegwerfen.backoffice.model.ModelStorageDetailsService;
@@ -338,6 +339,17 @@ public class DeviceActivityService {
 		deviceActivity.setName(businessPartner.name());
 		deviceActivity.setDeviceId(event.getDeviceId());
 		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(21));
+
+		deviceActivityRepository.save(deviceActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(DeviceBusinessPartnerUnsetAsBuyer event) {
+		DeviceActivity deviceActivity = new DeviceActivity(event.getExactTimestamp(), event.getActor());
+		NamedIdDto businessPartner = businessPartnerDetailsService.getBusinessPartner(event.getOldBuyerBusinessPartnerId());
+		deviceActivity.setName(businessPartner.name());
+		deviceActivity.setDeviceId(event.getDeviceId());
+		deviceActivity.setActivityType(deviceActivityTypeRepository.getById(29));
 
 		deviceActivityRepository.save(deviceActivity);
 	}

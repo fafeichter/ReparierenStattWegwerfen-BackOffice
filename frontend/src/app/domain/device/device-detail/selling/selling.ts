@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
+import {Component, effect, inject, input, OnInit, signal} from '@angular/core';
 import {
   ClrCardModule,
   ClrCheckboxModule,
@@ -7,8 +7,8 @@ import {
   ClrModalModule,
   ClrTextareaModule,
 } from '@clr/angular';
-import { CurrencyPipe, DatePipe } from '@angular/common';
-import { OrElsePipe } from '../../../../pipes/or-else-pipe';
+import {CurrencyPipe, DatePipe} from '@angular/common';
+import {OrElsePipe} from '../../../../pipes/or-else-pipe';
 import {
   DeviceBusinessPartnerControllerService,
   DeviceDetailsControllerService,
@@ -18,9 +18,9 @@ import {
   DeviceSellingDetailsDto,
   DeviceSellingInvoiceControllerService,
 } from '@api/device';
-import { RouterLink } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
+import {RouterLink} from '@angular/router';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-selling',
@@ -76,11 +76,11 @@ export class Selling implements OnInit {
   }
 
   ngOnInit(): void {
-    this.deviceApi
-      .getDeviceSellingDetails(this.deviceId())
-      .subscribe((data) => this.deviceSelling.set(data));
-    this.deviceAccessoriesApi.getSellingAccessories(this.deviceId()).subscribe((data) => {
-      this.deviceAccessories.set(data);
+    this.deviceApi.getDeviceSellingDetails(this.deviceId()).subscribe((deviceSelling) => {
+      this.deviceSelling.set(deviceSelling)
+    });
+    this.deviceAccessoriesApi.getSellingAccessories(this.deviceId()).subscribe((deviceSellingAccessories) => {
+      this.deviceAccessories.set(deviceSellingAccessories);
     });
     this.deviceInvoiceApi
       .getDeviceSellingInvoiceNumber(this.deviceId())
@@ -114,11 +114,22 @@ export class Selling implements OnInit {
   }
 
   protected setBuyerToAsgoodasnew() {
-    this.deviceBusinessPartnerApi.setBuyerToAsGoodAsNew(this.deviceId()).subscribe((response) => {
+    this.deviceBusinessPartnerApi.setBuyerToAsGoodAsNew(this.deviceId()).subscribe((deviceBuyer) => {
       this.deviceSelling.update((deviceSelling) => {
         return {
           ...deviceSelling!,
-          buyer: response,
+          buyer: deviceBuyer,
+        };
+      });
+    });
+  }
+
+  protected unsetBuyer() {
+    this.deviceBusinessPartnerApi.unsetBuyer(this.deviceId()).subscribe(() => {
+      this.deviceSelling.update((deviceSelling) => {
+        return {
+          ...deviceSelling!,
+          buyer: undefined,
         };
       });
     });

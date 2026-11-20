@@ -26,10 +26,11 @@ public class DeviceSellingService {
 	@Transactional(readOnly = true)
 	public DeviceSellingDetailsDto load(Integer deviceId) {
 		Device device = deviceRepository.getByIdWithRelations(deviceId);
+		Integer buyerBusinessPartnerId = device.getBuyerBusinessPartnerId();
 
 		return DeviceSellingDetailsDto.builder()
 			.price(device.getSellingPrice())
-			.buyer(businessPartnerDetailsService.getBusinessPartner(device.getBuyerBusinessPartnerId()))
+			.buyer(buyerBusinessPartnerId != null ? businessPartnerDetailsService.getBusinessPartner(buyerBusinessPartnerId) : null)
 			.date(device.getSellingDate())
 			.build();
 	}

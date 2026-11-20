@@ -6,6 +6,7 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.CreateBusinessPart
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.CreateBuyerBusinessPartnerForDeviceDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceBusinesspartnerDto;
 import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerSetAsBuyer;
+import at.reparierenstattwegwerfen.backoffice.event.DeviceBusinessPartnerUnsetAsBuyer;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -84,5 +85,21 @@ public class DeviceBusinessPartnerService {
 		events.publishEvent(businessPartnerSetAsBuyerEvent);
 
 		return businessPartnerDetailsService.getBusinessPartner(asgoodasnewBusinessPartnerId);
+	}
+
+	@Transactional
+	public void unsetBuyer(Integer deviceId, UserDetails actor) {
+		Device device = deviceRepository.getById(deviceId);
+		Integer oldBuyerBusinessPartnerId = device.getBuyerBusinessPartnerId();
+		device.setBuyerBusinessPartnerId(null);
+		deviceRepository.save(device);
+
+		DeviceBusinessPartnerUnsetAsBuyer businessPartnerUnsetAsBuyer = DeviceBusinessPartnerUnsetAsBuyer.builder()
+			.source(this)
+			.actor(actor)
+			.oldBuyerBusinessPartnerId(oldBuyerBusinessPartnerId)
+			.deviceId(deviceId)
+			.build();
+		events.publishEvent(businessPartnerUnsetAsBuyer);
 	}
 }
