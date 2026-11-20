@@ -1,0 +1,17 @@
+<clr-dropdown class="float-right">
+  <button class="btn btn-link" clrDropdownTrigger>
+    Actions
+    <cds-icon direction="down" shape="angle"/>
+  </button>
+  <clr-dropdown-menu *clrIfOpen clrPosition="bottom-left">
+    @if (!isScammer()) {
+      <div (click)="markAsScammer()" clrDropdownItem>
+        Mark as Scammer
+      </div>
+    } @else {
+      <div (click)="unmarkAsScammer()" clrDropdownItem>
+        Unmark as Scammer
+      </div>
+    }
+  </clr-dropdown-menu>
+</clr-dropdown>

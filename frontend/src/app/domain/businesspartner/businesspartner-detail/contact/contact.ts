@@ -1,28 +1,24 @@
-import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
+import {Component, effect, inject, input, OnInit, signal} from '@angular/core';
 import {
   ClrAlertModule,
   ClrCardModule,
   ClrCommonFormsModule,
+  ClrDropdownModule,
   ClrFileInputModule,
   ClrIcon,
   ClrLabel,
   ClrSpinnerModule,
 } from '@clr/angular';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { OrElsePipe } from '../../../../pipes/or-else-pipe';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {OrElsePipe} from '../../../../pipes/or-else-pipe';
 import {
   BusinessPartnerAddressExtractionControllerService,
   BusinessPartnerControllerService,
   BusinessPartnerDetailDto,
 } from '@api/businesspartner';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
+import {HeaderActions} from './header-actions/header-actions';
 
 @Component({
   imports: [
@@ -36,6 +32,8 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
     ClrCardModule,
     ClrSpinnerModule,
     ClrAlertModule,
+    ClrDropdownModule,
+    HeaderActions,
   ],
   selector: 'app-contact',
   styleUrl: './contact.css',
@@ -102,6 +100,13 @@ export class Contact implements OnInit {
     } else {
       this.router.navigate(['/devices', this.deviceId()]);
     }
+  }
+
+  setScammerFlag(isScammer: boolean) {
+    this.businessPartner.update(businessPartner => businessPartner ? {
+      ...businessPartner,
+      scammer: isScammer
+    } : businessPartner);
   }
 
   private resetForm() {

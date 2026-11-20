@@ -4,10 +4,9 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.Bu
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerDetailDto;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +29,17 @@ public class BusinessPartnerController {
 	@GetMapping("/{businessPartnerId}")
 	public BusinessPartnerDetailDto getBusinessPartnerDetails(@PathVariable Integer businessPartnerId) {
 		return businessPartnerService.getBusinessPartnerDetails(businessPartnerId);
+	}
+
+	@PutMapping("/{businessPartnerId}/scammer-flag")
+	public void markBusinessPartnerAsScammer(@PathVariable Integer businessPartnerId,
+											 @AuthenticationPrincipal UserDetails currentUser) {
+		businessPartnerService.markBusinessPartnerAsScammer(businessPartnerId, currentUser);
+	}
+
+	@DeleteMapping("/{businessPartnerId}/scammer-flag")
+	public void unmarkBusinessPartnerAsScammer(@PathVariable Integer businessPartnerId,
+											   @AuthenticationPrincipal UserDetails currentUser) {
+		businessPartnerService.unmarkBusinessPartnerAsScammer(businessPartnerId, currentUser);
 	}
 }

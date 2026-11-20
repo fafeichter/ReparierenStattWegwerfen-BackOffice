@@ -1,7 +1,9 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.activity;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.BusinessPartner;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.BusinessPartnerMarkedAsScammer;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.BusinessPartnerRepository;
+import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.BusinessPartnerUnmarkedAsScammer;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddress;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddressChanged;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddressRepository;
@@ -81,6 +83,26 @@ public class BusinessPartnerActivityService {
 		businessPartnerActivity.setName("#" + event.getDeviceId());
 		businessPartnerActivity.setBusinessPartnerId(event.getBuyerBusinessPartnerId());
 		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(5));
+
+		businessPartnerActivityRepository.save(businessPartnerActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(BusinessPartnerMarkedAsScammer event) {
+		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event);
+		businessPartnerActivity.setName(businessPartnerRepository.getById(event.getBusinessPartnerId()).getName());
+		businessPartnerActivity.setBusinessPartnerId(event.getBusinessPartnerId());
+		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(6));
+
+		businessPartnerActivityRepository.save(businessPartnerActivity);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void on(BusinessPartnerUnmarkedAsScammer event) {
+		BusinessPartnerActivity businessPartnerActivity = new BusinessPartnerActivity(event);
+		businessPartnerActivity.setName(businessPartnerRepository.getById(event.getBusinessPartnerId()).getName());
+		businessPartnerActivity.setBusinessPartnerId(event.getBusinessPartnerId());
+		businessPartnerActivity.setActivityType(businessPartnerActivityTypeRepository.getById(7));
 
 		businessPartnerActivityRepository.save(businessPartnerActivity);
 	}

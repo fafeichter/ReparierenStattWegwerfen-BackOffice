@@ -11,9 +11,11 @@ public interface BusinessPartnerRepository {
 
 	BusinessPartner getBusinessPartnerDetails(Integer businessPartnerId);
 
-	BusinessPartner getBusinessPartner(Integer businessPartnerId);
-
-	BusinessPartner getById(Integer id);
+	BusinessPartner getById(Integer businessPartnerId);
 
 	BusinessPartner save(BusinessPartner businessPartner);
+
+	void markBusinessPartnerAsScammer(Integer businessPartnerId);
+
+	void unmarkBusinessPartnerAsScammer(Integer businessPartnerId);
 }

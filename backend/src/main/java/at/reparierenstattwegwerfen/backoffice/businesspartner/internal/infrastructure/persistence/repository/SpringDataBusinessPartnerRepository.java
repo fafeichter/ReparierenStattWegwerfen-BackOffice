@@ -2,6 +2,7 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastr
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastructure.persistence.model.BusinessPartnerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -28,9 +29,19 @@ public interface SpringDataBusinessPartnerRepository extends JpaRepository<Busin
 		""")
 	BusinessPartnerEntity getBusinessPartnerDetails(Integer businessPartnerId);
 
+	@Modifying
 	@Query("""
-		from BusinessPartnerEntity bp
+		update BusinessPartnerEntity bp
+		set bp.scammer = true
 		where bp.id = :businessPartnerId
 		""")
-	BusinessPartnerEntity getBusinessPartner(Integer businessPartnerId);
+	void markBusinessPartnerAsScammer(Integer businessPartnerId);
+
+	@Modifying
+	@Query("""
+		update BusinessPartnerEntity bp
+		set bp.scammer = false
+		where bp.id = :businessPartnerId
+		""")
+	void unmarkBusinessPartnerAsScammer(Integer businessPartnerId);
 }

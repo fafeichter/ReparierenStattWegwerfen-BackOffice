@@ -3,6 +3,8 @@
     <clr-card-header>
       <cds-icon [shape]="navItem().icon" size="lg"/>
       {{ navItem().label }}
+      <app-header-actions (isScammerChange)="setScammerFlag($event)" [deviceId]="businessPartner.id"
+                          [isScammer]="businessPartner.scammer"/>
     </clr-card-header>
     <div class="card-block">
       <clr-card-body-title>

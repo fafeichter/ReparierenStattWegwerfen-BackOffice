@@ -32,17 +32,22 @@ public class BusinessPartnerRepositoryAdapter implements BusinessPartnerReposito
 	}
 
 	@Override
-	public BusinessPartner getBusinessPartner(Integer businessPartnerId) {
-		return mapper.toDomain(jpaRepository.getBusinessPartner(businessPartnerId));
-	}
-
-	@Override
-	public BusinessPartner getById(Integer id) {
-		return mapper.toDomain(jpaRepository.getReferenceById(id));
+	public BusinessPartner getById(Integer businessPartnerId) {
+		return mapper.toDomain(jpaRepository.getReferenceById(businessPartnerId));
 	}
 
 	@Override
 	public BusinessPartner save(BusinessPartner businessPartner) {
 		return mapper.toDomain(jpaRepository.save(mapper.toEntity(businessPartner)));
+	}
+
+	@Override
+	public void markBusinessPartnerAsScammer(Integer businessPartnerId) {
+		jpaRepository.markBusinessPartnerAsScammer(businessPartnerId);
+	}
+
+	@Override
+	public void unmarkBusinessPartnerAsScammer(Integer businessPartnerId) {
+		jpaRepository.unmarkBusinessPartnerAsScammer(businessPartnerId);
 	}
 }

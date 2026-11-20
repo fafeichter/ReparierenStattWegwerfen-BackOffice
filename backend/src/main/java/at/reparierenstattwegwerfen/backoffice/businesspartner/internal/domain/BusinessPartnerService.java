@@ -7,6 +7,8 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interface
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerDto;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class BusinessPartnerService implements BusinessPartnerDetailsService {
 
 	private final BusinessPartnerRepository businessPartnerRepository;
+	private final ApplicationEventPublisher events;
 
 	@Transactional(readOnly = true)
 	public List<BusinessPartnerDto> getAllBusinessPartners() {
@@ -40,7 +43,7 @@ public class BusinessPartnerService implements BusinessPartnerDetailsService {
 	@Transactional(readOnly = true)
 	@Override
 	public NamedIdDto getBusinessPartner(Integer businessPartnerId) {
-		return NamedIdDto.from(businessPartnerRepository.getBusinessPartner(businessPartnerId));
+		return NamedIdDto.from(businessPartnerRepository.getById(businessPartnerId));
 	}
 
 	@Transactional(readOnly = true)
@@ -71,5 +74,30 @@ public class BusinessPartnerService implements BusinessPartnerDetailsService {
 			.city(address.getCity())
 			.country(address.getCountry().getName())
 			.build() : null;
+	}
+
+	@Transactional
+	public void markBusinessPartnerAsScammer(Integer businessPartnerId, UserDetails actor) {
+		businessPartnerRepository.markBusinessPartnerAsScammer(businessPartnerId);
+
+		BusinessPartnerMarkedAsScammer businessPartnerMarkedAsScammerEvent = BusinessPartnerMarkedAsScammer.builder()
+			.source(this)
+			.actor(actor)
+			.businessPartnerId(businessPartnerId)
+			.build();
+		events.publishEvent(businessPartnerMarkedAsScammerEvent);
+	}
+
+	@Transactional
+	public void unmarkBusinessPartnerAsScammer(Integer businessPartnerId, UserDetails actor) {
+		businessPartnerRepository.unmarkBusinessPartnerAsScammer(businessPartnerId);
+
+		BusinessPartnerUnmarkedAsScammer businessPartnerUnmarkedAsScammerEvent =
+			BusinessPartnerUnmarkedAsScammer.builder()
+				.source(this)
+				.actor(actor)
+				.businessPartnerId(businessPartnerId)
+				.build();
+		events.publishEvent(businessPartnerUnmarkedAsScammerEvent);
 	}
 }
