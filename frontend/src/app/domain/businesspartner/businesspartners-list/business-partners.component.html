@@ -9,7 +9,7 @@
     <clr-dg-row>
       <clr-dg-cell>
         <a [routerLink]="['/businesspartners', businessPartner.id]">
-          {{ businessPartner.lastName }} {{ businessPartner.firstName }}
+          {{ businessPartner.firstName }} {{ businessPartner.lastName }}
           @if (businessPartner.scammer) {
             <clr-label clrColor="danger">
               Scammer
