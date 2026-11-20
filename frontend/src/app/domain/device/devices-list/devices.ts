@@ -1,5 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
-import {DeviceDto, DeviceSearchControllerService} from '@api/device';
+import {DeviceDto, DeviceSearchControllerService, Pageable} from '@api/device';
 import {ClrCheckboxModule, ClrDatagridModule, ClrDatagridStateInterface, ClrLabel,} from '@clr/angular';
 import {OrElsePipe} from '../../../pipes/or-else-pipe';
 import {CurrencyPipe, DatePipe} from '@angular/common';
@@ -31,13 +31,9 @@ export class Devices {
   protected readonly totalItems = signal(0);
   private readonly devicesSearchApi = inject(DeviceSearchControllerService);
 
-  refresh(state: ClrDatagridStateInterface): void {
-    if (!state.page) {
-      return;
-    }
-
-    const pageSize = state.page.size ?? this.pageSize();
-    const currentPage = state.page.current ?? 1;
+  refresh(dataGridState: ClrDatagridStateInterface): void {
+    const pageSize = dataGridState.page!.size ?? this.pageSize();
+    const currentPage = dataGridState.page!.current ?? 1;
 
     if (pageSize !== this.pageSize()) {
       this.pageSize.set(pageSize);
@@ -52,8 +48,12 @@ export class Devices {
   search(): void {
     this.loading.set(true);
 
+    const page: Pageable = {
+      page: this.page() - 1,
+      size: this.pageSize()
+    }
     this.devicesSearchApi
-      .search(this.pageSize(), this.page(), this.showInactiveDevices())
+      .search(page, this.showInactiveDevices())
       .subscribe((devicesPage) => {
         this.devices.set(devicesPage.content ?? []);
         this.lastPage.set(devicesPage.page?.totalPages ?? 1);

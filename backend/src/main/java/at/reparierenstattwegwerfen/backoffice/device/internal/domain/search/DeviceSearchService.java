@@ -5,7 +5,6 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.activity.De
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.earnings.DeviceEarning;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePart;
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.spareparts.DeviceInstalledSparePartRepository;
-import at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.persistence.model.DeviceEntity_;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOfferedForSaleDto;
 import at.reparierenstattwegwerfen.backoffice.device.internal.interfaces.dtos.DeviceOrderedDto;
@@ -17,8 +16,7 @@ import at.reparierenstattwegwerfen.backoffice.model.ModelUnifiedMemoryDetailsSer
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,17 +39,14 @@ public class DeviceSearchService {
 	private final DeviceInstalledSparePartRepository deviceInstalledSparePartRepository;
 
 	@Transactional(readOnly = true)
-	public Page<DeviceDto> search(Integer pageNumber, Integer pageSize, Boolean includeInactiveDevices) {
-		PageRequest page = PageRequest.of(pageNumber - 1, pageSize, Sort.by(DeviceEntity_.ID));
-
+	public Page<DeviceDto> search(Pageable page, Boolean includeInactiveDevices) {
 		return deviceRepository.search(page, includeInactiveDevices)
 			.map(device -> {
 				List<DeviceInstalledSparePart> spareParts = deviceInstalledSparePartRepository
 					.getSparePartsForDevice(device.getId());
 				DeviceEarning deviceEarning = new DeviceEarning(device, spareParts);
 
-				return
-					DeviceDto.builder()
+				return DeviceDto.builder()
 						.deviceId(device.getId())
 						.status(NamedIdDto.from(device.getStatus()))
 						.model(modelDetailsService.getModel(device.getModelId()))

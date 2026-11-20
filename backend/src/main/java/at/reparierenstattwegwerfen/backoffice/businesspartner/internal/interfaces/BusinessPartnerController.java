@@ -2,13 +2,10 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfac
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.BusinessPartnerService;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerDetailDto;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author Fabian Feichter
@@ -20,11 +17,6 @@ import java.util.List;
 public class BusinessPartnerController {
 
 	private final BusinessPartnerService businessPartnerService;
-
-	@GetMapping("/")
-	public List<BusinessPartnerDto> getAllBusinessPartners() {
-		return businessPartnerService.getAllBusinessPartners();
-	}
 
 	@GetMapping("/{businessPartnerId}")
 	public BusinessPartnerDetailDto getBusinessPartnerDetails(@PathVariable Integer businessPartnerId) {

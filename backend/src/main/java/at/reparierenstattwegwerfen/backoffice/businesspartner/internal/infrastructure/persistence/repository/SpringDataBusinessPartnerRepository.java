@@ -1,11 +1,11 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastructure.persistence.repository;
 
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastructure.persistence.model.BusinessPartnerEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 /**
  * @author Fabian Feichter
@@ -17,9 +17,9 @@ public interface SpringDataBusinessPartnerRepository extends JpaRepository<Busin
 		from BusinessPartnerEntity bp
 		left join fetch bp.address a
 		left join fetch a.country
-		order by bp.lastName asc, bp.firstName asc
+		order by bp.firstName asc, bp.lastName asc
 		""")
-	List<BusinessPartnerEntity> findAllBusinessPartners();
+	Page<BusinessPartnerEntity> search(Pageable page);
 
 	@Query("""
 		from BusinessPartnerEntity bp

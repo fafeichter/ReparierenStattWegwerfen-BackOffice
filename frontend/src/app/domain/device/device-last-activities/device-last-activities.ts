@@ -22,7 +22,7 @@ export class DeviceLastActivities implements OnInit {
   deviceActivityApi = inject(DeviceActivityControllerService);
 
   ngOnInit(): void {
-    let page: Pageable = {
+    const page: Pageable = {
       page: 0,
       size: 7
     }

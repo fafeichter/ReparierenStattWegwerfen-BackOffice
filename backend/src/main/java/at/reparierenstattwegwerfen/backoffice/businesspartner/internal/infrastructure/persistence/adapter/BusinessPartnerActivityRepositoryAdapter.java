@@ -21,7 +21,8 @@ public class BusinessPartnerActivityRepositoryAdapter implements BusinessPartner
 
 	@Override
 	public List<BusinessPartnerActivity> getByIdWithRelations(Integer businessPartnerId) {
-		return jpaRepository.getByIdWithRelations(businessPartnerId).stream()
+		return jpaRepository.getByIdWithRelations(businessPartnerId)
+			.stream()
 			.map(mapper::toDomain)
 			.toList();
 	}

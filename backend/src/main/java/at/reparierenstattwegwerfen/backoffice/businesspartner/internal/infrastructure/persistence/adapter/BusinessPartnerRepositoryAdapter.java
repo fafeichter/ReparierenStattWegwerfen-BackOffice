@@ -5,9 +5,9 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.Bu
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastructure.persistence.mapper.BusinessPartnerPersistenceMapper;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastructure.persistence.repository.SpringDataBusinessPartnerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @author Fabian Feichter
@@ -20,10 +20,9 @@ public class BusinessPartnerRepositoryAdapter implements BusinessPartnerReposito
 	private final BusinessPartnerPersistenceMapper mapper;
 
 	@Override
-	public List<BusinessPartner> findAllBusinessPartners() {
-		return jpaRepository.findAllBusinessPartners().stream()
-			.map(mapper::toDomain)
-			.toList();
+	public Page<BusinessPartner> search(Pageable page) {
+		return jpaRepository.search(page)
+			.map(mapper::toDomain);
 	}
 
 	@Override

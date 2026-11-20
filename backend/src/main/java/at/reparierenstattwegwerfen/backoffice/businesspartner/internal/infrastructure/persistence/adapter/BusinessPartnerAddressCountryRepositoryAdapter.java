@@ -22,7 +22,8 @@ public class BusinessPartnerAddressCountryRepositoryAdapter implements BusinessP
 
 	@Override
 	public List<BusinessPartnerAddressCountry> findAll(Sort sort) {
-		return jpaRepository.findAll(sort).stream()
+		return jpaRepository.findAll(sort)
+			.stream()
 			.map(mapper::toDomain)
 			.toList();
 	}

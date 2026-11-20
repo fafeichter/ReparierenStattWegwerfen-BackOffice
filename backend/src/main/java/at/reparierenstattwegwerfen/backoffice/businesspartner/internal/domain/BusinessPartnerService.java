@@ -4,15 +4,12 @@ import at.reparierenstattwegwerfen.backoffice.businesspartner.BusinessPartnerDet
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddress;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerAddressDto;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerDetailDto;
-import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.interfaces.dtos.BusinessPartnerDto;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedIdDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * @author Fabian Feichter
@@ -24,21 +21,6 @@ public class BusinessPartnerService implements BusinessPartnerDetailsService {
 
 	private final BusinessPartnerRepository businessPartnerRepository;
 	private final ApplicationEventPublisher events;
-
-	@Transactional(readOnly = true)
-	public List<BusinessPartnerDto> getAllBusinessPartners() {
-		return businessPartnerRepository.findAllBusinessPartners()
-			.stream()
-			.map(businessPartner -> BusinessPartnerDto.builder()
-				.id(businessPartner.getId())
-				.name(businessPartner.getName())
-				.firstName(businessPartner.getFirstName())
-				.lastName(businessPartner.getLastName())
-				.scammer(businessPartner.getScammer())
-				.address(toAddress(businessPartner.getAddress()))
-				.build())
-			.toList();
-	}
 
 	@Transactional(readOnly = true)
 	@Override
