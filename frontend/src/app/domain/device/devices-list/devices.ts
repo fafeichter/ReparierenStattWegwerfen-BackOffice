@@ -1,15 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
-import { DeviceDto, DeviceSearchControllerService } from '@api/device';
-import {
-  ClrCheckboxModule,
-  ClrDatagridModule,
-  ClrDatagridStateInterface,
-  ClrLabel,
-} from '@clr/angular';
-import { OrElsePipe } from '../../../pipes/or-else-pipe';
-import { CurrencyPipe, DatePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import {Component, inject, signal} from '@angular/core';
+import {DeviceDto, DeviceSearchControllerService} from '@api/device';
+import {ClrCheckboxModule, ClrDatagridModule, ClrDatagridStateInterface, ClrLabel,} from '@clr/angular';
+import {OrElsePipe} from '../../../pipes/or-else-pipe';
+import {CurrencyPipe, DatePipe} from '@angular/common';
+import {RouterLink} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-devices',
@@ -31,7 +26,7 @@ export class Devices {
   protected readonly loading = signal(true);
   protected readonly devices = signal<DeviceDto[]>([]);
   protected page = signal(1);
-  protected readonly pageSize = signal(10);
+  protected readonly pageSize = signal(25);
   protected readonly lastPage = signal(1);
   protected readonly totalItems = signal(0);
   private readonly devicesSearchApi = inject(DeviceSearchControllerService);
