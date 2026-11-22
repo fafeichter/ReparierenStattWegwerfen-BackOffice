@@ -1,3 +1,11 @@
+<h4 class="mt-2!">
+  <cds-icon shape="wrench" size="lg"/>
+  Zum Fertigstellen
+  <clr-badge clrType="outlined">
+    {{ devicesToFinish().length }}
+  </clr-badge>
+</h4>
+
 <clr-datagrid [clrDgLoading]="devicesResource.isLoading()">
   <clr-dg-column>
     Device

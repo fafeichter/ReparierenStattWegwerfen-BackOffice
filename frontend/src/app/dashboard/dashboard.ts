@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule, ClrVerticalNavModule } from '@clr/angular';
 import { AddDevice } from '../domain/device/add-device/add-device';
@@ -24,8 +24,4 @@ import { DeviceLastActivities } from '../domain/device/device-last-activities/de
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
-  orderedCount = signal<number | undefined>(undefined);
-  toFinishCount = signal<number | undefined>(undefined);
-  offeredForSaleCount = signal<number | undefined>(undefined);
-}
+export class Dashboard {}

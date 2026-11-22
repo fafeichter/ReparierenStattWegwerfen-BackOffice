@@ -1,3 +1,11 @@
+<h4 class="mt-2!">
+  <cds-icon shape="calendar" size="lg"/>
+  Bestellt / gekauft
+  <clr-badge clrType="outlined">
+    {{ devicesOrdered().length }}
+  </clr-badge>
+</h4>
+
 <clr-datagrid [clrDgLoading]="devicesResource.isLoading()">
   <clr-dg-column>
     Device

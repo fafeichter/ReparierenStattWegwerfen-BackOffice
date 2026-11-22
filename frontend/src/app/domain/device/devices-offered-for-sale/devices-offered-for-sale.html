@@ -1,3 +1,11 @@
+<h4 class="mt-2!">
+  <cds-icon shape="checkbox-list" size="lg"/>
+  Zum Verkauf angeboten
+  <clr-badge clrType="outlined">
+    {{ devicesOfferedForSale().length }}
+  </clr-badge>
+</h4>
+
 <clr-datagrid [clrDgLoading]="devicesResource.isLoading()">
   <clr-dg-column>
     Device
