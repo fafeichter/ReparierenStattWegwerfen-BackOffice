@@ -35,9 +35,14 @@ public class DeviceSearchController {
 		return deviceSearchService.search(page, includeInactiveDevices);
 	}
 
-	@GetMapping("/lookup")
+	@GetMapping("/lookup-serial-number")
 	public List<Integer> findDeviceIdsBySerialNumber(@RequestParam String serialNumber) {
 		return deviceSearchService.findDeviceIdsBySerialNumber(serialNumber);
+	}
+
+	@GetMapping("/lookup-url")
+	public List<Integer> findDeviceIdsByUrl(@RequestParam String url) {
+		return deviceSearchService.findDeviceIdsByUrl(url);
 	}
 
 	@GetMapping("/to-finish")

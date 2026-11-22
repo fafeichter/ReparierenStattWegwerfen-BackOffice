@@ -31,7 +31,7 @@
         <label class="clr-col-5">
           Serial number
         </label>
-        <input class="clr-col-5 uppercase" clrInput formControlName="deviceSerialNumber"/>
+        <input class="clr-col-6 uppercase" clrInput formControlName="deviceSerialNumber"/>
         <clr-control-error *clrIfError="'min'">
           Minimum length not met
         </clr-control-error>
@@ -46,6 +46,27 @@
         </clr-control-error>
         <clr-control-error *clrIfError="'deviceNotFound'">
           No device found with this serial number.
+        </clr-control-error>
+      </clr-input-container>
+      <clr-input-container class="mt-7!">
+        <label class="clr-col-5">
+          URL
+        </label>
+        <input class="clr-col-12" clrInput formControlName="deviceUrl" type="url"/>
+        <clr-control-error *clrIfError="'min'">
+          Minimum length not met
+        </clr-control-error>
+        <clr-control-error *clrIfError="'noneProvided'">
+          Either Device ID or serial number must be set
+        </clr-control-error>
+        <clr-control-error *clrIfError="'tooManyProvided'">
+          Only one search field must be set
+        </clr-control-error>
+        <clr-control-error *clrIfError="'multipleDevicesFound'">
+          Must be a unique URL.
+        </clr-control-error>
+        <clr-control-error *clrIfError="'deviceNotFound'">
+          No device found with this URL.
         </clr-control-error>
       </clr-input-container>
       <button [disabled]="deviceSearchForm.invalid || isSubmitting()" class="btn btn-icon mt-5!" type="submit">

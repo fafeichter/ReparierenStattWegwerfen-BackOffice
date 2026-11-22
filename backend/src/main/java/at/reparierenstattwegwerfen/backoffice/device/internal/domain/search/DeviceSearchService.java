@@ -113,4 +113,9 @@ public class DeviceSearchService {
 	public List<Integer> findDeviceIdsBySerialNumber(String serialNumber) {
 		return deviceRepository.findDeviceIdsBySerialNumber(serialNumber);
 	}
+
+	@Transactional(readOnly = true)
+	public List<Integer> findDeviceIdsByUrl(String url) {
+		return deviceRepository.findDeviceIdsWithUrl(url);
+	}
 }

@@ -27,21 +27,19 @@ export class DeviceSearch {
   exactlyOneRequiredValidator: ValidatorFn = (
     control: AbstractControl,
   ): ValidationErrors | null => {
-    const formGroup = control as FormGroup;
-    const deviceId = formGroup.get('deviceId')?.value;
-    const deviceSerialNumber = formGroup.get('deviceSerialNumber')?.value;
+    const searchFields = ['deviceId', 'deviceSerialNumber', 'deviceUrl'];
+    const filledCount = searchFields.filter((name) => {
+      const value = control.get(name)?.value;
+      return value !== null && value !== undefined && String(value).trim() !== '';
+    }).length;
 
-    const hasDeviceId = deviceId !== null && deviceId !== '' && deviceId !== undefined;
-    const hasDeviceSerial =
-      deviceSerialNumber !== null && deviceSerialNumber !== '' && deviceSerialNumber !== undefined;
-
-    // Error if both are filled out
-    if (hasDeviceId && hasDeviceSerial) {
+    // Error if more than one is filled out
+    if (filledCount > 1) {
       return {tooManyProvided: true};
     }
 
-    // Error if neither is filled out
-    if (!hasDeviceId && !hasDeviceSerial) {
+    // Error if none is filled out
+    if (filledCount === 0) {
       return {noneProvided: true};
     }
 
@@ -59,6 +57,10 @@ export class DeviceSearch {
         Validators.minLength(3),
         Validators.pattern(/^[a-zA-Z0-9]+$/),
       ]),
+      deviceUrl: new FormControl<string | null>(null, [
+        Validators.minLength(12),
+        Validators.pattern(/^https?:\/\/[^\s/$.?#].[^\s]*$/i)
+      ]),
     },
     {validators: [this.exactlyOneRequiredValidator]},
   );
@@ -69,9 +71,8 @@ export class DeviceSearch {
     if (deviceId !== null) {
       this.router.navigate(['/devices', deviceId]);
     } else {
-      const serialControl = this.deviceSearchForm.controls.deviceSerialNumber;
-      const deviceSerialNumber = serialControl.value;
-
+      const serialNumberFormControl = this.deviceSearchForm.controls.deviceSerialNumber;
+      const deviceSerialNumber = serialNumberFormControl.value;
       if (deviceSerialNumber !== null) {
         this.deviceSearchApi
           .findDeviceIdsBySerialNumber(deviceSerialNumber)
@@ -80,15 +81,34 @@ export class DeviceSearch {
               this.router.navigate(['/devices', deviceIds[0]]);
               return;
             }
-
             if (deviceIds.length > 1) {
-              serialControl.setErrors({multipleDevicesFound: true});
+              serialNumberFormControl.setErrors({multipleDevicesFound: true});
             } else {
-              serialControl.setErrors({deviceNotFound: true});
+              serialNumberFormControl.setErrors({deviceNotFound: true});
             }
-            serialControl.markAsTouched();
+            serialNumberFormControl.markAsTouched();
             this.isSubmitting.set(false);
           });
+      } else {
+        const urlFormControl = this.deviceSearchForm.controls.deviceUrl;
+        const deviceUrl = urlFormControl.value;
+        if (deviceUrl !== null) {
+          this.deviceSearchApi
+            .findDeviceIdsByUrl(deviceUrl)
+            .subscribe((deviceIds) => {
+              if (deviceIds.length === 1) {
+                this.router.navigate(['/devices', deviceIds[0]]);
+                return;
+              }
+              if (deviceIds.length > 1) {
+                urlFormControl.setErrors({multipleDevicesFound: true});
+              } else {
+                urlFormControl.setErrors({deviceNotFound: true});
+              }
+              urlFormControl.markAsTouched();
+              this.isSubmitting.set(false);
+            });
+        }
       }
     }
   }
