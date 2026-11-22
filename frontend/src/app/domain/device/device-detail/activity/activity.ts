@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, inject, input } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DeviceActivityControllerService } from '@api/device';
 import { ClrCardModule, ClrIcon } from '@clr/angular';
@@ -14,6 +14,9 @@ export class Activity {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
 
+  protected readonly visibleRowCount = 10;
+  protected readonly expanded = signal(false);
+
   private readonly activitiesResource = inject(
     DeviceActivityControllerService,
   ).getActivitiesForDeviceResource(() => ({ deviceId: this.deviceId() }));
@@ -21,6 +24,9 @@ export class Activity {
   // keeps the previous list while reloading, so the poll does not flicker
   readonly deviceActivities = computed(() =>
     this.activitiesResource.hasValue() ? this.activitiesResource.value() : [],
+  );
+  protected readonly hiddenRowCount = computed(() =>
+    Math.max(0, this.deviceActivities().length - this.visibleRowCount),
   );
 
   constructor() {

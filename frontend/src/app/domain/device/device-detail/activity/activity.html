@@ -22,8 +22,8 @@
       </tr>
       </thead>
       <tbody>
-        @for (activity of deviceActivities(); track activity.deviceActivityId) {
-          <tr>
+        @for (activity of deviceActivities(); track activity.deviceActivityId; let i = $index) {
+          <tr [class.collapsed]="!expanded() && i >= visibleRowCount">
             <td class="left">
               {{ activity.action }}
             </td>
@@ -39,6 +39,23 @@
           </tr>
         }
       </tbody>
+      @if (hiddenRowCount() > 0) {
+        <tfoot>
+        <tr>
+          <td class="center" colspan="4">
+            <button (click)="expanded.set(!expanded())" [attr.aria-expanded]="expanded()"
+                    class="btn btn-link btn-sm toggle-rows" type="button">
+              <cds-icon [direction]="expanded() ? 'up' : 'down'" shape="angle"/>
+              @if (expanded()) {
+                Show less
+              } @else {
+                Show {{ hiddenRowCount() }} more
+              }
+            </button>
+          </td>
+        </tr>
+        </tfoot>
+      }
     </table>
   </div>
 </clr-card>
