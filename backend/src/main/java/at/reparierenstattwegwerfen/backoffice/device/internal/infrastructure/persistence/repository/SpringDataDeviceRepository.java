@@ -54,31 +54,33 @@ public interface SpringDataDeviceRepository extends JpaRepository<DeviceEntity, 
 		select d.id
 		from DeviceEntity d
 		where d.status.id = 6
-				and d.sellingDate < CURRENT_DATE - 365 day
+		and d.sellingDate < current_date - 365 day
 		""")
 	List<Integer> findDevicesToArchive();
 
 	@Query("""
 		from DeviceEntity d
 		where :includeInactiveDevices = true
-		   or d.status.id in (select s.id
-				   			  from DeviceStatusEntity s
-						   	  where s.isEndstatus is false)
-		  	order by d.id desc
+		or d.status.id in (
+			select s.id
+			from DeviceStatusEntity s
+			where s.isEndstatus is false
+		)
+		order by d.id desc
 		""")
 	Page<DeviceEntity> search(Pageable page, Boolean includeInactiveDevices);
 
 	@Query("""
-		SELECT d.id
-		FROM DeviceEntity d
-		WHERE LOWER(d.serialNumber) LIKE LOWER(CONCAT('%', :serialNumber, '%'))
+		select d.id
+		from DeviceEntity d
+		where lower(d.serialNumber) like lower(concat('%', :serialNumber, '%'))
 		""")
 	List<Integer> findDeviceIdsBySerialNumber(String serialNumber);
 
 	@Query("""
-		SELECT d.id
-		FROM DeviceEntity d
-		WHERE d.url = :url
+		select d.id
+		from DeviceEntity d
+		where d.url = :url
 		""")
 	List<Integer> findDeviceIdsByUrl(String url);
 }

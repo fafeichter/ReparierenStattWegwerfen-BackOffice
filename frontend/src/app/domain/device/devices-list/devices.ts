@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
 export class Devices {
   showInactiveDevices = signal(false);
   protected page = signal(1);
-  protected readonly pageSize = signal(25);
+  protected readonly pageSize = signal(20);
 
   // re-requested automatically whenever page, page size or the inactive toggle changes
   private readonly devicesResource = inject(DeviceSearchControllerService).searchResource(() => ({

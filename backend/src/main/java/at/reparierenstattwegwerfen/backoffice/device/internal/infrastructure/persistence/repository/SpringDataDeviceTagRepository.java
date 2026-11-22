@@ -15,25 +15,24 @@ import java.util.List;
 public interface SpringDataDeviceTagRepository extends JpaRepository<DeviceTagEntity, Integer> {
 
 	@Query("""
-		FROM DeviceTagEntity t
-		JOIN DeviceAddedTagEntity d ON d.deviceTag.id = t.id
-		WHERE d.device.id = :deviceId
-		ORDER BY t.sortOrder
+		from DeviceTagEntity t
+		join DeviceAddedTagEntity d on d.deviceTag.id = t.id
+		where d.device.id = :deviceId
+		order by t.sortOrder
 		""")
 	List<DeviceTagEntity> getAddedTagsForDevice(Integer deviceId);
 
 	@Query("""
-		FROM DeviceTagEntity t
-		JOIN DeviceTagAvailableModelSeriesEntity ts
-		  ON t.id = ts.tag.id
-		WHERE ts.modelSeriesId = :modelSeriesId
-		AND NOT EXISTS (
-		  SELECT 1
-		  FROM DeviceAddedTagEntity dts
-		  WHERE dts.deviceTag.id = t.id
-		  AND dts.device.id = :deviceId
+		from DeviceTagEntity t
+		join DeviceTagAvailableModelSeriesEntity ts on ts.tag.id = t.id
+		where ts.modelSeriesId = :modelSeriesId
+		and not exists (
+			select 1
+			from DeviceAddedTagEntity dts
+			where dts.deviceTag.id = t.id
+			and dts.device.id = :deviceId
 		)
-		ORDER BY t.sortOrder
+		order by t.sortOrder
 		""")
 	List<DeviceTagEntity> getAvailableTagsForDevice(Integer deviceId, Integer modelSeriesId);
 }

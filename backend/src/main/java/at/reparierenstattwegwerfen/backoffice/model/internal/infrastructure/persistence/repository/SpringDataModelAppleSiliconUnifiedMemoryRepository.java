@@ -24,7 +24,7 @@ public interface SpringDataModelAppleSiliconUnifiedMemoryRepository extends JpaR
 		select available_memory.unifiedMemory
 		from ModelSiliconAvailableUnifiedMemoryEntity available_memory
 		where available_memory.availableAppleSilicon.model.id = :modelId
-		and available_memory.availableAppleSilicon.modelAppleSilicon.id= :appleSiliconId
+		and available_memory.availableAppleSilicon.modelAppleSilicon.id = :appleSiliconId
 		order by available_memory.unifiedMemory.sortOrder
 		""")
 	List<ModelAppleSiliconUnifiedMemoryEntity> getUnifiedMemoriesForModelAndAppleSilicon(Integer modelId, Integer appleSiliconId);

@@ -15,9 +15,9 @@ import java.util.List;
 public interface SpringDataDeviceInstalledSparePartRepository extends JpaRepository<DeviceInstalledSparePartEntity, Integer> {
 
 	@Query("""
-		FROM DeviceInstalledSparePartEntity sp
-		WHERE sp.deviceId = :deviceId
-		ORDER BY sp.date
+		from DeviceInstalledSparePartEntity sp
+		where sp.deviceId = :deviceId
+		order by sp.date
 		""")
 	List<DeviceInstalledSparePartEntity> getSparePartsForDevice(Integer deviceId);
 }

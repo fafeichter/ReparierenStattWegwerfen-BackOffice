@@ -15,9 +15,9 @@ import java.util.List;
 public interface SpringDataDeviceStatusRepository extends JpaRepository<DeviceStatusEntity, Integer> {
 
 	@Query("""
-		FROM DeviceStatusEntity n
-		WHERE n.deviceStatusClassification.id IN (1, 2)
-		ORDER BY n.sortOrder
+		from DeviceStatusEntity n
+		where n.deviceStatusClassification.id in (1, 2)
+		order by n.sortOrder
 		""")
 	List<DeviceStatusEntity> getAllNonSystemStatus();
 }

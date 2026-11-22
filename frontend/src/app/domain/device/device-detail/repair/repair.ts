@@ -61,10 +61,6 @@ export class Repair {
 
   private defectsApi = inject(DeviceDefectsControllerService);
   private deviceSparePartsApi = inject(DeviceSparePartsControllerService);
-
-  totalSparePartsCost = computed(() => {
-    return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
-  });
   private readonly deviceDefectsResource = this.defectsApi.getDeviceDefectDetailsResource(() => ({
     deviceId: this.deviceId(),
   }));
@@ -77,6 +73,9 @@ export class Repair {
   readonly deviceSpareParts = computed(() =>
     this.deviceSparePartsResource.hasValue() ? this.deviceSparePartsResource.value() : [],
   );
+  readonly totalSparePartsCost = computed(() => {
+    return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
+  });
   // only loaded (and re-loaded) while the spare part form is open
   private readonly availableSparePartsResource =
     this.deviceSparePartsApi.getAvailableSparePartsForDeviceResource(() =>

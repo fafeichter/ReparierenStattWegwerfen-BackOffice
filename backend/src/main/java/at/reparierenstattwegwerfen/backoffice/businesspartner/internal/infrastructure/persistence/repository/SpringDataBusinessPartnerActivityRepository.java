@@ -13,10 +13,10 @@ import java.util.List;
 public interface SpringDataBusinessPartnerActivityRepository extends JpaRepository<BusinessPartnerActivityEntity, Integer> {
 
 	@Query("""
-            FROM BusinessPartnerActivityEntity a
-		LEFT JOIN FETCH a.activityType
-		WHERE a.businessPartnerId = :businessPartnerId
-		ORDER BY a.date DESC
+		from BusinessPartnerActivityEntity a
+		left join fetch a.activityType
+		where a.businessPartnerId = :businessPartnerId
+		order by a.date desc
 		""")
 	List<BusinessPartnerActivityEntity> getByIdWithRelations(Integer businessPartnerId);
 }

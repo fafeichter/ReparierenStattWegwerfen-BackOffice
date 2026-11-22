@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -9,12 +9,19 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import {ClrCardModule, ClrCommonFormsModule, ClrIcon, ClrInputModule} from '@clr/angular';
-import {Router} from '@angular/router';
-import {DeviceSearchControllerService} from '@api/device';
+import { ClrCardModule, ClrCommonFormsModule, ClrIcon, ClrInputModule } from '@clr/angular';
+import { Router } from '@angular/router';
+import { DeviceSearchControllerService } from '@api/device';
 
 @Component({
-  imports: [ClrCommonFormsModule, ClrIcon, ClrInputModule, FormsModule, ReactiveFormsModule, ClrCardModule],
+  imports: [
+    ClrCommonFormsModule,
+    ClrIcon,
+    ClrInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ClrCardModule,
+  ],
   selector: 'app-device-search',
   styleUrl: './device-search.css',
   templateUrl: './device-search.html',
@@ -35,12 +42,12 @@ export class DeviceSearch {
 
     // Error if more than one is filled out
     if (filledCount > 1) {
-      return {tooManyProvided: true};
+      return { tooManyProvided: true };
     }
 
     // Error if none is filled out
     if (filledCount === 0) {
-      return {noneProvided: true};
+      return { noneProvided: true };
     }
 
     // Valid if exactly one is provided
@@ -59,10 +66,10 @@ export class DeviceSearch {
       ]),
       deviceUrl: new FormControl<string | null>(null, [
         Validators.minLength(12),
-        Validators.pattern(/^https?:\/\/[^\s/$.?#].[^\s]*$/i)
+        Validators.pattern(/^https?:\/\/[^\s/$.?#].[^\s]*$/i),
       ]),
     },
-    {validators: [this.exactlyOneRequiredValidator]},
+    { validators: [this.exactlyOneRequiredValidator] },
   );
 
   searchDevice() {
@@ -82,9 +89,9 @@ export class DeviceSearch {
               return;
             }
             if (deviceIds.length > 1) {
-              serialNumberFormControl.setErrors({multipleDevicesFound: true});
+              serialNumberFormControl.setErrors({ multipleDevicesFound: true });
             } else {
-              serialNumberFormControl.setErrors({deviceNotFound: true});
+              serialNumberFormControl.setErrors({ deviceNotFound: true });
             }
             serialNumberFormControl.markAsTouched();
             this.isSubmitting.set(false);
@@ -93,21 +100,19 @@ export class DeviceSearch {
         const urlFormControl = this.deviceSearchForm.controls.deviceUrl;
         const deviceUrl = urlFormControl.value;
         if (deviceUrl !== null) {
-          this.deviceSearchApi
-            .findDeviceIdsByUrl(deviceUrl)
-            .subscribe((deviceIds) => {
-              if (deviceIds.length === 1) {
-                this.router.navigate(['/devices', deviceIds[0]]);
-                return;
-              }
-              if (deviceIds.length > 1) {
-                urlFormControl.setErrors({multipleDevicesFound: true});
-              } else {
-                urlFormControl.setErrors({deviceNotFound: true});
-              }
-              urlFormControl.markAsTouched();
-              this.isSubmitting.set(false);
-            });
+          this.deviceSearchApi.findDeviceIdsByUrl(deviceUrl).subscribe((deviceIds) => {
+            if (deviceIds.length === 1) {
+              this.router.navigate(['/devices', deviceIds[0]]);
+              return;
+            }
+            if (deviceIds.length > 1) {
+              urlFormControl.setErrors({ multipleDevicesFound: true });
+            } else {
+              urlFormControl.setErrors({ deviceNotFound: true });
+            }
+            urlFormControl.markAsTouched();
+            this.isSubmitting.set(false);
+          });
         }
       }
     }

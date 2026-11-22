@@ -15,8 +15,8 @@ import java.util.List;
 public interface SpringDataDeviceBatteryStatusRepository extends JpaRepository<DeviceBatteryStatusEntity, Integer> {
 
 	@Query("""
-		FROM DeviceBatteryStatusEntity n
-		ORDER BY n.sortOrder ASC
+		from DeviceBatteryStatusEntity n
+		order by n.sortOrder asc
 		""")
 	List<DeviceBatteryStatusEntity> getAllStatus();
 }

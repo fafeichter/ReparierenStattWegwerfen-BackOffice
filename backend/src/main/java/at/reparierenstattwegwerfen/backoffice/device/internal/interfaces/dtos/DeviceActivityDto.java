@@ -15,9 +15,6 @@ import java.time.LocalDateTime;
 @Builder
 public class DeviceActivityDto {
 
-	@NotNull
-	private Integer deviceActivityId;
-
 	@NotEmpty
 	private final String action;
 
@@ -26,6 +23,9 @@ public class DeviceActivityDto {
 
 	@NotEmpty
 	private final String actor;
+
+	@NotNull
+	private Integer deviceActivityId;
 
 	@NotNull
 	private LocalDateTime date;

@@ -16,12 +16,11 @@ import java.util.Set;
 public interface SpringDataSparePartRepository extends JpaRepository<SparePartEntity, Integer> {
 
 	@Query("""
-		FROM SparePartEntity s
-		JOIN SparePartAvailableModelSeriesEntity spms
-		  ON spms.sparePart.id = s.id
-		WHERE spms.modelSeriesId = :modelSeriesId
-		  AND s.id NOT IN (:excludeIds)
-		ORDER BY s.sortOrder
+		from SparePartEntity s
+		join SparePartAvailableModelSeriesEntity spms on spms.sparePart.id = s.id
+		where spms.modelSeriesId = :modelSeriesId
+		and s.id not in (:excludeIds)
+		order by s.sortOrder
 		""")
 	List<SparePartEntity> getSparePartsForModelSeriesExcluding(Integer modelSeriesId, Set<Integer> excludeIds);
 }

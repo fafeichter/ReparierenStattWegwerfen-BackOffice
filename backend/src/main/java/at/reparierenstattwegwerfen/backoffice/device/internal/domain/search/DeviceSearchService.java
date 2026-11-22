@@ -47,16 +47,16 @@ public class DeviceSearchService {
 				DeviceEarning deviceEarning = new DeviceEarning(device, spareParts);
 
 				return DeviceDto.builder()
-						.deviceId(device.getId())
-						.status(NamedIdDto.from(device.getStatus()))
-						.model(modelDetailsService.getModel(device.getModelId()))
-						.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
-						.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device
-							.getModelAppleSiliconUnifiedMemoryId()))
-						.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
-						.earning(deviceEarning.getEarning())
-						.lastActivity(deviceActivityService.getLastActivityDateForDevice(device.getId()))
-						.build();
+					.deviceId(device.getId())
+					.status(NamedIdDto.from(device.getStatus()))
+					.model(modelDetailsService.getModel(device.getModelId()))
+					.appleSilicon(modelAppleSiliconDetailsService.getAppleSilicon(device.getModelAppleSiliconId()))
+					.unifiedMemory(modelUnifiedMemoryDetailsService.getUnifiedMemory(device
+						.getModelAppleSiliconUnifiedMemoryId()))
+					.storage(modelStorageDetailsService.getStorage(device.getModelStorageId()))
+					.earning(deviceEarning.getEarning())
+					.lastActivity(deviceActivityService.getLastActivityDateForDevice(device.getId()))
+					.build();
 			});
 	}
 

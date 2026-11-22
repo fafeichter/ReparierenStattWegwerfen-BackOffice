@@ -32,13 +32,13 @@ export class ModelDetail {
     { id: 'hardware', label: 'Hardware', icon: 'nvme' },
     { id: 'features', label: 'Features', icon: 'star' },
   ];
+  readonly modelId = input.required({ transform: numberAttribute });
   protected readonly memoryOptions = computed(() =>
     this.availability((silicon) => silicon.memoryOptions),
   );
   protected readonly storageOptions = computed(() =>
     this.availability((silicon) => silicon.storageOptions),
   );
-  readonly modelId = input.required({ transform: numberAttribute });
   private readonly modelResource = inject(ModelControllerService).getModelDetailsResource(() => ({
     modelId: this.modelId(),
   }));

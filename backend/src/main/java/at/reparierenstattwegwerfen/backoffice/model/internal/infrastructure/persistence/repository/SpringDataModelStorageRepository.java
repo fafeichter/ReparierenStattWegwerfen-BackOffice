@@ -24,7 +24,7 @@ public interface SpringDataModelStorageRepository extends JpaRepository<ModelSto
 		select available_storage.storage
 		from ModelSiliconAvailableStorageEntity available_storage
 		where available_storage.availableAppleSilicon.model.id = :modelId
-				and available_storage.availableAppleSilicon.modelAppleSilicon.id= :appleSiliconId
+		and available_storage.availableAppleSilicon.modelAppleSilicon.id = :appleSiliconId
 		order by available_storage.storage.sortOrder
 		""")
 	List<ModelStorageEntity> getStoragesForModelAndAppleSilicon(Integer modelId, Integer appleSiliconId);

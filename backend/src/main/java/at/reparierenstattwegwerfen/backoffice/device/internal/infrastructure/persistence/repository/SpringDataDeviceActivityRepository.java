@@ -17,35 +17,35 @@ import java.util.List;
 public interface SpringDataDeviceActivityRepository extends JpaRepository<DeviceActivityEntity, Integer> {
 
 	@Query("""
-		FROM DeviceActivityEntity a
-		LEFT JOIN FETCH a.activityType
-		WHERE a.deviceId = :deviceId
-		ORDER BY a.date DESC
+		from DeviceActivityEntity a
+		left join fetch a.activityType
+		where a.deviceId = :deviceId
+		order by a.date desc
 		""")
 	List<DeviceActivityEntity> getByIdWithRelations(Integer deviceId);
 
 	@Query("""
-		SELECT MAX(a.date)
-		FROM DeviceActivityEntity a
-		WHERE a.deviceId = :deviceId
+		select max(a.date)
+		from DeviceActivityEntity a
+		where a.deviceId = :deviceId
 		""")
 	LocalDateTime getLastActivityDateForDevice(Integer deviceId);
 
 	@Query("""
-		FROM DeviceActivityEntity a
-		LEFT JOIN FETCH a.activityType
-		WHERE a.date = (
-		    SELECT MAX(latestDay.date)
-		    FROM DeviceActivityEntity latestDay
-		    WHERE latestDay.deviceId = a.deviceId
+		from DeviceActivityEntity a
+		left join fetch a.activityType
+		where a.date = (
+			select max(latestDay.date)
+			from DeviceActivityEntity latestDay
+			where latestDay.deviceId = a.deviceId
 		)
-		AND a.id = (
-		    SELECT MAX(tieBreak.id)
-		    FROM DeviceActivityEntity tieBreak
-		    WHERE tieBreak.deviceId = a.deviceId
-		      AND tieBreak.date = a.date
+		and a.id = (
+			select max(tieBreak.id)
+			from DeviceActivityEntity tieBreak
+			where tieBreak.deviceId = a.deviceId
+			and tieBreak.date = a.date
 		)
-		ORDER BY a.date DESC, a.id DESC
+		order by a.date desc, a.id desc
 		""")
 	List<DeviceActivityEntity> getLastActivities(Pageable page);
 }

@@ -1,5 +1,5 @@
-import {Component, inject, input} from '@angular/core';
-import {DeviceControllerService} from '@api/device';
+import { Component, inject, input } from '@angular/core';
+import { DeviceControllerService } from '@api/device';
 import {
   ClrCommonFormsModule,
   ClrDatagridModule,
@@ -13,18 +13,18 @@ import {
   ClrTextareaModule,
   ClrVerticalNavModule,
 } from '@clr/angular';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Notes} from './notes/notes';
-import {Device} from './device/device';
-import {Repair} from './repair/repair';
-import {Activity} from './activity/activity';
-import {Selling} from './selling/selling';
-import {Buying} from './buying/buying';
-import {map} from 'rxjs';
-import {TitleFn} from '../../../layout/route-title.service';
-import {NavItem, Scrollspy} from '../../../clarity-addons/scrollspy/scrollspy';
-import {PageSidebar} from '../../../clarity-addons/page-sidebar/page-sidebar';
-import {Earnings} from './earnings/earnings';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Notes } from './notes/notes';
+import { Device } from './device/device';
+import { Repair } from './repair/repair';
+import { Activity } from './activity/activity';
+import { Selling } from './selling/selling';
+import { Buying } from './buying/buying';
+import { map } from 'rxjs';
+import { TitleFn } from '../../../layout/route-title.service';
+import { NavItem, Scrollspy } from '../../../clarity-addons/scrollspy/scrollspy';
+import { PageSidebar } from '../../../clarity-addons/page-sidebar/page-sidebar';
+import { Earnings } from './earnings/earnings';
 
 export const deviceTitle: TitleFn = (route) => {
   const deviceId = route.paramMap.get('deviceId')!;
@@ -72,7 +72,7 @@ export class DeviceDetail {
     { id: 'device', label: 'Device', icon: 'cpu' },
     { id: 'notes', label: 'Notes', icon: 'note' },
     { id: 'repair', label: 'Repair', icon: 'wrench' },
-    {id: 'buying', label: 'Buying', icon: 'user'},
+    { id: 'buying', label: 'Buying', icon: 'user' },
     { id: 'selling', label: 'Selling', icon: 'tag' },
     { id: 'activity', label: 'Activity', icon: 'timeline' },
   ];

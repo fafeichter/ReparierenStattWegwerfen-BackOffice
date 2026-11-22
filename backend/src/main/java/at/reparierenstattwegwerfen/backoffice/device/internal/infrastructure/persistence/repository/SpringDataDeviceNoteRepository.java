@@ -15,9 +15,9 @@ import java.util.List;
 public interface SpringDataDeviceNoteRepository extends JpaRepository<DeviceNoteEntity, Integer> {
 
 	@Query("""
-		FROM DeviceNoteEntity n
-		WHERE n.deviceId = :deviceId
-		ORDER BY n.date DESC
+		from DeviceNoteEntity n
+		where n.deviceId = :deviceId
+		order by n.date desc
 		""")
 	List<DeviceNoteEntity> getNotesForDevice(Integer deviceId);
 }
