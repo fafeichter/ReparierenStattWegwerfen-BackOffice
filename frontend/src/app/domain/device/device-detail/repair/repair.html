@@ -181,14 +181,17 @@
   </div>
   <div class="modal-footer">
     <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      <cds-icon shape="close"/>
       Cancel
     </button>
     <button (click)="updateDefects()" [disabled]="defectsForm.invalid || isSubmitting()" class="btn btn-primary"
             type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
+        Setting defects...
+      } @else {
+        Set defects
       }
-      {{ isSubmitting() ? 'Setting...' : 'Set' }}
     </button>
   </div>
 </clr-modal>

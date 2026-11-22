@@ -135,14 +135,17 @@
   </div>
   <div class="modal-footer">
     <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      <cds-icon shape="close"/>
       Cancel
     </button>
     <button (click)="updateAccessories()" [disabled]="accessoriesForm.invalid || isSubmitting()" class="btn btn-primary"
             type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
+        Setting selling accessories...
+      } @else {
+        Set selling accessories
       }
-      {{ isSubmitting() ? 'Setting selling accessories...' : 'Set selling accessories' }}
     </button>
   </div>
 </clr-modal>

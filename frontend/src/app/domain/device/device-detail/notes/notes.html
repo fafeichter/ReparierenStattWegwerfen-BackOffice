@@ -68,13 +68,16 @@
   </div>
   <div class="modal-footer">
     <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      <cds-icon shape="close"/>
       Cancel
     </button>
     <button (click)="addNote()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
+        Adding note...
+      } @else {
+        Add note
       }
-      {{ isSubmitting() ? 'Adding note...' : 'Add note' }}
     </button>
   </div>
 </clr-modal>
@@ -98,13 +101,16 @@
   </div>
   <div class="modal-footer">
     <button (click)="modalEditOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      <cds-icon shape="close"/>
       Cancel
     </button>
     <button (click)="editNote()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
+        Editing note...
+      } @else {
+        Edit note
       }
-      {{ isSubmitting() ? 'Editing note...' : 'Edit note' }}
     </button>
   </div>
 </clr-modal>

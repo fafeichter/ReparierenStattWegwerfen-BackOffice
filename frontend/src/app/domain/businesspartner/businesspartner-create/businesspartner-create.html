@@ -103,8 +103,10 @@
       <clr-button [disabled]="businessPartnerForm.invalid || isSubmitting()" class="btn btn-primary" type="submit">
         @if (isSubmitting()) {
           <span class="spinner spinner-inline"></span>
+          Creating Business Partner...
+        } @else {
+          Create Business Partner
         }
-        {{ isSubmitting() ? 'Setting...' : 'Set' }}
       </clr-button>
     </clr-button-group>
   </div>
