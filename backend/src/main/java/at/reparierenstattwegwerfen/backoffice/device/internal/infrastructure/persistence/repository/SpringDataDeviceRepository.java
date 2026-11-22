@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -72,9 +71,9 @@ public interface SpringDataDeviceRepository extends JpaRepository<DeviceEntity, 
 	@Query("""
 		SELECT d.id
 		FROM DeviceEntity d
-		WHERE LOWER(d.serialNumber) LIKE LOWER(CONCAT('%', :serialNumber))
+		WHERE LOWER(d.serialNumber) LIKE LOWER(CONCAT('%', :serialNumber, '%'))
 		""")
-	Integer findDeviceIdBySerialNumberLike(@Param("serialNumber") String serialNumber);
+	List<Integer> findDeviceIdsBySerialNumber(String serialNumber);
 
 	@Query("""
 		SELECT d.id

@@ -41,6 +41,12 @@
         <clr-control-error *clrIfError="'tooManyProvided'">
           Only one search field must be set
         </clr-control-error>
+        <clr-control-error *clrIfError="'multipleDevicesFound'">
+          Must be a unique serial number.
+        </clr-control-error>
+        <clr-control-error *clrIfError="'deviceNotFound'">
+          No device found with this serial number.
+        </clr-control-error>
       </clr-input-container>
       <button [disabled]="deviceSearchForm.invalid || isSubmitting()" class="btn btn-icon mt-5!" type="submit">
         <cds-icon direction="right" shape="arrow-mini"/>

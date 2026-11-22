@@ -110,7 +110,7 @@ public class DeviceSearchService {
 	}
 
 	@Transactional(readOnly = true)
-	public Integer findDeviceIdBySerialNumber(String serialNumber) {
-		return deviceRepository.findDeviceIdBySerialNumber(serialNumber);
+	public List<Integer> findDeviceIdsBySerialNumber(String serialNumber) {
+		return deviceRepository.findDeviceIdsBySerialNumber(serialNumber);
 	}
 }

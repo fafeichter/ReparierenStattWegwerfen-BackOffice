@@ -37,12 +37,12 @@ export class DeviceSearch {
 
     // Error if both are filled out
     if (hasDeviceId && hasDeviceSerial) {
-      return { tooManyProvided: true };
+      return {tooManyProvided: true};
     }
 
     // Error if neither is filled out
     if (!hasDeviceId && !hasDeviceSerial) {
-      return { noneProvided: true };
+      return {noneProvided: true};
     }
 
     // Valid if exactly one is provided
@@ -60,7 +60,7 @@ export class DeviceSearch {
         Validators.pattern(/^[a-zA-Z0-9]+$/),
       ]),
     },
-    { validators: [this.exactlyOneRequiredValidator] },
+    {validators: [this.exactlyOneRequiredValidator]},
   );
 
   searchDevice() {
@@ -69,23 +69,27 @@ export class DeviceSearch {
     if (deviceId !== null) {
       this.router.navigate(['/devices', deviceId]);
     } else {
-      const deviceSerialNumber = this.deviceSearchForm.controls.deviceSerialNumber.value;
+      const serialControl = this.deviceSearchForm.controls.deviceSerialNumber;
+      const deviceSerialNumber = serialControl.value;
+
       if (deviceSerialNumber !== null) {
         this.deviceSearchApi
-          .findDeviceIdBySerialNumber(deviceSerialNumber)
-          .subscribe((deviceId) => {
-            if (deviceId != null) {
-              this.router.navigate(['/devices', deviceId]);
-            } else {
-              this.resetForm();
+          .findDeviceIdsBySerialNumber(deviceSerialNumber)
+          .subscribe((deviceIds) => {
+            if (deviceIds.length === 1) {
+              this.router.navigate(['/devices', deviceIds[0]]);
+              return;
             }
+
+            if (deviceIds.length > 1) {
+              serialControl.setErrors({multipleDevicesFound: true});
+            } else {
+              serialControl.setErrors({deviceNotFound: true});
+            }
+            serialControl.markAsTouched();
+            this.isSubmitting.set(false);
           });
       }
     }
-  }
-
-  private resetForm() {
-    this.deviceSearchForm.reset();
-    this.isSubmitting.set(false);
   }
 }
