@@ -1,33 +1,21 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
-import {ClrCardModule, ClrIcon} from '@clr/angular';
-import {DatePipe} from '@angular/common';
-import {DeviceActivityControllerService, DeviceLastActivityDto, Pageable} from '@api/device';
-import {RouterLink} from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
+import { ClrCardModule, ClrIcon } from '@clr/angular';
+import { DatePipe } from '@angular/common';
+import { DeviceActivityControllerService } from '@api/device';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [
-    ClrCardModule,
-    ClrIcon,
-    DatePipe,
-    RouterLink
-  ],
+  imports: [ClrCardModule, ClrIcon, DatePipe, RouterLink],
   selector: 'app-device-last-activities',
   styleUrl: './device-last-activities.css',
   templateUrl: './device-last-activities.html',
 })
-export class DeviceLastActivities implements OnInit {
+export class DeviceLastActivities {
+  private readonly lastActivitiesResource = inject(
+    DeviceActivityControllerService,
+  ).getLastActivitiesResource(() => ({ page: { page: 0, size: 7 } }));
 
-  deviceLastActivities = signal<DeviceLastActivityDto[] | undefined>(undefined);
-
-  deviceActivityApi = inject(DeviceActivityControllerService);
-
-  ngOnInit(): void {
-    const page: Pageable = {
-      page: 0,
-      size: 7
-    }
-    this.deviceActivityApi.getLastActivities(page).subscribe((deviceLastActivities) => {
-      this.deviceLastActivities.set(deviceLastActivities);
-    });
-  }
+  readonly deviceLastActivities = computed(() =>
+    this.lastActivitiesResource.hasValue() ? this.lastActivitiesResource.value() : undefined,
+  );
 }

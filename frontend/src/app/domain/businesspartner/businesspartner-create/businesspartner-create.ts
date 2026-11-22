@@ -1,10 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClrButtonGroupModule, ClrInputModule, ClrSelectModule } from '@clr/angular';
-import {
-  BusinessPartnerAddressCountryControllerService,
-  BusinessPartnerAddressCountryDto,
-} from '@api/businesspartner';
+import { BusinessPartnerAddressCountryControllerService } from '@api/businesspartner';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   CreateBuyerBusinessPartnerForDeviceDto,
@@ -17,8 +14,7 @@ import {
   templateUrl: './businesspartner-create.html',
   styleUrl: './businesspartner-create.css',
 })
-export class BusinesspartnerCreate implements OnInit {
-  businessPartnerAddressCountries = signal<BusinessPartnerAddressCountryDto[]>([]);
+export class BusinesspartnerCreate {
   businessPartnerForm = new FormGroup({
     firstName: new FormControl<string | null>(null, [Validators.required]),
     lastName: new FormControl<string | null>(null, [Validators.required]),
@@ -32,15 +28,14 @@ export class BusinesspartnerCreate implements OnInit {
   private route = inject(ActivatedRoute);
   private rawDeviceId = this.route.snapshot.queryParamMap.get('device-id');
   deviceId = signal<number | undefined>(this.rawDeviceId ? Number(this.rawDeviceId) : undefined);
-  private businessPartnerAddressCountryApi = inject(BusinessPartnerAddressCountryControllerService);
+  private readonly countriesResource = inject(
+    BusinessPartnerAddressCountryControllerService,
+  ).getAllCountriesResource();
+  readonly businessPartnerAddressCountries = computed(() =>
+    this.countriesResource.hasValue() ? this.countriesResource.value() : [],
+  );
   private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
   private router = inject(Router);
-
-  ngOnInit(): void {
-    this.businessPartnerAddressCountryApi
-      .getAllCountries()
-      .subscribe((data) => this.businessPartnerAddressCountries.set(data));
-  }
 
   createBusinessPartner() {
     this.isSubmitting.set(true);

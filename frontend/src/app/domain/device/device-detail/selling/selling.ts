@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, OnInit, signal} from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import {
   ClrCardModule,
   ClrCheckboxModule,
@@ -7,20 +7,18 @@ import {
   ClrModalModule,
   ClrTextareaModule,
 } from '@clr/angular';
-import {CurrencyPipe, DatePipe} from '@angular/common';
-import {OrElsePipe} from '../../../../pipes/or-else-pipe';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import {
   DeviceBusinessPartnerControllerService,
   DeviceDetailsControllerService,
   DeviceSellingAccessoriesControllerService,
-  DeviceSellingAccessoriesDto,
   DeviceSellingAccessoriesFormDto,
-  DeviceSellingDetailsDto,
   DeviceSellingInvoiceControllerService,
 } from '@api/device';
-import {RouterLink} from '@angular/router';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
+import { RouterLink } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-selling',
@@ -40,13 +38,9 @@ import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
   templateUrl: './selling.html',
   styleUrl: './selling.css',
 })
-export class Selling implements OnInit {
+export class Selling {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
-
-  deviceSelling = signal<DeviceSellingDetailsDto | undefined>(undefined);
-  deviceAccessories = signal<DeviceSellingAccessoriesDto | undefined>(undefined);
-  invoiceNumber = signal<number | undefined>(undefined);
 
   modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -57,10 +51,26 @@ export class Selling implements OnInit {
     originalPackaging: new FormControl<boolean | null>(null, [Validators.required]),
   });
 
-  private deviceApi = inject(DeviceDetailsControllerService);
   private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
   private deviceAccessoriesApi = inject(DeviceSellingAccessoriesControllerService);
-  private deviceInvoiceApi = inject(DeviceSellingInvoiceControllerService);
+
+  private readonly deviceSellingResource = inject(
+    DeviceDetailsControllerService,
+  ).getDeviceSellingDetailsResource(() => ({ deviceId: this.deviceId() }));
+  readonly deviceSelling = computed(() =>
+    this.deviceSellingResource.hasValue() ? this.deviceSellingResource.value() : undefined,
+  );
+  private readonly deviceAccessoriesResource =
+    this.deviceAccessoriesApi.getSellingAccessoriesResource(() => ({ deviceId: this.deviceId() }));
+  readonly deviceAccessories = computed(() =>
+    this.deviceAccessoriesResource.hasValue() ? this.deviceAccessoriesResource.value() : undefined,
+  );
+  private readonly invoiceNumberResource = inject(
+    DeviceSellingInvoiceControllerService,
+  ).getDeviceSellingInvoiceNumberResource(() => ({ deviceId: this.deviceId() }));
+  readonly invoiceNumber = computed(() =>
+    this.invoiceNumberResource.hasValue() ? this.invoiceNumberResource.value() : undefined,
+  );
 
   constructor() {
     effect(() => {
@@ -75,20 +85,6 @@ export class Selling implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.deviceApi.getDeviceSellingDetails(this.deviceId()).subscribe((deviceSelling) => {
-      this.deviceSelling.set(deviceSelling)
-    });
-    this.deviceAccessoriesApi.getSellingAccessories(this.deviceId()).subscribe((deviceSellingAccessories) => {
-      this.deviceAccessories.set(deviceSellingAccessories);
-    });
-    this.deviceInvoiceApi
-      .getDeviceSellingInvoiceNumber(this.deviceId())
-      .subscribe((saleInvoiceNumber) => {
-        this.invoiceNumber.set(saleInvoiceNumber);
-      });
-  }
-
   protected updateAccessories() {
     const deviceAccessories: DeviceSellingAccessoriesFormDto = {
       charger: this.accessoriesForm.controls.charger.value!,
@@ -99,34 +95,33 @@ export class Selling implements OnInit {
     this.deviceAccessoriesApi
       .updateSellingAccessories(this.deviceId(), deviceAccessories)
       .subscribe(() => {
-        this.deviceAccessories.update(() => {
-          this.accessoriesForm.reset();
-          this.isSubmitting.set(false);
-          this.modalOpen.set(false);
-
-          return {
-            charger: deviceAccessories.charger,
-            chargingCable: deviceAccessories.chargingCable,
-            originalPackaging: deviceAccessories.originalPackaging,
-          };
+        this.accessoriesForm.reset();
+        this.isSubmitting.set(false);
+        this.modalOpen.set(false);
+        this.deviceAccessoriesResource.value.set({
+          charger: deviceAccessories.charger,
+          chargingCable: deviceAccessories.chargingCable,
+          originalPackaging: deviceAccessories.originalPackaging,
         });
       });
   }
 
   protected setBuyerToAsgoodasnew() {
-    this.deviceBusinessPartnerApi.setBuyerToAsGoodAsNew(this.deviceId()).subscribe((deviceBuyer) => {
-      this.deviceSelling.update((deviceSelling) => {
-        return {
-          ...deviceSelling!,
-          buyer: deviceBuyer,
-        };
+    this.deviceBusinessPartnerApi
+      .setBuyerToAsGoodAsNew(this.deviceId())
+      .subscribe((deviceBuyer) => {
+        this.deviceSellingResource.value.update((deviceSelling) => {
+          return {
+            ...deviceSelling!,
+            buyer: deviceBuyer,
+          };
+        });
       });
-    });
   }
 
   protected unsetBuyer() {
     this.deviceBusinessPartnerApi.unsetBuyer(this.deviceId()).subscribe(() => {
-      this.deviceSelling.update((deviceSelling) => {
+      this.deviceSellingResource.value.update((deviceSelling) => {
         return {
           ...deviceSelling!,
           buyer: undefined,

@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, OnInit, signal} from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import {
   ClrAlertModule,
   ClrCardModule,
@@ -9,16 +9,21 @@ import {
   ClrLabel,
   ClrSpinnerModule,
 } from '@clr/angular';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
-import {OrElsePipe} from '../../../../pipes/or-else-pipe';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import {
   BusinessPartnerAddressExtractionControllerService,
   BusinessPartnerControllerService,
-  BusinessPartnerDetailDto,
 } from '@api/businesspartner';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
-import {HeaderActions} from './header-actions/header-actions';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
+import { HeaderActions } from './header-actions/header-actions';
 
 @Component({
   imports: [
@@ -39,10 +44,9 @@ import {HeaderActions} from './header-actions/header-actions';
   styleUrl: './contact.css',
   templateUrl: './contact.html',
 })
-export class Contact implements OnInit {
+export class Contact {
   businessPartnerId = input.required<number>();
   navItem = input.required<NavItem>();
-  readonly businessPartner = signal<BusinessPartnerDetailDto | undefined>(undefined);
   form = new FormGroup({
     shippingLabelImage: new FormControl<FileList | null>(null, [Validators.required]),
   });
@@ -52,7 +56,12 @@ export class Contact implements OnInit {
     BusinessPartnerAddressExtractionControllerService,
   );
   private router = inject(Router);
-  private api = inject(BusinessPartnerControllerService);
+  private readonly businessPartnerResource = inject(
+    BusinessPartnerControllerService,
+  ).getBusinessPartnerDetailsResource(() => ({ businessPartnerId: this.businessPartnerId() }));
+  readonly businessPartner = computed(() =>
+    this.businessPartnerResource.hasValue() ? this.businessPartnerResource.value() : undefined,
+  );
   private route = inject(ActivatedRoute);
   addressEditModeActive = signal<boolean>(
     this.route.snapshot.queryParamMap.get('edit-address') === 'true',
@@ -68,12 +77,6 @@ export class Contact implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.api
-      .getBusinessPartnerDetails(this.businessPartnerId()!)
-      .subscribe((data) => this.businessPartner.set(data));
-  }
-
   updateAddress() {
     const shippingLabelImage: File = this.form.controls.shippingLabelImage.value![0];
 
@@ -82,11 +85,9 @@ export class Contact implements OnInit {
       this.businessPartnerAdressExtractionApi
         .extractAddressFromImage(this.businessPartnerId()!, shippingLabelImage)
         .subscribe(() => {
-          this.api.getBusinessPartnerDetails(this.businessPartnerId()!).subscribe((data) => {
-            this.businessPartner.set(data);
-            this.success.set(true);
-            this.resetForm();
-          });
+          this.businessPartnerResource.reload();
+          this.success.set(true);
+          this.resetForm();
         });
     } else {
       this.resetForm();
@@ -103,10 +104,14 @@ export class Contact implements OnInit {
   }
 
   setScammerFlag(isScammer: boolean) {
-    this.businessPartner.update(businessPartner => businessPartner ? {
-      ...businessPartner,
-      scammer: isScammer
-    } : businessPartner);
+    this.businessPartnerResource.value.update((businessPartner) =>
+      businessPartner
+        ? {
+            ...businessPartner,
+            scammer: isScammer,
+          }
+        : businessPartner,
+    );
   }
 
   private resetForm() {

@@ -1,7 +1,6 @@
-import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import {
   BatteryHealthDto,
-  DeviceBaseDetailsDto,
   DeviceBatteryHealthControllerService,
   DeviceBatteryStatusControllerService,
   DeviceControllerService,
@@ -63,14 +62,10 @@ import { SellingModal } from '../selling/selling-modal/selling-modal';
   templateUrl: './device.html',
   styleUrl: './device.css',
 })
-export class Device implements OnInit {
+export class Device {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
 
-  deviceBase = signal<DeviceBaseDetailsDto | undefined>(undefined);
-
-  modelAppleSilicons = signal<NamedIdDto[]>([]);
-  modelColors = signal<NamedIdDto[]>([]);
   modelMemories = signal<NamedIdDto[]>([]);
   modelStorages = signal<NamedIdDto[]>([]);
   deviceStatus = signal<NamedIdDto[]>([]);
@@ -78,7 +73,6 @@ export class Device implements OnInit {
   deviceGrades = signal<DeviceGradeDto[]>([]);
   statusEditModeActive = signal<boolean>(false);
   tagEditModeActive = signal<boolean>(false);
-  availableDeviceTags = signal<NamedIdDto[]>([]);
   statusSellingModeActive = signal<boolean>(false);
 
   serialNumberEditModeActive = signal<boolean>(false);
@@ -137,7 +131,6 @@ export class Device implements OnInit {
     this.gradeEditModeActive,
   ];
 
-  private api = inject(DeviceControllerService);
   private hardwareApi = inject(DeviceHardwareControllerService);
   private statusApi = inject(DeviceStatusControllerService);
   private batteryStatusApi = inject(DeviceBatteryStatusControllerService);
@@ -149,6 +142,39 @@ export class Device implements OnInit {
   private storageApi = inject(ModelStorageControllerService);
   private tagsApi = inject(DeviceTagsControllerService);
 
+  private readonly deviceBaseResource = inject(
+    DeviceControllerService,
+  ).getDeviceBaseDetailsResource(() => ({ deviceId: this.deviceId() }));
+  readonly deviceBase = computed(() =>
+    this.deviceBaseResource.hasValue() ? this.deviceBaseResource.value() : undefined,
+  );
+
+  // The option lists below are only requested while their edit mode is open.
+  private readonly hardwareConfigModelId = computed(() =>
+    this.hardwareConfigEditModeActive() ? this.deviceBase()?.model.id : undefined,
+  );
+  private readonly modelAppleSiliconsResource =
+    this.appleSiliconApi.getAllAppleSiliconsForModelResource(() => {
+      const modelId = this.hardwareConfigModelId();
+      return modelId === undefined ? undefined : { modelId };
+    });
+  readonly modelAppleSilicons = computed(() =>
+    this.modelAppleSiliconsResource.hasValue() ? this.modelAppleSiliconsResource.value() : [],
+  );
+  private readonly modelColorsResource = this.colorApi.getColorsForModelResource(() => {
+    const modelId = this.hardwareConfigModelId();
+    return modelId === undefined ? undefined : { modelId };
+  });
+  readonly modelColors = computed(() =>
+    this.modelColorsResource.hasValue() ? this.modelColorsResource.value() : [],
+  );
+  private readonly availableDeviceTagsResource = this.tagsApi.getAvailableTagsResource(() =>
+    this.tagEditModeActive() ? { deviceId: this.deviceId() } : undefined,
+  );
+  readonly availableDeviceTags = computed(() =>
+    this.availableDeviceTagsResource.hasValue() ? this.availableDeviceTagsResource.value() : [],
+  );
+
   constructor() {
     this.editModes.forEach((active) => {
       effect(() => {
@@ -159,10 +185,6 @@ export class Device implements OnInit {
         }
       });
     });
-  }
-
-  ngOnInit(): void {
-    this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
   }
 
   activateHardwareConfigEditMode() {
@@ -181,20 +203,10 @@ export class Device implements OnInit {
       newColorId: this.deviceBase()!.color?.id,
     });
 
-    this.appleSiliconApi
-      .getAllAppleSiliconsForModel(this.deviceBase()!.model.id)
-      .subscribe((data) => {
-        this.modelAppleSilicons.set(data);
-      });
-
     if (this.deviceBase()!.appleSilicon) {
       this.loadMemoryOptionsForAppleSilicon(this.deviceBase()!.appleSilicon?.id!);
       this.loadStorageOptions();
     }
-
-    this.colorApi.getColorsForModel(this.deviceBase()!.model.id).subscribe((data) => {
-      this.modelColors.set(data);
-    });
   }
 
   loadMemoryOptions($event: Event) {
@@ -221,9 +233,7 @@ export class Device implements OnInit {
       modelColorId: this.hardwareConfigForm.controls.newColorId.value!,
     };
     this.hardwareApi.updateHardwareConfig(this.deviceId(), updateHardwareConfig).subscribe(() => {
-      this.hardwareConfigEditModeActive.set(false);
-
-      this.deviceBase.update((deviceBase) => {
+      this.deviceBaseResource.value.update((deviceBase) => {
         return {
           ...deviceBase!,
           appleSilicon: this.modelAppleSilicons().find((appleSilicon) => {
@@ -240,6 +250,7 @@ export class Device implements OnInit {
           })!,
         };
       });
+      this.hardwareConfigEditModeActive.set(false);
     });
   }
 
@@ -259,7 +270,7 @@ export class Device implements OnInit {
       .updateStatus(this.deviceId(), this.statusForm.controls.newStatusId.value!)
       .subscribe(() => {
         this.statusEditModeActive.set(false);
-        this.deviceBase.update((deviceBase) => {
+        this.deviceBaseResource.value.update((deviceBase) => {
           return {
             ...deviceBase!,
             status: this.deviceStatus().find(
@@ -268,9 +279,7 @@ export class Device implements OnInit {
           };
         });
 
-        this.api
-          .getDeviceBaseDetails(this.deviceId())
-          .subscribe((data) => this.deviceBase.set(data));
+        this.deviceBaseResource.reload();
       });
   }
 
@@ -286,7 +295,7 @@ export class Device implements OnInit {
       .updateSerialNumber(this.deviceId(), this.serialNumberForm.controls.newSerialNumber.value!)
       .subscribe(() => {
         this.serialNumberEditModeActive.set(false);
-        this.deviceBase.update((deviceBase) => {
+        this.deviceBaseResource.value.update((deviceBase) => {
           return {
             ...deviceBase!,
             serialNumber: this.serialNumberForm.controls.newSerialNumber.value!,
@@ -311,7 +320,7 @@ export class Device implements OnInit {
 
     this.batteryHealthApi.updateBattery(this.deviceId(), newBatteryHealth).subscribe(() => {
       this.batteryEditModeActive.set(false);
-      this.api.getDeviceBaseDetails(this.deviceId()).subscribe((data) => this.deviceBase.set(data));
+      this.deviceBaseResource.reload();
     });
   }
 
@@ -335,7 +344,7 @@ export class Device implements OnInit {
       .subscribe(() => {
         this.batteryStatusEditModeActive.set(false);
 
-        this.deviceBase.update((deviceBase) => {
+        this.deviceBaseResource.value.update((deviceBase) => {
           return {
             ...deviceBase!,
             batteryStatus: this.deviceBatteryStatus().find((deviceBatteryStatus) => {
@@ -365,7 +374,7 @@ export class Device implements OnInit {
       .subscribe(() => {
         this.gradeEditModeActive.set(false);
 
-        this.deviceBase.update((deviceBase) => {
+        this.deviceBaseResource.value.update((deviceBase) => {
           return {
             ...deviceBase!,
             grade: this.deviceGrades().find((deviceGrade) => {
@@ -381,28 +390,21 @@ export class Device implements OnInit {
     this.tagForm.patchValue({
       newTagId: null,
     });
-
-    this.tagsApi.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
-      this.availableDeviceTags.set(deviceTags);
-    });
   }
 
   addTag() {
     const selectedTagId = this.tagForm.controls.newTagId.value!;
     this.tagsApi.addTag(this.deviceId(), selectedTagId).subscribe(() => {
+      // read the tag first: closing the edit mode unloads the available tags
+      const addedTag: NamedIdDto = this.availableDeviceTags().find((deviceTag) => {
+        return deviceTag.id == selectedTagId;
+      })!;
       this.tagEditModeActive.set(false);
 
-      this.deviceBase.update((deviceBase) => {
-        let addedTag: NamedIdDto = this.availableDeviceTags().find((deviceTag) => {
-          return deviceTag.id == selectedTagId;
-        })!;
-
-        this.deviceBase()?.tags!.push(addedTag);
-        this.availableDeviceTags.update((tags) => tags.filter((tag) => tag.id !== selectedTagId));
-
+      this.deviceBaseResource.value.update((deviceBase) => {
         return {
           ...deviceBase!,
-          tags: this.deviceBase()?.tags,
+          tags: [...(deviceBase?.tags ?? []), addedTag],
         };
       });
     });
@@ -411,20 +413,13 @@ export class Device implements OnInit {
   removeTag(tagId: number) {
     if (confirm('Do you really want to remove this tag?')) {
       this.tagsApi.removeTag(this.deviceId(), tagId).subscribe(() => {
-        this.deviceBase.update((deviceBase) => {
-          this.deviceBase()!.tags = this.deviceBase()!.tags!.filter(
-            (deviceTag) => deviceTag.id !== tagId,
-          );
-
-          this.tagsApi.getAvailableTags(this.deviceId()).subscribe((deviceTags) => {
-            this.availableDeviceTags.set(deviceTags);
-          });
-
+        this.deviceBaseResource.value.update((deviceBase) => {
           return {
             ...deviceBase!,
-            tags: this.deviceBase()?.tags,
+            tags: deviceBase?.tags?.filter((deviceTag) => deviceTag.id !== tagId),
           };
         });
+        this.availableDeviceTagsResource.reload();
       });
     }
   }

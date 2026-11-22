@@ -1,10 +1,5 @@
-import { Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
-import { interval, startWith, switchMap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  BusinessPartnerActivityControllerService,
-  BusinessPartnerActivityDto,
-} from '@api/businesspartner';
+import { Component, computed, DestroyRef, inject, input } from '@angular/core';
+import { BusinessPartnerActivityControllerService } from '@api/businesspartner';
 import { DatePipe } from '@angular/common';
 import { ClrCardModule, ClrIcon } from '@clr/angular';
 import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
@@ -15,23 +10,21 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
   styleUrl: './activity.css',
   templateUrl: './activity.html',
 })
-export class Activity implements OnInit {
+export class Activity {
   businessPartnerId = input.required<number>();
   navItem = input.required<NavItem>();
 
-  businessPartnerActivities = signal<BusinessPartnerActivityDto[]>([]);
+  private readonly activitiesResource = inject(
+    BusinessPartnerActivityControllerService,
+  ).getActivitiesResource(() => ({ businessPartnerId: this.businessPartnerId() }));
 
-  private activityApi = inject(BusinessPartnerActivityControllerService);
+  // keeps the previous list while reloading, so the poll does not flicker
+  readonly businessPartnerActivities = computed(() =>
+    this.activitiesResource.hasValue() ? this.activitiesResource.value() : [],
+  );
 
-  private destroyRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    interval(2500)
-      .pipe(
-        startWith(0),
-        switchMap(() => this.activityApi.getActivities(this.businessPartnerId())),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe((data) => this.businessPartnerActivities.set(data));
+  constructor() {
+    const pollId = setInterval(() => this.activitiesResource.reload(), 2500);
+    inject(DestroyRef).onDestroy(() => clearInterval(pollId));
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ClrDatagridModule, ClrDatagridSortOrder } from '@clr/angular';
 import { ModelControllerService, ModelDto } from '@api/model';
@@ -14,32 +14,16 @@ import { ReleaseDateFilter } from '../models-list/ReleaseDateFilter';
   styleUrl: './ipad-list.css',
   templateUrl: './ipad-list.html',
 })
-export class IpadList implements OnInit {
+export class IpadList {
   public releaseDateComparator = new ReleaseDateComparator();
   public nameFilter = new NameFilter();
   public releaseDateFilter = new ReleaseDateFilter();
   protected readonly ClrDatagridSortOrder = ClrDatagridSortOrder;
 
-  private api = inject(ModelControllerService);
-
-  private _ipads = signal<ModelDto[]>([]);
-  readonly ipads = this._ipads.asReadonly();
-
-  private _ipadsLoading = signal<boolean>(false);
-  readonly ipadsLoading = this._ipadsLoading.asReadonly();
-
-  ngOnInit(): void {
-    this.loadAllIPads();
-  }
-
-  loadAllIPads(): void {
-    this._ipadsLoading.set(true);
-    this.api.getAllIPads().subscribe((data) => {
-      this._ipads.set(data);
-      this._ipadsLoading.set(false);
-    });
-  }
-
+  private readonly ipadsResource = inject(ModelControllerService).getAllIPadsResource();
+  readonly ipads = computed<ModelDto[]>(() =>
+    this.ipadsResource.hasValue() ? this.ipadsResource.value() : [],
+  );
   createDate(year: number, monthIndex: number): Date {
     return new Date(year, monthIndex);
   }

@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { ClrIcon } from '@clr/angular';
 import { CurrencyPipe } from '@angular/common';
 import { DeviceEarningsControllerService } from '@api/device';
@@ -9,15 +9,14 @@ import { DeviceEarningsControllerService } from '@api/device';
   styleUrl: './earnings.css',
   templateUrl: './earnings.html',
 })
-export class Earnings implements OnInit {
+export class Earnings {
   deviceId = input.required<number>();
-  earnings = signal<number>(0);
 
-  private deviceEarningsApi = inject(DeviceEarningsControllerService);
+  private readonly earningsResource = inject(
+    DeviceEarningsControllerService,
+  ).getDeviceEarningsResource(() => ({ deviceId: this.deviceId() }));
 
-  ngOnInit(): void {
-    this.deviceEarningsApi.getDeviceEarnings(this.deviceId()).subscribe((earnings) => {
-      this.earnings.set(earnings);
-    });
-  }
+  readonly earnings = computed(() =>
+    this.earningsResource.hasValue() ? this.earningsResource.value() : 0,
+  );
 }

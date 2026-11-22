@@ -1,5 +1,5 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { DeviceBusinessPartnerControllerService, DeviceBusinesspartnerDto } from '@api/device';
+import { Component, computed, inject, input } from '@angular/core';
+import { DeviceBusinessPartnerControllerService } from '@api/device';
 import { RouterLink } from '@angular/router';
 import { ClrCardModule, ClrIcon } from '@clr/angular';
 import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
@@ -10,16 +10,15 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
   styleUrl: './devices.css',
   templateUrl: './devices.html',
 })
-export class Devices implements OnInit {
+export class Devices {
   businessPartnerId = input.required<number>();
   navItem = input.required<NavItem>();
 
-  readonly businessPartnerDevices = signal<DeviceBusinesspartnerDto | undefined>(undefined);
-  private deviceBusinessPartnerApi = inject(DeviceBusinessPartnerControllerService);
+  private readonly devicesResource = inject(
+    DeviceBusinessPartnerControllerService,
+  ).getDevicesOfBusinessPartnerResource(() => ({ businessPartnerId: this.businessPartnerId() }));
 
-  ngOnInit(): void {
-    this.deviceBusinessPartnerApi
-      .getDevicesOfBusinessPartner(this.businessPartnerId()!)
-      .subscribe((data) => this.businessPartnerDevices.set(data));
-  }
+  readonly businessPartnerDevices = computed(() =>
+    this.devicesResource.hasValue() ? this.devicesResource.value() : undefined,
+  );
 }

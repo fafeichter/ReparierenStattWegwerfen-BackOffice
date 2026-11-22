@@ -1,4 +1,4 @@
-import {Component, computed, effect, inject, input, OnInit, signal} from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import {
   ClrCardModule,
   ClrCommonFormsModule,
@@ -10,19 +10,16 @@ import {
   ClrSelectModule,
   ClrTextareaModule,
 } from '@clr/angular';
-import {CurrencyPipe, DatePipe} from '@angular/common';
-import {OrElsePipe} from '../../../../pipes/or-else-pipe';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { OrElsePipe } from '../../../../pipes/or-else-pipe';
 import {
   CreateDeviceSparePartDto,
   DeviceDefectsControllerService,
-  DeviceDefectsDetailsDto,
   DeviceDefectsDto,
-  DeviceSparePartDto,
   DeviceSparePartsControllerService,
-  NamedIdDto,
 } from '@api/device';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
   selector: 'app-repair',
@@ -44,17 +41,9 @@ import {NavItem} from '../../../../clarity-addons/scrollspy/scrollspy';
   templateUrl: './repair.html',
   styleUrl: './repair.css',
 })
-export class Repair implements OnInit {
+export class Repair {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
-
-  deviceDefects = signal<DeviceDefectsDetailsDto | undefined>(undefined);
-  deviceSpareParts = signal<DeviceSparePartDto[]>([]);
-  totalSparePartsCost = computed(() => {
-    return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
-  });
-
-  isLoading = signal<boolean>(true);
 
   modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
@@ -70,10 +59,32 @@ export class Repair implements OnInit {
     correctedDefect: new FormControl<string | null>(null),
   });
 
-  availableSpareParts = signal<NamedIdDto[]>([]);
-
   private defectsApi = inject(DeviceDefectsControllerService);
   private deviceSparePartsApi = inject(DeviceSparePartsControllerService);
+
+  totalSparePartsCost = computed(() => {
+    return this.deviceSpareParts().reduce((sum, part) => sum + part.priceNetto, 0);
+  });
+  private readonly deviceDefectsResource = this.defectsApi.getDeviceDefectDetailsResource(() => ({
+    deviceId: this.deviceId(),
+  }));
+  readonly deviceDefects = computed(() =>
+    this.deviceDefectsResource.hasValue() ? this.deviceDefectsResource.value() : undefined,
+  );
+  private readonly deviceSparePartsResource = this.deviceSparePartsApi.getDeviceSparePartsResource(
+    () => ({ deviceId: this.deviceId() }),
+  );
+  readonly deviceSpareParts = computed(() =>
+    this.deviceSparePartsResource.hasValue() ? this.deviceSparePartsResource.value() : [],
+  );
+  // only loaded (and re-loaded) while the spare part form is open
+  private readonly availableSparePartsResource =
+    this.deviceSparePartsApi.getAvailableSparePartsForDeviceResource(() =>
+      this.sparePartEditModeActive() ? { deviceId: this.deviceId() } : undefined,
+    );
+  readonly availableSpareParts = computed(() =>
+    this.availableSparePartsResource.hasValue() ? this.availableSparePartsResource.value() : [],
+  );
 
   constructor() {
     effect(() => {
@@ -84,27 +95,13 @@ export class Repair implements OnInit {
           correctedDefect: defects.correctedDefect,
         });
       }
+    });
 
+    effect(() => {
       if (this.sparePartEditModeActive()) {
         this.form.reset();
-        this.deviceSparePartsApi
-          .getAvailableSparePartsForDevice(this.deviceId())
-          .subscribe((availableSpareParts) => this.availableSpareParts.set(availableSpareParts));
       }
     });
-  }
-
-  ngOnInit(): void {
-    this.defectsApi
-      .getDeviceDefectDetails(this.deviceId())
-      .subscribe((deviceDefects) => this.deviceDefects.set(deviceDefects));
-    this.isLoading.set(true);
-    this.deviceSparePartsApi
-      .getDeviceSpareParts(this.deviceId())
-      .subscribe((deviceSpareParts) => {
-        this.isLoading.set(false);
-        this.deviceSpareParts.set(deviceSpareParts)
-      });
   }
 
   updateDefects() {
@@ -114,23 +111,20 @@ export class Repair implements OnInit {
     };
 
     this.defectsApi.updateDefects(this.deviceId(), defects).subscribe(() => {
-      this.deviceDefects.update(() => {
-        this.defectsForm.reset();
-        this.isSubmitting.set(false);
-        this.modalOpen.set(false);
-
-        return {
-          reportedDefect: defects.reportedDefect,
-          reportedDefectConfirmed: !defects.correctedDefect,
-          correctedDefect: defects.correctedDefect,
-        };
+      this.defectsForm.reset();
+      this.isSubmitting.set(false);
+      this.modalOpen.set(false);
+      this.deviceDefectsResource.value.set({
+        reportedDefect: defects.reportedDefect,
+        reportedDefectConfirmed: !defects.correctedDefect,
+        correctedDefect: defects.correctedDefect,
       });
     });
   }
 
   confirmReportedDefect() {
     this.defectsApi.confirmReportedDefect(this.deviceId()).subscribe(() => {
-      this.deviceDefects.update((deviceDefects) => {
+      this.deviceDefectsResource.value.update((deviceDefects) => {
         return {
           ...deviceDefects!,
           reportedDefectConfirmed: true,
@@ -151,9 +145,7 @@ export class Repair implements OnInit {
       .subscribe(() => {
         this.sparePartEditModeActive.set(false);
         this.form.reset();
-        this.deviceSparePartsApi
-          .getDeviceSpareParts(this.deviceId())
-          .subscribe((deviceSpareParts) => this.deviceSpareParts.set(deviceSpareParts));
+        this.deviceSparePartsResource.reload();
       });
   }
 
@@ -166,11 +158,11 @@ export class Repair implements OnInit {
         .deleteDeviceSparePart(this.deviceId(), oldDeviceSparePartId)
         .subscribe(() => {
           this.form.reset();
-          this.deviceSpareParts.update((deviceSparePart) => {
-            return deviceSparePart.filter(
+          this.deviceSparePartsResource.value.update((deviceSpareParts) =>
+            deviceSpareParts?.filter(
               (deviceSparePart) => deviceSparePart.deviceSparePartId !== oldDeviceSparePartId,
-            );
-          });
+            ),
+          );
         });
     }
   }

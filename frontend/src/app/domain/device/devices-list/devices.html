@@ -10,7 +10,7 @@
   </clr-toggle-container>
 </div>
 
-<clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="loading()">
+<clr-datagrid (clrDgRefresh)="refresh($event)" [clrDgLoading]="this.devicesResource.isLoading()">
   <clr-dg-column [style.width.px]="100">
     ID
   </clr-dg-column>

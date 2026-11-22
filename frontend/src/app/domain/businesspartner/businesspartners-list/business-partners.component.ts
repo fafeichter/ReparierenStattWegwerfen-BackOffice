@@ -1,9 +1,16 @@
-import {Component, inject, signal} from '@angular/core';
-import {BusinessPartnerDto, BusinessPartnerSearchControllerService} from '@api/businesspartner';
-import {ClrDatagridModule, ClrDatagridStateInterface, ClrLabel, ClrTabsModule} from '@clr/angular';
-import {RouterLink} from '@angular/router';
-import {OrElsePipe} from '../../../pipes/or-else-pipe';
-import {Pageable} from '@api/device';
+import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
+import {
+  BusinessPartnerSearchControllerService,
+  PagedModelBusinessPartnerDto,
+} from '@api/businesspartner';
+import {
+  ClrDatagridModule,
+  ClrDatagridStateInterface,
+  ClrLabel,
+  ClrTabsModule,
+} from '@clr/angular';
+import { RouterLink } from '@angular/router';
+import { OrElsePipe } from '../../../pipes/or-else-pipe';
 
 @Component({
   selector: 'app-businesspartners',
@@ -14,13 +21,26 @@ import {Pageable} from '@api/device';
 export class BusinessPartners {
   protected page = signal(1);
   protected readonly pageSize = signal(10);
-  protected readonly lastPage = signal(1);
-  protected readonly totalItems = signal(0);
-  private api = inject(BusinessPartnerSearchControllerService);
-  private _businessPartners = signal<BusinessPartnerDto[]>([]);
-  readonly businessPartners = this._businessPartners.asReadonly();
-  private _businessPartnersLoading = signal<boolean>(false);
-  readonly businessPartnersLoading = this._businessPartnersLoading.asReadonly();
+
+  // re-requested automatically whenever page or page size changes
+  private readonly businessPartnersResource = inject(
+    BusinessPartnerSearchControllerService,
+  ).searchResource(() => ({ page: { page: this.page() - 1, size: this.pageSize() } }));
+  // keeps the last page while the next one loads, so the pagination does not jump back
+  private readonly businessPartnersPage = linkedSignal<
+    PagedModelBusinessPartnerDto | undefined,
+    PagedModelBusinessPartnerDto | undefined
+  >({
+    source: () =>
+      this.businessPartnersResource.hasValue() ? this.businessPartnersResource.value() : undefined,
+    computation: (businessPartnersPage, previous) => businessPartnersPage ?? previous?.value,
+  });
+
+  readonly businessPartners = computed(() => this.businessPartnersPage()?.content ?? []);
+  protected readonly lastPage = computed(() => this.businessPartnersPage()?.page?.totalPages ?? 1);
+  protected readonly totalItems = computed(
+    () => this.businessPartnersPage()?.page?.totalElements ?? 0,
+  );
 
   refresh(dataGridState: ClrDatagridStateInterface): void {
     const pageSize = dataGridState.page!.size ?? this.pageSize();
@@ -32,22 +52,5 @@ export class BusinessPartners {
     } else {
       this.page.set(currentPage);
     }
-
-    this.search();
-  }
-
-  search() {
-    this._businessPartnersLoading.set(true);
-
-    const page: Pageable = {
-      page: this.page() - 1,
-      size: this.pageSize()
-    }
-    this.api.search(page).subscribe((businessPartnersPage) => {
-      this._businessPartners.set(businessPartnersPage.content ?? []);
-      this.lastPage.set(businessPartnersPage.page?.totalPages ?? 1);
-      this.totalItems.set(businessPartnersPage.page?.totalElements ?? 0);
-      this._businessPartnersLoading.set(false);
-    });
   }
 }

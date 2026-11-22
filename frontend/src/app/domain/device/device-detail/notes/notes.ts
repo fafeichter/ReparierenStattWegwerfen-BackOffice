@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import {
   ClrCardModule,
   ClrCommonFormsModule,
@@ -14,7 +14,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DeviceNoteDto, DeviceNotesControllerService } from '@api/device';
+import { DeviceNotesControllerService } from '@api/device';
 import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
 @Component({
@@ -32,10 +32,9 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
   templateUrl: './notes.html',
   styleUrl: './notes.css',
 })
-export class Notes implements OnInit {
+export class Notes {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
-  deviceNotes = signal<DeviceNoteDto[]>([]);
   modalOpen = signal<boolean>(false);
   modalEditOpen = signal<boolean>(false);
   noteIdInEditMode = signal<number | undefined>(undefined);
@@ -44,6 +43,12 @@ export class Notes implements OnInit {
     text: new FormControl<string | null>(null, [Validators.required]),
   });
   private notesApi = inject(DeviceNotesControllerService);
+  private readonly deviceNotesResource = this.notesApi.getDeviceNotesResource(() => ({
+    deviceId: this.deviceId(),
+  }));
+  readonly deviceNotes = computed(() =>
+    this.deviceNotesResource.hasValue() ? this.deviceNotesResource.value() : [],
+  );
 
   constructor() {
     // Automatically reset the form whenever the modal opens
@@ -54,27 +59,21 @@ export class Notes implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => this.deviceNotes.set(data));
-  }
-
   addNote() {
     this.notesApi
       .addDeviceNote(this.deviceId(), this.form.controls.text.value || '')
       .subscribe(() => {
         this.modalOpen.set(false);
-        this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => {
-          this.deviceNotes.set(data);
-        });
+        this.deviceNotesResource.reload();
       });
   }
 
   deleteNote(oldDeviceNoteId: number) {
     if (confirm('Do you really want to delete this note?')) {
       this.notesApi.deleteDeviceNote(this.deviceId(), oldDeviceNoteId).subscribe(() => {
-        this.deviceNotes.update((deviceNotes) => {
-          return deviceNotes.filter((note) => note.noteId !== oldDeviceNoteId);
-        });
+        this.deviceNotesResource.value.update((deviceNotes) =>
+          deviceNotes?.filter((note) => note.noteId !== oldDeviceNoteId),
+        );
       });
     }
   }
@@ -97,10 +96,7 @@ export class Notes implements OnInit {
       )
       .subscribe(() => {
         this.modalEditOpen.set(false);
-        this.notesApi.getDeviceNotes(this.deviceId()).subscribe((data) => {
-          this.modalEditOpen.set(false);
-          this.deviceNotes.set(data);
-        });
+        this.deviceNotesResource.reload();
       });
   }
 }

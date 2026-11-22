@@ -1,11 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  numberAttribute,
+} from '@angular/core';
 import { ModelControllerService, SiliconDto, SizeDto } from '@api/model';
-import { ActivatedRoute } from '@angular/router';
 import { ClrCardModule, ClrIcon, ClrLabel } from '@clr/angular';
 import { DatePipe } from '@angular/common';
 import { TitleFn } from '../../../layout/route-title.service';
-import { map, switchMap } from 'rxjs';
+import { map } from 'rxjs';
 import { NavItem, Scrollspy } from '../../../clarity-addons/scrollspy/scrollspy';
 import { PageSidebar } from '../../../clarity-addons/page-sidebar/page-sidebar';
 
@@ -33,11 +38,12 @@ export class ModelDetail {
   protected readonly storageOptions = computed(() =>
     this.availability((silicon) => silicon.storageOptions),
   );
-  private readonly api = inject(ModelControllerService);
-  protected readonly model = toSignal(
-    inject(ActivatedRoute).paramMap.pipe(
-      switchMap((params) => this.api.getModelDetails(Number(params.get('modelId')))),
-    ),
+  readonly modelId = input.required({ transform: numberAttribute });
+  private readonly modelResource = inject(ModelControllerService).getModelDetailsResource(() => ({
+    modelId: this.modelId(),
+  }));
+  protected readonly model = computed(() =>
+    this.modelResource.hasValue() ? this.modelResource.value() : undefined,
   );
   private readonly silicons = computed(() => this.model()?.siliconOptions ?? []);
   /** Grouped by variant, in the order the silicons arrive. */

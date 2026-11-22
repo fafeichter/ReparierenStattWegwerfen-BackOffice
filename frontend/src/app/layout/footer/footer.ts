@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, computed, inject } from '@angular/core';
 import { SystemInfoControllerService } from '@api/application';
 import { ClrIcon } from '@clr/angular';
 
@@ -10,7 +9,11 @@ import { ClrIcon } from '@clr/angular';
   templateUrl: './footer.html',
 })
 export class Footer {
-  private readonly systemInfoApi = inject(SystemInfoControllerService);
+  private readonly prodDbAndDataResource = inject(
+    SystemInfoControllerService,
+  ).isRunningOnProdDbAndDataResource();
 
-  readonly isRunningOnProdDbAndData = toSignal(this.systemInfoApi.isRunningOnProdDbAndData());
+  readonly isRunningOnProdDbAndData = computed(() =>
+    this.prodDbAndDataResource.hasValue() ? this.prodDbAndDataResource.value() : undefined,
+  );
 }

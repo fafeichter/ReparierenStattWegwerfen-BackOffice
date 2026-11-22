@@ -1,8 +1,6 @@
-import { Component, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { DeviceActivityControllerService, DeviceActivityDto } from '@api/device';
-import { interval, startWith, switchMap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DeviceActivityControllerService } from '@api/device';
 import { ClrCardModule, ClrIcon } from '@clr/angular';
 import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 
@@ -12,23 +10,21 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
   templateUrl: './activity.html',
   styleUrl: './activity.css',
 })
-export class Activity implements OnInit {
+export class Activity {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
 
-  deviceActivities = signal<DeviceActivityDto[]>([]);
+  private readonly activitiesResource = inject(
+    DeviceActivityControllerService,
+  ).getActivitiesForDeviceResource(() => ({ deviceId: this.deviceId() }));
 
-  private activityApi = inject(DeviceActivityControllerService);
+  // keeps the previous list while reloading, so the poll does not flicker
+  readonly deviceActivities = computed(() =>
+    this.activitiesResource.hasValue() ? this.activitiesResource.value() : [],
+  );
 
-  private destroyRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    interval(2500)
-      .pipe(
-        startWith(0),
-        switchMap(() => this.activityApi.getActivitiesForDevice(this.deviceId())),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe((data) => this.deviceActivities.set(data));
+  constructor() {
+    const pollId = setInterval(() => this.activitiesResource.reload(), 2500);
+    inject(DestroyRef).onDestroy(() => clearInterval(pollId));
   }
 }

@@ -1,5 +1,5 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { DeviceBuyingDetailsDto, DeviceDetailsControllerService } from '@api/device';
+import { Component, computed, inject, input } from '@angular/core';
+import { DeviceDetailsControllerService } from '@api/device';
 import { ClrCardModule, ClrCommonFormsModule, ClrFileInputModule, ClrIcon } from '@clr/angular';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -22,17 +22,15 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
   templateUrl: './buying.html',
   styleUrl: './buying.css',
 })
-export class Buying implements OnInit {
+export class Buying {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
 
-  deviceBuying = signal<DeviceBuyingDetailsDto | undefined>(undefined);
+  private readonly deviceBuyingResource = inject(
+    DeviceDetailsControllerService,
+  ).getDeviceBuyingDetailsResource(() => ({ deviceId: this.deviceId() }));
 
-  private api = inject(DeviceDetailsControllerService);
-
-  ngOnInit(): void {
-    this.api
-      .getDeviceBuyingDetails(this.deviceId())
-      .subscribe((data) => this.deviceBuying.set(data));
-  }
+  readonly deviceBuying = computed(() =>
+    this.deviceBuyingResource.hasValue() ? this.deviceBuyingResource.value() : undefined,
+  );
 }

@@ -1,10 +1,15 @@
-import {Component, inject, signal} from '@angular/core';
-import {DeviceDto, DeviceSearchControllerService, Pageable} from '@api/device';
-import {ClrCheckboxModule, ClrDatagridModule, ClrDatagridStateInterface, ClrLabel,} from '@clr/angular';
-import {OrElsePipe} from '../../../pipes/or-else-pipe';
-import {CurrencyPipe, DatePipe} from '@angular/common';
-import {RouterLink} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
+import { DeviceSearchControllerService, PagedModelDeviceDto } from '@api/device';
+import {
+  ClrCheckboxModule,
+  ClrDatagridModule,
+  ClrDatagridStateInterface,
+  ClrLabel,
+} from '@clr/angular';
+import { OrElsePipe } from '../../../pipes/or-else-pipe';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-devices',
@@ -23,13 +28,26 @@ import {FormsModule} from '@angular/forms';
 })
 export class Devices {
   showInactiveDevices = signal(false);
-  protected readonly loading = signal(true);
-  protected readonly devices = signal<DeviceDto[]>([]);
   protected page = signal(1);
   protected readonly pageSize = signal(25);
-  protected readonly lastPage = signal(1);
-  protected readonly totalItems = signal(0);
-  private readonly devicesSearchApi = inject(DeviceSearchControllerService);
+
+  // re-requested automatically whenever page, page size or the inactive toggle changes
+  private readonly devicesResource = inject(DeviceSearchControllerService).searchResource(() => ({
+    page: { page: this.page() - 1, size: this.pageSize() },
+    includeInactiveDevices: this.showInactiveDevices(),
+  }));
+  // keeps the last page while the next one loads, so the pagination does not jump back
+  private readonly devicesPage = linkedSignal<
+    PagedModelDeviceDto | undefined,
+    PagedModelDeviceDto | undefined
+  >({
+    source: () => (this.devicesResource.hasValue() ? this.devicesResource.value() : undefined),
+    computation: (devicesPage, previous) => devicesPage ?? previous?.value,
+  });
+
+  protected readonly devices = computed(() => this.devicesPage()?.content ?? []);
+  protected readonly lastPage = computed(() => this.devicesPage()?.page?.totalPages ?? 1);
+  protected readonly totalItems = computed(() => this.devicesPage()?.page?.totalElements ?? 0);
 
   refresh(dataGridState: ClrDatagridStateInterface): void {
     const pageSize = dataGridState.page!.size ?? this.pageSize();
@@ -41,29 +59,9 @@ export class Devices {
     } else {
       this.page.set(currentPage);
     }
-
-    this.search();
-  }
-
-  search(): void {
-    this.loading.set(true);
-
-    const page: Pageable = {
-      page: this.page() - 1,
-      size: this.pageSize()
-    }
-    this.devicesSearchApi
-      .search(page, this.showInactiveDevices())
-      .subscribe((devicesPage) => {
-        this.devices.set(devicesPage.content ?? []);
-        this.lastPage.set(devicesPage.page?.totalPages ?? 1);
-        this.totalItems.set(devicesPage.page?.totalElements ?? 0);
-        this.loading.set(false);
-      });
   }
 
   toggleInactiveDevices(showInactiveDevices: boolean) {
     this.showInactiveDevices.set(showInactiveDevices);
-    this.search();
   }
 }
