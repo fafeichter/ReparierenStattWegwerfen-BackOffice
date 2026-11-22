@@ -377,4 +377,6 @@
   </div>
 </clr-card>
 
-<app-selling-modal [deviceId]="deviceId()" [modalOpen]="statusSellingModeActive()"/>
+@if (statusSellingModeActive()) {
+  <app-selling-status-changed-modal [deviceId]="deviceId()" [modalOpen]="statusSellingModeActive()"/>
+}

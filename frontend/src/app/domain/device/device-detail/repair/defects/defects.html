@@ -1,0 +1,42 @@
+<dl>
+  <dt>
+    Reported Defect
+  </dt>
+  <dd>
+    {{ deviceDefects()?.reportedDefect | orElse }}
+  </dd>
+  <dt></dt>
+  <dd>
+    @if (deviceDefects()?.reportedDefectConfirmed === null) {
+      <button (click)="confirmReportedDefect()" class="btn btn-link">
+        ✓ Confirm
+      </button>
+    } @else {
+      @if (deviceDefects()?.reportedDefectConfirmed) {
+        <clr-label class="ml-1!">
+          ✓ Confirmed
+        </clr-label>
+      } @else {
+        @if (!deviceDefects()?.reportedDefectConfirmed) {
+          <clr-label class="ml-1!">
+            × Not as described
+          </clr-label>
+        }
+      }
+    }
+  </dd>
+  <dt>
+    Corrected Defect
+  </dt>
+  <dd>
+    {{ deviceDefects()?.correctedDefect | orElse }}
+    <button (click)="modalOpen.set(true)" class="btn btn-link ml-1!">
+      <cds-icon shape="edit"/>
+      Edit
+    </button>
+  </dd>
+</dl>
+
+@if (modalOpen()) {
+  <app-defects-modal (saved)="this.deviceDefectsResource.reload();" [(modalOpen)]="modalOpen" [deviceId]="deviceId()"/>
+}

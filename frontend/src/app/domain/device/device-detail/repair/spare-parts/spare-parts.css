@@ -1,0 +1,13 @@
+li {
+  margin-bottom: .2rem;
+}
+
+.datagrid-cell.total-cell {
+  display: flex;
+  align-items: center; /* Vertically centers the <hr> */
+}
+
+.datagrid-cell > .total {
+  width: 100%;
+  color: grey;
+}

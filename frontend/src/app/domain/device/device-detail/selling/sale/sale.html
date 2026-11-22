@@ -1,0 +1,40 @@
+<dl>
+  <dt>
+    Date
+  </dt>
+  <dd>
+    {{ deviceSelling()?.date | date:'dd.MM.yyyy' | orElse }}
+  </dd>
+  <dt>
+    Price
+  </dt>
+  <dd>
+    {{ deviceSelling()?.price | currency:'EUR':'symbol':'1.2-2' | orElse }}
+  </dd>
+  <dt>
+    Buyer
+  </dt>
+  <dd>
+    @if (deviceSelling()?.buyer) {
+      <a [routerLink]="['/businesspartners', deviceSelling()?.buyer?.id]">
+        {{ deviceSelling()?.buyer?.name }}
+        <cds-icon shape="pop-out"/>
+      </a>
+      <button (click)="unsetBuyer()" class="btn btn-link ml-2!">
+        <cds-icon shape="edit"/>
+        Unset
+      </button>
+    } @else {
+      -
+      <button [queryParams]="{ 'device-id':  deviceId()}" [routerLink]="['/businesspartners/create']"
+              class="btn btn-link ml-1! mr-2!">
+        <cds-icon shape="pop-out"/>
+        Add
+      </button>
+      |
+      <button (click)="setBuyerToAsgoodasnew()" class="btn btn-link ml-2!">
+        Sell to asgoodasnew
+      </button>
+    }
+  </dd>
+</dl>

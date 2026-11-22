@@ -32,16 +32,16 @@
   </div>
   <div class="modal-footer">
     <button (click)="modalOpen.set(false); modalCanceled.emit()" class="btn btn-outline btn-link" type="button">
-        <cds-icon shape="close"/>
+      <cds-icon shape="close"/>
       Cancel
     </button>
     <button (click)="setSellingDetails()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary"
             type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
-          Setting status to sold...
+        Setting status to sold...
       } @else {
-          Set status to sold
+        Set status to sold
       }
     </button>
   </div>

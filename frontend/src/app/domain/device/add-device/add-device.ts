@@ -139,9 +139,8 @@ export class AddDevice {
       defect: this.found()!.reportedDefect!,
     };
 
-    this.deviceCreationApi.createNewDevice(newDevice).subscribe({
-      next: (deviceId) => this.router.navigate(['/devices', deviceId]),
-      error: () => this.isSubmitting.set(false),
+    this.deviceCreationApi.createNewDevice(newDevice).subscribe((deviceId) => {
+      this.router.navigate(['/devices', deviceId]);
     });
   }
 
@@ -156,12 +155,9 @@ export class AddDevice {
         this.devicesWithSameAdUrl.set(devicesWithSameAdUrl);
       });
 
-      this.modelResolutionApi.resolveModelDetailsFromAd(adUrl).subscribe({
-        next: (data) => {
-          this.found.set(data);
-          this.isLoadingModel.set(false);
-        },
-        error: () => this.isLoadingModel.set(false),
+      this.modelResolutionApi.resolveModelDetailsFromAd(adUrl).subscribe((data) => {
+        this.found.set(data);
+        this.isLoadingModel.set(false);
       });
     }
   }

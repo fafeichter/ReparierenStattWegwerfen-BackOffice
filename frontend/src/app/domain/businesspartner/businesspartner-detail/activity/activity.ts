@@ -16,18 +16,15 @@ export class Activity {
 
   protected readonly visibleRowCount = 10;
   protected readonly expanded = signal(false);
-
+  protected readonly hiddenRowCount = computed(() =>
+    Math.max(0, this.businessPartnerActivities().length - this.visibleRowCount),
+  );
   private readonly activitiesResource = inject(
     BusinessPartnerActivityControllerService,
   ).getActivitiesResource(() => ({ businessPartnerId: this.businessPartnerId() }));
-
   // keeps the previous list while reloading, so the poll does not flicker
   readonly businessPartnerActivities = computed(() =>
     this.activitiesResource.hasValue() ? this.activitiesResource.value() : [],
-  );
-
-  protected readonly hiddenRowCount = computed(() =>
-    Math.max(0, this.businessPartnerActivities().length - this.visibleRowCount),
   );
 
   constructor() {

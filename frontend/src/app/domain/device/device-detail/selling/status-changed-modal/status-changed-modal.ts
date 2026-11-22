@@ -20,11 +20,11 @@ import { DeviceSellingControllerService, DeviceSellingDto } from '@api/device';
     DatePipe,
     ReactiveFormsModule,
   ],
-  selector: 'app-selling-modal',
-  styleUrl: './selling-modal.css',
-  templateUrl: './selling-modal.html',
+  selector: 'app-selling-status-changed-modal',
+  styleUrl: './status-changed-modal.css',
+  templateUrl: './status-changed-modal.html',
 })
-export class SellingModal {
+export class StatusChangedModal {
   deviceId = input.required<number>();
   modalOpen = model.required<boolean>();
   modalCanceled = output<void>();

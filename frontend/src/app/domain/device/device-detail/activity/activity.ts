@@ -16,17 +16,15 @@ export class Activity {
 
   protected readonly visibleRowCount = 10;
   protected readonly expanded = signal(false);
-
+  protected readonly hiddenRowCount = computed(() =>
+    Math.max(0, this.deviceActivities().length - this.visibleRowCount),
+  );
   private readonly activitiesResource = inject(
     DeviceActivityControllerService,
   ).getActivitiesForDeviceResource(() => ({ deviceId: this.deviceId() }));
-
   // keeps the previous list while reloading, so the poll does not flicker
   readonly deviceActivities = computed(() =>
     this.activitiesResource.hasValue() ? this.activitiesResource.value() : [],
-  );
-  protected readonly hiddenRowCount = computed(() =>
-    Math.max(0, this.deviceActivities().length - this.visibleRowCount),
   );
 
   constructor() {

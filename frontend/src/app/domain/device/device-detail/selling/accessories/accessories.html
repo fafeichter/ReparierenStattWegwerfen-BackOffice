@@ -1,0 +1,54 @@
+<dl>
+  <dt>
+    Charger included
+  </dt>
+  <dd>
+    @if (deviceAccessories()?.charger !== null) {
+      <cds-icon [shape]="deviceAccessories()?.charger ? 'check': 'close'"/>
+      <span class="ml-1">
+            {{ deviceAccessories()?.charger ? 'Yes' : 'No' }}
+          </span>
+    } @else {
+      -
+    }
+  </dd>
+  <dt>
+    Charging cable included
+  </dt>
+  <dd>
+    @if (deviceAccessories()?.chargingCable !== null) {
+      <cds-icon [shape]="deviceAccessories()?.chargingCable ? 'check': 'close'"/>
+      <span class="ml-1">
+            {{ deviceAccessories()?.chargingCable ? 'Yes' : 'No' }}
+          </span>
+    } @else {
+      -
+    }
+  </dd>
+  <dt>
+    Original packaging included
+  </dt>
+  <dd>
+    @if (deviceAccessories()?.originalPackaging !== null) {
+      <cds-icon [shape]="deviceAccessories()?.originalPackaging ? 'check': 'close'"/>
+      <span class="ml-1">
+            {{ deviceAccessories()?.originalPackaging ? 'Yes' : 'No' }}
+          </span>
+    } @else {
+      -
+    }
+  </dd>
+  <dt>
+  </dt>
+  <dd>
+    <button (click)="modalOpen.set(true)" class="btn btn-link">
+      <cds-icon shape="edit"/>
+      Edit
+    </button>
+  </dd>
+</dl>
+
+@if (modalOpen()) {
+  <app-selling-accessories-modal (saved)="this.deviceAccessoriesResource.reload();" [(modalOpen)]="modalOpen"
+                                 [deviceId]="deviceId()"/>
+}

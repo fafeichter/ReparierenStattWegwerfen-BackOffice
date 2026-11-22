@@ -1,0 +1,36 @@
+<clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="lg">
+  <div class="modal-title">
+    Set defects
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="updateDefects()" [formGroup]="defectsForm" autocomplete="off" clrForm>
+      <clr-textarea-container>
+        <label class="clr-required-mark">
+          Reported Defect
+        </label>
+        <textarea class="w-full!" clrTextarea formControlName="reportedDefect" required rows="2"></textarea>
+      </clr-textarea-container>
+      <clr-textarea-container>
+        <label>
+          Corrected Defect
+        </label>
+        <textarea autofocus class="w-full!" clrTextarea formControlName="correctedDefect" rows="4"></textarea>
+      </clr-textarea-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      <cds-icon shape="close"/>
+      Cancel
+    </button>
+    <button (click)="updateDefects()" [disabled]="defectsForm.invalid || isSubmitting()" class="btn btn-primary"
+            type="submit">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+        Setting defects...
+      } @else {
+        Set defects
+      }
+    </button>
+  </div>
+</clr-modal>

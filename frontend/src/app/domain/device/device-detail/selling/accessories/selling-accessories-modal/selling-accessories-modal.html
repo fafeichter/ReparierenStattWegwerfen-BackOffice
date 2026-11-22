@@ -1,0 +1,44 @@
+<clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="s">
+  <div class="modal-title">
+    Set selling accessories
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="updateAccessories()" [formGroup]="accessoriesForm" autocomplete="off" clrForm>
+      <clr-checkbox-container>
+        <clr-checkbox-wrapper>
+          <input clrCheckbox formControlName="charger" type="checkbox"/>
+          <label>
+            Charger
+          </label>
+        </clr-checkbox-wrapper>
+        <clr-checkbox-wrapper>
+          <input clrCheckbox formControlName="chargingCable" type="checkbox"/>
+          <label>
+            Charging cable
+          </label>
+        </clr-checkbox-wrapper>
+        <clr-checkbox-wrapper>
+          <input clrCheckbox formControlName="originalPackaging" type="checkbox"/>
+          <label>
+            Original packaging
+          </label>
+        </clr-checkbox-wrapper>
+      </clr-checkbox-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+      <cds-icon shape="close"/>
+      Cancel
+    </button>
+    <button (click)="updateAccessories()" [disabled]="accessoriesForm.invalid || isSubmitting()" class="btn btn-primary"
+            type="submit">
+      @if (isSubmitting()) {
+        <span class="spinner spinner-inline"></span>
+        Setting selling accessories...
+      } @else {
+        Set selling accessories
+      }
+    </button>
+  </div>
+</clr-modal>

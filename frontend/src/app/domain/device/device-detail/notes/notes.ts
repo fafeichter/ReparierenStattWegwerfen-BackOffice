@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import {
   ClrCardModule,
   ClrCommonFormsModule,
@@ -7,15 +7,11 @@ import {
   ClrTextareaModule,
 } from '@clr/angular';
 import { DatePipe } from '@angular/common';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeviceNotesControllerService } from '@api/device';
 import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
+import { NoteEditModal } from './note-edit-modal/note-edit-modal';
+import { NoteAddModal } from './note-add-modal/note-add-modal';
 
 @Component({
   selector: 'app-notes',
@@ -28,6 +24,8 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
     FormsModule,
     ReactiveFormsModule,
     ClrCardModule,
+    NoteEditModal,
+    NoteAddModal,
   ],
   templateUrl: './notes.html',
   styleUrl: './notes.css',
@@ -35,13 +33,10 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 export class Notes {
   deviceId = input.required<number>();
   navItem = input.required<NavItem>();
-  modalOpen = signal<boolean>(false);
-  modalEditOpen = signal<boolean>(false);
+  addNoteModalOpen = signal<boolean>(false);
+
+  editNoteModalOpen = signal<boolean>(false);
   noteIdInEditMode = signal<number | undefined>(undefined);
-  isSubmitting = signal<boolean>(false);
-  form = new FormGroup({
-    text: new FormControl<string | null>(null, [Validators.required]),
-  });
   private notesApi = inject(DeviceNotesControllerService);
   private readonly deviceNotesResource = this.notesApi.getDeviceNotesResource(() => ({
     deviceId: this.deviceId(),
@@ -49,24 +44,9 @@ export class Notes {
   readonly deviceNotes = computed(() =>
     this.deviceNotesResource.hasValue() ? this.deviceNotesResource.value() : [],
   );
-
-  constructor() {
-    // Automatically reset the form whenever the modal opens
-    effect(() => {
-      if (this.modalOpen()) {
-        this.form.reset();
-      }
-    });
-  }
-
-  addNote() {
-    this.notesApi
-      .addDeviceNote(this.deviceId(), this.form.controls.text.value || '')
-      .subscribe(() => {
-        this.modalOpen.set(false);
-        this.deviceNotesResource.reload();
-      });
-  }
+  readonly noteInEditMode = computed(() =>
+    this.deviceNotes().find((note) => note.noteId === this.noteIdInEditMode()),
+  );
 
   deleteNote(oldDeviceNoteId: number) {
     if (confirm('Do you really want to delete this note?')) {
@@ -79,24 +59,7 @@ export class Notes {
   }
 
   activateEditMode(noteId: number) {
-    this.modalEditOpen.set(true);
     this.noteIdInEditMode.set(noteId);
-    const note = this.deviceNotes().find((note) => note.noteId === noteId);
-    this.form.patchValue({
-      text: note!.text,
-    });
-  }
-
-  editNote() {
-    this.notesApi
-      .editDeviceNote(
-        this.deviceId(),
-        this.noteIdInEditMode()!,
-        this.form.controls.text.value || '',
-      )
-      .subscribe(() => {
-        this.modalEditOpen.set(false);
-        this.deviceNotesResource.reload();
-      });
+    this.editNoteModalOpen.set(true);
   }
 }

@@ -39,7 +39,7 @@ import {
 } from '@api/model';
 import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 import { SerialNumber } from '../../serial-number';
-import { SellingModal } from '../selling/selling-modal/selling-modal';
+import { StatusChangedModal } from '../selling/status-changed-modal/status-changed-modal';
 
 @Component({
   selector: 'app-device',
@@ -57,7 +57,7 @@ import { SellingModal } from '../selling/selling-modal/selling-modal';
     ClrAlertModule,
     ClrCardModule,
     SerialNumber,
-    SellingModal,
+    StatusChangedModal,
   ],
   templateUrl: './device.html',
   styleUrl: './device.css',
