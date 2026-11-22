@@ -1,4 +1,4 @@
-<clr-datagrid [clrDgLoading]="isLoading()">
+<clr-datagrid [clrDgLoading]="devicesResource.isLoading()">
   <clr-dg-column>
     Device
   </clr-dg-column>
@@ -11,7 +11,8 @@
   <clr-dg-placeholder>
     All done!
   </clr-dg-placeholder>
-  <clr-dg-row *clrDgItems="let device of devicesOfferedForSale()" [clrDgItem]="device">
+  <clr-dg-row *clrDgItems="let device of devicesOfferedForSale(); let i = index"
+              [class.collapsed]="!expanded() && i >= visibleRowCount" [clrDgItem]="device">
     <clr-dg-cell>
       <a [routerLink]="['/devices', device.deviceId]">
         #{{ device.deviceId }}
@@ -31,4 +32,19 @@
       Storage: {{ device.storage?.name | orElse }}
     </clr-dg-row-detail>
   </clr-dg-row>
+
+  @if (hiddenRowCount() > 0) {
+    <clr-dg-footer>
+      <button (click)="expanded.set(!expanded())" [attr.aria-expanded]="expanded()"
+              class="btn btn-link btn-sm toggle-rows"
+              type="button">
+        <cds-icon [direction]="expanded() ? 'up' : 'down'" shape="angle"/>
+        @if (expanded()) {
+          Show less
+        } @else {
+          Show {{ hiddenRowCount() }} more
+        }
+      </button>
+    </clr-dg-footer>
+  }
 </clr-datagrid>

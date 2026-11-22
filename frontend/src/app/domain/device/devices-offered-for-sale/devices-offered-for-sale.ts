@@ -1,29 +1,29 @@
-import { Component, inject, OnInit, output, signal } from '@angular/core';
-import { DeviceOfferedForSaleDto, DeviceSearchControllerService } from '@api/device';
-import { ClrDatagridModule } from '@clr/angular';
-import { DatePipe } from '@angular/common';
-import { OrElsePipe } from '../../../pipes/or-else-pipe';
-import { RouterLink } from '@angular/router';
+import {Component, computed, effect, inject, output, signal} from '@angular/core';
+import {DeviceSearchControllerService} from '@api/device';
+import {ClrAlertModule, ClrDatagridModule, ClrIcon} from '@clr/angular';
+import {DatePipe} from '@angular/common';
+import {OrElsePipe} from '../../../pipes/or-else-pipe';
+import {RouterLink} from '@angular/router';
 
 @Component({
-  imports: [ClrDatagridModule, DatePipe, OrElsePipe, RouterLink],
+  imports: [ClrAlertModule, ClrDatagridModule, DatePipe, OrElsePipe, RouterLink, ClrIcon],
   selector: 'app-devices-offered-for-sale',
   styleUrl: './devices-offered-for-sale.css',
   templateUrl: './devices-offered-for-sale.html',
 })
-export class DevicesOfferedForSale implements OnInit {
-  devicesOfferedForSaleCount = output<number>();
+export class DevicesOfferedForSale {
+  readonly devicesOfferedForSaleCount = output<number>();
+  protected readonly visibleRowCount = 10;
+  protected readonly expanded = signal(false);
+  protected readonly devicesResource = inject(DeviceSearchControllerService).getDevicesOfferedForSaleResource();
+  protected readonly devicesOfferedForSale = computed(() => this.devicesResource.hasValue() ? this.devicesResource.value() : []);
+  protected readonly hiddenRowCount = computed(() => Math.max(0, this.devicesOfferedForSale().length - this.visibleRowCount));
 
-  devicesOfferedForSale = signal<DeviceOfferedForSaleDto[]>([]);
-  isLoading = signal<boolean>(true);
-  private deviceSearchApi = inject(DeviceSearchControllerService);
-
-  ngOnInit(): void {
-    this.isLoading.set(true);
-    this.deviceSearchApi.getDevicesOfferedForSale().subscribe((devices) => {
-      this.isLoading.set(false);
-      this.devicesOfferedForSale.set(devices);
-      this.devicesOfferedForSaleCount.emit(devices.length);
+  constructor() {
+    effect(() => {
+      if (this.devicesResource.hasValue()) {
+        this.devicesOfferedForSaleCount.emit(this.devicesResource.value().length);
+      }
     });
   }
 }

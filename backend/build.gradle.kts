@@ -151,7 +151,8 @@ val apiClientsTasks = apiModules.map { module ->
         configOptions = mapOf(
             "supportsES6" to "true",
             "providedInRoot" to "true",
-            "serviceSuffix" to "Service"
+            "serviceSuffix" to "Service",
+            "withHttpResource" to "true"
         )
 
         dependsOn(generateOpenApiSpecs)

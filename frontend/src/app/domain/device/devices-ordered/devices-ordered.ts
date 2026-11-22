@@ -1,29 +1,29 @@
-import { Component, inject, OnInit, output, signal } from '@angular/core';
-import { DeviceOrderedDto, DeviceSearchControllerService } from '@api/device';
-import { ClrDatagridModule } from '@clr/angular';
-import { RouterLink } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { OrElsePipe } from '../../../pipes/or-else-pipe';
+import {Component, computed, effect, inject, output, signal} from '@angular/core';
+import {DeviceSearchControllerService} from '@api/device';
+import {ClrDatagridModule, ClrIcon} from '@clr/angular';
+import {DatePipe} from '@angular/common';
+import {OrElsePipe} from '../../../pipes/or-else-pipe';
+import {RouterLink} from '@angular/router';
 
 @Component({
-  imports: [ClrDatagridModule, RouterLink, DatePipe, OrElsePipe],
+  imports: [ClrDatagridModule, DatePipe, OrElsePipe, RouterLink, ClrIcon],
   selector: 'app-devices-ordered',
   styleUrl: './devices-ordered.css',
   templateUrl: './devices-ordered.html',
 })
-export class DevicesOrdered implements OnInit {
-  devicesOrderedCount = output<number>();
+export class DevicesOrdered {
+  readonly devicesOrderedCount = output<number>();
+  protected readonly visibleRowCount = 10;
+  protected readonly expanded = signal(false);
+  protected readonly devicesResource = inject(DeviceSearchControllerService).getDevicesOrderedResource();
+  protected readonly devicesOrdered = computed(() => this.devicesResource.hasValue() ? this.devicesResource.value() : []);
+  protected readonly hiddenRowCount = computed(() => Math.max(0, this.devicesOrdered().length - this.visibleRowCount));
 
-  devicesOrdered = signal<DeviceOrderedDto[]>([]);
-  isLoading = signal<boolean>(true);
-  private deviceSearchApi = inject(DeviceSearchControllerService);
-
-  ngOnInit(): void {
-    this.isLoading.set(true);
-    this.deviceSearchApi.getDevicesOrdered().subscribe((devices) => {
-      this.isLoading.set(false);
-      this.devicesOrdered.set(devices);
-      this.devicesOrderedCount.emit(devices.length);
+  constructor() {
+    effect(() => {
+      if (this.devicesResource.hasValue()) {
+        this.devicesOrderedCount.emit(this.devicesResource.value().length);
+      }
     });
   }
 }
