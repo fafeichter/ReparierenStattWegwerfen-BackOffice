@@ -29,6 +29,7 @@ import java.lang.annotation.*;
 	OpenAiChatAutoConfiguration.class,
 	OpenAiAudioTranscriptionAutoConfiguration.class,
 	OpenAiAudioSpeechAutoConfiguration.class,
+	OpenAiDecisionAutoConfiguration.class,
 	GoogleGenAiChatAutoConfiguration.class,
 	GoogleGenAiImageAutoConfiguration.class,
 	GoogleGenAiEmbeddingConnectionAutoConfiguration.class,
