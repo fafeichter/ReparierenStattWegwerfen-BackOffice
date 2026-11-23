@@ -37,15 +37,15 @@ export class Notes {
 
   editNoteModalOpen = signal<boolean>(false);
   noteIdInEditMode = signal<number | undefined>(undefined);
+  readonly noteInEditMode = computed(() =>
+    this.deviceNotes().find((note) => note.noteId === this.noteIdInEditMode()),
+  );
   private notesApi = inject(DeviceNotesControllerService);
   private readonly deviceNotesResource = this.notesApi.getDeviceNotesResource(() => ({
     deviceId: this.deviceId(),
   }));
   readonly deviceNotes = computed(() =>
     this.deviceNotesResource.hasValue() ? this.deviceNotesResource.value() : [],
-  );
-  readonly noteInEditMode = computed(() =>
-    this.deviceNotes().find((note) => note.noteId === this.noteIdInEditMode()),
   );
 
   deleteNote(oldDeviceNoteId: number) {
