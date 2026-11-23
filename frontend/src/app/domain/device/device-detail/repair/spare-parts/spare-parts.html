@@ -27,7 +27,7 @@
       {{ deviceSparePart.priceNetto | currency:'EUR':'symbol':'1.2-2' }}
     </clr-dg-cell>
     <clr-dg-cell class="right">
-      {{ deviceSparePart.date | date:'dd.MM.yyyy HH:mm' }}
+      {{ deviceSparePart.date | date:'dd. MMM yyyy HH:mm:ss' }}
     </clr-dg-cell>
   </clr-dg-row>
   @if (deviceSpareParts().length > 0) {
