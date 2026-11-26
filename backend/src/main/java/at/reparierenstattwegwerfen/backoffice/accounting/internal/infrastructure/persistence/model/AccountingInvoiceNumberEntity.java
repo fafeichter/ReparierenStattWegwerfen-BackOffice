@@ -20,6 +20,9 @@ import lombok.Setter;
 public class AccountingInvoiceNumberEntity {
 
 	@Id
+	@Column(name = "accounting_invoice_number_id")
+	private Integer id;
+
 	@Column(name = "current_invoice_number")
 	private Integer currentInvoiceNumber;
 }

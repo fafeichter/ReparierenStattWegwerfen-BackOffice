@@ -13,9 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AccountingInvoiceNumber {
 
-	private Integer currentInvoiceNumber;
+	private final Integer id;
+	private final Integer currentInvoiceNumber;
 
-	public Integer getNextInvoiceNumber() {
-		return currentInvoiceNumber + 1;
+	public AccountingInvoiceNumber nextInvoiceNumber() {
+		return new AccountingInvoiceNumber(id, currentInvoiceNumber + 1);
 	}
 }

@@ -18,9 +18,8 @@ public class AccountingInvoiceServiceImpl implements AccountingInvoiceService {
 	@Transactional
 	@Override
 	public synchronized Integer requestNextInvoiceNumber() {
-		AccountingInvoiceNumber invoiceNumber = accountingInvoiceNumberRepository.getCurrentNumberInvoiceNumber();
-		AccountingInvoiceNumber nextInvoiceNumber = new AccountingInvoiceNumber(invoiceNumber.getNextInvoiceNumber());
-
+		AccountingInvoiceNumber currentNumberInvoiceNumber = accountingInvoiceNumberRepository.getCurrentNumberInvoiceNumber();
+		AccountingInvoiceNumber nextInvoiceNumber = currentNumberInvoiceNumber.nextInvoiceNumber();
 		accountingInvoiceNumberRepository.save(nextInvoiceNumber);
 
 		return nextInvoiceNumber.getCurrentInvoiceNumber();

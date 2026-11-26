@@ -14,3 +14,8 @@ databaseChangeLog:
     path: businesspartner/milestone-2/,
     labels: milestone-2
   }
+  - includeAll: {
+    relativeToChangelogFile: true,
+    path: accounting/milestone-2/,
+    labels: milestone-2
+  }
