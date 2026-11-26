@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.accounting.internal.infrastructur
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -15,7 +14,6 @@ import java.time.LocalDate;
 @Table(name = "accounting_invoice")
 @Getter
 @Setter
-@NoArgsConstructor
 public class AccountingInvoiceEntity {
 
 	@Id

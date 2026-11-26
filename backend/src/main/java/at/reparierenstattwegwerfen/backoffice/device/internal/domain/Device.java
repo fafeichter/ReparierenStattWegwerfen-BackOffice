@@ -5,7 +5,6 @@ import at.reparierenstattwegwerfen.backoffice.device.internal.domain.grade.Devic
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.status.DeviceStatus;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class Device implements NamedId {
 	private Integer id;
 	private Integer modelId;

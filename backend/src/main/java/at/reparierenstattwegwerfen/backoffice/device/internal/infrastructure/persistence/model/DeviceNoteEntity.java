@@ -3,7 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.pe
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 @Table(name = "device_note")
 @Getter
 @Setter
-@NoArgsConstructor
 public class DeviceNoteEntity implements NamedId {
 
 	@Id

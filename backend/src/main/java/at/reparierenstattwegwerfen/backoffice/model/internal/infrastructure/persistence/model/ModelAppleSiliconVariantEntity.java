@@ -4,7 +4,6 @@ import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -15,7 +14,6 @@ import lombok.Setter;
 @Table(name = "model_apple_silicon_variant")
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelAppleSiliconVariantEntity implements NamedId, Sortable {
 
 	@Id

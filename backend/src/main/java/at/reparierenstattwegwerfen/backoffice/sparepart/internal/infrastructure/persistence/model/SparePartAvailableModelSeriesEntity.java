@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.sparepart.internal.infrastructure
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,7 +12,6 @@ import lombok.Setter;
 @Table(name = "spare_part_available_model_series")
 @Getter
 @Setter
-@NoArgsConstructor
 public class SparePartAvailableModelSeriesEntity {
 
 	@Id

@@ -3,7 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.sparepart.internal.infrastructure
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -14,7 +13,6 @@ import lombok.Setter;
 @Table(name = "spare_part")
 @Getter
 @Setter
-@NoArgsConstructor
 public class SparePartEntity implements NamedId {
 
 	@Id

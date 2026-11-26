@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.domain.tags;
 
 import at.reparierenstattwegwerfen.backoffice.device.internal.domain.Device;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -11,7 +10,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class DeviceAddedTag {
 
 	private Integer id;

@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.per
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,7 +12,6 @@ import lombok.Setter;
 @Table(name = "model_silicon_available_storage")
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelSiliconAvailableStorageEntity {
 
 	@Id

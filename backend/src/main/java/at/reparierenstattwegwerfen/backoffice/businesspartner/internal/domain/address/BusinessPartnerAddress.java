@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -10,7 +9,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class BusinessPartnerAddress {
 	private Integer id;
 	private String street;

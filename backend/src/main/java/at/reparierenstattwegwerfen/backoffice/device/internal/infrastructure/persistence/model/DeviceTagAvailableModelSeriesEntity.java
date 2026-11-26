@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.pe
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,7 +12,6 @@ import lombok.Setter;
 @Table(name = "device_tag_available_model_series")
 @Getter
 @Setter
-@NoArgsConstructor
 public class DeviceTagAvailableModelSeriesEntity {
 
 	@Id

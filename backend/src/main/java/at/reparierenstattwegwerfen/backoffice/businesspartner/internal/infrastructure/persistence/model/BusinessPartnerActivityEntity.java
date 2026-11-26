@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastr
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -15,7 +14,6 @@ import java.time.LocalDateTime;
 @Table(name = "business_partner_activity")
 @Getter
 @Setter
-@NoArgsConstructor
 public class BusinessPartnerActivityEntity {
 
 	@Id

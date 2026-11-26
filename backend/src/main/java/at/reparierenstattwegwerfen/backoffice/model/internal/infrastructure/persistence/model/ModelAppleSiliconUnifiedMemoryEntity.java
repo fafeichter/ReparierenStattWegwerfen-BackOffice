@@ -4,7 +4,6 @@ import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.util.unit.DataUnit;
 
@@ -16,7 +15,6 @@ import org.springframework.util.unit.DataUnit;
 @Table(name = "model_apple_silicon_unified_memory")
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelAppleSiliconUnifiedMemoryEntity implements NamedId, Sortable {
 
 	@Id

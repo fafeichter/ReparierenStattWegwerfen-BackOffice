@@ -5,14 +5,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author Fabian Feichter
  * @since 16.06.2026
  */
 @Data
-@NoArgsConstructor
 public class CreateBusinessPartnerDto {
 
 	@NotEmpty

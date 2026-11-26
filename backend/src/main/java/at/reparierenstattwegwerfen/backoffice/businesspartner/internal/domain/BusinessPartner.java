@@ -3,7 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain;
 import at.reparierenstattwegwerfen.backoffice.businesspartner.internal.domain.address.BusinessPartnerAddress;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -12,7 +11,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class BusinessPartner implements NamedId {
 	private Integer id;
 	private String firstName;

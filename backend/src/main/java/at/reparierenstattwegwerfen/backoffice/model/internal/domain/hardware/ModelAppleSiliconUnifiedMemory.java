@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware;
 
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.util.unit.DataUnit;
 
@@ -12,7 +11,6 @@ import org.springframework.util.unit.DataUnit;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelAppleSiliconUnifiedMemory implements NamedId {
 
 	private Integer id;

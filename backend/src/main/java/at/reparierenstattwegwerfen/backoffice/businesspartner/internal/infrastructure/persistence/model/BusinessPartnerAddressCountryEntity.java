@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.businesspartner.internal.infrastr
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,7 +12,6 @@ import lombok.Setter;
 @Table(name = "business_partner_address_country")
 @Getter
 @Setter
-@NoArgsConstructor
 public class BusinessPartnerAddressCountryEntity {
 
 	@Id

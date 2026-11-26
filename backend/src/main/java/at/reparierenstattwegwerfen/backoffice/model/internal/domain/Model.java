@@ -4,7 +4,6 @@ import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.Mod
 import at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware.ModelColor;
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -16,7 +15,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class Model implements NamedId {
 
 	private Integer id;

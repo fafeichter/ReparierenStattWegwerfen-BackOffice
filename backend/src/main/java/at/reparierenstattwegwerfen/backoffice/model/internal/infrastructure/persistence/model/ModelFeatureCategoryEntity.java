@@ -3,7 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.per
 import at.reparierenstattwegwerfen.backoffice.shared.Sortable;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -14,7 +13,6 @@ import lombok.Setter;
 @Table(name = "model_feature_category")
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelFeatureCategoryEntity implements Sortable {
 
 	@Id

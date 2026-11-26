@@ -3,7 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.per
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -17,7 +16,6 @@ import java.util.Set;
 @Table(name = "model")
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelEntity implements NamedId {
 
 	@Id

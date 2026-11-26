@@ -1,7 +1,6 @@
 package at.reparierenstattwegwerfen.backoffice.model.internal.domain.hardware;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelAvailableAppleSilicon {
 
 	private Integer id;

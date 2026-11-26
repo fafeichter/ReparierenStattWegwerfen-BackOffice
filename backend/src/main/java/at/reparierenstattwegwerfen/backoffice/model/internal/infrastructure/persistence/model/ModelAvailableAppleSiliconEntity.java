@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.model.internal.infrastructure.per
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -15,7 +14,6 @@ import java.util.Set;
 @Table(name = "model_available_apple_silicon")
 @Getter
 @Setter
-@NoArgsConstructor
 public class ModelAvailableAppleSiliconEntity {
 
 	@Id

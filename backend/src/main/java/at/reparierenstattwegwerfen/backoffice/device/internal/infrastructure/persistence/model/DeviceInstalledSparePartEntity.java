@@ -2,7 +2,6 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.pe
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -15,7 +14,6 @@ import java.time.LocalDateTime;
 @Table(name = "device_installed_spare_part")
 @Getter
 @Setter
-@NoArgsConstructor
 public class DeviceInstalledSparePartEntity {
 
 	@Id

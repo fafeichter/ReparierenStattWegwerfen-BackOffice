@@ -3,7 +3,6 @@ package at.reparierenstattwegwerfen.backoffice.device.internal.infrastructure.pe
 import at.reparierenstattwegwerfen.backoffice.shared.NamedId;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -14,7 +13,6 @@ import lombok.Setter;
 @Table(name = "device_status_classification")
 @Getter
 @Setter
-@NoArgsConstructor
 public class DeviceStatusClassificationEntity implements NamedId {
 
 	@Id
