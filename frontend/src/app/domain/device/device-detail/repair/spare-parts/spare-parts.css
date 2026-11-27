@@ -2,12 +2,17 @@ li {
   margin-bottom: .2rem;
 }
 
-.datagrid-cell.total-cell {
+.datagrid-cell:not(.form) {
+  height: 2rem;
   display: flex;
-  align-items: center; /* Vertically centers the <hr> */
-}
+  align-items: center;
 
-.datagrid-cell > .total {
-  width: 100%;
-  color: grey;
+  &.right {
+    justify-content: flex-end;
+  }
+
+  > .total {
+    width: 100%;
+    color: lightslategrey;
+  }
 }

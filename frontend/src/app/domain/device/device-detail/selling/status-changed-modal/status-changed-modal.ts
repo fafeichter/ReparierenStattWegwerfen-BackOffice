@@ -9,6 +9,7 @@ import {
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { DeviceSellingControllerService, DeviceSellingDto } from '@api/device';
+import { Autofocus } from '../../../../../clarity-addons/input/autofocus';
 
 @Component({
   imports: [
@@ -19,6 +20,7 @@ import { DeviceSellingControllerService, DeviceSellingDto } from '@api/device';
     ClrNumberInputModule,
     DatePipe,
     ReactiveFormsModule,
+    Autofocus,
   ],
   selector: 'app-selling-status-changed-modal',
   styleUrl: './status-changed-modal.css',

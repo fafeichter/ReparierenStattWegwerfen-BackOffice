@@ -40,6 +40,7 @@ import {
 import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
 import { SerialNumber } from '../../serial-number';
 import { StatusChangedModal } from '../selling/status-changed-modal/status-changed-modal';
+import { Autofocus } from '../../../../clarity-addons/input/autofocus';
 
 @Component({
   selector: 'app-device',
@@ -58,6 +59,7 @@ import { StatusChangedModal } from '../selling/status-changed-modal/status-chang
     ClrCardModule,
     SerialNumber,
     StatusChangedModal,
+    Autofocus,
   ],
   templateUrl: './device.html',
   styleUrl: './device.css',

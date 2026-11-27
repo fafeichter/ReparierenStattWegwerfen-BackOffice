@@ -1,6 +1,6 @@
 <h4 class="mt-2!">
   <cds-icon shape="checkbox-list" size="lg"/>
-  Zum Verkauf angeboten
+  Offered For Sale
   <clr-badge clrType="outlined">
     {{ devicesOfferedForSale().length }}
   </clr-badge>
@@ -17,7 +17,7 @@
     Model
   </clr-dg-column>
   <clr-dg-placeholder>
-    All done!
+    All Done!
   </clr-dg-placeholder>
   <clr-dg-row *clrDgItems="let device of devicesOfferedForSale(); let i = index"
               [class.collapsed]="!expanded() && i >= visibleRowCount" [clrDgItem]="device">

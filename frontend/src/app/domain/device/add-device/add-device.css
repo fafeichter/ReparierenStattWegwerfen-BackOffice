@@ -6,13 +6,6 @@
   line-height: 1.5;
 }
 
-.spinner-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 1rem 0;
-}
-
 hr {
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);

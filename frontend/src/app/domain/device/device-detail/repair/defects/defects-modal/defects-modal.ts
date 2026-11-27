@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DeviceDefectsControllerService, DeviceDefectsDto } from '@api/device';
+import { Autofocus } from '../../../../../../clarity-addons/input/autofocus';
 
 @Component({
   imports: [
@@ -17,6 +18,7 @@ import { DeviceDefectsControllerService, DeviceDefectsDto } from '@api/device';
     ClrTextareaModule,
     FormsModule,
     ReactiveFormsModule,
+    Autofocus,
   ],
   selector: 'app-defects-modal',
   styleUrl: './defects-modal.css',

@@ -1,131 +1,126 @@
 <button (click)="modalOpen.set(true)" class="btn btn-secondary mt-3! rounded-xl!">
   <cds-icon shape="plus"/>
-  Add device
+  Add Device
 </button>
 
-<clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="xl">
-  <div class="modal-title">
-    Add device
-  </div>
-  <div class="modal-body">
-    <form (ngSubmit)="addDevice()" [formGroup]="form" autocomplete="off" clrForm>
-      <clr-input-container>
-        <label class="clr-required-mark">
-          URL
-        </label>
-        <input #input (click)="input.select()" (focusout)="resolveModelDetails()" clrInput formControlName="url"
-               required
-               size="999" type="url"/>
-        <clr-control-helper>
-          From Kleinanzeigen, Willhaben etc.
-          @if (devicesWithSameAdUrl()?.length) {
-            <div class="mt-1">
-              <clr-alert [clrAlertClosable]="false" clrAlertType="warning">
-                <clr-alert-item>
-                  <div class="alert-text">
+@if (modalOpen()) {
+  <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="xl">
+    <div class="modal-title">
+      Add Device
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="addDevice()" [formGroup]="form" autocomplete="off" clrForm>
+        <clr-input-container>
+          <label class="clr-required-mark">
+            URL
+          </label>
+          <input (focusout)="resolveModelDetails()" appAutofocus clrInput formControlName="url" required size="999"
+                 type="url"/>
+          <clr-control-helper>
+            From Kleinanzeigen, Willhaben etc.
+            @if (devicesWithSameAdUrl()?.length) {
+              <div class="mt-1">
+                <clr-alert [clrAlertClosable]="false" clrAlertType="warning">
+                  <clr-alert-item>
+                    <div class="alert-text">
                     <span class="font-bold">
                       This URL is also used by at least one other device
                     </span>
-                    <div class="mt-1 mb-2">
-                      Each device usually needs its own URL.
-                    </div>
-                    @for (deviceIdWithSameAdUrl of devicesWithSameAdUrl(); track deviceIdWithSameAdUrl) {
-                      <div class="mt-1">
-                        <a [routerLink]="['/devices', deviceIdWithSameAdUrl]" class="ml-1 " target="_blank">
-                          #{{ deviceIdWithSameAdUrl }}
-                          <cds-icon shape="pop-out"/>
-                        </a>
+                      <div class="mt-1 mb-2">
+                        Each device usually needs its own URL.
                       </div>
-                    }
-                  </div>
-                </clr-alert-item>
-              </clr-alert>
-            </div>
+                      @for (deviceIdWithSameAdUrl of devicesWithSameAdUrl(); track deviceIdWithSameAdUrl) {
+                        <div class="mt-1">
+                          <a [routerLink]="['/devices', deviceIdWithSameAdUrl]" class="ml-1 " target="_blank">
+                            #{{ deviceIdWithSameAdUrl }}
+                            <cds-icon shape="pop-out"/>
+                          </a>
+                        </div>
+                      }
+                    </div>
+                  </clr-alert-item>
+                </clr-alert>
+              </div>
+            }
+          </clr-control-helper>
+          <clr-control-error *clrIfError="'required'">
+            URL is required
+          </clr-control-error>
+          <clr-control-error *clrIfError="'pattern'">
+            Please enter a valid URL
+          </clr-control-error>
+        </clr-input-container>
+        <clr-number-input-container>
+          <label class="clr-required-mark">
+            Price
+          </label>
+          <input clrNumberInput formControlName="price" prefix="€" required type="number"/>
+          <clr-control-error *clrIfError="'required'">
+            Price is required
+          </clr-control-error>
+          <clr-control-error *clrIfError="'min'">
+            Please enter a valid price
+          </clr-control-error>
+        </clr-number-input-container>
+        <clr-date-container>
+          <label class="clr-required-mark">
+            Buying Date
+          </label>
+          <input [max]="(now | date:'yyyy-MM-dd')!" clrDate formControlName="buyingDate" required type="date"/>
+          <clr-control-error *clrIfError="'required'">
+            Buying date is required
+          </clr-control-error>
+          <clr-control-error *clrIfError="'futureDate'">
+            Date must be in past or present
+          </clr-control-error>
+        </clr-date-container>
+        <clr-input-container>
+          <label class="clr-required-mark">
+            Model
+          </label>
+        </clr-input-container>
+      </form>
+      @if (isLoadingModel()) {
+        <clr-progress-bar class="mt-2!" clrLoop/>
+      } @else {
+        @if (found(); as mainFound) {
+          <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: mainFound }"/>
+        }
+        @if (found()?.alternativeCandidates?.length) {
+          <div class="mt-5 mb-1">
+            Alternatives:
+          </div>
+          @for (alternative of found()?.alternativeCandidates; track alternative; let i = $index) {
+            <clr-radio-wrapper>
+              <input (change)="selectedAlternative.set(i)" [checked]="selectedAlternative() === i" [id]="'option-' + i"
+                     [value]="i" clrRadio name="options" type="radio"/>
+              <label [for]="'option-' + i">
+                Alternative {{ i + 1 }}
+              </label>
+            </clr-radio-wrapper>
+            <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: alternative }"/>
           }
-        </clr-control-helper>
-        <clr-control-error *clrIfError="'required'">
-          URL is required
-        </clr-control-error>
-        <clr-control-error *clrIfError="'pattern'">
-          Please enter a valid URL
-        </clr-control-error>
-      </clr-input-container>
-      <clr-number-input-container>
-        <label class="clr-required-mark">
-          Price
-        </label>
-        <input clrNumberInput formControlName="price" prefix="€" required type="number"/>
-        <clr-control-error *clrIfError="'required'">
-          Price is required
-        </clr-control-error>
-        <clr-control-error *clrIfError="'min'">
-          Please enter a valid price
-        </clr-control-error>
-      </clr-number-input-container>
-      <clr-date-container>
-        <label class="clr-required-mark">
-          Buying date
-        </label>
-        <input [max]="(now | date:'yyyy-MM-dd')!" clrDate formControlName="buyingDate" required type="date"/>
-        <clr-control-error *clrIfError="'required'">
-          Buying date is required
-        </clr-control-error>
-        <clr-control-error *clrIfError="'futureDate'">
-          Date must be in past or present
-        </clr-control-error>
-      </clr-date-container>
-    </form>
-
-    @if (isLoadingModel()) {
-      <div class="spinner-container mt-6!">
-        <clr-spinner [clrSmall]="true"/>
-        <span>
-          Detecting model...
-        </span>
-      </div>
-    } @else {
-      <div class="mt-5 mb-1">
-        Found model:
-      </div>
-
-      @if (found(); as mainFound) {
-        <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: mainFound }"></ng-container>
-      }
-
-      @if (found()?.alternativeCandidates?.length) {
-        <div class="mt-5 mb-1">
-          Alternatives:
-        </div>
-        @for (alternative of found()?.alternativeCandidates; track alternative; let i = $index) {
-          <clr-radio-wrapper>
-            <input (change)="selectedAlternative.set(i)" [checked]="selectedAlternative() === i" [id]="'option-' + i"
-                   [value]="i" clrRadio name="options" type="radio"/>
-            <label [for]="'option-' + i">
-              Alternative {{ i + 1 }}
-            </label>
-          </clr-radio-wrapper>
-          <ng-container *ngTemplateOutlet="modelCard; context: { $implicit: alternative }"></ng-container>
         }
       }
-    }
-  </div>
-  <div class="modal-footer">
-    <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
-      <cds-icon shape="close"/>
-      Cancel
-    </button>
-    <button (click)="addDevice()"
-            [disabled]="form.invalid || isSubmitting() || isLoadingModel() || isLoadingDevicesWithSameUrl()"
-            class="btn btn-primary" type="submit">
-      @if (isSubmitting()) {
-        <span class="spinner spinner-inline"></span>
-        Adding device...
-      } @else {
-        Add device
-      }
-    </button>
-  </div>
-</clr-modal>
+    </div>
+    <div class="modal-footer">
+      <button (click)="modalOpen.set(false)" class="btn btn-outline btn-link" type="button">
+        <cds-icon shape="close"/>
+        Cancel
+      </button>
+      <button (click)="addDevice()"
+              [disabled]="form.invalid || isSubmitting() || isLoadingModel() || isLoadingDevicesWithSameUrl()"
+              class="btn btn-primary" type="submit">
+        @if (isSubmitting()) {
+          <span class="spinner spinner-inline"></span>
+          Adding Device...
+        } @else {
+          Add Device
+        }
+      </button>
+    </div>
+  </clr-modal>
+}
 
 <ng-template #modelCard let-model>
   <div [style.background-color]="getConfidenceColor(model.confidence)" class="found">

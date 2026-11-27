@@ -8,7 +8,8 @@
         <label class="clr-required-mark">
           Reported Defect
         </label>
-        <textarea class="w-full!" clrTextarea formControlName="reportedDefect" required rows="2"></textarea>
+        <textarea appAutofocus class="w-full!" clrTextarea formControlName="reportedDefect" required
+                  rows="2"></textarea>
       </clr-textarea-container>
       <clr-textarea-container>
         <label>
@@ -27,9 +28,9 @@
             type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
-        Setting defects...
+        Setting Defects...
       } @else {
-        Set defects
+        Set Defects
       }
     </button>
   </div>

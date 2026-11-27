@@ -1,0 +1,7 @@
+tr {
+  height: 2rem;
+
+  & td {
+    vertical-align: middle;
+  }
+}

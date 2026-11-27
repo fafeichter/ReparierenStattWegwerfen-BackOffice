@@ -1,8 +1,8 @@
 a.nav-link:target-current {
   color: var(--clr-vertical-nav-item-active-color);
   background-color: var(--clr-vertical-nav-selected-bg-color);
-}
 
-a.nav-link:target-current::before {
-  border-color: var(--cds-alias-object-interaction-background-highlight);
+  &::before {
+    border-color: var(--cds-alias-object-interaction-background-highlight);
+  }
 }

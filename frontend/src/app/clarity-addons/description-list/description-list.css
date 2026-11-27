@@ -14,9 +14,9 @@ dt {
   text-align: right;
   line-height: 2;
 
-  display: flex; /* ADDED: Turns dt into flex block */
-  align-items: center; /* ADDED: Vertically centers text */
-  justify-content: flex-end; /* ADDED: Preserves right alignment */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 dd {
@@ -27,22 +27,20 @@ dd {
   padding-left: 3%;
   margin-left: 0;
 
-  display: flex; /* ADDED: Turns dd into flex block */
-  align-items: center; /* ADDED: Vertically centers text/buttons/icons */
+  display: flex;
+  align-items: center;
 }
 
 dt:hover,
 dt:has(+ dd:hover) {
-  background-color: rgba(107, 209, 247, 0.05);
+  background-color: rgba(107, 209, 247, .05);
 }
 
-/* Highlight <dd> when hovering itself, or when its preceding <dt> is hovered */
 dd:hover,
 dt:hover + dd {
-  background-color: rgba(107, 209, 247, 0.05);
+  background-color: rgba(107, 209, 247, .05);
 }
 
-/* Optional: Treat dt and dd as inline/flex blocks if you want the hover background to cover full height */
 dt, dd {
   transition: background-color 0.15s ease;
 }

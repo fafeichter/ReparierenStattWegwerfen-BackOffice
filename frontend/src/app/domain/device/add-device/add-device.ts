@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -15,6 +15,7 @@ import {
   ClrFormsModule,
   ClrIcon,
   ClrModalModule,
+  ClrProgressBarModule,
   ClrSpinnerModule,
   ClrTooltipModule,
 } from '@clr/angular';
@@ -27,6 +28,7 @@ import {
   DeviceCreationControllerService,
 } from '@api/device';
 import { OrElsePipe } from '../../../pipes/or-else-pipe';
+import { Autofocus } from '../../../clarity-addons/input/autofocus';
 
 @Component({
   selector: 'app-add-device',
@@ -44,13 +46,13 @@ import { OrElsePipe } from '../../../pipes/or-else-pipe';
     RouterLink,
     DatePipe,
     ClrAlertModule,
+    ClrProgressBarModule,
+    Autofocus,
   ],
   templateUrl: './add-device.html',
   styleUrl: './add-device.css',
 })
 export class AddDevice {
-  @ViewChild('input') urlInput!: ElementRef<HTMLInputElement>;
-
   modalOpen = signal<boolean>(false);
   isSubmitting = signal<boolean>(false);
   isLoadingModel = signal<boolean>(false);
@@ -91,8 +93,6 @@ export class AddDevice {
     effect(() => {
       if (this.modalOpen()) {
         this.resetFormState();
-        // Uses standard frame animation timing instead of arbitrary magic numbers
-        requestAnimationFrame(() => this.urlInput?.nativeElement.focus());
       } else {
         this.isSubmitting.set(false);
         this.isLoadingModel.set(false);

@@ -1,6 +1,6 @@
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false">
   <h3 class="modal-title">
-    Set selling details
+    Set Selling Details
   </h3>
   <div class="modal-body">
     <form (ngSubmit)="setSellingDetails()" [formGroup]="form" autocomplete="off" clrForm clrLabelSize="3">
@@ -8,7 +8,7 @@
         <label class="clr-required-mark">
           Price
         </label>
-        <input clrNumberInput formControlName="sellingPrice" prefix="€" type="number"/>
+        <input appAutofocus clrNumberInput formControlName="sellingPrice" prefix="€" type="number"/>
         <clr-control-error *clrIfError="'required'">
           Price is required
         </clr-control-error>
@@ -39,9 +39,9 @@
             type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
-        Setting status to sold...
+        Setting Status To Sold...
       } @else {
-        Set status to sold
+        Set Status To Sold
       }
     </button>
   </div>

@@ -6,7 +6,7 @@
         <label class="clr-required-mark">
           First Name
         </label>
-        <input clrInput formControlName="firstName" required type="text"/>
+          <input appAutofocus clrInput formControlName="firstName" required type="text"/>
         <clr-control-error *clrIfError="'required'">
           First name is required
         </clr-control-error>
@@ -103,9 +103,9 @@
       <clr-button [disabled]="businessPartnerForm.invalid || isSubmitting()" class="btn btn-primary" type="submit">
         @if (isSubmitting()) {
           <span class="spinner spinner-inline"></span>
-          Creating Business Partner...
+            Adding Business Partner...
         } @else {
-          Create Business Partner
+            Add Business Partner
         }
       </clr-button>
     </clr-button-group>

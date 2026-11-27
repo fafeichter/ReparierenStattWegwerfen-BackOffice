@@ -1,6 +1,6 @@
 <h4 class="mt-2!">
   <cds-icon shape="calendar" size="lg"/>
-  Bestellt / gekauft
+  Bought
   <clr-badge clrType="outlined">
     {{ devicesOrdered().length }}
   </clr-badge>
@@ -11,13 +11,13 @@
     Device
   </clr-dg-column>
   <clr-dg-column>
-    Buying date
+    Buying Date
   </clr-dg-column>
   <clr-dg-column>
     Model
   </clr-dg-column>
   <clr-dg-placeholder>
-    There are no devices.
+    No Devices.
   </clr-dg-placeholder>
   <clr-dg-row *clrDgItems="let device of devicesOrdered(); let i = index"
               [class.collapsed]="!expanded() && i >= visibleRowCount" [clrDgItem]="device">

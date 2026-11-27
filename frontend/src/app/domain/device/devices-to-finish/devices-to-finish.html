@@ -1,6 +1,6 @@
 <h4 class="mt-2!">
   <cds-icon shape="wrench" size="lg"/>
-  Zum Fertigstellen
+  To Finish
   <clr-badge clrType="outlined">
     {{ devicesToFinish().length }}
   </clr-badge>
@@ -17,7 +17,7 @@
     Status
   </clr-dg-column>
   <clr-dg-placeholder>
-    All done!
+    All Done!
   </clr-dg-placeholder>
   <clr-dg-row *clrDgItems="let device of devicesToFinish(); let i = index"
               [class.collapsed]="!expanded() && i >= visibleRowCount" [clrDgItem]="device">

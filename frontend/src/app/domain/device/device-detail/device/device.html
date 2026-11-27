@@ -231,7 +231,7 @@
           <form (ngSubmit)="changeSerialNumber()" [formGroup]="serialNumberForm" autocomplete="off" clrForm
                 clrLayout="vertical">
             <clr-input-container>
-              <input autofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
+              <input appAutofocus clrInput deviceSerialNumber formControlName="newSerialNumber" type="text">
               <clr-control-error *clrIfError="'required'">
                 Serial number must be provided
               </clr-control-error>
@@ -276,7 +276,7 @@
         } @else {
           <form (ngSubmit)="changeBattery()" [formGroup]="batteryForm" autocomplete="off" clrForm clrLayout="vertical">
             <clr-input-container>
-              <input clrInput formControlName="newCycleCount"/>
+              <input appAutofocus clrInput formControlName="newCycleCount"/>
               <div clrInputSuffix>
                 cycles
               </div>

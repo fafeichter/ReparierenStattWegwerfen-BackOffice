@@ -13,7 +13,7 @@
     Date
   </clr-dg-column>
   <clr-dg-placeholder>
-    No spare parts.
+    No Spare Parts.
   </clr-dg-placeholder>
   <clr-dg-row *clrDgItems="let deviceSparePart of deviceSpareParts()">
     <clr-dg-cell>
@@ -21,6 +21,7 @@
       <button (click)="deleteDeviceSparePart(deviceSparePart.deviceSparePartId)" class="btn btn-link btn-icon"
               type="button">
         <cds-icon shape="trash" size="xs"/>
+        Delete
       </button>
     </clr-dg-cell>
     <clr-dg-cell>
@@ -41,7 +42,7 @@
     <clr-dg-row>
       <clr-dg-cell/>
       <clr-dg-cell>
-            <span class="font-bold">
+            <span class="font-bold mr-1">
               Sum:
             </span>
         {{ totalSparePartsCost() | currency:'EUR':'symbol':'1.2-2' }}
@@ -52,7 +53,7 @@
 
   @if (sparePartEditModeActive()) {
     <clr-dg-row>
-      <clr-dg-cell>
+      <clr-dg-cell class="form">
         <form (ngSubmit)="saveSparePart()" [formGroup]="form" autocomplete="off"
               clrForm clrLabelSize="3" clrLayout="horizontal">
           <clr-select-container>

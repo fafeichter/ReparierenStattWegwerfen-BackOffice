@@ -40,7 +40,7 @@
         <form [formGroup]="form" autocomplete="off" clrForm clrLayout="vertical">
           <clr-file-input-container clrButtonLabel="Browse">
             <label class="clr-required-mark">
-              Set address from image
+              Set Address From Image
             </label>
             <input (change)="updateAddress()" accept="image/*" capture="environment" clrFileInput
                    formControlName="shippingLabelImage" name="file" required type="file"/>

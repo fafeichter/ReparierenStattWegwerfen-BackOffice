@@ -7,10 +7,11 @@ import {
   CreateBuyerBusinessPartnerForDeviceDto,
   DeviceBusinessPartnerControllerService,
 } from '@api/device';
+import { Autofocus } from '../../../clarity-addons/input/autofocus';
 
 @Component({
   selector: 'app-businesspartner-create',
-  imports: [ClrInputModule, ReactiveFormsModule, ClrSelectModule, ClrButtonGroupModule],
+  imports: [ClrInputModule, ReactiveFormsModule, ClrSelectModule, ClrButtonGroupModule, Autofocus],
   templateUrl: './businesspartner-create.html',
   styleUrl: './businesspartner-create.css',
 })

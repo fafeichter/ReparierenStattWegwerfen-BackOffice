@@ -1,6 +1,6 @@
 <clr-modal [(clrModalOpen)]="modalOpen" [clrModalStaticBackdrop]="false" clrModalSize="l">
   <div class="modal-title">
-    Add note
+      Add Note
   </div>
   <div class="modal-body">
     <form (ngSubmit)="addNote()" [formGroup]="form" autocomplete="off" clrForm>
@@ -8,7 +8,8 @@
         <label class="clr-required-mark">
           Text
         </label>
-        <textarea class="w-full!" clrTextarea formControlName="text" name="text" required rows="2"></textarea>
+          <textarea appAutofocus class="w-full!" clrTextarea formControlName="text" name="text" required
+                    rows="2"></textarea>
         <clr-control-error *clrIfError="'required'">
           Text is required
         </clr-control-error>
@@ -23,9 +24,9 @@
     <button (click)="addNote()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="submit">
       @if (isSubmitting()) {
         <span class="spinner spinner-inline"></span>
-        Adding note...
+          Adding Note...
       } @else {
-        Add note
+          Add Note
       }
     </button>
   </div>
