@@ -22,8 +22,8 @@
       </tr>
       </thead>
       <tbody>
-        @for (activity of deviceActivities(); track activity.deviceActivityId; let i = $index) {
-          <tr [class.collapsed]="!expanded() && i >= visibleRowCount">
+        @for (activity of visibleDeviceActivities(); track activity.deviceActivityId) {
+          <tr>
             <td class="left">
               {{ activity.action }}
             </td>

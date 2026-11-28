@@ -23,4 +23,8 @@ export class DevicesOrdered {
   protected readonly hiddenRowCount = computed(() =>
     Math.max(0, this.devicesOrdered().length - this.visibleRowCount),
   );
+  // only the first rows are rendered until the user expands the list
+  protected readonly visibleDevicesOrdered = computed(() =>
+    this.expanded() ? this.devicesOrdered() : this.devicesOrdered().slice(0, this.visibleRowCount),
+  );
 }

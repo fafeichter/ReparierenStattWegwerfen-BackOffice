@@ -22,4 +22,10 @@ export class DevicesToFinish {
   protected readonly hiddenRowCount = computed(() =>
     Math.max(0, this.devicesToFinish().length - this.visibleRowCount),
   );
+  // only the first rows are rendered until the user expands the list
+  protected readonly visibleDevicesToFinish = computed(() =>
+    this.expanded()
+      ? this.devicesToFinish()
+      : this.devicesToFinish().slice(0, this.visibleRowCount),
+  );
 }

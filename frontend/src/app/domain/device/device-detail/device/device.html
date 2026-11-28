@@ -338,11 +338,11 @@
         Tags
       </dt>
       <dd class="tags">
-        <div class="tags-row">
+        <div>
           @for (tag of deviceBase()?.tags; track tag.id) {
             <clr-label>
               {{ tag.name }}
-              <cds-icon (click)="removeTag(tag.id)" [style.cursor]="'pointer'" shape="close"/>
+              <cds-icon (click)="removeTag(tag.id)" class="cursor-pointer" shape="close"/>
             </clr-label>
           }
         </div>

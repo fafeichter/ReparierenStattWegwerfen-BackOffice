@@ -8,7 +8,6 @@ import { NavItem } from '../../../../clarity-addons/scrollspy/scrollspy';
   selector: 'app-activity',
   imports: [DatePipe, ClrCardModule, ClrIcon],
   templateUrl: './activity.html',
-  styleUrl: './activity.css',
 })
 export class Activity {
   deviceId = input.required<number>();
@@ -18,6 +17,12 @@ export class Activity {
   protected readonly expanded = signal(false);
   protected readonly hiddenRowCount = computed(() =>
     Math.max(0, this.deviceActivities().length - this.visibleRowCount),
+  );
+  // only the first rows are rendered until the user expands the list
+  protected readonly visibleDeviceActivities = computed(() =>
+    this.expanded()
+      ? this.deviceActivities()
+      : this.deviceActivities().slice(0, this.visibleRowCount),
   );
   private readonly activitiesResource = inject(
     DeviceActivityControllerService,

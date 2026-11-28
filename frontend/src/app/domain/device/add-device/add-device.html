@@ -31,7 +31,7 @@
                       </div>
                       @for (deviceIdWithSameAdUrl of devicesWithSameAdUrl(); track deviceIdWithSameAdUrl) {
                         <div class="mt-1">
-                          <a [routerLink]="['/devices', deviceIdWithSameAdUrl]" class="ml-1 " target="_blank">
+                          <a [routerLink]="['/devices', deviceIdWithSameAdUrl]" class="ml-1" target="_blank">
                             #{{ deviceIdWithSameAdUrl }}
                             <cds-icon shape="pop-out"/>
                           </a>
@@ -112,7 +112,7 @@
               [clrLoading]="isSubmitting()"
               [disabled]="form.invalid || isLoadingModel() || isLoadingDevicesWithSameUrl()"
               class="btn btn-primary" type="submit">
-          Add Device
+        Add Device
       </button>
     </div>
   </clr-modal>

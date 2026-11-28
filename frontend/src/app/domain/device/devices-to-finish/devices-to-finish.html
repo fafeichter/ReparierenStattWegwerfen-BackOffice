@@ -19,8 +19,7 @@
   <clr-dg-placeholder>
     All Done!
   </clr-dg-placeholder>
-  <clr-dg-row *clrDgItems="let device of devicesToFinish(); let i = index"
-              [class.collapsed]="!expanded() && i >= visibleRowCount" [clrDgItem]="device">
+  <clr-dg-row *clrDgItems="let device of visibleDevicesToFinish()" [clrDgItem]="device">
     <clr-dg-cell>
       <a [routerLink]="['/devices', device.deviceId]">
         #{{ device.deviceId }}

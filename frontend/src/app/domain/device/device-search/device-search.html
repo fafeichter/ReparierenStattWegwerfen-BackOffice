@@ -27,11 +27,11 @@
           Only one search field must be set
         </clr-control-error>
       </clr-input-container>
-      <clr-input-container class="mt-7!">
+      <clr-input-container>
         <label class="clr-col-5">
           Serial number
         </label>
-        <input class="clr-col-6 uppercase" clrInput formControlName="deviceSerialNumber"/>
+        <input class="clr-col-8 uppercase" clrInput formControlName="deviceSerialNumber"/>
         <clr-control-error *clrIfError="'min'">
           Minimum length not met
         </clr-control-error>
@@ -48,7 +48,7 @@
           No device found with this serial number.
         </clr-control-error>
       </clr-input-container>
-      <clr-input-container class="mt-7!">
+      <clr-input-container>
         <label class="clr-col-5">
           URL
         </label>
@@ -72,7 +72,7 @@
       <button [clrLoading]="isSubmitting()" [disabled]="deviceSearchForm.invalid" class="btn btn-icon mt-5!"
               type="submit">
         <cds-icon direction="right" shape="arrow-mini"/>
-          Go To Device
+        Go To Device
       </button>
     </form>
   </div>
