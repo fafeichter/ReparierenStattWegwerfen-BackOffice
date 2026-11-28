@@ -21,13 +21,9 @@
       <cds-icon shape="close"/>
       Cancel
     </button>
-    <button (click)="editNote()" [disabled]="form.invalid || isSubmitting()" class="btn btn-primary" type="submit">
-      @if (isSubmitting()) {
-        <span class="spinner spinner-inline"></span>
-        Editing Note...
-      } @else {
+    <button (click)="editNote()" [clrLoading]="isSubmitting()" [disabled]="form.invalid" class="btn btn-primary"
+            type="submit">
         Edit Note
-      }
     </button>
   </div>
 </clr-modal>

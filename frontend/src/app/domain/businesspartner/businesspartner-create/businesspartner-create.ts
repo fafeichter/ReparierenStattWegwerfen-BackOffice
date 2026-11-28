@@ -1,6 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ClrButtonGroupModule, ClrInputModule, ClrSelectModule } from '@clr/angular';
+import {
+  ClrButtonGroupModule,
+  ClrInputModule,
+  ClrLoadingButtonModule,
+  ClrLoadingModule,
+  ClrSelectModule,
+} from '@clr/angular';
 import { BusinessPartnerAddressCountryControllerService } from '@api/businesspartner';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -11,7 +17,15 @@ import { Autofocus } from '../../../clarity-addons/input/autofocus';
 
 @Component({
   selector: 'app-businesspartner-create',
-  imports: [ClrInputModule, ReactiveFormsModule, ClrSelectModule, ClrButtonGroupModule, Autofocus],
+  imports: [
+    ClrInputModule,
+    ReactiveFormsModule,
+    ClrSelectModule,
+    ClrButtonGroupModule,
+    Autofocus,
+    ClrLoadingModule,
+    ClrLoadingButtonModule,
+  ],
   templateUrl: './businesspartner-create.html',
   styleUrl: './businesspartner-create.css',
 })

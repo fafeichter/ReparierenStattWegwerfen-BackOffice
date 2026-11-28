@@ -100,13 +100,10 @@
         <cds-icon shape="close"/>
         Cancel
       </clr-button>
-      <clr-button [disabled]="businessPartnerForm.invalid || isSubmitting()" class="btn btn-primary" type="submit">
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-            Adding Business Partner...
-        } @else {
+      <clr-button [clrLoading]="isSubmitting()" [disabled]="businessPartnerForm.invalid" class="btn btn-primary"
+                  type="submit">
             Add Business Partner
-        }
+
       </clr-button>
     </clr-button-group>
   </div>

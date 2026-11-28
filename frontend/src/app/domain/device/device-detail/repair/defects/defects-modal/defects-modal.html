@@ -24,14 +24,10 @@
       <cds-icon shape="close"/>
       Cancel
     </button>
-    <button (click)="updateDefects()" [disabled]="defectsForm.invalid || isSubmitting()" class="btn btn-primary"
+    <button (click)="updateDefects()" [clrLoading]="isSubmitting()" [disabled]="defectsForm.invalid"
+            class="btn btn-primary"
             type="submit">
-      @if (isSubmitting()) {
-        <span class="spinner spinner-inline"></span>
-        Setting Defects...
-      } @else {
-        Set Defects
-      }
+      Set Defects
     </button>
   </div>
 </clr-modal>

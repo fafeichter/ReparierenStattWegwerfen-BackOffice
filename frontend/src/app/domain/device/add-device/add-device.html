@@ -109,14 +109,10 @@
         Cancel
       </button>
       <button (click)="addDevice()"
-              [disabled]="form.invalid || isSubmitting() || isLoadingModel() || isLoadingDevicesWithSameUrl()"
+              [clrLoading]="isSubmitting()"
+              [disabled]="form.invalid || isLoadingModel() || isLoadingDevicesWithSameUrl()"
               class="btn btn-primary" type="submit">
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-          Adding Device...
-        } @else {
           Add Device
-        }
       </button>
     </div>
   </clr-modal>

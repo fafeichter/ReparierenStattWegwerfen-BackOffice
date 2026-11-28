@@ -7,7 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { DeviceNotesControllerService } from '@api/device';
-import { ClrCommonFormsModule, ClrIcon, ClrModalModule, ClrTextareaModule } from '@clr/angular';
+import {
+  ClrCommonFormsModule,
+  ClrIcon,
+  ClrLoadingButtonModule,
+  ClrLoadingModule,
+  ClrModalModule,
+  ClrTextareaModule,
+} from '@clr/angular';
 import { Autofocus } from '../../../../../clarity-addons/input/autofocus';
 
 @Component({
@@ -19,6 +26,8 @@ import { Autofocus } from '../../../../../clarity-addons/input/autofocus';
     FormsModule,
     ReactiveFormsModule,
     Autofocus,
+    ClrLoadingModule,
+    ClrLoadingButtonModule,
   ],
   selector: 'app-note-add-modal',
   styleUrl: './note-add-modal.css',

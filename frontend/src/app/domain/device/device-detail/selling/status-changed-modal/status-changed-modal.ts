@@ -3,6 +3,8 @@ import {
   ClrCommonFormsModule,
   ClrDatepickerModule,
   ClrInputModule,
+  ClrLoadingButtonModule,
+  ClrLoadingModule,
   ClrModalModule,
   ClrNumberInputModule,
 } from '@clr/angular';
@@ -21,6 +23,8 @@ import { Autofocus } from '../../../../../clarity-addons/input/autofocus';
     DatePipe,
     ReactiveFormsModule,
     Autofocus,
+    ClrLoadingModule,
+    ClrLoadingButtonModule,
   ],
   selector: 'app-selling-status-changed-modal',
   styleUrl: './status-changed-modal.css',

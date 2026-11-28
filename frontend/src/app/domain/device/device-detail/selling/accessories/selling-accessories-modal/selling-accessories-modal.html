@@ -31,14 +31,10 @@
       <cds-icon shape="close"/>
       Cancel
     </button>
-    <button (click)="updateAccessories()" [disabled]="accessoriesForm.invalid || isSubmitting()" class="btn btn-primary"
+    <button (click)="updateAccessories()" [clrLoading]="isSubmitting()" [disabled]="accessoriesForm.invalid"
+            class="btn btn-primary"
             type="submit">
-      @if (isSubmitting()) {
-        <span class="spinner spinner-inline"></span>
-        Setting Selling Accessories...
-      } @else {
         Set Selling Accessories
-      }
     </button>
   </div>
 </clr-modal>

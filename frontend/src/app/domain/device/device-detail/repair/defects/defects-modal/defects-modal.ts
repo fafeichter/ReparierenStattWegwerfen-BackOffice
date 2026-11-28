@@ -1,5 +1,12 @@
 import { Component, computed, effect, inject, input, model, output, signal } from '@angular/core';
-import { ClrCommonFormsModule, ClrIcon, ClrModalModule, ClrTextareaModule } from '@clr/angular';
+import {
+  ClrCommonFormsModule,
+  ClrIcon,
+  ClrLoadingButtonModule,
+  ClrLoadingModule,
+  ClrModalModule,
+  ClrTextareaModule,
+} from '@clr/angular';
 import {
   FormControl,
   FormGroup,
@@ -19,6 +26,8 @@ import { Autofocus } from '../../../../../../clarity-addons/input/autofocus';
     FormsModule,
     ReactiveFormsModule,
     Autofocus,
+    ClrLoadingModule,
+    ClrLoadingButtonModule,
   ],
   selector: 'app-defects-modal',
   styleUrl: './defects-modal.css',

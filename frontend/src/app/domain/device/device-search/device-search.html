@@ -69,14 +69,10 @@
           No device found with this URL.
         </clr-control-error>
       </clr-input-container>
-      <button [disabled]="deviceSearchForm.invalid || isSubmitting()" class="btn btn-icon mt-5!" type="submit">
+      <button [clrLoading]="isSubmitting()" [disabled]="deviceSearchForm.invalid" class="btn btn-icon mt-5!"
+              type="submit">
         <cds-icon direction="right" shape="arrow-mini"/>
-        @if (isSubmitting()) {
-          <span class="spinner spinner-inline"></span>
-          Going To Device ...
-        } @else {
           Go To Device
-        }
       </button>
     </form>
   </div>

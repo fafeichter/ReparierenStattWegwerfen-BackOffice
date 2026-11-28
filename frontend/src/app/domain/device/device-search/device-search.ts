@@ -9,7 +9,14 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { ClrCardModule, ClrCommonFormsModule, ClrIcon, ClrInputModule } from '@clr/angular';
+import {
+  ClrCardModule,
+  ClrCommonFormsModule,
+  ClrIcon,
+  ClrInputModule,
+  ClrLoadingButtonModule,
+  ClrLoadingModule,
+} from '@clr/angular';
 import { Router } from '@angular/router';
 import { DeviceSearchControllerService } from '@api/device';
 
@@ -21,6 +28,8 @@ import { DeviceSearchControllerService } from '@api/device';
     FormsModule,
     ReactiveFormsModule,
     ClrCardModule,
+    ClrLoadingModule,
+    ClrLoadingButtonModule,
   ],
   selector: 'app-device-search',
   styleUrl: './device-search.css',

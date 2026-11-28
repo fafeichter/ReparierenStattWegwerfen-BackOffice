@@ -1,5 +1,12 @@
 import { Component, computed, effect, inject, input, model, output, signal } from '@angular/core';
-import { ClrCheckboxModule, ClrCommonFormsModule, ClrIcon, ClrModalModule } from '@clr/angular';
+import {
+  ClrCheckboxModule,
+  ClrCommonFormsModule,
+  ClrIcon,
+  ClrLoadingButtonModule,
+  ClrLoadingModule,
+  ClrModalModule,
+} from '@clr/angular';
 import {
   FormControl,
   FormGroup,
@@ -20,6 +27,8 @@ import {
     ClrModalModule,
     FormsModule,
     ReactiveFormsModule,
+    ClrLoadingModule,
+    ClrLoadingButtonModule,
   ],
   selector: 'app-selling-accessories-modal',
   styleUrl: './selling-accessories-modal.css',
